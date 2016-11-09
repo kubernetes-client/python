@@ -47,17 +47,22 @@ if [[ ! -n ${SWAGGER_FILE-} ]]; then
   SWAGGER_FILE="${KUBE_ROOT}/api/openapi-spec/swagger.json"
 fi
 
+echo "--- Preprocessing OpenAPI spec to script directory"
+python "${SCRIPT_ROOT}/preprocess_spec.py" "$SWAGGER_FILE" "${SCRIPT_ROOT}/swagger.json"
+
 echo "--- Cleaning up previously generated folders"
 rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}"
 rm -rf "${CLIENT_ROOT}/docs"
 rm -rf "${CLIENT_ROOT}/test"
 
 echo "--- Generating client ..."
-mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SWAGGER_FILE}" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=${PACKAGE_NAME}
+mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=${PACKAGE_NAME}
 
 echo "--- Patching generated code..."
-cp "${CLIENT_ROOT}/README.md" "${CLIENT_ROOT}/GEN_README.md"
-cp "${SCRIPT_ROOT}/ROOT_README.md" "${CLIENT_ROOT}/README.md"
+cat "${CLIENT_ROOT}/README.prefix" "${CLIENT_ROOT}/README.md" > "${CLIENT_ROOT}/README.new"
+rm "${CLIENT_ROOT}/README.md"
+mv "${CLIENT_ROOT}/README.new" "${CLIENT_ROOT}/README.md"
 cp "${SCRIPT_ROOT}/LICENSE" "${CLIENT_ROOT}"
 rm -rf "${CLIENT_ROOT}/test"
+
 echo "---Done."
