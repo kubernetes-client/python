@@ -1,4 +1,4 @@
-# V1alpha1StatefulSetStatus
+# V1beta1StatefulSetStatus
 
 ## Properties
 Name | Type | Description | Notes

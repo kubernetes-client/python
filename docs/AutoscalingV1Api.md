@@ -4,25 +4,25 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#create_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **POST** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers | 
-[**delete_autoscaling_v1_collection_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#delete_autoscaling_v1_collection_namespaced_horizontal_pod_autoscaler) | **DELETE** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers | 
-[**delete_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#delete_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **DELETE** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
-[**get_autoscaling_v1_api_resources**](AutoscalingV1Api.md#get_autoscaling_v1_api_resources) | **GET** /apis/autoscaling/v1/ | 
-[**list_autoscaling_v1_horizontal_pod_autoscaler_for_all_namespaces**](AutoscalingV1Api.md#list_autoscaling_v1_horizontal_pod_autoscaler_for_all_namespaces) | **GET** /apis/autoscaling/v1/horizontalpodautoscalers | 
-[**list_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#list_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **GET** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers | 
-[**patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **PATCH** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
-[**patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status**](AutoscalingV1Api.md#patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status) | **PATCH** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status | 
-[**read_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#read_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **GET** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
-[**read_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status**](AutoscalingV1Api.md#read_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status) | **GET** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status | 
-[**replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **PUT** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
-[**replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status**](AutoscalingV1Api.md#replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status) | **PUT** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status | 
-[**watch_autoscaling_v1_horizontal_pod_autoscaler_list_for_all_namespaces**](AutoscalingV1Api.md#watch_autoscaling_v1_horizontal_pod_autoscaler_list_for_all_namespaces) | **GET** /apis/autoscaling/v1/watch/horizontalpodautoscalers | 
-[**watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler) | **GET** /apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
-[**watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_list**](AutoscalingV1Api.md#watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_list) | **GET** /apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers | 
+[**create_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#create_namespaced_horizontal_pod_autoscaler) | **POST** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers | 
+[**delete_collection_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#delete_collection_namespaced_horizontal_pod_autoscaler) | **DELETE** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers | 
+[**delete_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#delete_namespaced_horizontal_pod_autoscaler) | **DELETE** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
+[**get_api_resources**](AutoscalingV1Api.md#get_api_resources) | **GET** /apis/autoscaling/v1/ | 
+[**list_horizontal_pod_autoscaler_for_all_namespaces**](AutoscalingV1Api.md#list_horizontal_pod_autoscaler_for_all_namespaces) | **GET** /apis/autoscaling/v1/horizontalpodautoscalers | 
+[**list_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#list_namespaced_horizontal_pod_autoscaler) | **GET** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers | 
+[**patch_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#patch_namespaced_horizontal_pod_autoscaler) | **PATCH** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
+[**patch_namespaced_horizontal_pod_autoscaler_status**](AutoscalingV1Api.md#patch_namespaced_horizontal_pod_autoscaler_status) | **PATCH** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status | 
+[**read_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#read_namespaced_horizontal_pod_autoscaler) | **GET** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
+[**read_namespaced_horizontal_pod_autoscaler_status**](AutoscalingV1Api.md#read_namespaced_horizontal_pod_autoscaler_status) | **GET** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status | 
+[**replace_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#replace_namespaced_horizontal_pod_autoscaler) | **PUT** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
+[**replace_namespaced_horizontal_pod_autoscaler_status**](AutoscalingV1Api.md#replace_namespaced_horizontal_pod_autoscaler_status) | **PUT** /apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status | 
+[**watch_horizontal_pod_autoscaler_list_for_all_namespaces**](AutoscalingV1Api.md#watch_horizontal_pod_autoscaler_list_for_all_namespaces) | **GET** /apis/autoscaling/v1/watch/horizontalpodautoscalers | 
+[**watch_namespaced_horizontal_pod_autoscaler**](AutoscalingV1Api.md#watch_namespaced_horizontal_pod_autoscaler) | **GET** /apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name} | 
+[**watch_namespaced_horizontal_pod_autoscaler_list**](AutoscalingV1Api.md#watch_namespaced_horizontal_pod_autoscaler_list) | **GET** /apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers | 
 
 
-# **create_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> V1HorizontalPodAutoscaler create_autoscaling_v1_namespaced_horizontal_pod_autoscaler(namespace, body, pretty=pretty)
+# **create_namespaced_horizontal_pod_autoscaler**
+> V1HorizontalPodAutoscaler create_namespaced_horizontal_pod_autoscaler(namespace, body, pretty=pretty)
 
 
 
@@ -48,10 +48,10 @@ body = k8sclient.V1HorizontalPodAutoscaler() # V1HorizontalPodAutoscaler |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_autoscaling_v1_namespaced_horizontal_pod_autoscaler(namespace, body, pretty=pretty)
+    api_response = api_instance.create_namespaced_horizontal_pod_autoscaler(namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->create_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->create_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -77,8 +77,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_autoscaling_v1_collection_namespaced_horizontal_pod_autoscaler**
-> UnversionedStatus delete_autoscaling_v1_collection_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+# **delete_collection_namespaced_horizontal_pod_autoscaler**
+> UnversionedStatus delete_collection_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -108,10 +108,10 @@ timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.delete_autoscaling_v1_collection_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.delete_collection_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->delete_autoscaling_v1_collection_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->delete_collection_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -141,8 +141,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> UnversionedStatus delete_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
+# **delete_namespaced_horizontal_pod_autoscaler**
+> UnversionedStatus delete_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents)
 
 
 
@@ -167,12 +167,14 @@ name = 'name_example' # str | name of the HorizontalPodAutoscaler
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = k8sclient.V1DeleteOptions() # V1DeleteOptions | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
+orphan_dependents = true # bool | Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. (optional)
 
 try: 
-    api_response = api_instance.delete_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
+    api_response = api_instance.delete_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->delete_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->delete_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -183,6 +185,8 @@ Name | Type | Description  | Notes
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
+ **orphan_dependents** | **bool**| Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. | [optional] 
 
 ### Return type
 
@@ -199,8 +203,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_autoscaling_v1_api_resources**
-> UnversionedAPIResourceList get_autoscaling_v1_api_resources()
+# **get_api_resources**
+> UnversionedAPIResourceList get_api_resources()
 
 
 
@@ -223,10 +227,10 @@ k8sclient.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = k8sclient.AutoscalingV1Api()
 
 try: 
-    api_response = api_instance.get_autoscaling_v1_api_resources()
+    api_response = api_instance.get_api_resources()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->get_autoscaling_v1_api_resources: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->get_api_resources: %s\n" % e)
 ```
 
 ### Parameters
@@ -247,8 +251,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_autoscaling_v1_horizontal_pod_autoscaler_for_all_namespaces**
-> V1HorizontalPodAutoscalerList list_autoscaling_v1_horizontal_pod_autoscaler_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+# **list_horizontal_pod_autoscaler_for_all_namespaces**
+> V1HorizontalPodAutoscalerList list_horizontal_pod_autoscaler_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -277,10 +281,10 @@ timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_autoscaling_v1_horizontal_pod_autoscaler_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_horizontal_pod_autoscaler_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->list_autoscaling_v1_horizontal_pod_autoscaler_for_all_namespaces: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->list_horizontal_pod_autoscaler_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -309,8 +313,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> V1HorizontalPodAutoscalerList list_autoscaling_v1_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+# **list_namespaced_horizontal_pod_autoscaler**
+> V1HorizontalPodAutoscalerList list_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -340,10 +344,10 @@ timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_autoscaling_v1_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_namespaced_horizontal_pod_autoscaler(namespace, pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->list_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->list_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -373,8 +377,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> V1HorizontalPodAutoscaler patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
+# **patch_namespaced_horizontal_pod_autoscaler**
+> V1HorizontalPodAutoscaler patch_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
 
 
 
@@ -401,10 +405,10 @@ body = k8sclient.UnversionedPatch() # UnversionedPatch |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
+    api_response = api_instance.patch_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->patch_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -431,8 +435,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status**
-> V1HorizontalPodAutoscaler patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
+# **patch_namespaced_horizontal_pod_autoscaler_status**
+> V1HorizontalPodAutoscaler patch_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
 
 
 
@@ -459,10 +463,10 @@ body = k8sclient.UnversionedPatch() # UnversionedPatch |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
+    api_response = api_instance.patch_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->patch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->patch_namespaced_horizontal_pod_autoscaler_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -489,8 +493,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **read_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> V1HorizontalPodAutoscaler read_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, pretty=pretty, exact=exact, export=export)
+# **read_namespaced_horizontal_pod_autoscaler**
+> V1HorizontalPodAutoscaler read_namespaced_horizontal_pod_autoscaler(name, namespace, pretty=pretty, exact=exact, export=export)
 
 
 
@@ -518,10 +522,10 @@ exact = true # bool | Should the export be exact.  Exact export maintains cluste
 export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
 try: 
-    api_response = api_instance.read_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, pretty=pretty, exact=exact, export=export)
+    api_response = api_instance.read_namespaced_horizontal_pod_autoscaler(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->read_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->read_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -549,8 +553,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **read_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status**
-> V1HorizontalPodAutoscaler read_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status(name, namespace, pretty=pretty)
+# **read_namespaced_horizontal_pod_autoscaler_status**
+> V1HorizontalPodAutoscaler read_namespaced_horizontal_pod_autoscaler_status(name, namespace, pretty=pretty)
 
 
 
@@ -576,10 +580,10 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.read_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status(name, namespace, pretty=pretty)
+    api_response = api_instance.read_namespaced_horizontal_pod_autoscaler_status(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->read_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->read_namespaced_horizontal_pod_autoscaler_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -605,8 +609,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> V1HorizontalPodAutoscaler replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
+# **replace_namespaced_horizontal_pod_autoscaler**
+> V1HorizontalPodAutoscaler replace_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
 
 
 
@@ -633,10 +637,10 @@ body = k8sclient.V1HorizontalPodAutoscaler() # V1HorizontalPodAutoscaler |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
+    api_response = api_instance.replace_namespaced_horizontal_pod_autoscaler(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->replace_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -663,8 +667,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status**
-> V1HorizontalPodAutoscaler replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
+# **replace_namespaced_horizontal_pod_autoscaler_status**
+> V1HorizontalPodAutoscaler replace_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
 
 
 
@@ -691,10 +695,10 @@ body = k8sclient.V1HorizontalPodAutoscaler() # V1HorizontalPodAutoscaler |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
+    api_response = api_instance.replace_namespaced_horizontal_pod_autoscaler_status(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->replace_autoscaling_v1_namespaced_horizontal_pod_autoscaler_status: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->replace_namespaced_horizontal_pod_autoscaler_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -721,8 +725,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **watch_autoscaling_v1_horizontal_pod_autoscaler_list_for_all_namespaces**
-> VersionedEvent watch_autoscaling_v1_horizontal_pod_autoscaler_list_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+# **watch_horizontal_pod_autoscaler_list_for_all_namespaces**
+> VersionedEvent watch_horizontal_pod_autoscaler_list_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -751,10 +755,10 @@ timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.watch_autoscaling_v1_horizontal_pod_autoscaler_list_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.watch_horizontal_pod_autoscaler_list_for_all_namespaces(field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->watch_autoscaling_v1_horizontal_pod_autoscaler_list_for_all_namespaces: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->watch_horizontal_pod_autoscaler_list_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -783,8 +787,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler**
-> VersionedEvent watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+# **watch_namespaced_horizontal_pod_autoscaler**
+> VersionedEvent watch_namespaced_horizontal_pod_autoscaler(name, namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -815,10 +819,10 @@ timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler(name, namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.watch_namespaced_horizontal_pod_autoscaler(name, namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->watch_namespaced_horizontal_pod_autoscaler: %s\n" % e)
 ```
 
 ### Parameters
@@ -849,8 +853,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_list**
-> VersionedEvent watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_list(namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+# **watch_namespaced_horizontal_pod_autoscaler_list**
+> VersionedEvent watch_namespaced_horizontal_pod_autoscaler_list(namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -880,10 +884,10 @@ timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_list(namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.watch_namespaced_horizontal_pod_autoscaler_list(namespace, field_selector=field_selector, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AutoscalingV1Api->watch_autoscaling_v1_namespaced_horizontal_pod_autoscaler_list: %s\n" % e)
+    print("Exception when calling AutoscalingV1Api->watch_namespaced_horizontal_pod_autoscaler_list: %s\n" % e)
 ```
 
 ### Parameters

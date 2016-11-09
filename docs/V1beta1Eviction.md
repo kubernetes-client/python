@@ -1,10 +1,10 @@
-# V1alpha1StatefulSetList
+# V1beta1Eviction
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**list[V1alpha1StatefulSet]**](V1alpha1StatefulSet.md) |  | 
-**metadata** | [**UnversionedListMeta**](UnversionedListMeta.md) |  | [optional] 
+**delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md) | DeleteOptions may be provided | 
+**metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) | ObjectMeta describes the pod that is being evicted. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

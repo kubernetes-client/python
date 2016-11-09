@@ -4,11 +4,11 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_authentication_api_group**](AuthenticationApi.md#get_authentication_api_group) | **GET** /apis/authentication.k8s.io/ | 
+[**get_api_group**](AuthenticationApi.md#get_api_group) | **GET** /apis/authentication.k8s.io/ | 
 
 
-# **get_authentication_api_group**
-> UnversionedAPIGroup get_authentication_api_group()
+# **get_api_group**
+> UnversionedAPIGroup get_api_group()
 
 
 
@@ -31,10 +31,10 @@ k8sclient.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = k8sclient.AuthenticationApi()
 
 try: 
-    api_response = api_instance.get_authentication_api_group()
+    api_response = api_instance.get_api_group()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthenticationApi->get_authentication_api_group: %s\n" % e)
+    print("Exception when calling AuthenticationApi->get_api_group: %s\n" % e)
 ```
 
 ### Parameters

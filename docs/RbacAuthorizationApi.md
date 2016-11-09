@@ -4,11 +4,11 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_rbac_authorization_api_group**](RbacAuthorizationApi.md#get_rbac_authorization_api_group) | **GET** /apis/rbac.authorization.k8s.io/ | 
+[**get_api_group**](RbacAuthorizationApi.md#get_api_group) | **GET** /apis/rbac.authorization.k8s.io/ | 
 
 
-# **get_rbac_authorization_api_group**
-> UnversionedAPIGroup get_rbac_authorization_api_group()
+# **get_api_group**
+> UnversionedAPIGroup get_api_group()
 
 
 
@@ -31,10 +31,10 @@ k8sclient.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = k8sclient.RbacAuthorizationApi()
 
 try: 
-    api_response = api_instance.get_rbac_authorization_api_group()
+    api_response = api_instance.get_api_group()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling RbacAuthorizationApi->get_rbac_authorization_api_group: %s\n" % e)
+    print("Exception when calling RbacAuthorizationApi->get_api_group: %s\n" % e)
 ```
 
 ### Parameters

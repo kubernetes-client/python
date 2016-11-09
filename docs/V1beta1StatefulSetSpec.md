@@ -1,4 +1,4 @@
-# V1alpha1StatefulSetSpec
+# V1beta1StatefulSetSpec
 
 ## Properties
 Name | Type | Description | Notes

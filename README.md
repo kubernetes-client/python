@@ -151,7 +151,49 @@ Class | Method | HTTP request | Description
 *BatchV1Api* | [**watch_job_list_for_all_namespaces**](docs/BatchV1Api.md#watch_job_list_for_all_namespaces) | **GET** /apis/batch/v1/watch/jobs | 
 *BatchV1Api* | [**watch_namespaced_job**](docs/BatchV1Api.md#watch_namespaced_job) | **GET** /apis/batch/v1/watch/namespaces/{namespace}/jobs/{name} | 
 *BatchV1Api* | [**watch_namespaced_job_list**](docs/BatchV1Api.md#watch_namespaced_job_list) | **GET** /apis/batch/v1/watch/namespaces/{namespace}/jobs | 
+*BatchV2alpha1Api* | [**create_namespaced_cron_job**](docs/BatchV2alpha1Api.md#create_namespaced_cron_job) | **POST** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs | 
+*BatchV2alpha1Api* | [**create_namespaced_job**](docs/BatchV2alpha1Api.md#create_namespaced_job) | **POST** /apis/batch/v2alpha1/namespaces/{namespace}/jobs | 
+*BatchV2alpha1Api* | [**create_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#create_namespaced_scheduled_job) | **POST** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs | 
+*BatchV2alpha1Api* | [**delete_collection_namespaced_cron_job**](docs/BatchV2alpha1Api.md#delete_collection_namespaced_cron_job) | **DELETE** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs | 
+*BatchV2alpha1Api* | [**delete_collection_namespaced_job**](docs/BatchV2alpha1Api.md#delete_collection_namespaced_job) | **DELETE** /apis/batch/v2alpha1/namespaces/{namespace}/jobs | 
+*BatchV2alpha1Api* | [**delete_collection_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#delete_collection_namespaced_scheduled_job) | **DELETE** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs | 
+*BatchV2alpha1Api* | [**delete_namespaced_cron_job**](docs/BatchV2alpha1Api.md#delete_namespaced_cron_job) | **DELETE** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name} | 
+*BatchV2alpha1Api* | [**delete_namespaced_job**](docs/BatchV2alpha1Api.md#delete_namespaced_job) | **DELETE** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name} | 
+*BatchV2alpha1Api* | [**delete_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#delete_namespaced_scheduled_job) | **DELETE** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name} | 
 *BatchV2alpha1Api* | [**get_api_resources**](docs/BatchV2alpha1Api.md#get_api_resources) | **GET** /apis/batch/v2alpha1/ | 
+*BatchV2alpha1Api* | [**list_cron_job_for_all_namespaces**](docs/BatchV2alpha1Api.md#list_cron_job_for_all_namespaces) | **GET** /apis/batch/v2alpha1/cronjobs | 
+*BatchV2alpha1Api* | [**list_job_for_all_namespaces**](docs/BatchV2alpha1Api.md#list_job_for_all_namespaces) | **GET** /apis/batch/v2alpha1/jobs | 
+*BatchV2alpha1Api* | [**list_namespaced_cron_job**](docs/BatchV2alpha1Api.md#list_namespaced_cron_job) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs | 
+*BatchV2alpha1Api* | [**list_namespaced_job**](docs/BatchV2alpha1Api.md#list_namespaced_job) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/jobs | 
+*BatchV2alpha1Api* | [**list_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#list_namespaced_scheduled_job) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs | 
+*BatchV2alpha1Api* | [**list_scheduled_job_for_all_namespaces**](docs/BatchV2alpha1Api.md#list_scheduled_job_for_all_namespaces) | **GET** /apis/batch/v2alpha1/scheduledjobs | 
+*BatchV2alpha1Api* | [**patch_namespaced_cron_job**](docs/BatchV2alpha1Api.md#patch_namespaced_cron_job) | **PATCH** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name} | 
+*BatchV2alpha1Api* | [**patch_namespaced_cron_job_status**](docs/BatchV2alpha1Api.md#patch_namespaced_cron_job_status) | **PATCH** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name}/status | 
+*BatchV2alpha1Api* | [**patch_namespaced_job**](docs/BatchV2alpha1Api.md#patch_namespaced_job) | **PATCH** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name} | 
+*BatchV2alpha1Api* | [**patch_namespaced_job_status**](docs/BatchV2alpha1Api.md#patch_namespaced_job_status) | **PATCH** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name}/status | 
+*BatchV2alpha1Api* | [**patch_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#patch_namespaced_scheduled_job) | **PATCH** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name} | 
+*BatchV2alpha1Api* | [**patch_namespaced_scheduled_job_status**](docs/BatchV2alpha1Api.md#patch_namespaced_scheduled_job_status) | **PATCH** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name}/status | 
+*BatchV2alpha1Api* | [**read_namespaced_cron_job**](docs/BatchV2alpha1Api.md#read_namespaced_cron_job) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name} | 
+*BatchV2alpha1Api* | [**read_namespaced_cron_job_status**](docs/BatchV2alpha1Api.md#read_namespaced_cron_job_status) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name}/status | 
+*BatchV2alpha1Api* | [**read_namespaced_job**](docs/BatchV2alpha1Api.md#read_namespaced_job) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name} | 
+*BatchV2alpha1Api* | [**read_namespaced_job_status**](docs/BatchV2alpha1Api.md#read_namespaced_job_status) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name}/status | 
+*BatchV2alpha1Api* | [**read_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#read_namespaced_scheduled_job) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name} | 
+*BatchV2alpha1Api* | [**read_namespaced_scheduled_job_status**](docs/BatchV2alpha1Api.md#read_namespaced_scheduled_job_status) | **GET** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name}/status | 
+*BatchV2alpha1Api* | [**replace_namespaced_cron_job**](docs/BatchV2alpha1Api.md#replace_namespaced_cron_job) | **PUT** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name} | 
+*BatchV2alpha1Api* | [**replace_namespaced_cron_job_status**](docs/BatchV2alpha1Api.md#replace_namespaced_cron_job_status) | **PUT** /apis/batch/v2alpha1/namespaces/{namespace}/cronjobs/{name}/status | 
+*BatchV2alpha1Api* | [**replace_namespaced_job**](docs/BatchV2alpha1Api.md#replace_namespaced_job) | **PUT** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name} | 
+*BatchV2alpha1Api* | [**replace_namespaced_job_status**](docs/BatchV2alpha1Api.md#replace_namespaced_job_status) | **PUT** /apis/batch/v2alpha1/namespaces/{namespace}/jobs/{name}/status | 
+*BatchV2alpha1Api* | [**replace_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#replace_namespaced_scheduled_job) | **PUT** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name} | 
+*BatchV2alpha1Api* | [**replace_namespaced_scheduled_job_status**](docs/BatchV2alpha1Api.md#replace_namespaced_scheduled_job_status) | **PUT** /apis/batch/v2alpha1/namespaces/{namespace}/scheduledjobs/{name}/status | 
+*BatchV2alpha1Api* | [**watch_cron_job_list_for_all_namespaces**](docs/BatchV2alpha1Api.md#watch_cron_job_list_for_all_namespaces) | **GET** /apis/batch/v2alpha1/watch/cronjobs | 
+*BatchV2alpha1Api* | [**watch_job_list_for_all_namespaces**](docs/BatchV2alpha1Api.md#watch_job_list_for_all_namespaces) | **GET** /apis/batch/v2alpha1/watch/jobs | 
+*BatchV2alpha1Api* | [**watch_namespaced_cron_job**](docs/BatchV2alpha1Api.md#watch_namespaced_cron_job) | **GET** /apis/batch/v2alpha1/watch/namespaces/{namespace}/cronjobs/{name} | 
+*BatchV2alpha1Api* | [**watch_namespaced_cron_job_list**](docs/BatchV2alpha1Api.md#watch_namespaced_cron_job_list) | **GET** /apis/batch/v2alpha1/watch/namespaces/{namespace}/cronjobs | 
+*BatchV2alpha1Api* | [**watch_namespaced_job**](docs/BatchV2alpha1Api.md#watch_namespaced_job) | **GET** /apis/batch/v2alpha1/watch/namespaces/{namespace}/jobs/{name} | 
+*BatchV2alpha1Api* | [**watch_namespaced_job_list**](docs/BatchV2alpha1Api.md#watch_namespaced_job_list) | **GET** /apis/batch/v2alpha1/watch/namespaces/{namespace}/jobs | 
+*BatchV2alpha1Api* | [**watch_namespaced_scheduled_job**](docs/BatchV2alpha1Api.md#watch_namespaced_scheduled_job) | **GET** /apis/batch/v2alpha1/watch/namespaces/{namespace}/scheduledjobs/{name} | 
+*BatchV2alpha1Api* | [**watch_namespaced_scheduled_job_list**](docs/BatchV2alpha1Api.md#watch_namespaced_scheduled_job_list) | **GET** /apis/batch/v2alpha1/watch/namespaces/{namespace}/scheduledjobs | 
+*BatchV2alpha1Api* | [**watch_scheduled_job_list_for_all_namespaces**](docs/BatchV2alpha1Api.md#watch_scheduled_job_list_for_all_namespaces) | **GET** /apis/batch/v2alpha1/watch/scheduledjobs | 
 *CertificatesApi* | [**get_api_group**](docs/CertificatesApi.md#get_api_group) | **GET** /apis/certificates.k8s.io/ | 
 *CertificatesV1alpha1Api* | [**create_certificate_signing_request**](docs/CertificatesV1alpha1Api.md#create_certificate_signing_request) | **POST** /apis/certificates.k8s.io/v1alpha1/certificatesigningrequests | 
 *CertificatesV1alpha1Api* | [**delete_certificate_signing_request**](docs/CertificatesV1alpha1Api.md#delete_certificate_signing_request) | **DELETE** /apis/certificates.k8s.io/v1alpha1/certificatesigningrequests/{name} | 
@@ -848,6 +890,16 @@ Class | Method | HTTP request | Description
  - [V1beta1TokenReviewSpec](docs/V1beta1TokenReviewSpec.md)
  - [V1beta1TokenReviewStatus](docs/V1beta1TokenReviewStatus.md)
  - [V1beta1UserInfo](docs/V1beta1UserInfo.md)
+ - [V2alpha1CronJob](docs/V2alpha1CronJob.md)
+ - [V2alpha1CronJobList](docs/V2alpha1CronJobList.md)
+ - [V2alpha1CronJobSpec](docs/V2alpha1CronJobSpec.md)
+ - [V2alpha1CronJobStatus](docs/V2alpha1CronJobStatus.md)
+ - [V2alpha1Job](docs/V2alpha1Job.md)
+ - [V2alpha1JobCondition](docs/V2alpha1JobCondition.md)
+ - [V2alpha1JobList](docs/V2alpha1JobList.md)
+ - [V2alpha1JobSpec](docs/V2alpha1JobSpec.md)
+ - [V2alpha1JobStatus](docs/V2alpha1JobStatus.md)
+ - [V2alpha1JobTemplateSpec](docs/V2alpha1JobTemplateSpec.md)
  - [VersionInfo](docs/VersionInfo.md)
  - [VersionedEvent](docs/VersionedEvent.md)
 

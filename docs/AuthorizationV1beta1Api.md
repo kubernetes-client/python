@@ -4,14 +4,14 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_authorization_v1beta1_namespaced_local_subject_access_review**](AuthorizationV1beta1Api.md#create_authorization_v1beta1_namespaced_local_subject_access_review) | **POST** /apis/authorization.k8s.io/v1beta1/namespaces/{namespace}/localsubjectaccessreviews | 
-[**create_authorization_v1beta1_self_subject_access_review**](AuthorizationV1beta1Api.md#create_authorization_v1beta1_self_subject_access_review) | **POST** /apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews | 
-[**create_authorization_v1beta1_subject_access_review**](AuthorizationV1beta1Api.md#create_authorization_v1beta1_subject_access_review) | **POST** /apis/authorization.k8s.io/v1beta1/subjectaccessreviews | 
-[**get_authorization_v1beta1_api_resources**](AuthorizationV1beta1Api.md#get_authorization_v1beta1_api_resources) | **GET** /apis/authorization.k8s.io/v1beta1/ | 
+[**create_namespaced_local_subject_access_review**](AuthorizationV1beta1Api.md#create_namespaced_local_subject_access_review) | **POST** /apis/authorization.k8s.io/v1beta1/namespaces/{namespace}/localsubjectaccessreviews | 
+[**create_self_subject_access_review**](AuthorizationV1beta1Api.md#create_self_subject_access_review) | **POST** /apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews | 
+[**create_subject_access_review**](AuthorizationV1beta1Api.md#create_subject_access_review) | **POST** /apis/authorization.k8s.io/v1beta1/subjectaccessreviews | 
+[**get_api_resources**](AuthorizationV1beta1Api.md#get_api_resources) | **GET** /apis/authorization.k8s.io/v1beta1/ | 
 
 
-# **create_authorization_v1beta1_namespaced_local_subject_access_review**
-> V1beta1LocalSubjectAccessReview create_authorization_v1beta1_namespaced_local_subject_access_review(body, namespace, pretty=pretty)
+# **create_namespaced_local_subject_access_review**
+> V1beta1LocalSubjectAccessReview create_namespaced_local_subject_access_review(body, namespace, pretty=pretty)
 
 
 
@@ -37,10 +37,10 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_authorization_v1beta1_namespaced_local_subject_access_review(body, namespace, pretty=pretty)
+    api_response = api_instance.create_namespaced_local_subject_access_review(body, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthorizationV1beta1Api->create_authorization_v1beta1_namespaced_local_subject_access_review: %s\n" % e)
+    print("Exception when calling AuthorizationV1beta1Api->create_namespaced_local_subject_access_review: %s\n" % e)
 ```
 
 ### Parameters
@@ -66,8 +66,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_authorization_v1beta1_self_subject_access_review**
-> V1beta1SelfSubjectAccessReview create_authorization_v1beta1_self_subject_access_review(body, pretty=pretty)
+# **create_self_subject_access_review**
+> V1beta1SelfSubjectAccessReview create_self_subject_access_review(body, pretty=pretty)
 
 
 
@@ -92,10 +92,10 @@ body = k8sclient.V1beta1SelfSubjectAccessReview() # V1beta1SelfSubjectAccessRevi
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_authorization_v1beta1_self_subject_access_review(body, pretty=pretty)
+    api_response = api_instance.create_self_subject_access_review(body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthorizationV1beta1Api->create_authorization_v1beta1_self_subject_access_review: %s\n" % e)
+    print("Exception when calling AuthorizationV1beta1Api->create_self_subject_access_review: %s\n" % e)
 ```
 
 ### Parameters
@@ -120,8 +120,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_authorization_v1beta1_subject_access_review**
-> V1beta1SubjectAccessReview create_authorization_v1beta1_subject_access_review(body, pretty=pretty)
+# **create_subject_access_review**
+> V1beta1SubjectAccessReview create_subject_access_review(body, pretty=pretty)
 
 
 
@@ -146,10 +146,10 @@ body = k8sclient.V1beta1SubjectAccessReview() # V1beta1SubjectAccessReview |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_authorization_v1beta1_subject_access_review(body, pretty=pretty)
+    api_response = api_instance.create_subject_access_review(body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthorizationV1beta1Api->create_authorization_v1beta1_subject_access_review: %s\n" % e)
+    print("Exception when calling AuthorizationV1beta1Api->create_subject_access_review: %s\n" % e)
 ```
 
 ### Parameters
@@ -174,8 +174,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_authorization_v1beta1_api_resources**
-> UnversionedAPIResourceList get_authorization_v1beta1_api_resources()
+# **get_api_resources**
+> UnversionedAPIResourceList get_api_resources()
 
 
 
@@ -198,10 +198,10 @@ k8sclient.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = k8sclient.AuthorizationV1beta1Api()
 
 try: 
-    api_response = api_instance.get_authorization_v1beta1_api_resources()
+    api_response = api_instance.get_api_resources()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthorizationV1beta1Api->get_authorization_v1beta1_api_resources: %s\n" % e)
+    print("Exception when calling AuthorizationV1beta1Api->get_api_resources: %s\n" % e)
 ```
 
 ### Parameters

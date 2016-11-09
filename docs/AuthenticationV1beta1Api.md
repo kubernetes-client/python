@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_authentication_v1beta1_token_review**](AuthenticationV1beta1Api.md#create_authentication_v1beta1_token_review) | **POST** /apis/authentication.k8s.io/v1beta1/tokenreviews | 
-[**get_authentication_v1beta1_api_resources**](AuthenticationV1beta1Api.md#get_authentication_v1beta1_api_resources) | **GET** /apis/authentication.k8s.io/v1beta1/ | 
+[**create_token_review**](AuthenticationV1beta1Api.md#create_token_review) | **POST** /apis/authentication.k8s.io/v1beta1/tokenreviews | 
+[**get_api_resources**](AuthenticationV1beta1Api.md#get_api_resources) | **GET** /apis/authentication.k8s.io/v1beta1/ | 
 
 
-# **create_authentication_v1beta1_token_review**
-> V1beta1TokenReview create_authentication_v1beta1_token_review(body, pretty=pretty)
+# **create_token_review**
+> V1beta1TokenReview create_token_review(body, pretty=pretty)
 
 
 
@@ -34,10 +34,10 @@ body = k8sclient.V1beta1TokenReview() # V1beta1TokenReview |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_authentication_v1beta1_token_review(body, pretty=pretty)
+    api_response = api_instance.create_token_review(body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthenticationV1beta1Api->create_authentication_v1beta1_token_review: %s\n" % e)
+    print("Exception when calling AuthenticationV1beta1Api->create_token_review: %s\n" % e)
 ```
 
 ### Parameters
@@ -62,8 +62,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_authentication_v1beta1_api_resources**
-> UnversionedAPIResourceList get_authentication_v1beta1_api_resources()
+# **get_api_resources**
+> UnversionedAPIResourceList get_api_resources()
 
 
 
@@ -86,10 +86,10 @@ k8sclient.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = k8sclient.AuthenticationV1beta1Api()
 
 try: 
-    api_response = api_instance.get_authentication_v1beta1_api_resources()
+    api_response = api_instance.get_api_resources()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AuthenticationV1beta1Api->get_authentication_v1beta1_api_resources: %s\n" % e)
+    print("Exception when calling AuthenticationV1beta1Api->get_api_resources: %s\n" % e)
 ```
 
 ### Parameters
