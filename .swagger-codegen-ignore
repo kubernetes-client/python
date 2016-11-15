@@ -1,2 +1,3 @@
 .gitignore
 git_push.sh
+test/*

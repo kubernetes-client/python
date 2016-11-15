@@ -59,5 +59,5 @@ echo "--- Patching generated code..."
 cp "${CLIENT_ROOT}/README.md" "${CLIENT_ROOT}/GEN_README.md"
 cp "${SCRIPT_ROOT}/ROOT_README.md" "${CLIENT_ROOT}/README.md"
 cp "${SCRIPT_ROOT}/LICENSE" "${CLIENT_ROOT}"
-
+rm -rf "${CLIENT_ROOT}/test"
 echo "---Done."
