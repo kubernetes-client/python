@@ -2,4 +2,5 @@
 git_push.sh
 test/*
 requirements.txt
+test-requirements.txt
 setup.py
