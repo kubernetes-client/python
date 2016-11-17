@@ -63,6 +63,5 @@ cat "${CLIENT_ROOT}/README.prefix" "${CLIENT_ROOT}/README.md" > "${CLIENT_ROOT}/
 rm "${CLIENT_ROOT}/README.md"
 mv "${CLIENT_ROOT}/README.new" "${CLIENT_ROOT}/README.md"
 cp "${SCRIPT_ROOT}/LICENSE" "${CLIENT_ROOT}"
-rm -rf "${CLIENT_ROOT}/test"
 
 echo "---Done."
