@@ -51,7 +51,7 @@ class StorageV1beta1Api(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create_storage_v1beta1_storage_class(self, body, **kwargs):
+    def create_storage_class(self, body, **kwargs):
         """
         
         create a StorageClass
@@ -62,7 +62,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_storage_v1beta1_storage_class(body, callback=callback_function)
+        >>> thread = api.create_storage_class(body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -74,12 +74,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.create_storage_v1beta1_storage_class_with_http_info(body, **kwargs)
+            return self.create_storage_class_with_http_info(body, **kwargs)
         else:
-            (data) = self.create_storage_v1beta1_storage_class_with_http_info(body, **kwargs)
+            (data) = self.create_storage_class_with_http_info(body, **kwargs)
             return data
 
-    def create_storage_v1beta1_storage_class_with_http_info(self, body, **kwargs):
+    def create_storage_class_with_http_info(self, body, **kwargs):
         """
         
         create a StorageClass
@@ -90,7 +90,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_storage_v1beta1_storage_class_with_http_info(body, callback=callback_function)
+        >>> thread = api.create_storage_class_with_http_info(body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -104,19 +104,21 @@ class StorageV1beta1Api(object):
         all_params = ['body', 'pretty']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create_storage_v1beta1_storage_class" % key
+                    " to method create_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'body' is set
         if ('body' not in params) or (params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `body` when calling `create_storage_class`")
 
 
         collection_formats = {}
@@ -161,9 +163,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def delete_storage_v1beta1_collection_storage_class(self, **kwargs):
+    def delete_collection_storage_class(self, **kwargs):
         """
         
         delete collection of StorageClass
@@ -174,7 +178,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete_storage_v1beta1_collection_storage_class(callback=callback_function)
+        >>> thread = api.delete_collection_storage_class(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -190,12 +194,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.delete_storage_v1beta1_collection_storage_class_with_http_info(**kwargs)
+            return self.delete_collection_storage_class_with_http_info(**kwargs)
         else:
-            (data) = self.delete_storage_v1beta1_collection_storage_class_with_http_info(**kwargs)
+            (data) = self.delete_collection_storage_class_with_http_info(**kwargs)
             return data
 
-    def delete_storage_v1beta1_collection_storage_class_with_http_info(self, **kwargs):
+    def delete_collection_storage_class_with_http_info(self, **kwargs):
         """
         
         delete collection of StorageClass
@@ -206,7 +210,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete_storage_v1beta1_collection_storage_class_with_http_info(callback=callback_function)
+        >>> thread = api.delete_collection_storage_class_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -224,13 +228,15 @@ class StorageV1beta1Api(object):
         all_params = ['pretty', 'field_selector', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete_storage_v1beta1_collection_storage_class" % key
+                    " to method delete_collection_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -286,9 +292,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def delete_storage_v1beta1_storage_class(self, name, body, **kwargs):
+    def delete_storage_class(self, name, body, **kwargs):
         """
         
         delete a StorageClass
@@ -299,25 +307,27 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete_storage_v1beta1_storage_class(name, body, callback=callback_function)
+        >>> thread = api.delete_storage_class(name, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the StorageClass (required)
         :param V1DeleteOptions body:  (required)
         :param str pretty: If 'true', then the output is pretty printed.
+        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :param bool orphan_dependents: Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list.
         :return: UnversionedStatus
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.delete_storage_v1beta1_storage_class_with_http_info(name, body, **kwargs)
+            return self.delete_storage_class_with_http_info(name, body, **kwargs)
         else:
-            (data) = self.delete_storage_v1beta1_storage_class_with_http_info(name, body, **kwargs)
+            (data) = self.delete_storage_class_with_http_info(name, body, **kwargs)
             return data
 
-    def delete_storage_v1beta1_storage_class_with_http_info(self, name, body, **kwargs):
+    def delete_storage_class_with_http_info(self, name, body, **kwargs):
         """
         
         delete a StorageClass
@@ -328,37 +338,41 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete_storage_v1beta1_storage_class_with_http_info(name, body, callback=callback_function)
+        >>> thread = api.delete_storage_class_with_http_info(name, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the StorageClass (required)
         :param V1DeleteOptions body:  (required)
         :param str pretty: If 'true', then the output is pretty printed.
+        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :param bool orphan_dependents: Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list.
         :return: UnversionedStatus
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['name', 'body', 'pretty']
+        all_params = ['name', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete_storage_v1beta1_storage_class" % key
+                    " to method delete_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'name' is set
         if ('name' not in params) or (params['name'] is None):
-            raise ValueError("Missing the required parameter `name` when calling `delete_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `name` when calling `delete_storage_class`")
         # verify the required parameter 'body' is set
         if ('body' not in params) or (params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `delete_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `body` when calling `delete_storage_class`")
 
 
         collection_formats = {}
@@ -371,6 +385,10 @@ class StorageV1beta1Api(object):
         query_params = {}
         if 'pretty' in params:
             query_params['pretty'] = params['pretty']
+        if 'grace_period_seconds' in params:
+            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+        if 'orphan_dependents' in params:
+            query_params['orphanDependents'] = params['orphan_dependents']
 
         header_params = {}
 
@@ -405,9 +423,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def get_storage_v1beta1_api_resources(self, **kwargs):
+    def get_api_resources(self, **kwargs):
         """
         
         get available resources
@@ -418,7 +438,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_storage_v1beta1_api_resources(callback=callback_function)
+        >>> thread = api.get_api_resources(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -428,12 +448,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.get_storage_v1beta1_api_resources_with_http_info(**kwargs)
+            return self.get_api_resources_with_http_info(**kwargs)
         else:
-            (data) = self.get_storage_v1beta1_api_resources_with_http_info(**kwargs)
+            (data) = self.get_api_resources_with_http_info(**kwargs)
             return data
 
-    def get_storage_v1beta1_api_resources_with_http_info(self, **kwargs):
+    def get_api_resources_with_http_info(self, **kwargs):
         """
         
         get available resources
@@ -444,7 +464,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_storage_v1beta1_api_resources_with_http_info(callback=callback_function)
+        >>> thread = api.get_api_resources_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -456,13 +476,15 @@ class StorageV1beta1Api(object):
         all_params = []
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_storage_v1beta1_api_resources" % key
+                    " to method get_api_resources" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -506,9 +528,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def list_storage_v1beta1_storage_class(self, **kwargs):
+    def list_storage_class(self, **kwargs):
         """
         
         list or watch objects of kind StorageClass
@@ -519,7 +543,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_storage_v1beta1_storage_class(callback=callback_function)
+        >>> thread = api.list_storage_class(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -535,12 +559,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.list_storage_v1beta1_storage_class_with_http_info(**kwargs)
+            return self.list_storage_class_with_http_info(**kwargs)
         else:
-            (data) = self.list_storage_v1beta1_storage_class_with_http_info(**kwargs)
+            (data) = self.list_storage_class_with_http_info(**kwargs)
             return data
 
-    def list_storage_v1beta1_storage_class_with_http_info(self, **kwargs):
+    def list_storage_class_with_http_info(self, **kwargs):
         """
         
         list or watch objects of kind StorageClass
@@ -551,7 +575,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_storage_v1beta1_storage_class_with_http_info(callback=callback_function)
+        >>> thread = api.list_storage_class_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -569,13 +593,15 @@ class StorageV1beta1Api(object):
         all_params = ['pretty', 'field_selector', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list_storage_v1beta1_storage_class" % key
+                    " to method list_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -631,9 +657,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def patch_storage_v1beta1_storage_class(self, name, body, **kwargs):
+    def patch_storage_class(self, name, body, **kwargs):
         """
         
         partially update the specified StorageClass
@@ -644,7 +672,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_storage_v1beta1_storage_class(name, body, callback=callback_function)
+        >>> thread = api.patch_storage_class(name, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -657,12 +685,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.patch_storage_v1beta1_storage_class_with_http_info(name, body, **kwargs)
+            return self.patch_storage_class_with_http_info(name, body, **kwargs)
         else:
-            (data) = self.patch_storage_v1beta1_storage_class_with_http_info(name, body, **kwargs)
+            (data) = self.patch_storage_class_with_http_info(name, body, **kwargs)
             return data
 
-    def patch_storage_v1beta1_storage_class_with_http_info(self, name, body, **kwargs):
+    def patch_storage_class_with_http_info(self, name, body, **kwargs):
         """
         
         partially update the specified StorageClass
@@ -673,7 +701,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_storage_v1beta1_storage_class_with_http_info(name, body, callback=callback_function)
+        >>> thread = api.patch_storage_class_with_http_info(name, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -688,22 +716,24 @@ class StorageV1beta1Api(object):
         all_params = ['name', 'body', 'pretty']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method patch_storage_v1beta1_storage_class" % key
+                    " to method patch_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'name' is set
         if ('name' not in params) or (params['name'] is None):
-            raise ValueError("Missing the required parameter `name` when calling `patch_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `name` when calling `patch_storage_class`")
         # verify the required parameter 'body' is set
         if ('body' not in params) or (params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `patch_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `body` when calling `patch_storage_class`")
 
 
         collection_formats = {}
@@ -750,9 +780,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def read_storage_v1beta1_storage_class(self, name, **kwargs):
+    def read_storage_class(self, name, **kwargs):
         """
         
         read the specified StorageClass
@@ -763,7 +795,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.read_storage_v1beta1_storage_class(name, callback=callback_function)
+        >>> thread = api.read_storage_class(name, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -777,12 +809,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.read_storage_v1beta1_storage_class_with_http_info(name, **kwargs)
+            return self.read_storage_class_with_http_info(name, **kwargs)
         else:
-            (data) = self.read_storage_v1beta1_storage_class_with_http_info(name, **kwargs)
+            (data) = self.read_storage_class_with_http_info(name, **kwargs)
             return data
 
-    def read_storage_v1beta1_storage_class_with_http_info(self, name, **kwargs):
+    def read_storage_class_with_http_info(self, name, **kwargs):
         """
         
         read the specified StorageClass
@@ -793,7 +825,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.read_storage_v1beta1_storage_class_with_http_info(name, callback=callback_function)
+        >>> thread = api.read_storage_class_with_http_info(name, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -809,19 +841,21 @@ class StorageV1beta1Api(object):
         all_params = ['name', 'pretty', 'exact', 'export']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method read_storage_v1beta1_storage_class" % key
+                    " to method read_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'name' is set
         if ('name' not in params) or (params['name'] is None):
-            raise ValueError("Missing the required parameter `name` when calling `read_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `name` when calling `read_storage_class`")
 
 
         collection_formats = {}
@@ -870,9 +904,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def replace_storage_v1beta1_storage_class(self, name, body, **kwargs):
+    def replace_storage_class(self, name, body, **kwargs):
         """
         
         replace the specified StorageClass
@@ -883,7 +919,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.replace_storage_v1beta1_storage_class(name, body, callback=callback_function)
+        >>> thread = api.replace_storage_class(name, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -896,12 +932,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.replace_storage_v1beta1_storage_class_with_http_info(name, body, **kwargs)
+            return self.replace_storage_class_with_http_info(name, body, **kwargs)
         else:
-            (data) = self.replace_storage_v1beta1_storage_class_with_http_info(name, body, **kwargs)
+            (data) = self.replace_storage_class_with_http_info(name, body, **kwargs)
             return data
 
-    def replace_storage_v1beta1_storage_class_with_http_info(self, name, body, **kwargs):
+    def replace_storage_class_with_http_info(self, name, body, **kwargs):
         """
         
         replace the specified StorageClass
@@ -912,7 +948,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.replace_storage_v1beta1_storage_class_with_http_info(name, body, callback=callback_function)
+        >>> thread = api.replace_storage_class_with_http_info(name, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -927,22 +963,24 @@ class StorageV1beta1Api(object):
         all_params = ['name', 'body', 'pretty']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method replace_storage_v1beta1_storage_class" % key
+                    " to method replace_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'name' is set
         if ('name' not in params) or (params['name'] is None):
-            raise ValueError("Missing the required parameter `name` when calling `replace_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `name` when calling `replace_storage_class`")
         # verify the required parameter 'body' is set
         if ('body' not in params) or (params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `replace_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `body` when calling `replace_storage_class`")
 
 
         collection_formats = {}
@@ -989,9 +1027,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def watch_storage_v1beta1_storage_class(self, name, **kwargs):
+    def watch_storage_class(self, name, **kwargs):
         """
         
         watch changes to an object of kind StorageClass
@@ -1002,7 +1042,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.watch_storage_v1beta1_storage_class(name, callback=callback_function)
+        >>> thread = api.watch_storage_class(name, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -1019,12 +1059,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.watch_storage_v1beta1_storage_class_with_http_info(name, **kwargs)
+            return self.watch_storage_class_with_http_info(name, **kwargs)
         else:
-            (data) = self.watch_storage_v1beta1_storage_class_with_http_info(name, **kwargs)
+            (data) = self.watch_storage_class_with_http_info(name, **kwargs)
             return data
 
-    def watch_storage_v1beta1_storage_class_with_http_info(self, name, **kwargs):
+    def watch_storage_class_with_http_info(self, name, **kwargs):
         """
         
         watch changes to an object of kind StorageClass
@@ -1035,7 +1075,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.watch_storage_v1beta1_storage_class_with_http_info(name, callback=callback_function)
+        >>> thread = api.watch_storage_class_with_http_info(name, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -1054,19 +1094,21 @@ class StorageV1beta1Api(object):
         all_params = ['name', 'field_selector', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method watch_storage_v1beta1_storage_class" % key
+                    " to method watch_storage_class" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'name' is set
         if ('name' not in params) or (params['name'] is None):
-            raise ValueError("Missing the required parameter `name` when calling `watch_storage_v1beta1_storage_class`")
+            raise ValueError("Missing the required parameter `name` when calling `watch_storage_class`")
 
 
         collection_formats = {}
@@ -1121,9 +1163,11 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def watch_storage_v1beta1_storage_class_list(self, **kwargs):
+    def watch_storage_class_list(self, **kwargs):
         """
         
         watch individual changes to a list of StorageClass
@@ -1134,7 +1178,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.watch_storage_v1beta1_storage_class_list(callback=callback_function)
+        >>> thread = api.watch_storage_class_list(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -1150,12 +1194,12 @@ class StorageV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.watch_storage_v1beta1_storage_class_list_with_http_info(**kwargs)
+            return self.watch_storage_class_list_with_http_info(**kwargs)
         else:
-            (data) = self.watch_storage_v1beta1_storage_class_list_with_http_info(**kwargs)
+            (data) = self.watch_storage_class_list_with_http_info(**kwargs)
             return data
 
-    def watch_storage_v1beta1_storage_class_list_with_http_info(self, **kwargs):
+    def watch_storage_class_list_with_http_info(self, **kwargs):
         """
         
         watch individual changes to a list of StorageClass
@@ -1166,7 +1210,7 @@ class StorageV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.watch_storage_v1beta1_storage_class_list_with_http_info(callback=callback_function)
+        >>> thread = api.watch_storage_class_list_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -1184,13 +1228,15 @@ class StorageV1beta1Api(object):
         all_params = ['field_selector', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method watch_storage_v1beta1_storage_class_list" % key
+                    " to method watch_storage_class_list" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -1246,4 +1292,6 @@ class StorageV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)

@@ -166,21 +166,12 @@ from .models.v1alpha1_cluster_role import V1alpha1ClusterRole
 from .models.v1alpha1_cluster_role_binding import V1alpha1ClusterRoleBinding
 from .models.v1alpha1_cluster_role_binding_list import V1alpha1ClusterRoleBindingList
 from .models.v1alpha1_cluster_role_list import V1alpha1ClusterRoleList
-from .models.v1alpha1_eviction import V1alpha1Eviction
-from .models.v1alpha1_pod_disruption_budget import V1alpha1PodDisruptionBudget
-from .models.v1alpha1_pod_disruption_budget_list import V1alpha1PodDisruptionBudgetList
-from .models.v1alpha1_pod_disruption_budget_spec import V1alpha1PodDisruptionBudgetSpec
-from .models.v1alpha1_pod_disruption_budget_status import V1alpha1PodDisruptionBudgetStatus
 from .models.v1alpha1_policy_rule import V1alpha1PolicyRule
 from .models.v1alpha1_role import V1alpha1Role
 from .models.v1alpha1_role_binding import V1alpha1RoleBinding
 from .models.v1alpha1_role_binding_list import V1alpha1RoleBindingList
 from .models.v1alpha1_role_list import V1alpha1RoleList
 from .models.v1alpha1_role_ref import V1alpha1RoleRef
-from .models.v1alpha1_stateful_set import V1alpha1StatefulSet
-from .models.v1alpha1_stateful_set_list import V1alpha1StatefulSetList
-from .models.v1alpha1_stateful_set_spec import V1alpha1StatefulSetSpec
-from .models.v1alpha1_stateful_set_status import V1alpha1StatefulSetStatus
 from .models.v1alpha1_subject import V1alpha1Subject
 from .models.v1beta1_api_version import V1beta1APIVersion
 from .models.v1beta1_cpu_target_utilization import V1beta1CPUTargetUtilization
@@ -195,6 +186,7 @@ from .models.v1beta1_deployment_rollback import V1beta1DeploymentRollback
 from .models.v1beta1_deployment_spec import V1beta1DeploymentSpec
 from .models.v1beta1_deployment_status import V1beta1DeploymentStatus
 from .models.v1beta1_deployment_strategy import V1beta1DeploymentStrategy
+from .models.v1beta1_eviction import V1beta1Eviction
 from .models.v1beta1_horizontal_pod_autoscaler import V1beta1HorizontalPodAutoscaler
 from .models.v1beta1_horizontal_pod_autoscaler_list import V1beta1HorizontalPodAutoscalerList
 from .models.v1beta1_horizontal_pod_autoscaler_spec import V1beta1HorizontalPodAutoscalerSpec
@@ -219,6 +211,10 @@ from .models.v1beta1_network_policy_peer import V1beta1NetworkPolicyPeer
 from .models.v1beta1_network_policy_port import V1beta1NetworkPolicyPort
 from .models.v1beta1_network_policy_spec import V1beta1NetworkPolicySpec
 from .models.v1beta1_non_resource_attributes import V1beta1NonResourceAttributes
+from .models.v1beta1_pod_disruption_budget import V1beta1PodDisruptionBudget
+from .models.v1beta1_pod_disruption_budget_list import V1beta1PodDisruptionBudgetList
+from .models.v1beta1_pod_disruption_budget_spec import V1beta1PodDisruptionBudgetSpec
+from .models.v1beta1_pod_disruption_budget_status import V1beta1PodDisruptionBudgetStatus
 from .models.v1beta1_replica_set import V1beta1ReplicaSet
 from .models.v1beta1_replica_set_condition import V1beta1ReplicaSetCondition
 from .models.v1beta1_replica_set_list import V1beta1ReplicaSetList
@@ -232,6 +228,10 @@ from .models.v1beta1_scale_spec import V1beta1ScaleSpec
 from .models.v1beta1_scale_status import V1beta1ScaleStatus
 from .models.v1beta1_self_subject_access_review import V1beta1SelfSubjectAccessReview
 from .models.v1beta1_self_subject_access_review_spec import V1beta1SelfSubjectAccessReviewSpec
+from .models.v1beta1_stateful_set import V1beta1StatefulSet
+from .models.v1beta1_stateful_set_list import V1beta1StatefulSetList
+from .models.v1beta1_stateful_set_spec import V1beta1StatefulSetSpec
+from .models.v1beta1_stateful_set_status import V1beta1StatefulSetStatus
 from .models.v1beta1_storage_class import V1beta1StorageClass
 from .models.v1beta1_storage_class_list import V1beta1StorageClassList
 from .models.v1beta1_subject_access_review import V1beta1SubjectAccessReview
@@ -244,13 +244,23 @@ from .models.v1beta1_token_review import V1beta1TokenReview
 from .models.v1beta1_token_review_spec import V1beta1TokenReviewSpec
 from .models.v1beta1_token_review_status import V1beta1TokenReviewStatus
 from .models.v1beta1_user_info import V1beta1UserInfo
+from .models.v2alpha1_cron_job import V2alpha1CronJob
+from .models.v2alpha1_cron_job_list import V2alpha1CronJobList
+from .models.v2alpha1_cron_job_spec import V2alpha1CronJobSpec
+from .models.v2alpha1_cron_job_status import V2alpha1CronJobStatus
+from .models.v2alpha1_job import V2alpha1Job
+from .models.v2alpha1_job_condition import V2alpha1JobCondition
+from .models.v2alpha1_job_list import V2alpha1JobList
+from .models.v2alpha1_job_spec import V2alpha1JobSpec
+from .models.v2alpha1_job_status import V2alpha1JobStatus
+from .models.v2alpha1_job_template_spec import V2alpha1JobTemplateSpec
 from .models.version_info import VersionInfo
 from .models.versioned_event import VersionedEvent
 
 # import apis into sdk package
 from .apis.apis_api import ApisApi
 from .apis.apps_api import AppsApi
-from .apis.apps_v1alpha1_api import AppsV1alpha1Api
+from .apis.apps_v1beta1_api import AppsV1beta1Api
 from .apis.authentication_api import AuthenticationApi
 from .apis.authentication_v1beta1_api import AuthenticationV1beta1Api
 from .apis.authorization_api import AuthorizationApi
@@ -268,7 +278,7 @@ from .apis.extensions_api import ExtensionsApi
 from .apis.extensions_v1beta1_api import ExtensionsV1beta1Api
 from .apis.logs_api import LogsApi
 from .apis.policy_api import PolicyApi
-from .apis.policy_v1alpha1_api import PolicyV1alpha1Api
+from .apis.policy_v1beta1_api import PolicyV1beta1Api
 from .apis.rbac_authorization_api import RbacAuthorizationApi
 from .apis.rbac_authorization_v1alpha1_api import RbacAuthorizationV1alpha1Api
 from .apis.storage_api import StorageApi

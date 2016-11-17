@@ -4,11 +4,11 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_code_version**](VersionApi.md#get_code_version) | **GET** /version/ | 
+[**get_code**](VersionApi.md#get_code) | **GET** /version/ | 
 
 
-# **get_code_version**
-> VersionInfo get_code_version()
+# **get_code**
+> VersionInfo get_code()
 
 
 
@@ -31,10 +31,10 @@ k8sclient.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = k8sclient.VersionApi()
 
 try: 
-    api_response = api_instance.get_code_version()
+    api_response = api_instance.get_code()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling VersionApi->get_code_version: %s\n" % e)
+    print("Exception when calling VersionApi->get_code: %s\n" % e)
 ```
 
 ### Parameters

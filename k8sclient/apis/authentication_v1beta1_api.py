@@ -51,7 +51,7 @@ class AuthenticationV1beta1Api(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create_authentication_v1beta1_token_review(self, body, **kwargs):
+    def create_token_review(self, body, **kwargs):
         """
         
         create a TokenReview
@@ -62,7 +62,7 @@ class AuthenticationV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_authentication_v1beta1_token_review(body, callback=callback_function)
+        >>> thread = api.create_token_review(body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -74,12 +74,12 @@ class AuthenticationV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.create_authentication_v1beta1_token_review_with_http_info(body, **kwargs)
+            return self.create_token_review_with_http_info(body, **kwargs)
         else:
-            (data) = self.create_authentication_v1beta1_token_review_with_http_info(body, **kwargs)
+            (data) = self.create_token_review_with_http_info(body, **kwargs)
             return data
 
-    def create_authentication_v1beta1_token_review_with_http_info(self, body, **kwargs):
+    def create_token_review_with_http_info(self, body, **kwargs):
         """
         
         create a TokenReview
@@ -90,7 +90,7 @@ class AuthenticationV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_authentication_v1beta1_token_review_with_http_info(body, callback=callback_function)
+        >>> thread = api.create_token_review_with_http_info(body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -104,19 +104,21 @@ class AuthenticationV1beta1Api(object):
         all_params = ['body', 'pretty']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create_authentication_v1beta1_token_review" % key
+                    " to method create_token_review" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'body' is set
         if ('body' not in params) or (params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_authentication_v1beta1_token_review`")
+            raise ValueError("Missing the required parameter `body` when calling `create_token_review`")
 
 
         collection_formats = {}
@@ -161,9 +163,11 @@ class AuthenticationV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
 
-    def get_authentication_v1beta1_api_resources(self, **kwargs):
+    def get_api_resources(self, **kwargs):
         """
         
         get available resources
@@ -174,7 +178,7 @@ class AuthenticationV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_authentication_v1beta1_api_resources(callback=callback_function)
+        >>> thread = api.get_api_resources(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -184,12 +188,12 @@ class AuthenticationV1beta1Api(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.get_authentication_v1beta1_api_resources_with_http_info(**kwargs)
+            return self.get_api_resources_with_http_info(**kwargs)
         else:
-            (data) = self.get_authentication_v1beta1_api_resources_with_http_info(**kwargs)
+            (data) = self.get_api_resources_with_http_info(**kwargs)
             return data
 
-    def get_authentication_v1beta1_api_resources_with_http_info(self, **kwargs):
+    def get_api_resources_with_http_info(self, **kwargs):
         """
         
         get available resources
@@ -200,7 +204,7 @@ class AuthenticationV1beta1Api(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_authentication_v1beta1_api_resources_with_http_info(callback=callback_function)
+        >>> thread = api.get_api_resources_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -212,13 +216,15 @@ class AuthenticationV1beta1Api(object):
         all_params = []
         all_params.append('callback')
         all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         params = locals()
         for key, val in iteritems(params['kwargs']):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_authentication_v1beta1_api_resources" % key
+                    " to method get_api_resources" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -262,4 +268,6 @@ class AuthenticationV1beta1Api(object):
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
                                             collection_formats=collection_formats)
