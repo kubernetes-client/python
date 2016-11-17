@@ -138,30 +138,6 @@ class TestPolicyV1beta1Api(unittest.TestCase):
         """
         pass
 
-    def test_watch_namespaced_pod_disruption_budget(self):
-        """
-        Test case for watch_namespaced_pod_disruption_budget
-
-        
-        """
-        pass
-
-    def test_watch_namespaced_pod_disruption_budget_list(self):
-        """
-        Test case for watch_namespaced_pod_disruption_budget_list
-
-        
-        """
-        pass
-
-    def test_watch_pod_disruption_budget_list_for_all_namespaces(self):
-        """
-        Test case for watch_pod_disruption_budget_list_for_all_namespaces
-
-        
-        """
-        pass
-
 
 if __name__ == '__main__':
     unittest.main()

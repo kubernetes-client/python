@@ -106,22 +106,6 @@ class TestStorageV1beta1Api(unittest.TestCase):
         """
         pass
 
-    def test_watch_storage_class(self):
-        """
-        Test case for watch_storage_class
-
-        
-        """
-        pass
-
-    def test_watch_storage_class_list(self):
-        """
-        Test case for watch_storage_class_list
-
-        
-        """
-        pass
-
 
 if __name__ == '__main__':
     unittest.main()

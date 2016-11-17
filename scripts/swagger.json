@@ -11032,37 +11032,6 @@
       ]
     },
     "/api/v1/watch/configmaps": {
-      "get": {
-        "description": "watch individual changes to a list of ConfigMap",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchConfigMapListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11109,37 +11078,6 @@
       ]
     },
     "/api/v1/watch/endpoints": {
-      "get": {
-        "description": "watch individual changes to a list of Endpoints",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchEndpointsListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11186,37 +11124,6 @@
       ]
     },
     "/api/v1/watch/events": {
-      "get": {
-        "description": "watch individual changes to a list of Event",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchEventListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11263,37 +11170,6 @@
       ]
     },
     "/api/v1/watch/limitranges": {
-      "get": {
-        "description": "watch individual changes to a list of LimitRange",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchLimitRangeListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11340,37 +11216,6 @@
       ]
     },
     "/api/v1/watch/namespaces": {
-      "get": {
-        "description": "watch individual changes to a list of Namespace",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespaceList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11417,37 +11262,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/configmaps": {
-      "get": {
-        "description": "watch individual changes to a list of ConfigMap",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedConfigMapList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11502,37 +11316,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/configmaps/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ConfigMap",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedConfigMap",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11595,37 +11378,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/endpoints": {
-      "get": {
-        "description": "watch individual changes to a list of Endpoints",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedEndpointsList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11680,37 +11432,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/endpoints/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Endpoints",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedEndpoints",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11773,37 +11494,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/events": {
-      "get": {
-        "description": "watch individual changes to a list of Event",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedEventList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11858,37 +11548,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/events/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Event",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedEvent",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -11951,37 +11610,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/limitranges": {
-      "get": {
-        "description": "watch individual changes to a list of LimitRange",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedLimitRangeList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12036,37 +11664,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/limitranges/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind LimitRange",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedLimitRange",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12129,37 +11726,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/persistentvolumeclaims": {
-      "get": {
-        "description": "watch individual changes to a list of PersistentVolumeClaim",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedPersistentVolumeClaimList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12214,37 +11780,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/persistentvolumeclaims/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind PersistentVolumeClaim",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedPersistentVolumeClaim",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12307,37 +11842,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/pods": {
-      "get": {
-        "description": "watch individual changes to a list of Pod",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedPodList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12392,37 +11896,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/pods/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Pod",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedPod",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12485,37 +11958,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/podtemplates": {
-      "get": {
-        "description": "watch individual changes to a list of PodTemplate",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedPodTemplateList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12570,37 +12012,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/podtemplates/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind PodTemplate",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedPodTemplate",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12663,37 +12074,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/replicationcontrollers": {
-      "get": {
-        "description": "watch individual changes to a list of ReplicationController",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedReplicationControllerList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12748,37 +12128,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/replicationcontrollers/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ReplicationController",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedReplicationController",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12841,37 +12190,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/resourcequotas": {
-      "get": {
-        "description": "watch individual changes to a list of ResourceQuota",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedResourceQuotaList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -12926,37 +12244,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/resourcequotas/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ResourceQuota",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedResourceQuota",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13019,37 +12306,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/secrets": {
-      "get": {
-        "description": "watch individual changes to a list of Secret",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedSecretList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13104,37 +12360,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/secrets/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Secret",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedSecret",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13197,37 +12422,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/serviceaccounts": {
-      "get": {
-        "description": "watch individual changes to a list of ServiceAccount",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedServiceAccountList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13282,37 +12476,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/serviceaccounts/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ServiceAccount",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedServiceAccount",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13375,37 +12538,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/services": {
-      "get": {
-        "description": "watch individual changes to a list of Service",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedServiceList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13460,37 +12592,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{namespace}/services/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Service",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespacedService",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13553,37 +12654,6 @@
       ]
     },
     "/api/v1/watch/namespaces/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Namespace",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNamespace",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13638,37 +12708,6 @@
       ]
     },
     "/api/v1/watch/nodes": {
-      "get": {
-        "description": "watch individual changes to a list of Node",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNodeList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13715,37 +12754,6 @@
       ]
     },
     "/api/v1/watch/nodes/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Node",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchNode",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13800,37 +12808,6 @@
       ]
     },
     "/api/v1/watch/persistentvolumeclaims": {
-      "get": {
-        "description": "watch individual changes to a list of PersistentVolumeClaim",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchPersistentVolumeClaimListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13877,37 +12854,6 @@
       ]
     },
     "/api/v1/watch/persistentvolumes": {
-      "get": {
-        "description": "watch individual changes to a list of PersistentVolume",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchPersistentVolumeList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -13954,37 +12900,6 @@
       ]
     },
     "/api/v1/watch/persistentvolumes/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind PersistentVolume",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchPersistentVolume",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14039,37 +12954,6 @@
       ]
     },
     "/api/v1/watch/pods": {
-      "get": {
-        "description": "watch individual changes to a list of Pod",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchPodListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14116,37 +13000,6 @@
       ]
     },
     "/api/v1/watch/podtemplates": {
-      "get": {
-        "description": "watch individual changes to a list of PodTemplate",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchPodTemplateListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14193,37 +13046,6 @@
       ]
     },
     "/api/v1/watch/replicationcontrollers": {
-      "get": {
-        "description": "watch individual changes to a list of ReplicationController",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchReplicationControllerListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14270,37 +13092,6 @@
       ]
     },
     "/api/v1/watch/resourcequotas": {
-      "get": {
-        "description": "watch individual changes to a list of ResourceQuota",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchResourceQuotaListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14347,37 +13138,6 @@
       ]
     },
     "/api/v1/watch/secrets": {
-      "get": {
-        "description": "watch individual changes to a list of Secret",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchSecretListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14424,37 +13184,6 @@
       ]
     },
     "/api/v1/watch/serviceaccounts": {
-      "get": {
-        "description": "watch individual changes to a list of ServiceAccount",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchServiceAccountListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -14501,37 +13230,6 @@
       ]
     },
     "/api/v1/watch/services": {
-      "get": {
-        "description": "watch individual changes to a list of Service",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "core_v1"
-        ],
-        "operationId": "watchServiceListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -15287,37 +13985,6 @@
       ]
     },
     "/apis/apps/v1beta1/watch/namespaces/{namespace}/statefulsets": {
-      "get": {
-        "description": "watch individual changes to a list of StatefulSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "apps_v1beta1"
-        ],
-        "operationId": "watchNamespacedStatefulSetList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -15372,37 +14039,6 @@
       ]
     },
     "/apis/apps/v1beta1/watch/namespaces/{namespace}/statefulsets/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind StatefulSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "apps_v1beta1"
-        ],
-        "operationId": "watchNamespacedStatefulSet",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -15465,37 +14101,6 @@
       ]
     },
     "/apis/apps/v1beta1/watch/statefulsets": {
-      "get": {
-        "description": "watch individual changes to a list of StatefulSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "apps_v1beta1"
-        ],
-        "operationId": "watchStatefulSetListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -16550,37 +15155,6 @@
       ]
     },
     "/apis/autoscaling/v1/watch/horizontalpodautoscalers": {
-      "get": {
-        "description": "watch individual changes to a list of HorizontalPodAutoscaler",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "autoscaling_v1"
-        ],
-        "operationId": "watchHorizontalPodAutoscalerListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -16627,37 +15201,6 @@
       ]
     },
     "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers": {
-      "get": {
-        "description": "watch individual changes to a list of HorizontalPodAutoscaler",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "autoscaling_v1"
-        ],
-        "operationId": "watchNamespacedHorizontalPodAutoscalerList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -16712,37 +15255,6 @@
       ]
     },
     "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind HorizontalPodAutoscaler",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "autoscaling_v1"
-        ],
-        "operationId": "watchNamespacedHorizontalPodAutoscaler",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -17481,37 +15993,6 @@
       ]
     },
     "/apis/batch/v1/watch/jobs": {
-      "get": {
-        "description": "watch individual changes to a list of Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v1"
-        ],
-        "operationId": "watchJobListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -17558,37 +16039,6 @@
       ]
     },
     "/apis/batch/v1/watch/namespaces/{namespace}/jobs": {
-      "get": {
-        "description": "watch individual changes to a list of Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v1"
-        ],
-        "operationId": "watchNamespacedJobList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -17643,37 +16093,6 @@
       ]
     },
     "/apis/batch/v1/watch/namespaces/{namespace}/jobs/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v1"
-        ],
-        "operationId": "watchNamespacedJob",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -19599,37 +18018,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/cronjobs": {
-      "get": {
-        "description": "watch individual changes to a list of CronJob",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchCronJobListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -19676,37 +18064,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/jobs": {
-      "get": {
-        "description": "watch individual changes to a list of Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchJobListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -19753,37 +18110,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/namespaces/{namespace}/cronjobs": {
-      "get": {
-        "description": "watch individual changes to a list of CronJob",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchNamespacedCronJobList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -19838,37 +18164,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/namespaces/{namespace}/cronjobs/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind CronJob",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchNamespacedCronJob",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -19931,37 +18226,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/namespaces/{namespace}/jobs": {
-      "get": {
-        "description": "watch individual changes to a list of Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchNamespacedJobList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -20016,37 +18280,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/namespaces/{namespace}/jobs/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchNamespacedJob",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -20109,37 +18342,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/namespaces/{namespace}/scheduledjobs": {
-      "get": {
-        "description": "watch individual changes to a list of ScheduledJob",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchNamespacedScheduledJobList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -20194,37 +18396,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/namespaces/{namespace}/scheduledjobs/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ScheduledJob",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchNamespacedScheduledJob",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -20287,37 +18458,6 @@
       ]
     },
     "/apis/batch/v2alpha1/watch/scheduledjobs": {
-      "get": {
-        "description": "watch individual changes to a list of ScheduledJob",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "batch_v2alpha1"
-        ],
-        "operationId": "watchScheduledJobListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -20923,37 +19063,6 @@
       ]
     },
     "/apis/certificates.k8s.io/v1alpha1/watch/certificatesigningrequests": {
-      "get": {
-        "description": "watch individual changes to a list of CertificateSigningRequest",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "certificates_v1alpha1"
-        ],
-        "operationId": "watchCertificateSigningRequestList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -21000,37 +19109,6 @@
       ]
     },
     "/apis/certificates.k8s.io/v1alpha1/watch/certificatesigningrequests/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind CertificateSigningRequest",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "certificates_v1alpha1"
-        ],
-        "operationId": "watchCertificateSigningRequest",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26138,37 +24216,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/daemonsets": {
-      "get": {
-        "description": "watch individual changes to a list of DaemonSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchDaemonSetListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26215,37 +24262,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/deployments": {
-      "get": {
-        "description": "watch individual changes to a list of Deployment",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchDeploymentListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26292,37 +24308,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/horizontalpodautoscalers": {
-      "get": {
-        "description": "watch individual changes to a list of HorizontalPodAutoscaler",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchHorizontalPodAutoscalerListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26369,37 +24354,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/ingresses": {
-      "get": {
-        "description": "watch individual changes to a list of Ingress",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchIngressListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26446,37 +24400,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/jobs": {
-      "get": {
-        "description": "watch individual changes to a list of Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchJobListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26523,37 +24446,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/daemonsets": {
-      "get": {
-        "description": "watch individual changes to a list of DaemonSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedDaemonSetList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26608,37 +24500,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/daemonsets/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind DaemonSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedDaemonSet",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26701,37 +24562,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/deployments": {
-      "get": {
-        "description": "watch individual changes to a list of Deployment",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedDeploymentList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26786,37 +24616,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/deployments/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Deployment",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedDeployment",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26879,37 +24678,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/horizontalpodautoscalers": {
-      "get": {
-        "description": "watch individual changes to a list of HorizontalPodAutoscaler",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedHorizontalPodAutoscalerList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -26964,37 +24732,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind HorizontalPodAutoscaler",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedHorizontalPodAutoscaler",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27057,37 +24794,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/ingresses": {
-      "get": {
-        "description": "watch individual changes to a list of Ingress",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedIngressList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27142,37 +24848,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/ingresses/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Ingress",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedIngress",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27235,37 +24910,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/jobs": {
-      "get": {
-        "description": "watch individual changes to a list of Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedJobList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27320,37 +24964,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/jobs/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Job",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedJob",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27413,37 +25026,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/networkpolicies": {
-      "get": {
-        "description": "watch individual changes to a list of NetworkPolicy",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedNetworkPolicyList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27498,37 +25080,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/networkpolicies/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind NetworkPolicy",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedNetworkPolicy",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27591,37 +25142,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/replicasets": {
-      "get": {
-        "description": "watch individual changes to a list of ReplicaSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedReplicaSetList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27676,37 +25196,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/namespaces/{namespace}/replicasets/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ReplicaSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNamespacedReplicaSet",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27769,37 +25258,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/networkpolicies": {
-      "get": {
-        "description": "watch individual changes to a list of NetworkPolicy",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchNetworkPolicyListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27846,37 +25304,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/replicasets": {
-      "get": {
-        "description": "watch individual changes to a list of ReplicaSet",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchReplicaSetListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -27923,37 +25350,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/thirdpartyresources": {
-      "get": {
-        "description": "watch individual changes to a list of ThirdPartyResource",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchThirdPartyResourceList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -28000,37 +25396,6 @@
       ]
     },
     "/apis/extensions/v1beta1/watch/thirdpartyresources/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ThirdPartyResource",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "extensions_v1beta1"
-        ],
-        "operationId": "watchThirdPartyResource",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -28761,37 +26126,6 @@
       ]
     },
     "/apis/policy/v1beta1/watch/namespaces/{namespace}/poddisruptionbudgets": {
-      "get": {
-        "description": "watch individual changes to a list of PodDisruptionBudget",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "policy_v1beta1"
-        ],
-        "operationId": "watchNamespacedPodDisruptionBudgetList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -28846,37 +26180,6 @@
       ]
     },
     "/apis/policy/v1beta1/watch/namespaces/{namespace}/poddisruptionbudgets/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind PodDisruptionBudget",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "policy_v1beta1"
-        ],
-        "operationId": "watchNamespacedPodDisruptionBudget",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -28939,37 +26242,6 @@
       ]
     },
     "/apis/policy/v1beta1/watch/poddisruptionbudgets": {
-      "get": {
-        "description": "watch individual changes to a list of PodDisruptionBudget",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "policy_v1beta1"
-        ],
-        "operationId": "watchPodDisruptionBudgetListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -30728,37 +28000,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterrolebindings": {
-      "get": {
-        "description": "watch individual changes to a list of ClusterRoleBinding",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchClusterRoleBindingList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -30805,37 +28046,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterrolebindings/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ClusterRoleBinding",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchClusterRoleBinding",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -30890,37 +28100,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterroles": {
-      "get": {
-        "description": "watch individual changes to a list of ClusterRole",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchClusterRoleList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -30967,37 +28146,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterroles/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind ClusterRole",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchClusterRole",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -31052,37 +28200,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/namespaces/{namespace}/rolebindings": {
-      "get": {
-        "description": "watch individual changes to a list of RoleBinding",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchNamespacedRoleBindingList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -31137,37 +28254,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/namespaces/{namespace}/rolebindings/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind RoleBinding",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchNamespacedRoleBinding",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -31230,37 +28316,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/namespaces/{namespace}/roles": {
-      "get": {
-        "description": "watch individual changes to a list of Role",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchNamespacedRoleList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -31315,37 +28370,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/namespaces/{namespace}/roles/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind Role",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchNamespacedRole",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -31408,37 +28432,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/rolebindings": {
-      "get": {
-        "description": "watch individual changes to a list of RoleBinding",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchRoleBindingListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -31485,37 +28478,6 @@
       ]
     },
     "/apis/rbac.authorization.k8s.io/v1alpha1/watch/roles": {
-      "get": {
-        "description": "watch individual changes to a list of Role",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "rbacAuthorization_v1alpha1"
-        ],
-        "operationId": "watchRoleListForAllNamespaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -32009,37 +28971,6 @@
       ]
     },
     "/apis/storage.k8s.io/v1beta1/watch/storageclasses": {
-      "get": {
-        "description": "watch individual changes to a list of StorageClass",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "storage_v1beta1"
-        ],
-        "operationId": "watchStorageClassList",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,
@@ -32086,37 +29017,6 @@
       ]
     },
     "/apis/storage.k8s.io/v1beta1/watch/storageclasses/{name}": {
-      "get": {
-        "description": "watch changes to an object of kind StorageClass",
-        "consumes": [
-          "*/*"
-        ],
-        "produces": [
-          "application/json",
-          "application/yaml",
-          "application/vnd.kubernetes.protobuf",
-          "application/json;stream=watch",
-          "application/vnd.kubernetes.protobuf;stream=watch"
-        ],
-        "schemes": [
-          "https"
-        ],
-        "tags": [
-          "storage_v1beta1"
-        ],
-        "operationId": "watchStorageClass",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/versioned.Event"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
       "parameters": [
         {
           "uniqueItems": true,

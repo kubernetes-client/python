@@ -138,30 +138,6 @@ class TestBatchV1Api(unittest.TestCase):
         """
         pass
 
-    def test_watch_job_list_for_all_namespaces(self):
-        """
-        Test case for watch_job_list_for_all_namespaces
-
-        
-        """
-        pass
-
-    def test_watch_namespaced_job(self):
-        """
-        Test case for watch_namespaced_job
-
-        
-        """
-        pass
-
-    def test_watch_namespaced_job_list(self):
-        """
-        Test case for watch_namespaced_job_list
-
-        
-        """
-        pass
-
 
 if __name__ == '__main__':
     unittest.main()
