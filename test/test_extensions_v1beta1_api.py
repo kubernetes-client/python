@@ -778,6 +778,190 @@ class TestExtensionsV1beta1Api(unittest.TestCase):
         """
         pass
 
+    def test_watch_daemon_set_list_for_all_namespaces(self):
+        """
+        Test case for watch_daemon_set_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_deployment_list_for_all_namespaces(self):
+        """
+        Test case for watch_deployment_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_horizontal_pod_autoscaler_list_for_all_namespaces(self):
+        """
+        Test case for watch_horizontal_pod_autoscaler_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_ingress_list_for_all_namespaces(self):
+        """
+        Test case for watch_ingress_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_job_list_for_all_namespaces(self):
+        """
+        Test case for watch_job_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_daemon_set(self):
+        """
+        Test case for watch_namespaced_daemon_set
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_daemon_set_list(self):
+        """
+        Test case for watch_namespaced_daemon_set_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_deployment(self):
+        """
+        Test case for watch_namespaced_deployment
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_deployment_list(self):
+        """
+        Test case for watch_namespaced_deployment_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_horizontal_pod_autoscaler(self):
+        """
+        Test case for watch_namespaced_horizontal_pod_autoscaler
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_horizontal_pod_autoscaler_list(self):
+        """
+        Test case for watch_namespaced_horizontal_pod_autoscaler_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_ingress(self):
+        """
+        Test case for watch_namespaced_ingress
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_ingress_list(self):
+        """
+        Test case for watch_namespaced_ingress_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_job(self):
+        """
+        Test case for watch_namespaced_job
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_job_list(self):
+        """
+        Test case for watch_namespaced_job_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_network_policy(self):
+        """
+        Test case for watch_namespaced_network_policy
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_network_policy_list(self):
+        """
+        Test case for watch_namespaced_network_policy_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_replica_set(self):
+        """
+        Test case for watch_namespaced_replica_set
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_replica_set_list(self):
+        """
+        Test case for watch_namespaced_replica_set_list
+
+        
+        """
+        pass
+
+    def test_watch_network_policy_list_for_all_namespaces(self):
+        """
+        Test case for watch_network_policy_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_replica_set_list_for_all_namespaces(self):
+        """
+        Test case for watch_replica_set_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_third_party_resource(self):
+        """
+        Test case for watch_third_party_resource
+
+        
+        """
+        pass
+
+    def test_watch_third_party_resource_list(self):
+        """
+        Test case for watch_third_party_resource_list
+
+        
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

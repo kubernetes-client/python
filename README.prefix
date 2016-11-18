@@ -1,5 +1,7 @@
 # Kubernetes Python Client
 
+[![Build Status](https://travis-ci.org/kubernetes-incubator/client-python.svg?branch=master)](https://travis-ci.org/kubernetes-incubator/client-python)
+
 Python clients for talking to a [kubernetes](http://kubernetes.io/) cluster.
 
 ## Example
