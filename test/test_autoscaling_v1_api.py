@@ -138,6 +138,30 @@ class TestAutoscalingV1Api(unittest.TestCase):
         """
         pass
 
+    def test_watch_horizontal_pod_autoscaler_list_for_all_namespaces(self):
+        """
+        Test case for watch_horizontal_pod_autoscaler_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_horizontal_pod_autoscaler(self):
+        """
+        Test case for watch_namespaced_horizontal_pod_autoscaler
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_horizontal_pod_autoscaler_list(self):
+        """
+        Test case for watch_namespaced_horizontal_pod_autoscaler_list
+
+        
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

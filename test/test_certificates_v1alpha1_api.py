@@ -122,6 +122,22 @@ class TestCertificatesV1alpha1Api(unittest.TestCase):
         """
         pass
 
+    def test_watch_certificate_signing_request(self):
+        """
+        Test case for watch_certificate_signing_request
+
+        
+        """
+        pass
+
+    def test_watch_certificate_signing_request_list(self):
+        """
+        Test case for watch_certificate_signing_request_list
+
+        
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

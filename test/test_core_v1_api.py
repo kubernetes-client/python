@@ -1874,6 +1874,342 @@ class TestCoreV1Api(unittest.TestCase):
         """
         pass
 
+    def test_watch_config_map_list_for_all_namespaces(self):
+        """
+        Test case for watch_config_map_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_endpoints_list_for_all_namespaces(self):
+        """
+        Test case for watch_endpoints_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_event_list_for_all_namespaces(self):
+        """
+        Test case for watch_event_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_limit_range_list_for_all_namespaces(self):
+        """
+        Test case for watch_limit_range_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_namespace(self):
+        """
+        Test case for watch_namespace
+
+        
+        """
+        pass
+
+    def test_watch_namespace_list(self):
+        """
+        Test case for watch_namespace_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_config_map(self):
+        """
+        Test case for watch_namespaced_config_map
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_config_map_list(self):
+        """
+        Test case for watch_namespaced_config_map_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_endpoints(self):
+        """
+        Test case for watch_namespaced_endpoints
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_endpoints_list(self):
+        """
+        Test case for watch_namespaced_endpoints_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_event(self):
+        """
+        Test case for watch_namespaced_event
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_event_list(self):
+        """
+        Test case for watch_namespaced_event_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_limit_range(self):
+        """
+        Test case for watch_namespaced_limit_range
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_limit_range_list(self):
+        """
+        Test case for watch_namespaced_limit_range_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_persistent_volume_claim(self):
+        """
+        Test case for watch_namespaced_persistent_volume_claim
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_persistent_volume_claim_list(self):
+        """
+        Test case for watch_namespaced_persistent_volume_claim_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_pod(self):
+        """
+        Test case for watch_namespaced_pod
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_pod_list(self):
+        """
+        Test case for watch_namespaced_pod_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_pod_template(self):
+        """
+        Test case for watch_namespaced_pod_template
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_pod_template_list(self):
+        """
+        Test case for watch_namespaced_pod_template_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_replication_controller(self):
+        """
+        Test case for watch_namespaced_replication_controller
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_replication_controller_list(self):
+        """
+        Test case for watch_namespaced_replication_controller_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_resource_quota(self):
+        """
+        Test case for watch_namespaced_resource_quota
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_resource_quota_list(self):
+        """
+        Test case for watch_namespaced_resource_quota_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_secret(self):
+        """
+        Test case for watch_namespaced_secret
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_secret_list(self):
+        """
+        Test case for watch_namespaced_secret_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_service(self):
+        """
+        Test case for watch_namespaced_service
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_service_account(self):
+        """
+        Test case for watch_namespaced_service_account
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_service_account_list(self):
+        """
+        Test case for watch_namespaced_service_account_list
+
+        
+        """
+        pass
+
+    def test_watch_namespaced_service_list(self):
+        """
+        Test case for watch_namespaced_service_list
+
+        
+        """
+        pass
+
+    def test_watch_node(self):
+        """
+        Test case for watch_node
+
+        
+        """
+        pass
+
+    def test_watch_node_list(self):
+        """
+        Test case for watch_node_list
+
+        
+        """
+        pass
+
+    def test_watch_persistent_volume(self):
+        """
+        Test case for watch_persistent_volume
+
+        
+        """
+        pass
+
+    def test_watch_persistent_volume_claim_list_for_all_namespaces(self):
+        """
+        Test case for watch_persistent_volume_claim_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_persistent_volume_list(self):
+        """
+        Test case for watch_persistent_volume_list
+
+        
+        """
+        pass
+
+    def test_watch_pod_list_for_all_namespaces(self):
+        """
+        Test case for watch_pod_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_pod_template_list_for_all_namespaces(self):
+        """
+        Test case for watch_pod_template_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_replication_controller_list_for_all_namespaces(self):
+        """
+        Test case for watch_replication_controller_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_resource_quota_list_for_all_namespaces(self):
+        """
+        Test case for watch_resource_quota_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_secret_list_for_all_namespaces(self):
+        """
+        Test case for watch_secret_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_service_account_list_for_all_namespaces(self):
+        """
+        Test case for watch_service_account_list_for_all_namespaces
+
+        
+        """
+        pass
+
+    def test_watch_service_list_for_all_namespaces(self):
+        """
+        Test case for watch_service_list_for_all_namespaces
+
+        
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()
