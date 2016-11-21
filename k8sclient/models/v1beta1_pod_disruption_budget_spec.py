@@ -75,8 +75,6 @@ class V1beta1PodDisruptionBudgetSpec(object):
         :param min_available: The min_available of this V1beta1PodDisruptionBudgetSpec.
         :type: IntstrIntOrString
         """
-        if min_available is None:
-            raise ValueError("Invalid value for `min_available`, must not be `None`")
 
         self._min_available = min_available
 
@@ -100,8 +98,6 @@ class V1beta1PodDisruptionBudgetSpec(object):
         :param selector: The selector of this V1beta1PodDisruptionBudgetSpec.
         :type: UnversionedLabelSelector
         """
-        if selector is None:
-            raise ValueError("Invalid value for `selector`, must not be `None`")
 
         self._selector = selector
 

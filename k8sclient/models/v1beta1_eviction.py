@@ -75,8 +75,6 @@ class V1beta1Eviction(object):
         :param delete_options: The delete_options of this V1beta1Eviction.
         :type: V1DeleteOptions
         """
-        if delete_options is None:
-            raise ValueError("Invalid value for `delete_options`, must not be `None`")
 
         self._delete_options = delete_options
 
@@ -100,8 +98,6 @@ class V1beta1Eviction(object):
         :param metadata: The metadata of this V1beta1Eviction.
         :type: V1ObjectMeta
         """
-        if metadata is None:
-            raise ValueError("Invalid value for `metadata`, must not be `None`")
 
         self._metadata = metadata
 

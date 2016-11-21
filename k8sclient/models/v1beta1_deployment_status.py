@@ -110,8 +110,6 @@ class V1beta1DeploymentStatus(object):
         :param conditions: The conditions of this V1beta1DeploymentStatus.
         :type: list[V1beta1DeploymentCondition]
         """
-        if conditions is None:
-            raise ValueError("Invalid value for `conditions`, must not be `None`")
 
         self._conditions = conditions
 

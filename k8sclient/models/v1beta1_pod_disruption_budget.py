@@ -78,8 +78,6 @@ class V1beta1PodDisruptionBudget(object):
         :param metadata: The metadata of this V1beta1PodDisruptionBudget.
         :type: V1ObjectMeta
         """
-        if metadata is None:
-            raise ValueError("Invalid value for `metadata`, must not be `None`")
 
         self._metadata = metadata
 
@@ -103,8 +101,6 @@ class V1beta1PodDisruptionBudget(object):
         :param spec: The spec of this V1beta1PodDisruptionBudget.
         :type: V1beta1PodDisruptionBudgetSpec
         """
-        if spec is None:
-            raise ValueError("Invalid value for `spec`, must not be `None`")
 
         self._spec = spec
 
@@ -128,8 +124,6 @@ class V1beta1PodDisruptionBudget(object):
         :param status: The status of this V1beta1PodDisruptionBudget.
         :type: V1beta1PodDisruptionBudgetStatus
         """
-        if status is None:
-            raise ValueError("Invalid value for `status`, must not be `None`")
 
         self._status = status
 

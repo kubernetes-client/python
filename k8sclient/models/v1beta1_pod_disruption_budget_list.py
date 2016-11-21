@@ -100,8 +100,6 @@ class V1beta1PodDisruptionBudgetList(object):
         :param metadata: The metadata of this V1beta1PodDisruptionBudgetList.
         :type: UnversionedListMeta
         """
-        if metadata is None:
-            raise ValueError("Invalid value for `metadata`, must not be `None`")
 
         self._metadata = metadata
 
