@@ -42,7 +42,7 @@ class V1Secret(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'data': 'dict(str, list[int])',
+            'data': 'dict(str, str)',
             'metadata': 'V1ObjectMeta',
             'string_data': 'dict(str, str)',
             'type': 'str'
@@ -68,7 +68,7 @@ class V1Secret(object):
         Data contains the secret data. Each key must be a valid DNS_SUBDOMAIN or leading dot followed by valid DNS_SUBDOMAIN. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4
 
         :return: The data of this V1Secret.
-        :rtype: dict(str, list[int])
+        :rtype: dict(str, str)
         """
         return self._data
 
@@ -79,7 +79,7 @@ class V1Secret(object):
         Data contains the secret data. Each key must be a valid DNS_SUBDOMAIN or leading dot followed by valid DNS_SUBDOMAIN. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4
 
         :param data: The data of this V1Secret.
-        :type: dict(str, list[int])
+        :type: dict(str, str)
         """
 
         self._data = data
