@@ -142,8 +142,6 @@ class V1beta1DeploymentSpec(object):
         :param progress_deadline_seconds: The progress_deadline_seconds of this V1beta1DeploymentSpec.
         :type: int
         """
-        if progress_deadline_seconds is None:
-            raise ValueError("Invalid value for `progress_deadline_seconds`, must not be `None`")
 
         self._progress_deadline_seconds = progress_deadline_seconds
 

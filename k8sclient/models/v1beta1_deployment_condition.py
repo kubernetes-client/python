@@ -87,8 +87,6 @@ class V1beta1DeploymentCondition(object):
         :param last_transition_time: The last_transition_time of this V1beta1DeploymentCondition.
         :type: UnversionedTime
         """
-        if last_transition_time is None:
-            raise ValueError("Invalid value for `last_transition_time`, must not be `None`")
 
         self._last_transition_time = last_transition_time
 
@@ -112,8 +110,6 @@ class V1beta1DeploymentCondition(object):
         :param last_update_time: The last_update_time of this V1beta1DeploymentCondition.
         :type: UnversionedTime
         """
-        if last_update_time is None:
-            raise ValueError("Invalid value for `last_update_time`, must not be `None`")
 
         self._last_update_time = last_update_time
 
@@ -137,8 +133,6 @@ class V1beta1DeploymentCondition(object):
         :param message: The message of this V1beta1DeploymentCondition.
         :type: str
         """
-        if message is None:
-            raise ValueError("Invalid value for `message`, must not be `None`")
 
         self._message = message
 
@@ -162,8 +156,6 @@ class V1beta1DeploymentCondition(object):
         :param reason: The reason of this V1beta1DeploymentCondition.
         :type: str
         """
-        if reason is None:
-            raise ValueError("Invalid value for `reason`, must not be `None`")
 
         self._reason = reason
 
