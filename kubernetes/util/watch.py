@@ -15,7 +15,7 @@
 import json
 import pydoc
 
-import k8sclient
+from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":return:"
 
@@ -62,7 +62,7 @@ class Watch(object):
     def __init__(self, return_type=None):
         self._raw_return_type = return_type
         self._stop = False
-        self._api_client = k8sclient.ApiClient()
+        self._api_client = client.ApiClient()
 
     def stop(self):
         self._stop = True
@@ -98,8 +98,8 @@ class Watch(object):
                              'object' value will be the same as 'raw_object'.
 
         Example:
-            v1 = k8sclient.CoreV1Api()
-            watch = k8sutil.Watch()
+            v1 = client.CoreV1Api()
+            watch = util.Watch()
             for e in watch.stream(v1.list_namespace, resource_version=1127):
                 type = e['type']
                 object = e['object']  # object is one of type return_type

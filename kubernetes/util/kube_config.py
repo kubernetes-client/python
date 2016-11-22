@@ -19,7 +19,7 @@ import tempfile
 
 import urllib3
 import yaml
-from k8sclient import configuration
+from kubernetes.client import configuration
 from oauth2client.client import GoogleCredentials
 
 _temp_files = []
@@ -157,7 +157,7 @@ class _node:
 
 def load_kube_config(config_file):
     """Loads authentication and cluster information from kube-config file
-    and store them in k8sclient.configuration."""
+    and store them in kubernetes.client.configuration."""
 
     with open(config_file) as f:
         config = _node('kube-config', yaml.load(f))
