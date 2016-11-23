@@ -17,7 +17,7 @@ import sys
 from setuptools import find_packages, setup
 
 NAME = "kubernetes"
-VERSION = "1.0.0-alpha.1"
+VERSION = "1.0.0-alpha.2"
 
 # To install the library, run the following
 #
