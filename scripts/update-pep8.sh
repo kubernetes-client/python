@@ -46,7 +46,7 @@ SAVEIFS=$IFS
 trap "IFS=$SAVEIFS" EXIT SIGINT
 IFS=,
 
-SOURCES="${CLIENT_ROOT}/util/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/examples/*.py"
+SOURCES="${SCRIPT_ROOT}/../setup.py,${CLIENT_ROOT}/config/*.py,${CLIENT_ROOT}/watch/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/../examples/*.py"
 
 echo "--- Updating tools"
 pip install --upgrade pep8

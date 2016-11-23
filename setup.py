@@ -13,7 +13,8 @@
 # limitations under the License.
 
 import sys
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 NAME = "kubernetes"
 VERSION = "1.0.0-alpha.1"
@@ -25,7 +26,14 @@ VERSION = "1.0.0-alpha.1"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["urllib3 >= 1.19", "six >= 1.10", "certifi", "python-dateutil", "pyyaml", "oauth2client"]
+REQUIRES = [
+    "urllib3 >= 1.19",
+    "six >= 1.10",
+    "certifi",
+    "python-dateutil",
+    "pyyaml",
+    "oauth2client",
+    "ipaddress"]
 
 setup(
     name=NAME,
@@ -38,7 +46,7 @@ setup(
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
-              'kubernetes.watch', 'kubernetes.client.apis', 
+              'kubernetes.watch', 'kubernetes.client.apis',
               'kubernetes.client.models'],
     include_package_data=True,
     long_description="""\

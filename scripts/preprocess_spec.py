@@ -18,7 +18,6 @@ import os.path
 import sys
 from collections import OrderedDict
 
-
 # these four constants are shown as part of this example in []:
 # "[watch]Pod[List]" is the deprecated version of "[list]Pod?[watch]=True"
 WATCH_OP_PREFIX = "watch"
