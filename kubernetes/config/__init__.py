@@ -13,3 +13,5 @@
 # limitations under the License.
 
 from .kube_config import load_kube_config
+from .incluster_config import load_incluster_config
+from .incluster_config import ConfigException

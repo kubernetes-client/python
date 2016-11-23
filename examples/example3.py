@@ -34,7 +34,7 @@ def main():
                 name += "*"
             name += v.version
             versions.append(name)
-        print("%-20s %s" % (api.name, ",".join(versions)))
+        print("%-40s %s" % (api.name, ",".join(versions)))
 
 
 if __name__ == '__main__':
