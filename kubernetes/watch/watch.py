@@ -98,8 +98,8 @@ class Watch(object):
                              'object' value will be the same as 'raw_object'.
 
         Example:
-            v1 = client.CoreV1Api()
-            watch = util.Watch()
+            v1 = kubernetes.client.CoreV1Api()
+            watch = kubernetes.watch.Watch()
             for e in watch.stream(v1.list_namespace, resource_version=1127):
                 type = e['type']
                 object = e['object']  # object is one of type return_type

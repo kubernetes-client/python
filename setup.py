@@ -45,8 +45,9 @@ setup(
     url="http://kubernetes.io",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
-    packages=['kubernetes', 'kubernetes.client', 'kubernetes.util',
-              'kubernetes.client.apis', 'kubernetes.client.models'],
+    packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
+              'kubernetes.watch', 'kubernetes.client.apis', 
+              'kubernetes.client.models'],
     include_package_data=True,
     long_description="""\
     Python client for talk to a kubernetes cluster.

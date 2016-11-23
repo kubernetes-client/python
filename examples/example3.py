@@ -14,13 +14,13 @@
 
 import os
 
-from kubernetes import client, util
+from kubernetes import client, config
 
 
 def main():
     # Configs can be set in Configuration class directly or using helper
     # utility
-    util.load_kube_config(os.environ["HOME"] + '/.kube/config')
+    config.load_kube_config(os.environ["HOME"] + '/.kube/config')
 
     print("Supported APIs (* is preferred version):")
     print("%-20s %s" %
