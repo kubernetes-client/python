@@ -36,6 +36,7 @@ class ConfigException(Exception):
 
 
 class InClusterConfigLoader(object):
+
     def __init__(self, host_env_name, port_env_name, token_filename,
                  cert_filename, environ=os.environ):
         self._host_env_name = host_env_name

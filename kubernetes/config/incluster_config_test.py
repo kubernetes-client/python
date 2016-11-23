@@ -18,8 +18,8 @@ import unittest
 
 from kubernetes.client import configuration
 
-from .incluster_config import (ConfigException, InClusterConfigLoader,
-                               _SERVICE_HOST_ENV_NAME, _SERVICE_PORT_ENV_NAME)
+from .incluster_config import (_SERVICE_HOST_ENV_NAME, _SERVICE_PORT_ENV_NAME,
+                               ConfigException, InClusterConfigLoader)
 
 _TEST_TOKEN = "temp_token"
 _TEST_HOST = "127.0.0.1"
