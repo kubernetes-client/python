@@ -27,7 +27,7 @@ if ! which virtualenv > /dev/null 2>&1; then
 fi
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
-CLIENT_ROOT="${SCRIPT_ROOT}/.."
+CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
 
 pushd "${SCRIPT_ROOT}" > /dev/null
 SCRIPT_ROOT=`pwd`
@@ -46,7 +46,7 @@ SAVEIFS=$IFS
 trap "IFS=$SAVEIFS" EXIT SIGINT
 IFS=,
 
-SOURCES="${CLIENT_ROOT}/k8sutil/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/examples/*.py"
+SOURCES="${CLIENT_ROOT}/util/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/examples/*.py"
 
 echo "--- Updating tools"
 pip install --upgrade pep8

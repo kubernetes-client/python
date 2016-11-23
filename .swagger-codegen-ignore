@@ -1,6 +1,0 @@
-.gitignore
-git_push.sh
-requirements.txt
-test-requirements.txt
-setup.py
-.travis.yml

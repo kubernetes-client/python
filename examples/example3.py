@@ -14,19 +14,18 @@
 
 import os
 
-import k8sclient
-import k8sutil
+from kubernetes import client, util
 
 
 def main():
     # Configs can be set in Configuration class directly or using helper
     # utility
-    k8sutil.load_kube_config(os.environ["HOME"] + '/.kube/config')
+    util.load_kube_config(os.environ["HOME"] + '/.kube/config')
 
     print("Supported APIs (* is preferred version):")
     print("%-20s %s" %
-          ("core", ",".join(k8sclient.CoreApi().get_api_versions().versions)))
-    for api in k8sclient.ApisApi().get_api_versions().groups:
+          ("core", ",".join(client.CoreApi().get_api_versions().versions)))
+    for api in client.ApisApi().get_api_versions().groups:
         versions = []
         for v in api.versions:
             name = ""

@@ -27,7 +27,7 @@ if ! which mvn > /dev/null 2>&1; then
 fi
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
-CLIENT_ROOT="${SCRIPT_ROOT}/.."
+CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
 
 pushd "${SCRIPT_ROOT}" > /dev/null
 SCRIPT_ROOT=`pwd`
@@ -37,7 +37,7 @@ pushd "${CLIENT_ROOT}" > /dev/null
 CLIENT_ROOT=`pwd`
 popd > /dev/null
 
-PACKAGE_NAME=${PACKAGE_NAME:-k8sclient}
+PACKAGE_NAME=${PACKAGE_NAME:-client}
 
 if [[ ! -n ${SWAGGER_FILE-} ]]; then
   if [[ ! -n ${KUBE_ROOT-} ]]; then
@@ -59,9 +59,9 @@ echo "--- Generating client ..."
 mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=${PACKAGE_NAME}
 
 echo "--- Patching generated code..."
-cat "${CLIENT_ROOT}/README.prefix" "${CLIENT_ROOT}/README.md" > "${CLIENT_ROOT}/README.new"
-rm "${CLIENT_ROOT}/README.md"
-mv "${CLIENT_ROOT}/README.new" "${CLIENT_ROOT}/README.md"
-cp "${SCRIPT_ROOT}/LICENSE" "${CLIENT_ROOT}"
-
+find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/kubernetes.client/g' {} +
+find "kubernetes/" -type f -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
+find "kubernetes/" -type f -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
+rm "${CLIENT_ROOT}/LICENSE"
 echo "---Done."
+
