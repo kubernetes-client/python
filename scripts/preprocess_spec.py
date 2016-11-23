@@ -111,6 +111,10 @@ def process_swagger(infile, outfile):
         except PreprocessingException as e:
             print(e.message)
 
+        # TODO: Kubernetes does not set a version for OpenAPI spec yet,
+        # remove this when that is fixed.
+        spec['info']['version'] = "v1.5.0-beta.1"
+
         with open(outfile, 'w') as out:
             json.dump(spec, out, sort_keys=False, indent=2,
                       separators=(',', ': '), ensure_ascii=True)
