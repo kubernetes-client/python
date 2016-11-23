@@ -14,18 +14,17 @@
 
 import os
 
-import k8sclient
-import k8sutil
+from kubernetes import client, util
 
 
 def main():
     # Configs can be set in Configuration class directly or using helper
     # utility
-    k8sutil.load_kube_config(os.environ["HOME"] + '/.kube/config')
+    util.load_kube_config(os.environ["HOME"] + '/.kube/config')
 
-    v1 = k8sclient.CoreV1Api()
+    v1 = client.CoreV1Api()
     count = 10
-    watch = k8sutil.Watch()
+    watch = util.Watch()
     for event in watch.stream(v1.list_namespace, timeout_seconds=10):
         print("Event: %s %s" % (event['type'], event['object'].metadata.name))
         count -= 1

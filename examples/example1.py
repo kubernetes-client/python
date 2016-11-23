@@ -14,16 +14,15 @@
 
 import os
 
-import k8sclient
-import k8sutil
+from kubernetes import client, util
 
 
 def main():
     # Configs can be set in Configuration class directly or using helper
     # utility
-    k8sutil.load_kube_config(os.environ["HOME"] + '/.kube/config')
+    util.load_kube_config(os.environ["HOME"] + '/.kube/config')
 
-    v1 = k8sclient.CoreV1Api()
+    v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")
     ret = v1.list_pod_for_all_namespaces(watch=False)
     for i in ret.items:
