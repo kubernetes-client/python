@@ -23,6 +23,7 @@
                             <gitRepoId>client-python</gitRepoId>
                             <configOptions>
                                 <packageName>${generator.package.name}</packageName>
+                                <packageVersion>1.0.0-alpha.1</packageVersion>
                                 <sortParamsByRequiredFlag>true</sortParamsByRequiredFlag>
                             </configOptions>
                             <output>${generator.output.path}</output>
