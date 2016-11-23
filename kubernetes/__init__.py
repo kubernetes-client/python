@@ -13,4 +13,5 @@
 # limitations under the License.
 
 import kubernetes.client
-import kubernetes.util
+import kubernetes.config
+import kubernetes.watch

@@ -11,10 +11,10 @@ list all pods:
 ```python
 import os
 
-from kubernetes import client, util
+from kubernetes import client, config
 
 # Configs can be set in Configuration class directly or using helper utility
-util.load_kube_config(os.environ["HOME"] + '/.kube/config')
+config.load_kube_config(os.environ["HOME"] + '/.kube/config')
 
 v1=client.CoreV1Api()
 print("Listing pods with their IPs:")
@@ -28,19 +28,19 @@ watch on namespace object:
 ```python
 import os
 
-from kubernetes import client, util
+from kubernetes import client, config, watch
 
 # Configs can be set in Configuration class directly or using helper utility
-util.load_kube_config(os.environ["HOME"] + '/.kube/config')
+config.load_kube_config(os.environ["HOME"] + '/.kube/config')
 
 v1 = client.CoreV1Api()
 count = 10
-watch = util.Watch()
-for event in watch.stream(v1.list_namespace, _request_timeout=60):
+w = watch.Watch()
+for event in w.stream(v1.list_namespace, _request_timeout=60):
     print("Event: %s %s" % (event['type'], event['object'].metadata.name))
     count -= 1
     if not count:
-        watch.stop()
+        w.stop()
 
 print("Ended.")
 ```

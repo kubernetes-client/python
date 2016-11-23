@@ -13,4 +13,3 @@
 # limitations under the License.
 
 from .kube_config import load_kube_config
-from .watch import Watch
