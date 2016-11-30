@@ -16,6 +16,8 @@ import os
 
 from kubernetes.client import configuration
 
+from .config_exception import ConfigException
+
 _SERVICE_HOST_ENV_NAME = "KUBERNETES_SERVICE_HOST"
 _SERVICE_PORT_ENV_NAME = "KUBERNETES_SERVICE_PORT"
 _SERVICE_TOKEN_FILENAME = "/var/run/secrets/kubernetes.io/serviceaccount/token"
@@ -29,10 +31,6 @@ def _join_host_port(host, port):
     if host_requires_bracketing:
         template = "[%s]:%s"
     return template % (host, port)
-
-
-class ConfigException(Exception):
-    pass
 
 
 class InClusterConfigLoader(object):

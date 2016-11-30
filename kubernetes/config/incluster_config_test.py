@@ -16,10 +16,9 @@ import os
 import tempfile
 import unittest
 
-from kubernetes.client import configuration
-
+from .config_exception import ConfigException
 from .incluster_config import (_SERVICE_HOST_ENV_NAME, _SERVICE_PORT_ENV_NAME,
-                               ConfigException, InClusterConfigLoader)
+                               InClusterConfigLoader)
 
 _TEST_TOKEN = "temp_token"
 _TEST_HOST = "127.0.0.1"
