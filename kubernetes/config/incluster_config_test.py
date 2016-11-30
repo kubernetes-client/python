@@ -17,17 +17,21 @@ import tempfile
 import unittest
 
 from .config_exception import ConfigException
-from .incluster_config import (_SERVICE_HOST_ENV_NAME, _SERVICE_PORT_ENV_NAME,
-                               InClusterConfigLoader)
+from .incluster_config import (SERVICE_HOST_ENV_NAME, SERVICE_PORT_ENV_NAME,
+                               InClusterConfigLoader, _join_host_port)
 
 _TEST_TOKEN = "temp_token"
+_TEST_CERT = "temp_cert"
 _TEST_HOST = "127.0.0.1"
-_TEST_IPV6_HOST = "::1"
 _TEST_PORT = "80"
-_TEST_ENVIRON = {_SERVICE_HOST_ENV_NAME: _TEST_HOST,
-                 _SERVICE_PORT_ENV_NAME: _TEST_PORT}
-_TEST_IPV6_ENVIRON = {_SERVICE_HOST_ENV_NAME: _TEST_IPV6_HOST,
-                      _SERVICE_PORT_ENV_NAME: _TEST_PORT}
+_TEST_HOST_PORT = "127.0.0.1:80"
+_TEST_IPV6_HOST = "::1"
+_TEST_IPV6_HOST_PORT = "[::1]:80"
+
+_TEST_ENVIRON = {SERVICE_HOST_ENV_NAME: _TEST_HOST,
+                 SERVICE_PORT_ENV_NAME: _TEST_PORT}
+_TEST_IPV6_ENVIRON = {SERVICE_HOST_ENV_NAME: _TEST_IPV6_HOST,
+                      SERVICE_PORT_ENV_NAME: _TEST_PORT}
 
 
 class InClusterConfigTest(unittest.TestCase):
@@ -48,38 +52,29 @@ class InClusterConfigTest(unittest.TestCase):
 
     def get_test_loader(
             self,
-            host_env_name=_SERVICE_HOST_ENV_NAME,
-            port_env_name=_SERVICE_PORT_ENV_NAME,
             token_filename=None,
             cert_filename=None,
             environ=_TEST_ENVIRON):
         if not token_filename:
             token_filename = self._create_file_with_temp_content(_TEST_TOKEN)
         if not cert_filename:
-            cert_filename = self._create_file_with_temp_content()
+            cert_filename = self._create_file_with_temp_content(_TEST_CERT)
         return InClusterConfigLoader(
-            host_env_name=host_env_name,
-            port_env_name=port_env_name,
             token_filename=token_filename,
             cert_filename=cert_filename,
             environ=environ)
 
+    def test_join_host_port(self):
+        self.assertEqual(_TEST_HOST_PORT,
+                         _join_host_port(_TEST_HOST, _TEST_PORT))
+        self.assertEqual(_TEST_IPV6_HOST_PORT,
+                         _join_host_port(_TEST_IPV6_HOST, _TEST_PORT))
+
     def test_load_config(self):
-        cert_filename = self._create_file_with_temp_content()
+        cert_filename = self._create_file_with_temp_content(_TEST_CERT)
         loader = self.get_test_loader(cert_filename=cert_filename)
         loader._load_config()
-        self.assertEqual("https://%s:%s" % (_TEST_HOST, _TEST_PORT),
-                         loader.host)
-        self.assertEqual(cert_filename, loader.ssl_ca_cert)
-        self.assertEqual(_TEST_TOKEN, loader.token)
-
-    def test_load_config_with_bracketed_hostname(self):
-        cert_filename = self._create_file_with_temp_content()
-        loader = self.get_test_loader(cert_filename=cert_filename,
-                                      environ=_TEST_IPV6_ENVIRON)
-        loader._load_config()
-        self.assertEqual("https://[%s]:%s" % (_TEST_IPV6_HOST, _TEST_PORT),
-                         loader.host)
+        self.assertEqual("https://" + _TEST_HOST_PORT, loader.host)
         self.assertEqual(cert_filename, loader.ssl_ca_cert)
         self.assertEqual(_TEST_TOKEN, loader.token)
 
@@ -92,20 +87,44 @@ class InClusterConfigTest(unittest.TestCase):
             pass
 
     def test_no_port(self):
-        loader = self.get_test_loader(port_env_name="not_exists_port")
+        loader = self.get_test_loader(
+            environ={SERVICE_HOST_ENV_NAME: _TEST_HOST})
         self._should_fail_load(loader, "no port specified")
 
+    def test_empty_port(self):
+        loader = self.get_test_loader(
+            environ={SERVICE_HOST_ENV_NAME: _TEST_HOST,
+                     SERVICE_PORT_ENV_NAME: ""})
+        self._should_fail_load(loader, "empty port specified")
+
     def test_no_host(self):
-        loader = self.get_test_loader(host_env_name="not_exists_host")
+        loader = self.get_test_loader(
+            environ={SERVICE_PORT_ENV_NAME: _TEST_PORT})
         self._should_fail_load(loader, "no host specified")
+
+    def test_empty_host(self):
+        loader = self.get_test_loader(
+            environ={SERVICE_HOST_ENV_NAME: "",
+                     SERVICE_PORT_ENV_NAME: _TEST_PORT})
+        self._should_fail_load(loader, "empty host specified")
 
     def test_no_cert_file(self):
         loader = self.get_test_loader(cert_filename="not_exists_file_1123")
         self._should_fail_load(loader, "cert file does not exists")
 
+    def test_empty_cert_file(self):
+        loader = self.get_test_loader(
+            cert_filename=self._create_file_with_temp_content())
+        self._should_fail_load(loader, "empty cert file provided")
+
     def test_no_token_file(self):
         loader = self.get_test_loader(token_filename="not_exists_file_1123")
         self._should_fail_load(loader, "token file does not exists")
+
+    def test_empty_token_file(self):
+        loader = self.get_test_loader(
+            token_filename=self._create_file_with_temp_content())
+        self._should_fail_load(loader, "empty token file provided")
 
 
 if __name__ == '__main__':

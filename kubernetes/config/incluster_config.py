@@ -18,10 +18,10 @@ from kubernetes.client import configuration
 
 from .config_exception import ConfigException
 
-_SERVICE_HOST_ENV_NAME = "KUBERNETES_SERVICE_HOST"
-_SERVICE_PORT_ENV_NAME = "KUBERNETES_SERVICE_PORT"
-_SERVICE_TOKEN_FILENAME = "/var/run/secrets/kubernetes.io/serviceaccount/token"
-_SERVICE_CERT_FILENAME = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+SERVICE_HOST_ENV_NAME = "KUBERNETES_SERVICE_HOST"
+SERVICE_PORT_ENV_NAME = "KUBERNETES_SERVICE_PORT"
+SERVICE_TOKEN_FILENAME = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+SERVICE_CERT_FILENAME = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 
 
 def _join_host_port(host, port):
@@ -35,10 +35,8 @@ def _join_host_port(host, port):
 
 class InClusterConfigLoader(object):
 
-    def __init__(self, host_env_name, port_env_name, token_filename,
+    def __init__(self, token_filename,
                  cert_filename, environ=os.environ):
-        self._host_env_name = host_env_name
-        self._port_env_name = port_env_name
         self._token_filename = token_filename
         self._cert_filename = cert_filename
         self._environ = environ
@@ -48,23 +46,33 @@ class InClusterConfigLoader(object):
         self._set_config()
 
     def _load_config(self):
-        if (self._host_env_name not in self._environ or
-                self._port_env_name not in self._environ):
+        if (SERVICE_HOST_ENV_NAME not in self._environ or
+                SERVICE_PORT_ENV_NAME not in self._environ):
             raise ConfigException("Service host/port is not set.")
 
+        if (not self._environ[SERVICE_HOST_ENV_NAME] or
+                not self._environ[SERVICE_PORT_ENV_NAME]):
+            raise ConfigException("Service host/port is set but empty.")
+
         self.host = (
-            "https://" + _join_host_port(self._environ[self._host_env_name],
-                                         self._environ[self._port_env_name]))
+            "https://" + _join_host_port(self._environ[SERVICE_HOST_ENV_NAME],
+                                         self._environ[SERVICE_PORT_ENV_NAME]))
 
         if not os.path.isfile(self._token_filename):
             raise ConfigException("Service token file does not exists.")
 
         with open(self._token_filename) as f:
             self.token = f.read()
+            if not self.token:
+                raise ConfigException("Token file exists but empty.")
 
         if not os.path.isfile(self._cert_filename):
             raise ConfigException(
                 "Service certification file does not exists.")
+
+        with open(self._cert_filename) as f:
+            if not f.read():
+                raise ConfigException("Cert file exists but empty.")
 
         self.ssl_ca_cert = self._cert_filename
 
@@ -79,7 +87,5 @@ def load_incluster_config():
     cluster. It's intended for clients that expect to be running inside a pod
     running on kubernetes. It will raise an exception if called from a process
     not running in a kubernetes environment."""
-    InClusterConfigLoader(host_env_name=_SERVICE_HOST_ENV_NAME,
-                          port_env_name=_SERVICE_PORT_ENV_NAME,
-                          token_filename=_SERVICE_TOKEN_FILENAME,
-                          cert_filename=_SERVICE_CERT_FILENAME).load_and_set()
+    InClusterConfigLoader(token_filename=SERVICE_TOKEN_FILENAME,
+                          cert_filename=SERVICE_CERT_FILENAME).load_and_set()
