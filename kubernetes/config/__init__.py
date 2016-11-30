@@ -14,4 +14,5 @@
 
 from .config_exception import ConfigException
 from .incluster_config import load_incluster_config
+from .kube_config import list_kube_config_contexts
 from .kube_config import load_kube_config
