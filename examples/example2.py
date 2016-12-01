@@ -20,7 +20,8 @@ from kubernetes import client, config, watch
 def main():
     # Configs can be set in Configuration class directly or using helper
     # utility
-    config.load_kube_config(os.path.join(os.path.expanduser('~'), '.kube', 'config')
+    config.load_kube_config(
+        os.path.join(os.path.expanduser('~'), '.kube', 'config'))
 
     v1 = client.CoreV1Api()
     count = 10
