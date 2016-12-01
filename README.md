@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/kubernetes-incubator/client-python.svg?branch=master)](https://travis-ci.org/kubernetes-incubator/client-python)
 [![PyPI version](https://badge.fury.io/py/kubernetes.svg)](https://badge.fury.io/py/kubernetes)
+[![codecov](https://codecov.io/gh/kubernetes-incubator/client-python/branch/master/graph/badge.svg)](https://codecov.io/gh/kubernetes-incubator/client-python "Non-generated packages only")
 
 Python client for the [kubernetes](http://kubernetes.io/) API.
 
