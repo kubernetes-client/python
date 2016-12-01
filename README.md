@@ -31,7 +31,7 @@ import os
 from kubernetes import client, config
 
 # Configs can be set in Configuration class directly or using helper utility
-config.load_kube_config(os.path.join(os.path.expanduser('~'), '.kube', 'config')
+config.load_kube_config(os.path.join(os.path.expanduser('~'), '.kube', 'config'))
 
 v1=client.CoreV1Api()
 print("Listing pods with their IPs:")
@@ -48,7 +48,7 @@ import os
 from kubernetes import client, config, watch
 
 # Configs can be set in Configuration class directly or using helper utility
-config.load_kube_config(os.path.join(os.path.expanduser('~'), '.kube', 'config')
+config.load_kube_config(os.path.join(os.path.expanduser('~'), '.kube', 'config'))
 
 v1 = client.CoreV1Api()
 count = 10
