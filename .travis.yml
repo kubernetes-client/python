@@ -4,6 +4,12 @@ python:
   - "2.7"
   - "3.4"
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - "pip install -r requirements.txt"
+  - "pip install codecov"
+
 # command to run tests
-script: nosetests
+script: nosetests --with-coverage --cover-package=kubernetes.config,kubernetes.watch --cover-tests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
