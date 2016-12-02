@@ -22,151 +22,243 @@ import yaml
 from kubernetes.client import configuration
 from oauth2client.client import GoogleCredentials
 
-_temp_files = []
+from .config_exception import ConfigException
+
+_temp_files = {}
 
 
 def _cleanup_temp_files():
-    for f in _temp_files:
-        os.remove(f)
+    for temp_file in _temp_files.values():
+        os.remove(temp_file)
 
 
 def _create_temp_file_with_content(content):
     if len(_temp_files) == 0:
         atexit.register(_cleanup_temp_files)
+    # Because we may change context several times, try to remember files we
+    # created and reuse them at a small memory cost.
+    content_key = str(content)
+    if content_key in _temp_files:
+        return _temp_files[content_key]
     _, name = tempfile.mkstemp()
-    _temp_files.append(name)
-    if isinstance(content, str):
-        content = content.encode('utf8')
+    _temp_files[content_key] = name
     with open(name, 'wb') as fd:
-        fd.write(base64.decodestring(content))
+        fd.write(content.encode() if isinstance(content, str) else content)
     return name
 
 
-def _file_from_file_or_data(o, file_key_name, data_key_name=None):
-    if not data_key_name:
-        data_key_name = file_key_name + "-data"
-    if data_key_name in o:
-        return _create_temp_file_with_content(o[data_key_name])
-    if file_key_name in o:
-        return o[file_key_name]
+class FileOrData(object):
+    """Utility class to read content of obj[%data_key_name] or file's
+     content of obj[%file_key_name] and represent it as file or data.
+     Note that the data is preferred. The obj[%file_key_name] will be used iff
+     obj['%data_key_name'] is not set or empty. Assumption is file content is
+     raw data and data field is base64 string."""
+
+    def __init__(self, obj, file_key_name, data_key_name=None):
+        if not data_key_name:
+            data_key_name = file_key_name + "-data"
+        self._file = None
+        self._data = None
+        if data_key_name in obj:
+            self._data = obj[data_key_name]
+        elif file_key_name in obj:
+            self._file = obj[file_key_name]
+
+    def as_file(self):
+        """If obj[%data_key_name] exists, return name of a file with base64
+        decoded obj[%data_key_name] content otherwise obj[%file_key_name]."""
+        use_data_if_no_file = not self._file and self._data
+        if use_data_if_no_file:
+            self._file = _create_temp_file_with_content(
+                base64.decodestring(self._data.encode()))
+        return self._file
+
+    def as_data(self):
+        """If obj[%data_key_name] exists, Return obj[%data_key_name] otherwise
+        base64 encoded string of obj[%file_key_name] file content."""
+        use_file_if_no_data = not self._data and self._file
+        if use_file_if_no_data:
+            with open(self._file) as f:
+                self._data = bytes.decode(
+                    base64.encodestring(str.encode(f.read())))
+        return self._data
 
 
-def _data_from_file_or_data(o, file_key_name, data_key_name=None):
-    if not data_key_name:
-        data_key_name = file_key_name + "_data"
-    if data_key_name in o:
-        return o[data_key_name]
-    if file_key_name in o:
-        with open(o[file_key_name], 'r') as f:
-            data = f.read()
-        return data
+class KubeConfigLoader(object):
+
+    def __init__(self, config_dict, active_context=None,
+                 get_google_credentials=None, client_configuration=None):
+        self._config = ConfigNode('kube-config', config_dict)
+        self._current_context = None
+        self._user = None
+        self._cluster = None
+        self.set_active_context(active_context)
+        if get_google_credentials:
+            self._get_google_credentials = get_google_credentials
+        else:
+            self._get_google_credentials = lambda: (
+                GoogleCredentials.get_application_default()
+                .get_access_token().access_token)
+        if client_configuration:
+            self._client_configuration = client_configuration
+        else:
+            self._client_configuration = configuration
+
+    def set_active_context(self, context_name=None):
+        if context_name is None:
+            context_name = self._config['current-context']
+        self._current_context = self._config['contexts'].get_with_name(
+            context_name)
+        if self._current_context['context'].safe_get('user'):
+            self._user = self._config['users'].get_with_name(
+                self._current_context['context']['user'])['user']
+        else:
+            self._user = None
+        self._cluster = self._config['clusters'].get_with_name(
+            self._current_context['context']['cluster'])['cluster']
+
+    def _load_authentication(self):
+        """Read authentication from kube-config user section if exists.
+
+        This function goes through various authentication methods in user
+        section of kube-config and stops if it finds a valid authentication
+        method. The order of authentication methods is:
+
+            1. GCP auth-provider
+            2. token_data
+            3. token field (point to a token file)
+            4. username/password
+        """
+        if not self._user:
+            return
+        if self._load_gcp_token():
+            return
+        if self._load_user_token():
+            return
+        self._load_user_pass_token()
+
+    def _load_gcp_token(self):
+        if 'auth-provider' not in self._user:
+            return
+        if 'name' not in self._user['auth-provider']:
+            return
+        if self._user['auth-provider']['name'] != 'gcp':
+            return
+        # Ignore configs in auth-provider and rely on GoogleCredentials
+        # caching and refresh mechanism.
+        # TODO: support gcp command based token ("cmd-path" config).
+        self.token = self._get_google_credentials()
+        return self.token
+
+    def _load_user_token(self):
+        token = FileOrData(self._user, 'tokenFile', 'token').as_data()
+        if token:
+            self.token = token
+            return True
+
+    def _load_user_pass_token(self):
+        if 'username' in self._user and 'password' in self._user:
+            self.token = urllib3.util.make_headers(
+                basic_auth=(self._user['username'] + ':' +
+                            self._user['password'])).get('authorization')
+            return True
+
+    def _load_cluster_info(self):
+        if 'server' in self._cluster:
+            self.host = self._cluster['server']
+            if self.host.startswith("https"):
+                self.ssl_ca_cert = FileOrData(
+                    self._cluster, 'certificate-authority').as_file()
+                self.cert_file = FileOrData(
+                    self._user, 'client-certificate').as_file()
+                self.key_file = FileOrData(self._user, 'client-key').as_file()
+
+    def _set_config(self):
+        if 'token' in self.__dict__:
+            self._client_configuration.api_key['authorization'] = self.token
+        # copy these keys directly from self to configuration object
+        keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file']
+        for key in keys:
+            if key in self.__dict__:
+                setattr(self._client_configuration, key, getattr(self, key))
+
+    def load_and_set(self):
+        self._load_authentication()
+        self._load_cluster_info()
+        self._set_config()
+
+    def list_contexts(self):
+        return [context.value for context in self._config['contexts']]
+
+    @property
+    def current_context(self):
+        return self._current_context.value
 
 
-def _load_gcp_token(user):
-    if 'auth-provider' not in user:
-        return
-    if 'name' not in user['auth-provider']:
-        return
-    if user['auth-provider']['name'] != 'gcp':
-        return
-    # Ignore configs in auth-provider and rely on GoogleCredentials
-    # caching and refresh mechanism.
-    # TODO: support gcp command based token ("cmd-path" config).
-    return (GoogleCredentials
-            .get_application_default()
-            .get_access_token()
-            .access_token)
-
-
-def _load_authentication(user):
-    """Read authentication from kube-config user section.
-
-    This function goes through various authetication methods in user section of
-    kubeconfig and stops if it founds a valid authentication method. The order
-    of authentication methods is:
-
-        1. GCP auth-provider
-        2. token_data
-        3. token field (point to a token file)
-        4. username/password
-    """
-    # Read authentication
-    token = _load_gcp_token(user)
-    if not token:
-        token = _data_from_file_or_data(user, 'tokenFile', 'token')
-    if token:
-        configuration.api_key['authorization'] = "bearer " + token
-    else:
-        if 'username' in user and 'password' in user:
-            configuration.api_key['authorization'] = urllib3.util.make_headers(
-                basic_auth=user['username'] + ':' +
-                user['password']).get('authorization')
-
-
-def _load_cluster_info(cluster, user):
-    """Loads cluster information from kubeconfig such as host and SSL certs."""
-    if 'server' in cluster:
-        configuration.host = cluster['server']
-        if configuration.host.startswith("https"):
-            configuration.ssl_ca_cert = _file_from_file_or_data(
-                cluster, 'certificate-authority')
-            configuration.cert_file = _file_from_file_or_data(
-                user, 'client-certificate')
-            configuration.key_file = _file_from_file_or_data(
-                user, 'client-key')
-
-
-class _node:
-    """Remembers each key's path and construct a relevant exception message
-    in case of missing keys."""
+class ConfigNode(object):
+    """Remembers each config key's path and construct a relevant exception
+    message in case of missing keys. The assumption is all access keys are
+    present in a well-formed kube-config."""
 
     def __init__(self, name, value):
-        self._name = name
-        self._value = value
+        self.name = name
+        self.value = value
 
     def __contains__(self, key):
-        return key in self._value
+        return key in self.value
+
+    def __len__(self):
+        return len(self.value)
+
+    def safe_get(self, key):
+        if (isinstance(self.value, list) and isinstance(key, int) or
+                key in self.value):
+            return self.value[key]
 
     def __getitem__(self, key):
-        if key in self._value:
-            v = self._value[key]
-            if isinstance(v, dict) or isinstance(v, list):
-                return _node('%s/%s' % (self._name, key), v)
-            else:
-                return v
-        raise Exception(
-            'Invalid kube-config file. Expected key %s in %s'
-            % (key, self._name))
+        v = self.safe_get(key)
+        if not v:
+            raise ConfigException(
+                'Invalid kube-config file. Expected key %s in %s'
+                % (key, self.name))
+        if isinstance(v, dict) or isinstance(v, list):
+            return ConfigNode('%s/%s' % (self.name, key), v)
+        else:
+            return v
 
     def get_with_name(self, name):
-        if not isinstance(self._value, list):
-            raise Exception(
+        if not isinstance(self.value, list):
+            raise ConfigException(
                 'Invalid kube-config file. Expected %s to be a list'
-                % self._name)
-        for v in self._value:
+                % self.name)
+        for v in self.value:
             if 'name' not in v:
-                raise Exception(
+                raise ConfigException(
                     'Invalid kube-config file. '
                     'Expected all values in %s list to have \'name\' key'
-                    % self._name)
+                    % self.name)
             if v['name'] == name:
-                return _node('%s[name=%s]' % (self._name, name), v)
-        raise Exception(
-            "Cannot find object with name %s in %s list" % (name, self._name))
+                return ConfigNode('%s[name=%s]' % (self.name, name), v)
+        raise ConfigException(
+            'Invalid kube-config file. '
+            'Expected object with name %s in %s list' % (name, self.name))
 
 
-def load_kube_config(config_file):
+def list_kube_config_contexts(config_file):
+    with open(config_file) as f:
+        loader = KubeConfigLoader(config_dict=yaml.load(f))
+    return loader.list_contexts(), loader.current_context
+
+
+def load_kube_config(config_file, context=None):
     """Loads authentication and cluster information from kube-config file
-    and store them in kubernetes.client.configuration."""
+    and stores them in kubernetes.client.configuration.
+
+    :param config_file: Name of the kube-config file.
+    :param context: set the active context. If is set to None, current_context
+    from config file will be used.
+    """
 
     with open(config_file) as f:
-        config = _node('kube-config', yaml.load(f))
-
-        current_context = config['contexts'].get_with_name(
-            config['current-context'])['context']
-        user = config['users'].get_with_name(current_context['user'])['user']
-        cluster = config['clusters'].get_with_name(
-            current_context['cluster'])['cluster']
-
-        _load_cluster_info(cluster, user)
-        _load_authentication(user)
+        KubeConfigLoader(
+            config_dict=yaml.load(f), active_context=context).load_and_set()
