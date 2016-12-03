@@ -78,12 +78,7 @@ All APIs and Models' documentation can be found at the [Generated client's READM
 
 ## Community, Support, Discussion
 
-You can reach the maintainers of this project at:
-
-* [Slack](http://slack.kubernetes.io): #sig-api-machinery
-* Mailing List: [https://groups.google.com/forum/#!forum/kubernetes-sig-api-machinery](https://groups.google.com/forum/#!forum/kubernetes-sig-api-machinery)
-
-If you have a problem with the package or suggestions. Please file an [issue](https://github.com/kubernetes-incubator/client-python/issues).
+You can reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery). If you have any problem with the package or any suggestions, please file an [issue](https://github.com/kubernetes-incubator/client-python/issues).
 
 ### Code of Conduct
 
@@ -93,4 +88,4 @@ Participation in the Kubernetes community is governed by the [CNCF Code of Condu
 
 This is a [Kubernetes Incubator project](https://github.com/kubernetes/community/blob/master/incubator.md). 
 
-* SIG: sig-api-machinery
+* [SIG: sig-api-machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery)
