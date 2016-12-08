@@ -18,6 +18,9 @@ import os.path
 import sys
 from collections import OrderedDict
 
+import urllib3
+from constants import KUBERNETES_BRANCH, SPEC_VERSION
+
 # these four constants are shown as part of this example in []:
 # "[watch]Pod[List]" is the deprecated version of "[list]Pod?[watch]=True"
 WATCH_OP_PREFIX = "watch"
@@ -25,6 +28,10 @@ WATCH_OP_SUFFIX = "List"
 LIST_OP_PREFIX = "list"
 WATCH_QUERY_PARAM_NAME = "watch"
 
+SPEC_URL = 'https://raw.githubusercontent.com/kubernetes/kubernetes/' \
+           '%s/api/openapi-spec/swagger.json' % KUBERNETES_BRANCH
+
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'swagger.json')
 
 _ops = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch']
 
@@ -94,37 +101,38 @@ def strip_tags_from_operation_id(operation, _):
     operation['operationId'] = operation_id
 
 
-def process_swagger(infile, outfile):
-    with open(infile, 'r') as f:
-        spec = json.load(f, object_pairs_hook=OrderedDict)
+def process_swagger(spec):
+    apply_func_to_spec_operations(spec, strip_tags_from_operation_id)
 
-        apply_func_to_spec_operations(spec, strip_tags_from_operation_id)
+    operation_ids = {}
+    apply_func_to_spec_operations(spec, lambda op, _: operator.setitem(
+        operation_ids, op['operationId'], op))
 
-        operation_ids = {}
-        apply_func_to_spec_operations(spec, lambda op, _: operator.setitem(
-            operation_ids, op['operationId'], op))
+    try:
+        apply_func_to_spec_operations(
+            spec, remove_watch_operations, operation_ids)
+    except PreprocessingException as e:
+        print(e.message)
 
-        try:
-            apply_func_to_spec_operations(
-                spec, remove_watch_operations, operation_ids)
-        except PreprocessingException as e:
-            print(e.message)
+    # TODO: Kubernetes does not set a version for OpenAPI spec yet,
+    # remove this when that is fixed.
+    spec['info']['version'] = SPEC_VERSION
 
-        # TODO: Kubernetes does not set a version for OpenAPI spec yet,
-        # remove this when that is fixed.
-        spec['info']['version'] = "v1.5.0-beta.1"
-
-        with open(outfile, 'w') as out:
-            json.dump(spec, out, sort_keys=False, indent=2,
-                      separators=(',', ': '), ensure_ascii=True)
+    return spec
 
 
 def main():
-    if len(sys.argv) < 3:
-        print "Usage:\n\tpython %s infile outfile.\n" % sys.argv[0]
-        sys.exit(0)
-    if not os.path.isfile(sys.argv[1]):
-        print "Input file %s does not exist." % sys.argv[1]
-    process_swagger(sys.argv[1], sys.argv[2])
+    pool = urllib3.PoolManager()
+    with pool.request('GET', SPEC_URL, preload_content=False) as response:
+        if response.status != 200:
+            print "Error downloading spec file. Reason: %s" % response.reason
+            return 1
+        in_spec = json.load(response, object_pairs_hook=OrderedDict)
+        out_spec = process_swagger(in_spec)
+        with open(OUTPUT_PATH, 'w') as out:
+            json.dump(out_spec, out, sort_keys=False, indent=2,
+                      separators=(',', ': '), ensure_ascii=True)
+    return 0
 
-main()
+
+sys.exit(main())
