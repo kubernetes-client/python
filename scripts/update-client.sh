@@ -39,16 +39,8 @@ popd > /dev/null
 
 PACKAGE_NAME=${PACKAGE_NAME:-client}
 
-if [[ ! -n ${SWAGGER_FILE-} ]]; then
-  if [[ ! -n ${KUBE_ROOT-} ]]; then
-    echo "\${KUBE_ROOT} variable is not set"
-    exit
-  fi
-  SWAGGER_FILE="${KUBE_ROOT}/api/openapi-spec/swagger.json"
-fi
-
-echo "--- Preprocessing OpenAPI spec to script directory"
-python "${SCRIPT_ROOT}/preprocess_spec.py" "$SWAGGER_FILE" "${SCRIPT_ROOT}/swagger.json"
+echo "--- Downloading and processing OpenAPI spec"
+python "${SCRIPT_ROOT}/preprocess_spec.py"
 
 echo "--- Cleaning up previously generated folders"
 rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}"

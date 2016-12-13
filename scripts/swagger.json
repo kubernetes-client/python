@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Kubernetes",
-    "version": "v1.5.0-beta.1"
+    "version": "v1.5.0-beta.3"
   },
   "paths": {
     "/api/": {
@@ -3638,7 +3638,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Pod"
+              "type": "string"
             }
           },
           "401": {
@@ -30773,7 +30773,7 @@
           "type": "string"
         },
         "unschedulable": {
-          "description": "Unschedulable controls node schedulability of new pods. By default, node is schedulable. More info: http://releases.k8s.io/HEAD/docs/admin/node.md#manual-node-administration\"`",
+          "description": "Unschedulable controls node schedulability of new pods. By default, node is schedulable. More info: http://releases.k8s.io/HEAD/docs/admin/node.md#manual-node-administration\"",
           "type": "boolean"
         }
       }

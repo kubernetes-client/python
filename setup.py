@@ -12,12 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
 from setuptools import find_packages, setup
 
-NAME = "kubernetes"
-VERSION = "1.0.0-alpha.2"
+from scripts.constants import CLIENT_VERSION, PACKAGE_NAME
 
 # To install the library, run the following
 #
@@ -36,8 +33,8 @@ REQUIRES = [
     "ipaddress"]
 
 setup(
-    name=NAME,
-    version=VERSION,
+    name=PACKAGE_NAME,
+    version=CLIENT_VERSION,
     description="Kubernetes python client",
     author_email="",
     author="Kubernetes",
