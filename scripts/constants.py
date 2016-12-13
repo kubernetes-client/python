@@ -19,11 +19,11 @@ KUBERNETES_BRANCH = "release-1.5"
 
 # Spec version will be set in downloaded spec and all
 # generated code will refer to it.
-SPEC_VERSION = "v1.5.0-beta.3"
+SPEC_VERSION = "v1.5.0-snapshot"
 
 # client version for packaging and releasing. It can
 # be different than SPEC_VERSION.
-CLIENT_VERSION = "1.0.0-alpha.2"
+CLIENT_VERSION = "1.0.0-snapshot"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
