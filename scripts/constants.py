@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+
 # Kubernetes branch to get the OpenAPI spec from.
 KUBERNETES_BRANCH = "release-1.5"
 
@@ -25,3 +27,16 @@ CLIENT_VERSION = "1.0.0-alpha.2"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
+
+# If called directly, return the constant value given
+# its name. Useful in bash scripts.
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: python constant.py CONSTANT_NAME")
+        sys.exit(1)
+
+    if sys.argv[1] in globals():
+        print globals()[sys.argv[1]]
+    else:
+        print "Cannot find constant %s" % sys.argv[1]
+        sys.exit(1)
