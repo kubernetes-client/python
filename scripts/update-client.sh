@@ -48,12 +48,12 @@ rm -rf "${CLIENT_ROOT}/docs"
 rm -rf "${CLIENT_ROOT}/test"
 
 echo "--- Generating client ..."
-mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=${PACKAGE_NAME}
+mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=${PACKAGE_NAME} -D=generator.client.version=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
 
 echo "--- Patching generated code..."
 find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/kubernetes.client/g' {} +
-find "kubernetes/" -type f -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
-find "kubernetes/" -type f -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
+find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
+find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
 rm "${CLIENT_ROOT}/LICENSE"
 echo "---Done."
 

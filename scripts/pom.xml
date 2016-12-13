@@ -23,7 +23,7 @@
                             <gitRepoId>client-python</gitRepoId>
                             <configOptions>
                                 <packageName>${generator.package.name}</packageName>
-                                <packageVersion>1.0.0-alpha.2</packageVersion>
+                                <packageVersion>${generator.client.version}</packageVersion>
                                 <sortParamsByRequiredFlag>true</sortParamsByRequiredFlag>
                             </configOptions>
                             <output>${generator.output.path}</output>
@@ -49,5 +49,6 @@
         <generator.output.path>.</generator.output.path>
         <generator.spec.path>swagger.json</generator.spec.path>
         <generator.package.name>swagger_client</generator.package.name>
+        <generator.client.version>unversioned</generator.client.version>
     </properties>
 </project>
