@@ -24,6 +24,7 @@ from oauth2client.client import GoogleCredentials
 
 from .config_exception import ConfigException
 
+KUBE_CONFIG_DEFAULT_LOCATION = '~/.kube/config'
 _temp_files = {}
 
 
@@ -269,12 +270,16 @@ def _get_kube_config_loader_for_yaml_file(filename, **kwargs):
             **kwargs)
 
 
-def list_kube_config_contexts(config_file):
+def list_kube_config_contexts(config_file=None):
+
+    if config_file is None:
+        config_file = os.path.expanduser(KUBE_CONFIG_DEFAULT_LOCATION)
+
     loader = _get_kube_config_loader_for_yaml_file(config_file)
     return loader.list_contexts(), loader.current_context
 
 
-def load_kube_config(config_file, context=None):
+def load_kube_config(config_file=None, context=None):
     """Loads authentication and cluster information from kube-config file
     and stores them in kubernetes.client.configuration.
 
@@ -282,6 +287,9 @@ def load_kube_config(config_file, context=None):
     :param context: set the active context. If is set to None, current_context
     from config file will be used.
     """
+
+    if config_file is None:
+        config_file = os.path.expanduser(KUBE_CONFIG_DEFAULT_LOCATION)
 
     _get_kube_config_loader_for_yaml_file(
         config_file, active_context=context).load_and_set()
