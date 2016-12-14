@@ -36,7 +36,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if sys.argv[1] in globals():
-        print globals()[sys.argv[1]]
+        print(globals()[sys.argv[1]])
     else:
-        print "Cannot find constant %s" % sys.argv[1]
+        print("Cannot find constant %s" % sys.argv[1])
         sys.exit(1)
