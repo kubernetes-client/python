@@ -14,12 +14,15 @@
 
 import base64
 import os
+import shutil
 import tempfile
 import unittest
 
 from .config_exception import ConfigException
 from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
-                          _create_temp_file_with_content)
+                          _create_temp_file_with_content, _cleanup_temp_files)
+
+NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 
 
 def _base64(string):
@@ -67,6 +70,11 @@ class BaseTestCase(unittest.TestCase):
         os.close(handler)
         return name
 
+    def expect_exception(self, func, message_part):
+        with self.assertRaises(ConfigException) as context:
+            func()
+        self.assertIn(message_part, str(context.exception))
+
 
 class TestFileOrData(BaseTestCase):
 
@@ -76,9 +84,16 @@ class TestFileOrData(BaseTestCase):
             return f.read()
 
     def test_file_given_file(self):
-        obj = {TEST_FILE_KEY: TEST_FILENAME}
+        temp_filename = _create_temp_file_with_content(TEST_DATA)
+        obj = {TEST_FILE_KEY: temp_filename}
         t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY)
-        self.assertEqual(TEST_FILENAME, t.as_file())
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
+
+    def test_file_given_non_existing_file(self):
+        temp_filename = NON_EXISTING_FILE
+        obj = {TEST_FILE_KEY: temp_filename}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY)
+        self.expect_exception(t.as_file, "does not exists")
 
     def test_file_given_data(self):
         obj = {TEST_DATA_KEY: TEST_DATA_BASE64}
@@ -116,10 +131,20 @@ class TestFileOrData(BaseTestCase):
                        data_key_name=TEST_DATA_KEY)
         self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
 
+    def test_file_with_custom_dirname(self):
+        tempfile = self._create_temp_file(content=TEST_DATA)
+        tempfile_dir = os.path.dirname(tempfile)
+        tempfile_basename = os.path.basename(tempfile)
+        obj = {TEST_FILE_KEY: tempfile_basename}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       file_base_path=tempfile_dir)
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
+
     def test_create_temp_file_with_content(self):
         self.assertEqual(TEST_DATA,
                          self.get_file_content(
                              _create_temp_file_with_content(TEST_DATA)))
+        _cleanup_temp_files()
 
 
 class TestConfigNode(BaseTestCase):
@@ -162,11 +187,6 @@ class TestConfigNode(BaseTestCase):
                          node.get_with_name("test_name2").name)
         self.assertEqual("test_obj/with_names[name=test_name3]",
                          node.get_with_name("test_name3").name)
-
-    def expect_exception(self, func, message_part):
-        with self.assertRaises(ConfigException) as context:
-            func()
-        self.assertIn(message_part, str(context.exception))
 
     def test_key_does_not_exists(self):
         self.expect_exception(lambda: self.node['not-exists-key'],
@@ -281,6 +301,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     "user": "ssl-no_file"
                 }
             },
+            {
+                "name": "ssl-local-file",
+                "context": {
+                    "cluster": "ssl-local-file",
+                    "user": "ssl-local-file"
+                }
+            },
         ],
         "clusters": [
             {
@@ -294,6 +321,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 "cluster": {
                     "server": TEST_SSL_HOST,
                     "certificate-authority": TEST_CERTIFICATE_AUTH,
+                }
+            },
+            {
+                "name": "ssl-local-file",
+                "cluster": {
+                    "server": TEST_SSL_HOST,
+                    "certificate-authority": "cert_test",
                 }
             },
             {
@@ -338,6 +372,14 @@ class TestKubeConfigLoader(BaseTestCase):
                     "token": TEST_DATA_BASE64,
                     "client-certificate": TEST_CLIENT_CERT,
                     "client-key": TEST_CLIENT_KEY,
+                }
+            },
+            {
+                "name": "ssl-local-file",
+                "user": {
+                    "tokenFile": "token_file",
+                    "client-certificate": "client_cert",
+                    "client-key": "client_key",
                 }
             },
             {
@@ -420,11 +462,11 @@ class TestKubeConfigLoader(BaseTestCase):
             ssl_ca_cert=TEST_CERTIFICATE_AUTH
         )
         actual = FakeConfig()
-        KubeConfigLoader(
+        loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="ssl-no_file",
-            client_configuration=actual).load_and_set()
-        self.assertEqual(expected, actual)
+            client_configuration=actual)
+        self.expect_exception(loader.load_and_set, "does not exists")
 
     def test_ssl(self):
         expected = FakeConfig(
@@ -463,6 +505,34 @@ class TestKubeConfigLoader(BaseTestCase):
         expected_contexts = ConfigNode("", self.TEST_KUBE_CONFIG)['contexts']
         self.assertEqual(expected_contexts.get_with_name("ssl").value,
                          loader.current_context)
+
+    def test_ssl_with_relative_ssl_files(self):
+        expected = FakeConfig(
+            host=TEST_SSL_HOST,
+            token=TEST_DATA_BASE64,
+            cert_file=self._create_temp_file(TEST_CLIENT_CERT),
+            key_file=self._create_temp_file(TEST_CLIENT_KEY),
+            ssl_ca_cert=self._create_temp_file(TEST_CERTIFICATE_AUTH)
+        )
+        try:
+            temp_dir = tempfile.mkdtemp()
+            actual = FakeConfig()
+            with open(os.path.join(temp_dir, "cert_test"), "wb") as fd:
+                fd.write(TEST_CERTIFICATE_AUTH.encode())
+            with open(os.path.join(temp_dir, "client_cert"), "wb") as fd:
+                fd.write(TEST_CLIENT_CERT.encode())
+            with open(os.path.join(temp_dir, "client_key"), "wb") as fd:
+                fd.write(TEST_CLIENT_KEY.encode())
+            with open(os.path.join(temp_dir, "token_file"), "wb") as fd:
+                fd.write(TEST_DATA.encode())
+            KubeConfigLoader(
+                config_dict=self.TEST_KUBE_CONFIG,
+                active_context="ssl-local-file",
+                config_base_path=temp_dir,
+                client_configuration=actual).load_and_set()
+            self.assertEqual(expected, actual)
+        finally:
+            shutil.rmtree(temp_dir)
 
 
 if __name__ == '__main__':

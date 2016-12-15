@@ -28,8 +28,13 @@ _temp_files = {}
 
 
 def _cleanup_temp_files():
+    global _temp_files
     for temp_file in _temp_files.values():
-        os.remove(temp_file)
+        try:
+            os.remove(temp_file)
+        except OSError:
+            pass
+    _temp_files = {}
 
 
 def _create_temp_file_with_content(content):
@@ -54,7 +59,8 @@ class FileOrData(object):
      obj['%data_key_name'] is not set or empty. Assumption is file content is
      raw data and data field is base64 string."""
 
-    def __init__(self, obj, file_key_name, data_key_name=None):
+    def __init__(self, obj, file_key_name, data_key_name=None,
+                 file_base_path=""):
         if not data_key_name:
             data_key_name = file_key_name + "-data"
         self._file = None
@@ -62,7 +68,8 @@ class FileOrData(object):
         if data_key_name in obj:
             self._data = obj[data_key_name]
         elif file_key_name in obj:
-            self._file = obj[file_key_name]
+            self._file = os.path.normpath(
+                os.path.join(file_base_path, obj[file_key_name]))
 
     def as_file(self):
         """If obj[%data_key_name] exists, return name of a file with base64
@@ -71,6 +78,8 @@ class FileOrData(object):
         if use_data_if_no_file:
             self._file = _create_temp_file_with_content(
                 base64.decodestring(self._data.encode()))
+        if not os.path.isfile(self._file):
+            raise ConfigException("File does not exists: %s" % self._file)
         return self._file
 
     def as_data(self):
@@ -87,12 +96,14 @@ class FileOrData(object):
 class KubeConfigLoader(object):
 
     def __init__(self, config_dict, active_context=None,
-                 get_google_credentials=None, client_configuration=None):
+                 get_google_credentials=None, client_configuration=None,
+                 config_base_path=""):
         self._config = ConfigNode('kube-config', config_dict)
         self._current_context = None
         self._user = None
         self._cluster = None
         self.set_active_context(active_context)
+        self._config_base_path = config_base_path
         if get_google_credentials:
             self._get_google_credentials = get_google_credentials
         else:
@@ -151,7 +162,9 @@ class KubeConfigLoader(object):
         return self.token
 
     def _load_user_token(self):
-        token = FileOrData(self._user, 'tokenFile', 'token').as_data()
+        token = FileOrData(
+            self._user, 'tokenFile', 'token',
+            file_base_path=self._config_base_path).as_data()
         if token:
             self.token = token
             return True
@@ -168,10 +181,14 @@ class KubeConfigLoader(object):
             self.host = self._cluster['server']
             if self.host.startswith("https"):
                 self.ssl_ca_cert = FileOrData(
-                    self._cluster, 'certificate-authority').as_file()
+                    self._cluster, 'certificate-authority',
+                    file_base_path=self._config_base_path).as_file()
                 self.cert_file = FileOrData(
-                    self._user, 'client-certificate').as_file()
-                self.key_file = FileOrData(self._user, 'client-key').as_file()
+                    self._user, 'client-certificate',
+                    file_base_path=self._config_base_path).as_file()
+                self.key_file = FileOrData(
+                    self._user, 'client-key',
+                    file_base_path=self._config_base_path).as_file()
 
     def _set_config(self):
         if 'token' in self.__dict__:
@@ -244,9 +261,16 @@ class ConfigNode(object):
             'Expected object with name %s in %s list' % (name, self.name))
 
 
+def _get_kube_config_loader_for_yaml_file(filename, **kwargs):
+    with open(filename) as f:
+        return KubeConfigLoader(
+            config_dict=yaml.load(f),
+            config_base_path=os.path.abspath(os.path.dirname(filename)),
+            **kwargs)
+
+
 def list_kube_config_contexts(config_file):
-    with open(config_file) as f:
-        loader = KubeConfigLoader(config_dict=yaml.load(f))
+    loader = _get_kube_config_loader_for_yaml_file(config_file)
     return loader.list_contexts(), loader.current_context
 
 
@@ -259,6 +283,5 @@ def load_kube_config(config_file, context=None):
     from config file will be used.
     """
 
-    with open(config_file) as f:
-        KubeConfigLoader(
-            config_dict=yaml.load(f), active_context=context).load_and_set()
+    _get_kube_config_loader_for_yaml_file(
+        config_file, active_context=context).load_and_set()
