@@ -20,7 +20,7 @@ import unittest
 
 from .config_exception import ConfigException
 from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
-                          _create_temp_file_with_content, _cleanup_temp_files)
+                          _cleanup_temp_files, _create_temp_file_with_content)
 
 NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 

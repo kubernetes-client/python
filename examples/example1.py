@@ -12,16 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-
 from kubernetes import client, config
 
 
 def main():
     # Configs can be set in Configuration class directly or using helper
-    # utility
-    config.load_kube_config(
-        os.path.join(os.path.expanduser('~'), '.kube', 'config'))
+    # utility. If no argument provided, the config will be loaded from
+    # default location.
+    config.load_kube_config()
 
     v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")

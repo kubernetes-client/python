@@ -12,15 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-
 from kubernetes import client, config
 from kubernetes.client import configuration
 
 
 def main():
-    config_file = os.path.join(os.path.expanduser('~'), '.kube', 'config')
-    contexts, active_context = config.list_kube_config_contexts(config_file)
+    contexts, active_context = config.list_kube_config_contexts()
     if not contexts:
         print("Cannot find any context in kube-config file.")
         return
@@ -43,7 +40,7 @@ def main():
 
     # Configs can be set in Configuration class directly or using helper
     # utility
-    config.load_kube_config(config_file, context_name)
+    config.load_kube_config(context=context_name)
 
     print("Active host is %s" % configuration.host)
 
