@@ -2,6 +2,7 @@
 
 - Add context switch to kube config loader #46 
 - Add default kube config location #64
+- Add suport for accessing multiple clusters #7
 - Bugfix: Python client does not resolve relative paths in kubeconfig #68
 - Bugfix: `read_namespaced_pod_log` get None response #57
 - Improved test coverage #54

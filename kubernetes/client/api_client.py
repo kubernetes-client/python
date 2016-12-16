@@ -38,7 +38,7 @@ from datetime import date
 from six import PY3, integer_types, iteritems, text_type
 from six.moves.urllib.parse import quote
 
-from .configuration import Configuration
+from .configuration import configuration
 
 
 class ApiClient(object):
@@ -58,17 +58,19 @@ class ApiClient(object):
     :param header_name: a header to pass when making calls to the API.
     :param header_value: a header value to pass when making calls to the API.
     """
-    def __init__(self, host=None, header_name=None, header_value=None, cookie=None):
+    def __init__(self, host=None, header_name=None, header_value=None,
+                 cookie=None, config=configuration):
 
         """
         Constructor of the class.
         """
-        self.rest_client = RESTClientObject()
+        self.config = config
+        self.rest_client = RESTClientObject(config=self.config)
         self.default_headers = {}
         if header_name is not None:
             self.default_headers[header_name] = header_value
         if host is None:
-            self.host = Configuration().host
+            self.host = self.config.host
         else:
             self.host = host
         self.cookie = cookie
@@ -499,13 +501,12 @@ class ApiClient(object):
         :param querys: Query parameters tuple list to be updated.
         :param auth_settings: Authentication setting identifiers list.
         """
-        config = Configuration()
 
         if not auth_settings:
             return
 
         for auth in auth_settings:
-            auth_setting = config.auth_settings().get(auth)
+            auth_setting = self.config.auth_settings().get(auth)
             if auth_setting:
                 if not auth_setting['value']:
                     continue
@@ -526,9 +527,7 @@ class ApiClient(object):
         :param response:  RESTResponse.
         :return: file path.
         """
-        config = Configuration()
-
-        fd, path = tempfile.mkstemp(dir=config.temp_folder_path)
+        fd, path = tempfile.mkstemp(dir=self.config.temp_folder_path)
         os.close(fd)
         os.remove(path)
 

@@ -19,7 +19,7 @@ import tempfile
 
 import urllib3
 import yaml
-from kubernetes.client import configuration
+from kubernetes.client import ApiClient, ConfigurationObject, configuration
 from oauth2client.client import GoogleCredentials
 
 from .config_exception import ConfigException
@@ -97,7 +97,8 @@ class FileOrData(object):
 class KubeConfigLoader(object):
 
     def __init__(self, config_dict, active_context=None,
-                 get_google_credentials=None, client_configuration=None,
+                 get_google_credentials=None,
+                 client_configuration=configuration,
                  config_base_path=""):
         self._config = ConfigNode('kube-config', config_dict)
         self._current_context = None
@@ -111,10 +112,7 @@ class KubeConfigLoader(object):
             self._get_google_credentials = lambda: (
                 GoogleCredentials.get_application_default()
                 .get_access_token().access_token)
-        if client_configuration:
-            self._client_configuration = client_configuration
-        else:
-            self._client_configuration = configuration
+        self._client_configuration = client_configuration
 
     def set_active_context(self, context_name=None):
         if context_name is None:
@@ -279,17 +277,31 @@ def list_kube_config_contexts(config_file=None):
     return loader.list_contexts(), loader.current_context
 
 
-def load_kube_config(config_file=None, context=None):
+def load_kube_config(config_file=None, context=None,
+                     client_configuration=configuration):
     """Loads authentication and cluster information from kube-config file
     and stores them in kubernetes.client.configuration.
 
     :param config_file: Name of the kube-config file.
     :param context: set the active context. If is set to None, current_context
-    from config file will be used.
+        from config file will be used.
+    :param client_configuration: The kubernetes.client.ConfigurationObject to
+        set configs to.
     """
 
     if config_file is None:
         config_file = os.path.expanduser(KUBE_CONFIG_DEFAULT_LOCATION)
 
     _get_kube_config_loader_for_yaml_file(
-        config_file, active_context=context).load_and_set()
+        config_file, active_context=context,
+        client_configuration=client_configuration).load_and_set()
+
+
+def new_client_from_config(config_file=None, context=None):
+    """Loads configuration the same as load_kube_config but returns an ApiClient
+    to be used with any API object. This will allow the caller to concurrently
+    talk with multiple clusters."""
+    client_config = ConfigurationObject()
+    load_kube_config(config_file=config_file, context=context,
+                     client_configuration=client_config)
+    return ApiClient(config=client_config)
