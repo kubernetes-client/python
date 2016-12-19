@@ -35,7 +35,7 @@ import re
 from six import PY3
 from six.moves.urllib.parse import urlencode
 
-from .configuration import Configuration
+from .configuration import configuration
 
 try:
     import urllib3
@@ -69,7 +69,7 @@ class RESTResponse(io.IOBase):
 
 class RESTClientObject(object):
 
-    def __init__(self, pools_size=4):
+    def __init__(self, pools_size=4, config=configuration):
         # urllib3.PoolManager will pass all kw parameters to connectionpool
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680
@@ -77,23 +77,23 @@ class RESTClientObject(object):
         # http://stackoverflow.com/a/23957365/2985775
 
         # cert_reqs
-        if Configuration().verify_ssl:
+        if config.verify_ssl:
             cert_reqs = ssl.CERT_REQUIRED
         else:
             cert_reqs = ssl.CERT_NONE
 
         # ca_certs
-        if Configuration().ssl_ca_cert:
-            ca_certs = Configuration().ssl_ca_cert
+        if config.ssl_ca_cert:
+            ca_certs = config.ssl_ca_cert
         else:
             # if not set certificate file, use Mozilla's root certificates.
             ca_certs = certifi.where()
 
         # cert_file
-        cert_file = Configuration().cert_file
+        cert_file = config.cert_file
 
         # key file
-        key_file = Configuration().key_file
+        key_file = config.key_file
 
         # https pool manager
         self.pool_manager = urllib3.PoolManager(
