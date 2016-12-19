@@ -1,4 +1,4 @@
-# v1.0.0-beta1
+# v1.0.0-snapshot
 
 - Add context switch to kube config loader #46 
 - Add default kube config location #64
