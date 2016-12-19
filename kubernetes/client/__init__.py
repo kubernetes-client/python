@@ -288,6 +288,4 @@ from .apis.version_api import VersionApi
 # import ApiClient
 from .api_client import ApiClient
 
-from .configuration import Configuration
-
-configuration = Configuration()
+from .configuration import Configuration, ConfigurationObject, configuration

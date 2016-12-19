@@ -17,10 +17,14 @@ import os
 import shutil
 import tempfile
 import unittest
+import yaml
+from six import PY3
 
 from .config_exception import ConfigException
 from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
-                          _cleanup_temp_files, _create_temp_file_with_content)
+                          _cleanup_temp_files, _create_temp_file_with_content,
+                          load_kube_config, list_kube_config_contexts,
+                          new_client_from_config)
 
 NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 
@@ -533,6 +537,35 @@ class TestKubeConfigLoader(BaseTestCase):
             self.assertEqual(expected, actual)
         finally:
             shutil.rmtree(temp_dir)
+
+    def test_load_kube_config(self):
+        expected = FakeConfig(host=TEST_HOST, token=TEST_DATA_BASE64)
+        config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
+        actual = FakeConfig()
+        load_kube_config(config_file=config_file,context="simple_token",
+                         client_configuration=actual)
+        self.assertEqual(expected, actual)
+
+    def test_list_kube_config_contexts(self):
+        config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
+        contexts, active_context = list_kube_config_contexts(
+            config_file=config_file)
+        self.assertDictEqual(self.TEST_KUBE_CONFIG['contexts'][0],
+                             active_context)
+        if PY3:
+            self.assertCountEqual(self.TEST_KUBE_CONFIG['contexts'],
+                                  contexts)
+        else:
+            self.assertItemsEqual(self.TEST_KUBE_CONFIG['contexts'],
+                                  contexts)
+
+    def test_new_client_from_config(self):
+        config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
+        client = new_client_from_config(
+            config_file=config_file, context="simple_token")
+        self.assertEqual(TEST_HOST, client.config.host)
+        self.assertEqual(TEST_DATA_BASE64,
+                         client.config.api_key['authorization'])
 
 
 if __name__ == '__main__':

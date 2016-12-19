@@ -43,7 +43,8 @@ echo "--- Downloading and processing OpenAPI spec"
 python "${SCRIPT_ROOT}/preprocess_spec.py"
 
 echo "--- Cleaning up previously generated folders"
-rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}"
+rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}/apis"
+rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}/models"
 rm -rf "${CLIENT_ROOT}/docs"
 rm -rf "${CLIENT_ROOT}/test"
 
