@@ -47,6 +47,6 @@ setup(
               'kubernetes.client.models', 'scripts'],
     include_package_data=True,
     long_description="""\
-    Python client for talk to a kubernetes cluster.
+    Python client for kubernetes http://kubernetes.io/
     """
 )
