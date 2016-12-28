@@ -26,6 +26,8 @@ from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
                           load_kube_config, list_kube_config_contexts,
                           new_client_from_config)
 
+BEARER_TOKEN_FORMAT = "Bearer %s"
+
 NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 
 
@@ -407,7 +409,8 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(expected, actual)
 
     def test_simple_token(self):
-        expected = FakeConfig(host=TEST_HOST, token=TEST_DATA_BASE64)
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -420,10 +423,12 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="simple_token")
         self.assertTrue(loader._load_user_token())
-        self.assertEqual(TEST_DATA_BASE64, loader.token)
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64, loader.token)
 
     def test_gcp(self):
-        expected = FakeConfig(host=TEST_HOST, token=TEST_ANOTHER_DATA_BASE64)
+        expected = FakeConfig(
+            host=TEST_HOST,
+            token=BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64)
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -439,7 +444,8 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="gcp",
             get_google_credentials=lambda: TEST_ANOTHER_DATA_BASE64)
         self.assertTrue(loader._load_gcp_token())
-        self.assertEqual(TEST_ANOTHER_DATA_BASE64, loader.token)
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64,
+                         loader.token)
 
     def test_user_pass(self):
         expected = FakeConfig(host=TEST_HOST, token=TEST_BASIC_TOKEN)
@@ -458,13 +464,6 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(TEST_BASIC_TOKEN, loader.token)
 
     def test_ssl_no_cert_files(self):
-        expected = FakeConfig(
-            host=TEST_SSL_HOST,
-            token=TEST_DATA_BASE64,
-            cert_file=TEST_CLIENT_CERT,
-            key_file=TEST_CLIENT_KEY,
-            ssl_ca_cert=TEST_CERTIFICATE_AUTH
-        )
         actual = FakeConfig()
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -475,7 +474,7 @@ class TestKubeConfigLoader(BaseTestCase):
     def test_ssl(self):
         expected = FakeConfig(
             host=TEST_SSL_HOST,
-            token=TEST_DATA_BASE64,
+            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
             cert_file=self._create_temp_file(TEST_CLIENT_CERT),
             key_file=self._create_temp_file(TEST_CLIENT_KEY),
             ssl_ca_cert=self._create_temp_file(TEST_CERTIFICATE_AUTH)
@@ -513,7 +512,7 @@ class TestKubeConfigLoader(BaseTestCase):
     def test_ssl_with_relative_ssl_files(self):
         expected = FakeConfig(
             host=TEST_SSL_HOST,
-            token=TEST_DATA_BASE64,
+            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
             cert_file=self._create_temp_file(TEST_CLIENT_CERT),
             key_file=self._create_temp_file(TEST_CLIENT_KEY),
             ssl_ca_cert=self._create_temp_file(TEST_CERTIFICATE_AUTH)
@@ -539,7 +538,8 @@ class TestKubeConfigLoader(BaseTestCase):
             shutil.rmtree(temp_dir)
 
     def test_load_kube_config(self):
-        expected = FakeConfig(host=TEST_HOST, token=TEST_DATA_BASE64)
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
         load_kube_config(config_file=config_file,context="simple_token",
@@ -564,7 +564,7 @@ class TestKubeConfigLoader(BaseTestCase):
         client = new_client_from_config(
             config_file=config_file, context="simple_token")
         self.assertEqual(TEST_HOST, client.config.host)
-        self.assertEqual(TEST_DATA_BASE64,
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.config.api_key['authorization'])
 
 
