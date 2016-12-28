@@ -79,7 +79,7 @@ class FileOrData(object):
         if use_data_if_no_file:
             self._file = _create_temp_file_with_content(
                 base64.decodestring(self._data.encode()))
-        if not os.path.isfile(self._file):
+        if self._file and not os.path.isfile(self._file):
             raise ConfigException("File does not exists: %s" % self._file)
         return self._file
 
@@ -157,7 +157,7 @@ class KubeConfigLoader(object):
         # Ignore configs in auth-provider and rely on GoogleCredentials
         # caching and refresh mechanism.
         # TODO: support gcp command based token ("cmd-path" config).
-        self.token = self._get_google_credentials()
+        self.token = "Bearer %s" % self._get_google_credentials()
         return self.token
 
     def _load_user_token(self):
@@ -165,7 +165,7 @@ class KubeConfigLoader(object):
             self._user, 'tokenFile', 'token',
             file_base_path=self._config_base_path).as_data()
         if token:
-            self.token = token
+            self.token = "Bearer %s" % token
             return True
 
     def _load_user_pass_token(self):

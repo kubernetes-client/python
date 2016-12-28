@@ -1,3 +1,7 @@
+# v1.0.0a4
+
+- Bugfix: Fixed broken config loader #77
+
 # v1.0.0a3
 
 - Add context switch to kube config loader #46 
