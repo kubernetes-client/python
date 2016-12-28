@@ -28,6 +28,8 @@ fi
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
+CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
+PACKAGE_NAME=$(python "${SCRIPT_ROOT}/constants.py" PACKAGE_NAME)
 
 pushd "${SCRIPT_ROOT}" > /dev/null
 SCRIPT_ROOT=`pwd`
@@ -37,24 +39,24 @@ pushd "${CLIENT_ROOT}" > /dev/null
 CLIENT_ROOT=`pwd`
 popd > /dev/null
 
-PACKAGE_NAME=${PACKAGE_NAME:-client}
-
 echo "--- Downloading and processing OpenAPI spec"
 python "${SCRIPT_ROOT}/preprocess_spec.py"
 
 echo "--- Cleaning up previously generated folders"
-rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}/apis"
-rm -rf "${CLIENT_ROOT}/${PACKAGE_NAME}/models"
+rm -rf "${CLIENT_ROOT}/client/apis"
+rm -rf "${CLIENT_ROOT}/client/models"
 rm -rf "${CLIENT_ROOT}/docs"
 rm -rf "${CLIENT_ROOT}/test"
 
 echo "--- Generating client ..."
-mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=${PACKAGE_NAME} -D=generator.client.version=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
+mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=client -D=generator.client.version=${CLIENT_VERSION}
 
 echo "--- Patching generated code..."
 find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/kubernetes.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
 rm "${CLIENT_ROOT}/LICENSE"
+echo "--- updating version information..."
+sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
+sed -i'' "s/^PACKAGE_NAME = .*/PACKAGE_NAME = \\\"${PACKAGE_NAME}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 echo "---Done."
-

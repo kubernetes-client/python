@@ -14,7 +14,10 @@
 
 from setuptools import find_packages, setup
 
-from scripts.constants import CLIENT_VERSION, PACKAGE_NAME
+# Do not edit these constants. They will be updated automatically
+# by scripts/update-client.sh.
+CLIENT_VERSION = "1.0.0-snapshot"
+PACKAGE_NAME = "kubernetes"
 
 # To install the library, run the following
 #
@@ -44,7 +47,7 @@ setup(
     install_requires=REQUIRES,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.apis',
-              'kubernetes.client.models', 'scripts'],
+              'kubernetes.client.models'],
     include_package_data=True,
     long_description="""\
     Python client for kubernetes http://kubernetes.io/
