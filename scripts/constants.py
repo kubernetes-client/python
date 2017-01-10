@@ -28,6 +28,10 @@ CLIENT_VERSION = "1.0.0-snapshot"
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
 
+# Stage of development, mainly used in setup.py's classifiers.
+DEVELOPMENT_STATUS = "3 - Alpha"
+
+
 # If called directly, return the constant value given
 # its name. Useful in bash scripts.
 if __name__ == '__main__':

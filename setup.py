@@ -18,6 +18,7 @@ from setuptools import find_packages, setup
 # by scripts/update-client.sh.
 CLIENT_VERSION = "1.0.0-snapshot"
 PACKAGE_NAME = "kubernetes"
+DEVELOPMENT_STATUS = "snapshot"
 
 # To install the library, run the following
 #
@@ -53,7 +54,7 @@ setup(
     Python client for kubernetes http://kubernetes.io/
     """,
     classifiers=[
-        "Development Status :: 4 - Alpha",
+        "Development Status :: %s" % DEVELOPMENT_STATUS,
         "Environment :: Kubernetes",
         "Topic :: Utilities",
         "Intended Audience :: Developers",
