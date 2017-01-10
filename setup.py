@@ -51,5 +51,20 @@ setup(
     include_package_data=True,
     long_description="""\
     Python client for kubernetes http://kubernetes.io/
-    """
+    """,
+    classifiers=[
+        "Development Status :: 4 - Alpha",
+        "Environment :: Kubernetes",
+        "Topic :: Utilities",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+    ],
 )
