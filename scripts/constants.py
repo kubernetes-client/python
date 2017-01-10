@@ -19,7 +19,7 @@ KUBERNETES_BRANCH = "release-1.5"
 
 # Spec version will be set in downloaded spec and all
 # generated code will refer to it.
-SPEC_VERSION = "v1.5.0-snapshot"
+SPEC_VERSION = "v1.5.1-660c2a2"
 
 # client version for packaging and releasing. It can
 # be different than SPEC_VERSION.
