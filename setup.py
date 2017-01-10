@@ -55,7 +55,6 @@ setup(
     """,
     classifiers=[
         "Development Status :: %s" % DEVELOPMENT_STATUS,
-        "Environment :: Kubernetes",
         "Topic :: Utilities",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
