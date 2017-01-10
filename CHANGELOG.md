@@ -1,3 +1,7 @@
+# v1.0.0a5
+
+- Bugfix: Missing fields in some models #85, kubernetes/kubernetes#39465
+
 # v1.0.0a4
 
 - Bugfix: Fixed broken config loader #77
