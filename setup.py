@@ -14,7 +14,11 @@
 
 from setuptools import find_packages, setup
 
-from scripts.constants import CLIENT_VERSION, PACKAGE_NAME
+# Do not edit these constants. They will be updated automatically
+# by scripts/update-client.sh.
+CLIENT_VERSION = "1.0.0a4"
+PACKAGE_NAME = "kubernetes"
+DEVELOPMENT_STATUS = "3 - Alpha"
 
 # To install the library, run the following
 #
@@ -44,9 +48,24 @@ setup(
     install_requires=REQUIRES,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.apis',
-              'kubernetes.client.models', 'scripts'],
+              'kubernetes.client.models'],
     include_package_data=True,
     long_description="""\
     Python client for kubernetes http://kubernetes.io/
-    """
+    """,
+    classifiers=[
+        "Development Status :: %s" % DEVELOPMENT_STATUS,
+        "Environment :: Kubernetes",
+        "Topic :: Utilities",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+    ],
 )
