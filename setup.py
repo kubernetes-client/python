@@ -18,7 +18,7 @@ from setuptools import find_packages, setup
 # by scripts/update-client.sh.
 CLIENT_VERSION = "1.0.0-snapshot"
 PACKAGE_NAME = "kubernetes"
-DEVELOPMENT_STATUS = "snapshot"
+DEVELOPMENT_STATUS = "3 - Alpha"
 
 # To install the library, run the following
 #
