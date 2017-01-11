@@ -1,16 +1,18 @@
 # ref: https://docs.travis-ci.com/user/languages/python
 language: python
-python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-# command to install dependencies
+sudo: true
+services:
+  - docker
+env:
+  - TOXENV=py35,codecov
+  - TOXENV=py34,codecov
+  - TOXENV=py27,codecov
+  - TOXENV=py27-functional,codecov
+  - TOXENV=py35-functional,codecov
+  - TOXENV=coverage,codecov
+
 install:
-  - "pip install -r requirements.txt"
-  - "pip install codecov"
+  - pip install tox
 
-# command to run tests
-script: nosetests --with-coverage --cover-package=kubernetes.config,kubernetes.watch --cover-tests
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+script:
+  - tox
