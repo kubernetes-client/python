@@ -17,13 +17,14 @@ import os
 import shutil
 import tempfile
 import unittest
+
 import yaml
 from six import PY3
 
 from .config_exception import ConfigException
 from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
                           _cleanup_temp_files, _create_temp_file_with_content,
-                          load_kube_config, list_kube_config_contexts,
+                          list_kube_config_contexts, load_kube_config,
                           new_client_from_config)
 
 BEARER_TOKEN_FORMAT = "Bearer %s"
@@ -542,7 +543,7 @@ class TestKubeConfigLoader(BaseTestCase):
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
-        load_kube_config(config_file=config_file,context="simple_token",
+        load_kube_config(config_file=config_file, context="simple_token",
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 

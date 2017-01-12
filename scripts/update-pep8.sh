@@ -21,9 +21,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-if ! which virtualenv > /dev/null 2>&1; then
-  echo "virtualenv is not installed. run: [sudo] pip install virtualenv"
-  exit
+ENV=${VIRTUAL_ENV:-}
+
+if [[ -z ${ENV} ]]; then
+    if ! which virtualenv > /dev/null 2>&1; then
+      echo "virtualenv is not installed. run: [sudo] pip install virtualenv"
+      exit
+    fi
 fi
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
@@ -37,21 +41,24 @@ pushd "${CLIENT_ROOT}" > /dev/null
 CLIENT_ROOT=`pwd`
 popd > /dev/null
 
-virtualenv "${SCRIPT_ROOT}/.py"
+if [[ -z ${ENV} ]]; then
+    echo "--- Creating virtualenv"
+    virtualenv "${SCRIPT_ROOT}/.py"
 
-VIRTUAL_ENV_DISABLE_PROMPT=1; source "${SCRIPT_ROOT}/.py/bin/activate"
-trap "deactivate" EXIT SIGINT
+    VIRTUAL_ENV_DISABLE_PROMPT=1; source "${SCRIPT_ROOT}/.py/bin/activate"
+    trap "deactivate" EXIT SIGINT
+
+    echo "--- Updating tools"
+    pip install --upgrade pep8
+    pip install --upgrade autopep8
+    pip install --upgrade isort
+fi
 
 SAVEIFS=$IFS
 trap "IFS=$SAVEIFS" EXIT SIGINT
 IFS=,
 
 SOURCES="${SCRIPT_ROOT}/../setup.py,${CLIENT_ROOT}/config/*.py,${CLIENT_ROOT}/watch/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/../examples/*.py"
-
-echo "--- Updating tools"
-pip install --upgrade pep8
-pip install --upgrade autopep8
-pip install --upgrade isort
 
 echo "--- applying autopep8"
 for SOURCE in $SOURCES; do
@@ -68,5 +75,12 @@ set +o errexit
 for SOURCE in $SOURCES; do
     pep8 $SOURCE
 done
+
+if [[ ! -z ${ENV} ]]; then
+    if [[ $(git status --porcelain) != "" ]]; then
+        git --no-pager diff
+        exit 1
+    fi
+fi
 
 echo "---Done."

@@ -19,8 +19,9 @@ import tempfile
 
 import urllib3
 import yaml
-from kubernetes.client import ApiClient, ConfigurationObject, configuration
 from oauth2client.client import GoogleCredentials
+
+from kubernetes.client import ApiClient, ConfigurationObject, configuration
 
 from .config_exception import ConfigException
 
