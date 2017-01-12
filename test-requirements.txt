@@ -6,3 +6,4 @@ randomize>=0.13
 mock>=2.0.0
 sphinx>=1.2.1,!=1.3b1,<1.4 # BSD
 recommonmark
+codecov>=1.4.0
