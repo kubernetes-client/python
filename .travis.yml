@@ -4,12 +4,13 @@ sudo: true
 services:
   - docker
 env:
-  - TOXENV=py35,codecov
-  - TOXENV=py34,codecov
-  - TOXENV=py27,codecov
-  - TOXENV=py27-functional,codecov
-  - TOXENV=py35-functional,codecov
-  - TOXENV=update-pep8,codecov
+  - TOXENV=py35
+  - TOXENV=py34
+  - TOXENV=py27
+  - TOXENV=py27-functional
+  - TOXENV=py35-functional
+  - TOXENV=update-pep8
+  - TOXENV=docs
   - TOXENV=coverage,codecov
 
 install:
