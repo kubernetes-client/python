@@ -9,6 +9,7 @@ env:
   - TOXENV=py27,codecov
   - TOXENV=py27-functional,codecov
   - TOXENV=py35-functional,codecov
+  - TOXENV=update-pep8,codecov
   - TOXENV=coverage,codecov
 
 install:
