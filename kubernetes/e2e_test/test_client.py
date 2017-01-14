@@ -105,17 +105,15 @@ class TestClient(unittest.TestCase):
         self.assertEqual('frontend', resp.metadata.name)
         self.assertTrue(resp.status)
 
-        # TODO(dims) : Fails with "json: cannot unmarshal object into
-        # Go value of type jsonpatch.Patch"
-        # service_manifest['spec']['ports'] = [{'name': 'new',
-        #                                       'port': 8080,
-        #                                       'protocol': 'TCP',
-        #                                       'targetPort': 8080}]
-        # resp = api.patch_namespaced_service(body=service_manifest,
-        #                                     name='frontend',
-        #                                     namespace='default')
-        # self.assertEqual(2, len(resp.spec.ports))
-        # self.assertTrue(resp.status)
+        service_manifest['spec']['ports'] = [{'name': 'new',
+                                              'port': 8080,
+                                              'protocol': 'TCP',
+                                              'targetPort': 8080}]
+        resp = api.patch_namespaced_service(body=service_manifest,
+                                            name='frontend',
+                                            namespace='default')
+        self.assertEqual(2, len(resp.spec.ports))
+        self.assertTrue(resp.status)
 
         resp = api.delete_namespaced_service(name='frontend',
                                              namespace='default')
@@ -182,11 +180,9 @@ class TestClient(unittest.TestCase):
             name='test-configmap', namespace='default')
         self.assertEqual('test-configmap', resp.metadata.name)
 
-        # TODO(dims): Fails with "json: cannot unmarshal object
-        # into Go value of type jsonpatch.Patch"
-        # test_configmap['data']['config.json'] = "{}"
-        # resp = api.patch_namespaced_config_map(
-        #     name='test-configmap', namespace='default', body=test_configmap)
+        test_configmap['data']['config.json'] = "{}"
+        resp = api.patch_namespaced_config_map(
+            name='test-configmap', namespace='default', body=test_configmap)
 
         resp = api.delete_namespaced_config_map(
             name='test-configmap', body={}, namespace='default')
