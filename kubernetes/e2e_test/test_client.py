@@ -13,10 +13,10 @@
 # under the License.
 
 """
-test_k8sclient
+test_client
 ----------------------------------
 
-Tests for `k8sclient` module. Deploy Kubernetes using:
+Tests for `client` module. Deploy Kubernetes using:
 http://kubernetes.io/docs/getting-started-guides/docker/
 
 and then run this test
@@ -38,7 +38,7 @@ def _is_k8s_running():
         return False
 
 
-class TestK8sclient(unittest.TestCase):
+class TestClient(unittest.TestCase):
     @unittest.skipUnless(
         _is_k8s_running(), "Kubernetes is not available")
     def test_list_endpoints(self):
