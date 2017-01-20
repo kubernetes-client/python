@@ -56,10 +56,13 @@ echo "--- Patching generated code..."
 find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/kubernetes.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
-rm "${CLIENT_ROOT}/LICENSE"
+# rm "${CLIENT_ROOT}/LICENSE"
 echo "--- updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^PACKAGE_NAME = .*/PACKAGE_NAME = \\\"${PACKAGE_NAME}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^DEVELOPMENT_STATUS = .*/DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STATUS}\\\"/" "${SCRIPT_ROOT}/../setup.py"
-
+sed -i'' "/^configuration = Configuration()$/d" "${CLIENT_ROOT}/client/__init__.py"
+sed -i'' "/^from .configuration import Configuration$/d" "${CLIENT_ROOT}/client/__init__.py"
+sed -i '${/^$/d;}' "${CLIENT_ROOT}/client/__init__.py"
+echo "from .configuration import Configuration, ConfigurationObject, configuration" >> "${CLIENT_ROOT}/client/__init__.py"
 echo "---Done."
