@@ -187,6 +187,8 @@ class TestClient(unittest.TestCase):
         resp = api.delete_namespaced_config_map(
             name='test-configmap', body={}, namespace='default')
 
+        resp = api.list_namespaced_config_map('kube-system', pretty=True)
+        self.assertEqual([], resp.items)
 
     @unittest.skipUnless(
         _is_k8s_running(), "Kubernetes is not available")
