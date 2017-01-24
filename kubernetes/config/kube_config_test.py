@@ -235,13 +235,17 @@ class FakeConfig:
             if k not in other.__dict__:
                 return
             if k in self.FILE_KEYS:
-                try:
-                    with open(v) as f1, open(other.__dict__[k]) as f2:
-                        if f1.read() != f2.read():
+                if v and other.__dict__[k]:
+                    try:
+                        with open(v) as f1, open(other.__dict__[k]) as f2:
+                            if f1.read() != f2.read():
+                                return
+                    except IOError:
+                        # fall back to only compare filenames in case we are
+                        # testing the passing of filenames to the config
+                        if other.__dict__[k] != v:
                             return
-                except IOError:
-                    # fall back to only compare filenames in case we are
-                    # testing the passing of filenames to the config
+                else:
                     if other.__dict__[k] != v:
                         return
             else:
@@ -302,6 +306,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "no_ssl_verification",
+                "context": {
+                    "cluster": "no_ssl_verification",
+                    "user": "ssl"
+                }
+            },
+            {
                 "name": "ssl-no_file",
                 "context": {
                     "cluster": "ssl-no_file",
@@ -342,6 +353,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 "cluster": {
                     "server": TEST_SSL_HOST,
                     "certificate-authority-data": TEST_CERTIFICATE_AUTH_BASE64,
+                }
+            },
+            {
+                "name": "no_ssl_verification",
+                "cluster": {
+                    "server": TEST_SSL_HOST,
+                    "insecure-skip-tls-verify": "true",
                 }
             },
         ],
@@ -484,6 +502,22 @@ class TestKubeConfigLoader(BaseTestCase):
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="ssl",
+            client_configuration=actual).load_and_set()
+        self.assertEqual(expected, actual)
+
+    def test_ssl_no_verification(self):
+        expected = FakeConfig(
+            host=TEST_SSL_HOST,
+            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+            cert_file=self._create_temp_file(TEST_CLIENT_CERT),
+            key_file=self._create_temp_file(TEST_CLIENT_KEY),
+            verify_ssl=False,
+            ssl_ca_cert=None,
+        )
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="no_ssl_verification",
             client_configuration=actual).load_and_set()
         self.assertEqual(expected, actual)
 
