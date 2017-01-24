@@ -626,6 +626,8 @@ class ApiClient(object):
                and instance.attribute_map[attr] in data\
                and isinstance(data, (list, dict)):
                 value = data[instance.attribute_map[attr]]
+                if value is None:
+                    value = [] if isinstance(data, list) else {}
                 setattr(instance, attr, self.__deserialize(value, attr_type))
 
         return instance
