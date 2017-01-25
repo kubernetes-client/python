@@ -189,12 +189,14 @@ class KubeConfigLoader(object):
                 self.key_file = FileOrData(
                     self._user, 'client-key',
                     file_base_path=self._config_base_path).as_file()
+        if 'insecure-skip-tls-verify' in self._cluster:
+            self.verify_ssl = not self._cluster['insecure-skip-tls-verify']
 
     def _set_config(self):
         if 'token' in self.__dict__:
             self._client_configuration.api_key['authorization'] = self.token
         # copy these keys directly from self to configuration object
-        keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file']
+        keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl']
         for key in keys:
             if key in self.__dict__:
                 setattr(self._client_configuration, key, getattr(self, key))
