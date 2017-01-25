@@ -19,6 +19,7 @@ import sys
 from collections import OrderedDict
 
 import urllib3
+
 from constants import KUBERNETES_BRANCH, SPEC_VERSION
 
 # these four constants are shown as part of this example in []:

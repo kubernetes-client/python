@@ -17,13 +17,14 @@ import os
 import shutil
 import tempfile
 import unittest
+
 import yaml
 from six import PY3
 
 from .config_exception import ConfigException
 from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
                           _cleanup_temp_files, _create_temp_file_with_content,
-                          load_kube_config, list_kube_config_contexts,
+                          list_kube_config_contexts, load_kube_config,
                           new_client_from_config)
 
 BEARER_TOKEN_FORMAT = "Bearer %s"
@@ -234,13 +235,17 @@ class FakeConfig:
             if k not in other.__dict__:
                 return
             if k in self.FILE_KEYS:
-                try:
-                    with open(v) as f1, open(other.__dict__[k]) as f2:
-                        if f1.read() != f2.read():
+                if v and other.__dict__[k]:
+                    try:
+                        with open(v) as f1, open(other.__dict__[k]) as f2:
+                            if f1.read() != f2.read():
+                                return
+                    except IOError:
+                        # fall back to only compare filenames in case we are
+                        # testing the passing of filenames to the config
+                        if other.__dict__[k] != v:
                             return
-                except IOError:
-                    # fall back to only compare filenames in case we are
-                    # testing the passing of filenames to the config
+                else:
                     if other.__dict__[k] != v:
                         return
             else:
@@ -301,6 +306,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "no_ssl_verification",
+                "context": {
+                    "cluster": "no_ssl_verification",
+                    "user": "ssl"
+                }
+            },
+            {
                 "name": "ssl-no_file",
                 "context": {
                     "cluster": "ssl-no_file",
@@ -341,6 +353,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 "cluster": {
                     "server": TEST_SSL_HOST,
                     "certificate-authority-data": TEST_CERTIFICATE_AUTH_BASE64,
+                }
+            },
+            {
+                "name": "no_ssl_verification",
+                "cluster": {
+                    "server": TEST_SSL_HOST,
+                    "insecure-skip-tls-verify": "true",
                 }
             },
         ],
@@ -486,6 +505,22 @@ class TestKubeConfigLoader(BaseTestCase):
             client_configuration=actual).load_and_set()
         self.assertEqual(expected, actual)
 
+    def test_ssl_no_verification(self):
+        expected = FakeConfig(
+            host=TEST_SSL_HOST,
+            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+            cert_file=self._create_temp_file(TEST_CLIENT_CERT),
+            key_file=self._create_temp_file(TEST_CLIENT_KEY),
+            verify_ssl=False,
+            ssl_ca_cert=None,
+        )
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="no_ssl_verification",
+            client_configuration=actual).load_and_set()
+        self.assertEqual(expected, actual)
+
     def test_list_contexts(self):
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -542,7 +577,7 @@ class TestKubeConfigLoader(BaseTestCase):
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
-        load_kube_config(config_file=config_file,context="simple_token",
+        load_kube_config(config_file=config_file, context="simple_token",
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 
