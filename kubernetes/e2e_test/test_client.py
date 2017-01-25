@@ -25,9 +25,11 @@ and then run this test
 import unittest
 import urllib3
 import uuid
+import yaml
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
+from kubernetes.client.apis import extensions_v1beta1_api
 
 
 def _is_k8s_running():
@@ -41,6 +43,26 @@ def _is_k8s_running():
 class TestClient(unittest.TestCase):
     @unittest.skipUnless(
         _is_k8s_running(), "Kubernetes is not available")
+    def test_read_namespaces(self):
+        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        api = core_v1_api.CoreV1Api(client)
+
+        expected_namespaces = ('default', 'kube-system')
+        for ns in expected_namespaces:
+            api.read_namespace(name=ns)
+
+    @unittest.skipUnless(
+        _is_k8s_running(), "Kubernetes is not available")
+    def test_read_services(self):
+        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        api = core_v1_api.CoreV1Api(client)
+
+        expected_services = ('kubernetes',)
+        for service in expected_services:
+            api.read_namespaced_service(service, 'default')
+
+    @unittest.skipUnless(
+        _is_k8s_running(), "Kubernetes is not available")
     def test_list_endpoints(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
@@ -50,12 +72,40 @@ class TestClient(unittest.TestCase):
 
     @unittest.skipUnless(
         _is_k8s_running(), "Kubernetes is not available")
+    def test_create_deployment(self):
+        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
+        name = 'nginx-deployment-' + str(uuid.uuid4())
+        deployment = '''apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: %s
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+'''
+        resp = api.create_namespaced_deployment(
+            body=yaml.load(deployment % name),
+            namespace="default")
+        resp = api.read_namespaced_deployment(name, 'default')
+        self.assertIsNotNone(resp)
+
+    @unittest.skipUnless(
+        _is_k8s_running(), "Kubernetes is not available")
     def test_pod_apis(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
 
         name = 'test-' + str(uuid.uuid4())
-
         pod_manifest = {'apiVersion': 'v1',
                         'kind': 'Pod',
                         'metadata': {'color': 'blue', 'name': name},
@@ -84,25 +134,26 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
 
+        name = 'frontend-' + str(uuid.uuid4())
         service_manifest = {'apiVersion': 'v1',
                             'kind': 'Service',
-                            'metadata': {'labels': {'name': 'frontend'},
-                                         'name': 'frontend',
+                            'metadata': {'labels': {'name': name},
+                                         'name': name,
                                          'resourceversion': 'v1'},
                             'spec': {'ports': [{'name': 'port',
                                                 'port': 80,
                                                 'protocol': 'TCP',
                                                 'targetPort': 80}],
-                                     'selector': {'name': 'frontend'}}}
+                                     'selector': {'name': name}}}
 
         resp = api.create_namespaced_service(body=service_manifest,
                                              namespace='default')
-        self.assertEqual('frontend', resp.metadata.name)
+        self.assertEqual(name, resp.metadata.name)
         self.assertTrue(resp.status)
 
-        resp = api.read_namespaced_service(name='frontend',
+        resp = api.read_namespaced_service(name=name,
                                            namespace='default')
-        self.assertEqual('frontend', resp.metadata.name)
+        self.assertEqual(name, resp.metadata.name)
         self.assertTrue(resp.status)
 
         service_manifest['spec']['ports'] = [{'name': 'new',
@@ -110,12 +161,12 @@ class TestClient(unittest.TestCase):
                                               'protocol': 'TCP',
                                               'targetPort': 8080}]
         resp = api.patch_namespaced_service(body=service_manifest,
-                                            name='frontend',
+                                            name=name,
                                             namespace='default')
         self.assertEqual(2, len(resp.spec.ports))
         self.assertTrue(resp.status)
 
-        resp = api.delete_namespaced_service(name='frontend',
+        resp = api.delete_namespaced_service(name=name,
                                              namespace='default')
 
     @unittest.skipUnless(
@@ -124,15 +175,16 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
 
+        name = 'frontend-' + str(uuid.uuid4())
         rc_manifest = {
             'apiVersion': 'v1',
             'kind': 'ReplicationController',
-            'metadata': {'labels': {'name': 'frontend'},
-                         'name': 'frontend'},
+            'metadata': {'labels': {'name': name},
+                         'name': name},
             'spec': {'replicas': 2,
-                     'selector': {'name': 'frontend'},
+                     'selector': {'name': name},
                      'template': {'metadata': {
-                         'labels': {'name': 'frontend'}},
+                         'labels': {'name': name}},
                          'spec': {'containers': [{
                              'image': 'nginx',
                              'name': 'nginx',
@@ -141,17 +193,16 @@ class TestClient(unittest.TestCase):
 
         resp = api.create_namespaced_replication_controller(
             body=rc_manifest, namespace='default')
-        self.assertEqual('frontend', resp.metadata.name)
+        self.assertEqual(name, resp.metadata.name)
         self.assertEqual(2, resp.spec.replicas)
 
         resp = api.read_namespaced_replication_controller(
-            name='frontend', namespace='default')
-        self.assertEqual('frontend', resp.metadata.name)
+            name=name, namespace='default')
+        self.assertEqual(name, resp.metadata.name)
         self.assertEqual(2, resp.spec.replicas)
 
         resp = api.delete_namespaced_replication_controller(
-            name='frontend', body={}, namespace='default')
-
+            name=name, body={}, namespace='default')
 
     @unittest.skipUnless(
         _is_k8s_running(), "Kubernetes is not available")
@@ -159,11 +210,12 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
 
+        name = 'test-configmap-' + str(uuid.uuid4())
         test_configmap = {
             "kind": "ConfigMap",
             "apiVersion": "v1",
             "metadata": {
-                "name": "test-configmap",
+                "name": name,
             },
             "data": {
                 "config.json": "{\"command\":\"/usr/bin/mysqld_safe\"}",
@@ -174,18 +226,18 @@ class TestClient(unittest.TestCase):
         resp = api.create_namespaced_config_map(
             body=test_configmap, namespace='default'
         )
-        self.assertEqual('test-configmap', resp.metadata.name)
+        self.assertEqual(name, resp.metadata.name)
 
         resp = api.read_namespaced_config_map(
-            name='test-configmap', namespace='default')
-        self.assertEqual('test-configmap', resp.metadata.name)
+            name=name, namespace='default')
+        self.assertEqual(name, resp.metadata.name)
 
         test_configmap['data']['config.json'] = "{}"
         resp = api.patch_namespaced_config_map(
-            name='test-configmap', namespace='default', body=test_configmap)
+            name=name, namespace='default', body=test_configmap)
 
         resp = api.delete_namespaced_config_map(
-            name='test-configmap', body={}, namespace='default')
+            name=name, body={}, namespace='default')
 
         resp = api.list_namespaced_config_map('kube-system', pretty=True)
         self.assertEqual([], resp.items)
@@ -200,3 +252,37 @@ class TestClient(unittest.TestCase):
             node = api.read_node(name=item.metadata.name)
             self.assertTrue(len(node.metadata.labels) > 0)
             self.assertTrue(isinstance(node.metadata.labels, dict))
+
+    @unittest.skipUnless(
+        _is_k8s_running(), "Kubernetes is not available")
+    def test_create_daemonset(self):
+        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
+        name = 'nginx-app-' + str(uuid.uuid4())
+        daemonset = {
+            'apiVersion': 'extensions/v1beta1',
+            'kind': 'DaemonSet',
+            'metadata': {
+                'labels': {'app': 'nginx'},
+                'name': '%s' % name,
+            },
+            'spec': {
+                'template': {
+                    'metadata': {
+                        'labels': {'app': 'nginx'},
+                        'name': name},
+                    'spec': {
+                        'containers': [
+                            {'name': 'nginx-app',
+                             'image': 'nginx:1.10'},
+                        ],
+                    },
+                },
+                'updateStrategy': {
+                    'type': 'RollingUpdate',
+                },
+            }
+        }
+        resp = api.create_namespaced_daemon_set('default', body=daemonset)
+        resp = api.read_namespaced_daemon_set(name, 'default')
+        self.assertIsNotNone(resp)
