@@ -12,95 +12,17 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-"""
-test_client
-----------------------------------
-
-Tests for `client` module. Deploy Kubernetes using:
-http://kubernetes.io/docs/getting-started-guides/docker/
-
-and then run this test
-"""
-
 import unittest
-import urllib3
 import uuid
-import yaml
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
-from kubernetes.client.apis import extensions_v1beta1_api
-
-
-def _is_k8s_running():
-    try:
-        urllib3.PoolManager().request('GET', '127.0.0.1:8080')
-        return True
-    except urllib3.exceptions.HTTPError:
-        return False
+from kubernetes.e2e_test import base
 
 
 class TestClient(unittest.TestCase):
     @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
-    def test_read_namespaces(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
-        api = core_v1_api.CoreV1Api(client)
-
-        expected_namespaces = ('default', 'kube-system')
-        for ns in expected_namespaces:
-            api.read_namespace(name=ns)
-
-    @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
-    def test_read_services(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
-        api = core_v1_api.CoreV1Api(client)
-
-        expected_services = ('kubernetes',)
-        for service in expected_services:
-            api.read_namespaced_service(service, 'default')
-
-    @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
-    def test_list_endpoints(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
-        api = core_v1_api.CoreV1Api(client)
-
-        endpoints = api.list_endpoints_for_all_namespaces()
-        self.assertTrue(len(endpoints.items) > 0)
-
-    @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
-    def test_create_deployment(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
-        api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
-        name = 'nginx-deployment-' + str(uuid.uuid4())
-        deployment = '''apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: %s
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.7.9
-        ports:
-        - containerPort: 80
-'''
-        resp = api.create_namespaced_deployment(
-            body=yaml.load(deployment % name),
-            namespace="default")
-        resp = api.read_namespaced_deployment(name, 'default')
-        self.assertIsNotNone(resp)
-
-    @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
+        base.is_k8s_running(), "Kubernetes is not available")
     def test_pod_apis(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
@@ -129,7 +51,7 @@ spec:
                                          namespace='default')
 
     @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
+        base.is_k8s_running(), "Kubernetes is not available")
     def test_service_apis(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
@@ -170,7 +92,7 @@ spec:
                                              namespace='default')
 
     @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
+        base.is_k8s_running(), "Kubernetes is not available")
     def test_replication_controller_apis(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
@@ -205,7 +127,7 @@ spec:
             name=name, body={}, namespace='default')
 
     @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
+        base.is_k8s_running(), "Kubernetes is not available")
     def test_configmap_apis(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
@@ -243,7 +165,7 @@ spec:
         self.assertEqual([], resp.items)
 
     @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
+        base.is_k8s_running(), "Kubernetes is not available")
     def test_node_apis(self):
         client = api_client.ApiClient('http://127.0.0.1:8080/')
         api = core_v1_api.CoreV1Api(client)
@@ -252,37 +174,3 @@ spec:
             node = api.read_node(name=item.metadata.name)
             self.assertTrue(len(node.metadata.labels) > 0)
             self.assertTrue(isinstance(node.metadata.labels, dict))
-
-    @unittest.skipUnless(
-        _is_k8s_running(), "Kubernetes is not available")
-    def test_create_daemonset(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
-        api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
-        name = 'nginx-app-' + str(uuid.uuid4())
-        daemonset = {
-            'apiVersion': 'extensions/v1beta1',
-            'kind': 'DaemonSet',
-            'metadata': {
-                'labels': {'app': 'nginx'},
-                'name': '%s' % name,
-            },
-            'spec': {
-                'template': {
-                    'metadata': {
-                        'labels': {'app': 'nginx'},
-                        'name': name},
-                    'spec': {
-                        'containers': [
-                            {'name': 'nginx-app',
-                             'image': 'nginx:1.10'},
-                        ],
-                    },
-                },
-                'updateStrategy': {
-                    'type': 'RollingUpdate',
-                },
-            }
-        }
-        resp = api.create_namespaced_daemon_set('default', body=daemonset)
-        resp = api.read_namespaced_daemon_set(name, 'default')
-        self.assertIsNotNone(resp)
