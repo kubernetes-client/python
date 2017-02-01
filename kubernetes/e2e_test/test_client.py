@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import time
 import unittest
 import uuid
 
@@ -34,22 +35,49 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient(self.API_URL, config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
-        name = 'test-' + str(uuid.uuid4())
-        pod_manifest = {'apiVersion': 'v1',
-                        'kind': 'Pod',
-                        'metadata': {'color': 'blue', 'name': name},
-                        'spec': {'containers': [{'image': 'dockerfile/redis',
-                                                 'name': 'redis'}]}}
+        name = 'busybox-test-' + str(uuid.uuid4())
+        pod_manifest = {
+            'apiVersion': 'v1',
+            'kind': 'Pod',
+            'metadata': {
+                'name': name
+            },
+            'spec': {
+                'containers': [{
+                    'image': 'busybox',
+                    'name': 'sleep',
+                    "args": [
+                        "/bin/sh",
+                        "-c",
+                        "while true;do date;sleep 5; done"
+                    ]
+                }]
+            }
+        }
 
         resp = api.create_namespaced_pod(body=pod_manifest,
                                          namespace='default')
         self.assertEqual(name, resp.metadata.name)
         self.assertTrue(resp.status.phase)
 
-        resp = api.read_namespaced_pod(name=name,
-                                       namespace='default')
-        self.assertEqual(name, resp.metadata.name)
-        self.assertTrue(resp.status.phase)
+        while True:
+            resp = api.read_namespaced_pod(name=name,
+                                           namespace='default')
+            self.assertEqual(name, resp.metadata.name)
+            self.assertTrue(resp.status.phase)
+            if resp.status.phase != 'Pending':
+                break
+            time.sleep(1)
+
+        exec_command = ['/bin/sh',
+                        '-c',
+                        'for i in $(seq 1 3); do date; sleep 1; done']
+        resp = api.connect_get_namespaced_pod_exec(name, 'default',
+                                                   command=exec_command,
+                                                   stderr=False, stdin=False,
+                                                   stdout=True, tty=False)
+        print('EXEC response : %s' % resp)
+        self.assertEqual(3, len(resp.splitlines()))
 
         number_of_pods = len(api.list_pod_for_all_namespaces().items)
         self.assertTrue(number_of_pods > 0)

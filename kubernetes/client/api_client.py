@@ -21,6 +21,7 @@ Copyright 2016 SmartBear Software
 from __future__ import absolute_import
 
 from . import models
+from . import ws_client
 from .rest import RESTClientObject
 from .rest import ApiException
 
@@ -343,6 +344,15 @@ class ApiClient(object):
         """
         Makes the HTTP request using RESTClient.
         """
+        # FIXME(dims) : We need a better way to figure out which
+        # calls end up using web sockets
+        if url.endswith('/exec') and method == "GET":
+            return ws_client.GET(self.config,
+                                 url,
+                                 query_params=query_params,
+                                 _request_timeout=_request_timeout,
+                                 headers=headers)
+
         if method == "GET":
             return self.rest_client.GET(url,
                                         query_params=query_params,
