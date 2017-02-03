@@ -18,15 +18,22 @@ import yaml
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import extensions_v1beta1_api
+from kubernetes.client.configuration import configuration
 from kubernetes.client.models import v1_delete_options
 from kubernetes.e2e_test import base
 
 
 class TestClientExtensions(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.API_URL = 'http://127.0.0.1:8080/'
+        cls.config = configuration
+
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_create_deployment(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
         name = 'nginx-deployment-' + str(uuid.uuid4())
         deployment = '''apiVersion: extensions/v1beta1
@@ -58,7 +65,7 @@ spec:
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_create_daemonset(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
         name = 'nginx-app-' + str(uuid.uuid4())
         daemonset = {
@@ -91,3 +98,11 @@ spec:
 
         options = v1_delete_options.V1DeleteOptions()
         resp = api.delete_namespaced_daemon_set(name, 'default', body=options)
+
+
+class TestClientExtensionsSSL(TestClientExtensions):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.API_URL = 'https://127.0.0.1:8443/'
+        cls.config = base.setSSLConfiguration()

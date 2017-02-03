@@ -13,8 +13,14 @@ env:
   - TOXENV=docs
   - TOXENV=coverage,codecov
 
+before_install:
+  - sudo add-apt-repository ppa:0k53d-karl-f830m/hitch -y
+  - sudo apt-get -qq update
+  - sudo apt-get install hitch
+
 install:
   - pip install tox
+  - hitch --frontend=[*]:8443 --backend=[localhost]:8080 --daemon $TRAVIS_BUILD_DIR/scripts/example.pem
 
 script:
   - tox
