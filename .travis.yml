@@ -13,6 +13,9 @@ env:
   - TOXENV=docs
   - TOXENV=coverage,codecov
 
+# We use hitch (https://hitch-tls.org/) to setup TLS proxy from 8443 to 8080. while hitch is
+# in the ubuntu xenial main repos, it's not available by default on trusty. So we use the 
+# ppa from here : https://launchpad.net/~0k53d-karl-f830m/+archive/ubuntu/hitch
 before_install:
   - sudo add-apt-repository ppa:0k53d-karl-f830m/hitch -y
   - sudo apt-get -qq update
