@@ -10,8 +10,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import copy
+import os
 import urllib3
 
+from kubernetes.client.configuration import configuration
 
 def is_k8s_running():
     try:
@@ -19,3 +22,11 @@ def is_k8s_running():
         return True
     except urllib3.exceptions.HTTPError:
         return False
+
+
+def setSSLConfiguration():
+    config = copy.copy(configuration)
+    config.verify_ssl = True
+    config.ssl_ca_cert = os.path.dirname(__file__) + '/../../scripts/example.pem'
+    config.assert_hostname = False
+    return config

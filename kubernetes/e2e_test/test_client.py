@@ -17,14 +17,21 @@ import uuid
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
+from kubernetes.client.configuration import configuration
 from kubernetes.e2e_test import base
 
 
 class TestClient(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.API_URL = 'http://127.0.0.1:8080/'
+        cls.config = configuration
+
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_pod_apis(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'test-' + str(uuid.uuid4())
@@ -53,7 +60,7 @@ class TestClient(unittest.TestCase):
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_service_apis(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'frontend-' + str(uuid.uuid4())
@@ -94,7 +101,7 @@ class TestClient(unittest.TestCase):
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_replication_controller_apis(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'frontend-' + str(uuid.uuid4())
@@ -129,7 +136,7 @@ class TestClient(unittest.TestCase):
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_configmap_apis(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'test-configmap-' + str(uuid.uuid4())
@@ -167,10 +174,18 @@ class TestClient(unittest.TestCase):
     @unittest.skipUnless(
         base.is_k8s_running(), "Kubernetes is not available")
     def test_node_apis(self):
-        client = api_client.ApiClient('http://127.0.0.1:8080/')
+        client = api_client.ApiClient(self.API_URL, config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         for item in api.list_node().items:
             node = api.read_node(name=item.metadata.name)
             self.assertTrue(len(node.metadata.labels) > 0)
             self.assertTrue(isinstance(node.metadata.labels, dict))
+
+
+class TestClientSSL(TestClient):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.API_URL = 'https://127.0.0.1:8443/'
+        cls.config = base.setSSLConfiguration()
