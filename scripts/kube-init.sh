@@ -20,7 +20,7 @@ function clean_exit(){
     local error_code="$?"
     local spawned=$(jobs -p)
     if [ -n "$spawned" ]; then
-        kill $(jobs -p)
+        sudo kill $(jobs -p)
     fi
     return $error_code
 }
@@ -49,75 +49,48 @@ sudo systemctl start docker.service --ignore-dependencies
 echo "Checking docker service"
 sudo docker ps
 
-# Run the docker containers for kubernetes
-echo "Starting Kubernetes containers"
-sudo docker run \
-    --volume=/:/rootfs:ro \
-    --volume=/sys:/sys:ro \
-    --volume=/var/lib/docker/:/var/lib/docker:rw \
-    --volume=/var/lib/kubelet/:/var/lib/kubelet:rw \
-    --volume=/var/run:/var/run:rw \
-    --net=host \
-    --pid=host \
-    --privileged=true \
-    --name=kubelet \
-    -d \
-    gcr.io/google_containers/hyperkube-amd64:${K8S_VERSION} \
-    /hyperkube kubelet \
-        --containerized \
-        --hostname-override="127.0.0.1" \
-        --address="0.0.0.0" \
-        --api-servers=http://localhost:8080 \
-        --config=/etc/kubernetes/manifests \
-        --allow-privileged=true --v=2
-
-
 echo "Download Kubernetes CLI"
 wget -O kubectl "http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
-chmod 755 kubectl
-./kubectl get nodes
+sudo chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
 
-set +x
-echo "Waiting for master components to start..."
-for i in {1..300}
-do
-    running_count=$(./kubectl -s=http://127.0.0.1:8080 get pods --no-headers 2>/dev/null | grep "Running" | wc -l)
-    # We expect to have 3 running pods - etcd, master and kube-proxy.
-    if [ "$running_count" -ge 3 ]; then
-      break
-    fi
-    echo -n "."
-    sleep 1
-done
-set -x
+echo "Download localkube from minikube project"
+wget -O localkube "https://storage.googleapis.com/minikube/k8sReleases/v1.6.0-alpha.0/localkube-linux-amd64"
+sudo chmod +x localkube
+sudo mv localkube /usr/local/bin/
 
-echo "SUCCESS"
-echo "Cluster created!"
-echo ""
+echo "Starting localkube"
+sudo nohup localkube --logtostderr=true --enable-dns=false > localkube.log 2>&1 &
+
+echo "Waiting for localkube to start..."
+if ! timeout 120 sh -c "while ! curl -ks https://127.0.0.1:8443/ >/dev/null; do sleep 1; done"; then
+    sudo cat localkube.log
+    die $LINENO "localkube did not start"
+fi
 
 echo "Dump Kubernetes Objects..."
-./kubectl -s=http://127.0.0.1:8080 get componentstatuses
-./kubectl -s=http://127.0.0.1:8080 get configmaps
-./kubectl -s=http://127.0.0.1:8080 get daemonsets
-./kubectl -s=http://127.0.0.1:8080 get deployments
-./kubectl -s=http://127.0.0.1:8080 get events
-./kubectl -s=http://127.0.0.1:8080 get endpoints
-./kubectl -s=http://127.0.0.1:8080 get horizontalpodautoscalers
-./kubectl -s=http://127.0.0.1:8080 get ingress
-./kubectl -s=http://127.0.0.1:8080 get jobs
-./kubectl -s=http://127.0.0.1:8080 get limitranges
-./kubectl -s=http://127.0.0.1:8080 get nodes
-./kubectl -s=http://127.0.0.1:8080 get namespaces
-./kubectl -s=http://127.0.0.1:8080 get pods
-./kubectl -s=http://127.0.0.1:8080 get persistentvolumes
-./kubectl -s=http://127.0.0.1:8080 get persistentvolumeclaims
-./kubectl -s=http://127.0.0.1:8080 get quota
-./kubectl -s=http://127.0.0.1:8080 get resourcequotas
-./kubectl -s=http://127.0.0.1:8080 get replicasets
-./kubectl -s=http://127.0.0.1:8080 get replicationcontrollers
-./kubectl -s=http://127.0.0.1:8080 get secrets
-./kubectl -s=http://127.0.0.1:8080 get serviceaccounts
-./kubectl -s=http://127.0.0.1:8080 get services
+kubectl get componentstatuses
+kubectl get configmaps
+kubectl get daemonsets
+kubectl get deployments
+kubectl get events
+kubectl get endpoints
+kubectl get horizontalpodautoscalers
+kubectl get ingress
+kubectl get jobs
+kubectl get limitranges
+kubectl get nodes
+kubectl get namespaces
+kubectl get pods
+kubectl get persistentvolumes
+kubectl get persistentvolumeclaims
+kubectl get quota
+kubectl get resourcequotas
+kubectl get replicasets
+kubectl get replicationcontrollers
+kubectl get secrets
+kubectl get serviceaccounts
+kubectl get services
 
 
 echo "Running tests..."

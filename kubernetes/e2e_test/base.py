@@ -12,21 +12,34 @@
 
 import copy
 import os
+import unittest
 import urllib3
 
 from kubernetes.client.configuration import configuration
+from kubernetes.config import kube_config
 
-def is_k8s_running():
-    try:
-        urllib3.PoolManager().request('GET', '127.0.0.1:8080')
-        return True
-    except urllib3.exceptions.HTTPError:
-        return False
+DEFAULT_E2E_HOST = '127.0.0.1'
 
 
-def setSSLConfiguration():
+def get_e2e_configuration():
     config = copy.copy(configuration)
-    config.verify_ssl = True
-    config.ssl_ca_cert = os.path.dirname(__file__) + '/../../scripts/example.pem'
-    config.assert_hostname = False
+    config.host = None
+    if os.path.exists(
+            os.path.expanduser(kube_config.KUBE_CONFIG_DEFAULT_LOCATION)):
+        kube_config.load_kube_config(client_configuration=config)
+    else:
+        print('Unable to load config from %s' %
+              kube_config.KUBE_CONFIG_DEFAULT_LOCATION)
+        for url in ['https://%s:8443' % DEFAULT_E2E_HOST,
+                    'http://%s:8080' % DEFAULT_E2E_HOST]:
+            try:
+                urllib3.PoolManager().request('GET', url)
+                config.host = url
+                config.verify_ssl = False
+                break
+            except urllib3.exceptions.HTTPError:
+                pass
+    if config.host is None:
+        raise unittest.SkipTest('Unable to find a running Kubernetes instance')
+    print('Running test against : %s' % config.host)
     return config
