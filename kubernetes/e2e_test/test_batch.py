@@ -17,7 +17,6 @@ import uuid
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import batch_v1_api
-from kubernetes.client.configuration import configuration
 from kubernetes.e2e_test import base
 
 
@@ -25,13 +24,11 @@ class TestClientBatch(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.API_URL = 'http://127.0.0.1:8080/'
-        cls.config = configuration
+        cls.config = base.get_e2e_configuration()
 
-    @unittest.skipUnless(
-        base.is_k8s_running(), "Kubernetes is not available")
+
     def test_job_apis(self):
-        client = api_client.ApiClient(self.API_URL, config=self.config)
+        client = api_client.ApiClient(config=self.config)
         api = batch_v1_api.BatchV1Api(client)
 
         name = 'test-job-' + str(uuid.uuid4())
@@ -60,11 +57,3 @@ class TestClientBatch(unittest.TestCase):
 
         resp = api.delete_namespaced_job(
             name=name, body={}, namespace='default')
-
-
-class TestClientBatchSSL(TestClientBatch):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.API_URL = 'https://127.0.0.1:8443/'
-        cls.config = base.setSSLConfiguration()
