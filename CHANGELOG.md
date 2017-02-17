@@ -1,3 +1,6 @@
+# v1.0.0b2
+- Support exec calls in both interactive and non-interactive mode #58
+
 # v1.0.0b1
 
 - Support insecure-skip-tls-verify config flag #99
