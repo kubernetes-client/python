@@ -1,3 +1,15 @@
+# v1.0.0b2
+- Support exec calls in both interactive and non-interactive mode #58
+
+# v1.0.0b1
+
+- Support insecure-skip-tls-verify config flag #99
+- Added example for using yaml files as models #63
+- Added end to end tests #41, #94
+- Bugfix: Fix ValueError in list_namespaced_config_map #104
+- Bugfix: Export missing models #101
+- Bugfix: Patch operations #93
+
 # v1.0.0a5
 
 - Bugfix: Missing fields in some models #85, kubernetes/kubernetes#39465

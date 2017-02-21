@@ -95,13 +95,20 @@ class RESTClientObject(object):
         # key file
         key_file = config.key_file
 
+        kwargs = {
+            'num_pools': pools_size,
+            'cert_reqs': cert_reqs,
+            'ca_certs': ca_certs,
+            'cert_file': cert_file,
+            'key_file': key_file,
+        }
+
+        if config.assert_hostname is not None:
+            kwargs['assert_hostname'] = config.assert_hostname
+
         # https pool manager
         self.pool_manager = urllib3.PoolManager(
-            num_pools=pools_size,
-            cert_reqs=cert_reqs,
-            ca_certs=ca_certs,
-            cert_file=cert_file,
-            key_file=key_file
+            **kwargs
         )
 
     def request(self, method, url, query_params=None, headers=None,

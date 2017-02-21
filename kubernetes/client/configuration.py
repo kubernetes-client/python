@@ -85,6 +85,9 @@ class ConfigurationObject(object):
         self.cert_file = None
         # client key file
         self.key_file = None
+        # check host name
+        # Set this to True/False to enable/disable SSL hostname verification.
+        self.assert_hostname = None
 
     @property
     def logger_file(self):

@@ -1,9 +1,9 @@
 certifi >= 14.05.14
-six == 1.8.0
+six>=1.9.0
 python_dateutil >= 2.5.3
 setuptools >= 21.0.0
 urllib3 >= 1.19.1
 pyyaml >= 3.12
 oauth2client >= 4.0.0
 ipaddress >= 1.0.17
-
+websocket-client>=0.32.0
