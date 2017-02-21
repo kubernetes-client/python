@@ -347,12 +347,12 @@ class ApiClient(object):
         # FIXME(dims) : We need a better way to figure out which
         # calls end up using web sockets
         if url.endswith('/exec') and (method == "GET" or method == "POST"):
-            return ws_client.GET(self.config,
-                                 url,
-                                 query_params=query_params,
-                                 _request_timeout=_request_timeout,
-                                 headers=headers)
-
+            return ws_client.websocket_call(self.config,
+                                            url,
+                                            query_params=query_params,
+                                            _request_timeout=_request_timeout,
+                                            _preload_content=_preload_content,
+                                            headers=headers)
         if method == "GET":
             return self.rest_client.GET(url,
                                         query_params=query_params,

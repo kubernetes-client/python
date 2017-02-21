@@ -18,8 +18,12 @@ import uuid
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
-from kubernetes.client.configuration import configuration
 from kubernetes.e2e_test import base
+
+
+def short_uuid():
+    id = str(uuid.uuid4())
+    return id[-12:]
 
 
 class TestClient(unittest.TestCase):
@@ -32,7 +36,7 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient(config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
-        name = 'busybox-test-' + str(uuid.uuid4())
+        name = 'busybox-test-' + short_uuid()
         pod_manifest = {
             'apiVersion': 'v1',
             'kind': 'Pod',
@@ -68,7 +72,7 @@ class TestClient(unittest.TestCase):
 
         exec_command = ['/bin/sh',
                         '-c',
-                        'for i in $(seq 1 3); do date; sleep 1; done']
+                        'for i in $(seq 1 3); do date; done']
         resp = api.connect_get_namespaced_pod_exec(name, 'default',
                                                    command=exec_command,
                                                    stderr=False, stdin=False,
@@ -78,11 +82,28 @@ class TestClient(unittest.TestCase):
 
         exec_command = 'uptime'
         resp = api.connect_post_namespaced_pod_exec(name, 'default',
-                                                   command=exec_command,
-                                                   stderr=False, stdin=False,
-                                                   stdout=True, tty=False)
+                                                    command=exec_command,
+                                                    stderr=False, stdin=False,
+                                                    stdout=True, tty=False)
         print('EXEC response : %s' % resp)
         self.assertEqual(1, len(resp.splitlines()))
+
+        resp = api.connect_post_namespaced_pod_exec(name, 'default',
+                                                    command='/bin/sh',
+                                                    stderr=True, stdin=True,
+                                                    stdout=True, tty=False,
+                                                    _preload_content=False)
+        resp.write_stdin("echo test string 1\n")
+        line = resp.readline_stdout(timeout=5)
+        self.assertFalse(resp.peek_stderr())
+        self.assertEqual("test string 1", line)
+        resp.write_stdin("echo test string 2 >&2\n")
+        line = resp.readline_stderr(timeout=5)
+        self.assertFalse(resp.peek_stdout())
+        self.assertEqual("test string 2", line)
+        resp.write_stdin("exit\n")
+        resp.update(timeout=5)
+        self.assertFalse(resp.is_open())
 
         number_of_pods = len(api.list_pod_for_all_namespaces().items)
         self.assertTrue(number_of_pods > 0)
@@ -94,7 +115,7 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient(config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
-        name = 'frontend-' + str(uuid.uuid4())
+        name = 'frontend-' + short_uuid()
         service_manifest = {'apiVersion': 'v1',
                             'kind': 'Service',
                             'metadata': {'labels': {'name': name},
@@ -133,7 +154,7 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient(config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
-        name = 'frontend-' + str(uuid.uuid4())
+        name = 'frontend-' + short_uuid()
         rc_manifest = {
             'apiVersion': 'v1',
             'kind': 'ReplicationController',
@@ -166,7 +187,7 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient(config=self.config)
         api = core_v1_api.CoreV1Api(client)
 
-        name = 'test-configmap-' + str(uuid.uuid4())
+        name = 'test-configmap-' + short_uuid()
         test_configmap = {
             "kind": "ConfigMap",
             "apiVersion": "v1",
@@ -195,7 +216,7 @@ class TestClient(unittest.TestCase):
         resp = api.delete_namespaced_config_map(
             name=name, body={}, namespace='default')
 
-        resp = api.list_namespaced_config_map('kube-system', pretty=True)
+        resp = api.list_namespaced_config_map('default', pretty=True)
         self.assertEqual([], resp.items)
 
     def test_node_apis(self):
