@@ -18,8 +18,7 @@ should be on the same branch. To update an existing branch:
 export RELEASE_BRANCH=release-x.x
 git checkout RELEASE_BRANCH
 git fetch upstream
-git pull upstream/master
-git push origin RELEASE_BRANCH
+git pull upstream master
 ```
 
 You may need to fix some conflicts. For auto-generated files, you can commit
@@ -46,9 +45,11 @@ need to update:
 CLIENT_VERSION: Client version should follow x.y.zDn where x,y,z are version
 numbers (integers) and D is one of "a" for alpha or "b" for beta and n is the
 pre-release number. For a final release, "Dn" part should be omitted. Examples:
-1.0.0a1, 2.0.1b2, 1.5.1
+1.0.0a1, 2.0.1b2, 1.5.1.
+
 SPEC_VERSION: This would be the kubernetes OpenAPI spec version. It should be
 deprecated after kubernetes/kubernetes#37055 takes effect.
+
 DEVELOPMENT_STATUS: Update it to one of the values of "Development Status"
 in [this list](https://pypi.python.org/pypi?%3Aaction=list_classifiers).
 
@@ -106,7 +107,7 @@ python setup.py bdist_wheel --universal
 ls dist/
 ```
 
-You should see two files in dist folder. kubernetes*.whl and kubernetes*.tar.gz.
+You should see two files in dist folder. kubernetes\*.whl and kubernetes\*.tar.gz.
 
 TODO: We need a dry-run option an some way to test package upload process to pypi.
 
@@ -119,12 +120,11 @@ twine upload dist/*
 ## Create github release
 
 Create a gihub release by starting from
-[this page(https://github.com/kubernetes-incubator/client-python/releases).
+[this page](https://github.com/kubernetes-incubator/client-python/releases).
 Click Deaft new release button. Name the tag the same as CLIENT_VERSION. Change
-the target branch to "release-x.y"
+the target branch to "release-x.y". If the release is a pre-release, check the
+`This is a pre-release` option.
 
-
-ref: https://packaging.python.org/distributing/
 
 ## Cleanup
 
@@ -134,3 +134,6 @@ rm -rf .release
 ```
 
 TODO: Convert steps in this document to an (semi-) automated script.
+
+
+ref: https://packaging.python.org/distributing/
