@@ -1,3 +1,6 @@
+# v1.0.0b3
+- Bugfix: Missing websocket dependency #131
+
 # v1.0.0b2
 - Support exec calls in both interactive and non-interactive mode #58
 
