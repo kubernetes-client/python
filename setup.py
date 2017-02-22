@@ -28,13 +28,16 @@ DEVELOPMENT_STATUS = "3 - Alpha"
 # http://pypi.python.org/pypi/setuptools
 
 REQUIRES = [
-    "urllib3 >= 1.19",
-    "six >= 1.10",
     "certifi",
+    "ipaddress",
+    "oauth2client",
+    "setuptools",
+    "six",
+    "urllib3",
     "python-dateutil",
     "pyyaml",
-    "oauth2client",
-    "ipaddress"]
+    "websocket-client",
+]
 
 setup(
     name=PACKAGE_NAME,
