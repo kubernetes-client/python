@@ -168,11 +168,13 @@ class WSClient:
                 data = frame.data
                 if six.PY3:
                     data = data.decode("utf-8")
-                self._all += data
                 if len(data) > 1:
                     channel = ord(data[0])
                     data = data[1:]
                     if data:
+                        # keeping all messages in the order they received for
+                        # non-blocking call.
+                        self._all += data
                         if channel not in self._channels:
                             self._channels[channel] = data
                         else:
