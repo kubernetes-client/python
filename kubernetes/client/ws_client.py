@@ -191,6 +191,14 @@ class WSClient:
             while self.is_open():
                 self.update(timeout=None)
 
+    def close(self, **kwargs):
+        """
+        close websocket connection.
+        """
+        self._connected = False
+        if self.sock:
+            self.sock.close(**kwargs)
+
 
 WSResponse = collections.namedtuple('WSResponse', ['data'])
 
