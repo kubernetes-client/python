@@ -16,8 +16,9 @@ should be on the same branch. To update an existing branch:
 
 ```bash
 export RELEASE_BRANCH=release-x.x
-git checkout RELEASE_BRANCH
+git checkout $RELEASE_BRANCH
 git fetch upstream
+git rebase upstream/$RELEASE_BRANCH
 git pull upstream master
 ```
 
@@ -64,7 +65,7 @@ and commit changes (should be only version number changes) to the release branch
 Name the commit something like "Update version constants for XXX release".
 
 ```bash
-git push upstream RELEASE_BRANCH
+git push upstream $RELEASE_BRANCH
 ```
 
 ## Make distribution packages
