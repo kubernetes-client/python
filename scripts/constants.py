@@ -19,17 +19,17 @@ KUBERNETES_BRANCH = "release-1.5"
 
 # Spec version will be set in downloaded spec and all
 # generated code will refer to it.
-SPEC_VERSION = "v1.5.1"
+SPEC_VERSION = "v1.5.3"
 
 # client version for packaging and releasing. It can
 # be different than SPEC_VERSION.
-CLIENT_VERSION = "1.0.0b3"
+CLIENT_VERSION = "1.0.0"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
 
 # Stage of development, mainly used in setup.py's classifiers.
-DEVELOPMENT_STATUS = "4 - Beta"
+DEVELOPMENT_STATUS = "5 - Production/Stable"
 
 
 # If called directly, return the constant value given
