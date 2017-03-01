@@ -1,3 +1,7 @@
+# v1.0.0
+- Bugfix: blocking exec call should remove channel metadata #140
+- Add close method to websocket api of interactive exec #145
+
 # v1.0.0b3
 - Bugfix: Missing websocket-client dependency #131
 
