@@ -87,3 +87,25 @@ Participation in the Kubernetes community is governed by the [CNCF Code of Condu
 This is a [Kubernetes Incubator project](https://github.com/kubernetes/community/blob/master/incubator.md). 
 
 * [SIG: sig-api-machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery)
+
+
+## Troubleshooting
+
+### SSLError on macOS
+
+If you get an SSLError, you likely need to update your version of python. The
+version that ships with macOS may not be supported.
+
+Install the latest version of python with [brew](https://brew.sh/):
+
+```
+brew install python
+```
+
+Once installed, you can query the version of OpenSSL like so:
+
+```
+python -c "import ssl; print ssl.OPENSSL_VERSION"
+```
+
+You'll need a version with OpenSSL version 1.0.0 or later.
