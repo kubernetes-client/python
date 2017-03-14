@@ -109,3 +109,9 @@ python -c "import ssl; print ssl.OPENSSL_VERSION"
 ```
 
 You'll need a version with OpenSSL version 1.0.0 or later.
+
+### Hostname doesn't match
+
+If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt). 
+Specifically check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
+
