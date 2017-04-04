@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_namespaced_local_subject_access_review**
-> V1beta1LocalSubjectAccessReview create_namespaced_local_subject_access_review(body, namespace, pretty=pretty)
+> V1beta1LocalSubjectAccessReview create_namespaced_local_subject_access_review(namespace, body, pretty=pretty)
 
 
 
@@ -32,12 +32,12 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.AuthorizationV1beta1Api()
-body = kubernetes.client.V1beta1LocalSubjectAccessReview() # V1beta1LocalSubjectAccessReview | 
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.V1beta1LocalSubjectAccessReview() # V1beta1LocalSubjectAccessReview | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_namespaced_local_subject_access_review(body, namespace, pretty=pretty)
+    api_response = api_instance.create_namespaced_local_subject_access_review(namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AuthorizationV1beta1Api->create_namespaced_local_subject_access_review: %s\n" % e)
@@ -47,8 +47,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1beta1LocalSubjectAccessReview**](V1beta1LocalSubjectAccessReview.md)|  | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**V1beta1LocalSubjectAccessReview**](V1beta1LocalSubjectAccessReview.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_api_resources**
-> UnversionedAPIResourceList get_api_resources()
+> V1APIResourceList get_api_resources()
 
 
 
@@ -209,7 +209,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UnversionedAPIResourceList**](UnversionedAPIResourceList.md)
+[**V1APIResourceList**](V1APIResourceList.md)
 
 ### Authorization
 

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_api_group**
-> UnversionedAPIGroup get_api_group()
+> V1APIGroup get_api_group()
 
 
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UnversionedAPIGroup**](UnversionedAPIGroup.md)
+[**V1APIGroup**](V1APIGroup.md)
 
 ### Authorization
 
