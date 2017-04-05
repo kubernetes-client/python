@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_api_resources**
-> UnversionedAPIResourceList get_api_resources()
+> V1APIResourceList get_api_resources()
 
 
 
@@ -97,7 +97,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UnversionedAPIResourceList**](UnversionedAPIResourceList.md)
+[**V1APIResourceList**](V1APIResourceList.md)
 
 ### Authorization
 

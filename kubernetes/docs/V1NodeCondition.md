@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**last_heartbeat_time** | [**UnversionedTime**](UnversionedTime.md) | Last time we got an update on a given condition. | [optional] 
-**last_transition_time** | [**UnversionedTime**](UnversionedTime.md) | Last time the condition transit from one status to another. | [optional] 
+**last_heartbeat_time** | [**V1Time**](V1Time.md) | Last time we got an update on a given condition. | [optional] 
+**last_transition_time** | [**V1Time**](V1Time.md) | Last time the condition transit from one status to another. | [optional] 
 **message** | **str** | Human readable message indicating details about last transition. | [optional] 
 **reason** | **str** | (brief) reason for the condition&#39;s last transition. | [optional] 
 **status** | **str** | Status of the condition, one of True, False, Unknown. | 

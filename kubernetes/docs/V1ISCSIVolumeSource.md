@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **iqn** | **str** | Target iSCSI Qualified Name. | 
 **iscsi_interface** | **str** | Optional: Defaults to &#39;default&#39; (tcp). iSCSI interface name that uses an iSCSI transport. | [optional] 
 **lun** | **int** | iSCSI target lun number. | 
+**portals** | **list[str]** | iSCSI target portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | [optional] 
 **read_only** | **bool** | ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. | [optional] 
 **target_portal** | **str** | iSCSI target portal. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | 
 
