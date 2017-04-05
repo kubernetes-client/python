@@ -23,7 +23,7 @@ SPEC_VERSION = "v1.6.1"
 
 # client version for packaging and releasing. It can
 # be different than SPEC_VERSION.
-CLIENT_VERSION = "2.0.0-snapshot"
+CLIENT_VERSION = "2.0.0a1"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
