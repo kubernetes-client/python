@@ -62,7 +62,7 @@ class V2alpha1CronJobSpec(object):
     def concurrency_policy(self):
         """
         Gets the concurrency_policy of this V2alpha1CronJobSpec.
-        ConcurrencyPolicy specifies how to treat concurrent executions of a Job.
+        ConcurrencyPolicy specifies how to treat concurrent executions of a Job. Defaults to Allow.
 
         :return: The concurrency_policy of this V2alpha1CronJobSpec.
         :rtype: str
@@ -73,7 +73,7 @@ class V2alpha1CronJobSpec(object):
     def concurrency_policy(self, concurrency_policy):
         """
         Sets the concurrency_policy of this V2alpha1CronJobSpec.
-        ConcurrencyPolicy specifies how to treat concurrent executions of a Job.
+        ConcurrencyPolicy specifies how to treat concurrent executions of a Job. Defaults to Allow.
 
         :param concurrency_policy: The concurrency_policy of this V2alpha1CronJobSpec.
         :type: str

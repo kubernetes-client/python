@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**concurrency_policy** | **str** | ConcurrencyPolicy specifies how to treat concurrent executions of a Job. | [optional] 
+**concurrency_policy** | **str** | ConcurrencyPolicy specifies how to treat concurrent executions of a Job. Defaults to Allow. | [optional] 
 **failed_jobs_history_limit** | **int** | The number of failed finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified. | [optional] 
 **job_template** | [**V2alpha1JobTemplateSpec**](V2alpha1JobTemplateSpec.md) | JobTemplate is the object that describes the job that will be created when executing a CronJob. | 
 **schedule** | **str** | Schedule contains the schedule in Cron format, see https://en.wikipedia.org/wiki/Cron. | 

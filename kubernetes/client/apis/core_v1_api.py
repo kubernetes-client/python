@@ -14488,7 +14488,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Namespace (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Namespace
                  If the method is called asynchronously,
@@ -14515,7 +14515,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Namespace (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Namespace
                  If the method is called asynchronously,
@@ -14604,7 +14604,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Namespace (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Namespace
                  If the method is called asynchronously,
@@ -14631,7 +14631,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Namespace (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Namespace
                  If the method is called asynchronously,
@@ -14721,7 +14721,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ConfigMap (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ConfigMap
                  If the method is called asynchronously,
@@ -14749,7 +14749,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ConfigMap (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ConfigMap
                  If the method is called asynchronously,
@@ -14844,7 +14844,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Endpoints (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Endpoints
                  If the method is called asynchronously,
@@ -14872,7 +14872,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Endpoints (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Endpoints
                  If the method is called asynchronously,
@@ -14967,7 +14967,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Event (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Event
                  If the method is called asynchronously,
@@ -14995,7 +14995,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Event (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Event
                  If the method is called asynchronously,
@@ -15090,7 +15090,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the LimitRange (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1LimitRange
                  If the method is called asynchronously,
@@ -15118,7 +15118,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the LimitRange (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1LimitRange
                  If the method is called asynchronously,
@@ -15213,7 +15213,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolumeClaim (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolumeClaim
                  If the method is called asynchronously,
@@ -15241,7 +15241,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolumeClaim (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolumeClaim
                  If the method is called asynchronously,
@@ -15336,7 +15336,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolumeClaim (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolumeClaim
                  If the method is called asynchronously,
@@ -15364,7 +15364,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolumeClaim (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolumeClaim
                  If the method is called asynchronously,
@@ -15459,7 +15459,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Pod (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Pod
                  If the method is called asynchronously,
@@ -15487,7 +15487,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Pod (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Pod
                  If the method is called asynchronously,
@@ -15582,7 +15582,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Pod (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Pod
                  If the method is called asynchronously,
@@ -15610,7 +15610,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Pod (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Pod
                  If the method is called asynchronously,
@@ -15705,7 +15705,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PodTemplate (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PodTemplate
                  If the method is called asynchronously,
@@ -15733,7 +15733,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PodTemplate (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PodTemplate
                  If the method is called asynchronously,
@@ -15828,7 +15828,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicationController (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ReplicationController
                  If the method is called asynchronously,
@@ -15856,7 +15856,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicationController (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ReplicationController
                  If the method is called asynchronously,
@@ -15951,7 +15951,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicationController (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ReplicationController
                  If the method is called asynchronously,
@@ -15979,7 +15979,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicationController (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ReplicationController
                  If the method is called asynchronously,
@@ -16074,7 +16074,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ResourceQuota (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ResourceQuota
                  If the method is called asynchronously,
@@ -16102,7 +16102,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ResourceQuota (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ResourceQuota
                  If the method is called asynchronously,
@@ -16197,7 +16197,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ResourceQuota (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ResourceQuota
                  If the method is called asynchronously,
@@ -16225,7 +16225,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ResourceQuota (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ResourceQuota
                  If the method is called asynchronously,
@@ -16320,7 +16320,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Scale
                  If the method is called asynchronously,
@@ -16348,7 +16348,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Scale
                  If the method is called asynchronously,
@@ -16443,7 +16443,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Secret (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Secret
                  If the method is called asynchronously,
@@ -16471,7 +16471,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Secret (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Secret
                  If the method is called asynchronously,
@@ -16566,7 +16566,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Service (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Service
                  If the method is called asynchronously,
@@ -16594,7 +16594,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Service (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Service
                  If the method is called asynchronously,
@@ -16689,7 +16689,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ServiceAccount (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ServiceAccount
                  If the method is called asynchronously,
@@ -16717,7 +16717,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ServiceAccount (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1ServiceAccount
                  If the method is called asynchronously,
@@ -16812,7 +16812,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Service (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Service
                  If the method is called asynchronously,
@@ -16840,7 +16840,7 @@ class CoreV1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Service (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Service
                  If the method is called asynchronously,
@@ -16934,7 +16934,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Node (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Node
                  If the method is called asynchronously,
@@ -16961,7 +16961,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Node (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Node
                  If the method is called asynchronously,
@@ -17050,7 +17050,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Node (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Node
                  If the method is called asynchronously,
@@ -17077,7 +17077,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the Node (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1Node
                  If the method is called asynchronously,
@@ -17166,7 +17166,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolume (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolume
                  If the method is called asynchronously,
@@ -17193,7 +17193,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolume (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolume
                  If the method is called asynchronously,
@@ -17282,7 +17282,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolume (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolume
                  If the method is called asynchronously,
@@ -17309,7 +17309,7 @@ class CoreV1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the PersistentVolume (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1PersistentVolume
                  If the method is called asynchronously,

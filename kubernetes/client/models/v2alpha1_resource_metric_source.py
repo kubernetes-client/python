@@ -33,7 +33,7 @@ class V2alpha1ResourceMetricSource(object):
         self.swagger_types = {
             'name': 'str',
             'target_average_utilization': 'int',
-            'target_average_value': 'ResourceQuantity'
+            'target_average_value': 'str'
         }
 
         self.attribute_map = {
@@ -101,7 +101,7 @@ class V2alpha1ResourceMetricSource(object):
         targetAverageValue is the the target value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type.
 
         :return: The target_average_value of this V2alpha1ResourceMetricSource.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._target_average_value
 
@@ -112,7 +112,7 @@ class V2alpha1ResourceMetricSource(object):
         targetAverageValue is the the target value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type.
 
         :param target_average_value: The target_average_value of this V2alpha1ResourceMetricSource.
-        :type: ResourceQuantity
+        :type: str
         """
 
         self._target_average_value = target_average_value

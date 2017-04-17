@@ -32,7 +32,7 @@ class V2alpha1CronJobStatus(object):
         """
         self.swagger_types = {
             'active': 'list[V1ObjectReference]',
-            'last_schedule_time': 'V1Time'
+            'last_schedule_time': 'datetime'
         }
 
         self.attribute_map = {
@@ -73,7 +73,7 @@ class V2alpha1CronJobStatus(object):
         LastScheduleTime keeps information of when was the last time the job was successfully scheduled.
 
         :return: The last_schedule_time of this V2alpha1CronJobStatus.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_schedule_time
 
@@ -84,7 +84,7 @@ class V2alpha1CronJobStatus(object):
         LastScheduleTime keeps information of when was the last time the job was successfully scheduled.
 
         :param last_schedule_time: The last_schedule_time of this V2alpha1CronJobStatus.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_schedule_time = last_schedule_time

@@ -4,8 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **addresses** | [**list[V1NodeAddress]**](V1NodeAddress.md) | List of addresses reachable to the node. Queried from cloud provider, if available. More info: http://releases.k8s.io/HEAD/docs/admin/node.md#node-addresses | [optional] 
-**allocatable** | [**dict(str, ResourceQuantity)**](ResourceQuantity.md) | Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity. | [optional] 
-**capacity** | [**dict(str, ResourceQuantity)**](ResourceQuantity.md) | Capacity represents the total resources of a node. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity for more details. | [optional] 
+**allocatable** | **dict(str, str)** | Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity. | [optional] 
+**capacity** | **dict(str, str)** | Capacity represents the total resources of a node. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity for more details. | [optional] 
 **conditions** | [**list[V1NodeCondition]**](V1NodeCondition.md) | Conditions is an array of current observed node conditions. More info: http://releases.k8s.io/HEAD/docs/admin/node.md#node-condition | [optional] 
 **daemon_endpoints** | [**V1NodeDaemonEndpoints**](V1NodeDaemonEndpoints.md) | Endpoints of daemons running on the Node. | [optional] 
 **images** | [**list[V1ContainerImage]**](V1ContainerImage.md) | List of container images on this node | [optional] 

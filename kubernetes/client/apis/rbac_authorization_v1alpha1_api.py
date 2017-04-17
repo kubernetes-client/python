@@ -2375,7 +2375,7 @@ class RbacAuthorizationV1alpha1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the ClusterRole (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1ClusterRole
                  If the method is called asynchronously,
@@ -2402,7 +2402,7 @@ class RbacAuthorizationV1alpha1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the ClusterRole (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1ClusterRole
                  If the method is called asynchronously,
@@ -2491,7 +2491,7 @@ class RbacAuthorizationV1alpha1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the ClusterRoleBinding (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1ClusterRoleBinding
                  If the method is called asynchronously,
@@ -2518,7 +2518,7 @@ class RbacAuthorizationV1alpha1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the ClusterRoleBinding (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1ClusterRoleBinding
                  If the method is called asynchronously,
@@ -2608,7 +2608,7 @@ class RbacAuthorizationV1alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Role (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1Role
                  If the method is called asynchronously,
@@ -2636,7 +2636,7 @@ class RbacAuthorizationV1alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Role (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1Role
                  If the method is called asynchronously,
@@ -2731,7 +2731,7 @@ class RbacAuthorizationV1alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the RoleBinding (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1RoleBinding
                  If the method is called asynchronously,
@@ -2759,7 +2759,7 @@ class RbacAuthorizationV1alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the RoleBinding (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1alpha1RoleBinding
                  If the method is called asynchronously,

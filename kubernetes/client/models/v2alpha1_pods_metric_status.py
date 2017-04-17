@@ -31,7 +31,7 @@ class V2alpha1PodsMetricStatus(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'current_average_value': 'ResourceQuantity',
+            'current_average_value': 'str',
             'metric_name': 'str'
         }
 
@@ -50,7 +50,7 @@ class V2alpha1PodsMetricStatus(object):
         currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)
 
         :return: The current_average_value of this V2alpha1PodsMetricStatus.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._current_average_value
 
@@ -61,7 +61,7 @@ class V2alpha1PodsMetricStatus(object):
         currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)
 
         :param current_average_value: The current_average_value of this V2alpha1PodsMetricStatus.
-        :type: ResourceQuantity
+        :type: str
         """
         if current_average_value is None:
             raise ValueError("Invalid value for `current_average_value`, must not be `None`")

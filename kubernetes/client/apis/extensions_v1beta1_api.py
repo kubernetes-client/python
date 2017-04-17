@@ -4392,7 +4392,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1DaemonSet
                  If the method is called asynchronously,
@@ -4420,7 +4420,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1DaemonSet
                  If the method is called asynchronously,
@@ -4515,7 +4515,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1DaemonSet
                  If the method is called asynchronously,
@@ -4543,7 +4543,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1DaemonSet
                  If the method is called asynchronously,
@@ -4638,7 +4638,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Deployment
                  If the method is called asynchronously,
@@ -4666,7 +4666,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Deployment
                  If the method is called asynchronously,
@@ -4761,7 +4761,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Deployment
                  If the method is called asynchronously,
@@ -4789,7 +4789,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Deployment
                  If the method is called asynchronously,
@@ -4884,7 +4884,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Scale
                  If the method is called asynchronously,
@@ -4912,7 +4912,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Scale
                  If the method is called asynchronously,
@@ -5007,7 +5007,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1Ingress
                  If the method is called asynchronously,
@@ -5035,7 +5035,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1Ingress
                  If the method is called asynchronously,
@@ -5130,7 +5130,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1Ingress
                  If the method is called asynchronously,
@@ -5158,7 +5158,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1Ingress
                  If the method is called asynchronously,
@@ -5253,7 +5253,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1NetworkPolicy
                  If the method is called asynchronously,
@@ -5281,7 +5281,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1NetworkPolicy
                  If the method is called asynchronously,
@@ -5376,7 +5376,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ReplicaSet
                  If the method is called asynchronously,
@@ -5404,7 +5404,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ReplicaSet
                  If the method is called asynchronously,
@@ -5499,7 +5499,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ReplicaSet
                  If the method is called asynchronously,
@@ -5527,7 +5527,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ReplicaSet
                  If the method is called asynchronously,
@@ -5622,7 +5622,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Scale
                  If the method is called asynchronously,
@@ -5650,7 +5650,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Scale
                  If the method is called asynchronously,
@@ -5745,7 +5745,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Scale
                  If the method is called asynchronously,
@@ -5773,7 +5773,7 @@ class ExtensionsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1Scale
                  If the method is called asynchronously,
@@ -5867,7 +5867,7 @@ class ExtensionsV1beta1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the PodSecurityPolicy (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodSecurityPolicy
                  If the method is called asynchronously,
@@ -5894,7 +5894,7 @@ class ExtensionsV1beta1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the PodSecurityPolicy (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodSecurityPolicy
                  If the method is called asynchronously,
@@ -5983,7 +5983,7 @@ class ExtensionsV1beta1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the ThirdPartyResource (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ThirdPartyResource
                  If the method is called asynchronously,
@@ -6010,7 +6010,7 @@ class ExtensionsV1beta1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the ThirdPartyResource (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ThirdPartyResource
                  If the method is called asynchronously,

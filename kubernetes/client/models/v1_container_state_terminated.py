@@ -33,11 +33,11 @@ class V1ContainerStateTerminated(object):
         self.swagger_types = {
             'container_id': 'str',
             'exit_code': 'int',
-            'finished_at': 'V1Time',
+            'finished_at': 'datetime',
             'message': 'str',
             'reason': 'str',
             'signal': 'int',
-            'started_at': 'V1Time'
+            'started_at': 'datetime'
         }
 
         self.attribute_map = {
@@ -113,7 +113,7 @@ class V1ContainerStateTerminated(object):
         Time at which the container last terminated
 
         :return: The finished_at of this V1ContainerStateTerminated.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._finished_at
 
@@ -124,7 +124,7 @@ class V1ContainerStateTerminated(object):
         Time at which the container last terminated
 
         :param finished_at: The finished_at of this V1ContainerStateTerminated.
-        :type: V1Time
+        :type: datetime
         """
 
         self._finished_at = finished_at
@@ -205,7 +205,7 @@ class V1ContainerStateTerminated(object):
         Time at which previous execution of the container started
 
         :return: The started_at of this V1ContainerStateTerminated.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._started_at
 
@@ -216,7 +216,7 @@ class V1ContainerStateTerminated(object):
         Time at which previous execution of the container started
 
         :param started_at: The started_at of this V1ContainerStateTerminated.
-        :type: V1Time
+        :type: datetime
         """
 
         self._started_at = started_at

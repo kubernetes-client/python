@@ -33,10 +33,10 @@ class V1Event(object):
         self.swagger_types = {
             'api_version': 'str',
             'count': 'int',
-            'first_timestamp': 'V1Time',
+            'first_timestamp': 'datetime',
             'involved_object': 'V1ObjectReference',
             'kind': 'str',
-            'last_timestamp': 'V1Time',
+            'last_timestamp': 'datetime',
             'message': 'str',
             'metadata': 'V1ObjectMeta',
             'reason': 'str',
@@ -123,7 +123,7 @@ class V1Event(object):
         The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
 
         :return: The first_timestamp of this V1Event.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._first_timestamp
 
@@ -134,7 +134,7 @@ class V1Event(object):
         The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
 
         :param first_timestamp: The first_timestamp of this V1Event.
-        :type: V1Time
+        :type: datetime
         """
 
         self._first_timestamp = first_timestamp
@@ -194,7 +194,7 @@ class V1Event(object):
         The time at which the most recent occurrence of this event was recorded.
 
         :return: The last_timestamp of this V1Event.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_timestamp
 
@@ -205,7 +205,7 @@ class V1Event(object):
         The time at which the most recent occurrence of this event was recorded.
 
         :param last_timestamp: The last_timestamp of this V1Event.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_timestamp = last_timestamp

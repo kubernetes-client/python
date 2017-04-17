@@ -35,7 +35,7 @@ class V1ServicePort(object):
             'node_port': 'int',
             'port': 'int',
             'protocol': 'str',
-            'target_port': 'IntstrIntOrString'
+            'target_port': 'str'
         }
 
         self.attribute_map = {
@@ -153,7 +153,7 @@ class V1ServicePort(object):
         Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: http://kubernetes.io/docs/user-guide/services#defining-a-service
 
         :return: The target_port of this V1ServicePort.
-        :rtype: IntstrIntOrString
+        :rtype: str
         """
         return self._target_port
 
@@ -164,7 +164,7 @@ class V1ServicePort(object):
         Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: http://kubernetes.io/docs/user-guide/services#defining-a-service
 
         :param target_port: The target_port of this V1ServicePort.
-        :type: IntstrIntOrString
+        :type: str
         """
 
         self._target_port = target_port
