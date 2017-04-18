@@ -234,7 +234,7 @@ def websocket_call(configuration, url, query_params, _request_timeout,
     if isinstance(commands, list):
         for command in commands:
             url += "&command=%s&" % quote_plus(command)
-    else:
+    elif commands is not None:
         url += '&command=' + quote_plus(commands)
 
     try:
