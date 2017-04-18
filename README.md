@@ -75,6 +75,43 @@ python -m examples.example1
 
 All APIs and Models' documentation can be found at the [Generated client's README file](kubernetes/README.md)
 
+## Compatibility
+
+`client-python` follows [semver](http://semver.org/), so until the major version of
+client-python gets increased, your code will continue to work with explicitly 
+supported versions of Kubernetes clusters.
+
+#### Compatibility matrix
+
+|                         | Kubernetes 1.3 | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 |
+|-------------------------|----------------|----------------|----------------|----------------|
+| client-python 1.0       | +              | +              | ✓              | -              |
+| client-python 2.0 alpha | +              | +              | +              | ✓              |
+| client-python HEAD      | +              | +              | +              | +              |
+
+Key:
+
+* `✓` Exactly the same features / API objects in both client-python and the Kubernetes
+  version.
+* `+` client-python has features or api objects that may not be present in the
+  Kubernetes cluster, but everything they have in common will work.
+* `-` The Kubernetes cluster has features the client-python library can't use
+  (additional API objects, etc).
+
+See the [CHANGELOG](./CHANGELOG.md) for a detailed description of changes
+between client-python versions.
+
+| Client version | Canonical source for OpenAPI spec    | Maintenance status            |
+|----------------|--------------------------------------|-------------------------------|
+| 1.0 Alpha/Beta | Kubernetes main repo, 1.5 branch     | ✗                             |
+| 1.0.x          | Kubernetes main repo, 1.5 branch     | ✓                             |
+| 2.0 alpha      | Kubernetes main repo, 1.6 branch     | ✓                             |
+
+Key:
+
+* `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-incubator/client-python/issues/177)) published to client-python when they are available.
+* `✗` No longer maintained; please upgrade.
+
 ## Community, Support, Discussion
 
 You can reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery). If you have any problem with the package or any suggestions, please file an [issue](https://github.com/kubernetes-incubator/client-python/issues).

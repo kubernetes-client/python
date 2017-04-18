@@ -1,3 +1,6 @@
+# HEAD
+- Add support for attach API calls #180
+
 # v2.0.0a1
 - Update to kubernetes 1.6 spec #169
 
