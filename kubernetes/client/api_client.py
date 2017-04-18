@@ -346,7 +346,7 @@ class ApiClient(object):
         """
         # FIXME(dims) : We need a better way to figure out which
         # calls end up using web sockets
-        if url.endswith('/exec') and (method == "GET" or method == "POST"):
+        if (url.endswith('/exec') or url.endswith('/attach')) and (method == "GET" or method == "POST"):
             return ws_client.websocket_call(self.config,
                                             url,
                                             query_params=query_params,
