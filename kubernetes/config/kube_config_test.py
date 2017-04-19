@@ -108,6 +108,12 @@ class TestFileOrData(BaseTestCase):
                        data_key_name=TEST_DATA_KEY)
         self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
 
+    def test_file_given_data_no_base64(self):
+        obj = {TEST_DATA_KEY: TEST_DATA}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY, base64_file_content=False)
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
+
     def test_data_given_data(self):
         obj = {TEST_DATA_KEY: TEST_DATA_BASE64}
         t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
@@ -119,6 +125,13 @@ class TestFileOrData(BaseTestCase):
             TEST_FILE_KEY: self._create_temp_file(content=TEST_DATA)}
         t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY)
         self.assertEqual(TEST_DATA_BASE64, t.as_data())
+
+    def test_data_given_file_no_base64(self):
+        obj = {
+            TEST_FILE_KEY: self._create_temp_file(content=TEST_DATA)}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       base64_file_content=False)
+        self.assertEqual(TEST_DATA, t.as_data())
 
     def test_data_given_file_and_data(self):
         obj = {
@@ -562,7 +575,7 @@ class TestKubeConfigLoader(BaseTestCase):
             with open(os.path.join(temp_dir, "client_key"), "wb") as fd:
                 fd.write(TEST_CLIENT_KEY.encode())
             with open(os.path.join(temp_dir, "token_file"), "wb") as fd:
-                fd.write(TEST_DATA.encode())
+                fd.write(TEST_DATA_BASE64.encode())
             KubeConfigLoader(
                 config_dict=self.TEST_KUBE_CONFIG,
                 active_context="ssl-local-file",
