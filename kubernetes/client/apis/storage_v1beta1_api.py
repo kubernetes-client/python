@@ -632,7 +632,7 @@ class StorageV1beta1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the StorageClass (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1StorageClass
                  If the method is called asynchronously,
@@ -659,7 +659,7 @@ class StorageV1beta1Api(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str name: name of the StorageClass (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1StorageClass
                  If the method is called asynchronously,

@@ -325,7 +325,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.StorageV1Api()
 name = 'name_example' # str | name of the StorageClass
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -340,7 +340,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the StorageClass | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type

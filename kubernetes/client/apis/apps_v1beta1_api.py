@@ -1537,7 +1537,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: AppsV1beta1Deployment
                  If the method is called asynchronously,
@@ -1565,7 +1565,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: AppsV1beta1Deployment
                  If the method is called asynchronously,
@@ -1660,7 +1660,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: AppsV1beta1Deployment
                  If the method is called asynchronously,
@@ -1688,7 +1688,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: AppsV1beta1Deployment
                  If the method is called asynchronously,
@@ -1783,7 +1783,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: AppsV1beta1Scale
                  If the method is called asynchronously,
@@ -1811,7 +1811,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: AppsV1beta1Scale
                  If the method is called asynchronously,
@@ -1906,7 +1906,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the StatefulSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1StatefulSet
                  If the method is called asynchronously,
@@ -1934,7 +1934,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the StatefulSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1StatefulSet
                  If the method is called asynchronously,
@@ -2029,7 +2029,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the StatefulSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1StatefulSet
                  If the method is called asynchronously,
@@ -2057,7 +2057,7 @@ class AppsV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the StatefulSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1StatefulSet
                  If the method is called asynchronously,

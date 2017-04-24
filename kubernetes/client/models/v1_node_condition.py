@@ -31,8 +31,8 @@ class V1NodeCondition(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'last_heartbeat_time': 'V1Time',
-            'last_transition_time': 'V1Time',
+            'last_heartbeat_time': 'datetime',
+            'last_transition_time': 'datetime',
             'message': 'str',
             'reason': 'str',
             'status': 'str',
@@ -62,7 +62,7 @@ class V1NodeCondition(object):
         Last time we got an update on a given condition.
 
         :return: The last_heartbeat_time of this V1NodeCondition.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_heartbeat_time
 
@@ -73,7 +73,7 @@ class V1NodeCondition(object):
         Last time we got an update on a given condition.
 
         :param last_heartbeat_time: The last_heartbeat_time of this V1NodeCondition.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_heartbeat_time = last_heartbeat_time
@@ -85,7 +85,7 @@ class V1NodeCondition(object):
         Last time the condition transit from one status to another.
 
         :return: The last_transition_time of this V1NodeCondition.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_transition_time
 
@@ -96,7 +96,7 @@ class V1NodeCondition(object):
         Last time the condition transit from one status to another.
 
         :param last_transition_time: The last_transition_time of this V1NodeCondition.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_transition_time = last_transition_time

@@ -38,8 +38,6 @@ from .extensions_v1beta1_rolling_update_deployment import ExtensionsV1beta1Rolli
 from .extensions_v1beta1_scale import ExtensionsV1beta1Scale
 from .extensions_v1beta1_scale_spec import ExtensionsV1beta1ScaleSpec
 from .extensions_v1beta1_scale_status import ExtensionsV1beta1ScaleStatus
-from .intstr_int_or_string import IntstrIntOrString
-from .resource_quantity import ResourceQuantity
 from .runtime_raw_extension import RuntimeRawExtension
 from .v1_api_group import V1APIGroup
 from .v1_api_group_list import V1APIGroupList
@@ -220,7 +218,6 @@ from .v1_subject_access_review_spec import V1SubjectAccessReviewSpec
 from .v1_subject_access_review_status import V1SubjectAccessReviewStatus
 from .v1_tcp_socket_action import V1TCPSocketAction
 from .v1_taint import V1Taint
-from .v1_time import V1Time
 from .v1_token_review import V1TokenReview
 from .v1_token_review_spec import V1TokenReviewSpec
 from .v1_token_review_status import V1TokenReviewStatus

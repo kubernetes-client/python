@@ -32,7 +32,7 @@ class V1beta1IngressBackend(object):
         """
         self.swagger_types = {
             'service_name': 'str',
-            'service_port': 'IntstrIntOrString'
+            'service_port': 'str'
         }
 
         self.attribute_map = {
@@ -75,7 +75,7 @@ class V1beta1IngressBackend(object):
         Specifies the port of the referenced service.
 
         :return: The service_port of this V1beta1IngressBackend.
-        :rtype: IntstrIntOrString
+        :rtype: str
         """
         return self._service_port
 
@@ -86,7 +86,7 @@ class V1beta1IngressBackend(object):
         Specifies the port of the referenced service.
 
         :param service_port: The service_port of this V1beta1IngressBackend.
-        :type: IntstrIntOrString
+        :type: str
         """
         if service_port is None:
             raise ValueError("Invalid value for `service_port`, must not be `None`")

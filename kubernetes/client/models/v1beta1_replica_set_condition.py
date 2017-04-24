@@ -31,7 +31,7 @@ class V1beta1ReplicaSetCondition(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'last_transition_time': 'V1Time',
+            'last_transition_time': 'datetime',
             'message': 'str',
             'reason': 'str',
             'status': 'str',
@@ -59,7 +59,7 @@ class V1beta1ReplicaSetCondition(object):
         The last time the condition transitioned from one status to another.
 
         :return: The last_transition_time of this V1beta1ReplicaSetCondition.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_transition_time
 
@@ -70,7 +70,7 @@ class V1beta1ReplicaSetCondition(object):
         The last time the condition transitioned from one status to another.
 
         :param last_transition_time: The last_transition_time of this V1beta1ReplicaSetCondition.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_transition_time = last_transition_time

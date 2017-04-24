@@ -31,7 +31,7 @@ class V1TCPSocketAction(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'port': 'IntstrIntOrString'
+            'port': 'str'
         }
 
         self.attribute_map = {
@@ -47,7 +47,7 @@ class V1TCPSocketAction(object):
         Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 
         :return: The port of this V1TCPSocketAction.
-        :rtype: IntstrIntOrString
+        :rtype: str
         """
         return self._port
 
@@ -58,7 +58,7 @@ class V1TCPSocketAction(object):
         Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 
         :param port: The port of this V1TCPSocketAction.
-        :type: IntstrIntOrString
+        :type: str
         """
         if port is None:
             raise ValueError("Invalid value for `port`, must not be `None`")

@@ -40,7 +40,7 @@ class V1PodStatus(object):
             'pod_ip': 'str',
             'qos_class': 'str',
             'reason': 'str',
-            'start_time': 'V1Time'
+            'start_time': 'datetime'
         }
 
         self.attribute_map = {
@@ -281,7 +281,7 @@ class V1PodStatus(object):
         RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.
 
         :return: The start_time of this V1PodStatus.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._start_time
 
@@ -292,7 +292,7 @@ class V1PodStatus(object):
         RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.
 
         :param start_time: The start_time of this V1PodStatus.
-        :type: V1Time
+        :type: datetime
         """
 
         self._start_time = start_time

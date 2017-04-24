@@ -32,7 +32,7 @@ class V2alpha1PodsMetricSource(object):
         """
         self.swagger_types = {
             'metric_name': 'str',
-            'target_average_value': 'ResourceQuantity'
+            'target_average_value': 'str'
         }
 
         self.attribute_map = {
@@ -75,7 +75,7 @@ class V2alpha1PodsMetricSource(object):
         targetAverageValue is the target value of the average of the metric across all relevant pods (as a quantity)
 
         :return: The target_average_value of this V2alpha1PodsMetricSource.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._target_average_value
 
@@ -86,7 +86,7 @@ class V2alpha1PodsMetricSource(object):
         targetAverageValue is the target value of the average of the metric across all relevant pods (as a quantity)
 
         :param target_average_value: The target_average_value of this V2alpha1PodsMetricSource.
-        :type: ResourceQuantity
+        :type: str
         """
         if target_average_value is None:
             raise ValueError("Invalid value for `target_average_value`, must not be `None`")

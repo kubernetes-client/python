@@ -32,7 +32,7 @@ class V1ResourceFieldSelector(object):
         """
         self.swagger_types = {
             'container_name': 'str',
-            'divisor': 'ResourceQuantity',
+            'divisor': 'str',
             'resource': 'str'
         }
 
@@ -76,7 +76,7 @@ class V1ResourceFieldSelector(object):
         Specifies the output format of the exposed resources, defaults to \"1\"
 
         :return: The divisor of this V1ResourceFieldSelector.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._divisor
 
@@ -87,7 +87,7 @@ class V1ResourceFieldSelector(object):
         Specifies the output format of the exposed resources, defaults to \"1\"
 
         :param divisor: The divisor of this V1ResourceFieldSelector.
-        :type: ResourceQuantity
+        :type: str
         """
 
         self._divisor = divisor

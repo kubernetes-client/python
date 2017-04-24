@@ -31,8 +31,8 @@ class V1JobCondition(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'last_probe_time': 'V1Time',
-            'last_transition_time': 'V1Time',
+            'last_probe_time': 'datetime',
+            'last_transition_time': 'datetime',
             'message': 'str',
             'reason': 'str',
             'status': 'str',
@@ -62,7 +62,7 @@ class V1JobCondition(object):
         Last time the condition was checked.
 
         :return: The last_probe_time of this V1JobCondition.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_probe_time
 
@@ -73,7 +73,7 @@ class V1JobCondition(object):
         Last time the condition was checked.
 
         :param last_probe_time: The last_probe_time of this V1JobCondition.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_probe_time = last_probe_time
@@ -85,7 +85,7 @@ class V1JobCondition(object):
         Last time the condition transit from one status to another.
 
         :return: The last_transition_time of this V1JobCondition.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_transition_time
 
@@ -96,7 +96,7 @@ class V1JobCondition(object):
         Last time the condition transit from one status to another.
 
         :param last_transition_time: The last_transition_time of this V1JobCondition.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_transition_time = last_transition_time
