@@ -34,7 +34,7 @@ class V2alpha1HorizontalPodAutoscalerStatus(object):
             'current_metrics': 'list[V2alpha1MetricStatus]',
             'current_replicas': 'int',
             'desired_replicas': 'int',
-            'last_scale_time': 'V1Time',
+            'last_scale_time': 'datetime',
             'observed_generation': 'int'
         }
 
@@ -134,7 +134,7 @@ class V2alpha1HorizontalPodAutoscalerStatus(object):
         lastScaleTime is the last time the HorizontalPodAutoscaler scaled the number of pods, used by the autoscaler to control how often the number of pods is changed.
 
         :return: The last_scale_time of this V2alpha1HorizontalPodAutoscalerStatus.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_scale_time
 
@@ -145,7 +145,7 @@ class V2alpha1HorizontalPodAutoscalerStatus(object):
         lastScaleTime is the last time the HorizontalPodAutoscaler scaled the number of pods, used by the autoscaler to control how often the number of pods is changed.
 
         :param last_scale_time: The last_scale_time of this V2alpha1HorizontalPodAutoscalerStatus.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_scale_time = last_scale_time

@@ -1414,7 +1414,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the CronJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1442,7 +1442,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the CronJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1537,7 +1537,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the CronJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1565,7 +1565,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the CronJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1660,7 +1660,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ScheduledJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1688,7 +1688,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ScheduledJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1783,7 +1783,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ScheduledJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,
@@ -1811,7 +1811,7 @@ class BatchV2alpha1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the ScheduledJob (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V2alpha1CronJob
                  If the method is called asynchronously,

@@ -31,7 +31,7 @@ class V1beta1CertificateSigningRequestCondition(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'last_update_time': 'V1Time',
+            'last_update_time': 'datetime',
             'message': 'str',
             'reason': 'str',
             'type': 'str'
@@ -56,7 +56,7 @@ class V1beta1CertificateSigningRequestCondition(object):
         timestamp for the last update to this condition
 
         :return: The last_update_time of this V1beta1CertificateSigningRequestCondition.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._last_update_time
 
@@ -67,7 +67,7 @@ class V1beta1CertificateSigningRequestCondition(object):
         timestamp for the last update to this condition
 
         :param last_update_time: The last_update_time of this V1beta1CertificateSigningRequestCondition.
-        :type: V1Time
+        :type: datetime
         """
 
         self._last_update_time = last_update_time

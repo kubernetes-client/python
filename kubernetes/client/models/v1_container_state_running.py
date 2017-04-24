@@ -31,7 +31,7 @@ class V1ContainerStateRunning(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'started_at': 'V1Time'
+            'started_at': 'datetime'
         }
 
         self.attribute_map = {
@@ -47,7 +47,7 @@ class V1ContainerStateRunning(object):
         Time at which the container was last (re-)started
 
         :return: The started_at of this V1ContainerStateRunning.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._started_at
 
@@ -58,7 +58,7 @@ class V1ContainerStateRunning(object):
         Time at which the container was last (re-)started
 
         :param started_at: The started_at of this V1ContainerStateRunning.
-        :type: V1Time
+        :type: datetime
         """
 
         self._started_at = started_at

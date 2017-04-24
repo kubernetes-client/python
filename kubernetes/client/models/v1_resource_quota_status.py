@@ -31,8 +31,8 @@ class V1ResourceQuotaStatus(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'hard': 'dict(str, ResourceQuantity)',
-            'used': 'dict(str, ResourceQuantity)'
+            'hard': 'dict(str, str)',
+            'used': 'dict(str, str)'
         }
 
         self.attribute_map = {
@@ -50,7 +50,7 @@ class V1ResourceQuotaStatus(object):
         Hard is the set of enforced hard limits for each named resource. More info: http://releases.k8s.io/HEAD/docs/design/admission_control_resource_quota.md#admissioncontrol-plugin-resourcequota
 
         :return: The hard of this V1ResourceQuotaStatus.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._hard
 
@@ -61,7 +61,7 @@ class V1ResourceQuotaStatus(object):
         Hard is the set of enforced hard limits for each named resource. More info: http://releases.k8s.io/HEAD/docs/design/admission_control_resource_quota.md#admissioncontrol-plugin-resourcequota
 
         :param hard: The hard of this V1ResourceQuotaStatus.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._hard = hard
@@ -73,7 +73,7 @@ class V1ResourceQuotaStatus(object):
         Used is the current observed total usage of the resource in the namespace.
 
         :return: The used of this V1ResourceQuotaStatus.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._used
 
@@ -84,7 +84,7 @@ class V1ResourceQuotaStatus(object):
         Used is the current observed total usage of the resource in the namespace.
 
         :param used: The used of this V1ResourceQuotaStatus.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._used = used

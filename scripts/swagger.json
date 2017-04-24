@@ -1108,7 +1108,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -1512,7 +1513,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -1916,7 +1918,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -2320,7 +2323,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -2724,7 +2728,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -2860,7 +2865,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -3264,7 +3270,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -4330,7 +4337,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -4734,7 +4742,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -5138,7 +5147,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -5274,7 +5284,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -5410,7 +5421,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -5814,7 +5826,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -5950,7 +5963,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -6354,7 +6368,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -6758,7 +6773,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -7065,7 +7081,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -7587,7 +7604,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -7799,7 +7817,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -7985,7 +8004,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -8373,7 +8393,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -8871,7 +8892,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -9336,7 +9358,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -9464,7 +9487,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -14081,7 +14105,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -14283,7 +14308,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -14419,7 +14445,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -14823,7 +14850,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -14959,7 +14987,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -16521,7 +16550,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -16657,7 +16687,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -17333,7 +17364,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -17469,7 +17501,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -18178,7 +18211,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -18314,7 +18348,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -18990,7 +19025,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -19126,7 +19162,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -19530,7 +19567,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -19666,7 +19704,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -20529,7 +20568,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -21438,7 +21478,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -21574,7 +21615,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -21978,7 +22020,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -22180,7 +22223,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -22316,7 +22360,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -22720,7 +22765,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -22856,7 +22902,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -23260,7 +23307,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -23664,7 +23712,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -23800,7 +23849,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -23936,7 +23986,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -24072,7 +24123,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -24545,7 +24597,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -25010,7 +25063,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -26482,7 +26536,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -26618,7 +26673,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -27303,7 +27359,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -27675,7 +27732,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -28055,7 +28113,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -28443,7 +28502,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -29534,7 +29594,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -29906,7 +29967,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -30286,7 +30348,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -30674,7 +30737,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -31822,7 +31886,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -32523,7 +32588,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -33044,7 +33110,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Patch"
+              "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.",
+              "type": "object"
             }
           }
         ],
@@ -33322,11 +33389,13 @@
       "properties": {
         "maxSurge": {
           "description": "The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. By default, a value of 1 is used. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         },
         "maxUnavailable": {
           "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 1 is used. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         }
       }
     },
@@ -33366,10 +33435,6 @@
           }
         }
       }
-    },
-    "intstr.IntOrString": {
-      "type": "string",
-      "format": "int-or-string"
     },
     "v1.Lifecycle": {
       "description": "Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted.",
@@ -33683,11 +33748,13 @@
       "properties": {
         "lastTransitionTime": {
           "description": "Last time the condition transitioned from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "lastUpdateTime": {
           "description": "The last time this condition was updated.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "A human readable message indicating details about the transition.",
@@ -33829,7 +33896,8 @@
         },
         "lastScheduleTime": {
           "description": "LastScheduleTime keeps information of when was the last time the job was successfully scheduled.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -33902,7 +33970,7 @@
         },
         "currentAverageValue": {
           "description": "currentAverageValue is the the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type. It will always be set, regardless of the corresponding metric specification.",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         },
         "name": {
           "description": "name is the name of the resource in question.",
@@ -34053,14 +34121,14 @@
           "description": "Limits describes the maximum amount of compute resources allowed. More info: http://kubernetes.io/docs/user-guide/compute-resources/",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "requests": {
           "description": "Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: http://kubernetes.io/docs/user-guide/compute-resources/",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         }
       }
@@ -34290,7 +34358,7 @@
         },
         "targetValue": {
           "description": "targetValue is the target value of the metric (as a quantity).",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         }
       }
     },
@@ -34331,7 +34399,8 @@
         },
         "lastScaleTime": {
           "description": "last time the HorizontalPodAutoscaler scaled the number of pods; used by the autoscaler to control how often the number of pods is changed.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "observedGeneration": {
           "description": "most recent generation observed by this autoscaler.",
@@ -34510,7 +34579,7 @@
         },
         "targetAverageValue": {
           "description": "targetAverageValue is the the target value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type.",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         }
       }
     },
@@ -35539,9 +35608,6 @@
         }
       }
     },
-    "v1.Patch": {
-      "description": "Patch is provided to give a concrete name and type to the Kubernetes PATCH request body."
-    },
     "v1beta1.IngressList": {
       "description": "IngressList is a collection of Ingress.",
       "required": [
@@ -35798,10 +35864,6 @@
           "$ref": "#/definitions/v1.SecretProjection"
         }
       }
-    },
-    "v1.Time": {
-      "type": "string",
-      "format": "date-time"
     },
     "v1.TokenReviewSpec": {
       "description": "TokenReviewSpec is a description of the token authentication request.",
@@ -36091,7 +36153,8 @@
       "properties": {
         "port": {
           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         }
       }
     },
@@ -36671,7 +36734,8 @@
         },
         "completionTime": {
           "description": "CompletionTime represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "conditions": {
           "description": "Conditions represent the latest available observations of an object's current state. More info: http://kubernetes.io/docs/user-guide/jobs",
@@ -36687,7 +36751,8 @@
         },
         "startTime": {
           "description": "StartTime represents time when the job was acknowledged by the Job Manager. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "succeeded": {
           "description": "Succeeded is the number of pods which reached Phase Succeeded.",
@@ -36718,7 +36783,8 @@
       "properties": {
         "lastTransitionTime": {
           "description": "The last time the condition transitioned from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "A human readable message indicating details about the transition.",
@@ -36831,7 +36897,7 @@
           "description": "A description of the persistent volume's resources and capacity. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "cephfs": {
@@ -37090,11 +37156,13 @@
       "properties": {
         "lastHeartbeatTime": {
           "description": "Last time we got an update on a given condition.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "lastTransitionTime": {
           "description": "Last time the condition transit from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "Human readable message indicating details about last transition.",
@@ -37387,14 +37455,14 @@
           "description": "Hard is the set of enforced hard limits for each named resource. More info: http://releases.k8s.io/HEAD/docs/design/admission_control_resource_quota.md#admissioncontrol-plugin-resourcequota",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "used": {
           "description": "Used is the current observed total usage of the resource in the namespace.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         }
       }
@@ -37628,11 +37696,13 @@
       "properties": {
         "lastProbeTime": {
           "description": "Last time we probed the condition.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "lastTransitionTime": {
           "description": "Last time the condition transitioned from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "Human-readable message indicating details about last transition.",
@@ -37727,7 +37797,8 @@
       "properties": {
         "lastUpdateTime": {
           "description": "timestamp for the last update to this condition",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "human readable message with details about the request state",
@@ -37818,7 +37889,7 @@
           "description": "Hard is the set of desired hard limits for each named resource. More info: http://releases.k8s.io/HEAD/docs/design/admission_control_resource_quota.md#admissioncontrol-plugin-resourcequota",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "scopes": {
@@ -38212,7 +38283,8 @@
         },
         "creationTimestamp": {
           "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "deletionGracePeriodSeconds": {
           "description": "Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.",
@@ -38221,7 +38293,8 @@
         },
         "deletionTimestamp": {
           "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field. Once set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "finalizers": {
           "description": "Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.",
@@ -38376,7 +38449,8 @@
         },
         "firstTimestamp": {
           "description": "The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "involvedObject": {
           "description": "The object that this event is about.",
@@ -38388,7 +38462,8 @@
         },
         "lastTimestamp": {
           "description": "The time at which the most recent occurrence of this event was recorded.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "A human-readable description of the status of this operation.",
@@ -38455,7 +38530,7 @@
         },
         "divisor": {
           "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         },
         "resource": {
           "description": "Required: resource to select",
@@ -38822,7 +38897,8 @@
         },
         "targetPort": {
           "description": "Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: http://kubernetes.io/docs/user-guide/services#defining-a-service",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         }
       }
     },
@@ -39271,7 +39347,8 @@
         },
         "timeAdded": {
           "description": "TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "value": {
           "description": "Required. The taint value corresponding to the taint key.",
@@ -39592,7 +39669,7 @@
       ],
       "properties": {
         "concurrencyPolicy": {
-          "description": "ConcurrencyPolicy specifies how to treat concurrent executions of a Job.",
+          "description": "ConcurrencyPolicy specifies how to treat concurrent executions of a Job. Defaults to Allow.",
           "type": "string"
         },
         "failedJobsHistoryLimit": {
@@ -39638,7 +39715,7 @@
           "description": "Represents the actual resources of the underlying volume.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "phase": {
@@ -39790,35 +39867,35 @@
           "description": "Default resource requirement limit value by resource name if resource limit is omitted.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "defaultRequest": {
           "description": "DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "max": {
           "description": "Max usage constraints on this kind by resource name.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "maxLimitRequestRatio": {
           "description": "MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "min": {
           "description": "Min usage constraints on this kind by resource name.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "type": {
@@ -39885,7 +39962,8 @@
           "description": "DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/v1.Time"
+            "type": "string",
+            "format": "date-time"
           }
         },
         "disruptionsAllowed": {
@@ -39980,9 +40058,6 @@
         }
       }
     },
-    "resource.Quantity": {
-      "type": "string"
-    },
     "v1.ReplicationController": {
       "description": "ReplicationController represents the configuration of a replication controller.",
       "properties": {
@@ -40070,11 +40145,13 @@
       "properties": {
         "maxSurge": {
           "description": "The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         },
         "maxUnavailable": {
           "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         }
       }
     },
@@ -40141,7 +40218,8 @@
         },
         "port": {
           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         },
         "scheme": {
           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -40240,7 +40318,8 @@
       "properties": {
         "lastTransitionTime": {
           "description": "The last time the condition transitioned from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "A human readable message indicating details about the transition.",
@@ -40332,7 +40411,7 @@
       "properties": {
         "currentValue": {
           "description": "currentValue is the current value of the metric (as a quantity).",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         },
         "metricName": {
           "description": "metricName is the name of the metric in question.",
@@ -40579,7 +40658,8 @@
       "properties": {
         "maxUnavailable": {
           "description": "The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         }
       }
     },
@@ -40852,14 +40932,14 @@
           "description": "Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "capacity": {
           "description": "Capacity represents the total resources of a node. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity for more details.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/resource.Quantity"
+            "type": "string"
           }
         },
         "conditions": {
@@ -40967,7 +41047,8 @@
       "properties": {
         "startedAt": {
           "description": "Time at which the container was last (re-)started",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -41086,7 +41167,8 @@
         },
         "startTime": {
           "description": "RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -41136,7 +41218,8 @@
       "properties": {
         "minAvailable": {
           "description": "An eviction is allowed if at least \"minAvailable\" pods selected by \"selector\" will still be available after the eviction, i.e. even in the absence of the evicted pod.  So for example you can prevent all voluntary evictions by specifying \"100%\".",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         },
         "selector": {
           "description": "Label query over pods whose evictions are managed by the disruption budget.",
@@ -41245,7 +41328,8 @@
         },
         "servicePort": {
           "description": "Specifies the port of the referenced service.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         }
       }
     },
@@ -41437,7 +41521,8 @@
         },
         "lastScaleTime": {
           "description": "lastScaleTime is the last time the HorizontalPodAutoscaler scaled the number of pods, used by the autoscaler to control how often the number of pods is changed.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "observedGeneration": {
           "description": "observedGeneration is the most recent generation observed by this autoscaler.",
@@ -41463,7 +41548,8 @@
         },
         "finishedAt": {
           "description": "Time at which the container last terminated",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "Message regarding the last termination of the container",
@@ -41480,7 +41566,8 @@
         },
         "startedAt": {
           "description": "Time at which previous execution of the container started",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -41677,11 +41764,13 @@
       "properties": {
         "lastTransitionTime": {
           "description": "Last time the condition transitioned from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "lastUpdateTime": {
           "description": "The last time this condition was updated.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "A human readable message indicating details about the transition.",
@@ -42059,7 +42148,7 @@
         },
         "targetAverageValue": {
           "description": "targetAverageValue is the target value of the average of the metric across all relevant pods (as a quantity)",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         }
       }
     },
@@ -42109,11 +42198,13 @@
       "properties": {
         "lastProbeTime": {
           "description": "Last time the condition was checked.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "lastTransitionTime": {
           "description": "Last time the condition transit from one status to another.",
-          "$ref": "#/definitions/v1.Time"
+          "type": "string",
+          "format": "date-time"
         },
         "message": {
           "description": "Human readable message indicating details about last transition.",
@@ -42313,7 +42404,7 @@
       "properties": {
         "currentAverageValue": {
           "description": "currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)",
-          "$ref": "#/definitions/resource.Quantity"
+          "type": "string"
         },
         "metricName": {
           "description": "metricName is the name of the metric in question",
@@ -42338,7 +42429,8 @@
       "properties": {
         "port": {
           "description": "If specified, the port on the given protocol.  This can either be a numerical or named port on a pod.  If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.",
-          "$ref": "#/definitions/intstr.IntOrString"
+          "type": "string",
+          "format": "int-or-string"
         },
         "protocol": {
           "description": "Optional.  The protocol (TCP or UDP) which traffic must match. If not specified, this field defaults to TCP.",

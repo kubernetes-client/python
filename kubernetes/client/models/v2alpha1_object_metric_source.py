@@ -33,7 +33,7 @@ class V2alpha1ObjectMetricSource(object):
         self.swagger_types = {
             'metric_name': 'str',
             'target': 'V2alpha1CrossVersionObjectReference',
-            'target_value': 'ResourceQuantity'
+            'target_value': 'str'
         }
 
         self.attribute_map = {
@@ -103,7 +103,7 @@ class V2alpha1ObjectMetricSource(object):
         targetValue is the target value of the metric (as a quantity).
 
         :return: The target_value of this V2alpha1ObjectMetricSource.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._target_value
 
@@ -114,7 +114,7 @@ class V2alpha1ObjectMetricSource(object):
         targetValue is the target value of the metric (as a quantity).
 
         :param target_value: The target_value of this V2alpha1ObjectMetricSource.
-        :type: ResourceQuantity
+        :type: str
         """
         if target_value is None:
             raise ValueError("Invalid value for `target_value`, must not be `None`")
