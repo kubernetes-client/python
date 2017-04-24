@@ -783,7 +783,7 @@ class PolicyV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PodDisruptionBudget (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodDisruptionBudget
                  If the method is called asynchronously,
@@ -811,7 +811,7 @@ class PolicyV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PodDisruptionBudget (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodDisruptionBudget
                  If the method is called asynchronously,
@@ -906,7 +906,7 @@ class PolicyV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PodDisruptionBudget (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodDisruptionBudget
                  If the method is called asynchronously,
@@ -934,7 +934,7 @@ class PolicyV1beta1Api(object):
             for asynchronous request. (optional)
         :param str name: name of the PodDisruptionBudget (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Patch body: (required)
+        :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodDisruptionBudget
                  If the method is called asynchronously,

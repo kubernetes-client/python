@@ -32,10 +32,10 @@ class V1JobStatus(object):
         """
         self.swagger_types = {
             'active': 'int',
-            'completion_time': 'V1Time',
+            'completion_time': 'datetime',
             'conditions': 'list[V1JobCondition]',
             'failed': 'int',
-            'start_time': 'V1Time',
+            'start_time': 'datetime',
             'succeeded': 'int'
         }
 
@@ -85,7 +85,7 @@ class V1JobStatus(object):
         CompletionTime represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.
 
         :return: The completion_time of this V1JobStatus.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._completion_time
 
@@ -96,7 +96,7 @@ class V1JobStatus(object):
         CompletionTime represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.
 
         :param completion_time: The completion_time of this V1JobStatus.
-        :type: V1Time
+        :type: datetime
         """
 
         self._completion_time = completion_time
@@ -154,7 +154,7 @@ class V1JobStatus(object):
         StartTime represents time when the job was acknowledged by the Job Manager. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.
 
         :return: The start_time of this V1JobStatus.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._start_time
 
@@ -165,7 +165,7 @@ class V1JobStatus(object):
         StartTime represents time when the job was acknowledged by the Job Manager. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.
 
         :param start_time: The start_time of this V1JobStatus.
-        :type: V1Time
+        :type: datetime
         """
 
         self._start_time = start_time

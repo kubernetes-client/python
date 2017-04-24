@@ -31,7 +31,7 @@ class V1beta1NetworkPolicyPort(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'port': 'IntstrIntOrString',
+            'port': 'str',
             'protocol': 'str'
         }
 
@@ -50,7 +50,7 @@ class V1beta1NetworkPolicyPort(object):
         If specified, the port on the given protocol.  This can either be a numerical or named port on a pod.  If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.
 
         :return: The port of this V1beta1NetworkPolicyPort.
-        :rtype: IntstrIntOrString
+        :rtype: str
         """
         return self._port
 
@@ -61,7 +61,7 @@ class V1beta1NetworkPolicyPort(object):
         If specified, the port on the given protocol.  This can either be a numerical or named port on a pod.  If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.
 
         :param port: The port of this V1beta1NetworkPolicyPort.
-        :type: IntstrIntOrString
+        :type: str
         """
 
         self._port = port

@@ -31,7 +31,7 @@ class V2alpha1ObjectMetricStatus(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'current_value': 'ResourceQuantity',
+            'current_value': 'str',
             'metric_name': 'str',
             'target': 'V2alpha1CrossVersionObjectReference'
         }
@@ -53,7 +53,7 @@ class V2alpha1ObjectMetricStatus(object):
         currentValue is the current value of the metric (as a quantity).
 
         :return: The current_value of this V2alpha1ObjectMetricStatus.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._current_value
 
@@ -64,7 +64,7 @@ class V2alpha1ObjectMetricStatus(object):
         currentValue is the current value of the metric (as a quantity).
 
         :param current_value: The current_value of this V2alpha1ObjectMetricStatus.
-        :type: ResourceQuantity
+        :type: str
         """
         if current_value is None:
             raise ValueError("Invalid value for `current_value`, must not be `None`")

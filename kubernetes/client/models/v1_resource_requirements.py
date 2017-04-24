@@ -31,8 +31,8 @@ class V1ResourceRequirements(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'limits': 'dict(str, ResourceQuantity)',
-            'requests': 'dict(str, ResourceQuantity)'
+            'limits': 'dict(str, str)',
+            'requests': 'dict(str, str)'
         }
 
         self.attribute_map = {
@@ -50,7 +50,7 @@ class V1ResourceRequirements(object):
         Limits describes the maximum amount of compute resources allowed. More info: http://kubernetes.io/docs/user-guide/compute-resources/
 
         :return: The limits of this V1ResourceRequirements.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._limits
 
@@ -61,7 +61,7 @@ class V1ResourceRequirements(object):
         Limits describes the maximum amount of compute resources allowed. More info: http://kubernetes.io/docs/user-guide/compute-resources/
 
         :param limits: The limits of this V1ResourceRequirements.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._limits = limits
@@ -73,7 +73,7 @@ class V1ResourceRequirements(object):
         Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: http://kubernetes.io/docs/user-guide/compute-resources/
 
         :return: The requests of this V1ResourceRequirements.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._requests
 
@@ -84,7 +84,7 @@ class V1ResourceRequirements(object):
         Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: http://kubernetes.io/docs/user-guide/compute-resources/
 
         :param requests: The requests of this V1ResourceRequirements.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._requests = requests

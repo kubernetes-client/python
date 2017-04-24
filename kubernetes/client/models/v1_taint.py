@@ -33,7 +33,7 @@ class V1Taint(object):
         self.swagger_types = {
             'effect': 'str',
             'key': 'str',
-            'time_added': 'V1Time',
+            'time_added': 'datetime',
             'value': 'str'
         }
 
@@ -106,7 +106,7 @@ class V1Taint(object):
         TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints.
 
         :return: The time_added of this V1Taint.
-        :rtype: V1Time
+        :rtype: datetime
         """
         return self._time_added
 
@@ -117,7 +117,7 @@ class V1Taint(object):
         TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints.
 
         :param time_added: The time_added of this V1Taint.
-        :type: V1Time
+        :type: datetime
         """
 
         self._time_added = time_added

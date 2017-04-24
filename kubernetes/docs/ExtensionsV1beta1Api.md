@@ -2243,7 +2243,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the DaemonSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2259,7 +2259,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the DaemonSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2301,7 +2301,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the DaemonSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2317,7 +2317,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the DaemonSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2359,7 +2359,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2375,7 +2375,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Deployment | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2417,7 +2417,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2433,7 +2433,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Deployment | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2475,7 +2475,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2491,7 +2491,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Scale | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2533,7 +2533,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Ingress
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2549,7 +2549,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Ingress | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2591,7 +2591,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Ingress
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2607,7 +2607,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Ingress | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2649,7 +2649,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the NetworkPolicy
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2665,7 +2665,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the NetworkPolicy | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2707,7 +2707,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the ReplicaSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2723,7 +2723,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ReplicaSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2765,7 +2765,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the ReplicaSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2781,7 +2781,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ReplicaSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2823,7 +2823,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2839,7 +2839,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Scale | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2881,7 +2881,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2897,7 +2897,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Scale | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2938,7 +2938,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the PodSecurityPolicy
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -2953,7 +2953,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PodSecurityPolicy | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -2994,7 +2994,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.ExtensionsV1beta1Api()
 name = 'name_example' # str | name of the ThirdPartyResource
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -3009,7 +3009,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ThirdPartyResource | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type

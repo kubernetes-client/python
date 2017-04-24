@@ -32,7 +32,7 @@ class V2alpha1ResourceMetricStatus(object):
         """
         self.swagger_types = {
             'current_average_utilization': 'int',
-            'current_average_value': 'ResourceQuantity',
+            'current_average_value': 'str',
             'name': 'str'
         }
 
@@ -76,7 +76,7 @@ class V2alpha1ResourceMetricStatus(object):
         currentAverageValue is the the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type. It will always be set, regardless of the corresponding metric specification.
 
         :return: The current_average_value of this V2alpha1ResourceMetricStatus.
-        :rtype: ResourceQuantity
+        :rtype: str
         """
         return self._current_average_value
 
@@ -87,7 +87,7 @@ class V2alpha1ResourceMetricStatus(object):
         currentAverageValue is the the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type. It will always be set, regardless of the corresponding metric specification.
 
         :param current_average_value: The current_average_value of this V2alpha1ResourceMetricStatus.
-        :type: ResourceQuantity
+        :type: str
         """
         if current_average_value is None:
             raise ValueError("Invalid value for `current_average_value`, must not be `None`")

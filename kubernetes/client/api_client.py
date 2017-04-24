@@ -585,6 +585,8 @@ class ApiClient(object):
         :param string: str.
         :return: date.
         """
+        if not string:
+            return None
         try:
             from dateutil.parser import parse
             return parse(string).date()
@@ -606,6 +608,8 @@ class ApiClient(object):
         :param string: str.
         :return: datetime.
         """
+        if not string:
+            return None
         try:
             from dateutil.parser import parse
             return parse(string)

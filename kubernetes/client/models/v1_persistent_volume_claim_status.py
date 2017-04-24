@@ -32,7 +32,7 @@ class V1PersistentVolumeClaimStatus(object):
         """
         self.swagger_types = {
             'access_modes': 'list[str]',
-            'capacity': 'dict(str, ResourceQuantity)',
+            'capacity': 'dict(str, str)',
             'phase': 'str'
         }
 
@@ -76,7 +76,7 @@ class V1PersistentVolumeClaimStatus(object):
         Represents the actual resources of the underlying volume.
 
         :return: The capacity of this V1PersistentVolumeClaimStatus.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._capacity
 
@@ -87,7 +87,7 @@ class V1PersistentVolumeClaimStatus(object):
         Represents the actual resources of the underlying volume.
 
         :param capacity: The capacity of this V1PersistentVolumeClaimStatus.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._capacity = capacity

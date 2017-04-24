@@ -31,7 +31,7 @@ class V1beta1PodDisruptionBudgetSpec(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'min_available': 'IntstrIntOrString',
+            'min_available': 'str',
             'selector': 'V1LabelSelector'
         }
 
@@ -50,7 +50,7 @@ class V1beta1PodDisruptionBudgetSpec(object):
         An eviction is allowed if at least \"minAvailable\" pods selected by \"selector\" will still be available after the eviction, i.e. even in the absence of the evicted pod.  So for example you can prevent all voluntary evictions by specifying \"100%\".
 
         :return: The min_available of this V1beta1PodDisruptionBudgetSpec.
-        :rtype: IntstrIntOrString
+        :rtype: str
         """
         return self._min_available
 
@@ -61,7 +61,7 @@ class V1beta1PodDisruptionBudgetSpec(object):
         An eviction is allowed if at least \"minAvailable\" pods selected by \"selector\" will still be available after the eviction, i.e. even in the absence of the evicted pod.  So for example you can prevent all voluntary evictions by specifying \"100%\".
 
         :param min_available: The min_available of this V1beta1PodDisruptionBudgetSpec.
-        :type: IntstrIntOrString
+        :type: str
         """
 
         self._min_available = min_available

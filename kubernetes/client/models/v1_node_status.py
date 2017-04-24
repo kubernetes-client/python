@@ -32,8 +32,8 @@ class V1NodeStatus(object):
         """
         self.swagger_types = {
             'addresses': 'list[V1NodeAddress]',
-            'allocatable': 'dict(str, ResourceQuantity)',
-            'capacity': 'dict(str, ResourceQuantity)',
+            'allocatable': 'dict(str, str)',
+            'capacity': 'dict(str, str)',
             'conditions': 'list[V1NodeCondition]',
             'daemon_endpoints': 'V1NodeDaemonEndpoints',
             'images': 'list[V1ContainerImage]',
@@ -97,7 +97,7 @@ class V1NodeStatus(object):
         Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.
 
         :return: The allocatable of this V1NodeStatus.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._allocatable
 
@@ -108,7 +108,7 @@ class V1NodeStatus(object):
         Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.
 
         :param allocatable: The allocatable of this V1NodeStatus.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._allocatable = allocatable
@@ -120,7 +120,7 @@ class V1NodeStatus(object):
         Capacity represents the total resources of a node. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity for more details.
 
         :return: The capacity of this V1NodeStatus.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._capacity
 
@@ -131,7 +131,7 @@ class V1NodeStatus(object):
         Capacity represents the total resources of a node. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity for more details.
 
         :param capacity: The capacity of this V1NodeStatus.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._capacity = capacity

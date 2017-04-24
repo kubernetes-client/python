@@ -35,7 +35,7 @@ class V1PersistentVolumeSpec(object):
             'aws_elastic_block_store': 'V1AWSElasticBlockStoreVolumeSource',
             'azure_disk': 'V1AzureDiskVolumeSource',
             'azure_file': 'V1AzureFileVolumeSource',
-            'capacity': 'dict(str, ResourceQuantity)',
+            'capacity': 'dict(str, str)',
             'cephfs': 'V1CephFSVolumeSource',
             'cinder': 'V1CinderVolumeSource',
             'claim_ref': 'V1ObjectReference',
@@ -208,7 +208,7 @@ class V1PersistentVolumeSpec(object):
         A description of the persistent volume's resources and capacity. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity
 
         :return: The capacity of this V1PersistentVolumeSpec.
-        :rtype: dict(str, ResourceQuantity)
+        :rtype: dict(str, str)
         """
         return self._capacity
 
@@ -219,7 +219,7 @@ class V1PersistentVolumeSpec(object):
         A description of the persistent volume's resources and capacity. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#capacity
 
         :param capacity: The capacity of this V1PersistentVolumeSpec.
-        :type: dict(str, ResourceQuantity)
+        :type: dict(str, str)
         """
 
         self._capacity = capacity
