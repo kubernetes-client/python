@@ -59,14 +59,18 @@ class FileOrData(object):
      content of obj[%file_key_name] and represent it as file or data.
      Note that the data is preferred. The obj[%file_key_name] will be used iff
      obj['%data_key_name'] is not set or empty. Assumption is file content is
-     raw data and data field is base64 string."""
+     raw data and data field is base64 string. The assumption can be changed
+     with base64_file_content flag. If set to False, the content of the file
+     will assumed to be base64 and read as is. The default True value will
+     result in base64 encode of the file content after read."""
 
     def __init__(self, obj, file_key_name, data_key_name=None,
-                 file_base_path=""):
+                 file_base_path="", base64_file_content=True):
         if not data_key_name:
             data_key_name = file_key_name + "-data"
         self._file = None
         self._data = None
+        self._base64_file_content = base64_file_content
         if data_key_name in obj:
             self._data = obj[data_key_name]
         elif file_key_name in obj:
@@ -78,8 +82,11 @@ class FileOrData(object):
         decoded obj[%data_key_name] content otherwise obj[%file_key_name]."""
         use_data_if_no_file = not self._file and self._data
         if use_data_if_no_file:
-            self._file = _create_temp_file_with_content(
-                base64.decodestring(self._data.encode()))
+            if self._base64_file_content:
+                self._file = _create_temp_file_with_content(
+                    base64.decodestring(self._data.encode()))
+            else:
+                self._file = _create_temp_file_with_content(self._data)
         if self._file and not os.path.isfile(self._file):
             raise ConfigException("File does not exists: %s" % self._file)
         return self._file
@@ -90,8 +97,11 @@ class FileOrData(object):
         use_file_if_no_data = not self._data and self._file
         if use_file_if_no_data:
             with open(self._file) as f:
-                self._data = bytes.decode(
-                    base64.encodestring(str.encode(f.read())))
+                if self._base64_file_content:
+                    self._data = bytes.decode(
+                        base64.encodestring(str.encode(f.read())))
+                else:
+                    self._data = f.read()
         return self._data
 
 
@@ -164,7 +174,8 @@ class KubeConfigLoader(object):
     def _load_user_token(self):
         token = FileOrData(
             self._user, 'tokenFile', 'token',
-            file_base_path=self._config_base_path).as_data()
+            file_base_path=self._config_base_path,
+            base64_file_content=False).as_data()
         if token:
             self.token = "Bearer %s" % token
             return True
