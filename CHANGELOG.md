@@ -2,6 +2,7 @@
 - Add support for attach API calls #180
 - Bugfix: token file should not be decoded #182
 - Inline primitive models (e.g. v1.Time and resource.Quantity) #179
+- Bugfix: urllib3 1.21 fails tests, editing dependency to 1.20 or older #197
 
 # v2.0.0a1
 - Update to kubernetes 1.6 spec #169
