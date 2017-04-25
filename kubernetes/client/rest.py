@@ -103,9 +103,6 @@ class RESTClientObject(object):
             'key_file': key_file,
         }
 
-        if config.assert_hostname is not None:
-            kwargs['assert_hostname'] = config.assert_hostname
-
         # https pool manager
         self.pool_manager = urllib3.PoolManager(
             **kwargs
