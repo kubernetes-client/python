@@ -48,9 +48,6 @@ numbers (integers) and D is one of "a" for alpha or "b" for beta and n is the
 pre-release number. For a final release, "Dn" part should be omitted. Examples:
 1.0.0a1, 2.0.1b2, 1.5.1.
 
-SPEC_VERSION: This would be the kubernetes OpenAPI spec version. It should be
-deprecated after kubernetes/kubernetes#37055 takes effect.
-
 DEVELOPMENT_STATUS: Update it to one of the values of "Development Status"
 in [this list](https://pypi.python.org/pypi?%3Aaction=list_classifiers).
 
