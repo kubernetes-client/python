@@ -20,7 +20,7 @@ from collections import OrderedDict
 
 import urllib3
 
-from constants import KUBERNETES_BRANCH, SPEC_VERSION
+from constants import KUBERNETES_BRANCH
 
 # these four constants are shown as part of this example in []:
 # "[watch]Pod[List]" is the deprecated version of "[list]Pod?[watch]=True"
@@ -118,10 +118,6 @@ def process_swagger(spec):
     remove_model_prefixes(spec)
 
     inline_primitive_models(spec)
-
-    # TODO: Kubernetes does not set a version for OpenAPI spec yet,
-    # remove this when that is fixed.
-    spec['info']['version'] = SPEC_VERSION
 
     return spec
 
