@@ -2,7 +2,7 @@ certifi>=14.05.14 # MPL
 six>=1.9.0  # MIT
 python-dateutil>=2.5.3  # BSD
 setuptools>=21.0.0  # PSF/ZPL
-urllib3>=1.19.1  # MIT
+urllib3>=1.19.1,<=1.20  # MIT
 pyyaml>=3.12  # MIT
 oauth2client>=4.0.0  # Apache-2.0
 ipaddress>=1.0.17  # PSF
