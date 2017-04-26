@@ -721,7 +721,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.BatchV2alpha1Api()
 name = 'name_example' # str | name of the CronJob
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -737,7 +737,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the CronJob | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -779,7 +779,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.BatchV2alpha1Api()
 name = 'name_example' # str | name of the CronJob
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -795,7 +795,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the CronJob | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -837,7 +837,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.BatchV2alpha1Api()
 name = 'name_example' # str | name of the ScheduledJob
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -853,7 +853,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ScheduledJob | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
@@ -895,7 +895,7 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.BatchV2alpha1Api()
 name = 'name_example' # str | name of the ScheduledJob
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Patch() # V1Patch | 
+body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
@@ -911,7 +911,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ScheduledJob | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Patch**](V1Patch.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type

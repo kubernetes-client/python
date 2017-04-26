@@ -33,7 +33,7 @@ REQUIRES = [
     "oauth2client",
     "setuptools",
     "six",
-    "urllib3",
+    "urllib3!=1.21",
     "python-dateutil",
     "pyyaml",
     "websocket-client",

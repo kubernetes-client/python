@@ -20,7 +20,7 @@ from collections import OrderedDict
 
 import urllib3
 
-from constants import KUBERNETES_BRANCH, SPEC_VERSION
+from constants import KUBERNETES_BRANCH
 
 # these four constants are shown as part of this example in []:
 # "[watch]Pod[List]" is the deprecated version of "[list]Pod?[watch]=True"
@@ -117,9 +117,7 @@ def process_swagger(spec):
 
     remove_model_prefixes(spec)
 
-    # TODO: Kubernetes does not set a version for OpenAPI spec yet,
-    # remove this when that is fixed.
-    spec['info']['version'] = SPEC_VERSION
+    inline_primitive_models(spec)
 
     return spec
 
@@ -189,6 +187,40 @@ def remove_model_prefixes(spec):
             raise PreprocessingException("Cannot rename model %s" % k)
         print("Removing prefix %s from %s...\n" % (v["removed_prefix"], k))
         rename_model(spec, k, v["new_name"])
+
+
+def find_replace_ref_recursive(root, ref_name, replace_map):
+    if isinstance(root, list):
+        for r in root:
+            find_replace_ref_recursive(r, ref_name, replace_map)
+    if isinstance(root, dict):
+        if "$ref" in root:
+            if root["$ref"] == ref_name:
+                del root["$ref"]
+                for k, v in replace_map.iteritems():
+                    if k in root:
+                        if k != "description":
+                            raise PreprocessingException(
+                                "Cannot inline model %s because of "
+                                "conflicting key %s." % (ref_name, k))
+                        continue
+                    root[k] = v
+        for k, v in root.iteritems():
+            find_replace_ref_recursive(v, ref_name, replace_map)
+
+
+def inline_primitive_models(spec):
+    to_remove_models = []
+    for k, v in spec['definitions'].iteritems():
+        if "properties" not in v:
+            print("Making primitive mode `%s` inline ..." % k)
+            if "type" not in v:
+                v["type"] = "object"
+            find_replace_ref_recursive(spec, "#/definitions/" + k, v)
+            to_remove_models.append(k)
+
+    for k in to_remove_models:
+        del spec['definitions'][k]
 
 
 def main():
