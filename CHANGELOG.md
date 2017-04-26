@@ -1,3 +1,6 @@
+# v1.0.1
+- Exclude urllib3 version 1.21 from dependencies #197
+
 # v2.0.0b1
 - Add support for attach API calls #180
 - Bugfix: token file should not be decoded #182
