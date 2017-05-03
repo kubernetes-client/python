@@ -1,3 +1,6 @@
+# v2.0.0
+- No changes. The same as `v2.0.0b1`.
+
 # v1.0.1
 - Bugfix: urllib3 1.21 fails tests, Excluding version 1.21 from dependencies #197
 
