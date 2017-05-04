@@ -104,7 +104,8 @@ def strip_tags_from_operation_id(operation, _):
 
 def add_thirdparty_resource_paths(spec):
     with open('thirdpartypaths.yml', 'r') as third_party_spec_file:
-        third_party_spec=json.loads(json.dumps(yaml.load(third_party_spec_file.read())))
+        third_party_spec=json.loads(json.dumps(
+            yaml.load(third_party_spec_file.read())))
     for path in third_party_spec.keys():
         spec['paths'][path] = third_party_spec[path]
     return spec
