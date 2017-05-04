@@ -16,10 +16,10 @@ import json
 import operator
 import os.path
 import sys
-import yaml
 from collections import OrderedDict
 
 import urllib3
+import yaml
 
 from constants import KUBERNETES_BRANCH
 
@@ -102,13 +102,15 @@ def strip_tags_from_operation_id(operation, _):
         operation_id = operation_id.replace(_to_camel_case(t), '')
     operation['operationId'] = operation_id
 
+
 def add_thirdparty_resource_paths(spec):
     with open('thirdpartypaths.yml', 'r') as third_party_spec_file:
-        third_party_spec=json.loads(json.dumps(
+        third_party_spec = json.loads(json.dumps(
             yaml.load(third_party_spec_file.read())))
     for path in third_party_spec.keys():
         spec['paths'][path] = third_party_spec[path]
     return spec
+
 
 def process_swagger(spec):
     spec = add_thirdparty_resource_paths(spec)
