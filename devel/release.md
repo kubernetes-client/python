@@ -9,13 +9,16 @@ Make sure changes logs are up to date [here](https://github.com/kubernetes-incub
 If they are not, follow commits added after last release and update/commit
 the change logs to master.
 
-## Release branch
+Then based on the release, follow one of next two steps.
+
+## Update pre-release branch
 
 Release branch name should have release-x.x format. All minor and pre-releases
-should be on the same branch. To update an existing branch:
+should be on the same branch. To update an existing branch with master(only for
+latest pre-release):
 
 ```bash
-export RELEASE_BRANCH=release-x.x
+export RELEASE_BRANCH=release-x.y
 git checkout $RELEASE_BRANCH
 git fetch upstream
 git rebase upstream/$RELEASE_BRANCH
@@ -24,6 +27,26 @@ git pull upstream master
 
 You may need to fix some conflicts. For auto-generated files, you can commit
 either version. They will be updated to the current version in the next step.
+
+## Patch a release branch
+
+If you are releasing a patch to an existing stable release, you should do a
+cherry pick first:
+
+```bash
+scripts/cherry_pick_pull.sh
+```
+
+Do not merge master into an stable releast branch. Run the script without 
+parameters and follow its instruction to create cherry pick PR and get the 
+PR merged then update your local branch:
+
+```bash
+export RELEASE_BRANCH=release-x.y
+git checkout $RELEASE_BRANCH
+git fetch upstream
+git rebase upstream/$RELEASE_BRANCH
+```
 
 ## Sanity check generated client
 We need to make sure there is no API changes after running update client
