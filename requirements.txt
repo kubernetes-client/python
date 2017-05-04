@@ -7,3 +7,4 @@ pyyaml>=3.12  # MIT
 oauth2client>=4.0.0  # Apache-2.0
 ipaddress>=1.0.17  # PSF
 websocket-client>=0.32.0 # LGPLv2+
+pyyaml>=3.12 # MIT
