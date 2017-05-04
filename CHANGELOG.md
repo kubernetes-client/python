@@ -1,3 +1,6 @@
+# v1.0.2
+- Bugfix: support RFC6902 'json-patch' operations #187
+
 # v2.0.0
 - No changes. The same as `v2.0.0b1`.
 
