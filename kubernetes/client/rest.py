@@ -154,8 +154,8 @@ class RESTClientObject(object):
                 if query_params:
                     url += '?' + urlencode(query_params)
                 if headers['Content-Type'] == 'application/json-patch+json':
-                    headers[
-                        'Content-Type'] = 'application/strategic-merge-patch+json'
+                    if not isinstance(body, list):
+                        headers['Content-Type'] = 'application/strategic-merge-patch+json'
                     request_body = None
                     if body:
                         request_body = json.dumps(body)
