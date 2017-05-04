@@ -157,6 +157,9 @@ class V1EndpointSubset(object):
         """
         Returns true if both objects are equal
         """
+        if not isinstance(other, V1EndpointSubset):
+            return False
+
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):

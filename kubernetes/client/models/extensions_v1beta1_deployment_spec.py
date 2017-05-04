@@ -315,6 +315,9 @@ class ExtensionsV1beta1DeploymentSpec(object):
         """
         Returns true if both objects are equal
         """
+        if not isinstance(other, ExtensionsV1beta1DeploymentSpec):
+            return False
+
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
