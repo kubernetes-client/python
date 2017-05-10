@@ -90,7 +90,7 @@ class ConfigurationObject(object):
         self.assert_hostname = None
 
 	# http proxy setting
-        self.http_proxy = None
+        self.http_proxy_url = None
 
     @property
     def logger_file(self):
