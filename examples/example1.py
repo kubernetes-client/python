@@ -21,6 +21,7 @@ def main():
     # default location.
     config.load_kube_config()
 
+    # Adding a dummy line
     v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")
     ret = v1.list_pod_for_all_namespaces(watch=False)
