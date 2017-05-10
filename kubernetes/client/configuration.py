@@ -89,6 +89,9 @@ class ConfigurationObject(object):
         # Set this to True/False to enable/disable SSL hostname verification.
         self.assert_hostname = None
 
+	# http proxy setting
+        self.http_proxy_url = None
+
     @property
     def logger_file(self):
         """
