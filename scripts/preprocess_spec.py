@@ -106,7 +106,8 @@ def add_thirdparty_resource_paths(spec):
     with open('thirdpartypaths.json', 'r') as third_party_spec_file:
         third_party_spec = json.loads(third_party_spec_file.read())
     for path in third_party_spec.keys():
-        spec['paths'][path] = third_party_spec[path]
+        if path not in spec['paths'].keys():
+            spec['paths'][path] = third_party_spec[path]
     return spec
 
 

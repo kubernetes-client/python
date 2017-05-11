@@ -10,6 +10,9 @@
       ],
       "summary": "Gets Resources",
       "description": "Returns a list of Resources",
+      "tags": [
+        "thirdparty_v1"
+      ],
       "parameters": [
         {
           "name": "watch",
@@ -54,6 +57,9 @@
       ],
       "summary": "Create a Resource",
       "description": "Creates a third party resource of the type specified",
+      "tags": [
+        "thirdparty_v1"
+      ],
       "parameters": [
         {
           "name": "namespace",
@@ -107,6 +113,9 @@
       ],
       "summary": "Gets a specific Resource",
       "description": "Returns a specific Resource in a namespace",
+      "tags": [
+        "thirdparty_v1"
+      ],
       "parameters": [
         {
           "name": "namespace",
@@ -156,6 +165,9 @@
       ],
       "summary": "Deletes a specific Resource",
       "description": "Deletes the specified Resource in the specified namespace",
+      "tags": [
+        "thirdparty_v1"
+      ],
       "parameters": [
         {
           "name": "body",
@@ -206,6 +218,9 @@
       ],
       "summary": "Replace a Resource",
       "description": "Replaces the specified third party resource of the type specified",
+      "tags": [
+        "thirdparty_v1"
+      ],
       "parameters": [
         {
           "name": "namespace",
