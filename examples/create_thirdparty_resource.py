@@ -1,5 +1,7 @@
 from __future__ import print_function
+
 from pprint import pprint
+
 import kubernetes
 from kubernetes import config
 from kubernetes.rest import ApiException
@@ -20,6 +22,7 @@ body['repo'] = "github.com/user/my-blog"
 body['username'] = "username"
 body['password'] = "password"
 body['branch'] = "branch"
+
 
 
 try: 
