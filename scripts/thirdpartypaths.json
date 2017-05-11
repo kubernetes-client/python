@@ -11,7 +11,7 @@
       "summary": "Gets Resources",
       "description": "Returns a list of Resources",
       "tags": [
-        "thirdparty_v1"
+        "third_party_resources"
       ],
       "parameters": [
         {
@@ -58,7 +58,7 @@
       "summary": "Create a Resource",
       "description": "Creates a third party resource of the type specified",
       "tags": [
-        "thirdparty_v1"
+        "third_party_resources"
       ],
       "parameters": [
         {
@@ -114,7 +114,7 @@
       "summary": "Gets a specific Resource",
       "description": "Returns a specific Resource in a namespace",
       "tags": [
-        "thirdparty_v1"
+        "third_party_resources"
       ],
       "parameters": [
         {
@@ -166,7 +166,7 @@
       "summary": "Deletes a specific Resource",
       "description": "Deletes the specified Resource in the specified namespace",
       "tags": [
-        "thirdparty_v1"
+        "third_party_resources"
       ],
       "parameters": [
         {
@@ -219,7 +219,7 @@
       "summary": "Replace a Resource",
       "description": "Replaces the specified third party resource of the type specified",
       "tags": [
-        "thirdparty_v1"
+        "third_party_resources"
       ],
       "parameters": [
         {
