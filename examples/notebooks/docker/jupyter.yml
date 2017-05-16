@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter
+  labels:
+    app: jupyter
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8888
+  selector:
+    app: jupyter
+  type: NodePort
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jupyter
+  labels:
+    app: jupyter
+spec:
+  containers:
+    - name: jupyter
+      image: skippbox/jupyter:0.0.3
+      ports:
+      - containerPort: 8888
+        protocol: TCP
+        name: http
+      volumeMounts:
+        - mountPath: /root
+          name: notebook-volume
+  volumes:
+  - name: notebook-volume
+    gitRepo:
+      repository: "https://github.com/kubernetes-incubator/client-python.git"
