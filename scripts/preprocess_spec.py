@@ -102,7 +102,18 @@ def strip_tags_from_operation_id(operation, _):
     operation['operationId'] = operation_id
 
 
+def add_thirdparty_resource_paths(spec):
+    with open('thirdpartypaths.json', 'r') as third_party_spec_file:
+        third_party_spec = json.loads(third_party_spec_file.read())
+    for path in third_party_spec.keys():
+        if path not in spec['paths'].keys():
+            spec['paths'][path] = third_party_spec[path]
+    return spec
+
+
 def process_swagger(spec):
+    spec = add_thirdparty_resource_paths(spec)
+
     apply_func_to_spec_operations(spec, strip_tags_from_operation_id)
 
     operation_ids = {}
