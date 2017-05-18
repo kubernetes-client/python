@@ -1,3 +1,6 @@
+## Creating a Third Party Resource
+
+```
 from __future__ import print_function
 
 from pprint import pprint
@@ -34,3 +37,4 @@ except ApiException as e:
     print(
         "Exception when calling DefaultApi->apis_fqdn_v1_namespaces_namespace_resource_post: %s\n" % 
         e)
+```
