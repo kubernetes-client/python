@@ -373,6 +373,7 @@ from .apis.settings_v1alpha1_api import SettingsV1alpha1Api
 from .apis.storage_api import StorageApi
 from .apis.storage_v1_api import StorageV1Api
 from .apis.storage_v1beta1_api import StorageV1beta1Api
+from .apis.third_party_resources_api import ThirdPartyResourcesApi
 from .apis.version_api import VersionApi
 
 # import ApiClient

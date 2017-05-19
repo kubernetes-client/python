@@ -1,6 +1,7 @@
 {
   "/apis/{fqdn}/v1/{resource}": {
     "get": {
+      "operationId": "listThirdPartyResource",
       "security": [
         {
           "Bearer": [
@@ -48,6 +49,7 @@
   },
   "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}": {
     "post": {
+      "operationId": "createThirdPartyResource",
       "security": [
         {
           "Bearer": [
@@ -104,6 +106,7 @@
   },
   "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}": {
     "get": {
+      "operationId": "getThirdPartyResource",
       "security": [
         {
           "Bearer": [
@@ -156,6 +159,7 @@
       }
     },
     "delete": {
+      "operationId": "deleteThirdPartyResource",
       "security": [
         {
           "Bearer": [
@@ -209,6 +213,7 @@
       }
     },
     "put": {
+      "operationId": "updateThirdPartyResource",
       "security": [
         {
           "Bearer": [
@@ -216,8 +221,8 @@
           ]
         }
       ],
-      "summary": "Replace a Resource",
-      "description": "Replaces the specified third party resource of the type specified",
+      "summary": "Update a Resource",
+      "description": "Update the specified third party resource of the type specified",
       "tags": [
         "third_party_resources"
       ],
