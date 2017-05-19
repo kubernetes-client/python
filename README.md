@@ -14,7 +14,7 @@ Python client for the [kubernetes](http://kubernetes.io/) API.
 From source:
 
 ```
-git clone https://github.com/kubernetes-incubator/client-python.git
+git clone --recursive https://github.com/kubernetes-incubator/client-python.git
 cd client-python
 python setup.py install
 ```
