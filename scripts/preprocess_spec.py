@@ -34,6 +34,8 @@ SPEC_URL = 'https://raw.githubusercontent.com/kubernetes/kubernetes/' \
 
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'swagger.json')
 
+TPR_SPEC_PATH = os.path.join(os.path.dirname(__file__), 'thirdpartypaths.json')
+
 _ops = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch']
 
 
@@ -103,7 +105,7 @@ def strip_tags_from_operation_id(operation, _):
 
 
 def add_thirdparty_resource_paths(spec):
-    with open('thirdpartypaths.json', 'r') as third_party_spec_file:
+    with open(TPR_SPEC_PATH, 'r') as third_party_spec_file:
         third_party_spec = json.loads(third_party_spec_file.read())
     for path in third_party_spec.keys():
         if path not in spec['paths'].keys():
