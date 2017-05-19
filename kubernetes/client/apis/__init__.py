@@ -33,4 +33,5 @@ from .settings_v1alpha1_api import SettingsV1alpha1Api
 from .storage_api import StorageApi
 from .storage_v1_api import StorageV1Api
 from .storage_v1beta1_api import StorageV1beta1Api
+from .third_party_resources_api import ThirdPartyResourcesApi
 from .version_api import VersionApi
