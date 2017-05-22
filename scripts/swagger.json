@@ -33326,7 +33326,6 @@
             }
           }
         },
-        "description": "Returns a list of Resources",
         "parameters": [
           {
             "uniqueItems": true,
@@ -33354,12 +33353,8 @@
           "third_party_resources"
         ],
         "summary": "Gets Resources",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "operationId": "listThirdPartyResource"
+        "operationId": "listThirdPartyResource",
+        "description": "Returns a list of Resources"
       }
     },
     "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}": {
@@ -33372,7 +33367,6 @@
             }
           }
         },
-        "description": "Update the specified third party resource of the type specified",
         "parameters": [
           {
             "description": "The Resource's namespace",
@@ -33409,12 +33403,8 @@
           "third_party_resources"
         ],
         "summary": "Update a Resource",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "operationId": "updateThirdPartyResource"
+        "operationId": "updateThirdPartyResource",
+        "description": "Update the specified third party resource of the type specified"
       },
       "delete": {
         "responses": {
@@ -33425,7 +33415,6 @@
             }
           }
         },
-        "description": "Deletes the specified Resource in the specified namespace",
         "parameters": [
           {
             "schema": {
@@ -33461,12 +33450,8 @@
           "third_party_resources"
         ],
         "summary": "Deletes a specific Resource",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "operationId": "deleteThirdPartyResource"
+        "operationId": "deleteThirdPartyResource",
+        "description": "Deletes the specified Resource in the specified namespace"
       },
       "get": {
         "responses": {
@@ -33477,7 +33462,6 @@
             }
           }
         },
-        "description": "Returns a specific Resource in a namespace",
         "parameters": [
           {
             "description": "The Resource's namespace",
@@ -33512,12 +33496,8 @@
           "third_party_resources"
         ],
         "summary": "Gets a specific Resource",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "operationId": "getThirdPartyResource"
+        "operationId": "getThirdPartyResource",
+        "description": "Returns a specific Resource in a namespace"
       }
     },
     "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}": {
@@ -33530,7 +33510,6 @@
             }
           }
         },
-        "description": "Creates a third party resource of the type specified",
         "parameters": [
           {
             "description": "The Resource's namespace",
@@ -33567,12 +33546,8 @@
           "third_party_resources"
         ],
         "summary": "Create a Resource",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "operationId": "createThirdPartyResource"
+        "operationId": "createThirdPartyResource",
+        "description": "Creates a third party resource of the type specified"
       }
     }
   },
