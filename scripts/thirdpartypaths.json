@@ -2,13 +2,6 @@
   "/apis/{fqdn}/v1/{resource}": {
     "get": {
       "operationId": "listThirdPartyResource",
-      "security": [
-        {
-          "Bearer": [
-
-          ]
-        }
-      ],
       "summary": "Gets Resources",
       "description": "Returns a list of Resources",
       "tags": [
@@ -50,13 +43,6 @@
   "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}": {
     "post": {
       "operationId": "createThirdPartyResource",
-      "security": [
-        {
-          "Bearer": [
-
-          ]
-        }
-      ],
       "summary": "Create a Resource",
       "description": "Creates a third party resource of the type specified",
       "tags": [
@@ -107,13 +93,6 @@
   "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}": {
     "get": {
       "operationId": "getThirdPartyResource",
-      "security": [
-        {
-          "Bearer": [
-
-          ]
-        }
-      ],
       "summary": "Gets a specific Resource",
       "description": "Returns a specific Resource in a namespace",
       "tags": [
@@ -160,13 +139,6 @@
     },
     "delete": {
       "operationId": "deleteThirdPartyResource",
-      "security": [
-        {
-          "Bearer": [
-
-          ]
-        }
-      ],
       "summary": "Deletes a specific Resource",
       "description": "Deletes the specified Resource in the specified namespace",
       "tags": [
@@ -214,13 +186,6 @@
     },
     "put": {
       "operationId": "updateThirdPartyResource",
-      "security": [
-        {
-          "Bearer": [
-
-          ]
-        }
-      ],
       "summary": "Update a Resource",
       "description": "Update the specified third party resource of the type specified",
       "tags": [
