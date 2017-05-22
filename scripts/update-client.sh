@@ -54,8 +54,8 @@ mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${
 
 echo "--- Patching generated code..."
 find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/kubernetes.client/g' {} +
-find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
-find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
+find "${CLIENT_ROOT}" -path "${CLIENT_ROOT}/base" -prune -o -type f -a -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
+find "${CLIENT_ROOT}" -path "${CLIENT_ROOT}/base" -prune -o -type f -a -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
 # rm "${CLIENT_ROOT}/LICENSE"
 echo "--- updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
