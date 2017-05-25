@@ -26,6 +26,11 @@ import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
 namespace = 'namespace_example' # str | The Resource's namespace
@@ -56,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerToken](../README.md#BearerToken)
 
 ### HTTP request headers
 
@@ -79,6 +84,11 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
@@ -110,7 +120,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerToken](../README.md#BearerToken)
 
 ### HTTP request headers
 
@@ -133,6 +143,11 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
@@ -164,7 +179,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerToken](../README.md#BearerToken)
 
 ### HTTP request headers
 
@@ -187,6 +202,11 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
@@ -216,7 +236,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerToken](../README.md#BearerToken)
 
 ### HTTP request headers
 
@@ -239,6 +259,11 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
@@ -270,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerToken](../README.md#BearerToken)
 
 ### HTTP request headers
 
