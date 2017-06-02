@@ -30,6 +30,9 @@ DEVELOPMENT_STATUS = "3 - Alpha"
 with open('requirements.txt') as f:
     REQUIRES = f.readlines()
 
+with open('test-requirements.txt') as f:
+    TESTS_REQUIRES = f.readlines()
+
 setup(
     name=PACKAGE_NAME,
     version=CLIENT_VERSION,
@@ -40,6 +43,7 @@ setup(
     url="https://github.com/kubernetes-incubator/client-python",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
+    tests_require=TESTS_REQUIRES,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.apis',
               'kubernetes.client.models'],
