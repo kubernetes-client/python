@@ -27,17 +27,8 @@ DEVELOPMENT_STATUS = "3 - Alpha"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = [
-    "certifi",
-    "ipaddress",
-    "oauth2client",
-    "setuptools",
-    "six",
-    "urllib3!=1.21",
-    "python-dateutil",
-    "pyyaml",
-    "websocket-client",
-]
+with open('requirements.txt') as f:
+    REQUIRES = f.readlines()
 
 setup(
     name=PACKAGE_NAME,
