@@ -615,6 +615,17 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.config.api_key['authorization'])
 
+    def test_no_users_section(self):
+        expected = FakeConfig(host=TEST_HOST)
+        actual = FakeConfig()
+        test_kube_config = self.TEST_KUBE_CONFIG.copy()
+        del test_kube_config['users']
+        KubeConfigLoader(
+            config_dict=test_kube_config,
+            active_context="gcp",
+            client_configuration=actual).load_and_set()
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
