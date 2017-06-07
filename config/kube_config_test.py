@@ -339,6 +339,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     "user": "ssl-local-file"
                 }
             },
+            {
+                "name": "non_existing_user",
+                "context": {
+                    "cluster": "default",
+                    "user": "non_existing_user"
+                }
+            },
         ],
         "clusters": [
             {
@@ -623,6 +630,15 @@ class TestKubeConfigLoader(BaseTestCase):
         KubeConfigLoader(
             config_dict=test_kube_config,
             active_context="gcp",
+            client_configuration=actual).load_and_set()
+        self.assertEqual(expected, actual)
+
+    def test_non_existing_user(self):
+        expected = FakeConfig(host=TEST_HOST)
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="non_existing_user",
             client_configuration=actual).load_and_set()
         self.assertEqual(expected, actual)
 

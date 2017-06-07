@@ -132,8 +132,12 @@ class KubeConfigLoader(object):
             context_name)
         if (self._current_context['context'].safe_get('user')
                 and self._config.safe_get('users')):
-            self._user = self._config['users'].get_with_name(
-                self._current_context['context']['user'])['user']
+            user = self._config['users'].get_with_name(
+                self._current_context['context']['user'], safe=True)
+            if user:
+                self._user = user['user']
+            else:
+                self._user = None
         else:
             self._user = None
         self._cluster = self._config['clusters'].get_with_name(
@@ -257,7 +261,7 @@ class ConfigNode(object):
         else:
             return v
 
-    def get_with_name(self, name):
+    def get_with_name(self, name, safe=False):
         if not isinstance(self.value, list):
             raise ConfigException(
                 'Invalid kube-config file. Expected %s to be a list'
@@ -270,6 +274,8 @@ class ConfigNode(object):
                     % self.name)
             if v['name'] == name:
                 return ConfigNode('%s[name=%s]' % (self.name, name), v)
+        if safe:
+            return None
         raise ConfigException(
             'Invalid kube-config file. '
             'Expected object with name %s in %s list' % (name, self.name))
