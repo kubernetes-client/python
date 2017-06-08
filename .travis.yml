@@ -3,15 +3,29 @@ language: python
 sudo: true
 services:
   - docker
-env:
-  - TOXENV=py35
-  - TOXENV=py34
-  - TOXENV=py27
-  - TOXENV=py27-functional
-  - TOXENV=py35-functional
-  - TOXENV=update-pep8
-  - TOXENV=docs
-  - TOXENV=coverage,codecov
+
+matrix:
+    include:
+     - python: 2.7
+       env: TOXENV=py27
+     - python: 2.7
+       env: TOXENV=py27-functional
+     - python: 2.7
+       env: TOXENV=update-pep8
+     - python: 2.7
+       env: TOXENV=docs
+     - python: 2.7
+       env: TOXENV=coverage,codecov
+     - python: 3.4
+       env: TOXENV=py34
+     - python: 3.5
+       env: TOXENV=py35
+     - python: 3.5
+       env: TOXENV=py35-functional
+     - python: 3.6
+       env: TOXENV=py36
+     - python: 3.6
+       env: TOXENV=py36-functional
 
 install:
   - pip install tox
