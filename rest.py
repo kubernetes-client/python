@@ -106,9 +106,14 @@ class RESTClientObject(object):
             kwargs['assert_hostname'] = config.assert_hostname
 
         # https pool manager
-        self.pool_manager = urllib3.PoolManager(
-            **kwargs
-        )
+        if config.http_proxy_url is not None:
+            self.pool_manager = urllib3.proxy_from_url(
+                config.http_proxy_url, **kwargs
+            )
+        else:
+            self.pool_manager = urllib3.PoolManager(
+	        **kwargs
+            )
 
     def request(self, method, url, query_params=None, headers=None,
                 body=None, post_params=None, _preload_content=True,

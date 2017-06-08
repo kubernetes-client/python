@@ -82,13 +82,14 @@ class ConfigurationObject(object):
         # check host name
         # Set this to True/False to enable/disable SSL hostname verification.
         self.assert_hostname = None
-
         # urllib3 connection pool's maximum number of connections saved
         # per pool. Increasing this is useful for cases when you are
         # making a lot of possibly parallel requests to the same host,
         # which is often the case here.
         # When set to `None`, will default to whatever urllib3 uses
         self.connection_pool_maxsize = None
+        # http proxy setting
+        self.http_proxy_url = None
 
         # WebSocket subprotocol to use for exec and portforward.
         self.ws_streaming_protocol = "v4.channel.k8s.io"
