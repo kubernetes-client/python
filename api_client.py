@@ -20,26 +20,21 @@ Copyright 2016 SmartBear Software
 
 from __future__ import absolute_import
 
-from . import models
-from . import ws_client
-from .rest import RESTClientObject
-from .rest import ApiException
-
-import os
-import re
 import json
 import mimetypes
+import os
+import re
 import tempfile
 import threading
-
-from datetime import datetime
-from datetime import date
+from datetime import date, datetime
 
 # python 2 and python 3 compatibility library
 from six import PY3, integer_types, iteritems, text_type
 from six.moves.urllib.parse import quote
 
+from . import models, ws_client
 from .configuration import configuration
+from .rest import ApiException, RESTClientObject
 
 
 class ApiClient(object):
@@ -59,9 +54,9 @@ class ApiClient(object):
     :param header_name: a header to pass when making calls to the API.
     :param header_value: a header value to pass when making calls to the API.
     """
+
     def __init__(self, host=None, header_name=None, header_value=None,
                  cookie=None, config=configuration):
-
         """
         Constructor of the class.
         """
@@ -99,8 +94,8 @@ class ApiClient(object):
                    path_params=None, query_params=None, header_params=None,
                    body=None, post_params=None, files=None,
                    response_type=None, auth_settings=None, callback=None,
-                   _return_http_data_only=None, collection_formats=None, _preload_content=True,
-                   _request_timeout=None):
+                   _return_http_data_only=None, collection_formats=None,
+                   _preload_content=True, _request_timeout=None):
 
         # header parameters
         header_params = header_params or {}
@@ -163,11 +158,16 @@ class ApiClient(object):
                 return_data = None
 
         if callback:
-            callback(return_data) if _return_http_data_only else callback((return_data, response_data.status, response_data.getheaders()))
+            if _return_http_data_only:
+                callback(return_data)
+            else:
+                callback((return_data,
+                          response_data.status, response_data.getheaders()))
         elif _return_http_data_only:
             return (return_data)
         else:
-            return (return_data, response_data.status, response_data.getheaders())
+            return (return_data, response_data.status,
+                    response_data.getheaders())
 
     def sanitize_for_serialization(self, obj):
         """
@@ -194,7 +194,7 @@ class ApiClient(object):
                     for sub_obj in obj]
         elif isinstance(obj, tuple):
             return tuple(self.sanitize_for_serialization(sub_obj)
-                for sub_obj in obj)
+                         for sub_obj in obj)
         elif isinstance(obj, (datetime, date)):
             return obj.isoformat()
         else:
@@ -248,7 +248,7 @@ class ApiClient(object):
         if data is None:
             return None
 
-        if type(klass) == str:
+        if isinstance(klass, str):
             if klass.startswith('list['):
                 sub_kls = re.match('list\[(.*)\]', klass).group(1)
                 return [self.__deserialize(sub_data, sub_kls)
@@ -285,8 +285,8 @@ class ApiClient(object):
                  path_params=None, query_params=None, header_params=None,
                  body=None, post_params=None, files=None,
                  response_type=None, auth_settings=None, callback=None,
-                 _return_http_data_only=None, collection_formats=None, _preload_content=True,
-                 _request_timeout=None):
+                 _return_http_data_only=None, collection_formats=None,
+                 _preload_content=True, _request_timeout=None):
         """
         Makes the HTTP request (synchronous) and return the deserialized data.
         To make an async request, define a function for callback.
@@ -307,13 +307,18 @@ class ApiClient(object):
         :param callback function: Callback function for asynchronous request.
             If provide this parameter,
             the request will be called asynchronously.
-        :param _return_http_data_only: response data without head status code and headers
+        :param _return_http_data_only: response data without head status code
+            and headers
         :param collection_formats: dict of collection formats for path, query,
             header, and post parameters.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will be returned without
-                                 reading/decoding response data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of (connection, read) timeouts.
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without
+                                 reading/decoding response data.
+                                 Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
         :return:
             If provide parameter callback,
             the request will be called asynchronously.
@@ -326,7 +331,8 @@ class ApiClient(object):
                                    path_params, query_params, header_params,
                                    body, post_params, files,
                                    response_type, auth_settings, callback,
-                                   _return_http_data_only, collection_formats, _preload_content, _request_timeout)
+                                   _return_http_data_only, collection_formats,
+                                   _preload_content, _request_timeout)
         else:
             thread = threading.Thread(target=self.__call_api,
                                       args=(resource_path, method,
@@ -335,18 +341,22 @@ class ApiClient(object):
                                             post_params, files,
                                             response_type, auth_settings,
                                             callback, _return_http_data_only,
-                                            collection_formats, _preload_content, _request_timeout))
+                                            collection_formats,
+                                            _preload_content,
+                                            _request_timeout))
         thread.start()
         return thread
 
     def request(self, method, url, query_params=None, headers=None,
-                post_params=None, body=None, _preload_content=True, _request_timeout=None):
+                post_params=None, body=None, _preload_content=True,
+                _request_timeout=None):
         """
         Makes the HTTP request using RESTClient.
         """
         # FIXME(dims) : We need a better way to figure out which
         # calls end up using web sockets
-        if (url.endswith('/exec') or url.endswith('/attach')) and (method == "GET" or method == "POST"):
+        if (url.endswith('/exec') or url.endswith('/attach')) and \
+                (method == "GET" or method == "POST"):
             return ws_client.websocket_call(self.config,
                                             url,
                                             query_params=query_params,
@@ -458,14 +468,15 @@ class ApiClient(object):
             for k, v in iteritems(files):
                 if not v:
                     continue
-                file_names = v if type(v) is list else [v]
+                file_names = v if isinstance(v, list) else [v]
                 for n in file_names:
                     with open(n, 'rb') as f:
                         filename = os.path.basename(f.name)
                         filedata = f.read()
-                        mimetype = mimetypes.\
-                            guess_type(filename)[0] or 'application/octet-stream'
-                        params.append(tuple([k, tuple([filename, filedata, mimetype])]))
+                        mimetype = (mimetypes.guess_type(filename)[0] or
+                                    'application/octet-stream')
+                        params.append(tuple([k, tuple([filename, filedata,
+                                                       mimetype])]))
 
         return params
 
@@ -543,9 +554,8 @@ class ApiClient(object):
 
         content_disposition = response.getheader("Content-Disposition")
         if content_disposition:
-            filename = re.\
-                search(r'filename=[\'"]?([^\'"\s]+)[\'"]?', content_disposition).\
-                group(1)
+            filename = re.search(r'filename=[\'"]?([^\'"\s]+)[\'"]?',
+                                 content_disposition).group(1)
             path = os.path.join(os.path.dirname(path), filename)
 
         with open(path, "w") as f:

@@ -130,8 +130,8 @@ class KubeConfigLoader(object):
             context_name = self._config['current-context']
         self._current_context = self._config['contexts'].get_with_name(
             context_name)
-        if (self._current_context['context'].safe_get('user')
-                and self._config.safe_get('users')):
+        if (self._current_context['context'].safe_get('user') and
+                self._config.safe_get('users')):
             user = self._config['users'].get_with_name(
                 self._current_context['context']['user'], safe=True)
             if user:
