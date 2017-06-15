@@ -19,8 +19,7 @@ import collections
 from websocket import WebSocket, ABNF, enableTrace
 import six
 import ssl
-from six.moves.urllib.parse import urlencode
-from six.moves.urllib.parse import quote_plus
+from six.moves.urllib.parse import urlencode, quote_plus, urlparse, urlunparse
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
@@ -203,17 +202,20 @@ class WSClient:
 WSResponse = collections.namedtuple('WSResponse', ['data'])
 
 
+def get_websocket_url(url):
+    parsed_url = urlparse(url)
+    parts = list(parsed_url)
+    if parsed_url.scheme == 'http':
+        parts[0] = 'ws'
+    elif parsed_url.scheme == 'https':
+        parts[0] = 'wss'
+    return urlunparse(parts)
+
+
 def websocket_call(configuration, url, query_params, _request_timeout,
                    _preload_content, headers):
     """An internal function to be called in api-client when a websocket
     connection is required."""
-
-    # switch protocols from http to websocket
-    url = url.replace('http://', 'ws://')
-    url = url.replace('https://', 'wss://')
-
-    # patch extra /
-    url = url.replace('//api', '/api')
 
     # Extract the command from the list of tuples
     commands = None
@@ -238,7 +240,7 @@ def websocket_call(configuration, url, query_params, _request_timeout,
         url += '&command=' + quote_plus(commands)
 
     try:
-        client = WSClient(configuration, url, headers)
+        client = WSClient(configuration, get_websocket_url(url), headers)
         if not _preload_content:
             return client
         client.run_forever(timeout=_request_timeout)
