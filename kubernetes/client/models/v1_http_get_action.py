@@ -34,7 +34,7 @@ class V1HTTPGetAction(object):
             'host': 'str',
             'http_headers': 'list[V1HTTPHeader]',
             'path': 'str',
-            'port': 'str',
+            'port': 'int',
             'scheme': 'str'
         }
 
