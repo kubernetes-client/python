@@ -31,7 +31,7 @@ class V1TCPSocketAction(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'port': 'str'
+            'port': 'int'
         }
 
         self.attribute_map = {
