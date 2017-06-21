@@ -605,11 +605,11 @@ Class | Method | HTTP request | Description
 *StorageV1beta1Api* | [**patch_storage_class**](docs/StorageV1beta1Api.md#patch_storage_class) | **PATCH** /apis/storage.k8s.io/v1beta1/storageclasses/{name} | 
 *StorageV1beta1Api* | [**read_storage_class**](docs/StorageV1beta1Api.md#read_storage_class) | **GET** /apis/storage.k8s.io/v1beta1/storageclasses/{name} | 
 *StorageV1beta1Api* | [**replace_storage_class**](docs/StorageV1beta1Api.md#replace_storage_class) | **PUT** /apis/storage.k8s.io/v1beta1/storageclasses/{name} | 
-*ThirdPartyResourcesApi* | [**create_third_party_resource**](docs/ThirdPartyResourcesApi.md#create_third_party_resource) | **POST** /apis/{fqdn}/v1/namespaces/{namespace}/{resource} | Create a Resource
-*ThirdPartyResourcesApi* | [**delete_third_party_resource**](docs/ThirdPartyResourcesApi.md#delete_third_party_resource) | **DELETE** /apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name} | Deletes a specific Resource
-*ThirdPartyResourcesApi* | [**get_third_party_resource**](docs/ThirdPartyResourcesApi.md#get_third_party_resource) | **GET** /apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name} | Gets a specific Resource
-*ThirdPartyResourcesApi* | [**list_third_party_resource**](docs/ThirdPartyResourcesApi.md#list_third_party_resource) | **GET** /apis/{fqdn}/v1/{resource} | Gets Resources
-*ThirdPartyResourcesApi* | [**update_third_party_resource**](docs/ThirdPartyResourcesApi.md#update_third_party_resource) | **PUT** /apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name} | Update a Resource
+*ThirdPartyResourcesApi* | [**create_third_party_resource**](docs/ThirdPartyResourcesApi.md#create_third_party_resource) | **POST** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource} | Create a Resource
+*ThirdPartyResourcesApi* | [**delete_third_party_resource**](docs/ThirdPartyResourcesApi.md#delete_third_party_resource) | **DELETE** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name} | Deletes a specific Resource
+*ThirdPartyResourcesApi* | [**get_third_party_resource**](docs/ThirdPartyResourcesApi.md#get_third_party_resource) | **GET** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name} | Gets a specific Resource
+*ThirdPartyResourcesApi* | [**list_third_party_resource**](docs/ThirdPartyResourcesApi.md#list_third_party_resource) | **GET** /apis/{fqdn}/{version}/{resource} | Gets Resources
+*ThirdPartyResourcesApi* | [**update_third_party_resource**](docs/ThirdPartyResourcesApi.md#update_third_party_resource) | **PUT** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name} | Update a Resource
 *VersionApi* | [**get_code**](docs/VersionApi.md#get_code) | **GET** /version/ | 
 
 

@@ -40,7 +40,7 @@ class ThirdPartyResourcesApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create_third_party_resource(self, namespace, fqdn, resource, body, **kwargs):
+    def create_third_party_resource(self, namespace, fqdn, version, resource, body, **kwargs):
         """
         Create a Resource
         Creates a third party resource of the type specified
@@ -50,12 +50,13 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_third_party_resource(namespace, fqdn, resource, body, callback=callback_function)
+        >>> thread = api.create_third_party_resource(namespace, fqdn, version, resource, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str namespace: The Resource's namespace (required)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :param object body: The JSON schema of the Resource to create. (required)
         :return: object
@@ -64,12 +65,12 @@ class ThirdPartyResourcesApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.create_third_party_resource_with_http_info(namespace, fqdn, resource, body, **kwargs)
+            return self.create_third_party_resource_with_http_info(namespace, fqdn, version, resource, body, **kwargs)
         else:
-            (data) = self.create_third_party_resource_with_http_info(namespace, fqdn, resource, body, **kwargs)
+            (data) = self.create_third_party_resource_with_http_info(namespace, fqdn, version, resource, body, **kwargs)
             return data
 
-    def create_third_party_resource_with_http_info(self, namespace, fqdn, resource, body, **kwargs):
+    def create_third_party_resource_with_http_info(self, namespace, fqdn, version, resource, body, **kwargs):
         """
         Create a Resource
         Creates a third party resource of the type specified
@@ -79,12 +80,13 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_third_party_resource_with_http_info(namespace, fqdn, resource, body, callback=callback_function)
+        >>> thread = api.create_third_party_resource_with_http_info(namespace, fqdn, version, resource, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str namespace: The Resource's namespace (required)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :param object body: The JSON schema of the Resource to create. (required)
         :return: object
@@ -92,7 +94,7 @@ class ThirdPartyResourcesApi(object):
                  returns the request thread.
         """
 
-        all_params = ['namespace', 'fqdn', 'resource', 'body']
+        all_params = ['namespace', 'fqdn', 'version', 'resource', 'body']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -113,6 +115,9 @@ class ThirdPartyResourcesApi(object):
         # verify the required parameter 'fqdn' is set
         if ('fqdn' not in params) or (params['fqdn'] is None):
             raise ValueError("Missing the required parameter `fqdn` when calling `create_third_party_resource`")
+        # verify the required parameter 'version' is set
+        if ('version' not in params) or (params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `create_third_party_resource`")
         # verify the required parameter 'resource' is set
         if ('resource' not in params) or (params['resource'] is None):
             raise ValueError("Missing the required parameter `resource` when calling `create_third_party_resource`")
@@ -123,12 +128,14 @@ class ThirdPartyResourcesApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{fqdn}/v1/namespaces/{namespace}/{resource}'.replace('{format}', 'json')
+        resource_path = '/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
         if 'fqdn' in params:
             path_params['fqdn'] = params['fqdn']
+        if 'version' in params:
+            path_params['version'] = params['version']
         if 'resource' in params:
             path_params['resource'] = params['resource']
 
@@ -234,7 +241,7 @@ class ThirdPartyResourcesApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}'.replace('{format}', 'json')
+        resource_path = '/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name}'.replace('{format}', 'json')
         path_params = {}
 
         query_params = {}
@@ -271,7 +278,7 @@ class ThirdPartyResourcesApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def get_third_party_resource(self, namespace, name, fqdn, resource, **kwargs):
+    def get_third_party_resource(self, namespace, name, fqdn, version, resource, **kwargs):
         """
         Gets a specific Resource
         Returns a specific Resource in a namespace
@@ -281,13 +288,14 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_third_party_resource(namespace, name, fqdn, resource, callback=callback_function)
+        >>> thread = api.get_third_party_resource(namespace, name, fqdn, version, resource, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str namespace: The Resource's namespace (required)
         :param str name: The Resource's name (required)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :return: object
                  If the method is called asynchronously,
@@ -295,12 +303,12 @@ class ThirdPartyResourcesApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.get_third_party_resource_with_http_info(namespace, name, fqdn, resource, **kwargs)
+            return self.get_third_party_resource_with_http_info(namespace, name, fqdn, version, resource, **kwargs)
         else:
-            (data) = self.get_third_party_resource_with_http_info(namespace, name, fqdn, resource, **kwargs)
+            (data) = self.get_third_party_resource_with_http_info(namespace, name, fqdn, version, resource, **kwargs)
             return data
 
-    def get_third_party_resource_with_http_info(self, namespace, name, fqdn, resource, **kwargs):
+    def get_third_party_resource_with_http_info(self, namespace, name, fqdn, version, resource, **kwargs):
         """
         Gets a specific Resource
         Returns a specific Resource in a namespace
@@ -310,20 +318,21 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_third_party_resource_with_http_info(namespace, name, fqdn, resource, callback=callback_function)
+        >>> thread = api.get_third_party_resource_with_http_info(namespace, name, fqdn, version, resource, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str namespace: The Resource's namespace (required)
         :param str name: The Resource's name (required)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :return: object
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['namespace', 'name', 'fqdn', 'resource']
+        all_params = ['namespace', 'name', 'fqdn', 'version', 'resource']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -347,6 +356,9 @@ class ThirdPartyResourcesApi(object):
         # verify the required parameter 'fqdn' is set
         if ('fqdn' not in params) or (params['fqdn'] is None):
             raise ValueError("Missing the required parameter `fqdn` when calling `get_third_party_resource`")
+        # verify the required parameter 'version' is set
+        if ('version' not in params) or (params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `get_third_party_resource`")
         # verify the required parameter 'resource' is set
         if ('resource' not in params) or (params['resource'] is None):
             raise ValueError("Missing the required parameter `resource` when calling `get_third_party_resource`")
@@ -354,7 +366,7 @@ class ThirdPartyResourcesApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}'.replace('{format}', 'json')
+        resource_path = '/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
@@ -362,6 +374,8 @@ class ThirdPartyResourcesApi(object):
             path_params['name'] = params['name']
         if 'fqdn' in params:
             path_params['fqdn'] = params['fqdn']
+        if 'version' in params:
+            path_params['version'] = params['version']
         if 'resource' in params:
             path_params['resource'] = params['resource']
 
@@ -391,7 +405,7 @@ class ThirdPartyResourcesApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def list_third_party_resource(self, fqdn, resource, **kwargs):
+    def list_third_party_resource(self, fqdn, version, resource, **kwargs):
         """
         Gets Resources
         Returns a list of Resources
@@ -401,11 +415,12 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_third_party_resource(fqdn, resource, callback=callback_function)
+        >>> thread = api.list_third_party_resource(fqdn, version, resource, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
         :return: object
@@ -414,12 +429,12 @@ class ThirdPartyResourcesApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.list_third_party_resource_with_http_info(fqdn, resource, **kwargs)
+            return self.list_third_party_resource_with_http_info(fqdn, version, resource, **kwargs)
         else:
-            (data) = self.list_third_party_resource_with_http_info(fqdn, resource, **kwargs)
+            (data) = self.list_third_party_resource_with_http_info(fqdn, version, resource, **kwargs)
             return data
 
-    def list_third_party_resource_with_http_info(self, fqdn, resource, **kwargs):
+    def list_third_party_resource_with_http_info(self, fqdn, version, resource, **kwargs):
         """
         Gets Resources
         Returns a list of Resources
@@ -429,11 +444,12 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_third_party_resource_with_http_info(fqdn, resource, callback=callback_function)
+        >>> thread = api.list_third_party_resource_with_http_info(fqdn, version, resource, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
         :return: object
@@ -441,7 +457,7 @@ class ThirdPartyResourcesApi(object):
                  returns the request thread.
         """
 
-        all_params = ['fqdn', 'resource', 'watch']
+        all_params = ['fqdn', 'version', 'resource', 'watch']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -459,6 +475,9 @@ class ThirdPartyResourcesApi(object):
         # verify the required parameter 'fqdn' is set
         if ('fqdn' not in params) or (params['fqdn'] is None):
             raise ValueError("Missing the required parameter `fqdn` when calling `list_third_party_resource`")
+        # verify the required parameter 'version' is set
+        if ('version' not in params) or (params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `list_third_party_resource`")
         # verify the required parameter 'resource' is set
         if ('resource' not in params) or (params['resource'] is None):
             raise ValueError("Missing the required parameter `resource` when calling `list_third_party_resource`")
@@ -466,10 +485,12 @@ class ThirdPartyResourcesApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{fqdn}/v1/{resource}'.replace('{format}', 'json')
+        resource_path = '/apis/{fqdn}/{version}/{resource}'.replace('{format}', 'json')
         path_params = {}
         if 'fqdn' in params:
             path_params['fqdn'] = params['fqdn']
+        if 'version' in params:
+            path_params['version'] = params['version']
         if 'resource' in params:
             path_params['resource'] = params['resource']
 
@@ -501,7 +522,7 @@ class ThirdPartyResourcesApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def update_third_party_resource(self, namespace, fqdn, resource, body, **kwargs):
+    def update_third_party_resource(self, namespace, name, fqdn, version, resource, body, **kwargs):
         """
         Update a Resource
         Update the specified third party resource of the type specified
@@ -511,12 +532,14 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.update_third_party_resource(namespace, fqdn, resource, body, callback=callback_function)
+        >>> thread = api.update_third_party_resource(namespace, name, fqdn, version, resource, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str namespace: The Resource's namespace (required)
+        :param str name: The Resource's name (required)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :param object body: The JSON schema of the Resource to create. (required)
         :return: object
@@ -525,12 +548,12 @@ class ThirdPartyResourcesApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.update_third_party_resource_with_http_info(namespace, fqdn, resource, body, **kwargs)
+            return self.update_third_party_resource_with_http_info(namespace, name, fqdn, version, resource, body, **kwargs)
         else:
-            (data) = self.update_third_party_resource_with_http_info(namespace, fqdn, resource, body, **kwargs)
+            (data) = self.update_third_party_resource_with_http_info(namespace, name, fqdn, version, resource, body, **kwargs)
             return data
 
-    def update_third_party_resource_with_http_info(self, namespace, fqdn, resource, body, **kwargs):
+    def update_third_party_resource_with_http_info(self, namespace, name, fqdn, version, resource, body, **kwargs):
         """
         Update a Resource
         Update the specified third party resource of the type specified
@@ -540,12 +563,14 @@ class ThirdPartyResourcesApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.update_third_party_resource_with_http_info(namespace, fqdn, resource, body, callback=callback_function)
+        >>> thread = api.update_third_party_resource_with_http_info(namespace, name, fqdn, version, resource, body, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str namespace: The Resource's namespace (required)
+        :param str name: The Resource's name (required)
         :param str fqdn: The Third party Resource fqdn (required)
+        :param str version: The Third party Resource version (required)
         :param str resource: The Resource type (required)
         :param object body: The JSON schema of the Resource to create. (required)
         :return: object
@@ -553,7 +578,7 @@ class ThirdPartyResourcesApi(object):
                  returns the request thread.
         """
 
-        all_params = ['namespace', 'fqdn', 'resource', 'body']
+        all_params = ['namespace', 'name', 'fqdn', 'version', 'resource', 'body']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -571,9 +596,15 @@ class ThirdPartyResourcesApi(object):
         # verify the required parameter 'namespace' is set
         if ('namespace' not in params) or (params['namespace'] is None):
             raise ValueError("Missing the required parameter `namespace` when calling `update_third_party_resource`")
+        # verify the required parameter 'name' is set
+        if ('name' not in params) or (params['name'] is None):
+            raise ValueError("Missing the required parameter `name` when calling `update_third_party_resource`")
         # verify the required parameter 'fqdn' is set
         if ('fqdn' not in params) or (params['fqdn'] is None):
             raise ValueError("Missing the required parameter `fqdn` when calling `update_third_party_resource`")
+        # verify the required parameter 'version' is set
+        if ('version' not in params) or (params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `update_third_party_resource`")
         # verify the required parameter 'resource' is set
         if ('resource' not in params) or (params['resource'] is None):
             raise ValueError("Missing the required parameter `resource` when calling `update_third_party_resource`")
@@ -584,12 +615,16 @@ class ThirdPartyResourcesApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}'.replace('{format}', 'json')
+        resource_path = '/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
+        if 'name' in params:
+            path_params['name'] = params['name']
         if 'fqdn' in params:
             path_params['fqdn'] = params['fqdn']
+        if 'version' in params:
+            path_params['version'] = params['version']
         if 'resource' in params:
             path_params['resource'] = params['resource']
 

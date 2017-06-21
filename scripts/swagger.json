@@ -33250,48 +33250,7 @@
         }
       }
     },
-    "/apis/{fqdn}/v1/{resource}": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "A list of Resources",
-            "schema": {
-              "type": "object"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "uniqueItems": true,
-            "in": "query",
-            "type": "boolean",
-            "name": "watch",
-            "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion."
-          },
-          {
-            "description": "The Third party Resource fqdn",
-            "required": true,
-            "type": "string",
-            "name": "fqdn",
-            "in": "path"
-          },
-          {
-            "description": "The Resource type",
-            "required": true,
-            "type": "string",
-            "name": "resource",
-            "in": "path"
-          }
-        ],
-        "tags": [
-          "third_party_resources"
-        ],
-        "summary": "Gets Resources",
-        "operationId": "listThirdPartyResource",
-        "description": "Returns a list of Resources"
-      }
-    },
-    "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}": {
+    "/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name}": {
       "put": {
         "responses": {
           "201": {
@@ -33310,10 +33269,24 @@
             "in": "path"
           },
           {
+            "description": "The Resource's name",
+            "required": true,
+            "type": "string",
+            "name": "name",
+            "in": "path"
+          },
+          {
             "description": "The Third party Resource fqdn",
             "required": true,
             "type": "string",
             "name": "fqdn",
+            "in": "path"
+          },
+          {
+            "description": "The Third party Resource version",
+            "required": true,
+            "type": "string",
+            "name": "version",
             "in": "path"
           },
           {
@@ -33419,6 +33392,13 @@
             "in": "path"
           },
           {
+            "description": "The Third party Resource version",
+            "required": true,
+            "type": "string",
+            "name": "version",
+            "in": "path"
+          },
+          {
             "description": "The Resource type",
             "required": true,
             "type": "string",
@@ -33434,7 +33414,7 @@
         "description": "Returns a specific Resource in a namespace"
       }
     },
-    "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}": {
+    "/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}": {
       "post": {
         "responses": {
           "201": {
@@ -33460,6 +33440,13 @@
             "in": "path"
           },
           {
+            "description": "The Third party Resource version",
+            "required": true,
+            "type": "string",
+            "name": "version",
+            "in": "path"
+          },
+          {
             "description": "The Resource type",
             "required": true,
             "type": "string",
@@ -33482,6 +33469,54 @@
         "summary": "Create a Resource",
         "operationId": "createThirdPartyResource",
         "description": "Creates a third party resource of the type specified"
+      }
+    },
+    "/apis/{fqdn}/{version}/{resource}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "A list of Resources",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "boolean",
+            "name": "watch",
+            "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion."
+          },
+          {
+            "description": "The Third party Resource fqdn",
+            "required": true,
+            "type": "string",
+            "name": "fqdn",
+            "in": "path"
+          },
+          {
+            "description": "The Third party Resource version",
+            "required": true,
+            "type": "string",
+            "name": "version",
+            "in": "path"
+          },
+          {
+            "description": "The Resource type",
+            "required": true,
+            "type": "string",
+            "name": "resource",
+            "in": "path"
+          }
+        ],
+        "tags": [
+          "third_party_resources"
+        ],
+        "summary": "Gets Resources",
+        "operationId": "listThirdPartyResource",
+        "description": "Returns a list of Resources"
       }
     }
   },
