@@ -1,5 +1,5 @@
 {
-  "/apis/{fqdn}/v1/{resource}": {
+  "/apis/{fqdn}/{version}/{resource}": {
     "get": {
       "operationId": "listThirdPartyResource",
       "summary": "Gets Resources",
@@ -23,6 +23,13 @@
           "type": "string"
         },
         {
+          "name": "version",
+          "in": "path",
+          "required": true,
+          "description": "The Third party Resource version",
+          "type": "string"
+        },
+        {
           "name": "resource",
           "in": "path",
           "required": true,
@@ -40,7 +47,7 @@
       }
     }
   },
-  "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}": {
+  "/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}": {
     "post": {
       "operationId": "createThirdPartyResource",
       "summary": "Create a Resource",
@@ -61,6 +68,13 @@
           "in": "path",
           "required": true,
           "description": "The Third party Resource fqdn",
+          "type": "string"
+        },
+        {
+          "name": "version",
+          "in": "path",
+          "required": true,
+          "description": "The Third party Resource version",
           "type": "string"
         },
         {
@@ -90,7 +104,7 @@
       }
     }
   },
-  "/apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name}": {
+  "/apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name}": {
     "get": {
       "operationId": "getThirdPartyResource",
       "summary": "Gets a specific Resource",
@@ -118,6 +132,13 @@
           "in": "path",
           "required": true,
           "description": "The Third party Resource fqdn",
+          "type": "string"
+        },
+        {
+          "name": "version",
+          "in": "path",
+          "required": true,
+          "description": "The Third party Resource version",
           "type": "string"
         },
         {
@@ -200,10 +221,24 @@
           "type": "string"
         },
         {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "description": "The Resource's name",
+          "type": "string"
+        },
+        {
           "name": "fqdn",
           "in": "path",
           "required": true,
           "description": "The Third party Resource fqdn",
+          "type": "string"
+        },
+        {
+          "name": "version",
+          "in": "path",
+          "required": true,
+          "description": "The Third party Resource version",
           "type": "string"
         },
         {
