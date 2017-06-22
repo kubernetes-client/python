@@ -4,15 +4,15 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_third_party_resource**](ThirdPartyResourcesApi.md#create_third_party_resource) | **POST** /apis/{fqdn}/v1/namespaces/{namespace}/{resource} | Create a Resource
-[**delete_third_party_resource**](ThirdPartyResourcesApi.md#delete_third_party_resource) | **DELETE** /apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name} | Deletes a specific Resource
-[**get_third_party_resource**](ThirdPartyResourcesApi.md#get_third_party_resource) | **GET** /apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name} | Gets a specific Resource
-[**list_third_party_resource**](ThirdPartyResourcesApi.md#list_third_party_resource) | **GET** /apis/{fqdn}/v1/{resource} | Gets Resources
-[**update_third_party_resource**](ThirdPartyResourcesApi.md#update_third_party_resource) | **PUT** /apis/{fqdn}/v1/namespaces/{namespace}/{resource}/{name} | Update a Resource
+[**create_third_party_resource**](ThirdPartyResourcesApi.md#create_third_party_resource) | **POST** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource} | Create a Resource
+[**delete_third_party_resource**](ThirdPartyResourcesApi.md#delete_third_party_resource) | **DELETE** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name} | Deletes a specific Resource
+[**get_third_party_resource**](ThirdPartyResourcesApi.md#get_third_party_resource) | **GET** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name} | Gets a specific Resource
+[**list_third_party_resource**](ThirdPartyResourcesApi.md#list_third_party_resource) | **GET** /apis/{fqdn}/{version}/{resource} | Gets Resources
+[**update_third_party_resource**](ThirdPartyResourcesApi.md#update_third_party_resource) | **PUT** /apis/{fqdn}/{version}/namespaces/{namespace}/{resource}/{name} | Update a Resource
 
 
 # **create_third_party_resource**
-> object create_third_party_resource(namespace, fqdn, resource, body)
+> object create_third_party_resource(namespace, fqdn, version, resource, body)
 
 Create a Resource
 
@@ -35,12 +35,13 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
 namespace = 'namespace_example' # str | The Resource's namespace
 fqdn = 'fqdn_example' # str | The Third party Resource fqdn
+version = 'version_example' # str | The Third party Resource version
 resource = 'resource_example' # str | The Resource type
 body = NULL # object | The JSON schema of the Resource to create.
 
 try: 
     # Create a Resource
-    api_response = api_instance.create_third_party_resource(namespace, fqdn, resource, body)
+    api_response = api_instance.create_third_party_resource(namespace, fqdn, version, resource, body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ThirdPartyResourcesApi->create_third_party_resource: %s\n" % e)
@@ -52,6 +53,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| The Resource&#39;s namespace | 
  **fqdn** | **str**| The Third party Resource fqdn | 
+ **version** | **str**| The Third party Resource version | 
  **resource** | **str**| The Resource type | 
  **body** | **object**| The JSON schema of the Resource to create. | 
 
@@ -130,7 +132,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_third_party_resource**
-> object get_third_party_resource(namespace, name, fqdn, resource)
+> object get_third_party_resource(namespace, name, fqdn, version, resource)
 
 Gets a specific Resource
 
@@ -154,11 +156,12 @@ api_instance = kubernetes.client.ThirdPartyResourcesApi()
 namespace = 'namespace_example' # str | The Resource's namespace
 name = 'name_example' # str | The Resource's name
 fqdn = 'fqdn_example' # str | The Third party Resource fqdn
+version = 'version_example' # str | The Third party Resource version
 resource = 'resource_example' # str | The Resource type
 
 try: 
     # Gets a specific Resource
-    api_response = api_instance.get_third_party_resource(namespace, name, fqdn, resource)
+    api_response = api_instance.get_third_party_resource(namespace, name, fqdn, version, resource)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ThirdPartyResourcesApi->get_third_party_resource: %s\n" % e)
@@ -171,6 +174,7 @@ Name | Type | Description  | Notes
  **namespace** | **str**| The Resource&#39;s namespace | 
  **name** | **str**| The Resource&#39;s name | 
  **fqdn** | **str**| The Third party Resource fqdn | 
+ **version** | **str**| The Third party Resource version | 
  **resource** | **str**| The Resource type | 
 
 ### Return type
@@ -189,7 +193,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_third_party_resource**
-> object list_third_party_resource(fqdn, resource, watch=watch)
+> object list_third_party_resource(fqdn, version, resource, watch=watch)
 
 Gets Resources
 
@@ -211,12 +215,13 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
 fqdn = 'fqdn_example' # str | The Third party Resource fqdn
+version = 'version_example' # str | The Third party Resource version
 resource = 'resource_example' # str | The Resource type
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
     # Gets Resources
-    api_response = api_instance.list_third_party_resource(fqdn, resource, watch=watch)
+    api_response = api_instance.list_third_party_resource(fqdn, version, resource, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ThirdPartyResourcesApi->list_third_party_resource: %s\n" % e)
@@ -227,6 +232,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fqdn** | **str**| The Third party Resource fqdn | 
+ **version** | **str**| The Third party Resource version | 
  **resource** | **str**| The Resource type | 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
 
@@ -246,7 +252,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_third_party_resource**
-> object update_third_party_resource(namespace, fqdn, resource, body)
+> object update_third_party_resource(namespace, name, fqdn, version, resource, body)
 
 Update a Resource
 
@@ -268,13 +274,15 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
 namespace = 'namespace_example' # str | The Resource's namespace
+name = 'name_example' # str | The Resource's name
 fqdn = 'fqdn_example' # str | The Third party Resource fqdn
+version = 'version_example' # str | The Third party Resource version
 resource = 'resource_example' # str | The Resource type
 body = NULL # object | The JSON schema of the Resource to create.
 
 try: 
     # Update a Resource
-    api_response = api_instance.update_third_party_resource(namespace, fqdn, resource, body)
+    api_response = api_instance.update_third_party_resource(namespace, name, fqdn, version, resource, body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ThirdPartyResourcesApi->update_third_party_resource: %s\n" % e)
@@ -285,7 +293,9 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| The Resource&#39;s namespace | 
+ **name** | **str**| The Resource&#39;s name | 
  **fqdn** | **str**| The Third party Resource fqdn | 
+ **version** | **str**| The Third party Resource version | 
  **resource** | **str**| The Resource type | 
  **body** | **object**| The JSON schema of the Resource to create. | 
 

@@ -64,7 +64,6 @@ Method | HTTP request | Description
 [**create_namespaced_service_account**](CoreV1Api.md#create_namespaced_service_account) | **POST** /api/v1/namespaces/{namespace}/serviceaccounts | 
 [**create_node**](CoreV1Api.md#create_node) | **POST** /api/v1/nodes | 
 [**create_persistent_volume**](CoreV1Api.md#create_persistent_volume) | **POST** /api/v1/persistentvolumes | 
-[**delete_collection_namespace**](CoreV1Api.md#delete_collection_namespace) | **DELETE** /api/v1/namespaces | 
 [**delete_collection_namespaced_config_map**](CoreV1Api.md#delete_collection_namespaced_config_map) | **DELETE** /api/v1/namespaces/{namespace}/configmaps | 
 [**delete_collection_namespaced_endpoints**](CoreV1Api.md#delete_collection_namespaced_endpoints) | **DELETE** /api/v1/namespaces/{namespace}/endpoints | 
 [**delete_collection_namespaced_event**](CoreV1Api.md#delete_collection_namespaced_event) | **DELETE** /api/v1/namespaces/{namespace}/events | 
@@ -3635,68 +3634,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V1PersistentVolume**](V1PersistentVolume.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_collection_namespace**
-> V1Status delete_collection_namespace(pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-
-
-
-delete collection of Namespace
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api()
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
-resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
-timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-
-try: 
-    api_response = api_instance.delete_collection_namespace(pretty=pretty, field_selector=field_selector, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespace: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
- **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
- **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
- **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
-
-### Return type
-
-[**V1Status**](V1Status.md)
 
 ### Authorization
 
