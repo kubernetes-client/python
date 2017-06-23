@@ -33262,17 +33262,17 @@
         },
         "parameters": [
           {
-            "description": "The Resource's namespace",
-            "required": true,
-            "type": "string",
-            "name": "namespace",
-            "in": "path"
-          },
-          {
             "description": "The Resource's name",
             "required": true,
             "type": "string",
             "name": "name",
+            "in": "path"
+          },
+          {
+            "description": "The Resource's namespace",
+            "required": true,
+            "type": "string",
+            "name": "namespace",
             "in": "path"
           },
           {
@@ -33371,17 +33371,17 @@
         },
         "parameters": [
           {
-            "description": "The Resource's namespace",
-            "required": true,
-            "type": "string",
-            "name": "namespace",
-            "in": "path"
-          },
-          {
             "description": "The Resource's name",
             "required": true,
             "type": "string",
             "name": "name",
+            "in": "path"
+          },
+          {
+            "description": "The Resource's namespace",
+            "required": true,
+            "type": "string",
+            "name": "namespace",
             "in": "path"
           },
           {
