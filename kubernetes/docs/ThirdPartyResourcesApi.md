@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_third_party_resource**
-> object get_third_party_resource(namespace, name, fqdn, version, resource)
+> object get_third_party_resource(name, namespace, fqdn, version, resource)
 
 Gets a specific Resource
 
@@ -153,15 +153,15 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
-namespace = 'namespace_example' # str | The Resource's namespace
 name = 'name_example' # str | The Resource's name
+namespace = 'namespace_example' # str | The Resource's namespace
 fqdn = 'fqdn_example' # str | The Third party Resource fqdn
 version = 'version_example' # str | The Third party Resource version
 resource = 'resource_example' # str | The Resource type
 
 try: 
     # Gets a specific Resource
-    api_response = api_instance.get_third_party_resource(namespace, name, fqdn, version, resource)
+    api_response = api_instance.get_third_party_resource(name, namespace, fqdn, version, resource)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ThirdPartyResourcesApi->get_third_party_resource: %s\n" % e)
@@ -171,8 +171,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **namespace** | **str**| The Resource&#39;s namespace | 
  **name** | **str**| The Resource&#39;s name | 
+ **namespace** | **str**| The Resource&#39;s namespace | 
  **fqdn** | **str**| The Third party Resource fqdn | 
  **version** | **str**| The Third party Resource version | 
  **resource** | **str**| The Resource type | 
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_third_party_resource**
-> object update_third_party_resource(namespace, name, fqdn, version, resource, body)
+> object update_third_party_resource(name, namespace, fqdn, version, resource, body)
 
 Update a Resource
 
@@ -273,8 +273,8 @@ kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.ThirdPartyResourcesApi()
-namespace = 'namespace_example' # str | The Resource's namespace
 name = 'name_example' # str | The Resource's name
+namespace = 'namespace_example' # str | The Resource's namespace
 fqdn = 'fqdn_example' # str | The Third party Resource fqdn
 version = 'version_example' # str | The Third party Resource version
 resource = 'resource_example' # str | The Resource type
@@ -282,7 +282,7 @@ body = NULL # object | The JSON schema of the Resource to create.
 
 try: 
     # Update a Resource
-    api_response = api_instance.update_third_party_resource(namespace, name, fqdn, version, resource, body)
+    api_response = api_instance.update_third_party_resource(name, namespace, fqdn, version, resource, body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ThirdPartyResourcesApi->update_third_party_resource: %s\n" % e)
@@ -292,8 +292,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **namespace** | **str**| The Resource&#39;s namespace | 
  **name** | **str**| The Resource&#39;s name | 
+ **namespace** | **str**| The Resource&#39;s namespace | 
  **fqdn** | **str**| The Third party Resource fqdn | 
  **version** | **str**| The Third party Resource version | 
  **resource** | **str**| The Resource type | 
