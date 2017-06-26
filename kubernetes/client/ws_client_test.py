@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import ssl
 import unittest
+import websocket
 
-from .ws_client import get_websocket_url
+from .ws_client import get_websocket_url, websocket_call
+from kubernetes.client import configuration
+from unittest.mock import patch
 
 
 class WSClientTest(unittest.TestCase):
@@ -31,6 +35,24 @@ class WSClientTest(unittest.TestCase):
                 ('https://api.domain.com/', 'wss://api.domain.com/'),
                 ]:
             self.assertEqual(get_websocket_url(url), ws_url)
+
+    @patch.object(websocket._http, '_can_use_sni')
+    @patch.object(websocket._http, '_open_socket')
+    @patch.object(ssl.SSLContext, 'load_verify_locations')
+    def test_use_of_correct_ca_cert(self, load_verify_locations, *ignored):
+        # arrange
+        expected = '/expected-ca.pem'
+        configuration.ssl_ca_cert = expected
+        load_verify_locations.side_effect = Exception("need not go further")
+
+        # act
+        with self.assertRaises(Exception):
+            websocket_call(configuration, 'https://localhost',
+                           {}, None, True, {})
+
+        # assert
+        actual = load_verify_locations.call_args[1]['cafile']
+        self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':

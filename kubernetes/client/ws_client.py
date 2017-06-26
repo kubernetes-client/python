@@ -16,7 +16,9 @@ import select
 import certifi
 import time
 import collections
+from distutils.version import StrictVersion
 from websocket import WebSocket, ABNF, enableTrace
+from websocket import __version__ as websocket_version
 import six
 import ssl
 from six.moves.urllib.parse import urlencode, quote_plus, urlparse, urlunparse
@@ -51,8 +53,11 @@ class WSClient:
                 'cert_reqs': ssl.CERT_REQUIRED,
                 'keyfile': configuration.key_file,
                 'certfile': configuration.cert_file,
-                'ca_certs': configuration.ssl_ca_cert or certifi.where(),
+                'ca_cert': configuration.ssl_ca_cert or certifi.where(),
             }
+            if StrictVersion(websocket_version) < StrictVersion('0.41.0'):
+                ssl_opts['ca_certs'] = ssl_opts.pop('ca_cert')
+
             if configuration.assert_hostname is not None:
                 ssl_opts['check_hostname'] = configuration.assert_hostname
         else:
