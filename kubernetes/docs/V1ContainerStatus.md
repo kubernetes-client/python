@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**container_id** | **str** | Container&#39;s ID in the format &#39;docker://&lt;container_id&gt;&#39;. More info: http://kubernetes.io/docs/user-guide/container-environment#container-information | [optional] 
-**image** | **str** | The image the container is running. More info: http://kubernetes.io/docs/user-guide/images | 
+**container_id** | **str** | Container&#39;s ID in the format &#39;docker://&lt;container_id&gt;&#39;. | [optional] 
+**image** | **str** | The image the container is running. More info: https://kubernetes.io/docs/concepts/containers/images | 
 **image_id** | **str** | ImageID of the container&#39;s image. | 
 **last_state** | [**V1ContainerState**](V1ContainerState.md) | Details about the container&#39;s last termination condition. | [optional] 
 **name** | **str** | This must be a DNS_LABEL. Each container in a pod must have a unique name. Cannot be updated. | 
