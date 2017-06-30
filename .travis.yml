@@ -1,5 +1,6 @@
 # ref: https://docs.travis-ci.com/user/languages/python
 language: python
+dist: trusty
 sudo: true
 services:
   - docker
