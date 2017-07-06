@@ -40,29 +40,24 @@ pushd "${CLIENT_ROOT}" > /dev/null
 CLIENT_ROOT=`pwd`
 popd > /dev/null
 
-echo "--- Downloading and processing OpenAPI spec"
-python "${SCRIPT_ROOT}/preprocess_spec.py"
+TEMP_FOLDER=$(mktemp -d) 
+trap "rm -rf ${TEMP_FOLDER}" EXIT SIGINT
 
-echo "--- Cleaning up previously generated folders"
-rm -rf "${CLIENT_ROOT}/client/apis"
-rm -rf "${CLIENT_ROOT}/client/models"
-rm -rf "${CLIENT_ROOT}/docs"
-rm -rf "${CLIENT_ROOT}/test"
+GEN_ROOT="${TEMP_FOLDER}/gen"
+SETTING_FILE="${TEMP_FOLDER}/settings"
+echo "export KUBERNETES_BRANCH=\"$(python ${SCRIPT_ROOT}/constants.py KUBERNETES_BRANCH)\"" > $SETTING_FILE
+echo "export CLIENT_VERSION=\"$(python ${SCRIPT_ROOT}/constants.py CLIENT_VERSION)\"" >> $SETTING_FILE
+echo "export PACKAGE_NAME=\"client\"" >> $SETTING_FILE
 
-echo "--- Generating client ..."
-mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${SCRIPT_ROOT}/swagger.json" -Dgenerator.output.path="${CLIENT_ROOT}" -Dgenerator.package.name=client -D=generator.client.version=${CLIENT_VERSION}
+echo ">>> Cloning gen repo"
+git clone --recursive https://github.com/kubernetes-client/gen.git "${GEN_ROOT}"
 
-echo "--- Patching generated code..."
-find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/kubernetes.client/g' {} +
-find "${CLIENT_ROOT}" -path "${CLIENT_ROOT}/base" -prune -o -type f -a -name \*.md -exec sed -i 's/\bclient/kubernetes.client/g' {} +
-find "${CLIENT_ROOT}" -path "${CLIENT_ROOT}/base" -prune -o -type f -a -name \*.md -exec sed -i 's/kubernetes.client-python/client-python/g' {} +
-# rm "${CLIENT_ROOT}/LICENSE"
-echo "--- updating version information..."
+echo ">>> Running python generator from the gen repo"
+"${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}" 
+mv "${CLIENT_ROOT}/swagger.json" "${SCRIPT_ROOT}/swagger.json"
+
+echo ">>> updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^PACKAGE_NAME = .*/PACKAGE_NAME = \\\"${PACKAGE_NAME}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STATUS}\\\"," "${SCRIPT_ROOT}/../setup.py"
-sed -i'' "/^configuration = Configuration()$/d" "${CLIENT_ROOT}/client/__init__.py"
-sed -i'' "/^from .configuration import Configuration$/d" "${CLIENT_ROOT}/client/__init__.py"
-sed -i '${/^$/d;}' "${CLIENT_ROOT}/client/__init__.py"
-echo "from .configuration import Configuration, ConfigurationObject, configuration" >> "${CLIENT_ROOT}/client/__init__.py"
-echo "---Done."
+echo ">>> Done."
