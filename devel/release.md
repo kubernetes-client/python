@@ -99,7 +99,7 @@ on a clean machine:
 
 ```bash
 git clean -xdf
-pyenv install 2.7.12
+pyenv install -s 2.7.12
 pyenv global 2.7.12
 virtualenv .release
 source .release/bin/activate
