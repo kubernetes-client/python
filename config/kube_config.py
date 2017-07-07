@@ -19,7 +19,7 @@ import tempfile
 
 import urllib3
 import yaml
-from oauth2client.client import GoogleCredentials
+from google.oauth2.credentials import Credentials
 
 from kubernetes.client import ApiClient, ConfigurationObject, configuration
 
