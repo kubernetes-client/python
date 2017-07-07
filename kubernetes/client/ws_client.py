@@ -49,14 +49,17 @@ class WSClient:
         if url.startswith('wss://') and configuration.verify_ssl:
             ssl_opts = {
                 'cert_reqs': ssl.CERT_REQUIRED,
-                'keyfile': configuration.key_file,
-                'certfile': configuration.cert_file,
                 'ca_certs': configuration.ssl_ca_cert or certifi.where(),
             }
             if configuration.assert_hostname is not None:
                 ssl_opts['check_hostname'] = configuration.assert_hostname
         else:
             ssl_opts = {'cert_reqs': ssl.CERT_NONE}
+
+        if configuration.cert_file:
+            ssl_opts['certfile'] = configuration.cert_file
+        if configuration.key_file:
+            ssl_opts['keyfile'] = configuration.key_file
 
         self.sock = WebSocket(sslopt=ssl_opts, skip_utf8_validation=False)
         self.sock.connect(url, header=header)
