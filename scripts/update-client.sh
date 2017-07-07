@@ -43,14 +43,18 @@ popd > /dev/null
 TEMP_FOLDER=$(mktemp -d) 
 trap "rm -rf ${TEMP_FOLDER}" EXIT SIGINT
 
-GEN_ROOT="${TEMP_FOLDER}/gen"
 SETTING_FILE="${TEMP_FOLDER}/settings"
 echo "export KUBERNETES_BRANCH=\"$(python ${SCRIPT_ROOT}/constants.py KUBERNETES_BRANCH)\"" > $SETTING_FILE
 echo "export CLIENT_VERSION=\"$(python ${SCRIPT_ROOT}/constants.py CLIENT_VERSION)\"" >> $SETTING_FILE
 echo "export PACKAGE_NAME=\"client\"" >> $SETTING_FILE
 
-echo ">>> Cloning gen repo"
-git clone --recursive https://github.com/kubernetes-client/gen.git "${GEN_ROOT}"
+if [[ -z ${GEN_ROOT:-} ]]; then
+    GEN_ROOT="${TEMP_FOLDER}/gen"
+    echo ">>> Cloning gen repo"
+    git clone --recursive https://github.com/kubernetes-client/gen.git "${GEN_ROOT}"
+else
+    echo ">>> Reusing gen repo at ${GEN_ROOT}"
+fi
 
 echo ">>> Running python generator from the gen repo"
 "${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}" 

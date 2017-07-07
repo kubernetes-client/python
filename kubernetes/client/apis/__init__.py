@@ -24,6 +24,7 @@ from .certificates_api import CertificatesApi
 from .certificates_v1beta1_api import CertificatesV1beta1Api
 from .core_api import CoreApi
 from .core_v1_api import CoreV1Api
+from .custom_objects_api import CustomObjectsApi
 from .extensions_api import ExtensionsApi
 from .extensions_v1beta1_api import ExtensionsV1beta1Api
 from .logs_api import LogsApi
@@ -39,5 +40,4 @@ from .settings_v1alpha1_api import SettingsV1alpha1Api
 from .storage_api import StorageApi
 from .storage_v1_api import StorageV1Api
 from .storage_v1beta1_api import StorageV1beta1Api
-from .third_party_resources_api import ThirdPartyResourcesApi
 from .version_api import VersionApi
