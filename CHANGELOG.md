@@ -1,3 +1,9 @@
+# v3.0.0a1
+- Update client to kubernetes 1.7 
+- Support ThirdPartyResources (TPR) and CustomResourceDefinitions (CRD). Note that TPR is deprecated in kubernetes #251 #201
+- Better dependency management #136
+- Add support for python3.6 #244
+
 # v1.0.2
 - Bugfix: support RFC6902 'json-patch' operations #187
 
