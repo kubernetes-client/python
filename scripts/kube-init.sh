@@ -41,17 +41,21 @@ docker --version
 
 # ref: https://github.com/kubernetes/minikube#linux-ci-installation-which-supports-running-in-a-vm-example-w-kubectl-installation
 
+echo "Home is $HOME"
+export HOME=~
+echo "Home is $HOME"
+
 curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
 
 export MINIKUBE_WANTUPDATENOTIFICATION=false
 export MINIKUBE_WANTREPORTERRORPROMPT=false
-export MINIKUBE_HOME=~
+export MINIKUBE_HOME=$HOME
 export CHANGE_MINIKUBE_NONE_USER=true
-mkdir ~/.kube || true
-touch ~/.kube/config
+mkdir $HOME/.kube || true
+touch $HOME/.kube/config
 
-export KUBECONFIG=~/.kube/config
+export KUBECONFIG=$HOME/.kube/config
 sudo -E ./minikube start --vm-driver=none --use-vendored-driver
 
 # this for loop waits until kubectl can access the api server that minikube has created
