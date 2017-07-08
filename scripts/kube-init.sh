@@ -70,6 +70,8 @@ done
 
 # kubectl commands are now able to interact with minikube cluster
 
+sed -i'' "s/127.0.0.1:8080/127.0.0.1:8443/" ~/.kube/config
+
 echo "Dump Kubernetes Objects..."
 cat ~/.kube/config
 kubectl get componentstatuses
