@@ -41,8 +41,8 @@ def get_e2e_configuration():
                 break
             except urllib3.exceptions.HTTPError:
                 pass
+        config.assert_hostname = False
     if config.host is None:
         raise unittest.SkipTest('Unable to find a running Kubernetes instance')
     print('Running test against : %s' % config.host)
-    config.assert_hostname = False
     return config
