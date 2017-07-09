@@ -11,7 +11,7 @@ spec:
     targetPort: 8888
   selector:
     app: jupyter
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Pod
