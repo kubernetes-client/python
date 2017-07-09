@@ -99,6 +99,9 @@ class RESTClientObject(object):
             'key_file': key_file,
         }
 
+        if config.connection_pool_maxsize is not None:
+            kwargs['maxsize'] = config.connection_pool_maxsize
+
         if config.assert_hostname is not None:
             kwargs['assert_hostname'] = config.assert_hostname
 
