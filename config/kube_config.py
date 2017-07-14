@@ -25,7 +25,7 @@ from kubernetes.client import ApiClient, ConfigurationObject, configuration
 
 from .config_exception import ConfigException
 
-KUBE_CONFIG_DEFAULT_LOCATION = '~/.kube/config'
+KUBE_CONFIG_DEFAULT_LOCATION = os.environ.get('KUBECONFIG', '~/.kube/config')
 _temp_files = {}
 
 
