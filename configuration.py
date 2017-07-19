@@ -90,6 +90,9 @@ class ConfigurationObject(object):
         # When set to `None`, will default to whatever urllib3 uses
         self.connection_pool_maxsize = None
 
+        # WebSocket subprotocol to use for exec and portforward.
+        self.ws_streaming_protocol = "v4.channel.k8s.io"
+
     @property
     def logger_file(self):
         """
