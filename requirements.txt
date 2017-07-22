@@ -7,3 +7,4 @@ pyyaml>=3.12  # MIT
 google-auth>=1.0.1  # Apache-2.0
 ipaddress>=1.0.17  # PSF
 websocket-client>=0.32.0,<=0.40.0 # LGPLv2+
+requests # Apache-2.0
