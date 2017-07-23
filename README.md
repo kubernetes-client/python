@@ -1,5 +1,7 @@
 # python-base
 
+[![Build Status](https://travis-ci.org/kubernetes-client/python-base.svg?branch=master)](https://travis-ci.org/kubernetes-client/python-base)
+
 This is the utility part of the [python client](https://github.com/kubernetes-incubator/client-python). It has been added to the main
 repo using git submodules. This structure allow other developers to create
 their own kubernetes client and still use standard kubernetes python utilities.
