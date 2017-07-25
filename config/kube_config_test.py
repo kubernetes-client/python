@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import base64
+import datetime
 import os
 import shutil
 import tempfile
@@ -22,6 +23,7 @@ import yaml
 from six import PY3
 
 from .config_exception import ConfigException
+from .dateutil import parse_rfc3339
 from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
                           _cleanup_temp_files, _create_temp_file_with_content,
                           list_kube_config_contexts, load_kube_config,
@@ -34,6 +36,10 @@ NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 
 def _base64(string):
     return base64.encodestring(string.encode()).decode()
+
+
+def _raise_exception(st):
+    raise Exception(st)
 
 
 TEST_FILE_KEY = "file"
@@ -305,6 +311,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "expired_gcp",
+                "context": {
+                    "cluster": "default",
+                    "user": "expired_gcp"
+                }
+            },
+            {
                 "name": "user_pass",
                 "context": {
                     "cluster": "default",
@@ -397,7 +410,24 @@ class TestKubeConfigLoader(BaseTestCase):
                 "user": {
                     "auth-provider": {
                         "name": "gcp",
-                        "access_token": "not_used",
+                        "config": {
+                            "access-token": TEST_DATA_BASE64,
+                        }
+                    },
+                    "token": TEST_DATA_BASE64,  # should be ignored
+                    "username": TEST_USERNAME,  # should be ignored
+                    "password": TEST_PASSWORD,  # should be ignored
+                }
+            },
+            {
+                "name": "expired_gcp",
+                "user": {
+                    "auth-provider": {
+                        "name": "gcp",
+                        "config": {
+                            "access-token": TEST_DATA_BASE64,
+                            "expiry": "2000-01-01T12:00:00Z",  # always in past
+                        }
                     },
                     "token": TEST_DATA_BASE64,  # should be ignored
                     "username": TEST_USERNAME,  # should be ignored
@@ -464,24 +494,39 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertTrue(loader._load_user_token())
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64, loader.token)
 
-    def test_gcp(self):
+    def test_gcp_no_refresh(self):
         expected = FakeConfig(
             host=TEST_HOST,
-            token=BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64)
+            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="gcp",
             client_configuration=actual,
-            get_google_credentials=lambda: TEST_ANOTHER_DATA_BASE64) \
-            .load_and_set()
+            get_google_credentials=lambda: _raise_exception(
+                "SHOULD NOT BE CALLED")).load_and_set()
         self.assertEqual(expected, actual)
 
-    def test_load_gcp_token(self):
+    def test_load_gcp_token_no_refresh(self):
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="gcp",
-            get_google_credentials=lambda: TEST_ANOTHER_DATA_BASE64)
+            get_google_credentials=lambda: _raise_exception(
+                "SHOULD NOT BE CALLED"))
+        self.assertTrue(loader._load_gcp_token())
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+                         loader.token)
+
+    def test_load_gcp_token_with_refresh(self):
+
+        def cred(): return None
+        cred.token = TEST_ANOTHER_DATA_BASE64
+        cred.expiry = datetime.datetime.now()
+
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="expired_gcp",
+            get_google_credentials=lambda: cred)
         self.assertTrue(loader._load_gcp_token())
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64,
                          loader.token)
