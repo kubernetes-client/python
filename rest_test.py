@@ -16,7 +16,7 @@ import urllib3
 
 from mock import patch
 
-from kubernetes.client import Configuration
+from kubernetes.client import ConfigurationObject
 from kubernetes.client.rest import RESTClientObject
 
 
@@ -25,12 +25,12 @@ class RestTest(unittest.TestCase):
     def test_poolmanager(self):
         'Test that a poolmanager is created for rest client'
         with patch.object(urllib3, 'PoolManager') as pool:
-            RESTClientObject(config=Configuration())
+            RESTClientObject(config=ConfigurationObject())
             pool.assert_called_once()
 
     def test_proxy(self):
         'Test that proxy is created when the config especifies it'
-        config = Configuration()
+        config = ConfigurationObject()
         config.http_proxy_url = 'http://proxy.example.com'
 
         with patch.object(urllib3, 'proxy_from_url') as proxy:
