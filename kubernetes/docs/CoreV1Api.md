@@ -54,14 +54,14 @@ Method | HTTP request | Description
 [**connect_put_node_proxy_with_path**](CoreV1Api.md#connect_put_node_proxy_with_path) | **PUT** /api/v1/nodes/{name}/proxy/{path} | 
 [**create_namespace**](CoreV1Api.md#create_namespace) | **POST** /api/v1/namespaces | 
 [**create_namespaced_binding**](CoreV1Api.md#create_namespaced_binding) | **POST** /api/v1/namespaces/{namespace}/bindings | 
-[**create_namespaced_binding_binding**](CoreV1Api.md#create_namespaced_binding_binding) | **POST** /api/v1/namespaces/{namespace}/pods/{name}/binding | 
 [**create_namespaced_config_map**](CoreV1Api.md#create_namespaced_config_map) | **POST** /api/v1/namespaces/{namespace}/configmaps | 
 [**create_namespaced_endpoints**](CoreV1Api.md#create_namespaced_endpoints) | **POST** /api/v1/namespaces/{namespace}/endpoints | 
 [**create_namespaced_event**](CoreV1Api.md#create_namespaced_event) | **POST** /api/v1/namespaces/{namespace}/events | 
-[**create_namespaced_eviction_eviction**](CoreV1Api.md#create_namespaced_eviction_eviction) | **POST** /api/v1/namespaces/{namespace}/pods/{name}/eviction | 
 [**create_namespaced_limit_range**](CoreV1Api.md#create_namespaced_limit_range) | **POST** /api/v1/namespaces/{namespace}/limitranges | 
 [**create_namespaced_persistent_volume_claim**](CoreV1Api.md#create_namespaced_persistent_volume_claim) | **POST** /api/v1/namespaces/{namespace}/persistentvolumeclaims | 
 [**create_namespaced_pod**](CoreV1Api.md#create_namespaced_pod) | **POST** /api/v1/namespaces/{namespace}/pods | 
+[**create_namespaced_pod_binding**](CoreV1Api.md#create_namespaced_pod_binding) | **POST** /api/v1/namespaces/{namespace}/pods/{name}/binding | 
+[**create_namespaced_pod_eviction**](CoreV1Api.md#create_namespaced_pod_eviction) | **POST** /api/v1/namespaces/{namespace}/pods/{name}/eviction | 
 [**create_namespaced_pod_template**](CoreV1Api.md#create_namespaced_pod_template) | **POST** /api/v1/namespaces/{namespace}/podtemplates | 
 [**create_namespaced_replication_controller**](CoreV1Api.md#create_namespaced_replication_controller) | **POST** /api/v1/namespaces/{namespace}/replicationcontrollers | 
 [**create_namespaced_resource_quota**](CoreV1Api.md#create_namespaced_resource_quota) | **POST** /api/v1/namespaces/{namespace}/resourcequotas | 
@@ -139,10 +139,10 @@ Method | HTTP request | Description
 [**patch_namespaced_pod_status**](CoreV1Api.md#patch_namespaced_pod_status) | **PATCH** /api/v1/namespaces/{namespace}/pods/{name}/status | 
 [**patch_namespaced_pod_template**](CoreV1Api.md#patch_namespaced_pod_template) | **PATCH** /api/v1/namespaces/{namespace}/podtemplates/{name} | 
 [**patch_namespaced_replication_controller**](CoreV1Api.md#patch_namespaced_replication_controller) | **PATCH** /api/v1/namespaces/{namespace}/replicationcontrollers/{name} | 
+[**patch_namespaced_replication_controller_scale**](CoreV1Api.md#patch_namespaced_replication_controller_scale) | **PATCH** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**patch_namespaced_replication_controller_status**](CoreV1Api.md#patch_namespaced_replication_controller_status) | **PATCH** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status | 
 [**patch_namespaced_resource_quota**](CoreV1Api.md#patch_namespaced_resource_quota) | **PATCH** /api/v1/namespaces/{namespace}/resourcequotas/{name} | 
 [**patch_namespaced_resource_quota_status**](CoreV1Api.md#patch_namespaced_resource_quota_status) | **PATCH** /api/v1/namespaces/{namespace}/resourcequotas/{name}/status | 
-[**patch_namespaced_scale_scale**](CoreV1Api.md#patch_namespaced_scale_scale) | **PATCH** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**patch_namespaced_secret**](CoreV1Api.md#patch_namespaced_secret) | **PATCH** /api/v1/namespaces/{namespace}/secrets/{name} | 
 [**patch_namespaced_service**](CoreV1Api.md#patch_namespaced_service) | **PATCH** /api/v1/namespaces/{namespace}/services/{name} | 
 [**patch_namespaced_service_account**](CoreV1Api.md#patch_namespaced_service_account) | **PATCH** /api/v1/namespaces/{namespace}/serviceaccounts/{name} | 
@@ -207,10 +207,10 @@ Method | HTTP request | Description
 [**read_namespaced_pod_status**](CoreV1Api.md#read_namespaced_pod_status) | **GET** /api/v1/namespaces/{namespace}/pods/{name}/status | 
 [**read_namespaced_pod_template**](CoreV1Api.md#read_namespaced_pod_template) | **GET** /api/v1/namespaces/{namespace}/podtemplates/{name} | 
 [**read_namespaced_replication_controller**](CoreV1Api.md#read_namespaced_replication_controller) | **GET** /api/v1/namespaces/{namespace}/replicationcontrollers/{name} | 
+[**read_namespaced_replication_controller_scale**](CoreV1Api.md#read_namespaced_replication_controller_scale) | **GET** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**read_namespaced_replication_controller_status**](CoreV1Api.md#read_namespaced_replication_controller_status) | **GET** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status | 
 [**read_namespaced_resource_quota**](CoreV1Api.md#read_namespaced_resource_quota) | **GET** /api/v1/namespaces/{namespace}/resourcequotas/{name} | 
 [**read_namespaced_resource_quota_status**](CoreV1Api.md#read_namespaced_resource_quota_status) | **GET** /api/v1/namespaces/{namespace}/resourcequotas/{name}/status | 
-[**read_namespaced_scale_scale**](CoreV1Api.md#read_namespaced_scale_scale) | **GET** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**read_namespaced_secret**](CoreV1Api.md#read_namespaced_secret) | **GET** /api/v1/namespaces/{namespace}/secrets/{name} | 
 [**read_namespaced_service**](CoreV1Api.md#read_namespaced_service) | **GET** /api/v1/namespaces/{namespace}/services/{name} | 
 [**read_namespaced_service_account**](CoreV1Api.md#read_namespaced_service_account) | **GET** /api/v1/namespaces/{namespace}/serviceaccounts/{name} | 
@@ -232,10 +232,10 @@ Method | HTTP request | Description
 [**replace_namespaced_pod_status**](CoreV1Api.md#replace_namespaced_pod_status) | **PUT** /api/v1/namespaces/{namespace}/pods/{name}/status | 
 [**replace_namespaced_pod_template**](CoreV1Api.md#replace_namespaced_pod_template) | **PUT** /api/v1/namespaces/{namespace}/podtemplates/{name} | 
 [**replace_namespaced_replication_controller**](CoreV1Api.md#replace_namespaced_replication_controller) | **PUT** /api/v1/namespaces/{namespace}/replicationcontrollers/{name} | 
+[**replace_namespaced_replication_controller_scale**](CoreV1Api.md#replace_namespaced_replication_controller_scale) | **PUT** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**replace_namespaced_replication_controller_status**](CoreV1Api.md#replace_namespaced_replication_controller_status) | **PUT** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status | 
 [**replace_namespaced_resource_quota**](CoreV1Api.md#replace_namespaced_resource_quota) | **PUT** /api/v1/namespaces/{namespace}/resourcequotas/{name} | 
 [**replace_namespaced_resource_quota_status**](CoreV1Api.md#replace_namespaced_resource_quota_status) | **PUT** /api/v1/namespaces/{namespace}/resourcequotas/{name}/status | 
-[**replace_namespaced_scale_scale**](CoreV1Api.md#replace_namespaced_scale_scale) | **PUT** /api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**replace_namespaced_secret**](CoreV1Api.md#replace_namespaced_secret) | **PUT** /api/v1/namespaces/{namespace}/secrets/{name} | 
 [**replace_namespaced_service**](CoreV1Api.md#replace_namespaced_service) | **PUT** /api/v1/namespaces/{namespace}/services/{name} | 
 [**replace_namespaced_service_account**](CoreV1Api.md#replace_namespaced_service_account) | **PUT** /api/v1/namespaces/{namespace}/serviceaccounts/{name} | 
@@ -3094,64 +3094,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_namespaced_binding_binding**
-> V1Binding create_namespaced_binding_binding(name, namespace, body, pretty=pretty)
-
-
-
-create binding of a Binding
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api()
-name = 'name_example' # str | name of the Binding
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Binding() # V1Binding | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.create_namespaced_binding_binding(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_binding_binding: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Binding | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Binding**](V1Binding.md)|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**V1Binding**](V1Binding.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **create_namespaced_config_map**
 > V1ConfigMap create_namespaced_config_map(namespace, body, pretty=pretty)
 
@@ -3320,64 +3262,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_namespaced_eviction_eviction**
-> V1beta1Eviction create_namespaced_eviction_eviction(name, namespace, body, pretty=pretty)
-
-
-
-create eviction of an Eviction
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api()
-name = 'name_example' # str | name of the Eviction
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1beta1Eviction() # V1beta1Eviction | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.create_namespaced_eviction_eviction(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_eviction_eviction: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Eviction | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1beta1Eviction**](V1beta1Eviction.md)|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**V1beta1Eviction**](V1beta1Eviction.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **create_namespaced_limit_range**
 > V1LimitRange create_namespaced_limit_range(namespace, body, pretty=pretty)
 
@@ -3534,6 +3418,122 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V1Pod**](V1Pod.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_namespaced_pod_binding**
+> V1Binding create_namespaced_pod_binding(name, namespace, body, pretty=pretty)
+
+
+
+create binding of a Pod
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CoreV1Api()
+name = 'name_example' # str | name of the Binding
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.V1Binding() # V1Binding | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.create_namespaced_pod_binding(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreV1Api->create_namespaced_pod_binding: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Binding | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**V1Binding**](V1Binding.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1Binding**](V1Binding.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_namespaced_pod_eviction**
+> V1beta1Eviction create_namespaced_pod_eviction(name, namespace, body, pretty=pretty)
+
+
+
+create eviction of a Pod
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CoreV1Api()
+name = 'name_example' # str | name of the Eviction
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.V1beta1Eviction() # V1beta1Eviction | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.create_namespaced_pod_eviction(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreV1Api->create_namespaced_pod_eviction: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Eviction | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**V1beta1Eviction**](V1beta1Eviction.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1beta1Eviction**](V1beta1Eviction.md)
 
 ### Authorization
 
@@ -8346,6 +8346,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_namespaced_replication_controller_scale**
+> V1Scale patch_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty)
+
+
+
+partially update scale of the specified ReplicationController
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CoreV1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreV1Api->patch_namespaced_replication_controller_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1Scale**](V1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_replication_controller_status**
 > V1ReplicationController patch_namespaced_replication_controller_status(name, namespace, body, pretty=pretty)
 
@@ -8508,64 +8566,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V1ResourceQuota**](V1ResourceQuota.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **patch_namespaced_scale_scale**
-> V1Scale patch_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-
-
-
-partially update scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.patch_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_scale_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**V1Scale**](V1Scale.md)
 
 ### Authorization
 
@@ -12144,6 +12144,62 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **read_namespaced_replication_controller_scale**
+> V1Scale read_namespaced_replication_controller_scale(name, namespace, pretty=pretty)
+
+
+
+read scale of the specified ReplicationController
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CoreV1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_namespaced_replication_controller_scale(name, namespace, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreV1Api->read_namespaced_replication_controller_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1Scale**](V1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_namespaced_replication_controller_status**
 > V1ReplicationController read_namespaced_replication_controller_status(name, namespace, pretty=pretty)
 
@@ -12304,62 +12360,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V1ResourceQuota**](V1ResourceQuota.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_namespaced_scale_scale**
-> V1Scale read_namespaced_scale_scale(name, namespace, pretty=pretty)
-
-
-
-read scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.read_namespaced_scale_scale(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_scale_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**V1Scale**](V1Scale.md)
 
 ### Authorization
 
@@ -13580,6 +13580,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **replace_namespaced_replication_controller_scale**
+> V1Scale replace_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty)
+
+
+
+replace scale of the specified ReplicationController
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CoreV1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.V1Scale() # V1Scale | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.replace_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreV1Api->replace_namespaced_replication_controller_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**V1Scale**](V1Scale.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1Scale**](V1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **replace_namespaced_replication_controller_status**
 > V1ReplicationController replace_namespaced_replication_controller_status(name, namespace, body, pretty=pretty)
 
@@ -13742,64 +13800,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V1ResourceQuota**](V1ResourceQuota.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **replace_namespaced_scale_scale**
-> V1Scale replace_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-
-
-
-replace scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1Scale() # V1Scale | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.replace_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_scale_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**V1Scale**](V1Scale.md)|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**V1Scale**](V1Scale.md)
 
 ### Authorization
 

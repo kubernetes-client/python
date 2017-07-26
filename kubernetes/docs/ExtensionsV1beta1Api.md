@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_namespaced_daemon_set**](ExtensionsV1beta1Api.md#create_namespaced_daemon_set) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets | 
 [**create_namespaced_deployment**](ExtensionsV1beta1Api.md#create_namespaced_deployment) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/deployments | 
-[**create_namespaced_deployment_rollback_rollback**](ExtensionsV1beta1Api.md#create_namespaced_deployment_rollback_rollback) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/rollback | 
+[**create_namespaced_deployment_rollback**](ExtensionsV1beta1Api.md#create_namespaced_deployment_rollback) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/rollback | 
 [**create_namespaced_ingress**](ExtensionsV1beta1Api.md#create_namespaced_ingress) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses | 
 [**create_namespaced_network_policy**](ExtensionsV1beta1Api.md#create_namespaced_network_policy) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies | 
 [**create_namespaced_replica_set**](ExtensionsV1beta1Api.md#create_namespaced_replica_set) | **POST** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets | 
@@ -42,43 +42,43 @@ Method | HTTP request | Description
 [**patch_namespaced_daemon_set**](ExtensionsV1beta1Api.md#patch_namespaced_daemon_set) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name} | 
 [**patch_namespaced_daemon_set_status**](ExtensionsV1beta1Api.md#patch_namespaced_daemon_set_status) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status | 
 [**patch_namespaced_deployment**](ExtensionsV1beta1Api.md#patch_namespaced_deployment) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name} | 
+[**patch_namespaced_deployment_scale**](ExtensionsV1beta1Api.md#patch_namespaced_deployment_scale) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**patch_namespaced_deployment_status**](ExtensionsV1beta1Api.md#patch_namespaced_deployment_status) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
-[**patch_namespaced_deployments_scale**](ExtensionsV1beta1Api.md#patch_namespaced_deployments_scale) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**patch_namespaced_ingress**](ExtensionsV1beta1Api.md#patch_namespaced_ingress) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name} | 
 [**patch_namespaced_ingress_status**](ExtensionsV1beta1Api.md#patch_namespaced_ingress_status) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status | 
 [**patch_namespaced_network_policy**](ExtensionsV1beta1Api.md#patch_namespaced_network_policy) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name} | 
 [**patch_namespaced_replica_set**](ExtensionsV1beta1Api.md#patch_namespaced_replica_set) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name} | 
+[**patch_namespaced_replica_set_scale**](ExtensionsV1beta1Api.md#patch_namespaced_replica_set_scale) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale | 
 [**patch_namespaced_replica_set_status**](ExtensionsV1beta1Api.md#patch_namespaced_replica_set_status) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status | 
-[**patch_namespaced_replicasets_scale**](ExtensionsV1beta1Api.md#patch_namespaced_replicasets_scale) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale | 
-[**patch_namespaced_replicationcontrollers_scale**](ExtensionsV1beta1Api.md#patch_namespaced_replicationcontrollers_scale) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
+[**patch_namespaced_replication_controller_dummy_scale**](ExtensionsV1beta1Api.md#patch_namespaced_replication_controller_dummy_scale) | **PATCH** /apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**patch_pod_security_policy**](ExtensionsV1beta1Api.md#patch_pod_security_policy) | **PATCH** /apis/extensions/v1beta1/podsecuritypolicies/{name} | 
 [**patch_third_party_resource**](ExtensionsV1beta1Api.md#patch_third_party_resource) | **PATCH** /apis/extensions/v1beta1/thirdpartyresources/{name} | 
 [**read_namespaced_daemon_set**](ExtensionsV1beta1Api.md#read_namespaced_daemon_set) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name} | 
 [**read_namespaced_daemon_set_status**](ExtensionsV1beta1Api.md#read_namespaced_daemon_set_status) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status | 
 [**read_namespaced_deployment**](ExtensionsV1beta1Api.md#read_namespaced_deployment) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name} | 
+[**read_namespaced_deployment_scale**](ExtensionsV1beta1Api.md#read_namespaced_deployment_scale) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**read_namespaced_deployment_status**](ExtensionsV1beta1Api.md#read_namespaced_deployment_status) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
-[**read_namespaced_deployments_scale**](ExtensionsV1beta1Api.md#read_namespaced_deployments_scale) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**read_namespaced_ingress**](ExtensionsV1beta1Api.md#read_namespaced_ingress) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name} | 
 [**read_namespaced_ingress_status**](ExtensionsV1beta1Api.md#read_namespaced_ingress_status) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status | 
 [**read_namespaced_network_policy**](ExtensionsV1beta1Api.md#read_namespaced_network_policy) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name} | 
 [**read_namespaced_replica_set**](ExtensionsV1beta1Api.md#read_namespaced_replica_set) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name} | 
+[**read_namespaced_replica_set_scale**](ExtensionsV1beta1Api.md#read_namespaced_replica_set_scale) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale | 
 [**read_namespaced_replica_set_status**](ExtensionsV1beta1Api.md#read_namespaced_replica_set_status) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status | 
-[**read_namespaced_replicasets_scale**](ExtensionsV1beta1Api.md#read_namespaced_replicasets_scale) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale | 
-[**read_namespaced_replicationcontrollers_scale**](ExtensionsV1beta1Api.md#read_namespaced_replicationcontrollers_scale) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
+[**read_namespaced_replication_controller_dummy_scale**](ExtensionsV1beta1Api.md#read_namespaced_replication_controller_dummy_scale) | **GET** /apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**read_pod_security_policy**](ExtensionsV1beta1Api.md#read_pod_security_policy) | **GET** /apis/extensions/v1beta1/podsecuritypolicies/{name} | 
 [**read_third_party_resource**](ExtensionsV1beta1Api.md#read_third_party_resource) | **GET** /apis/extensions/v1beta1/thirdpartyresources/{name} | 
 [**replace_namespaced_daemon_set**](ExtensionsV1beta1Api.md#replace_namespaced_daemon_set) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name} | 
 [**replace_namespaced_daemon_set_status**](ExtensionsV1beta1Api.md#replace_namespaced_daemon_set_status) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status | 
 [**replace_namespaced_deployment**](ExtensionsV1beta1Api.md#replace_namespaced_deployment) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name} | 
+[**replace_namespaced_deployment_scale**](ExtensionsV1beta1Api.md#replace_namespaced_deployment_scale) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**replace_namespaced_deployment_status**](ExtensionsV1beta1Api.md#replace_namespaced_deployment_status) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
-[**replace_namespaced_deployments_scale**](ExtensionsV1beta1Api.md#replace_namespaced_deployments_scale) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**replace_namespaced_ingress**](ExtensionsV1beta1Api.md#replace_namespaced_ingress) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name} | 
 [**replace_namespaced_ingress_status**](ExtensionsV1beta1Api.md#replace_namespaced_ingress_status) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status | 
 [**replace_namespaced_network_policy**](ExtensionsV1beta1Api.md#replace_namespaced_network_policy) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name} | 
 [**replace_namespaced_replica_set**](ExtensionsV1beta1Api.md#replace_namespaced_replica_set) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name} | 
+[**replace_namespaced_replica_set_scale**](ExtensionsV1beta1Api.md#replace_namespaced_replica_set_scale) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale | 
 [**replace_namespaced_replica_set_status**](ExtensionsV1beta1Api.md#replace_namespaced_replica_set_status) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status | 
-[**replace_namespaced_replicasets_scale**](ExtensionsV1beta1Api.md#replace_namespaced_replicasets_scale) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale | 
-[**replace_namespaced_replicationcontrollers_scale**](ExtensionsV1beta1Api.md#replace_namespaced_replicationcontrollers_scale) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
+[**replace_namespaced_replication_controller_dummy_scale**](ExtensionsV1beta1Api.md#replace_namespaced_replication_controller_dummy_scale) | **PUT** /apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale | 
 [**replace_pod_security_policy**](ExtensionsV1beta1Api.md#replace_pod_security_policy) | **PUT** /apis/extensions/v1beta1/podsecuritypolicies/{name} | 
 [**replace_third_party_resource**](ExtensionsV1beta1Api.md#replace_third_party_resource) | **PUT** /apis/extensions/v1beta1/thirdpartyresources/{name} | 
 
@@ -195,12 +195,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_namespaced_deployment_rollback_rollback**
-> ExtensionsV1beta1DeploymentRollback create_namespaced_deployment_rollback_rollback(name, namespace, body, pretty=pretty)
+# **create_namespaced_deployment_rollback**
+> ExtensionsV1beta1DeploymentRollback create_namespaced_deployment_rollback(name, namespace, body, pretty=pretty)
 
 
 
-create rollback of a DeploymentRollback
+create rollback of a Deployment
 
 ### Example 
 ```python
@@ -223,10 +223,10 @@ body = kubernetes.client.ExtensionsV1beta1DeploymentRollback() # ExtensionsV1bet
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_namespaced_deployment_rollback_rollback(name, namespace, body, pretty=pretty)
+    api_response = api_instance.create_namespaced_deployment_rollback(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->create_namespaced_deployment_rollback_rollback: %s\n" % e)
+    print("Exception when calling ExtensionsV1beta1Api->create_namespaced_deployment_rollback: %s\n" % e)
 ```
 
 ### Parameters
@@ -2431,6 +2431,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_namespaced_deployment_scale**
+> ExtensionsV1beta1Scale patch_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+
+
+
+partially update scale of the specified Deployment
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ExtensionsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ExtensionsV1beta1Api->patch_namespaced_deployment_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_deployment_status**
 > ExtensionsV1beta1Deployment patch_namespaced_deployment_status(name, namespace, body, pretty=pretty)
 
@@ -2477,64 +2535,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ExtensionsV1beta1Deployment**](ExtensionsV1beta1Deployment.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **patch_namespaced_deployments_scale**
-> ExtensionsV1beta1Scale patch_namespaced_deployments_scale(name, namespace, body, pretty=pretty)
-
-
-
-partially update scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.ExtensionsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.patch_namespaced_deployments_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->patch_namespaced_deployments_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
 
 ### Authorization
 
@@ -2779,6 +2779,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_namespaced_replica_set_scale**
+> ExtensionsV1beta1Scale patch_namespaced_replica_set_scale(name, namespace, body, pretty=pretty)
+
+
+
+partially update scale of the specified ReplicaSet
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ExtensionsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_namespaced_replica_set_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ExtensionsV1beta1Api->patch_namespaced_replica_set_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_replica_set_status**
 > V1beta1ReplicaSet patch_namespaced_replica_set_status(name, namespace, body, pretty=pretty)
 
@@ -2837,70 +2895,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **patch_namespaced_replicasets_scale**
-> ExtensionsV1beta1Scale patch_namespaced_replicasets_scale(name, namespace, body, pretty=pretty)
+# **patch_namespaced_replication_controller_dummy_scale**
+> ExtensionsV1beta1Scale patch_namespaced_replication_controller_dummy_scale(name, namespace, body, pretty=pretty)
 
 
 
-partially update scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.ExtensionsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.patch_namespaced_replicasets_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->patch_namespaced_replicasets_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **patch_namespaced_replicationcontrollers_scale**
-> ExtensionsV1beta1Scale patch_namespaced_replicationcontrollers_scale(name, namespace, body, pretty=pretty)
-
-
-
-partially update scale of the specified Scale
+partially update scale of the specified ReplicationControllerDummy
 
 ### Example 
 ```python
@@ -2923,10 +2923,10 @@ body = NULL # object |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.patch_namespaced_replicationcontrollers_scale(name, namespace, body, pretty=pretty)
+    api_response = api_instance.patch_namespaced_replication_controller_dummy_scale(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->patch_namespaced_replicationcontrollers_scale: %s\n" % e)
+    print("Exception when calling ExtensionsV1beta1Api->patch_namespaced_replication_controller_dummy_scale: %s\n" % e)
 ```
 
 ### Parameters
@@ -3241,6 +3241,62 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **read_namespaced_deployment_scale**
+> ExtensionsV1beta1Scale read_namespaced_deployment_scale(name, namespace, pretty=pretty)
+
+
+
+read scale of the specified Deployment
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ExtensionsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_namespaced_deployment_scale(name, namespace, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ExtensionsV1beta1Api->read_namespaced_deployment_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_namespaced_deployment_status**
 > ExtensionsV1beta1Deployment read_namespaced_deployment_status(name, namespace, pretty=pretty)
 
@@ -3285,62 +3341,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ExtensionsV1beta1Deployment**](ExtensionsV1beta1Deployment.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_namespaced_deployments_scale**
-> ExtensionsV1beta1Scale read_namespaced_deployments_scale(name, namespace, pretty=pretty)
-
-
-
-read scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.ExtensionsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.read_namespaced_deployments_scale(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->read_namespaced_deployments_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
 
 ### Authorization
 
@@ -3589,6 +3589,62 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **read_namespaced_replica_set_scale**
+> ExtensionsV1beta1Scale read_namespaced_replica_set_scale(name, namespace, pretty=pretty)
+
+
+
+read scale of the specified ReplicaSet
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ExtensionsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_namespaced_replica_set_scale(name, namespace, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ExtensionsV1beta1Api->read_namespaced_replica_set_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_namespaced_replica_set_status**
 > V1beta1ReplicaSet read_namespaced_replica_set_status(name, namespace, pretty=pretty)
 
@@ -3645,68 +3701,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **read_namespaced_replicasets_scale**
-> ExtensionsV1beta1Scale read_namespaced_replicasets_scale(name, namespace, pretty=pretty)
+# **read_namespaced_replication_controller_dummy_scale**
+> ExtensionsV1beta1Scale read_namespaced_replication_controller_dummy_scale(name, namespace, pretty=pretty)
 
 
 
-read scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.ExtensionsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.read_namespaced_replicasets_scale(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->read_namespaced_replicasets_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_namespaced_replicationcontrollers_scale**
-> ExtensionsV1beta1Scale read_namespaced_replicationcontrollers_scale(name, namespace, pretty=pretty)
-
-
-
-read scale of the specified Scale
+read scale of the specified ReplicationControllerDummy
 
 ### Example 
 ```python
@@ -3728,10 +3728,10 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.read_namespaced_replicationcontrollers_scale(name, namespace, pretty=pretty)
+    api_response = api_instance.read_namespaced_replication_controller_dummy_scale(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->read_namespaced_replicationcontrollers_scale: %s\n" % e)
+    print("Exception when calling ExtensionsV1beta1Api->read_namespaced_replication_controller_dummy_scale: %s\n" % e)
 ```
 
 ### Parameters
@@ -4047,6 +4047,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **replace_namespaced_deployment_scale**
+> ExtensionsV1beta1Scale replace_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+
+
+
+replace scale of the specified Deployment
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ExtensionsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.ExtensionsV1beta1Scale() # ExtensionsV1beta1Scale | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.replace_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ExtensionsV1beta1Api->replace_namespaced_deployment_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **replace_namespaced_deployment_status**
 > ExtensionsV1beta1Deployment replace_namespaced_deployment_status(name, namespace, body, pretty=pretty)
 
@@ -4093,64 +4151,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ExtensionsV1beta1Deployment**](ExtensionsV1beta1Deployment.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **replace_namespaced_deployments_scale**
-> ExtensionsV1beta1Scale replace_namespaced_deployments_scale(name, namespace, body, pretty=pretty)
-
-
-
-replace scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.ExtensionsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.ExtensionsV1beta1Scale() # ExtensionsV1beta1Scale | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.replace_namespaced_deployments_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->replace_namespaced_deployments_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
 
 ### Authorization
 
@@ -4395,6 +4395,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **replace_namespaced_replica_set_scale**
+> ExtensionsV1beta1Scale replace_namespaced_replica_set_scale(name, namespace, body, pretty=pretty)
+
+
+
+replace scale of the specified ReplicaSet
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ExtensionsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.ExtensionsV1beta1Scale() # ExtensionsV1beta1Scale | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.replace_namespaced_replica_set_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ExtensionsV1beta1Api->replace_namespaced_replica_set_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **replace_namespaced_replica_set_status**
 > V1beta1ReplicaSet replace_namespaced_replica_set_status(name, namespace, body, pretty=pretty)
 
@@ -4453,70 +4511,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **replace_namespaced_replicasets_scale**
-> ExtensionsV1beta1Scale replace_namespaced_replicasets_scale(name, namespace, body, pretty=pretty)
+# **replace_namespaced_replication_controller_dummy_scale**
+> ExtensionsV1beta1Scale replace_namespaced_replication_controller_dummy_scale(name, namespace, body, pretty=pretty)
 
 
 
-replace scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.ExtensionsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.ExtensionsV1beta1Scale() # ExtensionsV1beta1Scale | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.replace_namespaced_replicasets_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->replace_namespaced_replicasets_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**ExtensionsV1beta1Scale**](ExtensionsV1beta1Scale.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **replace_namespaced_replicationcontrollers_scale**
-> ExtensionsV1beta1Scale replace_namespaced_replicationcontrollers_scale(name, namespace, body, pretty=pretty)
-
-
-
-replace scale of the specified Scale
+replace scale of the specified ReplicationControllerDummy
 
 ### Example 
 ```python
@@ -4539,10 +4539,10 @@ body = kubernetes.client.ExtensionsV1beta1Scale() # ExtensionsV1beta1Scale |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.replace_namespaced_replicationcontrollers_scale(name, namespace, body, pretty=pretty)
+    api_response = api_instance.replace_namespaced_replication_controller_dummy_scale(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ExtensionsV1beta1Api->replace_namespaced_replicationcontrollers_scale: %s\n" % e)
+    print("Exception when calling ExtensionsV1beta1Api->replace_namespaced_replication_controller_dummy_scale: %s\n" % e)
 ```
 
 ### Parameters
