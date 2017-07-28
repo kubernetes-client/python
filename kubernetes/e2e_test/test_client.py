@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import json
 import time
 import unittest
 import uuid
@@ -102,6 +103,10 @@ class TestClient(unittest.TestCase):
         self.assertFalse(resp.peek_stdout())
         self.assertEqual("test string 2", line)
         resp.write_stdin("exit\n")
+        resp.update(timeout=5)
+        line = resp.read_channel(api_client.ws_client.ERROR_CHANNEL)
+        status = json.loads(line)
+        self.assertEqual(status['status'], 'Success')
         resp.update(timeout=5)
         self.assertFalse(resp.is_open())
 

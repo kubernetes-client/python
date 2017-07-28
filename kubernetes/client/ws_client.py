@@ -24,6 +24,8 @@ from six.moves.urllib.parse import urlencode, quote_plus, urlparse, urlunparse
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
 STDERR_CHANNEL = 2
+ERROR_CHANNEL = 3
+RESIZE_CHANNEL = 4
 
 
 class WSClient:
@@ -45,6 +47,10 @@ class WSClient:
         # http headers we get from the generated code
         if headers and 'authorization' in headers:
             header.append("authorization: %s" % headers['authorization'])
+
+        if configuration.ws_streaming_protocol:
+            header.append("Sec-WebSocket-Protocol: %s" %
+                          configuration.ws_streaming_protocol)
 
         if url.startswith('wss://') and configuration.verify_ssl:
             ssl_opts = {
@@ -131,10 +137,10 @@ class WSClient:
         return self.readline_channel(STDERR_CHANNEL, timeout=timeout)
 
     def read_all(self):
-        """Read all of the inputs with the same order they recieved. The channel
-        information would be part of the string. This is useful for
-        non-interactive call where a set of command passed to the API call and
-        their result is needed after the call is concluded.
+        """Return buffered data received on stdout and stderr channels.
+        This is useful for non-interactive call where a set of command passed
+        to the API call and their result is needed after the call is concluded.
+        Should be called after run_forever() or update()
 
         TODO: Maybe we can process this and return a more meaningful map with
         channels mapped for each input.
@@ -174,9 +180,10 @@ class WSClient:
                     channel = ord(data[0])
                     data = data[1:]
                     if data:
-                        # keeping all messages in the order they received for
-                        # non-blocking call.
-                        self._all += data
+                        if channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
+                            # keeping all messages in the order they received for
+                            # non-blocking call.
+                            self._all += data
                         if channel not in self._channels:
                             self._channels[channel] = data
                         else:
