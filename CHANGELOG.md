@@ -1,3 +1,6 @@
+# v3.0.0
+- Fix Operation names for subresources kubernetes/kubernetes#49357
+
 # v3.0.0b1
 - Add proper GCP config loader and refresher kubernetes-client/python-base#22
 - Add ws_streaming_protocol and use v4 by default kubernetes-client/python-base#20
