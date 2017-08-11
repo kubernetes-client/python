@@ -10,3 +10,10 @@ kubectl create -f docker/jupyter.yml
 ```
 
 Open your browser on the jupyter service and go through the notebooks.
+
+If you are using minikube, you can run this command to see jupyter service in your browser:
+
+```
+minikube service jupyter
+```
+

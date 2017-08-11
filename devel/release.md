@@ -99,7 +99,7 @@ on a clean machine:
 
 ```bash
 git clean -xdf
-pyenv install 2.7.12
+pyenv install -s 2.7.12
 pyenv global 2.7.12
 virtualenv .release
 source .release/bin/activate
@@ -146,6 +146,9 @@ Click Deaft new release button. Name the tag the same as CLIENT_VERSION. Change
 the target branch to "release-x.y". If the release is a pre-release, check the
 `This is a pre-release` option.
 
+
+## Announcement
+Send an announcement email to kubernetes-dev@googlegroups.com with the subject [ANNOUNCE] kubernetes python-client $VERSION is released
 
 ## Cleanup
 
