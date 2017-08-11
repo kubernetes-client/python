@@ -83,11 +83,12 @@ supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
 
-|                         | Kubernetes 1.3 | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 |
-|-------------------------|----------------|----------------|----------------|----------------|
-| client-python 1.0       | +              | +              | ✓              | -              |
-| client-python 2.0 alpha | +              | +              | +              | ✓              |
-| client-python HEAD      | +              | +              | +              | +              |
+|                    | Kubernetes 1.3 | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 | Kubernetes 1.7 |
+|--------------------|----------------|----------------|----------------|----------------|----------------|
+| client-python 1.0  | +              | +              | ✓              | -              | -              |
+| client-python 2.0  | +              | +              | +              | ✓              | -              |
+| client-python 3.0  | +              | +              | +              | +              | ✓              |
+| client-python HEAD | +              | +              | +              | +              | +              |
 
 Key:
 
@@ -105,12 +106,18 @@ between client-python versions.
 |----------------|--------------------------------------|-------------------------------|
 | 1.0 Alpha/Beta | Kubernetes main repo, 1.5 branch     | ✗                             |
 | 1.0.x          | Kubernetes main repo, 1.5 branch     | ✓                             |
-| 2.0 alpha      | Kubernetes main repo, 1.6 branch     | ✓                             |
+| 2.0 Alpha/Beta | Kubernetes main repo, 1.6 branch     | ✗                             |
+| 2.0.x          | Kubernetes main repo, 1.6 branch     | ✓                             |
+| 3.0 Alpha/Beta | Kubernetes main repo, 1.7 branch     | ✗                             |
+| 3.0            | Kubernetes main repo, 1.7 branch     | ✓                             |
+
 
 Key:
 
 * `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-incubator/client-python/issues/177)) published to client-python when they are available.
 * `✗` No longer maintained; please upgrade.
+
+Note: There would be no maintenance for alpha/beta releases except the latest one.
 
 ## Community, Support, Discussion
 
