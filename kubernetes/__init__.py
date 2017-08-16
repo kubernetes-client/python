@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+__project__ = 'kubernetes'
+# The version is auto-updated. Please do not edit.
+__version__ = "3.0.0-snapshot"
+
 import kubernetes.client
 import kubernetes.config
 import kubernetes.watch
