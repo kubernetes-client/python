@@ -109,6 +109,7 @@ class Watch(object):
                     watch.stop()
         """
 
+        self._stop = False
         return_type = self.get_return_type(func)
         kwargs['watch'] = True
         kwargs['_preload_content'] = False
