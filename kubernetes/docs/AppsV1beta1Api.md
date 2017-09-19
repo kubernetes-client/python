@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_namespaced_controller_revision**](AppsV1beta1Api.md#create_namespaced_controller_revision) | **POST** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions | 
 [**create_namespaced_deployment**](AppsV1beta1Api.md#create_namespaced_deployment) | **POST** /apis/apps/v1beta1/namespaces/{namespace}/deployments | 
-[**create_namespaced_deployment_rollback_rollback**](AppsV1beta1Api.md#create_namespaced_deployment_rollback_rollback) | **POST** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/rollback | 
+[**create_namespaced_deployment_rollback**](AppsV1beta1Api.md#create_namespaced_deployment_rollback) | **POST** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/rollback | 
 [**create_namespaced_stateful_set**](AppsV1beta1Api.md#create_namespaced_stateful_set) | **POST** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets | 
 [**delete_collection_namespaced_controller_revision**](AppsV1beta1Api.md#delete_collection_namespaced_controller_revision) | **DELETE** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions | 
 [**delete_collection_namespaced_deployment**](AppsV1beta1Api.md#delete_collection_namespaced_deployment) | **DELETE** /apis/apps/v1beta1/namespaces/{namespace}/deployments | 
@@ -23,20 +23,20 @@ Method | HTTP request | Description
 [**list_stateful_set_for_all_namespaces**](AppsV1beta1Api.md#list_stateful_set_for_all_namespaces) | **GET** /apis/apps/v1beta1/statefulsets | 
 [**patch_namespaced_controller_revision**](AppsV1beta1Api.md#patch_namespaced_controller_revision) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions/{name} | 
 [**patch_namespaced_deployment**](AppsV1beta1Api.md#patch_namespaced_deployment) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name} | 
+[**patch_namespaced_deployment_scale**](AppsV1beta1Api.md#patch_namespaced_deployment_scale) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**patch_namespaced_deployment_status**](AppsV1beta1Api.md#patch_namespaced_deployment_status) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
-[**patch_namespaced_scale_scale**](AppsV1beta1Api.md#patch_namespaced_scale_scale) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**patch_namespaced_stateful_set**](AppsV1beta1Api.md#patch_namespaced_stateful_set) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name} | 
 [**patch_namespaced_stateful_set_status**](AppsV1beta1Api.md#patch_namespaced_stateful_set_status) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/status | 
 [**read_namespaced_controller_revision**](AppsV1beta1Api.md#read_namespaced_controller_revision) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions/{name} | 
 [**read_namespaced_deployment**](AppsV1beta1Api.md#read_namespaced_deployment) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name} | 
+[**read_namespaced_deployment_scale**](AppsV1beta1Api.md#read_namespaced_deployment_scale) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**read_namespaced_deployment_status**](AppsV1beta1Api.md#read_namespaced_deployment_status) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
-[**read_namespaced_scale_scale**](AppsV1beta1Api.md#read_namespaced_scale_scale) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**read_namespaced_stateful_set**](AppsV1beta1Api.md#read_namespaced_stateful_set) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name} | 
 [**read_namespaced_stateful_set_status**](AppsV1beta1Api.md#read_namespaced_stateful_set_status) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/status | 
 [**replace_namespaced_controller_revision**](AppsV1beta1Api.md#replace_namespaced_controller_revision) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions/{name} | 
 [**replace_namespaced_deployment**](AppsV1beta1Api.md#replace_namespaced_deployment) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name} | 
+[**replace_namespaced_deployment_scale**](AppsV1beta1Api.md#replace_namespaced_deployment_scale) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**replace_namespaced_deployment_status**](AppsV1beta1Api.md#replace_namespaced_deployment_status) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
-[**replace_namespaced_scale_scale**](AppsV1beta1Api.md#replace_namespaced_scale_scale) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**replace_namespaced_stateful_set**](AppsV1beta1Api.md#replace_namespaced_stateful_set) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name} | 
 [**replace_namespaced_stateful_set_status**](AppsV1beta1Api.md#replace_namespaced_stateful_set_status) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/status | 
 
@@ -153,12 +153,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_namespaced_deployment_rollback_rollback**
-> AppsV1beta1DeploymentRollback create_namespaced_deployment_rollback_rollback(name, namespace, body, pretty=pretty)
+# **create_namespaced_deployment_rollback**
+> AppsV1beta1DeploymentRollback create_namespaced_deployment_rollback(name, namespace, body, pretty=pretty)
 
 
 
-create rollback of a DeploymentRollback
+create rollback of a Deployment
 
 ### Example 
 ```python
@@ -181,10 +181,10 @@ body = kubernetes.client.AppsV1beta1DeploymentRollback() # AppsV1beta1Deployment
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_namespaced_deployment_rollback_rollback(name, namespace, body, pretty=pretty)
+    api_response = api_instance.create_namespaced_deployment_rollback(name, namespace, body, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AppsV1beta1Api->create_namespaced_deployment_rollback_rollback: %s\n" % e)
+    print("Exception when calling AppsV1beta1Api->create_namespaced_deployment_rollback: %s\n" % e)
 ```
 
 ### Parameters
@@ -1211,6 +1211,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_namespaced_deployment_scale**
+> AppsV1beta1Scale patch_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+
+
+
+partially update scale of the specified Deployment
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.AppsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AppsV1beta1Api->patch_namespaced_deployment_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_deployment_status**
 > AppsV1beta1Deployment patch_namespaced_deployment_status(name, namespace, body, pretty=pretty)
 
@@ -1257,64 +1315,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AppsV1beta1Deployment**](AppsV1beta1Deployment.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **patch_namespaced_scale_scale**
-> AppsV1beta1Scale patch_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-
-
-
-partially update scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.patch_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AppsV1beta1Api->patch_namespaced_scale_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
 
 ### Authorization
 
@@ -1563,6 +1563,62 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **read_namespaced_deployment_scale**
+> AppsV1beta1Scale read_namespaced_deployment_scale(name, namespace, pretty=pretty)
+
+
+
+read scale of the specified Deployment
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.AppsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_namespaced_deployment_scale(name, namespace, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AppsV1beta1Api->read_namespaced_deployment_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_namespaced_deployment_status**
 > AppsV1beta1Deployment read_namespaced_deployment_status(name, namespace, pretty=pretty)
 
@@ -1607,62 +1663,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AppsV1beta1Deployment**](AppsV1beta1Deployment.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_namespaced_scale_scale**
-> AppsV1beta1Scale read_namespaced_scale_scale(name, namespace, pretty=pretty)
-
-
-
-read scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.read_namespaced_scale_scale(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AppsV1beta1Api->read_namespaced_scale_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
 
 ### Authorization
 
@@ -1907,6 +1907,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **replace_namespaced_deployment_scale**
+> AppsV1beta1Scale replace_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+
+
+
+replace scale of the specified Deployment
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.AppsV1beta1Api()
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.AppsV1beta1Scale() # AppsV1beta1Scale | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.replace_namespaced_deployment_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AppsV1beta1Api->replace_namespaced_deployment_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**AppsV1beta1Scale**](AppsV1beta1Scale.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **replace_namespaced_deployment_status**
 > AppsV1beta1Deployment replace_namespaced_deployment_status(name, namespace, body, pretty=pretty)
 
@@ -1953,64 +2011,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AppsV1beta1Deployment**](AppsV1beta1Deployment.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
- - **Content-Type**: */*
- - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **replace_namespaced_scale_scale**
-> AppsV1beta1Scale replace_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-
-
-
-replace scale of the specified Scale
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
-name = 'name_example' # str | name of the Scale
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.AppsV1beta1Scale() # AppsV1beta1Scale | 
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-
-try: 
-    api_response = api_instance.replace_namespaced_scale_scale(name, namespace, body, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AppsV1beta1Api->replace_namespaced_scale_scale: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the Scale | 
- **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**AppsV1beta1Scale**](AppsV1beta1Scale.md)|  | 
- **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
-
-### Return type
-
-[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
 
 ### Authorization
 

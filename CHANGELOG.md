@@ -1,3 +1,13 @@
+# v3.0.0
+- Fix Operation names for subresources kubernetes/kubernetes#49357
+
+# v3.0.0b1
+- Add proper GCP config loader and refresher kubernetes-client/python-base#22
+- Add ws_streaming_protocol and use v4 by default kubernetes-client/python-base#20
+- Respect the KUBECONFIG environment variable if set kubernetes-client/python-base#19
+- Allow setting maxsize for PoolManager kubernetes-client/python-base#18
+- Restricting the websocket-client to <=0.40 #299
+
 # v3.0.0a1
 - Update client to kubernetes 1.7 
 - Support ThirdPartyResources (TPR) and CustomResourceDefinitions (CRD). Note that TPR is deprecated in kubernetes #251 #201
