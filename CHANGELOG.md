@@ -1,3 +1,6 @@
+# Master
+- Adding stream package to support calls like exec. The old way of calling them is deprecated. See [Troubleshooting](README.md#why-execattach-calls-doesnt-work)).
+
 # v3.0.0
 - Fix Operation names for subresources kubernetes/kubernetes#49357
 

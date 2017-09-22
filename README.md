@@ -160,3 +160,7 @@ You'll need a version with OpenSSL version 1.0.0 or later.
 If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt). 
 Specifically check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
 
+### Why Exec/Attach calls doesn't work
+Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
+of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
+See more at [exec example](examples/exec.py).
