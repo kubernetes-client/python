@@ -20,6 +20,7 @@ import uuid
 from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
 from kubernetes.e2e_test import base
+from kubernetes.stream import stream
 
 
 def short_uuid():
@@ -74,7 +75,7 @@ class TestClient(unittest.TestCase):
         exec_command = ['/bin/sh',
                         '-c',
                         'for i in $(seq 1 3); do date; done']
-        resp = api.connect_get_namespaced_pod_exec(name, 'default',
+        resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
                                                    command=exec_command,
                                                    stderr=False, stdin=False,
                                                    stdout=True, tty=False)
@@ -82,14 +83,14 @@ class TestClient(unittest.TestCase):
         self.assertEqual(3, len(resp.splitlines()))
 
         exec_command = 'uptime'
-        resp = api.connect_post_namespaced_pod_exec(name, 'default',
+        resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
                                                     command=exec_command,
                                                     stderr=False, stdin=False,
                                                     stdout=True, tty=False)
         print('EXEC response : %s' % resp)
         self.assertEqual(1, len(resp.splitlines()))
 
-        resp = api.connect_post_namespaced_pod_exec(name, 'default',
+        resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
                                                     command='/bin/sh',
                                                     stderr=True, stdin=True,
                                                     stdout=True, tty=False,

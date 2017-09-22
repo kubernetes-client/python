@@ -19,3 +19,4 @@ __version__ = "3.0.0-snapshot"
 import kubernetes.client
 import kubernetes.config
 import kubernetes.watch
+import kubernetes.stream
