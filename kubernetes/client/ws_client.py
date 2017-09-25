@@ -245,7 +245,7 @@ def websocket_call(configuration, url, query_params, _request_timeout,
     # tack on the actual command to execute at the end
     if isinstance(commands, list):
         for command in commands:
-            url += "&command=%s&" % quote_plus(command)
+            url += "&command=%s" % quote_plus(command)
     elif commands is not None:
         url += '&command=' + quote_plus(commands)
 
