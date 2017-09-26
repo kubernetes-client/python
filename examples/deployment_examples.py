@@ -20,6 +20,7 @@ from kubernetes import client, config
 
 DEPLOYMENT_NAME = "nginx-deployment"
 
+
 def create_deployment_object():
     # Instantiate an empty deployment object
     deployment = client.ExtensionsV1beta1Deployment()
@@ -44,22 +45,25 @@ def create_deployment_object():
 
     return deployment
 
+
 def create_deployment(api_instance, deployment):
     # Create deployement
     api_response = api_instance.create_namespaced_deployment(
-            body=deployment,
-            namespace="default")
+        body=deployment,
+        namespace="default")
     print("Deployment created. status='%s'" % str(api_response.status))
+
 
 def update_deployment(api_instance, deployment):
     # Update container image
     deployment.container.image = "nginx:1.9.1"
     # Update the deployment
     api_response = api_instance.replace_namespaced_deployment(
-            name=DEPLOYMENT_NAME,
-            namespace="default",
-            body=deployment)
+        name=DEPLOYMENT_NAME,
+        namespace="default",
+        body=deployment)
     print("Deployment updated. status='%s'" % str(api_response.status))
+
 
 def roll_back_deployment(api_instance):
     # Instanciate an empty DeploymentRollback object
@@ -73,18 +77,19 @@ def roll_back_deployment(api_instance):
     rollback.rollback_to.revision = 0
     # Execute the rollback
     api_response = api_instance.create_namespaced_deployment_rollback(
-            name=DEPLOYMENT_NAME,
-            namespace="default",
-            body=rollback)
+        name=DEPLOYMENT_NAME,
+        namespace="default",
+        body=rollback)
     print("Deployment rolled back. status='%s'" % str(api_response.status))
+
 
 def delete_deployment(api_instance):
     # Delete deployment
     api_response = api_instance.delete_namespaced_deployment(
-            name=DEPLOYMENT_NAME,
-            namespace="default",
-            client.V1DeleteOptions(propagation_policy='Foreground',
-                                   grace_period_seconds=5))
+        name=DEPLOYMENT_NAME,
+        namespace="default",
+        client.V1DeleteOptions(propagation_policy='Foreground',
+                               grace_period_seconds=5))
     print("Deployment deleted. status='%s'" % str(api_response.status))
 
 
@@ -105,6 +110,7 @@ def main():
     roll_back_deployment(extensions_v1beta1)
 
     delete_deployment(extensions_v1beta1)
+
 
 if __name__ == '__main__':
     main()
