@@ -58,7 +58,7 @@ def update_deployment(api_instance, deployment):
     # Update container image
     deployment.container.image = "nginx:1.9.1"
     # Update the deployment
-    api_response = api_instance.replace_namespaced_deployment(
+    api_response = api_instance.patch_namespaced_deployment(
         name=DEPLOYMENT_NAME,
         namespace="default",
         body=deployment)
