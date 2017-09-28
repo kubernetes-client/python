@@ -35,7 +35,7 @@ def main():
                     "containers": [
                         {
                             "name": "container1",
-                            "image":"gcr.io/xxx/image:tag"
+                            "image": "gcr.io/xxx/image:tag"
                         }
                     ]
                 }
@@ -43,7 +43,8 @@ def main():
         }
     }
 
-    api_response = api_instance.patch_namespaced_deployment('deploy1', 'default', body, pretty=True)
+    api_response = api_instance.patch_namespaced_deployment(
+        'deploy1', 'default', body, pretty=True)
 
     pprint(api_response)
 
