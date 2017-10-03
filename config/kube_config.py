@@ -23,7 +23,7 @@ import google.auth.transport.requests
 import urllib3
 import yaml
 
-from kubernetes.client import ApiClient, ConfigurationObject, configuration
+from kubernetes.client import ApiClient, Configuration
 
 from .config_exception import ConfigException
 from .dateutil import UTC, format_rfc3339, parse_rfc3339
@@ -118,7 +118,6 @@ class KubeConfigLoader(object):
 
     def __init__(self, config_dict, active_context=None,
                  get_google_credentials=None,
-                 client_configuration=configuration,
                  config_base_path="",
                  config_persister=None):
         self._config = ConfigNode('kube-config', config_dict)
@@ -139,7 +138,6 @@ class KubeConfigLoader(object):
             self._get_google_credentials = get_google_credentials
         else:
             self._get_google_credentials = _refresh_credentials
-        self._client_configuration = client_configuration
 
     def set_active_context(self, context_name=None):
         if context_name is None:
@@ -240,19 +238,19 @@ class KubeConfigLoader(object):
         if 'insecure-skip-tls-verify' in self._cluster:
             self.verify_ssl = not self._cluster['insecure-skip-tls-verify']
 
-    def _set_config(self):
+    def _set_config(self, client_configuration):
         if 'token' in self.__dict__:
-            self._client_configuration.api_key['authorization'] = self.token
+            client_configuration.api_key['authorization'] = self.token
         # copy these keys directly from self to configuration object
         keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl']
         for key in keys:
             if key in self.__dict__:
-                setattr(self._client_configuration, key, getattr(self, key))
+                setattr(client_configuration, key, getattr(self, key))
 
-    def load_and_set(self):
+    def load_and_set(self, client_configuration):
         self._load_authentication()
         self._load_cluster_info()
-        self._set_config()
+        self._set_config(client_configuration)
 
     def list_contexts(self):
         return [context.value for context in self._config['contexts']]
@@ -331,7 +329,7 @@ def list_kube_config_contexts(config_file=None):
 
 
 def load_kube_config(config_file=None, context=None,
-                     client_configuration=configuration,
+                     client_configuration=None,
                      persist_config=True):
     """Loads authentication and cluster information from kube-config file
     and stores them in kubernetes.client.configuration.
@@ -339,7 +337,7 @@ def load_kube_config(config_file=None, context=None,
     :param config_file: Name of the kube-config file.
     :param context: set the active context. If is set to None, current_context
         from config file will be used.
-    :param client_configuration: The kubernetes.client.ConfigurationObject to
+    :param client_configuration: The kubernetes.client.Configuration to
         set configs to.
     :param persist_config: If True, config file will be updated when changed
         (e.g GCP token refresh).
@@ -355,10 +353,15 @@ def load_kube_config(config_file=None, context=None,
                 yaml.safe_dump(config_map, f, default_flow_style=False)
         config_persister = _save_kube_config
 
-    _get_kube_config_loader_for_yaml_file(
+    loader = _get_kube_config_loader_for_yaml_file(
         config_file, active_context=context,
-        client_configuration=client_configuration,
-        config_persister=config_persister).load_and_set()
+        config_persister=config_persister)
+    if client_configuration is None:
+        config = type.__call__(Configuration)
+        loader.load_and_set(config)
+        Configuration.set_default(config)
+    else:
+        loader.load_and_set(client_configuration)
 
 
 def new_client_from_config(
@@ -368,8 +371,8 @@ def new_client_from_config(
     """Loads configuration the same as load_kube_config but returns an ApiClient
     to be used with any API object. This will allow the caller to concurrently
     talk with multiple clusters."""
-    client_config = ConfigurationObject()
+    client_config = type.__call__(Configuration)
     load_kube_config(config_file=config_file, context=context,
                      client_configuration=client_config,
                      persist_config=persist_config)
-    return ApiClient(config=client_config)
+    return ApiClient(configuration=client_config)

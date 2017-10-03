@@ -83,9 +83,9 @@ class BaseTestCase(unittest.TestCase):
         os.close(handler)
         return name
 
-    def expect_exception(self, func, message_part):
+    def expect_exception(self, func, message_part, *args, **kwargs):
         with self.assertRaises(ConfigException) as context:
-            func()
+            func(*args, **kwargs)
         self.assertIn(message_part, str(context.exception))
 
 
@@ -473,8 +473,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="no_user",
-            client_configuration=actual).load_and_set()
+            active_context="no_user").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_simple_token(self):
@@ -483,8 +482,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="simple_token",
-            client_configuration=actual).load_and_set()
+            active_context="simple_token").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_load_user_token(self):
@@ -502,9 +500,8 @@ class TestKubeConfigLoader(BaseTestCase):
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="gcp",
-            client_configuration=actual,
             get_google_credentials=lambda: _raise_exception(
-                "SHOULD NOT BE CALLED")).load_and_set()
+                "SHOULD NOT BE CALLED")).load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_load_gcp_token_no_refresh(self):
@@ -536,8 +533,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="user_pass",
-            client_configuration=actual).load_and_set()
+            active_context="user_pass").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_load_user_pass_token(self):
@@ -548,12 +544,13 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(TEST_BASIC_TOKEN, loader.token)
 
     def test_ssl_no_cert_files(self):
-        actual = FakeConfig()
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="ssl-no_file",
-            client_configuration=actual)
-        self.expect_exception(loader.load_and_set, "does not exists")
+            active_context="ssl-no_file")
+        self.expect_exception(
+            loader.load_and_set,
+            "does not exists",
+            FakeConfig())
 
     def test_ssl(self):
         expected = FakeConfig(
@@ -566,8 +563,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="ssl",
-            client_configuration=actual).load_and_set()
+            active_context="ssl").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_ssl_no_verification(self):
@@ -582,8 +578,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="no_ssl_verification",
-            client_configuration=actual).load_and_set()
+            active_context="no_ssl_verification").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_list_contexts(self):
@@ -631,8 +626,7 @@ class TestKubeConfigLoader(BaseTestCase):
             KubeConfigLoader(
                 config_dict=self.TEST_KUBE_CONFIG,
                 active_context="ssl-local-file",
-                config_base_path=temp_dir,
-                client_configuration=actual).load_and_set()
+                config_base_path=temp_dir).load_and_set(actual)
             self.assertEqual(expected, actual)
         finally:
             shutil.rmtree(temp_dir)
@@ -663,9 +657,9 @@ class TestKubeConfigLoader(BaseTestCase):
         config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
         client = new_client_from_config(
             config_file=config_file, context="simple_token")
-        self.assertEqual(TEST_HOST, client.config.host)
+        self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
-                         client.config.api_key['authorization'])
+                         client.configuration.api_key['authorization'])
 
     def test_no_users_section(self):
         expected = FakeConfig(host=TEST_HOST)
@@ -674,8 +668,7 @@ class TestKubeConfigLoader(BaseTestCase):
         del test_kube_config['users']
         KubeConfigLoader(
             config_dict=test_kube_config,
-            active_context="gcp",
-            client_configuration=actual).load_and_set()
+            active_context="gcp").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_non_existing_user(self):
@@ -683,8 +676,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
-            active_context="non_existing_user",
-            client_configuration=actual).load_and_set()
+            active_context="non_existing_user").load_and_set(actual)
         self.assertEqual(expected, actual)
 
 
