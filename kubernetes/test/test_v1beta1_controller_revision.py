@@ -35,7 +35,9 @@ class TestV1beta1ControllerRevision(unittest.TestCase):
         """
         Test V1beta1ControllerRevision
         """
-        model = kubernetes.client.models.v1beta1_controller_revision.V1beta1ControllerRevision()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_controller_revision.V1beta1ControllerRevision()
+        pass
 
 
 if __name__ == '__main__':

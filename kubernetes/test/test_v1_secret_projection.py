@@ -35,7 +35,9 @@ class TestV1SecretProjection(unittest.TestCase):
         """
         Test V1SecretProjection
         """
-        model = kubernetes.client.models.v1_secret_projection.V1SecretProjection()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_secret_projection.V1SecretProjection()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestExtensionsV1beta1DeploymentStrategy(unittest.TestCase):
         """
         Test ExtensionsV1beta1DeploymentStrategy
         """
-        model = kubernetes.client.models.extensions_v1beta1_deployment_strategy.ExtensionsV1beta1DeploymentStrategy()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.extensions_v1beta1_deployment_strategy.ExtensionsV1beta1DeploymentStrategy()
+        pass
 
 
 if __name__ == '__main__':

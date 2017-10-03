@@ -35,7 +35,9 @@ class TestV1alpha1PodPreset(unittest.TestCase):
         """
         Test V1alpha1PodPreset
         """
-        model = kubernetes.client.models.v1alpha1_pod_preset.V1alpha1PodPreset()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1alpha1_pod_preset.V1alpha1PodPreset()
+        pass
 
 
 if __name__ == '__main__':

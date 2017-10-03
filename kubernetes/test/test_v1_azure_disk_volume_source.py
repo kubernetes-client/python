@@ -35,7 +35,9 @@ class TestV1AzureDiskVolumeSource(unittest.TestCase):
         """
         Test V1AzureDiskVolumeSource
         """
-        model = kubernetes.client.models.v1_azure_disk_volume_source.V1AzureDiskVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_azure_disk_volume_source.V1AzureDiskVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

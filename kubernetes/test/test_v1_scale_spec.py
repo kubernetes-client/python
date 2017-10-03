@@ -35,7 +35,9 @@ class TestV1ScaleSpec(unittest.TestCase):
         """
         Test V1ScaleSpec
         """
-        model = kubernetes.client.models.v1_scale_spec.V1ScaleSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_scale_spec.V1ScaleSpec()
+        pass
 
 
 if __name__ == '__main__':

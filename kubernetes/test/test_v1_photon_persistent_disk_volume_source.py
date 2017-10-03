@@ -35,7 +35,9 @@ class TestV1PhotonPersistentDiskVolumeSource(unittest.TestCase):
         """
         Test V1PhotonPersistentDiskVolumeSource
         """
-        model = kubernetes.client.models.v1_photon_persistent_disk_volume_source.V1PhotonPersistentDiskVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_photon_persistent_disk_volume_source.V1PhotonPersistentDiskVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

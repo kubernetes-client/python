@@ -35,7 +35,9 @@ class TestV1Taint(unittest.TestCase):
         """
         Test V1Taint
         """
-        model = kubernetes.client.models.v1_taint.V1Taint()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_taint.V1Taint()
+        pass
 
 
 if __name__ == '__main__':

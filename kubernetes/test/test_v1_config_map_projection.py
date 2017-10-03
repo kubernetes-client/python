@@ -35,7 +35,9 @@ class TestV1ConfigMapProjection(unittest.TestCase):
         """
         Test V1ConfigMapProjection
         """
-        model = kubernetes.client.models.v1_config_map_projection.V1ConfigMapProjection()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_config_map_projection.V1ConfigMapProjection()
+        pass
 
 
 if __name__ == '__main__':

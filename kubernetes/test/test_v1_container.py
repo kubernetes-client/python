@@ -35,7 +35,9 @@ class TestV1Container(unittest.TestCase):
         """
         Test V1Container
         """
-        model = kubernetes.client.models.v1_container.V1Container()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_container.V1Container()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1TokenReviewStatus(unittest.TestCase):
         """
         Test V1TokenReviewStatus
         """
-        model = kubernetes.client.models.v1_token_review_status.V1TokenReviewStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_token_review_status.V1TokenReviewStatus()
+        pass
 
 
 if __name__ == '__main__':

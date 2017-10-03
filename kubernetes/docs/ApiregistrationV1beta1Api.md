@@ -24,19 +24,20 @@ create an APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 body = kubernetes.client.V1beta1APIService() # V1beta1APIService | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
@@ -78,19 +79,20 @@ delete an APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the APIService
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -140,19 +142,20 @@ delete collection of APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
@@ -204,19 +207,20 @@ get available resources
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 
 try: 
     api_response = api_instance.get_api_resources()
@@ -252,19 +256,20 @@ list or watch objects of kind APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
@@ -316,19 +321,20 @@ partially update the specified APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the APIService
 body = NULL # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -372,19 +378,20 @@ read the specified APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the APIService
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
@@ -430,19 +437,20 @@ replace the specified APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the APIService
 body = kubernetes.client.V1beta1APIService() # V1beta1APIService | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -486,19 +494,20 @@ replace status of the specified APIService
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.ApiregistrationV1beta1Api()
+api_instance = kubernetes.client.ApiregistrationV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the APIService
 body = kubernetes.client.V1beta1APIService() # V1beta1APIService | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)

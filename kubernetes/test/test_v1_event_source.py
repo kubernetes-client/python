@@ -35,7 +35,9 @@ class TestV1EventSource(unittest.TestCase):
         """
         Test V1EventSource
         """
-        model = kubernetes.client.models.v1_event_source.V1EventSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_event_source.V1EventSource()
+        pass
 
 
 if __name__ == '__main__':

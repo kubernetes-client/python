@@ -35,7 +35,9 @@ class TestV1LocalSubjectAccessReview(unittest.TestCase):
         """
         Test V1LocalSubjectAccessReview
         """
-        model = kubernetes.client.models.v1_local_subject_access_review.V1LocalSubjectAccessReview()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_local_subject_access_review.V1LocalSubjectAccessReview()
+        pass
 
 
 if __name__ == '__main__':

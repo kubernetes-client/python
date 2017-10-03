@@ -35,7 +35,9 @@ class TestV1Lifecycle(unittest.TestCase):
         """
         Test V1Lifecycle
         """
-        model = kubernetes.client.models.v1_lifecycle.V1Lifecycle()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_lifecycle.V1Lifecycle()
+        pass
 
 
 if __name__ == '__main__':

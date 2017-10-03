@@ -35,7 +35,9 @@ class TestV1HostAlias(unittest.TestCase):
         """
         Test V1HostAlias
         """
-        model = kubernetes.client.models.v1_host_alias.V1HostAlias()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_host_alias.V1HostAlias()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1beta1IngressTLS(unittest.TestCase):
         """
         Test V1beta1IngressTLS
         """
-        model = kubernetes.client.models.v1beta1_ingress_tls.V1beta1IngressTLS()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_ingress_tls.V1beta1IngressTLS()
+        pass
 
 
 if __name__ == '__main__':

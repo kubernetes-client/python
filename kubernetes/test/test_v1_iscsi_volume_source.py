@@ -35,7 +35,9 @@ class TestV1ISCSIVolumeSource(unittest.TestCase):
         """
         Test V1ISCSIVolumeSource
         """
-        model = kubernetes.client.models.v1_iscsi_volume_source.V1ISCSIVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_iscsi_volume_source.V1ISCSIVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

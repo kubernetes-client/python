@@ -35,7 +35,9 @@ class TestV1VolumeProjection(unittest.TestCase):
         """
         Test V1VolumeProjection
         """
-        model = kubernetes.client.models.v1_volume_projection.V1VolumeProjection()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_volume_projection.V1VolumeProjection()
+        pass
 
 
 if __name__ == '__main__':

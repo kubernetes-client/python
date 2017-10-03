@@ -35,7 +35,9 @@ class TestV1EnvFromSource(unittest.TestCase):
         """
         Test V1EnvFromSource
         """
-        model = kubernetes.client.models.v1_env_from_source.V1EnvFromSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_env_from_source.V1EnvFromSource()
+        pass
 
 
 if __name__ == '__main__':

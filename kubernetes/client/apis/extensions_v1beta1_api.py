@@ -20,7 +20,6 @@ import re
 # python 2 and python 3 compatibility library
 from six import iteritems
 
-from ..configuration import Configuration
 from ..api_client import ApiClient
 
 
@@ -32,27 +31,19 @@ class ExtensionsV1beta1Api(object):
     """
 
     def __init__(self, api_client=None):
-        config = Configuration()
-        if api_client:
-            self.api_client = api_client
-        else:
-            if not config.api_client:
-                config.api_client = ApiClient()
-            self.api_client = config.api_client
+        if api_client is None:
+            api_client = ApiClient()
+        self.api_client = api_client
 
     def create_namespaced_daemon_set(self, namespace, body, **kwargs):
         """
         create a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_daemon_set(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_daemon_set(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -61,7 +52,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_daemon_set_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_daemon_set_with_http_info(namespace, body, **kwargs)
@@ -71,15 +62,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_daemon_set_with_http_info(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_daemon_set_with_http_info(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -89,7 +76,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -113,14 +100,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -141,7 +127,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -150,7 +136,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -160,15 +146,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_deployment(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_deployment(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -177,7 +159,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_deployment_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_deployment_with_http_info(namespace, body, **kwargs)
@@ -187,15 +169,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_deployment_with_http_info(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_deployment_with_http_info(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -205,7 +183,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -229,14 +207,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -257,7 +234,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -266,7 +243,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -276,15 +253,11 @@ class ExtensionsV1beta1Api(object):
         """
         create rollback of a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_deployment_rollback(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_deployment_rollback(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DeploymentRollback (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1DeploymentRollback body: (required)
@@ -294,7 +267,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, **kwargs)
@@ -304,15 +277,11 @@ class ExtensionsV1beta1Api(object):
         """
         create rollback of a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DeploymentRollback (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1DeploymentRollback body: (required)
@@ -323,7 +292,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -350,16 +319,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/rollback'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -380,7 +348,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/rollback', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -389,7 +357,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1DeploymentRollback',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -399,15 +367,11 @@ class ExtensionsV1beta1Api(object):
         """
         create an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_ingress(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_ingress(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -416,7 +380,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_ingress_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_ingress_with_http_info(namespace, body, **kwargs)
@@ -426,15 +390,11 @@ class ExtensionsV1beta1Api(object):
         """
         create an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_ingress_with_http_info(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_ingress_with_http_info(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -444,7 +404,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -468,14 +428,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -496,7 +455,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -505,7 +464,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -515,15 +474,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_network_policy(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_network_policy(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -532,7 +487,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_network_policy_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_network_policy_with_http_info(namespace, body, **kwargs)
@@ -542,15 +497,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_network_policy_with_http_info(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_network_policy_with_http_info(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -560,7 +511,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -584,14 +535,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -612,7 +562,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -621,7 +571,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -631,15 +581,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_replica_set(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_replica_set(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -648,7 +594,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_replica_set_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_replica_set_with_http_info(namespace, body, **kwargs)
@@ -658,15 +604,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_replica_set_with_http_info(namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_replica_set_with_http_info(namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -676,7 +618,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -700,14 +642,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -728,7 +669,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -737,7 +678,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -747,15 +688,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_pod_security_policy(body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_pod_security_policy(body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param V1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodSecurityPolicy
@@ -763,7 +700,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_pod_security_policy_with_http_info(body, **kwargs)
         else:
             (data) = self.create_pod_security_policy_with_http_info(body, **kwargs)
@@ -773,15 +710,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_pod_security_policy_with_http_info(body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_pod_security_policy_with_http_info(body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param V1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1PodSecurityPolicy
@@ -790,7 +723,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -811,12 +744,11 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -837,7 +769,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -846,7 +778,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -856,15 +788,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_third_party_resource(body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_third_party_resource(body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param V1beta1ThirdPartyResource body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ThirdPartyResource
@@ -872,7 +800,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_third_party_resource_with_http_info(body, **kwargs)
         else:
             (data) = self.create_third_party_resource_with_http_info(body, **kwargs)
@@ -882,15 +810,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_third_party_resource_with_http_info(body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_third_party_resource_with_http_info(body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param V1beta1ThirdPartyResource body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1ThirdPartyResource
@@ -899,7 +823,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -920,12 +844,11 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -946,7 +869,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -955,7 +878,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ThirdPartyResource',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -965,15 +888,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_daemon_set(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_daemon_set(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -987,7 +906,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_namespaced_daemon_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_daemon_set_with_http_info(namespace, **kwargs)
@@ -997,15 +916,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_daemon_set_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_daemon_set_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1020,7 +935,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1041,26 +956,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1079,7 +993,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1088,7 +1002,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1098,15 +1012,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_deployment(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_deployment(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1120,7 +1030,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_namespaced_deployment_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_deployment_with_http_info(namespace, **kwargs)
@@ -1130,15 +1040,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_deployment_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_deployment_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1153,7 +1059,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1174,26 +1080,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1212,7 +1117,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1221,7 +1126,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1231,15 +1136,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_ingress(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_ingress(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1253,7 +1154,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_namespaced_ingress_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_ingress_with_http_info(namespace, **kwargs)
@@ -1263,15 +1164,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_ingress_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_ingress_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1286,7 +1183,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1307,26 +1204,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1345,7 +1241,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1354,7 +1250,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1364,15 +1260,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_network_policy(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_network_policy(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1386,7 +1278,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_namespaced_network_policy_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_network_policy_with_http_info(namespace, **kwargs)
@@ -1396,15 +1288,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_network_policy_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_network_policy_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1419,7 +1307,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1440,26 +1328,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1478,7 +1365,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1487,7 +1374,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1497,15 +1384,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_replica_set(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_replica_set(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1519,7 +1402,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_namespaced_replica_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_replica_set_with_http_info(namespace, **kwargs)
@@ -1529,15 +1412,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_namespaced_replica_set_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_namespaced_replica_set_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1552,7 +1431,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1573,26 +1452,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1611,7 +1489,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1620,7 +1498,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1630,15 +1508,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_pod_security_policy(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_pod_security_policy(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -1651,7 +1525,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_pod_security_policy_with_http_info(**kwargs)
         else:
             (data) = self.delete_collection_pod_security_policy_with_http_info(**kwargs)
@@ -1661,15 +1535,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_pod_security_policy_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_pod_security_policy_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -1683,7 +1553,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1701,24 +1571,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1737,7 +1606,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1746,7 +1615,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1756,15 +1625,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_third_party_resource(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_third_party_resource(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -1777,7 +1642,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_collection_third_party_resource_with_http_info(**kwargs)
         else:
             (data) = self.delete_collection_third_party_resource_with_http_info(**kwargs)
@@ -1787,15 +1652,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_collection_third_party_resource_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_collection_third_party_resource_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -1809,7 +1670,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1827,24 +1688,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1863,7 +1723,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1872,7 +1732,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1882,15 +1742,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_daemon_set(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_daemon_set(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1903,7 +1759,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
@@ -1913,15 +1769,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_daemon_set_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_daemon_set_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1935,7 +1787,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1962,22 +1814,21 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -1998,7 +1849,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2007,7 +1858,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2017,15 +1868,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_deployment(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_deployment(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2038,7 +1885,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
@@ -2048,15 +1895,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_deployment_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_deployment_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2070,7 +1913,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2097,22 +1940,21 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -2133,7 +1975,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2142,7 +1984,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2152,15 +1994,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_ingress(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_ingress(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2173,7 +2011,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
@@ -2183,15 +2021,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_ingress_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_ingress_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2205,7 +2039,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2232,22 +2066,21 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -2268,7 +2101,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2277,7 +2110,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2287,15 +2120,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_network_policy(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_network_policy(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2308,7 +2137,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
@@ -2318,15 +2147,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_network_policy_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_network_policy_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2340,7 +2165,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2367,22 +2192,21 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -2403,7 +2227,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2412,7 +2236,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2422,15 +2246,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_replica_set(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_replica_set(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2443,7 +2263,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
@@ -2453,15 +2273,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_replica_set_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_replica_set_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2475,7 +2291,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2502,22 +2318,21 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -2538,7 +2353,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2547,7 +2362,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2557,15 +2372,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_pod_security_policy(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_pod_security_policy(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param V1DeleteOptions body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -2577,7 +2388,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_pod_security_policy_with_http_info(name, body, **kwargs)
         else:
             (data) = self.delete_pod_security_policy_with_http_info(name, body, **kwargs)
@@ -2587,15 +2398,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_pod_security_policy_with_http_info(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_pod_security_policy_with_http_info(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param V1DeleteOptions body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -2608,7 +2415,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2632,20 +2439,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -2666,7 +2472,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2675,7 +2481,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2685,15 +2491,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_third_party_resource(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_third_party_resource(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param V1DeleteOptions body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -2705,7 +2507,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_third_party_resource_with_http_info(name, body, **kwargs)
         else:
             (data) = self.delete_third_party_resource_with_http_info(name, body, **kwargs)
@@ -2715,15 +2517,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_third_party_resource_with_http_info(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_third_party_resource_with_http_info(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param V1DeleteOptions body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -2736,7 +2534,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2760,20 +2558,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -2794,7 +2591,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2803,7 +2600,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2813,21 +2610,17 @@ class ExtensionsV1beta1Api(object):
         """
         get available resources
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_api_resources(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_api_resources(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :return: V1APIResourceList
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_api_resources_with_http_info(**kwargs)
         else:
             (data) = self.get_api_resources_with_http_info(**kwargs)
@@ -2837,22 +2630,18 @@ class ExtensionsV1beta1Api(object):
         """
         get available resources
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_api_resources_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_api_resources_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :return: V1APIResourceList
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         all_params = []
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2869,10 +2658,9 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
 
         header_params = {}
 
@@ -2891,7 +2679,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -2900,7 +2688,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1APIResourceList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2910,15 +2698,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_daemon_set_for_all_namespaces(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_daemon_set_for_all_namespaces(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -2931,7 +2715,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_daemon_set_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_daemon_set_for_all_namespaces_with_http_info(**kwargs)
@@ -2941,15 +2725,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_daemon_set_for_all_namespaces_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_daemon_set_for_all_namespaces_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -2963,7 +2743,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['field_selector', 'include_uninitialized', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2981,24 +2761,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/daemonsets'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3017,7 +2796,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/daemonsets', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3026,7 +2805,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSetList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3036,15 +2815,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_deployment_for_all_namespaces(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_deployment_for_all_namespaces(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -3057,7 +2832,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_deployment_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_deployment_for_all_namespaces_with_http_info(**kwargs)
@@ -3067,15 +2842,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_deployment_for_all_namespaces_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_deployment_for_all_namespaces_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -3089,7 +2860,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['field_selector', 'include_uninitialized', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3107,24 +2878,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/deployments'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3143,7 +2913,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/deployments', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3152,7 +2922,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1DeploymentList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3162,15 +2932,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_ingress_for_all_namespaces(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_ingress_for_all_namespaces(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -3183,7 +2949,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_ingress_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_ingress_for_all_namespaces_with_http_info(**kwargs)
@@ -3193,15 +2959,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_ingress_for_all_namespaces_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_ingress_for_all_namespaces_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -3215,7 +2977,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['field_selector', 'include_uninitialized', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3233,24 +2995,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/ingresses'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3269,7 +3030,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/ingresses', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3278,7 +3039,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1IngressList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3288,15 +3049,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_daemon_set(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_daemon_set(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3310,7 +3067,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_namespaced_daemon_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_daemon_set_with_http_info(namespace, **kwargs)
@@ -3320,15 +3077,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_daemon_set_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_daemon_set_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3343,7 +3096,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3364,26 +3117,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3402,7 +3154,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3411,7 +3163,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSetList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3421,15 +3173,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_deployment(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_deployment(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3443,7 +3191,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_namespaced_deployment_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_deployment_with_http_info(namespace, **kwargs)
@@ -3453,15 +3201,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_deployment_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_deployment_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3476,7 +3220,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3497,26 +3241,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3535,7 +3278,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3544,7 +3287,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1DeploymentList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3554,15 +3297,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_ingress(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_ingress(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3576,7 +3315,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_namespaced_ingress_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_ingress_with_http_info(namespace, **kwargs)
@@ -3586,15 +3325,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_ingress_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_ingress_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3609,7 +3344,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3630,26 +3365,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3668,7 +3402,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3677,7 +3411,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1IngressList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3687,15 +3421,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_network_policy(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_network_policy(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3709,7 +3439,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_namespaced_network_policy_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_network_policy_with_http_info(namespace, **kwargs)
@@ -3719,15 +3449,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_network_policy_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_network_policy_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3742,7 +3468,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3763,26 +3489,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3801,7 +3526,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3810,7 +3535,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicyList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3820,15 +3545,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_replica_set(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_replica_set(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3842,7 +3563,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_namespaced_replica_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_replica_set_with_http_info(namespace, **kwargs)
@@ -3852,15 +3573,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_replica_set_with_http_info(namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_replica_set_with_http_info(namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3875,7 +3592,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3896,26 +3613,25 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets'.replace('{format}', 'json')
         path_params = {}
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -3934,7 +3650,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -3943,7 +3659,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSetList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3953,15 +3669,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_network_policy_for_all_namespaces(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_network_policy_for_all_namespaces(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -3974,7 +3686,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_network_policy_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_network_policy_for_all_namespaces_with_http_info(**kwargs)
@@ -3984,15 +3696,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_network_policy_for_all_namespaces_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_network_policy_for_all_namespaces_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -4006,7 +3714,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['field_selector', 'include_uninitialized', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4024,24 +3732,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/networkpolicies'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -4060,7 +3767,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/networkpolicies', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4069,7 +3776,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicyList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4079,15 +3786,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_pod_security_policy(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_pod_security_policy(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -4100,7 +3803,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_pod_security_policy_with_http_info(**kwargs)
         else:
             (data) = self.list_pod_security_policy_with_http_info(**kwargs)
@@ -4110,15 +3813,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_pod_security_policy_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_pod_security_policy_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -4132,7 +3831,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4150,24 +3849,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -4186,7 +3884,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4195,7 +3893,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1PodSecurityPolicyList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4205,15 +3903,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_replica_set_for_all_namespaces(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_replica_set_for_all_namespaces(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -4226,7 +3920,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_replica_set_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_replica_set_for_all_namespaces_with_http_info(**kwargs)
@@ -4236,15 +3930,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_replica_set_for_all_namespaces_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_replica_set_for_all_namespaces_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
         :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
@@ -4258,7 +3948,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['field_selector', 'include_uninitialized', 'label_selector', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4276,24 +3966,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/replicasets'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -4312,7 +4001,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/replicasets', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4321,7 +4010,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSetList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4331,15 +4020,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_third_party_resource(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_third_party_resource(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -4352,7 +4037,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_third_party_resource_with_http_info(**kwargs)
         else:
             (data) = self.list_third_party_resource_with_http_info(**kwargs)
@@ -4362,15 +4047,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_third_party_resource_with_http_info(callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_third_party_resource_with_http_info(async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -4384,7 +4065,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['pretty', 'field_selector', 'include_uninitialized', 'label_selector', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4402,24 +4083,23 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources'.replace('{format}', 'json')
         path_params = {}
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'field_selector' in params:
-            query_params['fieldSelector'] = params['field_selector']
+            query_params.append(('fieldSelector', params['field_selector']))
         if 'include_uninitialized' in params:
-            query_params['includeUninitialized'] = params['include_uninitialized']
+            query_params.append(('includeUninitialized', params['include_uninitialized']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'timeout_seconds' in params:
-            query_params['timeoutSeconds'] = params['timeout_seconds']
+            query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -4438,7 +4118,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4447,7 +4127,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ThirdPartyResourceList',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4457,15 +4137,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_daemon_set(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_daemon_set(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4475,7 +4151,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
@@ -4485,15 +4161,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_daemon_set_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_daemon_set_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4504,7 +4176,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4531,16 +4203,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -4561,7 +4232,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4570,7 +4241,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4580,15 +4251,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_daemon_set_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_daemon_set_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4598,7 +4265,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -4608,15 +4275,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4627,7 +4290,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4654,16 +4317,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -4684,7 +4346,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4693,7 +4355,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4703,15 +4365,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_deployment(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_deployment(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4721,7 +4379,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
@@ -4731,15 +4389,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_deployment_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_deployment_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4750,7 +4404,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4777,16 +4431,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -4807,7 +4460,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4816,7 +4469,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4826,15 +4479,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_deployment_scale(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_deployment_scale(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4844,7 +4493,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
@@ -4854,15 +4503,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4873,7 +4518,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4900,16 +4545,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -4930,7 +4574,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -4939,7 +4583,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4949,15 +4593,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_deployment_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_deployment_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4967,7 +4607,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
@@ -4977,15 +4617,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_deployment_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_deployment_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4996,7 +4632,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5023,16 +4659,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5053,7 +4688,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5062,7 +4697,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5072,15 +4707,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_ingress(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_ingress(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5090,7 +4721,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
@@ -5100,15 +4731,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_ingress_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_ingress_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5119,7 +4746,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5146,16 +4773,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5176,7 +4802,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5185,7 +4811,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5195,15 +4821,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_ingress_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_ingress_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5213,7 +4835,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
@@ -5223,15 +4845,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_ingress_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_ingress_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5242,7 +4860,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5269,16 +4887,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5299,7 +4916,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5308,7 +4925,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5318,15 +4935,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_network_policy(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_network_policy(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5336,7 +4949,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
@@ -5346,15 +4959,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_network_policy_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_network_policy_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5365,7 +4974,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5392,16 +5001,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5422,7 +5030,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5431,7 +5039,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5441,15 +5049,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replica_set(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replica_set(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5459,7 +5063,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
@@ -5469,15 +5073,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replica_set_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replica_set_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5488,7 +5088,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5515,16 +5115,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5545,7 +5144,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5554,7 +5153,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5564,15 +5163,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replica_set_scale(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replica_set_scale(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5582,7 +5177,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
@@ -5592,15 +5187,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5611,7 +5202,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5638,16 +5229,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5668,7 +5258,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5677,7 +5267,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5687,15 +5277,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replica_set_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replica_set_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5705,7 +5291,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -5715,15 +5301,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5734,7 +5316,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5761,16 +5343,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5791,7 +5372,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5800,7 +5381,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5810,15 +5391,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replication_controller_dummy_scale(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replication_controller_dummy_scale(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5828,7 +5405,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
@@ -5838,15 +5415,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5857,7 +5430,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5884,16 +5457,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -5914,7 +5486,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -5923,7 +5495,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5933,15 +5505,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_pod_security_policy(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_pod_security_policy(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5950,7 +5518,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_pod_security_policy_with_http_info(name, body, **kwargs)
         else:
             (data) = self.patch_pod_security_policy_with_http_info(name, body, **kwargs)
@@ -5960,15 +5528,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_pod_security_policy_with_http_info(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_pod_security_policy_with_http_info(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5978,7 +5542,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6002,14 +5566,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -6030,7 +5593,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6039,7 +5602,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6049,15 +5612,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_third_party_resource(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_third_party_resource(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6066,7 +5625,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.patch_third_party_resource_with_http_info(name, body, **kwargs)
         else:
             (data) = self.patch_third_party_resource_with_http_info(name, body, **kwargs)
@@ -6076,15 +5635,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.patch_third_party_resource_with_http_info(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_third_party_resource_with_http_info(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6094,7 +5649,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6118,14 +5673,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -6146,7 +5700,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources/{name}', 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6155,7 +5709,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ThirdPartyResource',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6165,15 +5719,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_daemon_set(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_daemon_set(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6184,7 +5734,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_daemon_set_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_daemon_set_with_http_info(name, namespace, **kwargs)
@@ -6194,15 +5744,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_daemon_set_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_daemon_set_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6214,7 +5760,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6238,20 +5784,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -6270,7 +5815,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6279,7 +5824,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6289,15 +5834,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_daemon_set_status(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_daemon_set_status(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6306,7 +5847,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_daemon_set_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_daemon_set_status_with_http_info(name, namespace, **kwargs)
@@ -6316,15 +5857,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_daemon_set_status_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_daemon_set_status_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6334,7 +5871,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6358,16 +5895,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -6386,7 +5922,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6395,7 +5931,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6405,15 +5941,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_deployment(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_deployment(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6424,7 +5956,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_deployment_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_deployment_with_http_info(name, namespace, **kwargs)
@@ -6434,15 +5966,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_deployment_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_deployment_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6454,7 +5982,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6478,20 +6006,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -6510,7 +6037,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6519,7 +6046,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6529,15 +6056,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_deployment_scale(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_deployment_scale(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6546,7 +6069,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_deployment_scale_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_deployment_scale_with_http_info(name, namespace, **kwargs)
@@ -6556,15 +6079,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_deployment_scale_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_deployment_scale_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6574,7 +6093,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6598,16 +6117,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -6626,7 +6144,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6635,7 +6153,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6645,15 +6163,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_deployment_status(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_deployment_status(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6662,7 +6176,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_deployment_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_deployment_status_with_http_info(name, namespace, **kwargs)
@@ -6672,15 +6186,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_deployment_status_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_deployment_status_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6690,7 +6200,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6714,16 +6224,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -6742,7 +6251,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6751,7 +6260,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6761,15 +6270,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_ingress(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_ingress(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6780,7 +6285,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_ingress_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_ingress_with_http_info(name, namespace, **kwargs)
@@ -6790,15 +6295,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_ingress_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_ingress_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6810,7 +6311,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6834,20 +6335,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -6866,7 +6366,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6875,7 +6375,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6885,15 +6385,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_ingress_status(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_ingress_status(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6902,7 +6398,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_ingress_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_ingress_status_with_http_info(name, namespace, **kwargs)
@@ -6912,15 +6408,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_ingress_status_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_ingress_status_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6930,7 +6422,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6954,16 +6446,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -6982,7 +6473,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -6991,7 +6482,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7001,15 +6492,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_network_policy(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_network_policy(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7020,7 +6507,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_network_policy_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_network_policy_with_http_info(name, namespace, **kwargs)
@@ -7030,15 +6517,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_network_policy_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_network_policy_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7050,7 +6533,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7074,20 +6557,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -7106,7 +6588,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7115,7 +6597,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7125,15 +6607,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replica_set(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replica_set(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7144,7 +6622,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_replica_set_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replica_set_with_http_info(name, namespace, **kwargs)
@@ -7154,15 +6632,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replica_set_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replica_set_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7174,7 +6648,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7198,20 +6672,19 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -7230,7 +6703,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7239,7 +6712,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7249,15 +6722,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replica_set_scale(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replica_set_scale(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7266,7 +6735,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_replica_set_scale_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replica_set_scale_with_http_info(name, namespace, **kwargs)
@@ -7276,15 +6745,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replica_set_scale_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replica_set_scale_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7294,7 +6759,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7318,16 +6783,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -7346,7 +6810,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7355,7 +6819,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7365,15 +6829,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replica_set_status(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replica_set_status(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7382,7 +6842,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_replica_set_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replica_set_status_with_http_info(name, namespace, **kwargs)
@@ -7392,15 +6852,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replica_set_status_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replica_set_status_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7410,7 +6866,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7434,16 +6890,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -7462,7 +6917,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7471,7 +6926,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7481,15 +6936,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replication_controller_dummy_scale(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replication_controller_dummy_scale(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7498,7 +6949,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, **kwargs)
@@ -7508,15 +6959,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -7526,7 +6973,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7550,16 +6997,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -7578,7 +7024,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7587,7 +7033,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7597,15 +7043,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_pod_security_policy(name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_pod_security_policy(name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
@@ -7615,7 +7057,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_pod_security_policy_with_http_info(name, **kwargs)
         else:
             (data) = self.read_pod_security_policy_with_http_info(name, **kwargs)
@@ -7625,15 +7067,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_pod_security_policy_with_http_info(name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_pod_security_policy_with_http_info(name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
@@ -7644,7 +7082,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7665,18 +7103,17 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -7695,7 +7132,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7704,7 +7141,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7714,15 +7151,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_third_party_resource(name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_third_party_resource(name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
@@ -7732,7 +7165,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.read_third_party_resource_with_http_info(name, **kwargs)
         else:
             (data) = self.read_third_party_resource_with_http_info(name, **kwargs)
@@ -7742,15 +7175,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.read_third_party_resource_with_http_info(name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.read_third_party_resource_with_http_info(name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
@@ -7761,7 +7190,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'pretty', 'exact', 'export']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7782,18 +7211,17 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'exact' in params:
-            query_params['exact'] = params['exact']
+            query_params.append(('exact', params['exact']))
         if 'export' in params:
-            query_params['export'] = params['export']
+            query_params.append(('export', params['export']))
 
         header_params = {}
 
@@ -7812,7 +7240,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7821,7 +7249,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ThirdPartyResource',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7831,15 +7259,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_daemon_set(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_daemon_set(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -7849,7 +7273,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
@@ -7859,15 +7283,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_daemon_set_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_daemon_set_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -7878,7 +7298,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7905,16 +7325,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -7935,7 +7354,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -7944,7 +7363,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7954,15 +7373,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_daemon_set_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_daemon_set_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -7972,7 +7387,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -7982,15 +7397,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -8001,7 +7412,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8028,16 +7439,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8058,7 +7468,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/daemonsets/{name}/status', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8067,7 +7477,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8077,15 +7487,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_deployment(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_deployment(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -8095,7 +7501,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
@@ -8105,15 +7511,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_deployment_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_deployment_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -8124,7 +7526,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8151,16 +7553,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8181,7 +7582,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8190,7 +7591,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8200,15 +7601,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_deployment_scale(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_deployment_scale(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -8218,7 +7615,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
@@ -8228,15 +7625,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -8247,7 +7640,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8274,16 +7667,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8304,7 +7696,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/scale', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8313,7 +7705,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8323,15 +7715,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_deployment_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_deployment_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -8341,7 +7729,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
@@ -8351,15 +7739,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_deployment_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_deployment_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -8370,7 +7754,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8397,16 +7781,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8427,7 +7810,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/deployments/{name}/status', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8436,7 +7819,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8446,15 +7829,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_ingress(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_ingress(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -8464,7 +7843,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
@@ -8474,15 +7853,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_ingress_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_ingress_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -8493,7 +7868,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8520,16 +7895,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8550,7 +7924,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8559,7 +7933,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8569,15 +7943,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_ingress_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_ingress_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -8587,7 +7957,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
@@ -8597,15 +7967,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_ingress_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_ingress_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -8616,7 +7982,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8643,16 +8009,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8673,7 +8038,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/ingresses/{name}/status', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8682,7 +8047,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8692,15 +8057,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_network_policy(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_network_policy(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
@@ -8710,7 +8071,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
@@ -8720,15 +8081,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_network_policy_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_network_policy_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
@@ -8739,7 +8096,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8766,16 +8123,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8796,7 +8152,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/networkpolicies/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8805,7 +8161,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8815,15 +8171,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replica_set(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replica_set(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -8833,7 +8185,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
@@ -8843,15 +8195,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replica_set_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replica_set_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -8862,7 +8210,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8889,16 +8237,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -8919,7 +8266,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -8928,7 +8275,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8938,15 +8285,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replica_set_scale(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replica_set_scale(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -8956,7 +8299,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
@@ -8966,15 +8309,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -8985,7 +8324,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -9012,16 +8351,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -9042,7 +8380,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/scale', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -9051,7 +8389,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -9061,15 +8399,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replica_set_status(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replica_set_status(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -9079,7 +8413,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -9089,15 +8423,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -9108,7 +8438,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -9135,16 +8465,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -9165,7 +8494,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicasets/{name}/status', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -9174,7 +8503,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -9184,15 +8513,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replication_controller_dummy_scale(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replication_controller_dummy_scale(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -9202,7 +8527,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
@@ -9212,15 +8537,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -9231,7 +8552,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -9258,16 +8579,15 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
         if 'namespace' in params:
             path_params['namespace'] = params['namespace']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -9288,7 +8608,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/namespaces/{namespace}/replicationcontrollers/{name}/scale', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -9297,7 +8617,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -9307,15 +8627,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_pod_security_policy(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_pod_security_policy(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param V1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -9324,7 +8640,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_pod_security_policy_with_http_info(name, body, **kwargs)
         else:
             (data) = self.replace_pod_security_policy_with_http_info(name, body, **kwargs)
@@ -9334,15 +8650,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_pod_security_policy_with_http_info(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_pod_security_policy_with_http_info(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the PodSecurityPolicy (required)
         :param V1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -9352,7 +8664,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -9376,14 +8688,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/podsecuritypolicies/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -9404,7 +8715,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/podsecuritypolicies/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -9413,7 +8724,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -9423,15 +8734,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_third_party_resource(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_third_party_resource(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param V1beta1ThirdPartyResource body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -9440,7 +8747,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_third_party_resource_with_http_info(name, body, **kwargs)
         else:
             (data) = self.replace_third_party_resource_with_http_info(name, body, **kwargs)
@@ -9450,15 +8757,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified ThirdPartyResource
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_third_party_resource_with_http_info(name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_third_party_resource_with_http_info(name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str name: name of the ThirdPartyResource (required)
         :param V1beta1ThirdPartyResource body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -9468,7 +8771,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -9492,14 +8795,13 @@ class ExtensionsV1beta1Api(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/extensions/v1beta1/thirdpartyresources/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -9520,7 +8822,7 @@ class ExtensionsV1beta1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/extensions/v1beta1/thirdpartyresources/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -9529,7 +8831,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ThirdPartyResource',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),

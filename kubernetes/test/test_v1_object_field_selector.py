@@ -35,7 +35,9 @@ class TestV1ObjectFieldSelector(unittest.TestCase):
         """
         Test V1ObjectFieldSelector
         """
-        model = kubernetes.client.models.v1_object_field_selector.V1ObjectFieldSelector()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_object_field_selector.V1ObjectFieldSelector()
+        pass
 
 
 if __name__ == '__main__':

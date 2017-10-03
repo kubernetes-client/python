@@ -35,7 +35,9 @@ class TestV1EndpointPort(unittest.TestCase):
         """
         Test V1EndpointPort
         """
-        model = kubernetes.client.models.v1_endpoint_port.V1EndpointPort()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_endpoint_port.V1EndpointPort()
+        pass
 
 
 if __name__ == '__main__':

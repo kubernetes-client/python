@@ -35,7 +35,9 @@ class TestV1PodAntiAffinity(unittest.TestCase):
         """
         Test V1PodAntiAffinity
         """
-        model = kubernetes.client.models.v1_pod_anti_affinity.V1PodAntiAffinity()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_pod_anti_affinity.V1PodAntiAffinity()
+        pass
 
 
 if __name__ == '__main__':

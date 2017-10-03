@@ -35,7 +35,9 @@ class TestV1NetworkPolicyIngressRule(unittest.TestCase):
         """
         Test V1NetworkPolicyIngressRule
         """
-        model = kubernetes.client.models.v1_network_policy_ingress_rule.V1NetworkPolicyIngressRule()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_network_policy_ingress_rule.V1NetworkPolicyIngressRule()
+        pass
 
 
 if __name__ == '__main__':

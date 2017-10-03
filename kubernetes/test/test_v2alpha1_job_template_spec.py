@@ -35,7 +35,9 @@ class TestV2alpha1JobTemplateSpec(unittest.TestCase):
         """
         Test V2alpha1JobTemplateSpec
         """
-        model = kubernetes.client.models.v2alpha1_job_template_spec.V2alpha1JobTemplateSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v2alpha1_job_template_spec.V2alpha1JobTemplateSpec()
+        pass
 
 
 if __name__ == '__main__':

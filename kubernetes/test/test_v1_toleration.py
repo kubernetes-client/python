@@ -35,7 +35,9 @@ class TestV1Toleration(unittest.TestCase):
         """
         Test V1Toleration
         """
-        model = kubernetes.client.models.v1_toleration.V1Toleration()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_toleration.V1Toleration()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1HorizontalPodAutoscaler(unittest.TestCase):
         """
         Test V1HorizontalPodAutoscaler
         """
-        model = kubernetes.client.models.v1_horizontal_pod_autoscaler.V1HorizontalPodAutoscaler()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_horizontal_pod_autoscaler.V1HorizontalPodAutoscaler()
+        pass
 
 
 if __name__ == '__main__':

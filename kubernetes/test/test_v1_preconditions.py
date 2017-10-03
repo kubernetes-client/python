@@ -35,7 +35,9 @@ class TestV1Preconditions(unittest.TestCase):
         """
         Test V1Preconditions
         """
-        model = kubernetes.client.models.v1_preconditions.V1Preconditions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_preconditions.V1Preconditions()
+        pass
 
 
 if __name__ == '__main__':

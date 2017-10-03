@@ -35,7 +35,9 @@ class TestV1NodeDaemonEndpoints(unittest.TestCase):
         """
         Test V1NodeDaemonEndpoints
         """
-        model = kubernetes.client.models.v1_node_daemon_endpoints.V1NodeDaemonEndpoints()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_node_daemon_endpoints.V1NodeDaemonEndpoints()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1APIVersions(unittest.TestCase):
         """
         Test V1APIVersions
         """
-        model = kubernetes.client.models.v1_api_versions.V1APIVersions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_api_versions.V1APIVersions()
+        pass
 
 
 if __name__ == '__main__':

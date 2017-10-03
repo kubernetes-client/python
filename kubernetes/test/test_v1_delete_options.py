@@ -35,7 +35,9 @@ class TestV1DeleteOptions(unittest.TestCase):
         """
         Test V1DeleteOptions
         """
-        model = kubernetes.client.models.v1_delete_options.V1DeleteOptions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_delete_options.V1DeleteOptions()
+        pass
 
 
 if __name__ == '__main__':

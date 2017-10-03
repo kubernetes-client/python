@@ -35,7 +35,9 @@ class TestV1alpha1RoleBindingList(unittest.TestCase):
         """
         Test V1alpha1RoleBindingList
         """
-        model = kubernetes.client.models.v1alpha1_role_binding_list.V1alpha1RoleBindingList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1alpha1_role_binding_list.V1alpha1RoleBindingList()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1ConfigMap(unittest.TestCase):
         """
         Test V1ConfigMap
         """
-        model = kubernetes.client.models.v1_config_map.V1ConfigMap()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_config_map.V1ConfigMap()
+        pass
 
 
 if __name__ == '__main__':

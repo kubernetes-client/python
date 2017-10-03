@@ -35,7 +35,9 @@ class TestExtensionsV1beta1Scale(unittest.TestCase):
         """
         Test ExtensionsV1beta1Scale
         """
-        model = kubernetes.client.models.extensions_v1beta1_scale.ExtensionsV1beta1Scale()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.extensions_v1beta1_scale.ExtensionsV1beta1Scale()
+        pass
 
 
 if __name__ == '__main__':

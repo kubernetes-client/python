@@ -35,7 +35,9 @@ class TestAppsV1beta1RollbackConfig(unittest.TestCase):
         """
         Test AppsV1beta1RollbackConfig
         """
-        model = kubernetes.client.models.apps_v1beta1_rollback_config.AppsV1beta1RollbackConfig()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.apps_v1beta1_rollback_config.AppsV1beta1RollbackConfig()
+        pass
 
 
 if __name__ == '__main__':

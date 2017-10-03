@@ -35,7 +35,9 @@ class TestV1beta1ReplicaSetSpec(unittest.TestCase):
         """
         Test V1beta1ReplicaSetSpec
         """
-        model = kubernetes.client.models.v1beta1_replica_set_spec.V1beta1ReplicaSetSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_replica_set_spec.V1beta1ReplicaSetSpec()
+        pass
 
 
 if __name__ == '__main__':

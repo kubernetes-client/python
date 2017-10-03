@@ -35,7 +35,9 @@ class TestV1ComponentCondition(unittest.TestCase):
         """
         Test V1ComponentCondition
         """
-        model = kubernetes.client.models.v1_component_condition.V1ComponentCondition()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_component_condition.V1ComponentCondition()
+        pass
 
 
 if __name__ == '__main__':

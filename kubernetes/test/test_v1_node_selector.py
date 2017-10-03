@@ -35,7 +35,9 @@ class TestV1NodeSelector(unittest.TestCase):
         """
         Test V1NodeSelector
         """
-        model = kubernetes.client.models.v1_node_selector.V1NodeSelector()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_node_selector.V1NodeSelector()
+        pass
 
 
 if __name__ == '__main__':

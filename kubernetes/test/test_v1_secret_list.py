@@ -35,7 +35,9 @@ class TestV1SecretList(unittest.TestCase):
         """
         Test V1SecretList
         """
-        model = kubernetes.client.models.v1_secret_list.V1SecretList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_secret_list.V1SecretList()
+        pass
 
 
 if __name__ == '__main__':

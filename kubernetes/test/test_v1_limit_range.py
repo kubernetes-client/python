@@ -35,7 +35,9 @@ class TestV1LimitRange(unittest.TestCase):
         """
         Test V1LimitRange
         """
-        model = kubernetes.client.models.v1_limit_range.V1LimitRange()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_limit_range.V1LimitRange()
+        pass
 
 
 if __name__ == '__main__':

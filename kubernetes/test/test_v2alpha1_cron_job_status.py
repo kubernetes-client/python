@@ -35,7 +35,9 @@ class TestV2alpha1CronJobStatus(unittest.TestCase):
         """
         Test V2alpha1CronJobStatus
         """
-        model = kubernetes.client.models.v2alpha1_cron_job_status.V2alpha1CronJobStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v2alpha1_cron_job_status.V2alpha1CronJobStatus()
+        pass
 
 
 if __name__ == '__main__':

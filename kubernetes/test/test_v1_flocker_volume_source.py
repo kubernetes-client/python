@@ -35,7 +35,9 @@ class TestV1FlockerVolumeSource(unittest.TestCase):
         """
         Test V1FlockerVolumeSource
         """
-        model = kubernetes.client.models.v1_flocker_volume_source.V1FlockerVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_flocker_volume_source.V1FlockerVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

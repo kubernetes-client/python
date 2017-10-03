@@ -35,7 +35,9 @@ class TestV1beta1IngressRule(unittest.TestCase):
         """
         Test V1beta1IngressRule
         """
-        model = kubernetes.client.models.v1beta1_ingress_rule.V1beta1IngressRule()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_ingress_rule.V1beta1IngressRule()
+        pass
 
 
 if __name__ == '__main__':

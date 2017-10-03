@@ -35,7 +35,9 @@ class TestV1PodSecurityContext(unittest.TestCase):
         """
         Test V1PodSecurityContext
         """
-        model = kubernetes.client.models.v1_pod_security_context.V1PodSecurityContext()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_pod_security_context.V1PodSecurityContext()
+        pass
 
 
 if __name__ == '__main__':

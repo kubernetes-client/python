@@ -35,7 +35,9 @@ class TestV1NamespaceSpec(unittest.TestCase):
         """
         Test V1NamespaceSpec
         """
-        model = kubernetes.client.models.v1_namespace_spec.V1NamespaceSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_namespace_spec.V1NamespaceSpec()
+        pass
 
 
 if __name__ == '__main__':

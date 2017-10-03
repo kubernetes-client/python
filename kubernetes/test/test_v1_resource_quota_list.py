@@ -35,7 +35,9 @@ class TestV1ResourceQuotaList(unittest.TestCase):
         """
         Test V1ResourceQuotaList
         """
-        model = kubernetes.client.models.v1_resource_quota_list.V1ResourceQuotaList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_resource_quota_list.V1ResourceQuotaList()
+        pass
 
 
 if __name__ == '__main__':

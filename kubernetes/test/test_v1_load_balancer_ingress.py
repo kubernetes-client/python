@@ -35,7 +35,9 @@ class TestV1LoadBalancerIngress(unittest.TestCase):
         """
         Test V1LoadBalancerIngress
         """
-        model = kubernetes.client.models.v1_load_balancer_ingress.V1LoadBalancerIngress()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_load_balancer_ingress.V1LoadBalancerIngress()
+        pass
 
 
 if __name__ == '__main__':

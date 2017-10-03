@@ -35,7 +35,9 @@ class TestV1ContainerStateWaiting(unittest.TestCase):
         """
         Test V1ContainerStateWaiting
         """
-        model = kubernetes.client.models.v1_container_state_waiting.V1ContainerStateWaiting()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_container_state_waiting.V1ContainerStateWaiting()
+        pass
 
 
 if __name__ == '__main__':

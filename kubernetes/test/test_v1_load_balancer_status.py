@@ -35,7 +35,9 @@ class TestV1LoadBalancerStatus(unittest.TestCase):
         """
         Test V1LoadBalancerStatus
         """
-        model = kubernetes.client.models.v1_load_balancer_status.V1LoadBalancerStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_load_balancer_status.V1LoadBalancerStatus()
+        pass
 
 
 if __name__ == '__main__':

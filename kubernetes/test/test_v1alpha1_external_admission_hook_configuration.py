@@ -35,7 +35,9 @@ class TestV1alpha1ExternalAdmissionHookConfiguration(unittest.TestCase):
         """
         Test V1alpha1ExternalAdmissionHookConfiguration
         """
-        model = kubernetes.client.models.v1alpha1_external_admission_hook_configuration.V1alpha1ExternalAdmissionHookConfiguration()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1alpha1_external_admission_hook_configuration.V1alpha1ExternalAdmissionHookConfiguration()
+        pass
 
 
 if __name__ == '__main__':

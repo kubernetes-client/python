@@ -35,7 +35,9 @@ class TestV1LabelSelectorRequirement(unittest.TestCase):
         """
         Test V1LabelSelectorRequirement
         """
-        model = kubernetes.client.models.v1_label_selector_requirement.V1LabelSelectorRequirement()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_label_selector_requirement.V1LabelSelectorRequirement()
+        pass
 
 
 if __name__ == '__main__':

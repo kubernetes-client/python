@@ -35,7 +35,9 @@ class TestV1EmptyDirVolumeSource(unittest.TestCase):
         """
         Test V1EmptyDirVolumeSource
         """
-        model = kubernetes.client.models.v1_empty_dir_volume_source.V1EmptyDirVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_empty_dir_volume_source.V1EmptyDirVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

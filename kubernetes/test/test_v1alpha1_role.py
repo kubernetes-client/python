@@ -35,7 +35,9 @@ class TestV1alpha1Role(unittest.TestCase):
         """
         Test V1alpha1Role
         """
-        model = kubernetes.client.models.v1alpha1_role.V1alpha1Role()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1alpha1_role.V1alpha1Role()
+        pass
 
 
 if __name__ == '__main__':

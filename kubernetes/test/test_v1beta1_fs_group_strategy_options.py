@@ -35,7 +35,9 @@ class TestV1beta1FSGroupStrategyOptions(unittest.TestCase):
         """
         Test V1beta1FSGroupStrategyOptions
         """
-        model = kubernetes.client.models.v1beta1_fs_group_strategy_options.V1beta1FSGroupStrategyOptions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_fs_group_strategy_options.V1beta1FSGroupStrategyOptions()
+        pass
 
 
 if __name__ == '__main__':

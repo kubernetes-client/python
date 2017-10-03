@@ -35,7 +35,9 @@ class TestV1EnvVarSource(unittest.TestCase):
         """
         Test V1EnvVarSource
         """
-        model = kubernetes.client.models.v1_env_var_source.V1EnvVarSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_env_var_source.V1EnvVarSource()
+        pass
 
 
 if __name__ == '__main__':

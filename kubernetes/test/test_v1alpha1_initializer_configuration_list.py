@@ -35,7 +35,9 @@ class TestV1alpha1InitializerConfigurationList(unittest.TestCase):
         """
         Test V1alpha1InitializerConfigurationList
         """
-        model = kubernetes.client.models.v1alpha1_initializer_configuration_list.V1alpha1InitializerConfigurationList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1alpha1_initializer_configuration_list.V1alpha1InitializerConfigurationList()
+        pass
 
 
 if __name__ == '__main__':

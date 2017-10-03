@@ -35,7 +35,9 @@ class TestV1APIGroupList(unittest.TestCase):
         """
         Test V1APIGroupList
         """
-        model = kubernetes.client.models.v1_api_group_list.V1APIGroupList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_api_group_list.V1APIGroupList()
+        pass
 
 
 if __name__ == '__main__':

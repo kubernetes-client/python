@@ -35,7 +35,9 @@ class TestV1WeightedPodAffinityTerm(unittest.TestCase):
         """
         Test V1WeightedPodAffinityTerm
         """
-        model = kubernetes.client.models.v1_weighted_pod_affinity_term.V1WeightedPodAffinityTerm()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_weighted_pod_affinity_term.V1WeightedPodAffinityTerm()
+        pass
 
 
 if __name__ == '__main__':

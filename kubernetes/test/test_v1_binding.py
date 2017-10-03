@@ -35,7 +35,9 @@ class TestV1Binding(unittest.TestCase):
         """
         Test V1Binding
         """
-        model = kubernetes.client.models.v1_binding.V1Binding()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_binding.V1Binding()
+        pass
 
 
 if __name__ == '__main__':

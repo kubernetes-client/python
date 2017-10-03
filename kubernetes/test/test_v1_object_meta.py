@@ -35,7 +35,9 @@ class TestV1ObjectMeta(unittest.TestCase):
         """
         Test V1ObjectMeta
         """
-        model = kubernetes.client.models.v1_object_meta.V1ObjectMeta()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_object_meta.V1ObjectMeta()
+        pass
 
 
 if __name__ == '__main__':

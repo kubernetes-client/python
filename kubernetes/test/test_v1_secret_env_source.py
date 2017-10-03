@@ -35,7 +35,9 @@ class TestV1SecretEnvSource(unittest.TestCase):
         """
         Test V1SecretEnvSource
         """
-        model = kubernetes.client.models.v1_secret_env_source.V1SecretEnvSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_secret_env_source.V1SecretEnvSource()
+        pass
 
 
 if __name__ == '__main__':

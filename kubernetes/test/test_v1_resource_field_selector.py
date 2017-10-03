@@ -35,7 +35,9 @@ class TestV1ResourceFieldSelector(unittest.TestCase):
         """
         Test V1ResourceFieldSelector
         """
-        model = kubernetes.client.models.v1_resource_field_selector.V1ResourceFieldSelector()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_resource_field_selector.V1ResourceFieldSelector()
+        pass
 
 
 if __name__ == '__main__':

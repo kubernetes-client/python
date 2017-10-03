@@ -35,7 +35,9 @@ class TestV1KeyToPath(unittest.TestCase):
         """
         Test V1KeyToPath
         """
-        model = kubernetes.client.models.v1_key_to_path.V1KeyToPath()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_key_to_path.V1KeyToPath()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1CrossVersionObjectReference(unittest.TestCase):
         """
         Test V1CrossVersionObjectReference
         """
-        model = kubernetes.client.models.v1_cross_version_object_reference.V1CrossVersionObjectReference()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_cross_version_object_reference.V1CrossVersionObjectReference()
+        pass
 
 
 if __name__ == '__main__':

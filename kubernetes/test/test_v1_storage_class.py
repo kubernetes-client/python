@@ -35,7 +35,9 @@ class TestV1StorageClass(unittest.TestCase):
         """
         Test V1StorageClass
         """
-        model = kubernetes.client.models.v1_storage_class.V1StorageClass()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_storage_class.V1StorageClass()
+        pass
 
 
 if __name__ == '__main__':

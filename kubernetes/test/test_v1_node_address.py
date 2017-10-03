@@ -35,7 +35,9 @@ class TestV1NodeAddress(unittest.TestCase):
         """
         Test V1NodeAddress
         """
-        model = kubernetes.client.models.v1_node_address.V1NodeAddress()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_node_address.V1NodeAddress()
+        pass
 
 
 if __name__ == '__main__':

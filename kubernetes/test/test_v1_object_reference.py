@@ -35,7 +35,9 @@ class TestV1ObjectReference(unittest.TestCase):
         """
         Test V1ObjectReference
         """
-        model = kubernetes.client.models.v1_object_reference.V1ObjectReference()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_object_reference.V1ObjectReference()
+        pass
 
 
 if __name__ == '__main__':

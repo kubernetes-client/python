@@ -35,7 +35,9 @@ class TestV1NodeAffinity(unittest.TestCase):
         """
         Test V1NodeAffinity
         """
-        model = kubernetes.client.models.v1_node_affinity.V1NodeAffinity()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_node_affinity.V1NodeAffinity()
+        pass
 
 
 if __name__ == '__main__':

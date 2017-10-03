@@ -35,7 +35,9 @@ class TestV1beta1PodDisruptionBudget(unittest.TestCase):
         """
         Test V1beta1PodDisruptionBudget
         """
-        model = kubernetes.client.models.v1beta1_pod_disruption_budget.V1beta1PodDisruptionBudget()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_pod_disruption_budget.V1beta1PodDisruptionBudget()
+        pass
 
 
 if __name__ == '__main__':

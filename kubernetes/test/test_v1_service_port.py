@@ -35,7 +35,9 @@ class TestV1ServicePort(unittest.TestCase):
         """
         Test V1ServicePort
         """
-        model = kubernetes.client.models.v1_service_port.V1ServicePort()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_service_port.V1ServicePort()
+        pass
 
 
 if __name__ == '__main__':

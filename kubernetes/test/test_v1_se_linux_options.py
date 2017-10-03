@@ -35,7 +35,9 @@ class TestV1SELinuxOptions(unittest.TestCase):
         """
         Test V1SELinuxOptions
         """
-        model = kubernetes.client.models.v1_se_linux_options.V1SELinuxOptions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_se_linux_options.V1SELinuxOptions()
+        pass
 
 
 if __name__ == '__main__':

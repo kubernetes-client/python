@@ -35,7 +35,9 @@ class TestV1PreferredSchedulingTerm(unittest.TestCase):
         """
         Test V1PreferredSchedulingTerm
         """
-        model = kubernetes.client.models.v1_preferred_scheduling_term.V1PreferredSchedulingTerm()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_preferred_scheduling_term.V1PreferredSchedulingTerm()
+        pass
 
 
 if __name__ == '__main__':

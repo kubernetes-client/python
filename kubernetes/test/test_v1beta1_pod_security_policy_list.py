@@ -35,7 +35,9 @@ class TestV1beta1PodSecurityPolicyList(unittest.TestCase):
         """
         Test V1beta1PodSecurityPolicyList
         """
-        model = kubernetes.client.models.v1beta1_pod_security_policy_list.V1beta1PodSecurityPolicyList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_pod_security_policy_list.V1beta1PodSecurityPolicyList()
+        pass
 
 
 if __name__ == '__main__':

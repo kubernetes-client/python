@@ -35,7 +35,9 @@ class TestV1PersistentVolumeClaim(unittest.TestCase):
         """
         Test V1PersistentVolumeClaim
         """
-        model = kubernetes.client.models.v1_persistent_volume_claim.V1PersistentVolumeClaim()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_persistent_volume_claim.V1PersistentVolumeClaim()
+        pass
 
 
 if __name__ == '__main__':

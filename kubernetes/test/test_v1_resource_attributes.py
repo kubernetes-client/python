@@ -35,7 +35,9 @@ class TestV1ResourceAttributes(unittest.TestCase):
         """
         Test V1ResourceAttributes
         """
-        model = kubernetes.client.models.v1_resource_attributes.V1ResourceAttributes()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_resource_attributes.V1ResourceAttributes()
+        pass
 
 
 if __name__ == '__main__':

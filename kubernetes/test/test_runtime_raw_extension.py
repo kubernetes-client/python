@@ -35,7 +35,9 @@ class TestRuntimeRawExtension(unittest.TestCase):
         """
         Test RuntimeRawExtension
         """
-        model = kubernetes.client.models.runtime_raw_extension.RuntimeRawExtension()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.runtime_raw_extension.RuntimeRawExtension()
+        pass
 
 
 if __name__ == '__main__':

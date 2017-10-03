@@ -35,7 +35,9 @@ class TestV1beta1StatefulSetStatus(unittest.TestCase):
         """
         Test V1beta1StatefulSetStatus
         """
-        model = kubernetes.client.models.v1beta1_stateful_set_status.V1beta1StatefulSetStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_stateful_set_status.V1beta1StatefulSetStatus()
+        pass
 
 
 if __name__ == '__main__':

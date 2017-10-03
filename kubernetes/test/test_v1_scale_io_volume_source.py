@@ -35,7 +35,9 @@ class TestV1ScaleIOVolumeSource(unittest.TestCase):
         """
         Test V1ScaleIOVolumeSource
         """
-        model = kubernetes.client.models.v1_scale_io_volume_source.V1ScaleIOVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_scale_io_volume_source.V1ScaleIOVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

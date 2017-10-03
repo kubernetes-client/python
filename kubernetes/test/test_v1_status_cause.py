@@ -35,7 +35,9 @@ class TestV1StatusCause(unittest.TestCase):
         """
         Test V1StatusCause
         """
-        model = kubernetes.client.models.v1_status_cause.V1StatusCause()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_status_cause.V1StatusCause()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1PersistentVolumeStatus(unittest.TestCase):
         """
         Test V1PersistentVolumeStatus
         """
-        model = kubernetes.client.models.v1_persistent_volume_status.V1PersistentVolumeStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_persistent_volume_status.V1PersistentVolumeStatus()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1ScaleStatus(unittest.TestCase):
         """
         Test V1ScaleStatus
         """
-        model = kubernetes.client.models.v1_scale_status.V1ScaleStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_scale_status.V1ScaleStatus()
+        pass
 
 
 if __name__ == '__main__':

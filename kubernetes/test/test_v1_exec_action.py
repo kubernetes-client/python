@@ -35,7 +35,9 @@ class TestV1ExecAction(unittest.TestCase):
         """
         Test V1ExecAction
         """
-        model = kubernetes.client.models.v1_exec_action.V1ExecAction()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_exec_action.V1ExecAction()
+        pass
 
 
 if __name__ == '__main__':

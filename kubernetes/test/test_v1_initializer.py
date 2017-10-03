@@ -35,7 +35,9 @@ class TestV1Initializer(unittest.TestCase):
         """
         Test V1Initializer
         """
-        model = kubernetes.client.models.v1_initializer.V1Initializer()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_initializer.V1Initializer()
+        pass
 
 
 if __name__ == '__main__':

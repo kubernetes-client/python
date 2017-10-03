@@ -35,7 +35,9 @@ class TestV1HTTPHeader(unittest.TestCase):
         """
         Test V1HTTPHeader
         """
-        model = kubernetes.client.models.v1_http_header.V1HTTPHeader()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_http_header.V1HTTPHeader()
+        pass
 
 
 if __name__ == '__main__':

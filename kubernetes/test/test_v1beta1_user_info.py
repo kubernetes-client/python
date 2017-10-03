@@ -35,7 +35,9 @@ class TestV1beta1UserInfo(unittest.TestCase):
         """
         Test V1beta1UserInfo
         """
-        model = kubernetes.client.models.v1beta1_user_info.V1beta1UserInfo()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_user_info.V1beta1UserInfo()
+        pass
 
 
 if __name__ == '__main__':

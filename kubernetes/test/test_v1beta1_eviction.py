@@ -35,7 +35,9 @@ class TestV1beta1Eviction(unittest.TestCase):
         """
         Test V1beta1Eviction
         """
-        model = kubernetes.client.models.v1beta1_eviction.V1beta1Eviction()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_eviction.V1beta1Eviction()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV2alpha1PodsMetricStatus(unittest.TestCase):
         """
         Test V2alpha1PodsMetricStatus
         """
-        model = kubernetes.client.models.v2alpha1_pods_metric_status.V2alpha1PodsMetricStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v2alpha1_pods_metric_status.V2alpha1PodsMetricStatus()
+        pass
 
 
 if __name__ == '__main__':

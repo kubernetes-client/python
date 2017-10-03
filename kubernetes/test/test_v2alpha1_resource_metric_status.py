@@ -35,7 +35,9 @@ class TestV2alpha1ResourceMetricStatus(unittest.TestCase):
         """
         Test V2alpha1ResourceMetricStatus
         """
-        model = kubernetes.client.models.v2alpha1_resource_metric_status.V2alpha1ResourceMetricStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v2alpha1_resource_metric_status.V2alpha1ResourceMetricStatus()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1SecretKeySelector(unittest.TestCase):
         """
         Test V1SecretKeySelector
         """
-        model = kubernetes.client.models.v1_secret_key_selector.V1SecretKeySelector()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_secret_key_selector.V1SecretKeySelector()
+        pass
 
 
 if __name__ == '__main__':

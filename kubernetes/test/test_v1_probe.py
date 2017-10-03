@@ -35,7 +35,9 @@ class TestV1Probe(unittest.TestCase):
         """
         Test V1Probe
         """
-        model = kubernetes.client.models.v1_probe.V1Probe()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_probe.V1Probe()
+        pass
 
 
 if __name__ == '__main__':

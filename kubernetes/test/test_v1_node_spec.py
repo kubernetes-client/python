@@ -35,7 +35,9 @@ class TestV1NodeSpec(unittest.TestCase):
         """
         Test V1NodeSpec
         """
-        model = kubernetes.client.models.v1_node_spec.V1NodeSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_node_spec.V1NodeSpec()
+        pass
 
 
 if __name__ == '__main__':

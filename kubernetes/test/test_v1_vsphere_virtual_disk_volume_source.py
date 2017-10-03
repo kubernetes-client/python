@@ -35,7 +35,9 @@ class TestV1VsphereVirtualDiskVolumeSource(unittest.TestCase):
         """
         Test V1VsphereVirtualDiskVolumeSource
         """
-        model = kubernetes.client.models.v1_vsphere_virtual_disk_volume_source.V1VsphereVirtualDiskVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_vsphere_virtual_disk_volume_source.V1VsphereVirtualDiskVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

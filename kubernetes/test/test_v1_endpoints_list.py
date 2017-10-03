@@ -35,7 +35,9 @@ class TestV1EndpointsList(unittest.TestCase):
         """
         Test V1EndpointsList
         """
-        model = kubernetes.client.models.v1_endpoints_list.V1EndpointsList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_endpoints_list.V1EndpointsList()
+        pass
 
 
 if __name__ == '__main__':

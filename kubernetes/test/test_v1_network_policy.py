@@ -35,7 +35,9 @@ class TestV1NetworkPolicy(unittest.TestCase):
         """
         Test V1NetworkPolicy
         """
-        model = kubernetes.client.models.v1_network_policy.V1NetworkPolicy()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_network_policy.V1NetworkPolicy()
+        pass
 
 
 if __name__ == '__main__':

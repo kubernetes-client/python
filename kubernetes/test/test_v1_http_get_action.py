@@ -35,7 +35,9 @@ class TestV1HTTPGetAction(unittest.TestCase):
         """
         Test V1HTTPGetAction
         """
-        model = kubernetes.client.models.v1_http_get_action.V1HTTPGetAction()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_http_get_action.V1HTTPGetAction()
+        pass
 
 
 if __name__ == '__main__':

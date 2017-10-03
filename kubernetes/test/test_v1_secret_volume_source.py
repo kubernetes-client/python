@@ -35,7 +35,9 @@ class TestV1SecretVolumeSource(unittest.TestCase):
         """
         Test V1SecretVolumeSource
         """
-        model = kubernetes.client.models.v1_secret_volume_source.V1SecretVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_secret_volume_source.V1SecretVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

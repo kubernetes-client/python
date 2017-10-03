@@ -35,7 +35,9 @@ class TestV1beta1CertificateSigningRequestSpec(unittest.TestCase):
         """
         Test V1beta1CertificateSigningRequestSpec
         """
-        model = kubernetes.client.models.v1beta1_certificate_signing_request_spec.V1beta1CertificateSigningRequestSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_certificate_signing_request_spec.V1beta1CertificateSigningRequestSpec()
+        pass
 
 
 if __name__ == '__main__':

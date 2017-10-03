@@ -35,7 +35,9 @@ class TestV1RBDVolumeSource(unittest.TestCase):
         """
         Test V1RBDVolumeSource
         """
-        model = kubernetes.client.models.v1_rbd_volume_source.V1RBDVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_rbd_volume_source.V1RBDVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

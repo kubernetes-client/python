@@ -35,7 +35,9 @@ class TestV1beta1DaemonSetList(unittest.TestCase):
         """
         Test V1beta1DaemonSetList
         """
-        model = kubernetes.client.models.v1beta1_daemon_set_list.V1beta1DaemonSetList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_daemon_set_list.V1beta1DaemonSetList()
+        pass
 
 
 if __name__ == '__main__':

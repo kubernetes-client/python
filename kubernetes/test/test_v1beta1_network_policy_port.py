@@ -35,7 +35,9 @@ class TestV1beta1NetworkPolicyPort(unittest.TestCase):
         """
         Test V1beta1NetworkPolicyPort
         """
-        model = kubernetes.client.models.v1beta1_network_policy_port.V1beta1NetworkPolicyPort()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_network_policy_port.V1beta1NetworkPolicyPort()
+        pass
 
 
 if __name__ == '__main__':

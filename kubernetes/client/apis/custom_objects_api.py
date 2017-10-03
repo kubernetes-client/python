@@ -20,7 +20,6 @@ import re
 # python 2 and python 3 compatibility library
 from six import iteritems
 
-from ..configuration import Configuration
 from ..api_client import ApiClient
 
 
@@ -32,27 +31,19 @@ class CustomObjectsApi(object):
     """
 
     def __init__(self, api_client=None):
-        config = Configuration()
-        if api_client:
-            self.api_client = api_client
-        else:
-            if not config.api_client:
-                config.api_client = ApiClient()
-            self.api_client = config.api_client
+        if api_client is None:
+            api_client = ApiClient()
+        self.api_client = api_client
 
     def create_cluster_custom_object(self, group, version, plural, body, **kwargs):
         """
         Creates a cluster scoped Custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_cluster_custom_object(group, version, plural, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_cluster_custom_object(group, version, plural, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -63,7 +54,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_cluster_custom_object_with_http_info(group, version, plural, body, **kwargs)
         else:
             (data) = self.create_cluster_custom_object_with_http_info(group, version, plural, body, **kwargs)
@@ -73,15 +64,11 @@ class CustomObjectsApi(object):
         """
         Creates a cluster scoped Custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_cluster_custom_object_with_http_info(group, version, plural, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_cluster_custom_object_with_http_info(group, version, plural, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -93,7 +80,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'plural', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -123,7 +110,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/{plural}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -132,9 +118,9 @@ class CustomObjectsApi(object):
         if 'plural' in params:
             path_params['plural'] = params['plural']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -151,7 +137,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/{group}/{version}/{plural}', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -160,7 +146,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -170,15 +156,11 @@ class CustomObjectsApi(object):
         """
         Creates a namespace scoped Custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_custom_object(group, version, namespace, plural, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_custom_object(group, version, namespace, plural, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -190,7 +172,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.create_namespaced_custom_object_with_http_info(group, version, namespace, plural, body, **kwargs)
         else:
             (data) = self.create_namespaced_custom_object_with_http_info(group, version, namespace, plural, body, **kwargs)
@@ -200,15 +182,11 @@ class CustomObjectsApi(object):
         """
         Creates a namespace scoped Custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_namespaced_custom_object_with_http_info(group, version, namespace, plural, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.create_namespaced_custom_object_with_http_info(group, version, namespace, plural, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -221,7 +199,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'namespace', 'plural', 'body', 'pretty']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -254,7 +232,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/namespaces/{namespace}/{plural}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -265,9 +242,9 @@ class CustomObjectsApi(object):
         if 'plural' in params:
             path_params['plural'] = params['plural']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
 
         header_params = {}
 
@@ -284,7 +261,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'POST',
+        return self.api_client.call_api('/apis/{group}/{version}/namespaces/{namespace}/{plural}', 'POST',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -293,7 +270,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -303,15 +280,11 @@ class CustomObjectsApi(object):
         """
         Deletes the specified cluster scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_cluster_custom_object(group, version, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_cluster_custom_object(group, version, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -325,7 +298,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_cluster_custom_object_with_http_info(group, version, plural, name, body, **kwargs)
         else:
             (data) = self.delete_cluster_custom_object_with_http_info(group, version, plural, name, body, **kwargs)
@@ -335,15 +308,11 @@ class CustomObjectsApi(object):
         """
         Deletes the specified cluster scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_cluster_custom_object_with_http_info(group, version, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_cluster_custom_object_with_http_info(group, version, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -358,7 +327,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'plural', 'name', 'body', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -391,7 +360,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/{plural}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -402,13 +370,13 @@ class CustomObjectsApi(object):
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -429,7 +397,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/{group}/{version}/{plural}/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -438,7 +406,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -448,15 +416,11 @@ class CustomObjectsApi(object):
         """
         Deletes the specified namespace scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_custom_object(group, version, namespace, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_custom_object(group, version, namespace, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -471,7 +435,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, **kwargs)
         else:
             (data) = self.delete_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, **kwargs)
@@ -481,15 +445,11 @@ class CustomObjectsApi(object):
         """
         Deletes the specified namespace scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -505,7 +465,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'namespace', 'plural', 'name', 'body', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -541,7 +501,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -554,13 +513,13 @@ class CustomObjectsApi(object):
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
         if 'grace_period_seconds' in params:
-            query_params['gracePeriodSeconds'] = params['grace_period_seconds']
+            query_params.append(('gracePeriodSeconds', params['grace_period_seconds']))
         if 'orphan_dependents' in params:
-            query_params['orphanDependents'] = params['orphan_dependents']
+            query_params.append(('orphanDependents', params['orphan_dependents']))
         if 'propagation_policy' in params:
-            query_params['propagationPolicy'] = params['propagation_policy']
+            query_params.append(('propagationPolicy', params['propagation_policy']))
 
         header_params = {}
 
@@ -581,7 +540,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'DELETE',
+        return self.api_client.call_api('/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}', 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -590,7 +549,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -600,15 +559,11 @@ class CustomObjectsApi(object):
         """
         Returns a cluster scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_cluster_custom_object(group, version, plural, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_cluster_custom_object(group, version, plural, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -618,7 +573,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_cluster_custom_object_with_http_info(group, version, plural, name, **kwargs)
         else:
             (data) = self.get_cluster_custom_object_with_http_info(group, version, plural, name, **kwargs)
@@ -628,15 +583,11 @@ class CustomObjectsApi(object):
         """
         Returns a cluster scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_cluster_custom_object_with_http_info(group, version, plural, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_cluster_custom_object_with_http_info(group, version, plural, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -647,7 +598,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'plural', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -677,7 +628,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/{plural}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -688,7 +638,7 @@ class CustomObjectsApi(object):
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
 
         header_params = {}
 
@@ -707,7 +657,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/{group}/{version}/{plural}/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -716,7 +666,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -726,15 +676,11 @@ class CustomObjectsApi(object):
         """
         Returns a namespace scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_namespaced_custom_object(group, version, namespace, plural, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_namespaced_custom_object(group, version, namespace, plural, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -745,7 +691,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, **kwargs)
         else:
             (data) = self.get_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, **kwargs)
@@ -755,15 +701,11 @@ class CustomObjectsApi(object):
         """
         Returns a namespace scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -775,7 +717,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'namespace', 'plural', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -808,7 +750,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -821,7 +762,7 @@ class CustomObjectsApi(object):
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
 
         header_params = {}
 
@@ -840,7 +781,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -849,7 +790,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -859,15 +800,11 @@ class CustomObjectsApi(object):
         """
         list or watch cluster scoped custom objects
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_cluster_custom_object(group, version, plural, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_cluster_custom_object(group, version, plural, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -880,7 +817,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_cluster_custom_object_with_http_info(group, version, plural, **kwargs)
         else:
             (data) = self.list_cluster_custom_object_with_http_info(group, version, plural, **kwargs)
@@ -890,15 +827,11 @@ class CustomObjectsApi(object):
         """
         list or watch cluster scoped custom objects
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_cluster_custom_object_with_http_info(group, version, plural, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_cluster_custom_object_with_http_info(group, version, plural, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -912,7 +845,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'plural', 'pretty', 'label_selector', 'resource_version', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -939,7 +872,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/{plural}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -948,15 +880,15 @@ class CustomObjectsApi(object):
         if 'plural' in params:
             path_params['plural'] = params['plural']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -975,7 +907,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/{group}/{version}/{plural}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -984,7 +916,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -994,15 +926,11 @@ class CustomObjectsApi(object):
         """
         list or watch namespace scoped custom objects
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_custom_object(group, version, namespace, plural, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_custom_object(group, version, namespace, plural, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -1016,7 +944,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.list_namespaced_custom_object_with_http_info(group, version, namespace, plural, **kwargs)
         else:
             (data) = self.list_namespaced_custom_object_with_http_info(group, version, namespace, plural, **kwargs)
@@ -1026,15 +954,11 @@ class CustomObjectsApi(object):
         """
         list or watch namespace scoped custom objects
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.list_namespaced_custom_object_with_http_info(group, version, namespace, plural, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.list_namespaced_custom_object_with_http_info(group, version, namespace, plural, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -1049,7 +973,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'namespace', 'plural', 'pretty', 'label_selector', 'resource_version', 'watch']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1079,7 +1003,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/namespaces/{namespace}/{plural}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -1090,15 +1013,15 @@ class CustomObjectsApi(object):
         if 'plural' in params:
             path_params['plural'] = params['plural']
 
-        query_params = {}
+        query_params = []
         if 'pretty' in params:
-            query_params['pretty'] = params['pretty']
+            query_params.append(('pretty', params['pretty']))
         if 'label_selector' in params:
-            query_params['labelSelector'] = params['label_selector']
+            query_params.append(('labelSelector', params['label_selector']))
         if 'resource_version' in params:
-            query_params['resourceVersion'] = params['resource_version']
+            query_params.append(('resourceVersion', params['resource_version']))
         if 'watch' in params:
-            query_params['watch'] = params['watch']
+            query_params.append(('watch', params['watch']))
 
         header_params = {}
 
@@ -1117,7 +1040,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'GET',
+        return self.api_client.call_api('/apis/{group}/{version}/namespaces/{namespace}/{plural}', 'GET',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1126,7 +1049,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1136,15 +1059,11 @@ class CustomObjectsApi(object):
         """
         replace the specified cluster scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_cluster_custom_object(group, version, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_cluster_custom_object(group, version, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -1155,7 +1074,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_cluster_custom_object_with_http_info(group, version, plural, name, body, **kwargs)
         else:
             (data) = self.replace_cluster_custom_object_with_http_info(group, version, plural, name, body, **kwargs)
@@ -1165,15 +1084,11 @@ class CustomObjectsApi(object):
         """
         replace the specified cluster scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_cluster_custom_object_with_http_info(group, version, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_cluster_custom_object_with_http_info(group, version, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
@@ -1185,7 +1100,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'plural', 'name', 'body']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1218,7 +1133,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/{plural}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -1229,7 +1143,7 @@ class CustomObjectsApi(object):
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
 
         header_params = {}
 
@@ -1250,7 +1164,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/{group}/{version}/{plural}/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1259,7 +1173,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1269,15 +1183,11 @@ class CustomObjectsApi(object):
         """
         replace the specified namespace scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_custom_object(group, version, namespace, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_custom_object(group, version, namespace, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -1289,7 +1199,7 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.replace_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, **kwargs)
         else:
             (data) = self.replace_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, **kwargs)
@@ -1299,15 +1209,11 @@ class CustomObjectsApi(object):
         """
         replace the specified namespace scoped custom object
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.replace_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.replace_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: the custom resource's group (required)
         :param str version: the custom resource's version (required)
         :param str namespace: The custom resource's namespace (required)
@@ -1320,7 +1226,7 @@ class CustomObjectsApi(object):
         """
 
         all_params = ['group', 'version', 'namespace', 'plural', 'name', 'body']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1356,7 +1262,6 @@ class CustomObjectsApi(object):
 
         collection_formats = {}
 
-        resource_path = '/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}'.replace('{format}', 'json')
         path_params = {}
         if 'group' in params:
             path_params['group'] = params['group']
@@ -1369,7 +1274,7 @@ class CustomObjectsApi(object):
         if 'name' in params:
             path_params['name'] = params['name']
 
-        query_params = {}
+        query_params = []
 
         header_params = {}
 
@@ -1390,7 +1295,7 @@ class CustomObjectsApi(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api('/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}', 'PUT',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1399,7 +1304,7 @@ class CustomObjectsApi(object):
                                         files=local_var_files,
                                         response_type='object',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),

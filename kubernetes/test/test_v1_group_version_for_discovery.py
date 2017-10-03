@@ -35,7 +35,9 @@ class TestV1GroupVersionForDiscovery(unittest.TestCase):
         """
         Test V1GroupVersionForDiscovery
         """
-        model = kubernetes.client.models.v1_group_version_for_discovery.V1GroupVersionForDiscovery()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_group_version_for_discovery.V1GroupVersionForDiscovery()
+        pass
 
 
 if __name__ == '__main__':

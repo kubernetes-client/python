@@ -5,6 +5,3 @@ test-requirements.txt
 setup.py
 .travis.yml
 tox.ini
-client/api_client.py
-client/configuration.py
-client/rest.py

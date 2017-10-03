@@ -35,7 +35,9 @@ class TestV1APIResourceList(unittest.TestCase):
         """
         Test V1APIResourceList
         """
-        model = kubernetes.client.models.v1_api_resource_list.V1APIResourceList()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_api_resource_list.V1APIResourceList()
+        pass
 
 
 if __name__ == '__main__':

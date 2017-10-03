@@ -35,7 +35,9 @@ class TestV1DownwardAPIProjection(unittest.TestCase):
         """
         Test V1DownwardAPIProjection
         """
-        model = kubernetes.client.models.v1_downward_api_projection.V1DownwardAPIProjection()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_downward_api_projection.V1DownwardAPIProjection()
+        pass
 
 
 if __name__ == '__main__':

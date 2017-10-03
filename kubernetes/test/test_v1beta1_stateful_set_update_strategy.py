@@ -35,7 +35,9 @@ class TestV1beta1StatefulSetUpdateStrategy(unittest.TestCase):
         """
         Test V1beta1StatefulSetUpdateStrategy
         """
-        model = kubernetes.client.models.v1beta1_stateful_set_update_strategy.V1beta1StatefulSetUpdateStrategy()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_stateful_set_update_strategy.V1beta1StatefulSetUpdateStrategy()
+        pass
 
 
 if __name__ == '__main__':

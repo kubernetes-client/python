@@ -35,7 +35,9 @@ class TestV1beta1SELinuxStrategyOptions(unittest.TestCase):
         """
         Test V1beta1SELinuxStrategyOptions
         """
-        model = kubernetes.client.models.v1beta1_se_linux_strategy_options.V1beta1SELinuxStrategyOptions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_se_linux_strategy_options.V1beta1SELinuxStrategyOptions()
+        pass
 
 
 if __name__ == '__main__':

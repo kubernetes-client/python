@@ -35,7 +35,9 @@ class TestV1beta1SupplementalGroupsStrategyOptions(unittest.TestCase):
         """
         Test V1beta1SupplementalGroupsStrategyOptions
         """
-        model = kubernetes.client.models.v1beta1_supplemental_groups_strategy_options.V1beta1SupplementalGroupsStrategyOptions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_supplemental_groups_strategy_options.V1beta1SupplementalGroupsStrategyOptions()
+        pass
 
 
 if __name__ == '__main__':

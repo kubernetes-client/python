@@ -35,7 +35,9 @@ class TestV1CephFSVolumeSource(unittest.TestCase):
         """
         Test V1CephFSVolumeSource
         """
-        model = kubernetes.client.models.v1_ceph_fs_volume_source.V1CephFSVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_ceph_fs_volume_source.V1CephFSVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

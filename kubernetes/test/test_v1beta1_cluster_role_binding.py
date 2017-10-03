@@ -35,7 +35,9 @@ class TestV1beta1ClusterRoleBinding(unittest.TestCase):
         """
         Test V1beta1ClusterRoleBinding
         """
-        model = kubernetes.client.models.v1beta1_cluster_role_binding.V1beta1ClusterRoleBinding()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_cluster_role_binding.V1beta1ClusterRoleBinding()
+        pass
 
 
 if __name__ == '__main__':

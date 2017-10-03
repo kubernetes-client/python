@@ -35,7 +35,9 @@ class TestV1beta1RunAsUserStrategyOptions(unittest.TestCase):
         """
         Test V1beta1RunAsUserStrategyOptions
         """
-        model = kubernetes.client.models.v1beta1_run_as_user_strategy_options.V1beta1RunAsUserStrategyOptions()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_run_as_user_strategy_options.V1beta1RunAsUserStrategyOptions()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1ReplicationControllerStatus(unittest.TestCase):
         """
         Test V1ReplicationControllerStatus
         """
-        model = kubernetes.client.models.v1_replication_controller_status.V1ReplicationControllerStatus()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_replication_controller_status.V1ReplicationControllerStatus()
+        pass
 
 
 if __name__ == '__main__':

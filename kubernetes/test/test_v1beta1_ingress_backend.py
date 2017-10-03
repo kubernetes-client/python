@@ -35,7 +35,9 @@ class TestV1beta1IngressBackend(unittest.TestCase):
         """
         Test V1beta1IngressBackend
         """
-        model = kubernetes.client.models.v1beta1_ingress_backend.V1beta1IngressBackend()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_ingress_backend.V1beta1IngressBackend()
+        pass
 
 
 if __name__ == '__main__':

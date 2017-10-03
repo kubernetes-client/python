@@ -35,7 +35,9 @@ class TestV1beta1DaemonSetUpdateStrategy(unittest.TestCase):
         """
         Test V1beta1DaemonSetUpdateStrategy
         """
-        model = kubernetes.client.models.v1beta1_daemon_set_update_strategy.V1beta1DaemonSetUpdateStrategy()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_daemon_set_update_strategy.V1beta1DaemonSetUpdateStrategy()
+        pass
 
 
 if __name__ == '__main__':

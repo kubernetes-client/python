@@ -35,7 +35,9 @@ class TestV1beta1APIServiceSpec(unittest.TestCase):
         """
         Test V1beta1APIServiceSpec
         """
-        model = kubernetes.client.models.v1beta1_api_service_spec.V1beta1APIServiceSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1beta1_api_service_spec.V1beta1APIServiceSpec()
+        pass
 
 
 if __name__ == '__main__':

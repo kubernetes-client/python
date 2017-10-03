@@ -35,7 +35,9 @@ class TestV1PodTemplateSpec(unittest.TestCase):
         """
         Test V1PodTemplateSpec
         """
-        model = kubernetes.client.models.v1_pod_template_spec.V1PodTemplateSpec()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_pod_template_spec.V1PodTemplateSpec()
+        pass
 
 
 if __name__ == '__main__':

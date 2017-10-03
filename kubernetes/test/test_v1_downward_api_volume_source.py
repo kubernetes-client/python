@@ -35,7 +35,9 @@ class TestV1DownwardAPIVolumeSource(unittest.TestCase):
         """
         Test V1DownwardAPIVolumeSource
         """
-        model = kubernetes.client.models.v1_downward_api_volume_source.V1DownwardAPIVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_downward_api_volume_source.V1DownwardAPIVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

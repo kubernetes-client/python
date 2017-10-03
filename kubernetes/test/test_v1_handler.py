@@ -35,7 +35,9 @@ class TestV1Handler(unittest.TestCase):
         """
         Test V1Handler
         """
-        model = kubernetes.client.models.v1_handler.V1Handler()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_handler.V1Handler()
+        pass
 
 
 if __name__ == '__main__':

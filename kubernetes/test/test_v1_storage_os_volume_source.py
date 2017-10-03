@@ -35,7 +35,9 @@ class TestV1StorageOSVolumeSource(unittest.TestCase):
         """
         Test V1StorageOSVolumeSource
         """
-        model = kubernetes.client.models.v1_storage_os_volume_source.V1StorageOSVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_storage_os_volume_source.V1StorageOSVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

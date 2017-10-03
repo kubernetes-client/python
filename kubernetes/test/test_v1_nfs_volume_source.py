@@ -35,7 +35,9 @@ class TestV1NFSVolumeSource(unittest.TestCase):
         """
         Test V1NFSVolumeSource
         """
-        model = kubernetes.client.models.v1_nfs_volume_source.V1NFSVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_nfs_volume_source.V1NFSVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

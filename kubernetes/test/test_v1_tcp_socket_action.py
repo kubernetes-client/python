@@ -35,7 +35,9 @@ class TestV1TCPSocketAction(unittest.TestCase):
         """
         Test V1TCPSocketAction
         """
-        model = kubernetes.client.models.v1_tcp_socket_action.V1TCPSocketAction()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_tcp_socket_action.V1TCPSocketAction()
+        pass
 
 
 if __name__ == '__main__':

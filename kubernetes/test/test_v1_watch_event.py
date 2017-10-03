@@ -35,7 +35,9 @@ class TestV1WatchEvent(unittest.TestCase):
         """
         Test V1WatchEvent
         """
-        model = kubernetes.client.models.v1_watch_event.V1WatchEvent()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_watch_event.V1WatchEvent()
+        pass
 
 
 if __name__ == '__main__':

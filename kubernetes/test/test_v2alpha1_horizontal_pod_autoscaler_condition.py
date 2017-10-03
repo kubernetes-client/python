@@ -35,7 +35,9 @@ class TestV2alpha1HorizontalPodAutoscalerCondition(unittest.TestCase):
         """
         Test V2alpha1HorizontalPodAutoscalerCondition
         """
-        model = kubernetes.client.models.v2alpha1_horizontal_pod_autoscaler_condition.V2alpha1HorizontalPodAutoscalerCondition()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v2alpha1_horizontal_pod_autoscaler_condition.V2alpha1HorizontalPodAutoscalerCondition()
+        pass
 
 
 if __name__ == '__main__':

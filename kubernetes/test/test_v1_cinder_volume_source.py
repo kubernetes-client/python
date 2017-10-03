@@ -35,7 +35,9 @@ class TestV1CinderVolumeSource(unittest.TestCase):
         """
         Test V1CinderVolumeSource
         """
-        model = kubernetes.client.models.v1_cinder_volume_source.V1CinderVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_cinder_volume_source.V1CinderVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

@@ -35,7 +35,9 @@ class TestV1ConfigMapVolumeSource(unittest.TestCase):
         """
         Test V1ConfigMapVolumeSource
         """
-        model = kubernetes.client.models.v1_config_map_volume_source.V1ConfigMapVolumeSource()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_config_map_volume_source.V1ConfigMapVolumeSource()
+        pass
 
 
 if __name__ == '__main__':

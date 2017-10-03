@@ -35,7 +35,9 @@ class TestV1ContainerStateTerminated(unittest.TestCase):
         """
         Test V1ContainerStateTerminated
         """
-        model = kubernetes.client.models.v1_container_state_terminated.V1ContainerStateTerminated()
+        # FIXME: construct object with mandatory attributes with example values
+        #model = kubernetes.client.models.v1_container_state_terminated.V1ContainerStateTerminated()
+        pass
 
 
 if __name__ == '__main__':
