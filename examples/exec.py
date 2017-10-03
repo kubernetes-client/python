@@ -1,13 +1,15 @@
 import time
 
 from kubernetes import config
-from kubernetes.client import configuration
+from kubernetes.client import Configuration
 from kubernetes.client.apis import core_v1_api
 from kubernetes.client.rest import ApiException
 from kubernetes.stream import stream
 
 config.load_kube_config()
-configuration.assert_hostname = False
+c = Configuration()
+c.assert_hostname = False
+Configuration.set_default(c)
 api = core_v1_api.CoreV1Api()
 name = 'busybox-test'
 
