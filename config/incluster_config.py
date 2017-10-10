@@ -14,7 +14,7 @@
 
 import os
 
-from kubernetes.client import configuration
+from kubernetes.client import Configuration
 
 from .config_exception import ConfigException
 
@@ -77,9 +77,11 @@ class InClusterConfigLoader(object):
         self.ssl_ca_cert = self._cert_filename
 
     def _set_config(self):
+        configuration = Configuration()
         configuration.host = self.host
         configuration.ssl_ca_cert = self.ssl_ca_cert
         configuration.api_key['authorization'] = "bearer " + self.token
+        Configuration.set_default(configuration)
 
 
 def load_incluster_config():
