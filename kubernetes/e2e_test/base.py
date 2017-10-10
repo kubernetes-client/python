@@ -10,19 +10,18 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import copy
 import os
 import unittest
 import urllib3
 
-from kubernetes.client.configuration import configuration
+from kubernetes.client.configuration import Configuration
 from kubernetes.config import kube_config
 
 DEFAULT_E2E_HOST = '127.0.0.1'
 
 
 def get_e2e_configuration():
-    config = copy.copy(configuration)
+    config = Configuration()
     config.host = None
     if os.path.exists(
             os.path.expanduser(kube_config.KUBE_CONFIG_DEFAULT_LOCATION)):

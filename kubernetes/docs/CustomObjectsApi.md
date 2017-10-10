@@ -25,19 +25,20 @@ Creates a cluster scoped Custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | The custom resource's group name
 version = 'version_example' # str | The custom resource's version
 plural = 'plural_example' # str | The custom resource's plural name. For TPRs this would be lowercase plural kind.
@@ -85,19 +86,20 @@ Creates a namespace scoped Custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | The custom resource's group name
 version = 'version_example' # str | The custom resource's version
 namespace = 'namespace_example' # str | The custom resource's namespace
@@ -147,19 +149,20 @@ Deletes the specified cluster scoped custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | the custom resource's group
 version = 'version_example' # str | the custom resource's version
 plural = 'plural_example' # str | the custom object's plural name. For TPRs this would be lowercase plural kind.
@@ -213,19 +216,20 @@ Deletes the specified namespace scoped custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | the custom resource's group
 version = 'version_example' # str | the custom resource's version
 namespace = 'namespace_example' # str | The custom resource's namespace
@@ -281,19 +285,20 @@ Returns a cluster scoped custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | the custom resource's group
 version = 'version_example' # str | the custom resource's version
 plural = 'plural_example' # str | the custom object's plural name. For TPRs this would be lowercase plural kind.
@@ -339,19 +344,20 @@ Returns a namespace scoped custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | the custom resource's group
 version = 'version_example' # str | the custom resource's version
 namespace = 'namespace_example' # str | The custom resource's namespace
@@ -399,19 +405,20 @@ list or watch cluster scoped custom objects
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | The custom resource's group name
 version = 'version_example' # str | The custom resource's version
 plural = 'plural_example' # str | The custom resource's plural name. For TPRs this would be lowercase plural kind.
@@ -463,19 +470,20 @@ list or watch namespace scoped custom objects
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | The custom resource's group name
 version = 'version_example' # str | The custom resource's version
 namespace = 'namespace_example' # str | The custom resource's namespace
@@ -529,19 +537,20 @@ replace the specified cluster scoped custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | the custom resource's group
 version = 'version_example' # str | the custom resource's version
 plural = 'plural_example' # str | the custom object's plural name. For TPRs this would be lowercase plural kind.
@@ -589,19 +598,20 @@ replace the specified namespace scoped custom object
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.CustomObjectsApi()
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
 group = 'group_example' # str | the custom resource's group
 version = 'version_example' # str | the custom resource's version
 namespace = 'namespace_example' # str | The custom resource's namespace

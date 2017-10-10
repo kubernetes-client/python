@@ -21,6 +21,7 @@ from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
 from kubernetes.e2e_test import base
 from kubernetes.stream import stream
+from kubernetes.stream.ws_client import ERROR_CHANNEL
 
 
 def short_uuid():
@@ -35,7 +36,7 @@ class TestClient(unittest.TestCase):
         cls.config = base.get_e2e_configuration()
 
     def test_pod_apis(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'busybox-test-' + short_uuid()
@@ -105,7 +106,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual("test string 2", line)
         resp.write_stdin("exit\n")
         resp.update(timeout=5)
-        line = resp.read_channel(api_client.ws_client.ERROR_CHANNEL)
+        line = resp.read_channel(ERROR_CHANNEL)
         status = json.loads(line)
         self.assertEqual(status['status'], 'Success')
         resp.update(timeout=5)
@@ -118,7 +119,7 @@ class TestClient(unittest.TestCase):
                                          namespace='default')
 
     def test_service_apis(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'frontend-' + short_uuid()
@@ -157,7 +158,7 @@ class TestClient(unittest.TestCase):
                                              namespace='default')
 
     def test_replication_controller_apis(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'frontend-' + short_uuid()
@@ -190,7 +191,7 @@ class TestClient(unittest.TestCase):
             name=name, body={}, namespace='default')
 
     def test_configmap_apis(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         name = 'test-configmap-' + short_uuid()
@@ -226,7 +227,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual([], resp.items)
 
     def test_node_apis(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
 
         for item in api.list_node().items:

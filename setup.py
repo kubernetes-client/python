@@ -46,7 +46,7 @@ setup(
     tests_require=TESTS_REQUIRES,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.apis',
-              'kubernetes.client.models', 'kubernetes.stream'],
+              'kubernetes.stream', 'kubernetes.client.models'],
     include_package_data=True,
     long_description="""\
     Python client for kubernetes http://kubernetes.io/
