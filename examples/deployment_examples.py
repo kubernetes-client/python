@@ -38,7 +38,7 @@ def create_deployment_object():
     container = client.V1Container()
     container.name = "nginx"
     container.image = "nginx:1.7.9"
-    contianer.ports = [client.V1containerPort(container_port=80)]
+    container.ports = [client.V1ContainerPort(container_port=80)]
     spec.template.spec.containers = [container]
     # Assign spec section into deployment.spec
     deployment.spec = spec
@@ -56,7 +56,7 @@ def create_deployment(api_instance, deployment):
 
 def update_deployment(api_instance, deployment):
     # Update container image
-    deployment.container.image = "nginx:1.9.1"
+    deployment.spec.template.spec.containers[0].image = "nginx:1.9.1"
     # Update the deployment
     api_response = api_instance.patch_namespaced_deployment(
         name=DEPLOYMENT_NAME,
@@ -80,7 +80,6 @@ def roll_back_deployment(api_instance):
         name=DEPLOYMENT_NAME,
         namespace="default",
         body=rollback)
-    print("Deployment rolled back. status='%s'" % str(api_response.status))
 
 
 def delete_deployment(api_instance):
@@ -88,7 +87,7 @@ def delete_deployment(api_instance):
     api_response = api_instance.delete_namespaced_deployment(
         name=DEPLOYMENT_NAME,
         namespace="default",
-        client.V1DeleteOptions(propagation_policy='Foreground',
+        body=client.V1DeleteOptions(propagation_policy='Foreground',
                                grace_period_seconds=5))
     print("Deployment deleted. status='%s'" % str(api_response.status))
 
