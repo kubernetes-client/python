@@ -1,5 +1,8 @@
 # Master
 - Adding stream package to support calls like exec. The old way of calling them is deprecated. See [Troubleshooting](README.md#why-execattach-calls-doesnt-work)).
+- config.http_proxy_url is deprecated. use configuration.proxy instead.
+- Configuration is not a singleton object anymore. Please use Configuraion.set_default to change default configuration.
+- Configuration class does not support `ws_streaming_protocol` anymore. In ApiClient.set_default_header set `sec-websocket-protocol` to the preferred websocket protocol.
 
 # v3.0.0
 - Fix Operation names for subresources kubernetes/kubernetes#49357

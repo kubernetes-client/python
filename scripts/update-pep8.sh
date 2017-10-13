@@ -78,6 +78,9 @@ done
 
 if [[ ! -z ${ENV} ]]; then
     if [[ $(git status --porcelain) != "" ]]; then
+        cd "${SCRIPT_ROOT}/.."
+        git --no-pager diff
+        cd "${SCRIPT_ROOT}/../kubernetes/base"
         git --no-pager diff
         exit 1
     fi

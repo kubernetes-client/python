@@ -26,18 +26,21 @@ Method | HTTP request | Description
 [**patch_namespaced_deployment_scale**](AppsV1beta1Api.md#patch_namespaced_deployment_scale) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**patch_namespaced_deployment_status**](AppsV1beta1Api.md#patch_namespaced_deployment_status) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
 [**patch_namespaced_stateful_set**](AppsV1beta1Api.md#patch_namespaced_stateful_set) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name} | 
+[**patch_namespaced_stateful_set_scale**](AppsV1beta1Api.md#patch_namespaced_stateful_set_scale) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/scale | 
 [**patch_namespaced_stateful_set_status**](AppsV1beta1Api.md#patch_namespaced_stateful_set_status) | **PATCH** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/status | 
 [**read_namespaced_controller_revision**](AppsV1beta1Api.md#read_namespaced_controller_revision) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions/{name} | 
 [**read_namespaced_deployment**](AppsV1beta1Api.md#read_namespaced_deployment) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name} | 
 [**read_namespaced_deployment_scale**](AppsV1beta1Api.md#read_namespaced_deployment_scale) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**read_namespaced_deployment_status**](AppsV1beta1Api.md#read_namespaced_deployment_status) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
 [**read_namespaced_stateful_set**](AppsV1beta1Api.md#read_namespaced_stateful_set) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name} | 
+[**read_namespaced_stateful_set_scale**](AppsV1beta1Api.md#read_namespaced_stateful_set_scale) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/scale | 
 [**read_namespaced_stateful_set_status**](AppsV1beta1Api.md#read_namespaced_stateful_set_status) | **GET** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/status | 
 [**replace_namespaced_controller_revision**](AppsV1beta1Api.md#replace_namespaced_controller_revision) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/controllerrevisions/{name} | 
 [**replace_namespaced_deployment**](AppsV1beta1Api.md#replace_namespaced_deployment) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name} | 
 [**replace_namespaced_deployment_scale**](AppsV1beta1Api.md#replace_namespaced_deployment_scale) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/scale | 
 [**replace_namespaced_deployment_status**](AppsV1beta1Api.md#replace_namespaced_deployment_status) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/deployments/{name}/status | 
 [**replace_namespaced_stateful_set**](AppsV1beta1Api.md#replace_namespaced_stateful_set) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name} | 
+[**replace_namespaced_stateful_set_scale**](AppsV1beta1Api.md#replace_namespaced_stateful_set_scale) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/scale | 
 [**replace_namespaced_stateful_set_status**](AppsV1beta1Api.md#replace_namespaced_stateful_set_status) | **PUT** /apis/apps/v1beta1/namespaces/{namespace}/statefulsets/{name}/status | 
 
 
@@ -50,19 +53,20 @@ create a ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1ControllerRevision() # V1beta1ControllerRevision | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -106,19 +110,20 @@ create a Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.AppsV1beta1Deployment() # AppsV1beta1Deployment | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -162,19 +167,20 @@ create rollback of a Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the DeploymentRollback
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.AppsV1beta1DeploymentRollback() # AppsV1beta1DeploymentRollback | 
@@ -220,19 +226,20 @@ create a StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1StatefulSet() # V1beta1StatefulSet | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -268,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_controller_revision**
-> V1Status delete_collection_namespaced_controller_revision(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1Status delete_collection_namespaced_controller_revision(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -276,30 +283,33 @@ delete collection of ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.delete_collection_namespaced_controller_revision(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.delete_collection_namespaced_controller_revision(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->delete_collection_namespaced_controller_revision: %s\n" % e)
@@ -311,9 +321,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
@@ -334,7 +346,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_deployment**
-> V1Status delete_collection_namespaced_deployment(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1Status delete_collection_namespaced_deployment(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -342,30 +354,33 @@ delete collection of Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.delete_collection_namespaced_deployment(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.delete_collection_namespaced_deployment(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->delete_collection_namespaced_deployment: %s\n" % e)
@@ -377,9 +392,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
@@ -400,7 +417,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_stateful_set**
-> V1Status delete_collection_namespaced_stateful_set(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1Status delete_collection_namespaced_stateful_set(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -408,30 +425,33 @@ delete collection of StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.delete_collection_namespaced_stateful_set(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.delete_collection_namespaced_stateful_set(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->delete_collection_namespaced_stateful_set: %s\n" % e)
@@ -443,9 +463,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
@@ -474,19 +496,20 @@ delete a ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ControllerRevision
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions | 
@@ -538,19 +561,20 @@ delete a Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions | 
@@ -602,19 +626,20 @@ delete a StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions | 
@@ -666,19 +691,20 @@ get available resources
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 
 try: 
     api_response = api_instance.get_api_resources()
@@ -706,7 +732,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_controller_revision_for_all_namespaces**
-> V1beta1ControllerRevisionList list_controller_revision_for_all_namespaces(field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1beta1ControllerRevisionList list_controller_revision_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -714,29 +740,32 @@ list or watch objects of kind ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_controller_revision_for_all_namespaces(field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_controller_revision_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->list_controller_revision_for_all_namespaces: %s\n" % e)
@@ -746,9 +775,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
@@ -770,7 +801,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_deployment_for_all_namespaces**
-> AppsV1beta1DeploymentList list_deployment_for_all_namespaces(field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> AppsV1beta1DeploymentList list_deployment_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -778,29 +809,32 @@ list or watch objects of kind Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_deployment_for_all_namespaces(field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_deployment_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->list_deployment_for_all_namespaces: %s\n" % e)
@@ -810,9 +844,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
@@ -834,7 +870,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_controller_revision**
-> V1beta1ControllerRevisionList list_namespaced_controller_revision(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1beta1ControllerRevisionList list_namespaced_controller_revision(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -842,30 +878,33 @@ list or watch objects of kind ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_namespaced_controller_revision(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_namespaced_controller_revision(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->list_namespaced_controller_revision: %s\n" % e)
@@ -877,9 +916,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
@@ -900,7 +941,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_deployment**
-> AppsV1beta1DeploymentList list_namespaced_deployment(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> AppsV1beta1DeploymentList list_namespaced_deployment(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -908,30 +949,33 @@ list or watch objects of kind Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_namespaced_deployment(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_namespaced_deployment(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->list_namespaced_deployment: %s\n" % e)
@@ -943,9 +987,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
@@ -966,7 +1012,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_stateful_set**
-> V1beta1StatefulSetList list_namespaced_stateful_set(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1beta1StatefulSetList list_namespaced_stateful_set(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -974,30 +1020,33 @@ list or watch objects of kind StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_namespaced_stateful_set(namespace, pretty=pretty, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_namespaced_stateful_set(namespace, pretty=pretty, _continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->list_namespaced_stateful_set: %s\n" % e)
@@ -1009,9 +1058,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
  **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
@@ -1032,7 +1083,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_stateful_set_for_all_namespaces**
-> V1beta1StatefulSetList list_stateful_set_for_all_namespaces(field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1beta1StatefulSetList list_stateful_set_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -1040,29 +1091,32 @@ list or watch objects of kind StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
+_continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
+limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. (optional)
 watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
 try: 
-    api_response = api_instance.list_stateful_set_for_all_namespaces(field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+    api_response = api_instance.list_stateful_set_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AppsV1beta1Api->list_stateful_set_for_all_namespaces: %s\n" % e)
@@ -1072,9 +1126,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the kubernetes.client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
  **include_uninitialized** | **bool**| If true, partially initialized resources are included in the response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
+ **limit** | **int**| limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. | [optional] 
@@ -1104,19 +1160,20 @@ partially update the specified ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ControllerRevision
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = NULL # object | 
@@ -1162,19 +1219,20 @@ partially update the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = NULL # object | 
@@ -1220,19 +1278,20 @@ partially update scale of the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = NULL # object | 
@@ -1278,19 +1337,20 @@ partially update status of the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = NULL # object | 
@@ -1336,19 +1396,20 @@ partially update the specified StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = NULL # object | 
@@ -1385,6 +1446,65 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_namespaced_stateful_set_scale**
+> AppsV1beta1Scale patch_namespaced_stateful_set_scale(name, namespace, body, pretty=pretty)
+
+
+
+partially update scale of the specified StatefulSet
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_namespaced_stateful_set_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AppsV1beta1Api->patch_namespaced_stateful_set_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_stateful_set_status**
 > V1beta1StatefulSet patch_namespaced_stateful_set_status(name, namespace, body, pretty=pretty)
 
@@ -1394,19 +1514,20 @@ partially update status of the specified StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = NULL # object | 
@@ -1452,19 +1573,20 @@ read the specified ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ControllerRevision
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -1512,19 +1634,20 @@ read the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -1572,19 +1695,20 @@ read scale of the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -1628,19 +1752,20 @@ read status of the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -1684,19 +1809,20 @@ read the specified StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -1735,6 +1861,63 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **read_namespaced_stateful_set_scale**
+> AppsV1beta1Scale read_namespaced_stateful_set_scale(name, namespace, pretty=pretty)
+
+
+
+read scale of the specified StatefulSet
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_namespaced_stateful_set_scale(name, namespace, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AppsV1beta1Api->read_namespaced_stateful_set_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_namespaced_stateful_set_status**
 > V1beta1StatefulSet read_namespaced_stateful_set_status(name, namespace, pretty=pretty)
 
@@ -1744,19 +1927,20 @@ read status of the specified StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -1800,19 +1984,20 @@ replace the specified ControllerRevision
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ControllerRevision
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1ControllerRevision() # V1beta1ControllerRevision | 
@@ -1858,19 +2043,20 @@ replace the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.AppsV1beta1Deployment() # AppsV1beta1Deployment | 
@@ -1916,19 +2102,20 @@ replace scale of the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.AppsV1beta1Scale() # AppsV1beta1Scale | 
@@ -1974,19 +2161,20 @@ replace status of the specified Deployment
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.AppsV1beta1Deployment() # AppsV1beta1Deployment | 
@@ -2032,19 +2220,20 @@ replace the specified StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1StatefulSet() # V1beta1StatefulSet | 
@@ -2081,6 +2270,65 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **replace_namespaced_stateful_set_scale**
+> AppsV1beta1Scale replace_namespaced_stateful_set_scale(name, namespace, body, pretty=pretty)
+
+
+
+replace scale of the specified StatefulSet
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the Scale
+namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+body = kubernetes.client.AppsV1beta1Scale() # AppsV1beta1Scale | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.replace_namespaced_stateful_set_scale(name, namespace, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AppsV1beta1Api->replace_namespaced_stateful_set_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the Scale | 
+ **namespace** | **str**| object name and auth scope, such as for teams and projects | 
+ **body** | [**AppsV1beta1Scale**](AppsV1beta1Scale.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**AppsV1beta1Scale**](AppsV1beta1Scale.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **replace_namespaced_stateful_set_status**
 > V1beta1StatefulSet replace_namespaced_stateful_set_status(name, namespace, body, pretty=pretty)
 
@@ -2090,19 +2338,20 @@ replace status of the specified StatefulSet
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-kubernetes.client.configuration.api_key['authorization'] = 'YOUR_API_KEY'
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# kubernetes.client.configuration.api_key_prefix['authorization'] = 'Bearer'
+# configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AppsV1beta1Api()
+api_instance = kubernetes.client.AppsV1beta1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1StatefulSet() # V1beta1StatefulSet | 
