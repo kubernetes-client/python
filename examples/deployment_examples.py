@@ -22,26 +22,25 @@ DEPLOYMENT_NAME = "nginx-deployment"
 
 
 def create_deployment_object():
-    # Instantiate an empty deployment object
-    deployment = client.ExtensionsV1beta1Deployment()
-    # Fill required Deployment fields (apiVersion, kind and metadata)
-    deployment.api_version = "extensions/v1beta1"
-    deployment.kind = "Deployment"
-    deployment.metadata = client.V1ObjectMeta(name=DEPLOYMENT_NAME)
-    # Create and configurate a spec section
-    spec = client.ExtensionsV1beta1DeploymentSpec()
-    spec.replicas = 3
-    spec.template = client.V1PodTemplateSpec()
-    spec.template.metadata = client.V1ObjectMeta(labels={"app": "nginx"})
-    spec.template.spec = client.V1PodSpec()
     # Configureate Pod template container
-    container = client.V1Container()
-    container.name = "nginx"
-    container.image = "nginx:1.7.9"
-    container.ports = [client.V1ContainerPort(container_port=80)]
-    spec.template.spec.containers = [container]
-    # Assign spec section into deployment.spec
-    deployment.spec = spec
+    container = client.V1Container(
+        name="nginx",
+        image="nginx:1.7.9",
+        ports=[client.V1ContainerPort(container_port=80)])
+    # Create and configurate a spec section
+    template = client.V1PodTemplateSpec(
+        metadata=client.V1ObjectMeta(labels={"app": "nginx"}),
+        spec=client.V1PodSpec(containers=[container]))
+    # Create the specification of deployment
+    spec = client.ExtensionsV1beta1DeploymentSpec(
+        replicas=3,
+        template=template)
+    # Instantiate the deployment object
+    deployment = client.ExtensionsV1beta1Deployment(
+        api_version="extensions/v1beta1",
+        kind="Deployment",
+        metadata=client.V1ObjectMeta(name=DEPLOYMENT_NAME),
+        spec=spec)
 
     return deployment
 
@@ -65,30 +64,14 @@ def update_deployment(api_instance, deployment):
     print("Deployment updated. status='%s'" % str(api_response.status))
 
 
-def roll_back_deployment(api_instance):
-    # Instanciate an empty DeploymentRollback object
-    rollback = client.ExtensionsV1beta1DeploymentRollback()
-    # Fill required DeploymentRollback fields
-    rollback.api_version = "extensions/v1beta1"
-    rollback.kind = "DeploymentRollback"
-    rollback.name = DEPLOYMENT_NAME
-    # Configurate the rollback
-    rollback.rollback_to = client.ExtensionsV1beta1RollbackConfig()
-    rollback.rollback_to.revision = 0
-    # Execute the rollback
-    api_response = api_instance.create_namespaced_deployment_rollback(
-        name=DEPLOYMENT_NAME,
-        namespace="default",
-        body=rollback)
-
-
 def delete_deployment(api_instance):
     # Delete deployment
     api_response = api_instance.delete_namespaced_deployment(
         name=DEPLOYMENT_NAME,
         namespace="default",
-        body=client.V1DeleteOptions(propagation_policy='Foreground',
-                               grace_period_seconds=5))
+        body=client.V1DeleteOptions(
+            propagation_policy='Foreground',
+            grace_period_seconds=5))
     print("Deployment deleted. status='%s'" % str(api_response.status))
 
 
@@ -105,8 +88,6 @@ def main():
     create_deployment(extensions_v1beta1, deployment)
 
     update_deployment(extensions_v1beta1, deployment)
-
-    roll_back_deployment(extensions_v1beta1)
 
     delete_deployment(extensions_v1beta1)
 
