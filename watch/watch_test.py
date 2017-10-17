@@ -85,6 +85,36 @@ class WatchTests(unittest.TestCase):
             fake_resp.close.assert_called_once()
             fake_resp.release_conn.assert_called_once()
 
+    def test_watch_stream_keep(self):
+        w = Watch(float)
+
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.read_chunked = Mock(
+            return_value=['{"type": "ADDED", "object": 1}\n'])
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        count = 0
+        for e in w.stream(fake_api.get_namespaces):
+            count = count + 1
+
+        self.assertEqual(count, 1)
+
+        for e in w.stream(fake_api.get_namespaces, True):
+            count = count + 1
+            if count == 2:
+                w.stop()
+
+        self.assertEqual(count, 2)
+        self.assertEqual(fake_api.get_namespaces.call_count, 2)
+        self.assertEqual(fake_resp.read_chunked.call_count, 2)
+        self.assertEqual(fake_resp.close.call_count, 2)
+        self.assertEqual(fake_resp.release_conn.call_count, 2)
+
     def test_unmarshal_with_float_object(self):
         w = Watch()
         event = w.unmarshal_event('{"type": "ADDED", "object": 1}', 'float')

@@ -83,11 +83,13 @@ class Watch(object):
             js['object'] = self._api_client.deserialize(obj, return_type)
         return js
 
-    def stream(self, func, *args, **kwargs):
+    def stream(self, func, keep=False, *args, **kwargs):
         """Watch an API resource and stream the result back via a generator.
 
         :param func: The API function pointer. Any parameter to the function
                      can be passed after this parameter.
+
+        :param keep: Flag to keep the watch work all the time.
 
         :return: Event object with these keys:
                    'type': The type of event such as "ADDED", "DELETED", etc.
@@ -113,12 +115,17 @@ class Watch(object):
         return_type = self.get_return_type(func)
         kwargs['watch'] = True
         kwargs['_preload_content'] = False
-        resp = func(*args, **kwargs)
-        try:
-            for line in iter_resp_lines(resp):
-                yield self.unmarshal_event(line, return_type)
-                if self._stop:
-                    break
-        finally:
-            resp.close()
-            resp.release_conn()
+
+        while True:
+            resp = func(*args, **kwargs)
+            try:
+                for line in iter_resp_lines(resp):
+                    yield self.unmarshal_event(line, return_type)
+                    if self._stop:
+                        break
+            finally:
+                resp.close()
+                resp.release_conn()
+
+            if not keep or self._stop:
+                break
