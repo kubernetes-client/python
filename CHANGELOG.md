@@ -1,4 +1,5 @@
-# Master
+# v4.0.0a1
+- Update to Kubernetes 1.8 cluster
 - IntOrString is now object thus it can be int or string. #18 #359
 - Adding stream package to support calls like exec. The old way of calling them is deprecated. See [Troubleshooting](README.md#why-execattach-calls-doesnt-work)).
 - config.http_proxy_url is deprecated. use configuration.proxy instead.
