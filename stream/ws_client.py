@@ -229,32 +229,21 @@ def websocket_call(configuration, *args, **kwargs):
     apiClient.request method."""
 
     url = args[1]
-    query_params = kwargs.get("query_params", {})
     _request_timeout = kwargs.get("_request_timeout", 60)
     _preload_content = kwargs.get("_preload_content", True)
     headers = kwargs.get("headers")
 
-    # Extract the command from the list of tuples
-    commands = None
-    for key, value in query_params:
-        if key == 'command':
-            commands = value
-            break
+    # Expand command parameter list to indivitual command params
+    query_params = []
+    for key, value in kwargs.get("query_params", {}):
+        if key == 'command' and isinstance(value, list):
+            for command in value:
+                query_params.append((key, command))
+        else:
+            query_params.append((key, value))
 
-    # drop command from query_params as we will be processing it separately
-    query_params = [(key, value) for key, value in query_params if
-                    key != 'command']
-
-    # if we still have query params then encode them
     if query_params:
         url += '?' + urlencode(query_params)
-
-    # tack on the actual command to execute at the end
-    if isinstance(commands, list):
-        for command in commands:
-            url += "&command=%s&" % quote_plus(command)
-    elif commands is not None:
-        url += '&command=' + quote_plus(commands)
 
     try:
         client = WSClient(configuration, get_websocket_url(url), headers)
