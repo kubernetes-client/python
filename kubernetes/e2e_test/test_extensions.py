@@ -18,7 +18,6 @@ import yaml
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import extensions_v1beta1_api
-from kubernetes.client.configuration import configuration
 from kubernetes.client.models import v1_delete_options
 from kubernetes.e2e_test import base
 
@@ -30,7 +29,7 @@ class TestClientExtensions(unittest.TestCase):
         cls.config = base.get_e2e_configuration()
 
     def test_create_deployment(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
         name = 'nginx-deployment-' + str(uuid.uuid4())
         deployment = '''apiVersion: extensions/v1beta1
@@ -60,7 +59,7 @@ spec:
         resp = api.delete_namespaced_deployment(name, 'default', body=options)
 
     def test_create_daemonset(self):
-        client = api_client.ApiClient(config=self.config)
+        client = api_client.ApiClient(configuration=self.config)
         api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
         name = 'nginx-app-' + str(uuid.uuid4())
         daemonset = {

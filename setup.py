@@ -16,7 +16,7 @@ from setuptools import find_packages, setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "3.0.0-snapshot"
+CLIENT_VERSION = "4.0.0-snapshot"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "4 - Beta"
 
@@ -46,7 +46,7 @@ setup(
     tests_require=TESTS_REQUIRES,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.apis',
-              'kubernetes.client.models'],
+              'kubernetes.stream', 'kubernetes.client.models'],
     include_package_data=True,
     long_description="""\
     Python client for kubernetes http://kubernetes.io/
