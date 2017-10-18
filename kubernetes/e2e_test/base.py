@@ -23,12 +23,13 @@ DEFAULT_E2E_HOST = '127.0.0.1'
 def get_e2e_configuration():
     config = Configuration()
     config.host = None
-    if os.path.exists(
-            os.path.expanduser(kube_config.KUBE_CONFIG_DEFAULT_LOCATION)):
+    default_config_path = os.path.expanduser(kube_config.KUBE_CONFIG_DEFAULT_LOCATION)
+    if os.path.exists(default_config_path):
+        print("Loaded config from %s" % default_config_path)
         kube_config.load_kube_config(client_configuration=config)
+        kube_config.load_kube_config()
     else:
-        print('Unable to load config from %s' %
-              kube_config.KUBE_CONFIG_DEFAULT_LOCATION)
+        print('Unable to load config from %s' % default_config_path)
         for url in ['https://%s:8443' % DEFAULT_E2E_HOST,
                     'http://%s:8080' % DEFAULT_E2E_HOST]:
             try:
@@ -39,8 +40,8 @@ def get_e2e_configuration():
                 break
             except urllib3.exceptions.HTTPError:
                 pass
+        config.assert_hostname = False
     if config.host is None:
         raise unittest.SkipTest('Unable to find a running Kubernetes instance')
     print('Running test against : %s' % config.host)
-    config.assert_hostname = False
     return config

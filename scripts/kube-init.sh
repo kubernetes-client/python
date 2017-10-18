@@ -39,64 +39,41 @@ else
 fi
 docker --version
 
-# Get the latest stable version of kubernetes
-export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-echo "K8S_VERSION : ${K8S_VERSION}"
+# ref: https://github.com/kubernetes/minikube#linux-ci-installation-which-supports-running-in-a-vm-example-w-kubectl-installation
 
-echo "Starting docker service"
-sudo systemctl enable docker.service
-sudo systemctl start docker.service --ignore-dependencies
-echo "Checking docker service"
-sudo docker ps
+echo "Home is $HOME"
+export HOME=~
+echo "Home is $HOME"
 
-echo "Download Kubernetes CLI"
-wget -O kubectl "http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
-sudo chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
+curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
 
-echo "Download localkube from minikube project"
-wget -O localkube "https://storage.googleapis.com/minikube/k8sReleases/v1.7.0/localkube-linux-amd64"
-sudo chmod +x localkube
-sudo mv localkube /usr/local/bin/
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+export MINIKUBE_WANTREPORTERRORPROMPT=false
+export MINIKUBE_HOME=$HOME
+export CHANGE_MINIKUBE_NONE_USER=true
+mkdir $HOME/.kube || true
+touch $HOME/.kube/config
 
-echo "Starting localkube"
-sudo nohup localkube --logtostderr=true --enable-dns=false > localkube.log 2>&1 &
+export KUBECONFIG=$HOME/.kube/config
+sudo -E ./minikube start --vm-driver=none --use-vendored-driver
 
-echo "Waiting for localkube to start..."
-if ! timeout 120 sh -c "while ! curl -ks http://127.0.0.1:8080/ >/dev/null; do sleep 1; done"; then
-    sudo cat localkube.log
-    die $LINENO "localkube did not start"
-fi
+# this for loop waits until kubectl can access the api server that minikube has created
+for i in {1..150} # timeout for 5 minutes
+do
+   kubectl get po &> /dev/null
+   if [ $? -ne 1 ]; then
+      break
+  fi
+  sleep 2
+done
 
-echo "Check certificate permissions"
-sudo chmod 644 /var/lib/localkube/certs/*
-sudo ls -altr /var/lib/localkube/certs/
+# kubectl commands are now able to interact with minikube cluster
 
-echo "Set up .kube/config"
-mkdir ~/.kube
-cat <<EOF > ~/.kube/config
-apiVersion: v1
-clusters:
-- cluster:
-    insecure-skip-tls-verify: true
-    server: https://localhost:8443
-  name: local
-contexts:
-- context:
-    cluster: local
-    user: myself
-  name: local
-current-context: local
-kind: Config
-preferences: {}
-users:
-- name: myself
-  user:
-    client-certificate: /var/lib/localkube/certs/apiserver.crt
-    client-key: /var/lib/localkube/certs/apiserver.key
-EOF
+# sed -i'' "s/127.0.0.1:8080/127.0.0.1:8443/" ~/.kube/config
 
 echo "Dump Kubernetes Objects..."
+cat ~/.kube/config
 kubectl get componentstatuses
 kubectl get configmaps
 kubectl get daemonsets
@@ -119,6 +96,7 @@ kubectl get replicationcontrollers
 kubectl get secrets
 kubectl get serviceaccounts
 kubectl get services
+kubectl get componentstatuses
 
 
 echo "Running tests..."
