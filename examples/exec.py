@@ -1,12 +1,15 @@
 import time
 
 from kubernetes import config
-from kubernetes.client import configuration
+from kubernetes.client import Configuration
 from kubernetes.client.apis import core_v1_api
 from kubernetes.client.rest import ApiException
+from kubernetes.stream import stream
 
 config.load_kube_config()
-configuration.assert_hostname = False
+c = Configuration()
+c.assert_hostname = False
+Configuration.set_default(c)
 api = core_v1_api.CoreV1Api()
 name = 'busybox-test'
 
@@ -55,20 +58,19 @@ exec_command = [
     '/bin/sh',
     '-c',
     'echo This message goes to stderr >&2; echo This message goes to stdout']
-resp = api.connect_get_namespaced_pod_exec(name, 'default',
-                                           command=exec_command,
-                                           stderr=True, stdin=False,
-                                           stdout=True, tty=False)
+resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
+              command=exec_command,
+              stderr=True, stdin=False,
+              stdout=True, tty=False)
 print("Response: " + resp)
 
 # Calling exec interactively.
 exec_command = ['/bin/sh']
-resp = api.connect_get_namespaced_pod_exec(name, 'default',
-                                           command=exec_command,
-                                           stderr=True, stdin=True,
-                                           stdout=True, tty=False,
-
-                                           _preload_content=False)
+resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
+              command=exec_command,
+              stderr=True, stdin=True,
+              stdout=True, tty=False,
+              _preload_content=False)
 commands = [
     "echo test1",
     "echo \"This message goes to stderr\" >&2",

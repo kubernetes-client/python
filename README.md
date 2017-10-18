@@ -4,8 +4,8 @@
 [![PyPI version](https://badge.fury.io/py/kubernetes.svg)](https://badge.fury.io/py/kubernetes)
 [![codecov](https://codecov.io/gh/kubernetes-incubator/client-python/branch/master/graph/badge.svg)](https://codecov.io/gh/kubernetes-incubator/client-python "Non-generated packages only")
 [![pypi supported versions](https://img.shields.io/pypi/pyversions/kubernetes.svg)](https://pypi.python.org/pypi/kubernetes)
-[![Client Capabilities](https://img.shields.io/badge/Kubernetes%20client-Silver-blue.svg?style=flat&colorB=C0C0C0&colorA=306CE8)](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/csi-new-client-library-procedure.md#client-capabilities)
-[![Client Support Level](https://img.shields.io/badge/kubernetes%20client-beta-green.svg?style=flat&colorA=306CE8)](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/csi-new-client-library-procedure.md#client-support-level)
+[![Client Capabilities](https://img.shields.io/badge/Kubernetes%20client-Silver-blue.svg?style=flat&colorB=C0C0C0&colorA=306CE8)](http://bit.ly/kubernetes-client-capabilities-badge)
+[![Client Support Level](https://img.shields.io/badge/kubernetes%20client-beta-green.svg?style=flat&colorA=306CE8)](http://bit.ly/kubernetes-client-support-badge)
 
 Python client for the [kubernetes](http://kubernetes.io/) API.
 
@@ -83,12 +83,12 @@ supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
 
-|                    | Kubernetes 1.3 | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 | Kubernetes 1.7 |
+|                    | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 | Kubernetes 1.7 | Kubernetes 1.8 |
 |--------------------|----------------|----------------|----------------|----------------|----------------|
-| client-python 1.0  | +              | +              | ✓              | -              | -              |
-| client-python 2.0  | +              | +              | +              | ✓              | -              |
-| client-python 3.0  | +              | +              | +              | +              | ✓              |
-| client-python HEAD | +              | +              | +              | +              | +              |
+| client-python 1.0  | +              | ✓              | -              | -              |-               |
+| client-python 2.0  | +              | +              | ✓              | -              |-               |
+| client-python 3.0  | +              | +              | +              | ✓              |✓               |
+| client-python HEAD | +              | +              | +              | +              |✓               |
 
 Key:
 
@@ -110,6 +110,7 @@ between client-python versions.
 | 2.0.x          | Kubernetes main repo, 1.6 branch     | ✓                             |
 | 3.0 Alpha/Beta | Kubernetes main repo, 1.7 branch     | ✗                             |
 | 3.0            | Kubernetes main repo, 1.7 branch     | ✓                             |
+| 4.0 Alpha/Beta | Kubernetes main repo, 1.8 branch     | ✗                             |
 
 
 Key:
@@ -160,3 +161,7 @@ You'll need a version with OpenSSL version 1.0.0 or later.
 If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt). 
 Specifically check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
 
+### Why Exec/Attach calls doesn't work
+Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
+of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
+See more at [exec example](examples/exec.py).
