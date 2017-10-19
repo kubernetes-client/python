@@ -1,3 +1,6 @@
+# v4.0.0a2
+- Make sure PyPI source distribution is complete with all files from the root directory
+
 # v4.0.0a1
 - Update to Kubernetes 1.8 cluster
 - IntOrString is now object thus it can be int or string. #18 #359
