@@ -85,7 +85,7 @@ class WatchTests(unittest.TestCase):
             fake_resp.close.assert_called_once()
             fake_resp.release_conn.assert_called_once()
 
-    def test_watch_stream_keep(self):
+    def test_watch_stream_loop(self):
         w = Watch(float)
 
         fake_resp = Mock()
@@ -99,12 +99,14 @@ class WatchTests(unittest.TestCase):
         fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
 
         count = 0
-        for e in w.stream(fake_api.get_namespaces):
-            count = count + 1
 
+        # when timeout_seconds is set, auto-exist when timeout reaches
+        for e in w.stream(fake_api.get_namespaces, timeout_seconds=1):
+            count = count + 1
         self.assertEqual(count, 1)
 
-        for e in w.stream(fake_api.get_namespaces, True):
+        # when no timeout_seconds, only exist when w.stop() is called
+        for e in w.stream(fake_api.get_namespaces):
             count = count + 1
             if count == 2:
                 w.stop()

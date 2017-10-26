@@ -63,6 +63,7 @@ class Watch(object):
         self._raw_return_type = return_type
         self._stop = False
         self._api_client = client.ApiClient()
+        self.resource_version = 0
 
     def stop(self):
         self._stop = True
@@ -81,15 +82,15 @@ class Watch(object):
         if return_type:
             obj = SimpleNamespace(data=json.dumps(js['raw_object']))
             js['object'] = self._api_client.deserialize(obj, return_type)
+            if hasattr(js['object'], 'metadata'):
+                self.resource_version = js['object'].metadata.resource_version
         return js
 
-    def stream(self, func, keep=False, *args, **kwargs):
+    def stream(self, func, *args, **kwargs):
         """Watch an API resource and stream the result back via a generator.
 
         :param func: The API function pointer. Any parameter to the function
                      can be passed after this parameter.
-
-        :param keep: Flag to keep the watch work all the time.
 
         :return: Event object with these keys:
                    'type': The type of event such as "ADDED", "DELETED", etc.
@@ -116,6 +117,7 @@ class Watch(object):
         kwargs['watch'] = True
         kwargs['_preload_content'] = False
 
+        timeouts = ('timeout_seconds' in kwargs)
         while True:
             resp = func(*args, **kwargs)
             try:
@@ -124,8 +126,9 @@ class Watch(object):
                     if self._stop:
                         break
             finally:
+                kwargs['resource_version'] = self.resource_version
                 resp.close()
                 resp.release_conn()
 
-            if not keep or self._stop:
+            if timeouts or self._stop:
                 break
