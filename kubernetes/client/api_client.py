@@ -144,7 +144,8 @@ class ApiClient(object):
             body = self.sanitize_for_serialization(body)
 
         # request url
-        url = self.configuration.host + resource_path
+        # ignore trailing slashes in base url
+        url = self.configuration.host.rstrip('/') + resource_path
 
         # perform request and return response
         response_data = self.request(method, url,
