@@ -1,4 +1,4 @@
-# v4.0.0a2
+# v4.0.0b1
 - Make sure PyPI source distribution is complete with all files from the root directory
 
 # v4.0.0a1
