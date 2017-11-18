@@ -984,6 +984,7 @@ Class | Method | HTTP request | Description
  - [V1RoleRef](docs/V1RoleRef.md)
  - [V1SELinuxOptions](docs/V1SELinuxOptions.md)
  - [V1Scale](docs/V1Scale.md)
+ - [V1ScaleIOPersistentVolumeSource](docs/V1ScaleIOPersistentVolumeSource.md)
  - [V1ScaleIOVolumeSource](docs/V1ScaleIOVolumeSource.md)
  - [V1ScaleSpec](docs/V1ScaleSpec.md)
  - [V1ScaleStatus](docs/V1ScaleStatus.md)
