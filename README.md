@@ -88,7 +88,7 @@ supported versions of Kubernetes clusters.
 | client-python 1.0  | +              | ✓              | -              | -              |-               |
 | client-python 2.0  | +              | +              | ✓              | -              |-               |
 | client-python 3.0  | +              | +              | +              | ✓              |✓               |
-| client-python 4.0  | +              | +              | +              | ✓              |✓               |
+| client-python 4.0  | +              | +              | +              | +              |✓               |
 | client-python HEAD | +              | +              | +              | +              |✓               |
 
 Key:
