@@ -54,7 +54,7 @@ class V1PersistentVolumeSpec(object):
         'portworx_volume': 'V1PortworxVolumeSource',
         'quobyte': 'V1QuobyteVolumeSource',
         'rbd': 'V1RBDVolumeSource',
-        'scale_io': 'V1ScaleIOVolumeSource',
+        'scale_io': 'V1ScaleIOPersistentVolumeSource',
         'storage_class_name': 'str',
         'storageos': 'V1StorageOSPersistentVolumeSource',
         'vsphere_volume': 'V1VsphereVirtualDiskVolumeSource'
@@ -715,7 +715,7 @@ class V1PersistentVolumeSpec(object):
         ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
 
         :return: The scale_io of this V1PersistentVolumeSpec.
-        :rtype: V1ScaleIOVolumeSource
+        :rtype: V1ScaleIOPersistentVolumeSource
         """
         return self._scale_io
 
@@ -726,7 +726,7 @@ class V1PersistentVolumeSpec(object):
         ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
 
         :param scale_io: The scale_io of this V1PersistentVolumeSpec.
-        :type: V1ScaleIOVolumeSource
+        :type: V1ScaleIOPersistentVolumeSource
         """
 
         self._scale_io = scale_io

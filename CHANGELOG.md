@@ -1,3 +1,6 @@
+# v4.0.0
+- api change V1PersistentVolumeSpec to V1ScaleIOPersistentVolumeSource #397.
+
 # v4.0.0b1
 - Make sure PyPI source distribution is complete with all files from the root directory
 

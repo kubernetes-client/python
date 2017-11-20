@@ -217,6 +217,7 @@ from .v1_role_list import V1RoleList
 from .v1_role_ref import V1RoleRef
 from .v1_se_linux_options import V1SELinuxOptions
 from .v1_scale import V1Scale
+from .v1_scale_io_persistent_volume_source import V1ScaleIOPersistentVolumeSource
 from .v1_scale_io_volume_source import V1ScaleIOVolumeSource
 from .v1_scale_spec import V1ScaleSpec
 from .v1_scale_status import V1ScaleStatus

@@ -1,4 +1,4 @@
-# V1ScaleIOVolumeSource
+# V1ScaleIOPersistentVolumeSource
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **gateway** | **str** | The host address of the ScaleIO API Gateway. | 
 **protection_domain** | **str** | The name of the ScaleIO Protection Domain for the configured storage. | [optional] 
 **read_only** | **bool** | Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. | [optional] 
-**secret_ref** | [**V1LocalObjectReference**](V1LocalObjectReference.md) | SecretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail. | 
+**secret_ref** | [**V1SecretReference**](V1SecretReference.md) | SecretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail. | 
 **ssl_enabled** | **bool** | Flag to enable/disable SSL communication with Gateway, default false | [optional] 
 **storage_mode** | **str** | Indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. | [optional] 
 **storage_pool** | **str** | The ScaleIO Storage Pool associated with the protection domain. | [optional] 
