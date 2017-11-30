@@ -85,7 +85,8 @@ def main():
     config.load_kube_config()
     apps_v1beta2 = client.AppsV1beta2Api()
     # Create a deployment object with client-python API. The deployment we
-    # created is same as the `nginx-deployment-apps_v1beta2.yaml` in the /examples folder.
+    # created is same as the `nginx-deployment-apps_v1beta2.yaml`
+    # in the /examples folder.
     deployment = create_deployment_object()
 
     create_deployment(apps_v1beta2, deployment)
