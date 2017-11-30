@@ -13,13 +13,12 @@
 # limitations under the License.
 
 from os import path
-import sys
 
 import yaml
 
 from kubernetes import client, config
 
-DEPLOYMENT_NAME = "nginx-deployment-xxx"
+DEPLOYMENT_NAME = "nginx-deployment"
 
 
 def create_deployment_object():
