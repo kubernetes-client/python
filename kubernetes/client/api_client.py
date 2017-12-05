@@ -25,6 +25,7 @@ from six import PY3, integer_types, iteritems, text_type
 from six.moves.urllib.parse import quote
 
 from . import models
+from . import ws_client
 from .configuration import Configuration
 from .rest import ApiException, RESTClientObject
 
@@ -334,6 +335,15 @@ class ApiClient(object):
         """
         Makes the HTTP request using RESTClient.
         """
+        # FIXME(dims) : We need a better way to figure out which
+        # calls end up using web sockets
+        if url.endswith('/exec') and method == "GET":
+            return ws_client.GET(self.configuration,
+                                 url,
+                                 query_params=query_params,
+                                 _request_timeout=_request_timeout,
+                                 headers=headers)
+
         if method == "GET":
             return self.rest_client.GET(url,
                                         query_params=query_params,
