@@ -355,7 +355,7 @@ class ExtensionsV1beta1Api(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='ExtensionsV1beta1DeploymentRollback',
+                                        response_type='ExtensionsV1beta1DeploymentStatus',
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
