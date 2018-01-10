@@ -63,6 +63,7 @@ class Watch(object):
         self._raw_return_type = return_type
         self._stop = False
         self._api_client = client.ApiClient()
+        self.resource_version = 0
 
     def stop(self):
         self._stop = True
@@ -81,6 +82,8 @@ class Watch(object):
         if return_type:
             obj = SimpleNamespace(data=json.dumps(js['raw_object']))
             js['object'] = self._api_client.deserialize(obj, return_type)
+            if hasattr(js['object'], 'metadata'):
+                self.resource_version = js['object'].metadata.resource_version
         return js
 
     def stream(self, func, *args, **kwargs):
@@ -113,12 +116,19 @@ class Watch(object):
         return_type = self.get_return_type(func)
         kwargs['watch'] = True
         kwargs['_preload_content'] = False
-        resp = func(*args, **kwargs)
-        try:
-            for line in iter_resp_lines(resp):
-                yield self.unmarshal_event(line, return_type)
-                if self._stop:
-                    break
-        finally:
-            resp.close()
-            resp.release_conn()
+
+        timeouts = ('timeout_seconds' in kwargs)
+        while True:
+            resp = func(*args, **kwargs)
+            try:
+                for line in iter_resp_lines(resp):
+                    yield self.unmarshal_event(line, return_type)
+                    if self._stop:
+                        break
+            finally:
+                kwargs['resource_version'] = self.resource_version
+                resp.close()
+                resp.release_conn()
+
+            if timeouts or self._stop:
+                break
