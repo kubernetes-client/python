@@ -62,8 +62,7 @@ class V1beta2DaemonSetSpec(object):
           self.min_ready_seconds = min_ready_seconds
         if revision_history_limit is not None:
           self.revision_history_limit = revision_history_limit
-        if selector is not None:
-          self.selector = selector
+        self.selector = selector
         self.template = template
         if update_strategy is not None:
           self.update_strategy = update_strategy
@@ -118,7 +117,7 @@ class V1beta2DaemonSetSpec(object):
     def selector(self):
         """
         Gets the selector of this V1beta2DaemonSetSpec.
-        A label query over pods that are managed by the daemon set. Must match in order to be controlled. If empty, defaulted to labels on Pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+        A label query over pods that are managed by the daemon set. Must match in order to be controlled. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
 
         :return: The selector of this V1beta2DaemonSetSpec.
         :rtype: V1LabelSelector
@@ -129,11 +128,13 @@ class V1beta2DaemonSetSpec(object):
     def selector(self, selector):
         """
         Sets the selector of this V1beta2DaemonSetSpec.
-        A label query over pods that are managed by the daemon set. Must match in order to be controlled. If empty, defaulted to labels on Pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+        A label query over pods that are managed by the daemon set. Must match in order to be controlled. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
 
         :param selector: The selector of this V1beta2DaemonSetSpec.
         :type: V1LabelSelector
         """
+        if selector is None:
+            raise ValueError("Invalid value for `selector`, must not be `None`")
 
         self._selector = selector
 
