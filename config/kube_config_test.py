@@ -14,11 +14,13 @@
 
 import base64
 import datetime
+import json
 import os
 import shutil
 import tempfile
 import unittest
 
+import mock
 import yaml
 from six import PY3
 
@@ -65,6 +67,17 @@ TEST_CLIENT_KEY = "client-key"
 TEST_CLIENT_KEY_BASE64 = _base64(TEST_CLIENT_KEY)
 TEST_CLIENT_CERT = "client-cert"
 TEST_CLIENT_CERT_BASE64 = _base64(TEST_CLIENT_CERT)
+
+
+TEST_OIDC_TOKEN = "test-oidc-token"
+TEST_OIDC_INFO = "{\"name\": \"test\"}"
+TEST_OIDC_BASE = _base64(TEST_OIDC_TOKEN) + "." + _base64(TEST_OIDC_INFO)
+TEST_OIDC_LOGIN = TEST_OIDC_BASE + "." + TEST_CLIENT_CERT_BASE64
+TEST_OIDC_TOKEN = "Bearer %s" % TEST_OIDC_LOGIN
+TEST_OIDC_EXP = "{\"name\": \"test\",\"exp\": 536457600}"
+TEST_OIDC_EXP_BASE = _base64(TEST_OIDC_TOKEN) + "." + _base64(TEST_OIDC_EXP)
+TEST_OIDC_EXPIRED_LOGIN = TEST_OIDC_EXP_BASE + "." + TEST_CLIENT_CERT_BASE64
+TEST_OIDC_CA = _base64(TEST_CERTIFICATE_AUTH)
 
 
 class BaseTestCase(unittest.TestCase):
@@ -318,6 +331,20 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "oidc",
+                "context": {
+                    "cluster": "default",
+                    "user": "oidc"
+                }
+            },
+            {
+                "name": "expired_oidc",
+                "context": {
+                    "cluster": "default",
+                    "user": "expired_oidc"
+                }
+            },
+            {
                 "name": "user_pass",
                 "context": {
                     "cluster": "default",
@@ -435,6 +462,33 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "oidc",
+                "user": {
+                    "auth-provider": {
+                        "name": "oidc",
+                        "config": {
+                            "id-token": TEST_OIDC_LOGIN
+                        }
+                    }
+                }
+            },
+            {
+                "name": "expired_oidc",
+                "user": {
+                    "auth-provider": {
+                        "name": "oidc",
+                        "config": {
+                            "client-id": "tectonic-kubectl",
+                            "client-secret": "FAKE_SECRET",
+                            "id-token": TEST_OIDC_EXPIRED_LOGIN,
+                            "idp-certificate-authority-data": TEST_OIDC_CA,
+                            "idp-issuer-url": "https://example.org/identity",
+                            "refresh-token": "lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk"
+                        }
+                    }
+                }
+            },
+            {
                 "name": "user_pass",
                 "user": {
                     "username": TEST_USERNAME,  # should be ignored
@@ -527,6 +581,39 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertTrue(loader._load_gcp_token())
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64,
                          loader.token)
+
+    def test_oidc_no_refresh(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="oidc",
+        )
+        self.assertTrue(loader._load_oid_token())
+        self.assertEqual(TEST_OIDC_TOKEN, loader.token)
+
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.request')
+    def test_oidc_with_refresh(self, mock_ApiClient, mock_OAuth2Session):
+        mock_response = mock.MagicMock()
+        type(mock_response).status = mock.PropertyMock(
+            return_value=200
+        )
+        type(mock_response).data = mock.PropertyMock(
+            return_value=json.dumps({
+                "token_endpoint": "https://example.org/identity/token"
+            })
+        )
+
+        mock_ApiClient.return_value = mock_response
+
+        mock_OAuth2Session.return_value = {"id_token": "abc123",
+                                           "refresh_token": "newtoken123"}
+
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="expired_oidc",
+        )
+        self.assertTrue(loader._load_oid_token())
+        self.assertEqual("Bearer abc123", loader.token)
 
     def test_user_pass(self):
         expected = FakeConfig(host=TEST_HOST, token=TEST_BASIC_TOKEN)
