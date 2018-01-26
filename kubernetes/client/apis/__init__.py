@@ -3,12 +3,14 @@ from __future__ import absolute_import
 # import apis into api package
 from .admissionregistration_api import AdmissionregistrationApi
 from .admissionregistration_v1alpha1_api import AdmissionregistrationV1alpha1Api
+from .admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api
 from .apiextensions_api import ApiextensionsApi
 from .apiextensions_v1beta1_api import ApiextensionsV1beta1Api
 from .apiregistration_api import ApiregistrationApi
 from .apiregistration_v1beta1_api import ApiregistrationV1beta1Api
 from .apis_api import ApisApi
 from .apps_api import AppsApi
+from .apps_v1_api import AppsV1Api
 from .apps_v1beta1_api import AppsV1beta1Api
 from .apps_v1beta2_api import AppsV1beta2Api
 from .authentication_api import AuthenticationApi
@@ -29,6 +31,8 @@ from .certificates_v1beta1_api import CertificatesV1beta1Api
 from .core_api import CoreApi
 from .core_v1_api import CoreV1Api
 from .custom_objects_api import CustomObjectsApi
+from .events_api import EventsApi
+from .events_v1beta1_api import EventsV1beta1Api
 from .extensions_api import ExtensionsApi
 from .extensions_v1beta1_api import ExtensionsV1beta1Api
 from .logs_api import LogsApi
@@ -46,5 +50,6 @@ from .settings_api import SettingsApi
 from .settings_v1alpha1_api import SettingsV1alpha1Api
 from .storage_api import StorageApi
 from .storage_v1_api import StorageV1Api
+from .storage_v1alpha1_api import StorageV1alpha1Api
 from .storage_v1beta1_api import StorageV1beta1Api
 from .version_api import VersionApi

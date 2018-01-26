@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **parameters** | **dict(str, str)** | Parameters holds the parameters for the provisioner that should create volumes of this storage class. | [optional] 
 **provisioner** | **str** | Provisioner indicates the type of the provisioner. | 
 **reclaim_policy** | **str** | Dynamically provisioned PersistentVolumes of this storage class are created with this reclaimPolicy. Defaults to Delete. | [optional] 
+**volume_binding_mode** | **str** | VolumeBindingMode indicates how PersistentVolumeClaims should be provisioned and bound.  When unset, VolumeBindingImmediate is used. This field is alpha-level and is only honored by servers that enable the VolumeScheduling feature. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
