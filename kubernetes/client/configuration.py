@@ -240,5 +240,5 @@ class Configuration(with_metaclass(TypeWithDefault, object)):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: v1.9.3\n"\
-               "SDK Package Version: 5.0.0-snapshot".\
+               "SDK Package Version: 5.0.0b1".\
                format(env=sys.platform, pyversion=sys.version)
