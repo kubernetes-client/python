@@ -7,7 +7,7 @@ This document will provide basic steps to get submodules work.
 To clone repo, you need to pass `recursive` parameter to make the clone also get submodules:
 
 ```bash
-git clone --recursive https://github.com/kubernetes-incubator/client-python.git
+git clone --recursive https://github.com/kubernetes-client/python.git
 ```
 
 if you already clone repo with no `--recursive` option, you can run this command to get submodules:

@@ -5,7 +5,7 @@ branch, update release tags, create distribution packages and upload them to
 pip.
 
 ## Change logs
-Make sure changes logs are up to date [here](https://github.com/kubernetes-incubator/client-python/blob/master/CHANGELOG.md).
+Make sure changes logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
 If they are not, follow commits added after last release and update/commit
 the change logs to master.
 
@@ -141,7 +141,7 @@ twine upload dist/*
 ## Create github release
 
 Create a gihub release by starting from
-[this page](https://github.com/kubernetes-incubator/client-python/releases).
+[this page](https://github.com/kubernetes-client/python/releases).
 Click Deaft new release button. Name the tag the same as CLIENT_VERSION. Change
 the target branch to "release-x.y". If the release is a pre-release, check the
 `This is a pre-release` option.
