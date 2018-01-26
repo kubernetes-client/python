@@ -1,3 +1,6 @@
+# v5.0.0b1
+- Label selector for pods is now required and must match the pod template's labels for v1beta2 StatefulSetSpec, ReplicaSetSpec, DaemonSetSpec and DeploymentSpec kubernetes/kubernetes#55357
+
 # v4.0.0
 - api change V1PersistentVolumeSpec to V1ScaleIOPersistentVolumeSource #397.
 
