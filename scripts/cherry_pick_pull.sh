@@ -31,8 +31,8 @@ declare -r REBASEMAGIC="${REPO_ROOT}/.git/rebase-apply"
 DRY_RUN=${DRY_RUN:-""}
 UPSTREAM_REMOTE=${UPSTREAM_REMOTE:-upstream}
 FORK_REMOTE=${FORK_REMOTE:-origin}
-MAIN_REPO_NAME=${MAIN_REPO_NAME:-"client-python"}
-MAIN_REPO_ORG=${MAIN_REPO_ORG:-"kubernetes-incubator"}
+MAIN_REPO_NAME=${MAIN_REPO_NAME:-"python"}
+MAIN_REPO_ORG=${MAIN_REPO_ORG:-"kubernetes-client"}
 
 if [[ -z ${GITHUB_USER:-} ]]; then
   echo "Please export GITHUB_USER=<your-user> (or GH organization, if that's where your fork lives)"
