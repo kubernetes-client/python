@@ -73,9 +73,9 @@ class V1beta1CustomResourceDefinitionStatus(object):
         :type: V1beta1CustomResourceDefinitionNames
         """
         if accepted_names is None:
-            raise ValueError("Invalid value for `accepted_names`, must not be `None`")
-
-        self._accepted_names = accepted_names
+            self._accepted_names = []
+        else:
+            self._accepted_names = accepted_names
 
     @property
     def conditions(self):
