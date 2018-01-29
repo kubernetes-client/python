@@ -98,9 +98,9 @@ class V1beta1CustomResourceDefinitionStatus(object):
         :type: list[V1beta1CustomResourceDefinitionCondition]
         """
         if conditions is None:
-            raise ValueError("Invalid value for `conditions`, must not be `None`")
-
-        self._conditions = conditions
+            self._conditions = []
+        else:
+            self._conditions = conditions
 
     def to_dict(self):
         """
