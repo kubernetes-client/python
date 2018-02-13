@@ -114,7 +114,8 @@ between client-python versions.
 | 3.0            | Kubernetes main repo, 1.7 branch     | ✓                             |
 | 4.0 Alpha/Beta | Kubernetes main repo, 1.8 branch     | ✗                             |
 | 4.0            | Kubernetes main repo, 1.8 branch     | ✓                             |
-| 5.0 Alpha/Beta | Kubernetes main repo, 1.9 branch     | ✓                             |
+| 5.0 Alpha/Beta | Kubernetes main repo, 1.9 branch     | ✗                             |
+| 5.0            | Kubernetes main repo, 1.9 branch     | ✓                             |
 
 
 Key:
