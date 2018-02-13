@@ -1,3 +1,6 @@
+# v5.0.0
+- No changes. The same as `v5.0.0b1`.
+
 # v5.0.0b1
 - Update to Kubernetes 1.9 cluster
 - Label selector for pods is now required and must match the pod template's labels for v1beta2 StatefulSetSpec, ReplicaSetSpec, DaemonSetSpec and DeploymentSpec kubernetes/kubernetes#55357
