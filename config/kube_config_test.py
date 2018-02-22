@@ -180,7 +180,11 @@ class TestConfigNode(BaseTestCase):
                 "with_names": [{"name": "test_name", "value": "test_value"},
                                {"name": "test_name2",
                                 "value": {"key1", "test"}},
-                               {"name": "test_name3", "value": [1, 2, 3]}]}
+                               {"name": "test_name3", "value": [1, 2, 3]}],
+                "with_names_dup": [{"name": "test_name", "value": "test_value"},
+                                   {"name": "test_name",
+                                    "value": {"key1", "test"}},
+                                   {"name": "test_name3", "value": [1, 2, 3]}]}
 
     def setUp(self):
         super(TestConfigNode, self).setUp()
@@ -188,7 +192,7 @@ class TestConfigNode(BaseTestCase):
 
     def test_normal_map_array_operations(self):
         self.assertEqual("test", self.node['key1'])
-        self.assertEqual(4, len(self.node))
+        self.assertEqual(5, len(self.node))
 
         self.assertEqual("test_obj/key2", self.node['key2'].name)
         self.assertEqual(["a", "b", "c"], self.node['key2'].value)
@@ -234,6 +238,11 @@ class TestConfigNode(BaseTestCase):
         self.expect_exception(
             lambda: self.node['with_names'].get_with_name('no-name'),
             "Expected object with name no-name in test_obj/with_names list")
+
+    def test_get_with_name_on_duplicate_name(self):
+        self.expect_exception(
+            lambda: self.node['with_names_dup'].get_with_name('test_name'),
+            "Expected only one object with name test_name in test_obj/with_names_dup list")
 
 
 class FakeConfig:

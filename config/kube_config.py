@@ -298,6 +298,7 @@ class ConfigNode(object):
             raise ConfigException(
                 'Invalid kube-config file. Expected %s to be a list'
                 % self.name)
+        result = None
         for v in self.value:
             if 'name' not in v:
                 raise ConfigException(
@@ -305,7 +306,15 @@ class ConfigNode(object):
                     'Expected all values in %s list to have \'name\' key'
                     % self.name)
             if v['name'] == name:
-                return ConfigNode('%s[name=%s]' % (self.name, name), v)
+                if result is None:
+                    result = v
+                else:
+                    raise ConfigException(
+                        'Invalid kube-config file. '
+                        'Expected only one object with name %s in %s list'
+                        % (name, self.name))
+        if result is not None:
+            return ConfigNode('%s[name=%s]' % (self.name, name), result)
         if safe:
             return None
         raise ConfigException(
