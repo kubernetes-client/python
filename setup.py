@@ -16,7 +16,7 @@ from setuptools import find_packages, setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "4.0.0-snapshot"
+CLIENT_VERSION = "5.0.0-snapshot"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "4 - Beta"
 
@@ -40,7 +40,7 @@ setup(
     author_email="",
     author="Kubernetes",
     license="Apache License Version 2.0",
-    url="https://github.com/kubernetes-incubator/client-python",
+    url="https://github.com/kubernetes-client/python",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
     tests_require=TESTS_REQUIRES,

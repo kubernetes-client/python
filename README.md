@@ -1,8 +1,8 @@
 # Kubernetes Python Client
 
-[![Build Status](https://travis-ci.org/kubernetes-incubator/client-python.svg?branch=master)](https://travis-ci.org/kubernetes-incubator/client-python)
+[![Build Status](https://travis-ci.org/kubernetes-client/python.svg?branch=master)](https://travis-ci.org/kubernetes-client/python)
 [![PyPI version](https://badge.fury.io/py/kubernetes.svg)](https://badge.fury.io/py/kubernetes)
-[![codecov](https://codecov.io/gh/kubernetes-incubator/client-python/branch/master/graph/badge.svg)](https://codecov.io/gh/kubernetes-incubator/client-python "Non-generated packages only")
+[![codecov](https://codecov.io/gh/kubernetes-client/python/branch/master/graph/badge.svg)](https://codecov.io/gh/kubernetes-client/python "Non-generated packages only")
 [![pypi supported versions](https://img.shields.io/pypi/pyversions/kubernetes.svg)](https://pypi.python.org/pypi/kubernetes)
 [![Client Capabilities](https://img.shields.io/badge/Kubernetes%20client-Silver-blue.svg?style=flat&colorB=C0C0C0&colorA=306CE8)](http://bit.ly/kubernetes-client-capabilities-badge)
 [![Client Support Level](https://img.shields.io/badge/kubernetes%20client-beta-green.svg?style=flat&colorA=306CE8)](http://bit.ly/kubernetes-client-support-badge)
@@ -14,8 +14,8 @@ Python client for the [kubernetes](http://kubernetes.io/) API.
 From source:
 
 ```
-git clone --recursive https://github.com/kubernetes-incubator/client-python.git
-cd client-python
+git clone --recursive https://github.com/kubernetes-client/python.git
+cd python
 python setup.py install
 ```
 
@@ -83,13 +83,14 @@ supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
 
-|                    | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 | Kubernetes 1.7 | Kubernetes 1.8 |
-|--------------------|----------------|----------------|----------------|----------------|----------------|
-| client-python 1.0  | +              | ✓              | -              | -              |-               |
-| client-python 2.0  | +              | +              | ✓              | -              |-               |
-| client-python 3.0  | +              | +              | +              | ✓              |-               |
-| client-python 4.0  | +              | +              | +              | +              |✓               |
-| client-python HEAD | +              | +              | +              | +              |✓               |
+|                    | Kubernetes 1.4 | Kubernetes 1.5 | Kubernetes 1.6 | Kubernetes 1.7 | Kubernetes 1.8 | Kubernetes 1.9 |
+|--------------------|----------------|----------------|----------------|----------------|----------------|----------------|
+| client-python 1.0  | +              | ✓              | -              | -              |-               |-               |
+| client-python 2.0  | +              | +              | ✓              | -              |-               |-               |
+| client-python 3.0  | +              | +              | +              | ✓              |-               |-               |
+| client-python 4.0  | +              | +              | +              | +              |✓               |-               |
+| client-python 5.0  | +              | +              | +              | +              |+               |✓               |
+| client-python HEAD | +              | +              | +              | +              |+               |✓               |
 
 Key:
 
@@ -113,18 +114,20 @@ between client-python versions.
 | 3.0            | Kubernetes main repo, 1.7 branch     | ✓                             |
 | 4.0 Alpha/Beta | Kubernetes main repo, 1.8 branch     | ✗                             |
 | 4.0            | Kubernetes main repo, 1.8 branch     | ✓                             |
+| 5.0 Alpha/Beta | Kubernetes main repo, 1.9 branch     | ✗                             |
+| 5.0            | Kubernetes main repo, 1.9 branch     | ✓                             |
 
 
 Key:
 
-* `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-incubator/client-python/issues/177)) published to client-python when they are available.
+* `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-client/python/issues/177)) published to client-python when they are available.
 * `✗` No longer maintained; please upgrade.
 
 Note: There would be no maintenance for alpha/beta releases except the latest one.
 
 ## Community, Support, Discussion
 
-You can reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery). If you have any problem with the package or any suggestions, please file an [issue](https://github.com/kubernetes-incubator/client-python/issues).
+You can reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery). If you have any problem with the package or any suggestions, please file an [issue](https://github.com/kubernetes-client/python/issues).
 
 ### Code of Conduct
 

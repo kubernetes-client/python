@@ -1,3 +1,16 @@
+# v5.0.0
+- No changes. The same as `v5.0.0b1`.
+
+# v5.0.0b1
+- Update to Kubernetes 1.9 cluster
+- Label selector for pods is now required and must match the pod template's labels for v1beta2 StatefulSetSpec, ReplicaSetSpec, DaemonSetSpec and DeploymentSpec kubernetes/kubernetes#55357
+- The dynamic admission webhook is split into two kinds, mutating and validating. The kinds have changed completely and old code must be ported to admissionregistration.k8s.io/v1beta1 - MutatingWebhookConfiguration and ValidatingWebhookConfiguration kubernetes/kubernetes#55282
+- DaemonSet, Deployment, ReplicaSet, and StatefulSet have been promoted to GA and are available in the apps/v1 group version kubernetes/kubernetes#53679
+- Introduce new storage.k8s.io/v1alpha1 VolumeAttachment object kubernetes/kubernetes#54463
+- Introduce core/v1 RBDPersistentVolumeSource kubernetes/kubernetes#54302
+- StatefulSet status now has support for conditions kubernetes/kubernetes#55268
+- DaemonSet status now has support for conditions kubernetes/kubernetes#55272
+
 # v4.0.0
 - api change V1PersistentVolumeSpec to V1ScaleIOPersistentVolumeSource #397.
 
