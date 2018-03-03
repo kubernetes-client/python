@@ -234,3 +234,13 @@ class TestClient(unittest.TestCase):
             node = api.read_node(name=item.metadata.name)
             self.assertTrue(len(node.metadata.labels) > 0)
             self.assertTrue(isinstance(node.metadata.labels, dict))
+
+    def test_sync_node_apis(self):
+        client = api_client.ApiClient(configuration=self.config, async_req=False)
+        api = core_v1_api.CoreV1Api(client)
+
+        for item in api.list_node().items:
+            node = api.read_node(name=item.metadata.name)
+            self.assertTrue(len(node.metadata.labels) > 0)
+            self.assertTrue(isinstance(node.metadata.labels, dict))
+

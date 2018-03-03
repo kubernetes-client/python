@@ -59,12 +59,14 @@ class ApiClient(object):
         'object': object,
     }
 
-    def __init__(self, configuration=None, header_name=None, header_value=None, cookie=None):
+    def __init__(self, configuration=None, header_name=None, header_value=None, cookie=None, async_req=True):
         if configuration is None:
             configuration = Configuration()
         self.configuration = configuration
 
-        self.pool = ThreadPool()
+        self.async_req = async_req
+        if async_req:
+            self.pool = ThreadPool()
         self.rest_client = RESTClientObject(configuration)
         self.default_headers = {}
         if header_name is not None:
@@ -74,8 +76,9 @@ class ApiClient(object):
         self.user_agent = 'Swagger-Codegen/5.0.0-snapshot/python'
     
     def __del__(self):
-        self.pool.close()
-        self.pool.join()
+        if self.async_req:
+            self.pool.close()
+            self.pool.join()
 
     @property
     def user_agent(self):
@@ -313,7 +316,7 @@ class ApiClient(object):
             If parameter async is False or missing,
             then the method will return the response directly.
         """
-        if not async:
+        if not async or not self.async_req:
             return self.__call_api(resource_path, method,
                                    path_params, query_params, header_params,
                                    body, post_params, files,
