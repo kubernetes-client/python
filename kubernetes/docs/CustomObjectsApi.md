@@ -12,6 +12,8 @@ Method | HTTP request | Description
 [**get_namespaced_custom_object**](CustomObjectsApi.md#get_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 [**list_cluster_custom_object**](CustomObjectsApi.md#list_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural} | 
 [**list_namespaced_custom_object**](CustomObjectsApi.md#list_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
+[**patch_cluster_custom_object**](CustomObjectsApi.md#patch_cluster_custom_object) | **PATCH** /apis/{group}/{version}/{plural}/{name} | 
+[**patch_namespaced_custom_object**](CustomObjectsApi.md#patch_namespaced_custom_object) | **PATCH** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 [**replace_cluster_custom_object**](CustomObjectsApi.md#replace_cluster_custom_object) | **PUT** /apis/{group}/{version}/{plural}/{name} | 
 [**replace_namespaced_custom_object**](CustomObjectsApi.md#replace_namespaced_custom_object) | **PUT** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 
@@ -525,6 +527,130 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: */*
  - **Accept**: application/json, application/json;stream=watch
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_cluster_custom_object**
+> object patch_cluster_custom_object(group, version, plural, name, body)
+
+
+
+patch the specified cluster scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom object's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | The JSON schema of the Resource to patch.
+
+try: 
+    api_response = api_instance.patch_cluster_custom_object(group, version, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->patch_cluster_custom_object: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom object&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**| The JSON schema of the Resource to patch. | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/merge-patch+json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_namespaced_custom_object**
+> object patch_namespaced_custom_object(group, version, namespace, plural, name, body)
+
+
+
+patch the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | The JSON schema of the Resource to patch.
+
+try: 
+    api_response = api_instance.patch_namespaced_custom_object(group, version, namespace, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->patch_namespaced_custom_object: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**| The JSON schema of the Resource to patch. | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/merge-patch+json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
