@@ -618,6 +618,8 @@ Class | Method | HTTP request | Description
 *CustomObjectsApi* | [**get_namespaced_custom_object**](docs/CustomObjectsApi.md#get_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 *CustomObjectsApi* | [**list_cluster_custom_object**](docs/CustomObjectsApi.md#list_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural} | 
 *CustomObjectsApi* | [**list_namespaced_custom_object**](docs/CustomObjectsApi.md#list_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
+*CustomObjectsApi* | [**patch_cluster_custom_object**](docs/CustomObjectsApi.md#patch_cluster_custom_object) | **PATCH** /apis/{group}/{version}/{plural}/{name} | 
+*CustomObjectsApi* | [**patch_namespaced_custom_object**](docs/CustomObjectsApi.md#patch_namespaced_custom_object) | **PATCH** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 *CustomObjectsApi* | [**replace_cluster_custom_object**](docs/CustomObjectsApi.md#replace_cluster_custom_object) | **PUT** /apis/{group}/{version}/{plural}/{name} | 
 *CustomObjectsApi* | [**replace_namespaced_custom_object**](docs/CustomObjectsApi.md#replace_namespaced_custom_object) | **PUT** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 *EventsApi* | [**get_api_group**](docs/EventsApi.md#get_api_group) | **GET** /apis/events.k8s.io/ | 

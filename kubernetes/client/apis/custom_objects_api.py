@@ -1055,6 +1055,261 @@ class CustomObjectsApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
+    def patch_cluster_custom_object(self, group, version, plural, name, body, **kwargs):
+        """
+        patch the specified cluster scoped custom object
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_cluster_custom_object(group, version, plural, name, body, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str group: the custom resource's group (required)
+        :param str version: the custom resource's version (required)
+        :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str name: the custom object's name (required)
+        :param object body: The JSON schema of the Resource to patch. (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.patch_cluster_custom_object_with_http_info(group, version, plural, name, body, **kwargs)
+        else:
+            (data) = self.patch_cluster_custom_object_with_http_info(group, version, plural, name, body, **kwargs)
+            return data
+
+    def patch_cluster_custom_object_with_http_info(self, group, version, plural, name, body, **kwargs):
+        """
+        patch the specified cluster scoped custom object
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_cluster_custom_object_with_http_info(group, version, plural, name, body, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str group: the custom resource's group (required)
+        :param str version: the custom resource's version (required)
+        :param str plural: the custom object's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str name: the custom object's name (required)
+        :param object body: The JSON schema of the Resource to patch. (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['group', 'version', 'plural', 'name', 'body']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_cluster_custom_object" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'group' is set
+        if ('group' not in params) or (params['group'] is None):
+            raise ValueError("Missing the required parameter `group` when calling `patch_cluster_custom_object`")
+        # verify the required parameter 'version' is set
+        if ('version' not in params) or (params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `patch_cluster_custom_object`")
+        # verify the required parameter 'plural' is set
+        if ('plural' not in params) or (params['plural'] is None):
+            raise ValueError("Missing the required parameter `plural` when calling `patch_cluster_custom_object`")
+        # verify the required parameter 'name' is set
+        if ('name' not in params) or (params['name'] is None):
+            raise ValueError("Missing the required parameter `name` when calling `patch_cluster_custom_object`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `patch_cluster_custom_object`")
+
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'group' in params:
+            path_params['group'] = params['group']
+        if 'version' in params:
+            path_params['version'] = params['version']
+        if 'plural' in params:
+            path_params['plural'] = params['plural']
+        if 'name' in params:
+            path_params['name'] = params['name']
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/merge-patch+json'])
+
+        # Authentication setting
+        auth_settings = ['BearerToken']
+
+        return self.api_client.call_api('/apis/{group}/{version}/{plural}/{name}', 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='object',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def patch_namespaced_custom_object(self, group, version, namespace, plural, name, body, **kwargs):
+        """
+        patch the specified namespace scoped custom object
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_custom_object(group, version, namespace, plural, name, body, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str group: the custom resource's group (required)
+        :param str version: the custom resource's version (required)
+        :param str namespace: The custom resource's namespace (required)
+        :param str plural: the custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str name: the custom object's name (required)
+        :param object body: The JSON schema of the Resource to patch. (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.patch_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, **kwargs)
+        else:
+            (data) = self.patch_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, **kwargs)
+            return data
+
+    def patch_namespaced_custom_object_with_http_info(self, group, version, namespace, plural, name, body, **kwargs):
+        """
+        patch the specified namespace scoped custom object
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.patch_namespaced_custom_object_with_http_info(group, version, namespace, plural, name, body, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str group: the custom resource's group (required)
+        :param str version: the custom resource's version (required)
+        :param str namespace: The custom resource's namespace (required)
+        :param str plural: the custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str name: the custom object's name (required)
+        :param object body: The JSON schema of the Resource to patch. (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['group', 'version', 'namespace', 'plural', 'name', 'body']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_namespaced_custom_object" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'group' is set
+        if ('group' not in params) or (params['group'] is None):
+            raise ValueError("Missing the required parameter `group` when calling `patch_namespaced_custom_object`")
+        # verify the required parameter 'version' is set
+        if ('version' not in params) or (params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `patch_namespaced_custom_object`")
+        # verify the required parameter 'namespace' is set
+        if ('namespace' not in params) or (params['namespace'] is None):
+            raise ValueError("Missing the required parameter `namespace` when calling `patch_namespaced_custom_object`")
+        # verify the required parameter 'plural' is set
+        if ('plural' not in params) or (params['plural'] is None):
+            raise ValueError("Missing the required parameter `plural` when calling `patch_namespaced_custom_object`")
+        # verify the required parameter 'name' is set
+        if ('name' not in params) or (params['name'] is None):
+            raise ValueError("Missing the required parameter `name` when calling `patch_namespaced_custom_object`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `patch_namespaced_custom_object`")
+
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'group' in params:
+            path_params['group'] = params['group']
+        if 'version' in params:
+            path_params['version'] = params['version']
+        if 'namespace' in params:
+            path_params['namespace'] = params['namespace']
+        if 'plural' in params:
+            path_params['plural'] = params['plural']
+        if 'name' in params:
+            path_params['name'] = params['name']
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/merge-patch+json'])
+
+        # Authentication setting
+        auth_settings = ['BearerToken']
+
+        return self.api_client.call_api('/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}', 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='object',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def replace_cluster_custom_object(self, group, version, plural, name, body, **kwargs):
         """
         replace the specified cluster scoped custom object

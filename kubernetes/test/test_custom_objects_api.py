@@ -95,6 +95,22 @@ class TestCustomObjectsApi(unittest.TestCase):
         """
         pass
 
+    def test_patch_cluster_custom_object(self):
+        """
+        Test case for patch_cluster_custom_object
+
+        
+        """
+        pass
+
+    def test_patch_namespaced_custom_object(self):
+        """
+        Test case for patch_namespaced_custom_object
+
+        
+        """
+        pass
+
     def test_replace_cluster_custom_object(self):
         """
         Test case for replace_cluster_custom_object
