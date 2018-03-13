@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**categories** | **list[str]** | Categories is a list of grouped resources custom resources belong to (e.g. &#39;all&#39;) | [optional] 
 **kind** | **str** | Kind is the serialized kind of the resource.  It is normally CamelCase and singular. | 
 **list_kind** | **str** | ListKind is the serialized kind of the list for this resource.  Defaults to &lt;kind&gt;List. | [optional] 
 **plural** | **str** | Plural is the plural name of the resource to serve.  It must match the name of the CustomResourceDefinition-registration too: plural.group and it must be all lowercase. | 

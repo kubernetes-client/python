@@ -154,7 +154,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(2, len(resp.spec.ports))
         self.assertTrue(resp.status)
 
-        resp = api.delete_namespaced_service(name=name,
+        resp = api.delete_namespaced_service(name=name, body={},
                                              namespace='default')
 
     def test_replication_controller_apis(self):

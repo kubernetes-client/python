@@ -7,6 +7,7 @@ from .admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api
 from .apiextensions_api import ApiextensionsApi
 from .apiextensions_v1beta1_api import ApiextensionsV1beta1Api
 from .apiregistration_api import ApiregistrationApi
+from .apiregistration_v1_api import ApiregistrationV1Api
 from .apiregistration_v1beta1_api import ApiregistrationV1beta1Api
 from .apis_api import ApisApi
 from .apps_api import AppsApi
