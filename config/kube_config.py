@@ -15,13 +15,17 @@
 import atexit
 import base64
 import datetime
+import json
 import os
 import tempfile
 
 import google.auth
 import google.auth.transport.requests
+import oauthlib.oauth2
 import urllib3
 import yaml
+from requests_oauthlib import OAuth2Session
+from six import PY3
 
 from kubernetes.client import ApiClient, Configuration
 
@@ -169,13 +173,16 @@ class KubeConfigLoader(object):
             1. GCP auth-provider
             2. token_data
             3. token field (point to a token file)
-            4. username/password
+            4. oidc auth-provider
+            5. username/password
         """
         if not self._user:
             return
         if self._load_gcp_token():
             return
         if self._load_user_token():
+            return
+        if self._load_oid_token():
             return
         self._load_user_pass_token()
 
@@ -207,6 +214,100 @@ class KubeConfigLoader(object):
         provider.value['expiry'] = format_rfc3339(credentials.expiry)
         if self._config_persister:
             self._config_persister(self._config.value)
+
+    def _load_oid_token(self):
+        if 'auth-provider' not in self._user:
+            return
+        provider = self._user['auth-provider']
+
+        if 'name' not in provider or 'config' not in provider:
+            return
+
+        if provider['name'] != 'oidc':
+            return
+
+        parts = provider['config']['id-token'].split('.')
+
+        if len(parts) != 3:  # Not a valid JWT
+            return None
+
+        if PY3:
+            jwt_attributes = json.loads(
+                base64.b64decode(parts[1]).decode('utf-8')
+            )
+        else:
+            jwt_attributes = json.loads(
+                base64.b64decode(parts[1] + "==")
+            )
+
+        expire = jwt_attributes.get('exp')
+
+        if ((expire is not None) and
+            (_is_expired(datetime.datetime.fromtimestamp(expire,
+                                                         tz=UTC)))):
+            self._refresh_oidc(provider)
+
+            if self._config_persister:
+                self._config_persister(self._config.value)
+
+        self.token = "Bearer %s" % provider['config']['id-token']
+
+        return self.token
+
+    def _refresh_oidc(self, provider):
+        ca_cert = tempfile.NamedTemporaryFile(delete=True)
+
+        if PY3:
+            cert = base64.b64decode(
+                provider['config']['idp-certificate-authority-data']
+            ).decode('utf-8')
+        else:
+            cert = base64.b64decode(
+                provider['config']['idp-certificate-authority-data'] + "=="
+            )
+
+        with open(ca_cert.name, 'w') as fh:
+            fh.write(cert)
+
+        config = Configuration()
+        config.ssl_ca_cert = ca_cert.name
+
+        client = ApiClient(configuration=config)
+
+        response = client.request(
+            method="GET",
+            url="%s/.well-known/openid-configuration"
+            % provider['config']['idp-issuer-url']
+        )
+
+        if response.status != 200:
+            return
+
+        response = json.loads(response.data)
+
+        request = OAuth2Session(
+            client_id=provider['config']['client-id'],
+            token=provider['config']['refresh-token'],
+            auto_refresh_kwargs={
+                'client_id': provider['config']['client-id'],
+                'client_secret': provider['config']['client-secret']
+            },
+            auto_refresh_url=response['token_endpoint']
+        )
+
+        try:
+            refresh = request.refresh_token(
+                token_url=response['token_endpoint'],
+                refresh_token=provider['config']['refresh-token'],
+                auth=(provider['config']['client-id'],
+                      provider['config']['client-secret']),
+                verify=ca_cert.name
+            )
+        except oauthlib.oauth2.rfc6749.errors.InvalidClientIdError:
+            return
+
+        provider['config'].value['id-token'] = refresh['id_token']
+        provider['config'].value['refresh-token'] = refresh['refresh_token']
 
     def _load_user_token(self):
         token = FileOrData(
