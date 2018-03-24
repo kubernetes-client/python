@@ -21,6 +21,7 @@ import re
 from six import iteritems
 
 from ..api_client import ApiClient
+import six
 
 
 class CoreV1Api(object):
@@ -926,7 +927,7 @@ class CoreV1Api(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='str',
+                                        response_type=six.binary_type,
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),

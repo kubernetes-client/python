@@ -1,4 +1,6 @@
+import tarfile
 import time
+from tempfile import TemporaryFile
 
 from kubernetes import config
 from kubernetes.client import Configuration
@@ -74,6 +76,7 @@ resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
 commands = [
     "echo test1",
     "echo \"This message goes to stderr\" >&2",
+    "ls -l /etc",
 ]
 while resp.is_open():
     resp.update(timeout=1)
@@ -95,3 +98,65 @@ resp.write_stdin("whoami\n")
 user = resp.readline_stdout(timeout=3)
 print("Server user is: %s" % user)
 resp.close()
+
+# Copying file client -> pod
+print('copying client -> pod')
+exec_command = ['tar', 'xvf', '-', '-C', '/']
+resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
+              command=exec_command,
+              stderr=True, stdin=True,
+              stdout=True, tty=False,
+              binary=True,
+              _preload_content=False)
+
+source_file = '/tmp/dash'
+
+with TemporaryFile() as tar_buffer:
+    with tarfile.open(fileobj=tar_buffer, mode='w') as tar:
+        tar.add(source_file)
+
+    tar_buffer.seek(0)
+    commands = []
+    commands.append(tar_buffer.read())
+
+    while resp.is_open():
+        resp.update(timeout=1)
+        if resp.peek_stdout():
+            print("STDOUT: %s" % resp.read_stdout())
+        if resp.peek_stderr():
+            print("STDERR: %s" % resp.read_stderr())
+        if commands:
+            c = commands.pop(0)
+            resp.write_stdin(c)
+        else:
+            break
+    resp.close()
+
+# Copying file pod -> client
+print('copying pod -> client')
+exec_command = ['tar', 'cf', '-', '/bin/sh']
+
+with TemporaryFile() as tar_buffer:
+
+    resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
+                  command=exec_command,
+                  stderr=True, stdin=True,
+                  stdout=True, tty=False,
+                  binary=True,
+                  _preload_content=False)
+
+    while resp.is_open():
+        resp.update(timeout=1)
+        if resp.peek_stdout():
+            out = resp.read_stdout()
+            print("bytes received: %s" % len(out))
+            tar_buffer.write(out)
+        if resp.peek_stderr():
+            print("STDERR: %s" % resp.read_stderr())
+    resp.close()
+
+    tar_buffer.flush()
+    tar_buffer.seek(0)
+
+    with tarfile.open(fileobj=tar_buffer, mode='r:') as tar:
+        print('members', tar.getmembers())
