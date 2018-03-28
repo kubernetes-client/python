@@ -109,7 +109,7 @@ resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
               binary=True,
               _preload_content=False)
 
-source_file = '/tmp/dash'
+source_file = '/bin/sh'
 
 with TemporaryFile() as tar_buffer:
     with tarfile.open(fileobj=tar_buffer, mode='w') as tar:
