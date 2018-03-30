@@ -63,7 +63,7 @@ def _create_temp_file_with_content(content):
 
 
 def _is_expired(expiry):
-    return ((parse_rfc3339(expiry) + EXPIRY_SKEW_PREVENTION_DELAY) <=
+    return ((parse_rfc3339(expiry) - EXPIRY_SKEW_PREVENTION_DELAY) <=
             datetime.datetime.utcnow().replace(tzinfo=UTC))
 
 
