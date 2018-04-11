@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
@@ -27,8 +27,18 @@ DEVELOPMENT_STATUS = "4 - Beta"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
+EXTRAS = {}
+REQUIRES = []
 with open('requirements.txt') as f:
-    REQUIRES = f.readlines()
+    for line in f:
+        line, _, _ = line.partition('#')
+        line = line.strip()
+        if ';' in line:
+            requirement, _, specifier = line.partition(';')
+            for_specifier = EXTRAS.setdefault(':{}'.format(specifier), [])
+            for_specifier.append(requirement)
+        else:
+            REQUIRES.append(line)
 
 with open('test-requirements.txt') as f:
     TESTS_REQUIRES = f.readlines()
@@ -44,6 +54,7 @@ setup(
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
     tests_require=TESTS_REQUIRES,
+    extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.apis',
               'kubernetes.stream', 'kubernetes.client.models'],
