@@ -27,13 +27,13 @@ class WatchTests(unittest.TestCase):
         fake_resp.release_conn = Mock()
         fake_resp.read_chunked = Mock(
             return_value=[
-                '{"type": "ADDED", "object": {"metadata": {"name": "test1"}'
-                ',"spec": {}, "status": {}}}\n',
-                '{"type": "ADDED", "object": {"metadata": {"name": "test2"}'
-                ',"spec": {}, "sta',
+                '{"type": "ADDED", "object": {"metadata": {"name": "test1",'
+                '"resourceVersion": "1"}, "spec": {}, "status": {}}}\n',
+                '{"type": "ADDED", "object": {"metadata": {"name": "test2",'
+                '"resourceVersion": "2"}, "spec": {}, "sta',
                 'tus": {}}}\n'
-                '{"type": "ADDED", "object": {"metadata": {"name": "test3"},'
-                '"spec": {}, "status": {}}}\n',
+                '{"type": "ADDED", "object": {"metadata": {"name": "test3",'
+                '"resourceVersion": "3"}, "spec": {}, "status": {}}}\n',
                 'should_not_happened\n'])
 
         fake_api = Mock()
@@ -46,6 +46,10 @@ class WatchTests(unittest.TestCase):
             self.assertEqual("ADDED", e['type'])
             # make sure decoder worked and we got a model with the right name
             self.assertEqual("test%d" % count, e['object'].metadata.name)
+            # make sure decoder worked and updated Watch.resource_version
+            self.assertEqual(
+                "%d" % count, e['object'].metadata.resource_version)
+            self.assertEqual("%d" % count, w.resource_version)
             count += 1
             # make sure we can stop the watch and the last event with won't be
             # returned
@@ -132,6 +136,19 @@ class WatchTests(unittest.TestCase):
         self.assertEqual("ADDED", event['type'])
         self.assertEqual(["test1"], event['object'])
         self.assertEqual(["test1"], event['raw_object'])
+
+    def test_unmarshal_with_custom_object(self):
+        w = Watch()
+        event = w.unmarshal_event('{"type": "ADDED", "object": {"apiVersion":'
+                                  '"test.com/v1beta1","kind":"foo","metadata":'
+                                  '{"name": "bar", "resourceVersion": "1"}}}',
+                                  'object')
+        self.assertEqual("ADDED", event['type'])
+        # make sure decoder deserialized json into dictionary and updated
+        # Watch.resource_version
+        self.assertTrue(isinstance(event['object'], dict))
+        self.assertEqual("1", event['object']['metadata']['resourceVersion'])
+        self.assertEqual("1", w.resource_version)
 
     def test_watch_with_exception(self):
         fake_resp = Mock()

@@ -84,6 +84,12 @@ class Watch(object):
             js['object'] = self._api_client.deserialize(obj, return_type)
             if hasattr(js['object'], 'metadata'):
                 self.resource_version = js['object'].metadata.resource_version
+            # For custom objects that we don't have model defined, json
+            # deserialization results in dictionary
+            elif (isinstance(js['object'], dict) and 'metadata' in js['object']
+                  and 'resourceVersion' in js['object']['metadata']):
+                self.resource_version = js['object']['metadata'][
+                    'resourceVersion']
         return js
 
     def stream(self, func, *args, **kwargs):
