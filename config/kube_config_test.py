@@ -374,6 +374,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "expired_oidc_nocert",
+                "context": {
+                    "cluster": "default",
+                    "user": "expired_oidc_nocert"
+                }
+            },
+            {
                 "name": "user_pass",
                 "context": {
                     "cluster": "default",
@@ -520,6 +527,22 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "expired_oidc_nocert",
+                "user": {
+                    "auth-provider": {
+                        "name": "oidc",
+                        "config": {
+                            "client-id": "tectonic-kubectl",
+                            "client-secret": "FAKE_SECRET",
+                            "id-token": TEST_OIDC_EXPIRED_LOGIN,
+                            "idp-issuer-url": "https://example.org/identity",
+                            "refresh-token":
+                                "lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk"
+                        }
+                    }
+                }
+            },
+            {
                 "name": "user_pass",
                 "user": {
                     "username": TEST_USERNAME,  # should be ignored
@@ -645,6 +668,32 @@ class TestKubeConfigLoader(BaseTestCase):
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="expired_oidc",
+        )
+        self.assertTrue(loader._load_oid_token())
+        self.assertEqual("Bearer abc123", loader.token)
+
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.request')
+    def test_oidc_with_refresh_nocert(
+            self, mock_ApiClient, mock_OAuth2Session):
+        mock_response = mock.MagicMock()
+        type(mock_response).status = mock.PropertyMock(
+            return_value=200
+        )
+        type(mock_response).data = mock.PropertyMock(
+            return_value=json.dumps({
+                "token_endpoint": "https://example.org/identity/token"
+            })
+        )
+
+        mock_ApiClient.return_value = mock_response
+
+        mock_OAuth2Session.return_value = {"id_token": "abc123",
+                                           "refresh_token": "newtoken123"}
+
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="expired_oidc_nocert",
         )
         self.assertTrue(loader._load_oid_token())
         self.assertEqual("Bearer abc123", loader.token)
