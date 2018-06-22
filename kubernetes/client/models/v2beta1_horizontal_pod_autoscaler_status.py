@@ -61,8 +61,10 @@ class V2beta1HorizontalPodAutoscalerStatus(object):
         self._observed_generation = None
         self.discriminator = None
 
-        self.conditions = conditions
-        self.current_metrics = current_metrics
+        if conditions is not None:
+            self.conditions = conditions
+        if current_metrics is not None:
+            self.current_metrics = current_metrics
         self.current_replicas = current_replicas
         self.desired_replicas = desired_replicas
         if last_scale_time is not None:
