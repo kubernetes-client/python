@@ -6,6 +6,17 @@
 - Watch now properly deserializes custom resource objects and updates resource version [kubernetes-client/python-base#64](https://github.com/kubernetes-client/python-base/pull/64)
 - `idp-certificate-authority-data` in kubeconfig is now optional instead of required for OIDC token refresh [kubernetes-client/python-base#69](https://github.com/kubernetes-client/python-base/pull/69)
 
+**API Change:**
+- ApiextensionsV1beta1Api: Add PATCH and GET to custom_resource_definition_status [kubernetes/kubernetes#63619](https://github.com/kubernetes/kubernetes/pull/63619)
+- ApiregistrationV1Api and ApiregistrationV1beta1Api: Add PATCH and GET to api_service_status [kubernetes/kubernetes#64063](https://github.com/kubernetes/kubernetes/pull/64063)
+- CertificatesV1beta1Api: Add PATCH and GET to certificate_signing_request_status [kubernetes/kubernetes#64063](https://github.com/kubernetes/kubernetes/pull/64063)
+- SchedulingV1beta1Api: Promote priority_class to beta [kubernetes/kubernetes#63100](https://github.com/kubernetes/kubernetes/pull/63100)
+- PodSecurityPolicy now supports restricting hostPath volume mounts to be readOnly and under specific path prefixes [kubernetes/kubernetes#58647](https://github.com/kubernetes/kubernetes/pull/58647)
+- The Sysctls experimental feature has been promoted to beta (enabled by default via the `Sysctls` feature flag). PodSecurityPolicy and Pod objects now have fields for specifying and controlling sysctls. Alpha sysctl annotations will be ignored by 1.11+ kubelets. All alpha sysctl annotations in existing deployments must be converted to API fields to be effective. [kubernetes/kubernetes#63717](https://github.com/kubernetes/kubernetes/pull/63717)
+- Add CRD Versioning with NOP converter [kubernetes/kubernetes#63830](https://github.com/kubernetes/kubernetes/pull/63830)
+- Volume topology aware dynamic provisioning [kubernetes/kubernetes#63233](https://github.com/kubernetes/kubernetes/pull/63233)
+- Fixed incorrect OpenAPI schema for CustomResourceDefinition objects with a validation schema [kubernetes/kubernetes#65256](https://github.com/kubernetes/kubernetes/pull/65256)
+
 # v6.0.0
 - Config loader now supports OIDC auth [kubernetes-client/python-base#48](https://github.com/kubernetes-client/python-base/pull/48)
 - Bug fix: fix expiry time checking in API token refresh [kubernetes-client/python-base#55](https://github.com/kubernetes-client/python-base/pull/55)

@@ -10,7 +10,9 @@ Method | HTTP request | Description
 [**get_api_resources**](ApiregistrationV1Api.md#get_api_resources) | **GET** /apis/apiregistration.k8s.io/v1/ | 
 [**list_api_service**](ApiregistrationV1Api.md#list_api_service) | **GET** /apis/apiregistration.k8s.io/v1/apiservices | 
 [**patch_api_service**](ApiregistrationV1Api.md#patch_api_service) | **PATCH** /apis/apiregistration.k8s.io/v1/apiservices/{name} | 
+[**patch_api_service_status**](ApiregistrationV1Api.md#patch_api_service_status) | **PATCH** /apis/apiregistration.k8s.io/v1/apiservices/{name}/status | 
 [**read_api_service**](ApiregistrationV1Api.md#read_api_service) | **GET** /apis/apiregistration.k8s.io/v1/apiservices/{name} | 
+[**read_api_service_status**](ApiregistrationV1Api.md#read_api_service_status) | **GET** /apis/apiregistration.k8s.io/v1/apiservices/{name}/status | 
 [**replace_api_service**](ApiregistrationV1Api.md#replace_api_service) | **PUT** /apis/apiregistration.k8s.io/v1/apiservices/{name} | 
 [**replace_api_service_status**](ApiregistrationV1Api.md#replace_api_service_status) | **PUT** /apis/apiregistration.k8s.io/v1/apiservices/{name}/status | 
 
@@ -377,6 +379,63 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_api_service_status**
+> V1APIService patch_api_service_status(name, body, pretty=pretty)
+
+
+
+partially update status of the specified APIService
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ApiregistrationV1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the APIService
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_api_service_status(name, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApiregistrationV1Api->patch_api_service_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the APIService | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1APIService**](V1APIService.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_api_service**
 > V1APIService read_api_service(name, pretty=pretty, exact=exact, export=export)
 
@@ -420,6 +479,61 @@ Name | Type | Description  | Notes
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. | [optional] 
  **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. | [optional] 
+
+### Return type
+
+[**V1APIService**](V1APIService.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **read_api_service_status**
+> V1APIService read_api_service_status(name, pretty=pretty)
+
+
+
+read status of the specified APIService
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.ApiregistrationV1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the APIService
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_api_service_status(name, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApiregistrationV1Api->read_api_service_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the APIService | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
 

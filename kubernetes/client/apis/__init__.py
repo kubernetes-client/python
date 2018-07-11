@@ -47,6 +47,7 @@ from .rbac_authorization_v1alpha1_api import RbacAuthorizationV1alpha1Api
 from .rbac_authorization_v1beta1_api import RbacAuthorizationV1beta1Api
 from .scheduling_api import SchedulingApi
 from .scheduling_v1alpha1_api import SchedulingV1alpha1Api
+from .scheduling_v1beta1_api import SchedulingV1beta1Api
 from .settings_api import SettingsApi
 from .settings_v1alpha1_api import SettingsV1alpha1Api
 from .storage_api import StorageApi
