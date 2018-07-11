@@ -38,18 +38,18 @@ class LogsApi(object):
     def log_file_handler(self, logpath, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.log_file_handler(logpath, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.log_file_handler(logpath, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str logpath: path to the log (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.log_file_handler_with_http_info(logpath, **kwargs)
         else:
             (data) = self.log_file_handler_with_http_info(logpath, **kwargs)
@@ -58,11 +58,11 @@ class LogsApi(object):
     def log_file_handler_with_http_info(self, logpath, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.log_file_handler_with_http_info(logpath, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.log_file_handler_with_http_info(logpath, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str logpath: path to the log (required)
         :return: None
                  If the method is called asynchronously,
@@ -70,7 +70,7 @@ class LogsApi(object):
         """
 
         all_params = ['logpath']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -115,7 +115,7 @@ class LogsApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -124,17 +124,17 @@ class LogsApi(object):
     def log_file_list_handler(self, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.log_file_list_handler(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.log_file_list_handler(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.log_file_list_handler_with_http_info(**kwargs)
         else:
             (data) = self.log_file_list_handler_with_http_info(**kwargs)
@@ -143,18 +143,18 @@ class LogsApi(object):
     def log_file_list_handler_with_http_info(self, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.log_file_list_handler_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.log_file_list_handler_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         all_params = []
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -193,7 +193,7 @@ class LogsApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),

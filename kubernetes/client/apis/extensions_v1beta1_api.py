@@ -39,11 +39,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_daemon_set(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_daemon_set(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -52,7 +52,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_daemon_set_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_daemon_set_with_http_info(namespace, body, **kwargs)
@@ -62,11 +62,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_daemon_set_with_http_info(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_daemon_set_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -76,7 +76,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -136,7 +136,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -146,11 +146,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_deployment(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_deployment(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -159,7 +159,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_deployment_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_deployment_with_http_info(namespace, body, **kwargs)
@@ -169,11 +169,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_deployment_with_http_info(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_deployment_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -183,7 +183,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -243,7 +243,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -253,11 +253,11 @@ class ExtensionsV1beta1Api(object):
         """
         create rollback of a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_deployment_rollback(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_deployment_rollback(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DeploymentRollback (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1DeploymentRollback body: (required)
@@ -267,7 +267,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, **kwargs)
@@ -277,11 +277,11 @@ class ExtensionsV1beta1Api(object):
         """
         create rollback of a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_deployment_rollback_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DeploymentRollback (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1DeploymentRollback body: (required)
@@ -292,7 +292,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -357,7 +357,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1DeploymentRollback',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -367,11 +367,11 @@ class ExtensionsV1beta1Api(object):
         """
         create an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_ingress(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_ingress(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -380,7 +380,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_ingress_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_ingress_with_http_info(namespace, body, **kwargs)
@@ -390,11 +390,11 @@ class ExtensionsV1beta1Api(object):
         """
         create an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_ingress_with_http_info(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_ingress_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -404,7 +404,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -464,7 +464,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -474,11 +474,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_network_policy(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_network_policy(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -487,7 +487,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_network_policy_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_network_policy_with_http_info(namespace, body, **kwargs)
@@ -497,11 +497,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_network_policy_with_http_info(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_network_policy_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -511,7 +511,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -571,7 +571,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -581,11 +581,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_replica_set(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_replica_set(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -594,7 +594,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_replica_set_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_replica_set_with_http_info(namespace, body, **kwargs)
@@ -604,11 +604,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_replica_set_with_http_info(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_replica_set_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -618,7 +618,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -678,7 +678,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -688,11 +688,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_pod_security_policy(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_pod_security_policy(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param ExtensionsV1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1PodSecurityPolicy
@@ -700,7 +700,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_pod_security_policy_with_http_info(body, **kwargs)
         else:
             (data) = self.create_pod_security_policy_with_http_info(body, **kwargs)
@@ -710,11 +710,11 @@ class ExtensionsV1beta1Api(object):
         """
         create a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_pod_security_policy_with_http_info(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_pod_security_policy_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param ExtensionsV1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: ExtensionsV1beta1PodSecurityPolicy
@@ -723,7 +723,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -778,7 +778,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -788,11 +788,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_daemon_set(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_daemon_set(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -808,7 +808,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_collection_namespaced_daemon_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_daemon_set_with_http_info(namespace, **kwargs)
@@ -818,11 +818,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_daemon_set_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_daemon_set_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -839,7 +839,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -910,7 +910,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -920,11 +920,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_deployment(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_deployment(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -940,7 +940,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_collection_namespaced_deployment_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_deployment_with_http_info(namespace, **kwargs)
@@ -950,11 +950,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_deployment_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_deployment_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -971,7 +971,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1042,7 +1042,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1052,11 +1052,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_ingress(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_ingress(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -1072,7 +1072,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_collection_namespaced_ingress_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_ingress_with_http_info(namespace, **kwargs)
@@ -1082,11 +1082,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_ingress_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_ingress_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -1103,7 +1103,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1174,7 +1174,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1184,11 +1184,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_network_policy(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_network_policy(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -1204,7 +1204,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_collection_namespaced_network_policy_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_network_policy_with_http_info(namespace, **kwargs)
@@ -1214,11 +1214,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_network_policy_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_network_policy_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -1235,7 +1235,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1306,7 +1306,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1316,11 +1316,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_replica_set(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_replica_set(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -1336,7 +1336,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_collection_namespaced_replica_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.delete_collection_namespaced_replica_set_with_http_info(namespace, **kwargs)
@@ -1346,11 +1346,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_namespaced_replica_set_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_namespaced_replica_set_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -1367,7 +1367,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1438,7 +1438,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1448,11 +1448,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_pod_security_policy(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_pod_security_policy(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1467,7 +1467,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_collection_pod_security_policy_with_http_info(**kwargs)
         else:
             (data) = self.delete_collection_pod_security_policy_with_http_info(**kwargs)
@@ -1477,11 +1477,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete collection of PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_collection_pod_security_policy_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_collection_pod_security_policy_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -1497,7 +1497,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1563,7 +1563,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1573,11 +1573,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_daemon_set(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_daemon_set(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1590,7 +1590,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
@@ -1600,11 +1600,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_daemon_set_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_daemon_set_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1618,7 +1618,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1689,7 +1689,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1699,11 +1699,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_deployment(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_deployment(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1716,7 +1716,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
@@ -1726,11 +1726,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_deployment_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_deployment_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1744,7 +1744,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1815,7 +1815,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1825,11 +1825,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_ingress(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_ingress(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1842,7 +1842,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
@@ -1852,11 +1852,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete an Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_ingress_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_ingress_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1870,7 +1870,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1941,7 +1941,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1951,11 +1951,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_network_policy(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_network_policy(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1968,7 +1968,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
@@ -1978,11 +1978,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_network_policy_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_network_policy_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -1996,7 +1996,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2067,7 +2067,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2077,11 +2077,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_replica_set(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_replica_set(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2094,7 +2094,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.delete_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
@@ -2104,11 +2104,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_namespaced_replica_set_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_namespaced_replica_set_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1DeleteOptions body: (required)
@@ -2122,7 +2122,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2193,7 +2193,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2203,11 +2203,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_pod_security_policy(name, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_pod_security_policy(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param V1DeleteOptions body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -2219,7 +2219,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_pod_security_policy_with_http_info(name, body, **kwargs)
         else:
             (data) = self.delete_pod_security_policy_with_http_info(name, body, **kwargs)
@@ -2229,11 +2229,11 @@ class ExtensionsV1beta1Api(object):
         """
         delete a PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_pod_security_policy_with_http_info(name, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_pod_security_policy_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param V1DeleteOptions body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -2246,7 +2246,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty', 'grace_period_seconds', 'orphan_dependents', 'propagation_policy']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2312,7 +2312,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1Status',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2322,17 +2322,17 @@ class ExtensionsV1beta1Api(object):
         """
         get available resources
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_api_resources(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_api_resources(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :return: V1APIResourceList
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_api_resources_with_http_info(**kwargs)
         else:
             (data) = self.get_api_resources_with_http_info(**kwargs)
@@ -2342,18 +2342,18 @@ class ExtensionsV1beta1Api(object):
         """
         get available resources
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_api_resources_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_api_resources_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :return: V1APIResourceList
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         all_params = []
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2400,7 +2400,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1APIResourceList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2410,11 +2410,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_daemon_set_for_all_namespaces(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_daemon_set_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -2429,7 +2429,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_daemon_set_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_daemon_set_for_all_namespaces_with_http_info(**kwargs)
@@ -2439,11 +2439,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_daemon_set_for_all_namespaces_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_daemon_set_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -2459,7 +2459,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2525,7 +2525,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSetList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2535,11 +2535,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_deployment_for_all_namespaces(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_deployment_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -2554,7 +2554,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_deployment_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_deployment_for_all_namespaces_with_http_info(**kwargs)
@@ -2564,11 +2564,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_deployment_for_all_namespaces_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_deployment_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -2584,7 +2584,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2650,7 +2650,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1DeploymentList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2660,11 +2660,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_ingress_for_all_namespaces(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_ingress_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -2679,7 +2679,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_ingress_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_ingress_for_all_namespaces_with_http_info(**kwargs)
@@ -2689,11 +2689,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_ingress_for_all_namespaces_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_ingress_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -2709,7 +2709,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2775,7 +2775,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1IngressList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2785,11 +2785,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_daemon_set(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_daemon_set(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -2805,7 +2805,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_namespaced_daemon_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_daemon_set_with_http_info(namespace, **kwargs)
@@ -2815,11 +2815,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_daemon_set_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_daemon_set_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -2836,7 +2836,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2907,7 +2907,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSetList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2917,11 +2917,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_deployment(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_deployment(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -2937,7 +2937,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_namespaced_deployment_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_deployment_with_http_info(namespace, **kwargs)
@@ -2947,11 +2947,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_deployment_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_deployment_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -2968,7 +2968,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3039,7 +3039,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1DeploymentList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3049,11 +3049,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_ingress(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_ingress(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -3069,7 +3069,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_namespaced_ingress_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_ingress_with_http_info(namespace, **kwargs)
@@ -3079,11 +3079,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_ingress_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_ingress_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -3100,7 +3100,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3171,7 +3171,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1IngressList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3181,11 +3181,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_network_policy(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_network_policy(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -3201,7 +3201,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_namespaced_network_policy_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_network_policy_with_http_info(namespace, **kwargs)
@@ -3211,11 +3211,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_network_policy_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_network_policy_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -3232,7 +3232,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3303,7 +3303,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicyList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3313,11 +3313,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_replica_set(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_replica_set(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -3333,7 +3333,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_namespaced_replica_set_with_http_info(namespace, **kwargs)
         else:
             (data) = self.list_namespaced_replica_set_with_http_info(namespace, **kwargs)
@@ -3343,11 +3343,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_namespaced_replica_set_with_http_info(namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_namespaced_replica_set_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -3364,7 +3364,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['namespace', 'pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3435,7 +3435,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSetList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3445,11 +3445,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_network_policy_for_all_namespaces(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_network_policy_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -3464,7 +3464,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_network_policy_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_network_policy_for_all_namespaces_with_http_info(**kwargs)
@@ -3474,11 +3474,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_network_policy_for_all_namespaces_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_network_policy_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -3494,7 +3494,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3560,7 +3560,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicyList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3570,11 +3570,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_pod_security_policy(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_pod_security_policy(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3589,7 +3589,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_pod_security_policy_with_http_info(**kwargs)
         else:
             (data) = self.list_pod_security_policy_with_http_info(**kwargs)
@@ -3599,11 +3599,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_pod_security_policy_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_pod_security_policy_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str pretty: If 'true', then the output is pretty printed.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -3619,7 +3619,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['pretty', '_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3685,7 +3685,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1PodSecurityPolicyList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3695,11 +3695,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_replica_set_for_all_namespaces(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_replica_set_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -3714,7 +3714,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.list_replica_set_for_all_namespaces_with_http_info(**kwargs)
         else:
             (data) = self.list_replica_set_for_all_namespaces_with_http_info(**kwargs)
@@ -3724,11 +3724,11 @@ class ExtensionsV1beta1Api(object):
         """
         list or watch objects of kind ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.list_replica_set_for_all_namespaces_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_replica_set_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
         :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
         :param bool include_uninitialized: If true, partially initialized resources are included in the response.
@@ -3744,7 +3744,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['_continue', 'field_selector', 'include_uninitialized', 'label_selector', 'limit', 'pretty', 'resource_version', 'timeout_seconds', 'watch']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3810,7 +3810,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSetList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3820,11 +3820,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_daemon_set(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_daemon_set(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -3834,7 +3834,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
@@ -3844,11 +3844,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_daemon_set_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_daemon_set_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -3859,7 +3859,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -3924,7 +3924,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -3934,11 +3934,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_daemon_set_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_daemon_set_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -3948,7 +3948,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -3958,11 +3958,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_daemon_set_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -3973,7 +3973,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4038,7 +4038,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4048,11 +4048,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_deployment(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_deployment(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4062,7 +4062,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
@@ -4072,11 +4072,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_deployment_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_deployment_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4087,7 +4087,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4152,7 +4152,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4162,11 +4162,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_deployment_scale(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_deployment_scale(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4176,7 +4176,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
@@ -4186,11 +4186,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_deployment_scale_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4201,7 +4201,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4266,7 +4266,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4276,11 +4276,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_deployment_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_deployment_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4290,7 +4290,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
@@ -4300,11 +4300,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_deployment_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_deployment_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4315,7 +4315,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4380,7 +4380,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4390,11 +4390,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_ingress(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_ingress(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4404,7 +4404,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
@@ -4414,11 +4414,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_ingress_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_ingress_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4429,7 +4429,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4494,7 +4494,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4504,11 +4504,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_ingress_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_ingress_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4518,7 +4518,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
@@ -4528,11 +4528,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_ingress_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_ingress_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4543,7 +4543,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4608,7 +4608,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4618,11 +4618,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_network_policy(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_network_policy(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4632,7 +4632,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
@@ -4642,11 +4642,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_network_policy_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_network_policy_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4657,7 +4657,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4722,7 +4722,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4732,11 +4732,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replica_set(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replica_set(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4746,7 +4746,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
@@ -4756,11 +4756,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replica_set_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replica_set_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4771,7 +4771,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4836,7 +4836,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4846,11 +4846,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replica_set_scale(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replica_set_scale(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4860,7 +4860,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
@@ -4870,11 +4870,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replica_set_scale_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4885,7 +4885,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -4950,7 +4950,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -4960,11 +4960,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replica_set_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replica_set_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4974,7 +4974,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -4984,11 +4984,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replica_set_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -4999,7 +4999,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5064,7 +5064,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5074,11 +5074,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replication_controller_dummy_scale(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replication_controller_dummy_scale(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5088,7 +5088,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
@@ -5098,11 +5098,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param object body: (required)
@@ -5113,7 +5113,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5178,7 +5178,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5188,11 +5188,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_pod_security_policy(name, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_pod_security_policy(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5201,7 +5201,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.patch_pod_security_policy_with_http_info(name, body, **kwargs)
         else:
             (data) = self.patch_pod_security_policy_with_http_info(name, body, **kwargs)
@@ -5211,11 +5211,11 @@ class ExtensionsV1beta1Api(object):
         """
         partially update the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.patch_pod_security_policy_with_http_info(name, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.patch_pod_security_policy_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param object body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5225,7 +5225,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5285,7 +5285,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5295,11 +5295,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_daemon_set(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_daemon_set(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5310,7 +5310,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_daemon_set_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_daemon_set_with_http_info(name, namespace, **kwargs)
@@ -5320,11 +5320,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_daemon_set_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_daemon_set_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5336,7 +5336,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5400,7 +5400,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5410,11 +5410,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_daemon_set_status(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_daemon_set_status(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5423,7 +5423,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_daemon_set_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_daemon_set_status_with_http_info(name, namespace, **kwargs)
@@ -5433,11 +5433,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_daemon_set_status_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_daemon_set_status_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5447,7 +5447,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5507,7 +5507,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5517,11 +5517,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_deployment(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_deployment(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5532,7 +5532,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_deployment_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_deployment_with_http_info(name, namespace, **kwargs)
@@ -5542,11 +5542,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_deployment_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_deployment_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5558,7 +5558,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5622,7 +5622,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5632,11 +5632,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_deployment_scale(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_deployment_scale(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5645,7 +5645,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_deployment_scale_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_deployment_scale_with_http_info(name, namespace, **kwargs)
@@ -5655,11 +5655,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_deployment_scale_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_deployment_scale_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5669,7 +5669,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5729,7 +5729,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5739,11 +5739,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_deployment_status(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_deployment_status(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5752,7 +5752,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_deployment_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_deployment_status_with_http_info(name, namespace, **kwargs)
@@ -5762,11 +5762,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_deployment_status_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_deployment_status_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5776,7 +5776,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5836,7 +5836,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5846,11 +5846,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_ingress(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_ingress(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5861,7 +5861,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_ingress_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_ingress_with_http_info(name, namespace, **kwargs)
@@ -5871,11 +5871,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_ingress_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_ingress_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5887,7 +5887,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -5951,7 +5951,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -5961,11 +5961,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_ingress_status(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_ingress_status(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5974,7 +5974,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_ingress_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_ingress_status_with_http_info(name, namespace, **kwargs)
@@ -5984,11 +5984,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_ingress_status_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_ingress_status_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -5998,7 +5998,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6058,7 +6058,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6068,11 +6068,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_network_policy(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_network_policy(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6083,7 +6083,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_network_policy_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_network_policy_with_http_info(name, namespace, **kwargs)
@@ -6093,11 +6093,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_network_policy_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_network_policy_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6109,7 +6109,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6173,7 +6173,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6183,11 +6183,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replica_set(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replica_set(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6198,7 +6198,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_replica_set_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replica_set_with_http_info(name, namespace, **kwargs)
@@ -6208,11 +6208,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replica_set_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replica_set_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6224,7 +6224,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty', 'exact', 'export']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6288,7 +6288,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6298,11 +6298,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replica_set_scale(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replica_set_scale(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6311,7 +6311,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_replica_set_scale_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replica_set_scale_with_http_info(name, namespace, **kwargs)
@@ -6321,11 +6321,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replica_set_scale_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replica_set_scale_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6335,7 +6335,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6395,7 +6395,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6405,11 +6405,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replica_set_status(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replica_set_status(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6418,7 +6418,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_replica_set_status_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replica_set_status_with_http_info(name, namespace, **kwargs)
@@ -6428,11 +6428,11 @@ class ExtensionsV1beta1Api(object):
         """
         read status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replica_set_status_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replica_set_status_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6442,7 +6442,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6502,7 +6502,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6512,11 +6512,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replication_controller_dummy_scale(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replication_controller_dummy_scale(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6525,7 +6525,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, **kwargs)
         else:
             (data) = self.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, **kwargs)
@@ -6535,11 +6535,11 @@ class ExtensionsV1beta1Api(object):
         """
         read scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -6549,7 +6549,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6609,7 +6609,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6619,11 +6619,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_pod_security_policy(name, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_pod_security_policy(name, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
@@ -6633,7 +6633,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.read_pod_security_policy_with_http_info(name, **kwargs)
         else:
             (data) = self.read_pod_security_policy_with_http_info(name, **kwargs)
@@ -6643,11 +6643,11 @@ class ExtensionsV1beta1Api(object):
         """
         read the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.read_pod_security_policy_with_http_info(name, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.read_pod_security_policy_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
@@ -6658,7 +6658,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'pretty', 'exact', 'export']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6717,7 +6717,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6727,11 +6727,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_daemon_set(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_daemon_set(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -6741,7 +6741,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_daemon_set_with_http_info(name, namespace, body, **kwargs)
@@ -6751,11 +6751,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_daemon_set_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_daemon_set_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -6766,7 +6766,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6831,7 +6831,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6841,11 +6841,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_daemon_set_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_daemon_set_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -6855,7 +6855,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -6865,11 +6865,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified DaemonSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_daemon_set_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the DaemonSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1DaemonSet body: (required)
@@ -6880,7 +6880,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -6945,7 +6945,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1DaemonSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -6955,11 +6955,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_deployment(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_deployment(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -6969,7 +6969,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_deployment_with_http_info(name, namespace, body, **kwargs)
@@ -6979,11 +6979,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_deployment_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_deployment_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -6994,7 +6994,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7059,7 +7059,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7069,11 +7069,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_deployment_scale(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_deployment_scale(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -7083,7 +7083,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, **kwargs)
@@ -7093,11 +7093,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_deployment_scale_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -7108,7 +7108,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7173,7 +7173,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7183,11 +7183,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_deployment_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_deployment_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -7197,7 +7197,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_deployment_status_with_http_info(name, namespace, body, **kwargs)
@@ -7207,11 +7207,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Deployment
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_deployment_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_deployment_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Deployment (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Deployment body: (required)
@@ -7222,7 +7222,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7287,7 +7287,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Deployment',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7297,11 +7297,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_ingress(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_ingress(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -7311,7 +7311,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)
@@ -7321,11 +7321,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_ingress_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_ingress_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -7336,7 +7336,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7401,7 +7401,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7411,11 +7411,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_ingress_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_ingress_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -7425,7 +7425,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)
@@ -7435,11 +7435,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified Ingress
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_ingress_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_ingress_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Ingress (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1Ingress body: (required)
@@ -7450,7 +7450,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7515,7 +7515,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1Ingress',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7525,11 +7525,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_network_policy(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_network_policy(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
@@ -7539,7 +7539,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)
@@ -7549,11 +7549,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified NetworkPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_network_policy_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_network_policy_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the NetworkPolicy (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1NetworkPolicy body: (required)
@@ -7564,7 +7564,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7629,7 +7629,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1NetworkPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7639,11 +7639,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replica_set(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replica_set(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -7653,7 +7653,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replica_set_with_http_info(name, namespace, body, **kwargs)
@@ -7663,11 +7663,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replica_set_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replica_set_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -7678,7 +7678,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7743,7 +7743,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7753,11 +7753,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replica_set_scale(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replica_set_scale(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -7767,7 +7767,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, **kwargs)
@@ -7777,11 +7777,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replica_set_scale_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -7792,7 +7792,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7857,7 +7857,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7867,11 +7867,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replica_set_status(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replica_set_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -7881,7 +7881,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, **kwargs)
@@ -7891,11 +7891,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace status of the specified ReplicaSet
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replica_set_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the ReplicaSet (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1ReplicaSet body: (required)
@@ -7906,7 +7906,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -7971,7 +7971,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1ReplicaSet',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -7981,11 +7981,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replication_controller_dummy_scale(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replication_controller_dummy_scale(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -7995,7 +7995,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
         else:
             (data) = self.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, **kwargs)
@@ -8005,11 +8005,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace scale of the specified ReplicationControllerDummy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_namespaced_replication_controller_dummy_scale_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the Scale (required)
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param ExtensionsV1beta1Scale body: (required)
@@ -8020,7 +8020,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8085,7 +8085,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1Scale',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -8095,11 +8095,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_pod_security_policy(name, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_pod_security_policy(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param ExtensionsV1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -8108,7 +8108,7 @@ class ExtensionsV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.replace_pod_security_policy_with_http_info(name, body, **kwargs)
         else:
             (data) = self.replace_pod_security_policy_with_http_info(name, body, **kwargs)
@@ -8118,11 +8118,11 @@ class ExtensionsV1beta1Api(object):
         """
         replace the specified PodSecurityPolicy
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.replace_pod_security_policy_with_http_info(name, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_pod_security_policy_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str name: name of the PodSecurityPolicy (required)
         :param ExtensionsV1beta1PodSecurityPolicy body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -8132,7 +8132,7 @@ class ExtensionsV1beta1Api(object):
         """
 
         all_params = ['name', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -8192,7 +8192,7 @@ class ExtensionsV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='ExtensionsV1beta1PodSecurityPolicy',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),

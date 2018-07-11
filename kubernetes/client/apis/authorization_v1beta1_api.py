@@ -39,11 +39,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a LocalSubjectAccessReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_local_subject_access_review(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_local_subject_access_review(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1LocalSubjectAccessReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -52,7 +52,7 @@ class AuthorizationV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_namespaced_local_subject_access_review_with_http_info(namespace, body, **kwargs)
         else:
             (data) = self.create_namespaced_local_subject_access_review_with_http_info(namespace, body, **kwargs)
@@ -62,11 +62,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a LocalSubjectAccessReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_namespaced_local_subject_access_review_with_http_info(namespace, body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_namespaced_local_subject_access_review_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str namespace: object name and auth scope, such as for teams and projects (required)
         :param V1beta1LocalSubjectAccessReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
@@ -76,7 +76,7 @@ class AuthorizationV1beta1Api(object):
         """
 
         all_params = ['namespace', 'body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -136,7 +136,7 @@ class AuthorizationV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1LocalSubjectAccessReview',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -146,11 +146,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a SelfSubjectAccessReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_self_subject_access_review(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_self_subject_access_review(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param V1beta1SelfSubjectAccessReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1SelfSubjectAccessReview
@@ -158,7 +158,7 @@ class AuthorizationV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_self_subject_access_review_with_http_info(body, **kwargs)
         else:
             (data) = self.create_self_subject_access_review_with_http_info(body, **kwargs)
@@ -168,11 +168,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a SelfSubjectAccessReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_self_subject_access_review_with_http_info(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_self_subject_access_review_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param V1beta1SelfSubjectAccessReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1SelfSubjectAccessReview
@@ -181,7 +181,7 @@ class AuthorizationV1beta1Api(object):
         """
 
         all_params = ['body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -236,7 +236,7 @@ class AuthorizationV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1SelfSubjectAccessReview',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -246,11 +246,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a SelfSubjectRulesReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_self_subject_rules_review(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_self_subject_rules_review(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param V1beta1SelfSubjectRulesReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1SelfSubjectRulesReview
@@ -258,7 +258,7 @@ class AuthorizationV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_self_subject_rules_review_with_http_info(body, **kwargs)
         else:
             (data) = self.create_self_subject_rules_review_with_http_info(body, **kwargs)
@@ -268,11 +268,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a SelfSubjectRulesReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_self_subject_rules_review_with_http_info(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_self_subject_rules_review_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param V1beta1SelfSubjectRulesReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1SelfSubjectRulesReview
@@ -281,7 +281,7 @@ class AuthorizationV1beta1Api(object):
         """
 
         all_params = ['body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -336,7 +336,7 @@ class AuthorizationV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1SelfSubjectRulesReview',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -346,11 +346,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a SubjectAccessReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_subject_access_review(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_subject_access_review(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param V1beta1SubjectAccessReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1SubjectAccessReview
@@ -358,7 +358,7 @@ class AuthorizationV1beta1Api(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_subject_access_review_with_http_info(body, **kwargs)
         else:
             (data) = self.create_subject_access_review_with_http_info(body, **kwargs)
@@ -368,11 +368,11 @@ class AuthorizationV1beta1Api(object):
         """
         create a SubjectAccessReview
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_subject_access_review_with_http_info(body, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_subject_access_review_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param V1beta1SubjectAccessReview body: (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :return: V1beta1SubjectAccessReview
@@ -381,7 +381,7 @@ class AuthorizationV1beta1Api(object):
         """
 
         all_params = ['body', 'pretty']
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -436,7 +436,7 @@ class AuthorizationV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1beta1SubjectAccessReview',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -446,17 +446,17 @@ class AuthorizationV1beta1Api(object):
         """
         get available resources
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_api_resources(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_api_resources(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :return: V1APIResourceList
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_api_resources_with_http_info(**kwargs)
         else:
             (data) = self.get_api_resources_with_http_info(**kwargs)
@@ -466,18 +466,18 @@ class AuthorizationV1beta1Api(object):
         """
         get available resources
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_api_resources_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_api_resources_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :return: V1APIResourceList
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         all_params = []
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -524,7 +524,7 @@ class AuthorizationV1beta1Api(object):
                                         files=local_var_files,
                                         response_type='V1APIResourceList',
                                         auth_settings=auth_settings,
-                                        async=params.get('async'),
+                                        async_req=params.get('async_req'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
