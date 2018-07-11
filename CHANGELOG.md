@@ -1,6 +1,6 @@
 # v7.0.0a1
-**NOTE:**
-- We are doing an Alpha release for v7.0.0 because there will be an **ACTION REQUIRED** API breaking change in this client to support Python 3.7, which substitutes the currently being-used `async` reserved keyword [kubernetes-client/gen#67](https://github.com/kubernetes-client/gen/pull/67)
+**Breaking Change:**
+- **ACTION REQUIRED** Rename the currently being-used `async` parameter to `async_req` to support Python 3.7 because it's a reserved keyword in Python 3.7 [kubernetes-client/gen#67](https://github.com/kubernetes-client/gen/pull/67)
 
 **Bug Fix:**
 - Watch now properly deserializes custom resource objects and updates resource version [kubernetes-client/python-base#64](https://github.com/kubernetes-client/python-base/pull/64)
