@@ -1,3 +1,11 @@
+# v7.0.0a1
+**NOTE:**
+- We are doing an Alpha release for v7.0.0 because there will be an **ACTION REQUIRED** API breaking change in this client to support Python 3.7, which substitutes the currently being-used `async` reserved keyword [kubernetes-client/gen#67](https://github.com/kubernetes-client/gen/pull/67)
+
+**Bug Fix:**
+- Watch now properly deserializes custom resource objects and updates resource version [kubernetes-client/python-base#64](https://github.com/kubernetes-client/python-base/pull/64)
+- `idp-certificate-authority-data` in kubeconfig is now optional instead of required for OIDC token refresh [kubernetes-client/python-base#69](https://github.com/kubernetes-client/python-base/pull/69)
+
 # v6.0.0
 - Config loader now supports OIDC auth [kubernetes-client/python-base#48](https://github.com/kubernetes-client/python-base/pull/48)
 - Bug fix: fix expiry time checking in API token refresh [kubernetes-client/python-base#55](https://github.com/kubernetes-client/python-base/pull/55)
