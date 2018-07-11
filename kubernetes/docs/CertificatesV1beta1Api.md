@@ -10,7 +10,9 @@ Method | HTTP request | Description
 [**get_api_resources**](CertificatesV1beta1Api.md#get_api_resources) | **GET** /apis/certificates.k8s.io/v1beta1/ | 
 [**list_certificate_signing_request**](CertificatesV1beta1Api.md#list_certificate_signing_request) | **GET** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests | 
 [**patch_certificate_signing_request**](CertificatesV1beta1Api.md#patch_certificate_signing_request) | **PATCH** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name} | 
+[**patch_certificate_signing_request_status**](CertificatesV1beta1Api.md#patch_certificate_signing_request_status) | **PATCH** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/status | 
 [**read_certificate_signing_request**](CertificatesV1beta1Api.md#read_certificate_signing_request) | **GET** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name} | 
+[**read_certificate_signing_request_status**](CertificatesV1beta1Api.md#read_certificate_signing_request_status) | **GET** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/status | 
 [**replace_certificate_signing_request**](CertificatesV1beta1Api.md#replace_certificate_signing_request) | **PUT** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name} | 
 [**replace_certificate_signing_request_approval**](CertificatesV1beta1Api.md#replace_certificate_signing_request_approval) | **PUT** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/approval | 
 [**replace_certificate_signing_request_status**](CertificatesV1beta1Api.md#replace_certificate_signing_request_status) | **PUT** /apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/status | 
@@ -378,6 +380,63 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_certificate_signing_request_status**
+> V1beta1CertificateSigningRequest patch_certificate_signing_request_status(name, body, pretty=pretty)
+
+
+
+partially update status of the specified CertificateSigningRequest
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CertificatesV1beta1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the CertificateSigningRequest
+body = NULL # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.patch_certificate_signing_request_status(name, body, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CertificatesV1beta1Api->patch_certificate_signing_request_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the CertificateSigningRequest | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+
+### Return type
+
+[**V1beta1CertificateSigningRequest**](V1beta1CertificateSigningRequest.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_certificate_signing_request**
 > V1beta1CertificateSigningRequest read_certificate_signing_request(name, pretty=pretty, exact=exact, export=export)
 
@@ -421,6 +480,61 @@ Name | Type | Description  | Notes
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. | [optional] 
  **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. | [optional] 
+
+### Return type
+
+[**V1beta1CertificateSigningRequest**](V1beta1CertificateSigningRequest.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **read_certificate_signing_request_status**
+> V1beta1CertificateSigningRequest read_certificate_signing_request_status(name, pretty=pretty)
+
+
+
+read status of the specified CertificateSigningRequest
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CertificatesV1beta1Api(kubernetes.client.ApiClient(configuration))
+name = 'name_example' # str | name of the CertificateSigningRequest
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+
+try: 
+    api_response = api_instance.read_certificate_signing_request_status(name, pretty=pretty)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CertificatesV1beta1Api->read_certificate_signing_request_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the CertificateSigningRequest | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
 

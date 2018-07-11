@@ -1,10 +1,9 @@
-# V1beta1JSONSchemaPropsOrBool
+# V1ScopeSelector
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allows** | **bool** |  | 
-**schema** | [**V1beta1JSONSchemaProps**](V1beta1JSONSchemaProps.md) |  | 
+**match_expressions** | [**list[V1ScopedResourceSelectorRequirement]**](V1ScopedResourceSelectorRequirement.md) | A list of scope selector requirements by scope of the resources. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
