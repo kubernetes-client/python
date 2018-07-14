@@ -178,23 +178,35 @@ class KubeConfigLoader(object):
         """
         if not self._user:
             return
-        if self._load_gcp_token():
+        if self._load_auth_provider_token():
             return
         if self._load_user_token():
             return
-        if self._load_oid_token():
-            return
         self._load_user_pass_token()
 
-    def _load_gcp_token(self):
+    def _load_auth_provider_token(self):
         if 'auth-provider' not in self._user:
             return
         provider = self._user['auth-provider']
         if 'name' not in provider:
             return
-        if provider['name'] != 'gcp':
-            return
+        if provider['name'] == 'gcp':
+            return self._load_gcp_token(provider)
+        if provider['name'] == 'azure':
+            return self._load_azure_token(provider)
+        if provider['name'] == 'oidc':
+            return self._load_oid_token(provider)
 
+    def _load_azure_token(self, provider):
+        if 'config' not in provider:
+            return
+        if 'access-token' not in provider['config']:
+            return
+        # TODO: Refresh token here...
+        self.token = 'Bearer %s' % provider['config']['access-token']
+        return self.token
+
+    def _load_gcp_token(self, provider):
         if (('config' not in provider) or
                 ('access-token' not in provider['config']) or
                 ('expiry' in provider['config'] and
@@ -215,15 +227,8 @@ class KubeConfigLoader(object):
         if self._config_persister:
             self._config_persister(self._config.value)
 
-    def _load_oid_token(self):
-        if 'auth-provider' not in self._user:
-            return
-        provider = self._user['auth-provider']
-
-        if 'name' not in provider or 'config' not in provider:
-            return
-
-        if provider['name'] != 'oidc':
+    def _load_oid_token(self, provider):
+        if 'config' not in provider:
             return
 
         parts = provider['config']['id-token'].split('.')
