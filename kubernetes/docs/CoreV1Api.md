@@ -3526,9 +3526,9 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Eviction
+name = 'name_example' # str | name of the pod to evict
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1beta1Eviction() # V1beta1Eviction | 
+body = kubernetes.client.V1beta1Eviction(metadata=client.V1ObjectMeta(name='name_example', namespace='namespace_example')) # V1beta1Eviction | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
