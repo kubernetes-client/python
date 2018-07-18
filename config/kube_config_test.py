@@ -618,7 +618,7 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="gcp",
             get_google_credentials=lambda: _raise_exception(
                 "SHOULD NOT BE CALLED"))
-        self.assertTrue(loader._load_gcp_token())
+        self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          loader.token)
 
@@ -632,7 +632,7 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="expired_gcp",
             get_google_credentials=lambda: cred)
         original_expiry = _get_expiry(loader)
-        self.assertTrue(loader._load_gcp_token())
+        self.assertTrue(loader._load_auth_provider_token())
         new_expiry = _get_expiry(loader)
         # assert that the configs expiry actually updates
         self.assertTrue(new_expiry > original_expiry)
@@ -644,7 +644,7 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="oidc",
         )
-        self.assertTrue(loader._load_oid_token())
+        self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual(TEST_OIDC_TOKEN, loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
@@ -669,7 +669,7 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="expired_oidc",
         )
-        self.assertTrue(loader._load_oid_token())
+        self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual("Bearer abc123", loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
@@ -695,7 +695,7 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="expired_oidc_nocert",
         )
-        self.assertTrue(loader._load_oid_token())
+        self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual("Bearer abc123", loader.token)
 
     def test_user_pass(self):
