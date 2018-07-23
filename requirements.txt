@@ -9,3 +9,4 @@ ipaddress>=1.0.17;python_version=="2.7"  # PSF
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
+adal>=1.0.2 # MIT
