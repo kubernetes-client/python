@@ -1,3 +1,7 @@
+# v7.0.0b1
+**New Features:**
+- Add Azure support to authentication loading [kubernetes-client/python-base#74](https://github.com/kubernetes-client/python-base/pull/74)
+
 # v7.0.0a1
 **Breaking Change:**
 - **ACTION REQUIRED** Rename the currently being-used `async` parameter to `async_req` to support Python 3.7 because it's a reserved keyword in Python 3.7 [kubernetes-client/gen#67](https://github.com/kubernetes-client/gen/pull/67)
