@@ -18,7 +18,9 @@ import datetime
 import json
 import os
 import tempfile
+import time
 
+import adal
 import google.auth
 import google.auth.transport.requests
 import oauthlib.oauth2
@@ -202,9 +204,28 @@ class KubeConfigLoader(object):
             return
         if 'access-token' not in provider['config']:
             return
-        # TODO: Refresh token here...
+        if 'expires-on' in provider['config']:
+            if int(provider['config']['expires-on']) < time.gmtime():
+                self._refresh_azure_token(provider['config'])
         self.token = 'Bearer %s' % provider['config']['access-token']
         return self.token
+
+    def _refresh_azure_token(self, config):
+        tenant = config['tenant-id']
+        authority = 'https://login.microsoftonline.com/{}'.format(tenant)
+        context = adal.AuthenticationContext(
+            authority, validate_authority=True,
+        )
+        refresh_token = config['refresh-token']
+        client_id = config['client-id']
+        token_response = context.acquire_token_with_refresh_token(
+            refresh_token, client_id, '00000002-0000-0000-c000-000000000000')
+
+        provider = self._user['auth-provider']['config']
+        provider.value['access-token'] = token_response['accessToken']
+        provider.value['expires-on'] = token_response['expiresOn']
+        if self._config_persister:
+            self._config_persister(self._config.value)
 
     def _load_gcp_token(self, provider):
         if (('config' not in provider) or
