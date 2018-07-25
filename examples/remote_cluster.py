@@ -26,27 +26,27 @@ def main():
     aToken = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
     # Create a configuration object
-    configuration = client.Configuration()
+    aConfiguration = client.Configuration()
 
     # Specify the endpoint of your Kube cluster
-    configuration.host = "https://XXX.XXX.XXX.XXX:443"
+    aConfiguration.host = "https://XXX.XXX.XXX.XXX:443"
 
     # Security part.
     # In this simple example we are not going to verify the SSL certificate of
     # the remote cluster (for simplicity reason)
-    configuration.verify_ssl = False
+    aConfiguration.verify_ssl = False
     # Nevertheless if you want to do it you can with these 2 parameters
     # configuration.verify_ssl=True
     # ssl_ca_cert is the filepath to the file that contains the certificate.
     # configuration.ssl_ca_cert="certificate"
 
-    configuration.api_key = {"authorization": "Bearer " + aToken}
+    aConfiguration.api_key = {"authorization": "Bearer " + aToken}
 
-    # Use our configuration
-    client.Configuration.set_default(configuration)
+    # Create a ApiClient with our config
+    aApiClient = client.ApiClient(aConfiguration)
 
     # Do calls
-    v1 = client.CoreV1Api()
+    v1 = client.CoreV1Api(aApiClient)
     print("Listing pods with their IPs:")
     ret = v1.list_pod_for_all_namespaces(watch=False)
     for i in ret.items:
