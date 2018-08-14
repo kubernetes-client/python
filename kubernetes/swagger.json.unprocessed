@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Kubernetes",
-    "version": "v1.11.1"
+    "version": "v1.11.3"
   },
   "paths": {
     "/api/": {
@@ -76393,7 +76393,7 @@
           "type": "string"
         },
         "fsType": {
-          "description": "Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Implicitly inferred to be \"ext4\" if unspecified.",
+          "description": "Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\".",
           "type": "string"
         },
         "nodePublishSecretRef": {
