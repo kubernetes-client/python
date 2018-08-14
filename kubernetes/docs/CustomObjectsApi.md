@@ -9,13 +9,25 @@ Method | HTTP request | Description
 [**delete_cluster_custom_object**](CustomObjectsApi.md#delete_cluster_custom_object) | **DELETE** /apis/{group}/{version}/{plural}/{name} | 
 [**delete_namespaced_custom_object**](CustomObjectsApi.md#delete_namespaced_custom_object) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 [**get_cluster_custom_object**](CustomObjectsApi.md#get_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural}/{name} | 
+[**get_cluster_custom_object_scale**](CustomObjectsApi.md#get_cluster_custom_object_scale) | **GET** /apis/{group}/{version}/{plural}/{name}/scale | 
+[**get_cluster_custom_object_status**](CustomObjectsApi.md#get_cluster_custom_object_status) | **GET** /apis/{group}/{version}/{plural}/{name}/status | 
 [**get_namespaced_custom_object**](CustomObjectsApi.md#get_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
+[**get_namespaced_custom_object_scale**](CustomObjectsApi.md#get_namespaced_custom_object_scale) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/scale | 
+[**get_namespaced_custom_object_status**](CustomObjectsApi.md#get_namespaced_custom_object_status) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/status | 
 [**list_cluster_custom_object**](CustomObjectsApi.md#list_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural} | 
 [**list_namespaced_custom_object**](CustomObjectsApi.md#list_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
 [**patch_cluster_custom_object**](CustomObjectsApi.md#patch_cluster_custom_object) | **PATCH** /apis/{group}/{version}/{plural}/{name} | 
+[**patch_cluster_custom_object_scale**](CustomObjectsApi.md#patch_cluster_custom_object_scale) | **PATCH** /apis/{group}/{version}/{plural}/{name}/scale | 
+[**patch_cluster_custom_object_status**](CustomObjectsApi.md#patch_cluster_custom_object_status) | **PATCH** /apis/{group}/{version}/{plural}/{name}/status | 
 [**patch_namespaced_custom_object**](CustomObjectsApi.md#patch_namespaced_custom_object) | **PATCH** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
+[**patch_namespaced_custom_object_scale**](CustomObjectsApi.md#patch_namespaced_custom_object_scale) | **PATCH** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/scale | 
+[**patch_namespaced_custom_object_status**](CustomObjectsApi.md#patch_namespaced_custom_object_status) | **PATCH** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/status | 
 [**replace_cluster_custom_object**](CustomObjectsApi.md#replace_cluster_custom_object) | **PUT** /apis/{group}/{version}/{plural}/{name} | 
+[**replace_cluster_custom_object_scale**](CustomObjectsApi.md#replace_cluster_custom_object_scale) | **PUT** /apis/{group}/{version}/{plural}/{name}/scale | 
+[**replace_cluster_custom_object_status**](CustomObjectsApi.md#replace_cluster_custom_object_status) | **PUT** /apis/{group}/{version}/{plural}/{name}/status | 
 [**replace_namespaced_custom_object**](CustomObjectsApi.md#replace_namespaced_custom_object) | **PUT** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
+[**replace_namespaced_custom_object_scale**](CustomObjectsApi.md#replace_namespaced_custom_object_scale) | **PUT** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/scale | 
+[**replace_namespaced_custom_object_status**](CustomObjectsApi.md#replace_namespaced_custom_object_status) | **PUT** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/status | 
 
 
 # **create_cluster_custom_object**
@@ -337,6 +349,124 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_cluster_custom_object_scale**
+> object get_cluster_custom_object_scale(group, version, plural, name)
+
+
+
+read scale of the specified custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+
+try: 
+    api_response = api_instance.get_cluster_custom_object_scale(group, version, plural, name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->get_cluster_custom_object_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_cluster_custom_object_status**
+> object get_cluster_custom_object_status(group, version, plural, name)
+
+
+
+read status of the specified cluster scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+
+try: 
+    api_response = api_instance.get_cluster_custom_object_status(group, version, plural, name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->get_cluster_custom_object_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_namespaced_custom_object**
 > object get_namespaced_custom_object(group, version, namespace, plural, name)
 
@@ -395,6 +525,128 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: */*
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_namespaced_custom_object_scale**
+> object get_namespaced_custom_object_scale(group, version, namespace, plural, name)
+
+
+
+read scale of the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+
+try: 
+    api_response = api_instance.get_namespaced_custom_object_scale(group, version, namespace, plural, name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->get_namespaced_custom_object_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_namespaced_custom_object_status**
+> object get_namespaced_custom_object_status(group, version, namespace, plural, name)
+
+
+
+read status of the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+
+try: 
+    api_response = api_instance.get_namespaced_custom_object_status(group, version, namespace, plural, name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->get_namespaced_custom_object_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -591,6 +843,128 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_cluster_custom_object_scale**
+> object patch_cluster_custom_object_scale(group, version, plural, name, body)
+
+
+
+partially update scale of the specified cluster scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.patch_cluster_custom_object_scale(group, version, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->patch_cluster_custom_object_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_cluster_custom_object_status**
+> object patch_cluster_custom_object_status(group, version, plural, name, body)
+
+
+
+partially update status of the specified cluster scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.patch_cluster_custom_object_status(group, version, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->patch_cluster_custom_object_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_custom_object**
 > object patch_namespaced_custom_object(group, version, namespace, plural, name, body)
 
@@ -651,6 +1025,132 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/merge-patch+json
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_namespaced_custom_object_scale**
+> object patch_namespaced_custom_object_scale(group, version, namespace, plural, name, body)
+
+
+
+partially update scale of the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.patch_namespaced_custom_object_scale(group, version, namespace, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->patch_namespaced_custom_object_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_namespaced_custom_object_status**
+> object patch_namespaced_custom_object_status(group, version, namespace, plural, name, body)
+
+
+
+partially update status of the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.patch_namespaced_custom_object_status(group, version, namespace, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->patch_namespaced_custom_object_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/merge-patch+json
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -715,6 +1215,128 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **replace_cluster_custom_object_scale**
+> object replace_cluster_custom_object_scale(group, version, plural, name, body)
+
+
+
+replace scale of the specified cluster scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.replace_cluster_custom_object_scale(group, version, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->replace_cluster_custom_object_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_cluster_custom_object_status**
+> object replace_cluster_custom_object_status(group, version, plural, name, body)
+
+
+
+replace status of the cluster scoped specified custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.replace_cluster_custom_object_status(group, version, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->replace_cluster_custom_object_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **replace_namespaced_custom_object**
 > object replace_namespaced_custom_object(group, version, namespace, plural, name, body)
 
@@ -775,6 +1397,132 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: */*
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_namespaced_custom_object_scale**
+> object replace_namespaced_custom_object_scale(group, version, namespace, plural, name, body)
+
+
+
+replace scale of the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.replace_namespaced_custom_object_scale(group, version, namespace, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->replace_namespaced_custom_object_scale: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_namespaced_custom_object_status**
+> object replace_namespaced_custom_object_status(group, version, namespace, plural, name, body)
+
+
+
+replace status of the specified namespace scoped custom object
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: BearerToken
+configuration = kubernetes.client.Configuration()
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = kubernetes.client.CustomObjectsApi(kubernetes.client.ApiClient(configuration))
+group = 'group_example' # str | the custom resource's group
+version = 'version_example' # str | the custom resource's version
+namespace = 'namespace_example' # str | The custom resource's namespace
+plural = 'plural_example' # str | the custom resource's plural name. For TPRs this would be lowercase plural kind.
+name = 'name_example' # str | the custom object's name
+body = NULL # object | 
+
+try: 
+    api_response = api_instance.replace_namespaced_custom_object_status(group, version, namespace, plural, name, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CustomObjectsApi->replace_namespaced_custom_object_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group** | **str**| the custom resource&#39;s group | 
+ **version** | **str**| the custom resource&#39;s version | 
+ **namespace** | **str**| The custom resource&#39;s namespace | 
+ **plural** | **str**| the custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
+ **name** | **str**| the custom object&#39;s name | 
+ **body** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: */*
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
