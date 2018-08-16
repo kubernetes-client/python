@@ -1,3 +1,7 @@
+# v7.0.0
+**New Features:**
+- Add support for refreshing Azure tokens [kubernetes-client/python-base#77](https://github.com/kubernetes-client/python-base/pull/77)
+
 # v7.0.0b1
 **New Features:**
 - Add Azure support to authentication loading [kubernetes-client/python-base#74](https://github.com/kubernetes-client/python-base/pull/74)
