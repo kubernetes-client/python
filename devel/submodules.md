@@ -1,5 +1,5 @@
 # Submodules
-To comply with [client library structure requirement](https://github.com/kubernetes-client/community/blob/master/design-docs/clients-library-structure.md),
+To comply with [client library structure requirement](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/api-machinery/csi-client-structure-proposal.md),
 python client base utilities is moved into kubernetes-client/python-base repo. `git submodules` is being used to handle dependency to that repo.
 This document will provide basic steps to get submodules work.
 
