@@ -13,11 +13,46 @@
 # limitations under the License.
 
 # Simple example to show loading config from the cluster
+#
+# It works only from a pod. You can start an image with Python
+# (for example python:latest), exec into the pod, install the library,
+# then try out this example.
+#
+# If you get 403 errors from API server you will have to configure
+# RBAC to add the permission to list pods.
+#
+# ---
+# kind: ClusterRole
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: pods-list
+# rules:
+# - apiGroups: [""]
+#   resources: ["pods"]
+#   verbs: ["list"]
+# ---
+# kind: ClusterRoleBinding
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: pods-list
+# subjects:
+# - kind: ServiceAccount
+#   name: default
+#   namespace: default
+# roleRef:
+#   kind: ClusterRole
+#   name: pods-list
+#   apiGroup: rbac.authorization.k8s.io
+# ---
+#
+# Doc: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 
 from kubernetes import client, config
 
 
 def main():
+
+    # it works only if this script is run by K8s as a POD
     config.load_incluster_config()
 
     v1 = client.CoreV1Api()
