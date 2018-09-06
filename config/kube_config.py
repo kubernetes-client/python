@@ -1,4 +1,4 @@
-# Copyright 2016 The Kubernetes Authors.
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ import atexit
 import base64
 import datetime
 import json
+import logging
 import os
 import tempfile
 import time
@@ -30,6 +31,7 @@ from requests_oauthlib import OAuth2Session
 from six import PY3
 
 from kubernetes.client import ApiClient, Configuration
+from kubernetes.config.exec_provider import ExecProvider
 
 from .config_exception import ConfigException
 from .dateutil import UTC, format_rfc3339, parse_rfc3339
@@ -172,17 +174,18 @@ class KubeConfigLoader(object):
         section of kube-config and stops if it finds a valid authentication
         method. The order of authentication methods is:
 
-            1. GCP auth-provider
-            2. token_data
-            3. token field (point to a token file)
-            4. oidc auth-provider
-            5. username/password
+            1. auth-provider (gcp, azure, oidc)
+            2. token field (point to a token file)
+            3. exec provided plugin
+            4. username/password
         """
         if not self._user:
             return
         if self._load_auth_provider_token():
             return
         if self._load_user_token():
+            return
+        if self._load_from_exec_plugin():
             return
         self._load_user_pass_token()
 
@@ -339,6 +342,19 @@ class KubeConfigLoader(object):
 
         provider['config'].value['id-token'] = refresh['id_token']
         provider['config'].value['refresh-token'] = refresh['refresh_token']
+
+    def _load_from_exec_plugin(self):
+        if 'exec' not in self._user:
+            return
+        try:
+            status = ExecProvider(self._user['exec']).run()
+            if 'token' not in status:
+                logging.error('exec: missing token field in plugin output')
+                return None
+            self.token = "Bearer %s" % status['token']
+            return True
+        except Exception as e:
+            logging.error(str(e))
 
     def _load_user_token(self):
         token = FileOrData(
