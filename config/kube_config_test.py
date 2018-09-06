@@ -1,4 +1,4 @@
-# Copyright 2016 The Kubernetes Authors.
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -422,6 +422,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     "user": "non_existing_user"
                 }
             },
+            {
+                "name": "exec_cred_user",
+                "context": {
+                    "cluster": "default",
+                    "user": "exec_cred_user"
+                }
+            },
         ],
         "clusters": [
             {
@@ -571,6 +578,16 @@ class TestKubeConfigLoader(BaseTestCase):
                     "token": TEST_DATA_BASE64,
                     "client-certificate-data": TEST_CLIENT_CERT_BASE64,
                     "client-key-data": TEST_CLIENT_KEY_BASE64,
+                }
+            },
+            {
+                "name": "exec_cred_user",
+                "user": {
+                    "exec": {
+                        "apiVersion": "client.authentication.k8s.io/v1beta1",
+                        "command": "aws-iam-authenticator",
+                        "args": ["token", "-i", "dummy-cluster"]
+                    }
                 }
             },
         ]
@@ -847,6 +864,20 @@ class TestKubeConfigLoader(BaseTestCase):
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="non_existing_user").load_and_set(actual)
+        self.assertEqual(expected, actual)
+
+    @mock.patch('kubernetes.config.kube_config.ExecProvider.run')
+    def test_user_exec_auth(self, mock):
+        token = "dummy"
+        mock.return_value = {
+            "token": token
+        }
+        expected = FakeConfig(host=TEST_HOST, api_key={
+                              "authorization": BEARER_TOKEN_FORMAT % token})
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="exec_cred_user").load_and_set(actual)
         self.assertEqual(expected, actual)
 
 
