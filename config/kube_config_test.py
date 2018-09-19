@@ -201,6 +201,18 @@ class TestFileOrData(BaseTestCase):
                              _create_temp_file_with_content(TEST_DATA)))
         _cleanup_temp_files()
 
+    def test_file_given_data_bytes(self):
+        obj = {TEST_DATA_KEY: TEST_DATA_BASE64.encode()}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY)
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
+
+    def test_file_given_data_bytes_no_base64(self):
+        obj = {TEST_DATA_KEY: TEST_DATA.encode()}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY, base64_file_content=False)
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
+
 
 class TestConfigNode(BaseTestCase):
 
