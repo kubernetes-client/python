@@ -1,3 +1,34 @@
+# v8.0.0a1
+**New Feature:**
+- Add exec-plugins support in kubeconfig [kubernetes-client/python-base#75](https://github.com/kubernetes-client/python-base/pull/75)
+
+**Bug Fix:**
+- Fix reading kubeconfig data with bytes in Python 3
+  [kubernetes-client/python-base#86](https://github.com/kubernetes-client/python-base/pull/86)
+
+**API Change:**
+- Upon receiving a LIST request with expired continue token, the apiserver now returns a continue token together with the 410 "the from parameter is too old " error. If the client does not care about getting a list from a consistent snapshot, the client can use this token to continue listing from the next key, but the returned chunk will be from the latest snapshot [kubernetes/kubernetes#67284](https://github.com/kubernetes/kubernetes/pull/67284)
+- Introduces autoscaling/v2beta2 and custom\_metrics/v1beta2, which implement metric selectors for Object and Pods metrics, as well as allowing AverageValue targets on Objects, similar to External metrics [kubernetes/kubernetes#64097](https://github.com/kubernetes/kubernetes/pull/64097)
+- Create "coordination.k8s.io" api group with "Lease" api in it [kubernetes/kubernetes#64246](https://github.com/kubernetes/kubernetes/pull/64246)
+- Added support to restore a volume from a volume snapshot data source: adds TypedLocalObjectReference in the core API and adds DataSource in PersistentVolumeClaimSpec [kubernetes/kubernetes#67087](https://github.com/kubernetes/kubernetes/pull/67087)
+- ProcMount added to SecurityContext and AllowedProcMounts added to
+  PodSecurityPolicy to allow paths in the container's /proc to not be masked [kubernetes/kubernetes#64283](https://github.com/kubernetes/kubernetes/pull/64283)
+- Support both directory and block device for local volume plugin FileSystem
+  VolumeMode [kubernetes/kubernetes#63011](https://github.com/kubernetes/kubernetes/pull/63011)
+- SCTP is now supported as additional protocol (alpha) alongside TCP and UDP in
+  Pod, Service, Endpoint, and NetworkPolicy [kubernetes/kubernetes#64973](https://github.com/kubernetes/kubernetes/pull/64973)
+- RuntimeClass is a new API resource for defining different classes of runtimes
+  that may be used to run containers in the cluster. Pods can select a
+  RunitmeClass to use via the RuntimeClassName field. This feature is in alpha,
+  and the RuntimeClass feature gate must be enabled in order to use it [kubernetes/kubernetes#67737](https://github.com/kubernetes/kubernetes/pull/67737)
+- The PodShareProcessNamespace feature to configure PID namespace sharing within
+  a pod has been promoted to beta [kubernetes/kubernetes#66507](https://github.com/kubernetes/kubernetes/pull/66507)
+- To address the possibility dry-run requests overwhelming admission webhooks that rely on side effects and a reconciliation mechanism, a new field is being added to admissionregistration.k8s.io/v1beta1.ValidatingWebhookConfiguration and admissionregistration.k8s.io/v1beta1.MutatingWebhookConfiguration so that webhooks can explicitly register as having dry-run support. If a dry-run request is made on a resource that triggers a non dry-run supporting webhook, the request will be completely rejected, with "400: Bad Request". Additionally, a new field is being added to the admission.k8s.io/v1beta1.AdmissionReview API object, exposing to webhooks whether or not the request being reviewed is a dry-run [kubernetes/kubernetes#66936](https://github.com/kubernetes/kubernetes/pull/66936)
+- Add custom object status and scale api [kubernetes-client/gen#72](https://github.com/kubernetes-client/gen/pull/72)
+- dry-run: DELETE operations now support dryRun parameter [kubernetes/kubernetes#65105](https://github.com/kubernetes/kubernetes/pull/65105)
+- Default extensions/v1beta1 Deployment's ProgressDeadlineSeconds to MaxInt32
+  [kubernetes/kubernetes#66581](https://github.com/kubernetes/kubernetes/pull/66581)
+
 # v7.0.0
 **New Features:**
 - Add support for refreshing Azure tokens [kubernetes-client/python-base#77](https://github.com/kubernetes-client/python-base/pull/77)
