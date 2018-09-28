@@ -23,12 +23,15 @@ from .authorization_v1beta1_api import AuthorizationV1beta1Api
 from .autoscaling_api import AutoscalingApi
 from .autoscaling_v1_api import AutoscalingV1Api
 from .autoscaling_v2beta1_api import AutoscalingV2beta1Api
+from .autoscaling_v2beta2_api import AutoscalingV2beta2Api
 from .batch_api import BatchApi
 from .batch_v1_api import BatchV1Api
 from .batch_v1beta1_api import BatchV1beta1Api
 from .batch_v2alpha1_api import BatchV2alpha1Api
 from .certificates_api import CertificatesApi
 from .certificates_v1beta1_api import CertificatesV1beta1Api
+from .coordination_api import CoordinationApi
+from .coordination_v1beta1_api import CoordinationV1beta1Api
 from .core_api import CoreApi
 from .core_v1_api import CoreV1Api
 from .custom_objects_api import CustomObjectsApi
