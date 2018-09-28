@@ -23,7 +23,7 @@ except ApiException as e:
         exit(1)
 
 if not resp:
-    print("Pod %s does not exits. Creating it..." % name)
+    print("Pod %s does not exist. Creating it..." % name)
     pod_manifest = {
         'apiVersion': 'v1',
         'kind': 'Pod',
