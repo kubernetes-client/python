@@ -16,7 +16,7 @@
 
 # Checkout a PR from GitHub. (Yes, this is sitting in a Git tree. How
 # meta.) Assumes you care about pulls from remote "upstream" and
-# checks thems out to a branch named:
+# checks them out to a branch named:
 #  automated-cherry-pick-of-<pr>-<target branch>-<timestamp>
 
 set -o errexit
