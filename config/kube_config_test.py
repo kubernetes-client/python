@@ -40,7 +40,7 @@ NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 
 
 def _base64(string):
-    return base64.encodestring(string.encode()).decode()
+    return base64.standard_b64encode(string.encode()).decode()
 
 
 def _format_expiry_datetime(dt):
