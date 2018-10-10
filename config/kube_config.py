@@ -105,7 +105,7 @@ class FileOrData(object):
                 else:
                     content = self._data
                 self._file = _create_temp_file_with_content(
-                    base64.decodestring(content))
+                    base64.standard_b64decode(content))
             else:
                 self._file = _create_temp_file_with_content(self._data)
         if self._file and not os.path.isfile(self._file):
@@ -120,7 +120,7 @@ class FileOrData(object):
             with open(self._file) as f:
                 if self._base64_file_content:
                     self._data = bytes.decode(
-                        base64.encodestring(str.encode(f.read())))
+                        base64.standard_b64encode(str.encode(f.read())))
                 else:
                     self._data = f.read()
         return self._data
