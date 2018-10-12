@@ -19,15 +19,18 @@ import mock
 
 from .config_exception import ConfigException
 from .exec_provider import ExecProvider
+from .kube_config import ConfigNode
 
 
 class ExecProviderTest(unittest.TestCase):
 
     def setUp(self):
-        self.input_ok = {
-            'command': 'aws-iam-authenticator token -i dummy',
-            'apiVersion': 'client.authentication.k8s.io/v1beta1'
-        }
+        self.input_ok = ConfigNode('test', {
+            'command': 'aws-iam-authenticator',
+            'args': ['token', '-i', 'dummy'],
+            'apiVersion': 'client.authentication.k8s.io/v1beta1',
+            'env': None
+        })
         self.output_ok = """
         {
             "apiVersion": "client.authentication.k8s.io/v1beta1",
@@ -39,7 +42,9 @@ class ExecProviderTest(unittest.TestCase):
         """
 
     def test_missing_input_keys(self):
-        exec_configs = [{}, {'command': ''}, {'apiVersion': ''}]
+        exec_configs = [ConfigNode('test1', {}),
+                        ConfigNode('test2', {'command': ''}),
+                        ConfigNode('test3', {'apiVersion': ''})]
         for exec_config in exec_configs:
             with self.assertRaises(ConfigException) as context:
                 ExecProvider(exec_config)

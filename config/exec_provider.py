@@ -32,16 +32,21 @@ class ExecProvider(object):
     """
 
     def __init__(self, exec_config):
+        """
+        exec_config must be of type ConfigNode because we depend on
+        safe_get(self, key) to correctly handle optional exec provider
+        config parameters.
+        """
         for key in ['command', 'apiVersion']:
             if key not in exec_config:
                 raise ConfigException(
                     'exec: malformed request. missing key \'%s\'' % key)
         self.api_version = exec_config['apiVersion']
         self.args = [exec_config['command']]
-        if 'args' in exec_config:
+        if exec_config.safe_get('args'):
             self.args.extend(exec_config['args'])
         self.env = os.environ.copy()
-        if 'env' in exec_config:
+        if exec_config.safe_get('env'):
             additional_vars = {}
             for item in exec_config['env']:
                 name = item['name']
