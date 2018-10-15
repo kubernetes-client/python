@@ -1,3 +1,8 @@
+# v8.0.0b1
+**Bug Fix:**
+- Update ExecProvider to use safe\_get() to tolerate kube-config file that sets
+  `args: null` and `env: null` [kubernetes-client/python-base#91](https://github.com/kubernetes-client/python-base/pull/91)
+
 # v8.0.0a1
 **New Feature:**
 - Add exec-plugins support in kubeconfig [kubernetes-client/python-base#75](https://github.com/kubernetes-client/python-base/pull/75)
