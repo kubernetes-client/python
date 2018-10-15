@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **create_token_review**
-> V1TokenReview create_token_review(body, pretty=pretty)
+> V1TokenReview create_token_review(body, dry_run=dry_run, include_uninitialized=include_uninitialized, pretty=pretty)
 
 
 
@@ -32,10 +32,12 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.AuthenticationV1Api(kubernetes.client.ApiClient(configuration))
 body = kubernetes.client.V1TokenReview() # V1TokenReview | 
+dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
+include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
 try: 
-    api_response = api_instance.create_token_review(body, pretty=pretty)
+    api_response = api_instance.create_token_review(body, dry_run=dry_run, include_uninitialized=include_uninitialized, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AuthenticationV1Api->create_token_review: %s\n" % e)
@@ -46,6 +48,8 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**V1TokenReview**](V1TokenReview.md)|  | 
+ **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
+ **include_uninitialized** | **bool**| If IncludeUninitialized is specified, the object may be returned without completing initialization. | [optional] 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
 
 ### Return type
