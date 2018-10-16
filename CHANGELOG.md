@@ -1,3 +1,12 @@
+# v8.0.0b1
+**Bug Fix:**
+- Update ExecProvider to use safe\_get() to tolerate kube-config file that sets
+  `args: null` and `env: null` [kubernetes-client/python-base#91](https://github.com/kubernetes-client/python-base/pull/91)
+- Properly deserialize API server's response when posting a deployment rollback [kubernetes/kubernetes#68909](https://github.com/kubernetes/kubernetes/pull/68909)
+
+**API Change:**
+- dry-run: CREATE/UPDATE/PATCH methods now support dryRun parameter [kubernetes/kubernetes#69359](https://github.com/kubernetes/kubernetes/pull/69359)
+
 # v8.0.0a1
 **New Feature:**
 - Add exec-plugins support in kubeconfig [kubernetes-client/python-base#75](https://github.com/kubernetes-client/python-base/pull/75)
