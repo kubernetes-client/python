@@ -180,3 +180,8 @@ Specifically check `ipaddress` and `urllib3` package versions to make sure they 
 Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
 of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
 See more at [exec example](examples/exec.py).
+
+
+## License
+
+This software is free and open source released follows the Apache License version 2.0 (http://www.apache.org/licenses/ ).  See LICENSE.txt included with the distribution for details.
