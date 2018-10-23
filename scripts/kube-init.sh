@@ -55,7 +55,7 @@ sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 
 echo "Download localkube from minikube project"
-wget -O localkube "https://storage.googleapis.com/minikube/k8sReleases/v1.7.0/localkube-linux-amd64"
+wget -O localkube "https://storage.googleapis.com/minikube/k8sReleases/v1.9.4/localkube-linux-amd64"
 sudo chmod +x localkube
 sudo mv localkube /usr/local/bin/
 
