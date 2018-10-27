@@ -10,7 +10,7 @@ matrix:
      - python: 2.7
        env: TOXENV=py27-functional
      - python: 2.7
-       env: TOXENV=update-pep8
+       env: TOXENV=update-pycodestyle
      - python: 2.7
        env: TOXENV=docs
      - python: 2.7
