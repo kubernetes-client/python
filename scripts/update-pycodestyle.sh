@@ -49,7 +49,7 @@ if [[ -z ${ENV} ]]; then
     trap "deactivate" EXIT SIGINT
 
     echo "--- Updating tools"
-    pip install --upgrade pep8
+    pip install --upgrade pycodestyle
     pip install --upgrade autopep8
     pip install --upgrade isort
 fi
@@ -70,10 +70,10 @@ for SOURCE in $SOURCES; do
     isort -y $SOURCE
 done
 
-echo "--- check pep8 (all need to be fixed manually)"
+echo "--- check pycodestyle (all need to be fixed manually)"
 set +o errexit
 for SOURCE in $SOURCES; do
-    pep8 $SOURCE
+    pycodestyle $SOURCE
 done
 
 if [[ ! -z ${ENV} ]]; then
