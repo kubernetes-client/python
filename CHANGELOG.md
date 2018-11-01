@@ -1,3 +1,7 @@
+# v8.0.0
+**New Feature:**
+- Add utility to create API resource from yaml file [kubernetes-client/python#655](https://github.com/kubernetes-client/python/pull/655)
+
 # v8.0.0b1
 **Bug Fix:**
 - Update ExecProvider to use safe\_get() to tolerate kube-config file that sets
