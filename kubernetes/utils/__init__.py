@@ -1,4 +1,4 @@
-# Copyright 2016 The Kubernetes Authors.
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,12 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__project__ = 'kubernetes'
-# The version is auto-updated. Please do not edit.
-__version__ = "8.0.0-snapshot"
-
-import kubernetes.client
-import kubernetes.config
-import kubernetes.watch
-import kubernetes.stream
-import kubernetes.utils
+from .create_from_yaml import create_from_yaml
