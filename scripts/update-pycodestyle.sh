@@ -58,7 +58,7 @@ SAVEIFS=$IFS
 trap "IFS=$SAVEIFS" EXIT SIGINT
 IFS=,
 
-SOURCES="${SCRIPT_ROOT}/../setup.py,${CLIENT_ROOT}/config/*.py,${CLIENT_ROOT}/watch/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/../examples/*.py"
+SOURCES="${SCRIPT_ROOT}/../setup.py,${CLIENT_ROOT}/config/*.py,${CLIENT_ROOT}/watch/*.py,${CLIENT_ROOT}/utils/*.py,${SCRIPT_ROOT}/*.py,${CLIENT_ROOT}/../examples/*.py"
 
 echo "--- applying autopep8"
 for SOURCE in $SOURCES; do
