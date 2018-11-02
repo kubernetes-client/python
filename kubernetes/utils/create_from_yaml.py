@@ -12,21 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from os import path
+
 import re
 import sys
-
-from six import iteritems
+from os import path
 
 import yaml
+from six import iteritems
 
 from kubernetes import client
+
 
 def create_from_yaml(k8s_client, yaml_file, verbose=False, **kwargs):
     """
     Perform an action from a yaml file. Pass True for verbose to
     print confirmation information.
-    
     Input:
     yaml_file: string. Contains the path to yaml file.
     k8s_cline: an ApiClient object, initialized with the client args.
@@ -40,7 +40,7 @@ def create_from_yaml(k8s_client, yaml_file, verbose=False, **kwargs):
 
     with open(path.abspath(yaml_file)) as f:
         yml_object = yaml.load(f)
-        #TODO: case of yaml file containing multiple objects
+        # TODO: case of yaml file containing multiple objects
         group, _, version = yml_object["apiVersion"].partition("/")
         if version == "":
             version = group
@@ -49,7 +49,7 @@ def create_from_yaml(k8s_client, yaml_file, verbose=False, **kwargs):
         # Only replace the last instance
         group = "".join(group.rsplit(".k8s.io", 1))
         fcn_to_call = "{0}{1}Api".format(group.capitalize(),
-            version.capitalize())
+                                         version.capitalize())
         k8s_api = getattr(client, fcn_to_call)(k8s_client)
         # Replace CamelCased action_type into snake_case
         kind = yml_object["kind"]
@@ -71,4 +71,3 @@ def create_from_yaml(k8s_client, yaml_file, verbose=False, **kwargs):
         if verbose:
             print("{0} created. status='{1}'".format(kind, str(resp.status)))
         return k8s_api
-        
