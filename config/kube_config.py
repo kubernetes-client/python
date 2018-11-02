@@ -392,8 +392,24 @@ class KubeConfigLoader(object):
         if 'insecure-skip-tls-verify' in self._cluster:
             self.verify_ssl = not self._cluster['insecure-skip-tls-verify']
 
+    def _using_gcp_auth_provider(self):
+        return self._user and \
+            'auth-provider' in self._user and \
+            'name' in self._user['auth-provider'] and \
+            self._user['auth-provider']['name'] == 'gcp'
+
     def _set_config(self, client_configuration):
+        if self._using_gcp_auth_provider():
+            # GCP auth tokens must be refreshed regularly, but swagger expects
+            # a constant token. Replace the swagger-generated client config's
+            # get_api_key_with_prefix method with our own to allow automatic
+            # token refresh.
+            def _gcp_get_api_key(*args):
+                return self._load_gcp_token(self._user['auth-provider'])
+            client_configuration.get_api_key_with_prefix = _gcp_get_api_key
         if 'token' in self.__dict__:
+            # Note: this line runs for GCP auth tokens as well, but this entry
+            # will not be updated upon GCP token refresh.
             client_configuration.api_key['authorization'] = self.token
         # copy these keys directly from self to configuration object
         keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl']
