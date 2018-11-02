@@ -1,6 +1,6 @@
 # ref: https://docs.travis-ci.com/user/languages/python
 language: python
-dist: trusty
+dist: xenial
 sudo: required
 
 matrix:
