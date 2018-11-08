@@ -1,3 +1,14 @@
+# v6.1.0
+- Python 3.7 support
+- Update to Kubernetes 1.10.10 API
+
+**Breaking Change:**
+- **ACTION REQUIRED** Rename the currently being-used `async` parameter to `async_req` to support Python 3.7 because `async` is a reserved keyword in Python 3.7 [kubernetes-client/gen#67](https://github.com/kubernetes-client/gen/pull/67)
+- **NOTE** Python 3.7 was released after v6.0.0 release. It's not necessary to upgrade your client to v6.1.0 if you do not use Python 3.7+.
+
+**API change:**
+- Add custom object status and scale api kubernetes-client/gen#72
+
 # v6.0.0
 - Config loader now supports OIDC auth [kubernetes-client/python-base#48](https://github.com/kubernetes-client/python-base/pull/48)
 - Bug fix: fix expiry time checking in API token refresh [kubernetes-client/python-base#55](https://github.com/kubernetes-client/python-base/pull/55)
