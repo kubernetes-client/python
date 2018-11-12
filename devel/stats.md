@@ -1,6 +1,6 @@
 # Download Statistics
 
-Pypi stores download information in a [BigQuery public dataset](https://bigquery.cloud.google.com/dataset/the-psf:pypi). It can be queried to get detail infomration about downloads. For example, to get number of downloads per version, you can run this query:
+Pypi stores download information in a [BigQuery public dataset](https://bigquery.cloud.google.com/dataset/the-psf:pypi). It can be queried to get detailed information about downloads. For example, to get the number of downloads per version, you can run this query:
 
 ```sql
 SELECT
