@@ -378,7 +378,7 @@ class KubeConfigLoader(object):
 
     def _load_cluster_info(self):
         if 'server' in self._cluster:
-            self.host = self._cluster['server']
+            self.host = self._cluster['server'].rstrip('/')
             if self.host.startswith("https"):
                 self.ssl_ca_cert = FileOrData(
                     self._cluster, 'certificate-authority',
