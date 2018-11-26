@@ -176,7 +176,7 @@ class WSClient:
             elif op_code == ABNF.OPCODE_BINARY or op_code == ABNF.OPCODE_TEXT:
                 data = frame.data
                 if six.PY3:
-                    data = data.decode("utf-8")
+                    data = data.decode("utf-8", "replace")
                 if len(data) > 1:
                     channel = ord(data[0])
                     data = data[1:]
