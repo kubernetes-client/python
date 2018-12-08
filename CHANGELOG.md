@@ -3,6 +3,20 @@
 - Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)
 - Fix kubeconfig loading failure when server uri contains trailing slash [kubernetes-client/python-base#45](https://github.com/kubernetes-client/python-base/pull/45)
 
+**API Change:**
+- Add dynamic audit configuration api: AuditregistrationV1alpha1Api [kubernetes/kubernetes#67547](https://github.com/kubernetes/kubernetes/pull/67547)
+- CSIPersistentVolume feature, i.e. PersistentVolumes with CSIPersistentVolumeSource, is GA. CSIPersistentVolume feature gate is now deprecated and will be removed according to deprecation policy. [kubernetes/kubernetes#69929](https://github.com/kubernetes/kubernetes/pull/69929)
+- Add support for CRD conversion webhook [kubernetes/kubernetes#67006](https://github.com/kubernetes/kubernetes/pull/67006)
+- CRD supports multi-version Schema, Subresources and AdditionalPrintColumns (NOTE that CRDs created prior to 1.13 populated the top-level additionalPrinterColumns field by default. To apply an update that changes to per-version additionalPrinterColumns, the top-level additionalPrinterColumns field must be explicitly set to null). [kubernetes/kubernetes#70211](https://github.com/kubernetes/kubernetes/pull/70211)
+- Add ability to control primary GID of containers through Pod Spec and PodSecurityPolicy [kubernetes/kubernetes#67802](https://github.com/kubernetes/kubernetes/pull/67802)
+- Refactor GlusterFS PV spec. This patch introduces glusterfsPersistentVolumeSource addition to glusterfsVolumeSource. All fields remains same as glusterfsVolumeSource with an addition of a new field called `EndpointsNamespace` to define namespace of endpoint in the spec. [kubernetes/kubernetes#60195](https://github.com/kubernetes/kubernetes/pull/60195)
+- Delete request's body parameter is optional [kubernetes/kubernetes#70032](https://github.com/kubernetes/kubernetes/pull/70032)
+- Make service environment variables optional [kubernetes/kubernetes#68754](https://github.com/kubernetes/kubernetes/pull/68754)
+- TokenReview now supports audience validation of tokens with audiences other than the kube-apiserver. [kubernetes/kubernetes#62692](https://github.com/kubernetes/kubernetes/pull/62692)
+
+**Breaking Change:**
+- Model v1beta1WebhookClientConfig is renamed to AdmissionregistrationV1beta1WebhookClientConfig, to avoid naming conflict with ApiextensionsV1beta1WebhookClientConfig introduced in: [kubernetes/kubernetes#67006](https://github.com/kubernetes/kubernetes/pull/67006)
+
 # v8.0.0
 **New Feature:**
 - Add utility to create API resource from yaml file [kubernetes-client/python#655](https://github.com/kubernetes-client/python/pull/655)
