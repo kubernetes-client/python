@@ -1,3 +1,8 @@
+# v9.0.0a1
+**Bug Fix:**
+- Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)
+- Fix kubeconfig loading failure when server uri contains trailing slash [kubernetes-client/python-base#45](https://github.com/kubernetes-client/python-base/pull/45)
+
 # v8.0.0
 **New Feature:**
 - Add utility to create API resource from yaml file [kubernetes-client/python#655](https://github.com/kubernetes-client/python/pull/655)
