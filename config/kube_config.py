@@ -141,9 +141,10 @@ class KubeConfigLoader(object):
         self._config_persister = config_persister
 
         def _refresh_credentials():
-            credentials, project_id = google.auth.default(
-                scopes=['https://www.googleapis.com/auth/cloud-platform']
-            )
+            credentials, project_id = google.auth.default(scopes=[
+                'https://www.googleapis.com/auth/cloud-platform',
+                'https://www.googleapis.com/auth/userinfo.email'
+            ])
             request = google.auth.transport.requests.Request()
             credentials.refresh(request)
             return credentials
