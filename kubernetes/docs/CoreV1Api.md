@@ -3553,6 +3553,7 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
+from kubernetes.client.models import V1ObjectMeta
 
 # Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
@@ -3564,7 +3565,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Eviction
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1beta1Eviction() # V1beta1Eviction | 
+body = kubernetes.client.V1beta1Eviction(metadata=V1ObjectMeta(name=name,namespace=namespace)) # V1beta1Eviction | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
