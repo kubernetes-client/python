@@ -14,6 +14,8 @@ from .apps_api import AppsApi
 from .apps_v1_api import AppsV1Api
 from .apps_v1beta1_api import AppsV1beta1Api
 from .apps_v1beta2_api import AppsV1beta2Api
+from .auditregistration_api import AuditregistrationApi
+from .auditregistration_v1alpha1_api import AuditregistrationV1alpha1Api
 from .authentication_api import AuthenticationApi
 from .authentication_v1_api import AuthenticationV1Api
 from .authentication_v1beta1_api import AuthenticationV1beta1Api
