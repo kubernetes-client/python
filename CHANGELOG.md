@@ -3,6 +3,9 @@
 - Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)
 - Fix kubeconfig loading failure when server uri contains trailing slash [kubernetes-client/python-base#45](https://github.com/kubernetes-client/python-base/pull/45)
 
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2018-20060 [kubernetes-client/python#707](https://github.com/kubernetes-client/python/pull/707)
+
 **API Change:**
 - Add dynamic audit configuration api: AuditregistrationV1alpha1Api [kubernetes/kubernetes#67547](https://github.com/kubernetes/kubernetes/pull/67547)
 - CSIPersistentVolume feature, i.e. PersistentVolumes with CSIPersistentVolumeSource, is GA. CSIPersistentVolume feature gate is now deprecated and will be removed according to deprecation policy. [kubernetes/kubernetes#69929](https://github.com/kubernetes/kubernetes/pull/69929)
@@ -22,6 +25,13 @@
 **Bug Fix:**
 - Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)
 - Fix kubeconfig loading failure when server uri contains trailing slash [kubernetes-client/python-base#45](https://github.com/kubernetes-client/python-base/pull/45)
+
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2018-20060 [kubernetes-client/python#707](https://github.com/kubernetes-client/python/pull/707)
+
+# v7.0.1
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2018-20060 [kubernetes-client/python#707](https://github.com/kubernetes-client/python/pull/707)
 
 # v6.1.0
 - Python 3.7 support
