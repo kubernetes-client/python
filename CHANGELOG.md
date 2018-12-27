@@ -1,3 +1,7 @@
+# v7.0.1
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2018-20060 [kubernetes-client/python#707](https://github.com/kubernetes-client/python/pull/707)
+
 # v7.0.0
 **New Features:**
 - Add support for refreshing Azure tokens [kubernetes-client/python-base#77](https://github.com/kubernetes-client/python-base/pull/77)
