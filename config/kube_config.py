@@ -493,7 +493,7 @@ class ConfigNode(object):
 def _get_kube_config_loader_for_yaml_file(filename, **kwargs):
     with open(filename) as f:
         return KubeConfigLoader(
-            config_dict=yaml.load(f),
+            config_dict=yaml.safe_load(f),
             config_base_path=os.path.abspath(os.path.dirname(filename)),
             **kwargs)
 
