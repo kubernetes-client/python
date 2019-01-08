@@ -26,7 +26,7 @@ def main():
     config.load_kube_config()
 
     with open(path.join(path.dirname(__file__), "nginx-deployment.yaml")) as f:
-        dep = yaml.load(f)
+        dep = yaml.safe_load(f)
         k8s_beta = client.ExtensionsV1beta1Api()
         resp = k8s_beta.create_namespaced_deployment(
             body=dep, namespace="default")
