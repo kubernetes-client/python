@@ -29,7 +29,7 @@ def create_from_yaml(k8s_client, yaml_file, verbose=False, **kwargs):
     print confirmation information.
     Input:
     yaml_file: string. Contains the path to yaml file.
-    k8s_cline: an ApiClient object, initialized with the client args.
+    k8s_client: an ApiClient object, initialized with the client args.
 
     Available parameters for performing the subsequent action:
     :param async_req bool
