@@ -13,3 +13,4 @@
 # limitations under the License.
 
 from .create_from_yaml import create_from_yaml
+from .create_from_json import create_from_json
