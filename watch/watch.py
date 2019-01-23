@@ -124,6 +124,8 @@ class Watch(object):
         return_type = self.get_return_type(func)
         kwargs['watch'] = True
         kwargs['_preload_content'] = False
+        if 'resource_version' in kwargs:
+            self.resource_version = kwargs['resource_version']
 
         timeouts = ('timeout_seconds' in kwargs)
         while True:
