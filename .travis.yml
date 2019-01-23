@@ -35,4 +35,5 @@ install:
 
 script:
   - ./run_tox.sh tox
+  - ./hack/verify-boilerplate.sh
 

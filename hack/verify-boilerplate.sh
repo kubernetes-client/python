@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env bash
 
-# Copyright 2016 The Kubernetes Authors.
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .config_exception import ConfigException
-from .incluster_config import load_incluster_config
-from .kube_config import (list_kube_config_contexts, load_kube_config,
-                          new_client_from_config)
+set -o errexit
+set -o nounset
+set -o pipefail
+
+KUBE_ROOT=$(dirname "${BASH_SOURCE}")/..
+
+boilerDir="${KUBE_ROOT}/hack/boilerplate"
+boiler="${boilerDir}/boilerplate.py"
+
+files_need_boilerplate=($(${boiler} "$@"))
+
+# Run boilerplate check
+if [[ ${#files_need_boilerplate[@]} -gt 0 ]]; then
+  for file in "${files_need_boilerplate[@]}"; do
+    echo "Boilerplate header is wrong for: ${file}" >&2
+  done
+
+  exit 1
+fi
