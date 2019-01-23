@@ -21,7 +21,6 @@ import os
 import tempfile
 import time
 
-import adal
 import google.auth
 import google.auth.transport.requests
 import oauthlib.oauth2
@@ -35,6 +34,11 @@ from kubernetes.config.exec_provider import ExecProvider
 
 from .config_exception import ConfigException
 from .dateutil import UTC, format_rfc3339, parse_rfc3339
+
+try:
+    import adal
+except ImportError:
+    pass
 
 EXPIRY_SKEW_PREVENTION_DELAY = datetime.timedelta(minutes=5)
 KUBE_CONFIG_DEFAULT_LOCATION = os.environ.get('KUBECONFIG', '~/.kube/config')
@@ -218,6 +222,9 @@ class KubeConfigLoader(object):
         return self.token
 
     def _refresh_azure_token(self, config):
+        if 'adal' not in globals():
+            raise ImportError('refresh token error, adal library not imported')
+
         tenant = config['tenant-id']
         authority = 'https://login.microsoftonline.com/{}'.format(tenant)
         context = adal.AuthenticationContext(
