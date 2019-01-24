@@ -1,1 +1,5 @@
-where python >null && echo Python environment found.. && python --version && xcopy ..\kubernetes\base\* ..\kubernetes\ /E && cd ../ && python setup.py install
+( 	where python >null
+	echo Python environment found..
+	python --version
+	copy ..\kubernetes\base\* ..\kubernetes\ 
+	cd ../ && python setup.py install )
