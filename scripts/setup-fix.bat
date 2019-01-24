@@ -3,4 +3,4 @@
 	)
 	python --version
 	copy ..\kubernetes\base\* ..\kubernetes\ 
-	cd ../ && python setup.py install )
+	cd .. && python setup.py install )
