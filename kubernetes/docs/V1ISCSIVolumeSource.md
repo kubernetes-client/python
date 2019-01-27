@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **lun** | **int** | iSCSI Target Lun number. | 
 **portals** | **list[str]** | iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | [optional] 
 **read_only** | **bool** | ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. | [optional] 
-**secret_ref** | [**V1LocalObjectReference**](V1LocalObjectReference.md) | CHAP Secret for iSCSI target and initiator authentication | [optional] 
+**secret_ref** | [**V1LocalObjectReference**](V1LocalObjectReference.md) |  | [optional] 
 **target_portal** | **str** | iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

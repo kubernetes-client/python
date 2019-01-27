@@ -1,6 +1,6 @@
 # kubernetes.client.CoreV1Api
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -211,7 +211,9 @@ Method | HTTP request | Description
 
 connect DELETE requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -231,7 +233,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_delete_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -256,7 +258,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -268,7 +270,9 @@ Name | Type | Description  | Notes
 
 connect DELETE requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -289,7 +293,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_delete_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -315,7 +319,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -327,7 +331,9 @@ Name | Type | Description  | Notes
 
 connect DELETE requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -347,7 +353,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_delete_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -372,7 +378,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -384,7 +390,9 @@ Name | Type | Description  | Notes
 
 connect DELETE requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -405,7 +413,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_delete_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -431,7 +439,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -443,7 +451,9 @@ Name | Type | Description  | Notes
 
 connect DELETE requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -462,7 +472,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_delete_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -486,7 +496,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -498,7 +508,9 @@ Name | Type | Description  | Notes
 
 connect DELETE requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -518,7 +530,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_delete_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -543,7 +555,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -555,7 +567,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to attach of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -574,12 +588,12 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PodAttachOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 container = 'container_example' # str | The container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
-stderr = true # bool | Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true. (optional)
-stdin = true # bool | Stdin if true, redirects the standard input stream of the pod for this call. Defaults to false. (optional)
-stdout = true # bool | Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true. (optional)
-tty = true # bool | TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false. (optional)
+stderr = True # bool | Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true. (optional)
+stdin = True # bool | Stdin if true, redirects the standard input stream of the pod for this call. Defaults to false. (optional)
+stdout = True # bool | Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true. (optional)
+tty = True # bool | TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_pod_attach(name, namespace, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
     pprint(api_response)
 except ApiException as e:
@@ -608,7 +622,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -620,7 +634,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to exec of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -640,12 +656,12 @@ name = 'name_example' # str | name of the PodExecOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 command = 'command_example' # str | Command is the remote command to execute. argv array. Not executed within a shell. (optional)
 container = 'container_example' # str | Container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
-stderr = true # bool | Redirect the standard error stream of the pod for this call. Defaults to true. (optional)
-stdin = true # bool | Redirect the standard input stream of the pod for this call. Defaults to false. (optional)
-stdout = true # bool | Redirect the standard output stream of the pod for this call. Defaults to true. (optional)
-tty = true # bool | TTY if true indicates that a tty will be allocated for the exec call. Defaults to false. (optional)
+stderr = True # bool | Redirect the standard error stream of the pod for this call. Defaults to true. (optional)
+stdin = True # bool | Redirect the standard input stream of the pod for this call. Defaults to false. (optional)
+stdout = True # bool | Redirect the standard output stream of the pod for this call. Defaults to true. (optional)
+tty = True # bool | TTY if true indicates that a tty will be allocated for the exec call. Defaults to false. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_pod_exec(name, namespace, command=command, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
     pprint(api_response)
 except ApiException as e:
@@ -675,7 +691,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -687,7 +703,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to portforward of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -707,7 +725,7 @@ name = 'name_example' # str | name of the PodPortForwardOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 ports = 56 # int | List of ports to forward Required when using WebSockets (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_pod_portforward(name, namespace, ports=ports)
     pprint(api_response)
 except ApiException as e:
@@ -732,7 +750,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -744,7 +762,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -764,7 +784,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -789,7 +809,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -801,7 +821,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -822,7 +844,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -848,7 +870,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -860,7 +882,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -880,7 +904,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -905,7 +929,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -917,7 +941,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -938,7 +964,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -964,7 +990,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -976,7 +1002,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -995,7 +1023,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1019,7 +1047,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1031,7 +1059,9 @@ Name | Type | Description  | Notes
 
 connect GET requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1051,7 +1081,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_get_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1076,7 +1106,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1088,7 +1118,9 @@ Name | Type | Description  | Notes
 
 connect HEAD requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1108,7 +1140,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_head_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1133,7 +1165,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1145,7 +1177,9 @@ Name | Type | Description  | Notes
 
 connect HEAD requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1166,7 +1200,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_head_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1192,7 +1226,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1204,7 +1238,9 @@ Name | Type | Description  | Notes
 
 connect HEAD requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1224,7 +1260,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_head_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1249,7 +1285,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1261,7 +1297,9 @@ Name | Type | Description  | Notes
 
 connect HEAD requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1282,7 +1320,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_head_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1308,7 +1346,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1320,7 +1358,9 @@ Name | Type | Description  | Notes
 
 connect HEAD requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1339,7 +1379,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_head_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1363,7 +1403,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1375,7 +1415,9 @@ Name | Type | Description  | Notes
 
 connect HEAD requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1395,7 +1437,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_head_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1420,7 +1462,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1432,7 +1474,9 @@ Name | Type | Description  | Notes
 
 connect OPTIONS requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1452,7 +1496,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_options_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1477,7 +1521,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1489,7 +1533,9 @@ Name | Type | Description  | Notes
 
 connect OPTIONS requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1510,7 +1556,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_options_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1536,7 +1582,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1548,7 +1594,9 @@ Name | Type | Description  | Notes
 
 connect OPTIONS requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1568,7 +1616,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_options_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1593,7 +1641,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1605,7 +1653,9 @@ Name | Type | Description  | Notes
 
 connect OPTIONS requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1626,7 +1676,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_options_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1652,7 +1702,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1664,7 +1714,9 @@ Name | Type | Description  | Notes
 
 connect OPTIONS requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1683,7 +1735,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_options_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1707,7 +1759,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1719,7 +1771,9 @@ Name | Type | Description  | Notes
 
 connect OPTIONS requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1739,7 +1793,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_options_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1764,7 +1818,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1776,7 +1830,9 @@ Name | Type | Description  | Notes
 
 connect PATCH requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1796,7 +1852,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_patch_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1821,7 +1877,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1833,7 +1889,9 @@ Name | Type | Description  | Notes
 
 connect PATCH requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1854,7 +1912,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_patch_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1880,7 +1938,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1892,7 +1950,9 @@ Name | Type | Description  | Notes
 
 connect PATCH requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1912,7 +1972,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_patch_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -1937,7 +1997,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1949,7 +2009,9 @@ Name | Type | Description  | Notes
 
 connect PATCH requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -1970,7 +2032,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_patch_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -1996,7 +2058,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2008,7 +2070,9 @@ Name | Type | Description  | Notes
 
 connect PATCH requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2027,7 +2091,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_patch_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2051,7 +2115,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2063,7 +2127,9 @@ Name | Type | Description  | Notes
 
 connect PATCH requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2083,7 +2149,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_patch_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2108,7 +2174,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2120,7 +2186,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to attach of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2139,12 +2207,12 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PodAttachOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 container = 'container_example' # str | The container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
-stderr = true # bool | Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true. (optional)
-stdin = true # bool | Stdin if true, redirects the standard input stream of the pod for this call. Defaults to false. (optional)
-stdout = true # bool | Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true. (optional)
-tty = true # bool | TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false. (optional)
+stderr = True # bool | Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true. (optional)
+stdin = True # bool | Stdin if true, redirects the standard input stream of the pod for this call. Defaults to false. (optional)
+stdout = True # bool | Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true. (optional)
+tty = True # bool | TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_pod_attach(name, namespace, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
     pprint(api_response)
 except ApiException as e:
@@ -2173,7 +2241,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2185,7 +2253,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to exec of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2205,12 +2275,12 @@ name = 'name_example' # str | name of the PodExecOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 command = 'command_example' # str | Command is the remote command to execute. argv array. Not executed within a shell. (optional)
 container = 'container_example' # str | Container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
-stderr = true # bool | Redirect the standard error stream of the pod for this call. Defaults to true. (optional)
-stdin = true # bool | Redirect the standard input stream of the pod for this call. Defaults to false. (optional)
-stdout = true # bool | Redirect the standard output stream of the pod for this call. Defaults to true. (optional)
-tty = true # bool | TTY if true indicates that a tty will be allocated for the exec call. Defaults to false. (optional)
+stderr = True # bool | Redirect the standard error stream of the pod for this call. Defaults to true. (optional)
+stdin = True # bool | Redirect the standard input stream of the pod for this call. Defaults to false. (optional)
+stdout = True # bool | Redirect the standard output stream of the pod for this call. Defaults to true. (optional)
+tty = True # bool | TTY if true indicates that a tty will be allocated for the exec call. Defaults to false. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_pod_exec(name, namespace, command=command, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
     pprint(api_response)
 except ApiException as e:
@@ -2240,7 +2310,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2252,7 +2322,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to portforward of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2272,7 +2344,7 @@ name = 'name_example' # str | name of the PodPortForwardOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 ports = 56 # int | List of ports to forward Required when using WebSockets (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_pod_portforward(name, namespace, ports=ports)
     pprint(api_response)
 except ApiException as e:
@@ -2297,7 +2369,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2309,7 +2381,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2329,7 +2403,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2354,7 +2428,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2366,7 +2440,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2387,7 +2463,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2413,7 +2489,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2425,7 +2501,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2445,7 +2523,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2470,7 +2548,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2482,7 +2560,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2503,7 +2583,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2529,7 +2609,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2541,7 +2621,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2560,7 +2642,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2584,7 +2666,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2596,7 +2678,9 @@ Name | Type | Description  | Notes
 
 connect POST requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2616,7 +2700,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_post_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2641,7 +2725,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2653,7 +2737,9 @@ Name | Type | Description  | Notes
 
 connect PUT requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2673,7 +2759,7 @@ name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_put_namespaced_pod_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2698,7 +2784,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2710,7 +2796,9 @@ Name | Type | Description  | Notes
 
 connect PUT requests to proxy of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2731,7 +2819,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_put_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2757,7 +2845,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2769,7 +2857,9 @@ Name | Type | Description  | Notes
 
 connect PUT requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2789,7 +2879,7 @@ name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_put_namespaced_service_proxy(name, namespace, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2814,7 +2904,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2826,7 +2916,9 @@ Name | Type | Description  | Notes
 
 connect PUT requests to proxy of Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2847,7 +2939,7 @@ namespace = 'namespace_example' # str | object name and auth scope, such as for 
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_put_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2873,7 +2965,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2885,7 +2977,9 @@ Name | Type | Description  | Notes
 
 connect PUT requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2904,7 +2998,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_put_node_proxy(name, path=path)
     pprint(api_response)
 except ApiException as e:
@@ -2928,7 +3022,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2940,7 +3034,9 @@ Name | Type | Description  | Notes
 
 connect PUT requests to proxy of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -2960,7 +3056,7 @@ name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try: 
+try:
     api_response = api_instance.connect_put_node_proxy_with_path(name, path, path2=path2)
     pprint(api_response)
 except ApiException as e:
@@ -2985,7 +3081,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2997,7 +3093,9 @@ Name | Type | Description  | Notes
 
 create a Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3014,11 +3112,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 body = kubernetes.client.V1Namespace() # V1Namespace | 
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespace(body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3044,7 +3142,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3056,7 +3154,9 @@ Name | Type | Description  | Notes
 
 create a Binding
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3075,10 +3175,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Binding() # V1Binding | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_binding(namespace, body, dry_run=dry_run, include_uninitialized=include_uninitialized, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -3105,7 +3205,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3117,7 +3217,9 @@ Name | Type | Description  | Notes
 
 create a ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3135,11 +3237,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ConfigMap() # V1ConfigMap | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_config_map(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3166,7 +3268,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3178,7 +3280,9 @@ Name | Type | Description  | Notes
 
 create Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3196,11 +3300,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Endpoints() # V1Endpoints | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_endpoints(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3227,7 +3331,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3239,7 +3343,9 @@ Name | Type | Description  | Notes
 
 create an Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3257,11 +3363,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Event() # V1Event | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_event(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3288,7 +3394,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3300,7 +3406,9 @@ Name | Type | Description  | Notes
 
 create a LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3318,11 +3426,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1LimitRange() # V1LimitRange | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_limit_range(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3349,7 +3457,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3361,7 +3469,9 @@ Name | Type | Description  | Notes
 
 create a PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3379,11 +3489,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PersistentVolumeClaim() # V1PersistentVolumeClaim | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_persistent_volume_claim(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3410,7 +3520,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3422,7 +3532,9 @@ Name | Type | Description  | Notes
 
 create a Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3440,11 +3552,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Pod() # V1Pod | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_pod(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3471,7 +3583,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3483,7 +3595,9 @@ Name | Type | Description  | Notes
 
 create binding of a Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3503,10 +3617,10 @@ name = 'name_example' # str | name of the Binding
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Binding() # V1Binding | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_pod_binding(name, namespace, body, dry_run=dry_run, include_uninitialized=include_uninitialized, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -3534,7 +3648,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3546,7 +3660,9 @@ Name | Type | Description  | Notes
 
 create eviction of a Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3566,10 +3682,10 @@ name = 'name_example' # str | name of the Eviction
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1Eviction() # V1beta1Eviction | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_pod_eviction(name, namespace, body, dry_run=dry_run, include_uninitialized=include_uninitialized, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -3597,7 +3713,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3609,7 +3725,9 @@ Name | Type | Description  | Notes
 
 create a PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3627,11 +3745,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PodTemplate() # V1PodTemplate | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_pod_template(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3658,7 +3776,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3670,7 +3788,9 @@ Name | Type | Description  | Notes
 
 create a ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3688,11 +3808,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ReplicationController() # V1ReplicationController | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_replication_controller(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3719,7 +3839,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3731,7 +3851,9 @@ Name | Type | Description  | Notes
 
 create a ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3749,11 +3871,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ResourceQuota() # V1ResourceQuota | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_resource_quota(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3780,7 +3902,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3792,7 +3914,9 @@ Name | Type | Description  | Notes
 
 create a Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3810,11 +3934,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Secret() # V1Secret | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_secret(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3841,7 +3965,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3853,7 +3977,9 @@ Name | Type | Description  | Notes
 
 create a Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3871,11 +3997,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Service() # V1Service | 
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_service(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3902,7 +4028,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3914,7 +4040,9 @@ Name | Type | Description  | Notes
 
 create a ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3932,11 +4060,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ServiceAccount() # V1ServiceAccount | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_namespaced_service_account(namespace, body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -3963,7 +4091,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3975,7 +4103,9 @@ Name | Type | Description  | Notes
 
 create a Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -3992,11 +4122,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 body = kubernetes.client.V1Node() # V1Node | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_node(body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -4022,7 +4152,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4034,7 +4164,9 @@ Name | Type | Description  | Notes
 
 create a PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4051,11 +4183,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume | 
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.create_persistent_volume(body, include_uninitialized=include_uninitialized, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -4081,7 +4213,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4093,7 +4225,9 @@ Name | Type | Description  | Notes
 
 delete collection of ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4110,7 +4244,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4118,9 +4252,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_config_map(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4152,7 +4286,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4164,7 +4298,9 @@ Name | Type | Description  | Notes
 
 delete collection of Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4181,7 +4317,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4189,9 +4325,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_endpoints(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4223,7 +4359,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4235,7 +4371,9 @@ Name | Type | Description  | Notes
 
 delete collection of Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4252,7 +4390,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4260,9 +4398,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_event(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4294,7 +4432,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4306,7 +4444,9 @@ Name | Type | Description  | Notes
 
 delete collection of LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4323,7 +4463,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4331,9 +4471,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_limit_range(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4365,7 +4505,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4377,7 +4517,9 @@ Name | Type | Description  | Notes
 
 delete collection of PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4394,7 +4536,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4402,9 +4544,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_persistent_volume_claim(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4436,7 +4578,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4448,7 +4590,9 @@ Name | Type | Description  | Notes
 
 delete collection of Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4465,7 +4609,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4473,9 +4617,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_pod(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4507,7 +4651,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4519,7 +4663,9 @@ Name | Type | Description  | Notes
 
 delete collection of PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4536,7 +4682,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4544,9 +4690,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_pod_template(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4578,7 +4724,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4590,7 +4736,9 @@ Name | Type | Description  | Notes
 
 delete collection of ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4607,7 +4755,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4615,9 +4763,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_replication_controller(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4649,7 +4797,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4661,7 +4809,9 @@ Name | Type | Description  | Notes
 
 delete collection of ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4678,7 +4828,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4686,9 +4836,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_resource_quota(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4720,7 +4870,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4732,7 +4882,9 @@ Name | Type | Description  | Notes
 
 delete collection of Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4749,7 +4901,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4757,9 +4909,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_secret(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4791,7 +4943,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4803,7 +4955,9 @@ Name | Type | Description  | Notes
 
 delete collection of ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4820,7 +4974,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4828,9 +4982,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_namespaced_service_account(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4862,7 +5016,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4874,7 +5028,9 @@ Name | Type | Description  | Notes
 
 delete collection of Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4890,7 +5046,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4898,9 +5054,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_node(include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -4931,7 +5087,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4943,7 +5099,9 @@ Name | Type | Description  | Notes
 
 delete collection of PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -4959,7 +5117,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4967,9 +5125,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.delete_collection_persistent_volume(include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -5000,19 +5158,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespace**
-> V1Status delete_namespace(name, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespace(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5030,14 +5190,14 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Namespace
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespace(name, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespace(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespace: %s\n" % e)
@@ -5049,11 +5209,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Namespace | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5065,19 +5225,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_config_map**
-> V1Status delete_namespaced_config_map(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_config_map(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5096,14 +5258,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_config_map(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_config_map(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_config_map: %s\n" % e)
@@ -5116,11 +5278,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the ConfigMap | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5132,19 +5294,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_endpoints**
-> V1Status delete_namespaced_endpoints(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_endpoints(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5163,14 +5327,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_endpoints(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_endpoints(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_endpoints: %s\n" % e)
@@ -5183,11 +5347,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Endpoints | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5199,19 +5363,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_event**
-> V1Status delete_namespaced_event(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_event(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete an Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5230,14 +5396,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_event(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_event(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_event: %s\n" % e)
@@ -5250,11 +5416,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Event | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5266,19 +5432,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_limit_range**
-> V1Status delete_namespaced_limit_range(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_limit_range(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5297,14 +5465,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_limit_range(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_limit_range(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_limit_range: %s\n" % e)
@@ -5317,11 +5485,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the LimitRange | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5333,19 +5501,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_persistent_volume_claim**
-> V1Status delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5364,14 +5534,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_persistent_volume_claim: %s\n" % e)
@@ -5384,11 +5554,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the PersistentVolumeClaim | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5400,19 +5570,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod**
-> V1Status delete_namespaced_pod(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_pod(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5431,14 +5603,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_pod(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_pod(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_pod: %s\n" % e)
@@ -5451,11 +5623,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Pod | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5467,19 +5639,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod_template**
-> V1Status delete_namespaced_pod_template(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_pod_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5498,14 +5672,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_pod_template(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_pod_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_pod_template: %s\n" % e)
@@ -5518,11 +5692,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the PodTemplate | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5534,19 +5708,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_replication_controller**
-> V1Status delete_namespaced_replication_controller(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_replication_controller(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5565,14 +5741,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_replication_controller(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_replication_controller(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_replication_controller: %s\n" % e)
@@ -5585,11 +5761,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the ReplicationController | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5601,19 +5777,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_resource_quota**
-> V1Status delete_namespaced_resource_quota(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_resource_quota(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5632,14 +5810,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_resource_quota(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_resource_quota(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_resource_quota: %s\n" % e)
@@ -5652,11 +5830,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the ResourceQuota | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5668,19 +5846,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_secret**
-> V1Status delete_namespaced_secret(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_secret(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5699,14 +5879,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_secret(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_secret(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_secret: %s\n" % e)
@@ -5719,11 +5899,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Secret | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5735,19 +5915,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_service**
-> V1Status delete_namespaced_service(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_service(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5766,14 +5948,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_service(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_service(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_service: %s\n" % e)
@@ -5786,11 +5968,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Service | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5802,19 +5984,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_service_account**
-> V1Status delete_namespaced_service_account(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_namespaced_service_account(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5833,14 +6017,14 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_namespaced_service_account(name, namespace, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_namespaced_service_account(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_namespaced_service_account: %s\n" % e)
@@ -5853,11 +6037,11 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the ServiceAccount | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5869,19 +6053,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_node**
-> V1Status delete_node(name, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_node(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5899,14 +6085,14 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Node
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_node(name, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_node(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_node: %s\n" % e)
@@ -5918,11 +6104,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Node | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5934,19 +6120,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_persistent_volume**
-> V1Status delete_persistent_volume(name, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+> V1Status delete_persistent_volume(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
 delete a PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -5964,14 +6152,14 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PersistentVolume
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
-orphan_dependents = true # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
+orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try: 
-    api_response = api_instance.delete_persistent_volume(name, pretty=pretty, body=body, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy)
+try:
+    api_response = api_instance.delete_persistent_volume(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CoreV1Api->delete_persistent_volume: %s\n" % e)
@@ -5983,11 +6171,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolume | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5999,7 +6187,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6011,7 +6199,9 @@ Name | Type | Description  | Notes
 
 get available resources
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6028,7 +6218,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 
-try: 
+try:
     api_response = api_instance.get_api_resources()
     pprint(api_response)
 except ApiException as e:
@@ -6048,7 +6238,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6060,7 +6250,9 @@ This endpoint does not need any parameter.
 
 list objects of kind ComponentStatus
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6078,15 +6270,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_component_status(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6117,7 +6309,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6129,7 +6321,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6147,15 +6341,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_config_map_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6186,7 +6380,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6198,7 +6392,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6216,15 +6412,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_endpoints_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6255,7 +6451,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6267,7 +6463,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6285,15 +6483,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_event_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6324,7 +6522,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6336,7 +6534,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6354,15 +6554,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_limit_range_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6393,7 +6593,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6405,7 +6605,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6421,7 +6623,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6429,9 +6631,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespace(include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6462,7 +6664,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6474,7 +6676,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6491,7 +6695,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6499,9 +6703,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_config_map(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6533,7 +6737,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6545,7 +6749,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6562,7 +6768,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6570,9 +6776,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_endpoints(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6604,7 +6810,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6616,7 +6822,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6633,7 +6841,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6641,9 +6849,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_event(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6675,7 +6883,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6687,7 +6895,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6704,7 +6914,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6712,9 +6922,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_limit_range(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6746,7 +6956,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6758,7 +6968,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6775,7 +6987,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6783,9 +6995,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_persistent_volume_claim(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6817,7 +7029,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6829,7 +7041,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6846,7 +7060,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6854,9 +7068,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_pod(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6888,7 +7102,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6900,7 +7114,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6917,7 +7133,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6925,9 +7141,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_pod_template(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -6959,7 +7175,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6971,7 +7187,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -6988,7 +7206,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6996,9 +7214,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_replication_controller(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7030,7 +7248,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7042,7 +7260,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7059,7 +7279,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7067,9 +7287,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_resource_quota(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7101,7 +7321,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7113,7 +7333,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7130,7 +7352,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7138,9 +7360,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_secret(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7172,7 +7394,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7184,7 +7406,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7201,7 +7425,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
+include_uninitialized = True # bool | If IncludeUninitialized is specified, the object may be returned without completing initialization. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7209,9 +7433,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_service(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7243,7 +7467,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7255,7 +7479,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7272,7 +7498,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7280,9 +7506,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_namespaced_service_account(namespace, include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7314,7 +7540,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7326,7 +7552,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7342,7 +7570,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7350,9 +7578,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_node(include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7383,7 +7611,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7395,7 +7623,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7411,7 +7641,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7419,9 +7649,9 @@ label_selector = 'label_selector_example' # str | A selector to restrict the lis
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_persistent_volume(include_uninitialized=include_uninitialized, pretty=pretty, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7452,7 +7682,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7464,7 +7694,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7482,15 +7714,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_persistent_volume_claim_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7521,7 +7753,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7533,7 +7765,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7551,15 +7785,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_pod_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7590,7 +7824,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7602,7 +7836,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7620,15 +7856,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_pod_template_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7659,7 +7895,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7671,7 +7907,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7689,15 +7927,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_replication_controller_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7728,7 +7966,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7740,7 +7978,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7758,15 +7998,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_resource_quota_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7797,7 +8037,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7809,7 +8049,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7827,15 +8069,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_secret_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7866,7 +8108,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7878,7 +8120,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7896,15 +8140,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_service_account_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -7935,7 +8179,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -7947,7 +8191,9 @@ Name | Type | Description  | Notes
 
 list or watch objects of kind Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -7965,15 +8211,15 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
-include_uninitialized = true # bool | If true, partially initialized resources are included in the response. (optional)
+include_uninitialized = True # bool | If true, partially initialized resources are included in the response. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 limit = 56 # int | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and kubernetes.clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, kubernetes.clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a kubernetes.client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = true # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
+watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try: 
+try:
     api_response = api_instance.list_service_for_all_namespaces(_continue=_continue, field_selector=field_selector, include_uninitialized=include_uninitialized, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
     pprint(api_response)
 except ApiException as e:
@@ -8004,7 +8250,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -8016,7 +8262,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8033,11 +8281,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Namespace
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespace(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8049,7 +8297,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Namespace | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8075,7 +8323,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8092,11 +8342,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Namespace
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespace_status(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8108,7 +8358,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Namespace | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8134,7 +8384,9 @@ Name | Type | Description  | Notes
 
 partially update the specified ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8152,11 +8404,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_config_map(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8169,7 +8421,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ConfigMap | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8195,7 +8447,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8213,11 +8467,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_endpoints(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8230,7 +8484,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Endpoints | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8256,7 +8510,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8274,11 +8530,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_event(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8291,7 +8547,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Event | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8317,7 +8573,9 @@ Name | Type | Description  | Notes
 
 partially update the specified LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8335,11 +8593,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_limit_range(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8352,7 +8610,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the LimitRange | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8378,7 +8636,9 @@ Name | Type | Description  | Notes
 
 partially update the specified PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8396,11 +8656,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_persistent_volume_claim(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8413,7 +8673,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolumeClaim | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8439,7 +8699,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8457,11 +8719,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_persistent_volume_claim_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8474,7 +8736,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolumeClaim | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8500,7 +8762,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8518,11 +8782,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_pod(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8535,7 +8799,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Pod | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8561,7 +8825,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8579,11 +8845,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_pod_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8596,7 +8862,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Pod | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8622,7 +8888,9 @@ Name | Type | Description  | Notes
 
 partially update the specified PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8640,11 +8908,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_pod_template(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8657,7 +8925,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PodTemplate | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8683,7 +8951,9 @@ Name | Type | Description  | Notes
 
 partially update the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8701,11 +8971,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_replication_controller(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8718,7 +8988,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ReplicationController | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8744,7 +9014,9 @@ Name | Type | Description  | Notes
 
 partially update scale of the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8762,11 +9034,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8779,7 +9051,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Scale | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8805,7 +9077,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8823,11 +9097,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_replication_controller_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8840,7 +9114,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ReplicationController | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8866,7 +9140,9 @@ Name | Type | Description  | Notes
 
 partially update the specified ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8884,11 +9160,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_resource_quota(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8901,7 +9177,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ResourceQuota | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8927,7 +9203,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -8945,11 +9223,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_resource_quota_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -8962,7 +9240,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ResourceQuota | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -8988,7 +9266,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9006,11 +9286,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_secret(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9023,7 +9303,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Secret | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9049,7 +9329,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9067,11 +9349,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_service(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9084,7 +9366,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Service | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9110,7 +9392,9 @@ Name | Type | Description  | Notes
 
 partially update the specified ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9128,11 +9412,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_service_account(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9145,7 +9429,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ServiceAccount | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9171,7 +9455,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9189,11 +9475,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_namespaced_service_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9206,7 +9492,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Service | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9232,7 +9518,9 @@ Name | Type | Description  | Notes
 
 partially update the specified Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9249,11 +9537,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Node
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_node(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9265,7 +9553,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Node | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9291,7 +9579,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9308,11 +9598,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Node
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_node_status(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9324,7 +9614,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Node | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9350,7 +9640,9 @@ Name | Type | Description  | Notes
 
 partially update the specified PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9367,11 +9659,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PersistentVolume
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_persistent_volume(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9383,7 +9675,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolume | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9409,7 +9701,9 @@ Name | Type | Description  | Notes
 
 partially update status of the specified PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9426,11 +9720,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PersistentVolume
-body = NULL # object | 
+body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.patch_persistent_volume_status(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -9442,7 +9736,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolume | 
- **body** | **object**|  | 
+ **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
 
@@ -9468,7 +9762,9 @@ Name | Type | Description  | Notes
 
 read the specified ComponentStatus
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9487,7 +9783,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ComponentStatus
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_component_status(name, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -9511,7 +9807,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9523,7 +9819,9 @@ Name | Type | Description  | Notes
 
 read the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9541,10 +9839,10 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Namespace
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespace(name, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -9570,7 +9868,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9582,7 +9880,9 @@ Name | Type | Description  | Notes
 
 read status of the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9601,7 +9901,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Namespace
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespace_status(name, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -9625,7 +9925,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9637,7 +9937,9 @@ Name | Type | Description  | Notes
 
 read the specified ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9656,10 +9958,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_config_map(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -9686,7 +9988,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9698,7 +10000,9 @@ Name | Type | Description  | Notes
 
 read the specified Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9717,10 +10021,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_endpoints(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -9747,7 +10051,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9759,7 +10063,9 @@ Name | Type | Description  | Notes
 
 read the specified Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9778,10 +10084,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_event(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -9808,7 +10114,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9820,7 +10126,9 @@ Name | Type | Description  | Notes
 
 read the specified LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9839,10 +10147,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_limit_range(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -9869,7 +10177,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9881,7 +10189,9 @@ Name | Type | Description  | Notes
 
 read the specified PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9900,10 +10210,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -9930,7 +10240,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9942,7 +10252,9 @@ Name | Type | Description  | Notes
 
 read status of the specified PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -9962,7 +10274,7 @@ name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_persistent_volume_claim_status(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -9987,7 +10299,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9999,7 +10311,9 @@ Name | Type | Description  | Notes
 
 read the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10018,10 +10332,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_pod(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10048,7 +10362,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10060,7 +10374,9 @@ Name | Type | Description  | Notes
 
 read log of the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10079,15 +10395,15 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 container = 'container_example' # str | The container for which to stream logs. Defaults to only container if there is one container in the pod. (optional)
-follow = true # bool | Follow the log stream of the pod. Defaults to false. (optional)
+follow = True # bool | Follow the log stream of the pod. Defaults to false. (optional)
 limit_bytes = 56 # int | If set, the number of bytes to read from the server before terminating the log output. This may not display a complete final line of logging, and may return slightly more or slightly less than the specified limit. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-previous = true # bool | Return previous terminated container logs. Defaults to false. (optional)
+previous = True # bool | Return previous terminated container logs. Defaults to false. (optional)
 since_seconds = 56 # int | A relative time in seconds before the current time from which to show logs. If this value precedes the time a pod was started, only logs since the pod start will be returned. If this value is in the future, no logs will be returned. Only one of sinceSeconds or sinceTime may be specified. (optional)
 tail_lines = 56 # int | If set, the number of lines from the end of the logs to show. If not specified, logs are shown from the creation of the container or sinceSeconds or sinceTime (optional)
-timestamps = true # bool | If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false. (optional)
+timestamps = True # bool | If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_pod_log(name, namespace, container=container, follow=follow, limit_bytes=limit_bytes, pretty=pretty, previous=previous, since_seconds=since_seconds, tail_lines=tail_lines, timestamps=timestamps)
     pprint(api_response)
 except ApiException as e:
@@ -10119,7 +10435,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10131,7 +10447,9 @@ Name | Type | Description  | Notes
 
 read status of the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10151,7 +10469,7 @@ name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_pod_status(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10176,7 +10494,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10188,7 +10506,9 @@ Name | Type | Description  | Notes
 
 read the specified PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10207,10 +10527,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_pod_template(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10237,7 +10557,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10249,7 +10569,9 @@ Name | Type | Description  | Notes
 
 read the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10268,10 +10590,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_replication_controller(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10298,7 +10620,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10310,7 +10632,9 @@ Name | Type | Description  | Notes
 
 read scale of the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10330,7 +10654,7 @@ name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_replication_controller_scale(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10355,7 +10679,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10367,7 +10691,9 @@ Name | Type | Description  | Notes
 
 read status of the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10387,7 +10713,7 @@ name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_replication_controller_status(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10412,7 +10738,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10424,7 +10750,9 @@ Name | Type | Description  | Notes
 
 read the specified ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10443,10 +10771,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_resource_quota(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10473,7 +10801,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10485,7 +10813,9 @@ Name | Type | Description  | Notes
 
 read status of the specified ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10505,7 +10835,7 @@ name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_resource_quota_status(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10530,7 +10860,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10542,7 +10872,9 @@ Name | Type | Description  | Notes
 
 read the specified Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10561,10 +10893,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_secret(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10591,7 +10923,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10603,7 +10935,9 @@ Name | Type | Description  | Notes
 
 read the specified Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10622,10 +10956,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_service(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10652,7 +10986,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10664,7 +10998,9 @@ Name | Type | Description  | Notes
 
 read the specified ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10683,10 +11019,10 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_service_account(name, namespace, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10713,7 +11049,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10725,7 +11061,9 @@ Name | Type | Description  | Notes
 
 read status of the specified Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10745,7 +11083,7 @@ name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_namespaced_service_status(name, namespace, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10770,7 +11108,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10782,7 +11120,9 @@ Name | Type | Description  | Notes
 
 read the specified Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10800,10 +11140,10 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the Node
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_node(name, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10829,7 +11169,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10841,7 +11181,9 @@ Name | Type | Description  | Notes
 
 read status of the specified Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10860,7 +11202,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the Node
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_node_status(name, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10884,7 +11226,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10896,7 +11238,9 @@ Name | Type | Description  | Notes
 
 read the specified PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10914,10 +11258,10 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
 name = 'name_example' # str | name of the PersistentVolume
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = true # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
-export = true # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
+exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. (optional)
+export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. (optional)
 
-try: 
+try:
     api_response = api_instance.read_persistent_volume(name, pretty=pretty, exact=exact, export=export)
     pprint(api_response)
 except ApiException as e:
@@ -10943,7 +11287,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -10955,7 +11299,9 @@ Name | Type | Description  | Notes
 
 read status of the specified PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -10974,7 +11320,7 @@ api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configura
 name = 'name_example' # str | name of the PersistentVolume
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.read_persistent_volume_status(name, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -10998,7 +11344,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11010,7 +11356,9 @@ Name | Type | Description  | Notes
 
 replace the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11031,7 +11379,7 @@ body = kubernetes.client.V1Namespace() # V1Namespace |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespace(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11057,7 +11405,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11069,7 +11417,9 @@ Name | Type | Description  | Notes
 
 replace finalize of the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11090,7 +11440,7 @@ body = kubernetes.client.V1Namespace() # V1Namespace |
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespace_finalize(name, body, dry_run=dry_run, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -11116,7 +11466,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11128,7 +11478,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified Namespace
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11149,7 +11501,7 @@ body = kubernetes.client.V1Namespace() # V1Namespace |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespace_status(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11175,7 +11527,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11187,7 +11539,9 @@ Name | Type | Description  | Notes
 
 replace the specified ConfigMap
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11209,7 +11563,7 @@ body = kubernetes.client.V1ConfigMap() # V1ConfigMap |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_config_map(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11236,7 +11590,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11248,7 +11602,9 @@ Name | Type | Description  | Notes
 
 replace the specified Endpoints
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11270,7 +11626,7 @@ body = kubernetes.client.V1Endpoints() # V1Endpoints |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_endpoints(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11297,7 +11653,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11309,7 +11665,9 @@ Name | Type | Description  | Notes
 
 replace the specified Event
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11331,7 +11689,7 @@ body = kubernetes.client.V1Event() # V1Event |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_event(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11358,7 +11716,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11370,7 +11728,9 @@ Name | Type | Description  | Notes
 
 replace the specified LimitRange
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11392,7 +11752,7 @@ body = kubernetes.client.V1LimitRange() # V1LimitRange |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_limit_range(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11419,7 +11779,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11431,7 +11791,9 @@ Name | Type | Description  | Notes
 
 replace the specified PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11453,7 +11815,7 @@ body = kubernetes.client.V1PersistentVolumeClaim() # V1PersistentVolumeClaim |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_persistent_volume_claim(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11480,7 +11842,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11492,7 +11854,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified PersistentVolumeClaim
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11514,7 +11878,7 @@ body = kubernetes.client.V1PersistentVolumeClaim() # V1PersistentVolumeClaim |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_persistent_volume_claim_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11541,7 +11905,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11553,7 +11917,9 @@ Name | Type | Description  | Notes
 
 replace the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11575,7 +11941,7 @@ body = kubernetes.client.V1Pod() # V1Pod |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_pod(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11602,7 +11968,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11614,7 +11980,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified Pod
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11636,7 +12004,7 @@ body = kubernetes.client.V1Pod() # V1Pod |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_pod_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11663,7 +12031,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11675,7 +12043,9 @@ Name | Type | Description  | Notes
 
 replace the specified PodTemplate
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11697,7 +12067,7 @@ body = kubernetes.client.V1PodTemplate() # V1PodTemplate |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_pod_template(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11724,7 +12094,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11736,7 +12106,9 @@ Name | Type | Description  | Notes
 
 replace the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11758,7 +12130,7 @@ body = kubernetes.client.V1ReplicationController() # V1ReplicationController |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_replication_controller(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11785,7 +12157,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11797,7 +12169,9 @@ Name | Type | Description  | Notes
 
 replace scale of the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11819,7 +12193,7 @@ body = kubernetes.client.V1Scale() # V1Scale |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11846,7 +12220,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11858,7 +12232,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified ReplicationController
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11880,7 +12256,7 @@ body = kubernetes.client.V1ReplicationController() # V1ReplicationController |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_replication_controller_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11907,7 +12283,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11919,7 +12295,9 @@ Name | Type | Description  | Notes
 
 replace the specified ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -11941,7 +12319,7 @@ body = kubernetes.client.V1ResourceQuota() # V1ResourceQuota |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_resource_quota(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -11968,7 +12346,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11980,7 +12358,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified ResourceQuota
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12002,7 +12382,7 @@ body = kubernetes.client.V1ResourceQuota() # V1ResourceQuota |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_resource_quota_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12029,7 +12409,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12041,7 +12421,9 @@ Name | Type | Description  | Notes
 
 replace the specified Secret
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12063,7 +12445,7 @@ body = kubernetes.client.V1Secret() # V1Secret |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_secret(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12090,7 +12472,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12102,7 +12484,9 @@ Name | Type | Description  | Notes
 
 replace the specified Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12124,7 +12508,7 @@ body = kubernetes.client.V1Service() # V1Service |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_service(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12151,7 +12535,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12163,7 +12547,9 @@ Name | Type | Description  | Notes
 
 replace the specified ServiceAccount
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12185,7 +12571,7 @@ body = kubernetes.client.V1ServiceAccount() # V1ServiceAccount |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_service_account(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12212,7 +12598,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12224,7 +12610,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified Service
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12246,7 +12634,7 @@ body = kubernetes.client.V1Service() # V1Service |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_namespaced_service_status(name, namespace, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12273,7 +12661,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12285,7 +12673,9 @@ Name | Type | Description  | Notes
 
 replace the specified Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12306,7 +12696,7 @@ body = kubernetes.client.V1Node() # V1Node |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_node(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12332,7 +12722,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12344,7 +12734,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified Node
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12365,7 +12757,7 @@ body = kubernetes.client.V1Node() # V1Node |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_node_status(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12391,7 +12783,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12403,7 +12795,9 @@ Name | Type | Description  | Notes
 
 replace the specified PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12424,7 +12818,7 @@ body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_persistent_volume(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12450,7 +12844,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12462,7 +12856,9 @@ Name | Type | Description  | Notes
 
 replace status of the specified PersistentVolume
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -12483,7 +12879,7 @@ body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume |
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 
-try: 
+try:
     api_response = api_instance.replace_persistent_volume_status(name, body, pretty=pretty, dry_run=dry_run)
     pprint(api_response)
 except ApiException as e:
@@ -12509,7 +12905,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -56,7 +56,7 @@ setup(
     tests_require=TESTS_REQUIRES,
     extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
-              'kubernetes.watch', 'kubernetes.client.apis',
+              'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils'],
     include_package_data=True,
