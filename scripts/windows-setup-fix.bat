@@ -1,6 +1,10 @@
-(	python --version>nul 2>&1 && ( REM checks the availability of python environment
-	echo "Python environment found." REM prints if python environment is found
+REM Install python client in Windows.
+REM Windows doesn't have symbolic link that this repo uses.
+REM This batch script provides a workaround for symbolic link by copying the folders over.
+
+(	python --version>nul 2>&1 && (
+	echo "Python environment found."
 	)
-	python --version REM prints python environment version
-	copy ..\kubernetes\base\* ..\kubernetes\ REM copies every file and folder that's inside \kubernetes\base\ to \kubernetes\	
-	cd .. && python setup.py install ) REM runs setup.py file
+	python --version
+	copy ..\kubernetes\base\* ..\kubernetes\
+	cd .. && python setup.py install )
