@@ -1,3 +1,10 @@
+# v9.0.0b1
+**Breaking Change:**
+- Move dependancy adal under extra require [kubernetes-client/python-base#108](https://github.com/kubernetes-client/python-base/pull/108)
+
+**Bug Fix:**
+- Honor the specified resource version in stream request when watch restarts [kubernetes-client/python-base#109](https://github.com/kubernetes-client/python-base/pull/109)
+
 # v9.0.0a1
 **Bug Fix:**
 - Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)
