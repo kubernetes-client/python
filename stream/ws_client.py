@@ -53,7 +53,8 @@ class WSClient:
             header.append("authorization: %s" % headers['authorization'])
 
         if headers and 'sec-websocket-protocol' in headers:
-            header.append("sec-websocket-protocol: %s" % headers['sec-websocket-protocol'])
+            header.append("sec-websocket-protocol: %s" %
+                          headers['sec-websocket-protocol'])
         else:
             header.append("sec-websocket-protocol: v4.channel.k8s.io")
 
@@ -186,8 +187,8 @@ class WSClient:
                     data = data[1:]
                     if data:
                         if channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
-                            # keeping all messages in the order they received for
-                            # non-blocking call.
+                            # keeping all messages in the order they received
+                            # for non-blocking call.
                             self._all += data
                         if channel not in self._channels:
                             self._channels[channel] = data

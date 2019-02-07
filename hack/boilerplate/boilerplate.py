@@ -52,7 +52,8 @@ verbose_out = sys.stderr if args.verbose else open("/dev/null", "w")
 def get_refs():
     refs = {}
 
-    for path in glob.glob(os.path.join(args.boilerplate_dir, "boilerplate.*.txt")):
+    for path in glob.glob(os.path.join(
+            args.boilerplate_dir, "boilerplate.*.txt")):
         extension = os.path.basename(path).split(".")[1]
 
         ref_file = open(path, 'r')
@@ -105,7 +106,7 @@ def file_passes(filename, refs, regexs):
                   filename, file=verbose_out)
             return False
 
-    # Replace all occurrences of the regex "2014|2015|2016|2017|2018" with "YEAR"
+    # Replace all occurrences of regex "2014|2015|2016|2017|2018" with "YEAR"
     p = regexs["date"]
     for i, d in enumerate(data):
         (data[i], found) = p.subn('YEAR', d)
@@ -118,7 +119,8 @@ def file_passes(filename, refs, regexs):
               filename, file=verbose_out)
         if args.verbose:
             print(file=verbose_out)
-            for line in difflib.unified_diff(ref, data, 'reference', filename, lineterm=''):
+            for line in difflib.unified_diff(
+                    ref, data, 'reference', filename, lineterm=''):
                 print(line, file=verbose_out)
             print(file=verbose_out)
         return False
@@ -171,9 +173,11 @@ def get_dates():
 
 def get_regexs():
     regexs = {}
-    # Search for "YEAR" which exists in the boilerplate, but shouldn't in the real thing
+    # Search for "YEAR" which exists in the boilerplate,
+    # but shouldn't in the real thing
     regexs["year"] = re.compile('YEAR')
-    # get_dates return 2014, 2015, 2016, 2017, or 2018 until the current year as a regex like: "(2014|2015|2016|2017|2018)";
+    # get_dates return 2014, 2015, 2016, 2017, or 2018 until the current year
+    # as a regex like: "(2014|2015|2016|2017|2018)";
     # company holder names can be anything
     regexs["date"] = re.compile(get_dates())
     # strip #!.* from shell scripts
