@@ -27,7 +27,9 @@ DEVELOPMENT_STATUS = "4 - Beta"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-EXTRAS = {}
+EXTRAS = {
+    'adal': ['adal>=1.0.2']
+}
 REQUIRES = []
 with open('requirements.txt') as f:
     for line in f:
