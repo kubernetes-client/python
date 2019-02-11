@@ -25,8 +25,7 @@ class ExecProvider(object):
     """
     Implementation of the proposal for out-of-tree client
     authentication providers as described here --
-    https://github.com/kubernetes/community/blob/master/contributors
-    /design-proposals/auth/kubectl-exec-plugins.md
+    https://github.com/kubernetes/community/blob/master/contributors/design-proposals/auth/kubectl-exec-plugins.md
 
     Missing from implementation:
 
