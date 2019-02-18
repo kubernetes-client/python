@@ -13,3 +13,5 @@
 # limitations under the License.
 
 from .create_from_yaml import create_from_yaml
+from .copy_file_pod import copy_file_inside_pod
+from .copy_file_pod import copy_file_from_pod
