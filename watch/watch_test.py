@@ -67,6 +67,35 @@ class WatchTests(unittest.TestCase):
         fake_resp.close.assert_called_once()
         fake_resp.release_conn.assert_called_once()
 
+    def test_watch_for_follow(self):
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.read_chunked = Mock(
+            return_value=[
+                'log_line_1\n',
+                'log_line_2\n'])
+
+        fake_api = Mock()
+        fake_api.read_namespaced_pod_log = Mock(return_value=fake_resp)
+        fake_api.read_namespaced_pod_log.__doc__ = ':param bool follow:\n:return: str'
+
+        w = Watch()
+        count = 1
+        for e in w.stream(fake_api.read_namespaced_pod_log):
+            self.assertEqual("log_line_1", e)
+            count += 1
+            # make sure we can stop the watch and the last event with won't be
+            # returned
+            if count == 2:
+                w.stop()
+
+        fake_api.read_namespaced_pod_log.assert_called_once_with(
+            _preload_content=False, follow=True)
+        fake_resp.read_chunked.assert_called_once_with(decode_content=False)
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
+
     def test_watch_resource_version_set(self):
         # https://github.com/kubernetes-client/python/issues/700
         # ensure watching from a resource version does reset to resource
