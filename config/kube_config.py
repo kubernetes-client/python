@@ -257,18 +257,18 @@ class KubeConfigLoader(object):
 
         if any(char in token for char in reserved_characters):
             # Invalid jwt, as it contains url-unsafe chars
-            return None
+            return
 
         parts = token.split('.')
         if len(parts) != 3:  # Not a valid JWT
-            return None
+            return
 
         padding = (4 - len(parts[1]) % 4) * '='
         if len(padding) == 3:
             # According to spec, 3 padding characters cannot occur
             # in a valid jwt
             # https://tools.ietf.org/html/rfc7515#appendix-C
-            return None
+            return
 
         if PY3:
             jwt_attributes = json.loads(

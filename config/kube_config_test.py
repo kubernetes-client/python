@@ -107,6 +107,17 @@ TEST_OIDC_EXPIRED_LOGIN = ".".join([
     TEST_OIDC_EXP_BASE,
     _urlsafe_unpadded_b64encode(TEST_CLIENT_CERT)
 ])
+TEST_OIDC_CONTAINS_RESERVED_CHARACTERS = ".".join([
+    _urlsafe_unpadded_b64encode(TEST_OIDC_TOKEN),
+    _urlsafe_unpadded_b64encode(TEST_OIDC_INFO).replace("a", "+"),
+    _urlsafe_unpadded_b64encode(TEST_CLIENT_CERT)
+])
+TEST_OIDC_INVALID_PADDING_LENGTH = ".".join([
+    _urlsafe_unpadded_b64encode(TEST_OIDC_TOKEN),
+    "aaaaa",
+    _urlsafe_unpadded_b64encode(TEST_CLIENT_CERT)
+])
+
 TEST_OIDC_CA = _base64(TEST_CERTIFICATE_AUTH)
 
 
@@ -395,6 +406,22 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "oidc_contains_reserved_character",
+                "context": {
+                    "cluster": "default",
+                    "user": "oidc_contains_reserved_character"
+
+                }
+            },
+            {
+                "name": "oidc_invalid_padding_length",
+                "context": {
+                    "cluster": "default",
+                    "user": "oidc_invalid_padding_length"
+
+                }
+            },
+            {
                 "name": "user_pass",
                 "context": {
                     "cluster": "default",
@@ -557,6 +584,38 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "oidc_contains_reserved_character",
+                "user": {
+                    "auth-provider": {
+                        "name": "oidc",
+                        "config": {
+                            "client-id": "tectonic-kubectl",
+                            "client-secret": "FAKE_SECRET",
+                            "id-token": TEST_OIDC_CONTAINS_RESERVED_CHARACTERS,
+                            "idp-issuer-url": "https://example.org/identity",
+                            "refresh-token":
+                                "lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "oidc_invalid_padding_length",
+                "user": {
+                    "auth-provider": {
+                        "name": "oidc",
+                        "config": {
+                            "client-id": "tectonic-kubectl",
+                            "client-secret": "FAKE_SECRET",
+                            "id-token": TEST_OIDC_INVALID_PADDING_LENGTH,
+                            "idp-issuer-url": "https://example.org/identity",
+                            "refresh-token":
+                                "lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk"
+                        }
+                    }
+                }
+            },
+            {
                 "name": "user_pass",
                 "user": {
                     "username": TEST_USERNAME,  # should be ignored
@@ -711,6 +770,26 @@ class TestKubeConfigLoader(BaseTestCase):
         )
         self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual("Bearer abc123", loader.token)
+
+    def test_oidc_fails_if_contains_reserved_chars(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="oidc_contains_reserved_character",
+        )
+        self.assertEqual(
+            loader._load_oid_token("oidc_contains_reserved_character"),
+            None,
+        )
+
+    def test_oidc_fails_if_invalid_padding_length(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="oidc_invalid_padding_length",
+        )
+        self.assertEqual(
+            loader._load_oid_token("oidc_invalid_padding_length"),
+            None,
+        )
 
     def test_user_pass(self):
         expected = FakeConfig(host=TEST_HOST, token=TEST_BASIC_TOKEN)
