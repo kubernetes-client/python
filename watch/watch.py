@@ -151,7 +151,7 @@ class Watch(object):
                 if self.resource_version is not None:
                     kwargs['resource_version'] = self.resource_version
                 else:
-                    break
+                    self._stop = True
 
             if timeouts or self._stop:
                 break
