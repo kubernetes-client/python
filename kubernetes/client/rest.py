@@ -80,6 +80,10 @@ class RESTClientObject(object):
         if configuration.assert_hostname is not None:
             addition_pool_args['assert_hostname'] = configuration.assert_hostname
 
+
+        if hasattr(configuration, "retries") and configuration.retries is not None:
+            addition_pool_args['retries'] = configuration.retries
+
         if maxsize is None:
             if configuration.connection_pool_maxsize is not None:
                 maxsize = configuration.connection_pool_maxsize

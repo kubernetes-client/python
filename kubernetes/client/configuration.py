@@ -106,6 +106,8 @@ class Configuration(with_metaclass(TypeWithDefault, object)):
         # Safe chars for path_param
         self.safe_chars_for_path_param = ''
 
+        self.retries = None
+
     @property
     def logger_file(self):
         """
