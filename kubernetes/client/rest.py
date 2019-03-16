@@ -80,7 +80,6 @@ class RESTClientObject(object):
         if configuration.assert_hostname is not None:
             addition_pool_args['assert_hostname'] = configuration.assert_hostname
 
-
         if configuration.retries is not None:
             addition_pool_args['retries'] = configuration.retries
 
