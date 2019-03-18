@@ -17,6 +17,7 @@ import unittest
 from kubernetes import utils, client
 from kubernetes.e2e_test import base
 
+
 class TestUtils(unittest.TestCase):
 
     @classmethod
@@ -25,92 +26,105 @@ class TestUtils(unittest.TestCase):
 
     def test_app_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_yaml(k8s_client, 
+        k8s_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/apps-deployment.yaml")
-        self.assertEqual("apps/v1beta1", 
+        self.assertEqual(
+            "apps/v1beta1",
             k8s_api.get_api_resources().group_version)
-        dep = k8s_api.read_namespaced_deployment(name="nginx-app",
+        dep = k8s_api.read_namespaced_deployment(
+            name="nginx-app",
             namespace="default")
         self.assertIsNotNone(dep)
-        resp = k8s_api.delete_namespaced_deployment(
-            name="nginx-app", namespace="default", 
+        k8s_api.delete_namespaced_deployment(
+            name="nginx-app", namespace="default",
             body={})
-        
+
     def test_extension_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_yaml(k8s_client, 
+        k8s_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/extensions-deployment.yaml")
-        self.assertEqual("extensions/v1beta1", 
+        self.assertEqual(
+            "extensions/v1beta1",
             k8s_api.get_api_resources().group_version)
-        dep = k8s_api.read_namespaced_deployment(name="nginx-deployment", 
+        dep = k8s_api.read_namespaced_deployment(
+            name="nginx-deployment",
             namespace="default")
         self.assertIsNotNone(dep)
-        resp = k8s_api.delete_namespaced_deployment(
-            name="nginx-deployment", namespace="default", 
+        k8s_api.delete_namespaced_deployment(
+            name="nginx-deployment", namespace="default",
             body={})
-    
+
     def test_core_pod_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_yaml(k8s_client, 
+        k8s_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/core-pod.yaml")
-        self.assertEqual("v1", 
+        self.assertEqual(
+            "v1",
             k8s_api.get_api_resources().group_version)
-        pod = k8s_api.read_namespaced_pod(name="myapp-pod", 
-            namespace="default")
+        pod = k8s_api.read_namespaced_pod(
+            name="myapp-pod", namespace="default")
         self.assertIsNotNone(pod)
-        resp = k8s_api.delete_namespaced_pod(
+        k8s_api.delete_namespaced_pod(
             name="myapp-pod", namespace="default",
             body={})
 
     def test_core_service_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_yaml(k8s_client, 
+        k8s_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/core-service.yaml")
-        self.assertEqual("v1", 
-            k8s_api.get_api_resources().group_version)
-        svc = k8s_api.read_namespaced_service(name="my-service",
+        self.assertEqual("v1", k8s_api.get_api_resources().group_version)
+        svc = k8s_api.read_namespaced_service(
+            name="my-service",
             namespace="default")
         self.assertIsNotNone(svc)
-        resp = k8s_api.delete_namespaced_service(
+        k8s_api.delete_namespaced_service(
             name="my-service", namespace="default",
             body={})
-        
+
     def test_core_namespace_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_yaml(k8s_client, 
+        k8s_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/core-namespace.yaml")
-        self.assertEqual("v1", 
-            k8s_api.get_api_resources().group_version)
+        self.assertEqual("v1", k8s_api.get_api_resources().group_version)
         nmsp = k8s_api.read_namespace(name="development")
         self.assertIsNotNone(nmsp)
-        resp = k8s_api.delete_namespace(name="development", body={})
+        k8s_api.delete_namespace(name="development", body={})
 
     def test_deployment_in_namespace(self):
         k8s_client = client.ApiClient(configuration=self.config)
-        core_api = utils.create_from_yaml(k8s_client, 
+        core_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/core-namespace-dep.yaml")
-        self.assertEqual("v1", 
-            core_api.get_api_resources().group_version)
+        self.assertEqual("v1", core_api.get_api_resources().group_version)
         nmsp = core_api.read_namespace(name="dep")
         self.assertIsNotNone(nmsp)
-        dep_api = utils.create_from_yaml(k8s_client, 
+        dep_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/extensions-deployment-dep.yaml")
-        dep = dep_api.read_namespaced_deployment(name="nginx-deployment", 
+        dep = dep_api.read_namespaced_deployment(
+            name="nginx-deployment",
             namespace="dep")
         self.assertIsNotNone(dep)
-        resp = dep_api.delete_namespaced_deployment(
-            name="nginx-deployment", namespace="dep", 
+        dep_api.delete_namespaced_deployment(
+            name="nginx-deployment", namespace="dep",
             body={})
-        resp = core_api.delete_namespace(name="dep", body={})
-        
+        core_api.delete_namespace(name="dep", body={})
+
     def test_api_service(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_yaml(k8s_client, 
+        k8s_api = utils.create_from_file(
+            k8s_client,
             "kubernetes/e2e_test/test_yaml/api-service.yaml")
-        self.assertEqual("apiregistration.k8s.io/v1beta1", 
+        self.assertEqual(
+            "apiregistration.k8s.io/v1beta1",
             k8s_api.get_api_resources().group_version)
         svc = k8s_api.read_api_service(
             name="v1alpha1.wardle.k8s.io")
         self.assertIsNotNone(svc)
-        resp = k8s_api.delete_api_service(
+        k8s_api.delete_api_service(
             name="v1alpha1.wardle.k8s.io", body={})
