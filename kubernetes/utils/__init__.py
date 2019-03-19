@@ -12,6 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .create_from_yaml import (create_from_yaml,
-                               create_from_file,
-                               create_from_map)
+from .create_from_yaml import create_from_map, create_from_yaml

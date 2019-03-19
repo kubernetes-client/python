@@ -21,13 +21,13 @@ import yaml
 from kubernetes import client
 
 
-def create_from_file(k8s_client, yaml_path, verbose=False, **kwargs):
+def create_from_yaml(k8s_client, yml, verbose=False, **kwargs):
     """
-    Perform an action from a yaml file.
+    Perform an action from a yaml string or file.
 
     :param k8s_client: an ApiClient object, initialized with the client args
-    :yaml_path: the path on the file system to the yaml file
-    :type yaml_path: str
+    :yml: a string containing valid yaml or a file name.
+    :type yml: str
     :param verbose: print confimation information
     :type verbose: bool
 
@@ -43,36 +43,11 @@ def create_from_file(k8s_client, yaml_path, verbose=False, **kwargs):
     an error response and no further processing of the request.
     Valid values are: - All: all dry run stages will be processed
     """
-    with open(path.abspath(yaml_path)) as f:
-        k8s_api = create_from_yaml(k8s_client, f.read(), verbose=verbose,
-                                   **kwargs)
-
-    return k8s_api
-
-
-def create_from_yaml(k8s_client, yaml_str, verbose=False, **kwargs):
-    """
-    Perform an action from a yaml string.
-
-    :param k8s_client: an ApiClient object, initialized with the client args
-    :yaml_str: a string containing valid yaml or json.
-    :type yaml: str
-    :param verbose: print confimation information
-    :type verbose: bool
-
-    Available parameters for performing the subsequent action:
-    :param async_req:
-    :type async_req: bool
-    :param include_uninitialized: include partially initialized resources in
-    the response.
-    :type include_uninitialized: bool
-    :param str pretty: pretty print the output
-    :param str dry_run: When present, indicates that modifications should not
-    be persisted. An invalid or unrecognized dry_run directive will result in
-    an error response and no further processing of the request.
-    Valid values are: - All: all dry run stages will be processed
-    """
-    stream = yaml.safe_load_all(yaml_str)
+    if path.exists(yml):
+        with open(path.abspath(yml)) as f:
+            stream = yaml.safe_load_all(f.read())
+    else:
+        stream = yaml.safe_load_all(yml)
     for obj in stream:
         k8s_api = create_from_map(k8s_client, obj, verbose, **kwargs)
 
@@ -123,7 +98,7 @@ def create_from_map(k8s_client, yml_object, verbose, **kwargs):
     # Expect the user to create namespaced objects more often
     if hasattr(k8s_api, "create_namespaced_{0}".format(kind)):
         resp = getattr(k8s_api, "create_namespaced_{0}".format(kind))(
-             body=yml_object, namespace=namespace, **kwargs)
+            body=yml_object, namespace=namespace, **kwargs)
     else:
         resp = getattr(k8s_api, "create_{0}".format(kind))(
             body=yml_object, **kwargs)

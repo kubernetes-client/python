@@ -26,7 +26,7 @@ class TestUtils(unittest.TestCase):
 
     def test_app_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_file(
+        k8s_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/apps-deployment.yaml")
         self.assertEqual(
@@ -42,7 +42,7 @@ class TestUtils(unittest.TestCase):
 
     def test_extension_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_file(
+        k8s_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/extensions-deployment.yaml")
         self.assertEqual(
@@ -58,7 +58,7 @@ class TestUtils(unittest.TestCase):
 
     def test_core_pod_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_file(
+        k8s_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/core-pod.yaml")
         self.assertEqual(
@@ -73,7 +73,7 @@ class TestUtils(unittest.TestCase):
 
     def test_core_service_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_file(
+        k8s_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/core-service.yaml")
         self.assertEqual("v1", k8s_api.get_api_resources().group_version)
@@ -87,7 +87,7 @@ class TestUtils(unittest.TestCase):
 
     def test_core_namespace_yaml(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_file(
+        k8s_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/core-namespace.yaml")
         self.assertEqual("v1", k8s_api.get_api_resources().group_version)
@@ -97,13 +97,13 @@ class TestUtils(unittest.TestCase):
 
     def test_deployment_in_namespace(self):
         k8s_client = client.ApiClient(configuration=self.config)
-        core_api = utils.create_from_file(
+        core_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/core-namespace-dep.yaml")
         self.assertEqual("v1", core_api.get_api_resources().group_version)
         nmsp = core_api.read_namespace(name="dep")
         self.assertIsNotNone(nmsp)
-        dep_api = utils.create_from_file(
+        dep_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/extensions-deployment-dep.yaml")
         dep = dep_api.read_namespaced_deployment(
@@ -117,7 +117,7 @@ class TestUtils(unittest.TestCase):
 
     def test_api_service(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        k8s_api = utils.create_from_file(
+        k8s_api = utils.create_from_yaml(
             k8s_client,
             "kubernetes/e2e_test/test_yaml/api-service.yaml")
         self.assertEqual(
