@@ -1,3 +1,7 @@
+# v9.0.0
+**Bug Fix:**
+- Add fieldSelector parameter to list/watch methods in custom objects spec [kubernetes-client/gen#106](https://github.com/kubernetes-client/gen/pull/106)
+
 # v9.0.0b1
 **Breaking Change:**
 - Move dependancy adal under extra require [kubernetes-client/python-base#108](https://github.com/kubernetes-client/python-base/pull/108)
