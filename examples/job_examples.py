@@ -26,8 +26,7 @@ def create_job_object():
     container = client.V1Container(
         name="pi",
         image="perl",
-        command=["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"],
-        )
+        command=["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"])
     # Create and configurate a spec section
     template = client.V1PodTemplateSpec(
         metadata=client.V1ObjectMeta(labels={"app": "pi"}),
