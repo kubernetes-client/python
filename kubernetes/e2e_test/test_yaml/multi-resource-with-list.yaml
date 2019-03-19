@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PodList
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    name: mock-pod-0
+    labels:
+      app: mock-pod-0
+  spec:
+    containers:
+    - name: mock-pod-0
+      image: busybox
+      command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    name: mock-pod-1
+    labels:
+      app: mock-pod-1
+  spec:
+    containers:
+    - name: mock-pod-1
+      image: busybox
+      command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mock
+  labels:
+    app: mock
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mock
+  template:
+    metadata:
+      labels:
+        app: mock
+    spec:
+      containers:
+      - name: mock
+        image: nginx:1.15.4
+        ports:
+        - containerPort: 80

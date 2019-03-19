@@ -1,0 +1,60 @@
+{
+   "kind":"ServiceList",
+   "apiVersion":"v1",
+   "items":[
+     {
+       "metadata":{
+         "name":"mock-3",
+         "labels":{
+           "app":"mock-3"
+         }
+       },
+       "spec":{
+         "ports": [{
+           "protocol": "TCP",
+           "port": 99,
+           "targetPort": 9949
+         }],
+         "selector":{
+           "app":"mock-3"
+         }
+       }
+     },
+     {
+        "metadata":{
+          "name":"mock-3",
+          "labels":{
+            "app":"mock-3"
+          }
+        },
+        "spec":{
+          "ports": [{
+            "protocol": "TCP",
+            "port": 99,
+            "targetPort": 9949
+          }],
+          "selector":{
+            "app":"mock-3"
+          }
+        }
+     },
+     {
+       "metadata":{
+         "name":"mock-4",
+         "labels":{
+           "app":"mock-4"
+         }
+       },
+       "spec":{
+         "ports": [{
+           "protocol": "TCP",
+           "port": 99,
+           "targetPort": 9949
+         }],
+         "selector":{
+           "app":"mock-4"
+         }
+       }
+     }
+   ]
+}
