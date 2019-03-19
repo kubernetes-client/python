@@ -105,7 +105,7 @@ class Configuration(with_metaclass(TypeWithDefault, object)):
         self.proxy_headers = None
         # Safe chars for path_param
         self.safe_chars_for_path_param = ''
-
+        # Retires to override the default value os 3 retries in urllib3
         self.retries = None
 
     @property
