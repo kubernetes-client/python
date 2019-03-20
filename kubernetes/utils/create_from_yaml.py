@@ -97,8 +97,10 @@ def create_from_yaml_single_item(
     # Take care for the case e.g. api_type is "apiextensions.k8s.io"
     # Only replace the last instance
     group = "".join(group.rsplit(".k8s.io", 1))
-    fcn_to_call = "{0}{1}Api".format(group.capitalize(),
-                                     version.capitalize())
+    # convert group name from DNS subdomain format to
+    # python class name convention
+    group = "".join(word.capitalize() for word in group.split('.'))
+    fcn_to_call = "{0}{1}Api".format(group, version.capitalize())
     k8s_api = getattr(client, fcn_to_call)(k8s_client)
     # Replace CamelCased action_type into snake_case
     kind = yml_object["kind"]

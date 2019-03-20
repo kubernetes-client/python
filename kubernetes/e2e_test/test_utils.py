@@ -99,6 +99,20 @@ class TestUtils(unittest.TestCase):
         self.assertIsNotNone(nmsp)
         core_api.delete_namespace(name="development", body={})
 
+    def test_create_rbac_role_from_yaml(self):
+        """
+        Should be able to create an rbac role.
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml")
+        rbac_api = client.RbacAuthorizationV1Api(k8s_client)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNotNone(rbac_role)
+        rbac_api.delete_namespaced_role(
+            name="pod-reader", namespace="default", body={})
+
     def test_create_deployment_non_default_namespace_from_yaml(self):
         """
         Should be able to create a namespace "dep",
