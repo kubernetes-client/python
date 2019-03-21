@@ -21,9 +21,11 @@ from multiprocessing.pool import ThreadPool
 from datetime import date, datetime
 
 # python 2 and python 3 compatibility library
+from retry_decorator import *
 from six import PY3, integer_types, iteritems, text_type
 from six.moves.urllib.parse import quote
 
+from ..config import kube_config
 from . import models
 from .configuration import Configuration
 from .rest import ApiException, RESTClientObject
@@ -107,6 +109,7 @@ class ApiClient(object):
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value
 
+    @retry(ApiException, tries=2)
     def __call_api(self, resource_path, method,
                    path_params=None, query_params=None, header_params=None,
                    body=None, post_params=None, files=None,
@@ -160,12 +163,22 @@ class ApiClient(object):
         url = self.configuration.host + resource_path
 
         # perform request and return response
-        response_data = self.request(method, url,
-                                     query_params=query_params,
-                                     headers=header_params,
-                                     post_params=post_params, body=body,
-                                     _preload_content=_preload_content,
-                                     _request_timeout=_request_timeout)
+        try:
+            response_data = self.request(method, url,
+                                         query_params=query_params,
+                                         headers=header_params,
+                                         post_params=post_params, body=body,
+                                         _preload_content=_preload_content,
+                                         _request_timeout=_request_timeout)
+
+        # doing an API call could fail due to token expiry. In this case refresh the token and try once more.
+        # TODO: 1) make _load_from_exec_plugin public
+        #       2) decide if it's generally ok to retry or if e.g. a subclass of ApiException should be used.
+        except ApiException as e:
+            if e.status == 401 or e.reason == 'Unauthorized':
+                kube_config.KubeConfigLoader._load_from_exec_plugin()
+            raise e
+
 
         self.last_response = response_data
 
