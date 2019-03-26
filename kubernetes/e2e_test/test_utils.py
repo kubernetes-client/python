@@ -14,6 +14,7 @@
 
 import unittest
 
+import yaml
 from kubernetes import utils, client
 from kubernetes.e2e_test import base
 
@@ -41,6 +42,39 @@ class TestUtils(unittest.TestCase):
         app_api.delete_namespaced_deployment(
             name="nginx-app", namespace="default",
             body={})
+
+    def test_create_apps_deployment_from_yaml_string(self):
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        with open(self.path_prefix + "apps-deployment.yaml") as f:
+            yaml_str = f.read()
+
+        utils.create_from_yaml(
+            k8s_client, yaml_str)
+
+        app_api = client.AppsV1beta1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace="default")
+        self.assertIsNotNone(dep)
+        app_api.delete_namespaced_deployment(
+            name="nginx-app", namespace="default",
+            body={})
+
+    def test_create_apps_deployment_from_yaml_obj(self):
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        with open(self.path_prefix + "apps-deployment.yaml") as f:
+            yml_obj = yaml.safe_load(f)
+
+        utils.create_from_dict(
+            k8s_client, yml_obj)
+
+        app_api = client.AppsV1beta1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace="default")
+        self.assertIsNotNone(dep)
+        app_api.delete_namespaced_deployment(
+            name="nginx-app", namespace="default",
+            body={})
+
 
     def test_create_extensions_deployment_from_yaml(self):
         """

@@ -30,7 +30,7 @@ def create_from_yaml(
     Perform an action from a yaml file. Pass True for verbose to
     print confirmation information.
     Input:
-    yaml_file: string. Contains yaml string or a  path to yaml file.
+    yaml_file: string. Contains yaml string or a path to yaml file.
     k8s_client: an ApiClient object, initialized with the client args.
     verbose: If True, print confirmation from the create action.
         Default is False.
@@ -61,11 +61,11 @@ def create_from_yaml(
     yml_document_all = yaml.safe_load_all(yaml_file)
     # Load all documents from a single YAML file
     for yml_document in yml_document_all:
-        create_from_map(k8s_client, yml_document, verbose,
+        create_from_dict(k8s_client, yml_document, verbose,
                         **kwargs)
 
 
-def create_from_map(k8s_client, yml_document, verbose=False, **kwargs):
+def create_from_dict(k8s_client, yml_document, verbose=False, **kwargs):
     # If it is a list type, will need to iterate its items
     api_exceptions = []
 
