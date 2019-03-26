@@ -11,9 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
+import io
 import re
+
 from os import path
 
 import yaml
@@ -30,7 +30,7 @@ def create_from_yaml(
     Perform an action from a yaml file. Pass True for verbose to
     print confirmation information.
     Input:
-    yaml_file: string. Contains the path to yaml file.
+    yaml_file: string. Contains yaml string or a  path to yaml file.
     k8s_client: an ApiClient object, initialized with the client args.
     verbose: If True, print confirmation from the create action.
         Default is False.
@@ -54,35 +54,44 @@ def create_from_yaml(
         processing of the request.
         Valid values are: - All: all dry run stages will be processed
     """
+    if path.exists(yaml_file):
+        with open(path.abspath(yaml_file)) as f:
+            yaml_file = io.StringIO(f.read())
 
-    with open(path.abspath(yaml_file)) as f:
-        yml_document_all = yaml.safe_load_all(f)
-        api_exceptions = []
-        # Load all documents from a single YAML file
-        for yml_document in yml_document_all:
-            # If it is a list type, will need to iterate its items
-            if "List" in yml_document["kind"]:
-                # Could be "List" or "Pod/Service/...List"
-                # This is a list type. iterate within its items
-                kind = yml_document["kind"].replace("List", "")
-                for yml_object in yml_document["items"]:
-                    # Mitigate cases when server returns a xxxList object
-                    # See kubernetes-client/python#586
-                    if kind is not "":
-                        yml_object["apiVersion"] = yml_document["apiVersion"]
-                        yml_object["kind"] = kind
-                    try:
-                        create_from_yaml_single_item(
-                            k8s_client, yml_object, verbose, **kwargs)
-                    except client.rest.ApiException as api_exception:
-                        api_exceptions.append(api_exception)
-            else:
-                # This is a single object. Call the single item method
-                try:
-                    create_from_yaml_single_item(
-                        k8s_client, yml_document, verbose, **kwargs)
-                except client.rest.ApiException as api_exception:
-                    api_exceptions.append(api_exception)
+    yml_document_all = yaml.safe_load_all(yaml_file)
+    # Load all documents from a single YAML file
+    for yml_document in yml_document_all:
+        create_from_map(k8s_client, yml_document, verbose,
+                        **kwargs)
+
+
+def create_from_map(k8s_client, yml_document, verbose=False, **kwargs):
+    # If it is a list type, will need to iterate its items
+    api_exceptions = []
+
+    if "List" in yml_document["kind"]:
+        # Could be "List" or "Pod/Service/...List"
+        # This is a list type. iterate within its items
+        kind = yml_document["kind"].replace("List", "")
+        for yml_object in yml_document["items"]:
+            # Mitigate cases when server returns a xxxList object
+            # See kubernetes-client/python#586
+            if kind is not "":
+                yml_object["apiVersion"] = yml_document["apiVersion"]
+                yml_object["kind"] = kind
+            try:
+                create_from_yaml_single_item(
+                    k8s_client, yml_object, verbose, **kwargs)
+            except client.rest.ApiException as api_exception:
+                api_exceptions.append(api_exception)
+    else:
+        # This is a single object. Call the single item method
+        try:
+            create_from_yaml_single_item(
+                k8s_client, yml_document, verbose, **kwargs)
+        except client.rest.ApiException as api_exception:
+            api_exceptions.append(api_exception)
+
     # In case we have exceptions waiting for us, raise them
     if api_exceptions:
         raise FailToCreateError(api_exceptions)
