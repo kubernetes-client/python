@@ -25,49 +25,6 @@ def create_from_yaml(
         k8s_client,
         yaml_file,
         verbose=False,
-        **kwargs):
-    """
-    Perform an action from a yaml file. Pass True for verbose to
-    print confirmation information.
-    Input:
-    yaml_file: string. Contains the path to yaml file.
-    k8s_client: an ApiClient object, initialized with the client args.
-    verbose: If True, print confirmation from the create action.
-        Default is False.
-
-    Returns:
-    An k8s api object or list of apis objects created from YAML.
-    When a single object is generated, return type is dependent
-    on output_list.
-
-    Throws a FailToCreateError exception if creation of any object
-    fails with helpful messages from the server.
-
-    Available parameters for creating <kind>:
-    :param async_req bool
-    :param bool include_uninitialized: If true, partially initialized
-        resources are included in the response.
-    :param str pretty: If 'true', then the output is pretty printed.
-    :param str dry_run: When present, indicates that modifications
-        should not be persisted. An invalid or unrecognized dryRun
-        directive will result in an error response and no further
-        processing of the request.
-        Valid values are: - All: all dry run stages will be processed
-    """
-
-    create_namespaced_from_yaml(
-        k8s_client,
-        yaml_file,
-        verbose,
-        namespace="default",
-        **kwargs
-    )
-
-
-def create_namespaced_from_yaml(
-        k8s_client,
-        yaml_file,
-        verbose=False,
         namespace="default",
         **kwargs):
     """
@@ -118,14 +75,14 @@ def create_namespaced_from_yaml(
                         yml_object["apiVersion"] = yml_document["apiVersion"]
                         yml_object["kind"] = kind
                     try:
-                        create_namespaced_from_yaml_single_item(
+                        create_from_yaml_single_item(
                             k8s_client, yml_object, verbose, namespace, **kwargs)
                     except client.rest.ApiException as api_exception:
                         api_exceptions.append(api_exception)
             else:
                 # This is a single object. Call the single item method
                 try:
-                    create_namespaced_from_yaml_single_item(
+                    create_from_yaml_single_item(
                         k8s_client, yml_document, verbose, namespace, **kwargs)
                 except client.rest.ApiException as api_exception:
                     api_exceptions.append(api_exception)
@@ -135,19 +92,6 @@ def create_namespaced_from_yaml(
 
 
 def create_from_yaml_single_item(
-        k8s_client,
-        yml_object,
-        verbose=False,
-        **kwargs):
-    create_namespaced_from_yaml_single_item(
-        k8s_client,
-        yml_object,
-        verbose,
-        namespace="default",
-        **kwargs)
-
-
-def create_namespaced_from_yaml_single_item(
         k8s_client,
         yml_object,
         verbose=False,

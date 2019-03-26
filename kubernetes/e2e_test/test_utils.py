@@ -333,7 +333,7 @@ class TestUtils(unittest.TestCase):
         Should be able to create an apps/v1beta1 deployment.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_namespaced_from_yaml(
+        utils.create_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml", namespace=self.test_namespace)
         app_api = client.AppsV1beta1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
@@ -349,7 +349,7 @@ class TestUtils(unittest.TestCase):
         specified in the multi-resource file
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_namespaced_from_yaml(
+        utils.create_from_yaml(
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml", namespace=self.test_namespace)
         core_api = client.CoreV1Api(k8s_client)
         app_api = client.AppsV1beta1Api(k8s_client)
