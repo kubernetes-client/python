@@ -1,4 +1,6 @@
-# Copyright 2016 The Kubernetes Authors.
+#!/usr/bin/env python
+
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,8 +26,11 @@ import mock
 import yaml
 from six import PY3, next
 
+from kubernetes.client import Configuration
+
 from .config_exception import ConfigException
-from .kube_config import (ConfigNode, FileOrData, KubeConfigLoader,
+from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, ConfigNode,
+                          FileOrData, KubeConfigLoader, KubeConfigMerger,
                           _cleanup_temp_files, _create_temp_file_with_content,
                           list_kube_config_contexts, load_kube_config,
                           new_client_from_config)
@@ -34,13 +39,15 @@ BEARER_TOKEN_FORMAT = "Bearer %s"
 
 EXPIRY_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 # should be less than kube_config.EXPIRY_SKEW_PREVENTION_DELAY
-EXPIRY_TIMEDELTA = 2
+PAST_EXPIRY_TIMEDELTA = 2
+# should be more than kube_config.EXPIRY_SKEW_PREVENTION_DELAY
+FUTURE_EXPIRY_TIMEDELTA = 60
 
 NON_EXISTING_FILE = "zz_non_existing_file_472398324"
 
 
 def _base64(string):
-    return base64.encodestring(string.encode()).decode()
+    return base64.standard_b64encode(string.encode()).decode()
 
 
 def _urlsafe_unpadded_b64encode(string):
@@ -51,9 +58,9 @@ def _format_expiry_datetime(dt):
     return dt.strftime(EXPIRY_DATETIME_FORMAT)
 
 
-def _get_expiry(loader):
+def _get_expiry(loader, active_context):
     expired_gcp_conf = (item for item in loader._config.value.get("users")
-                        if item.get("name") == "expired_gcp")
+                        if item.get("name") == active_context)
     return next(expired_gcp_conf).get("user").get("auth-provider") \
         .get("config").get("expiry")
 
@@ -77,8 +84,11 @@ TEST_USERNAME = "me"
 TEST_PASSWORD = "pass"
 # token for me:pass
 TEST_BASIC_TOKEN = "Basic bWU6cGFzcw=="
-TEST_TOKEN_EXPIRY = _format_expiry_datetime(
-    datetime.datetime.utcnow() - datetime.timedelta(minutes=EXPIRY_TIMEDELTA))
+DATETIME_EXPIRY_PAST = datetime.datetime.utcnow(
+) - datetime.timedelta(minutes=PAST_EXPIRY_TIMEDELTA)
+DATETIME_EXPIRY_FUTURE = datetime.datetime.utcnow(
+) + datetime.timedelta(minutes=FUTURE_EXPIRY_TIMEDELTA)
+TEST_TOKEN_EXPIRY_PAST = _format_expiry_datetime(DATETIME_EXPIRY_PAST)
 
 TEST_SSL_HOST = "https://test-host"
 TEST_CERTIFICATE_AUTH = "cert-auth"
@@ -225,6 +235,18 @@ class TestFileOrData(BaseTestCase):
                          self.get_file_content(
                              _create_temp_file_with_content(TEST_DATA)))
         _cleanup_temp_files()
+
+    def test_file_given_data_bytes(self):
+        obj = {TEST_DATA_KEY: TEST_DATA_BASE64.encode()}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY)
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
+
+    def test_file_given_data_bytes_no_base64(self):
+        obj = {TEST_DATA_KEY: TEST_DATA.encode()}
+        t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY, base64_file_content=False)
+        self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
 
 
 class TestConfigNode(BaseTestCase):
@@ -385,6 +407,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "expired_gcp_refresh",
+                "context": {
+                    "cluster": "default",
+                    "user": "expired_gcp_refresh"
+                }
+            },
+            {
                 "name": "oidc",
                 "context": {
                     "cluster": "default",
@@ -463,6 +492,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     "user": "non_existing_user"
                 }
             },
+            {
+                "name": "exec_cred_user",
+                "context": {
+                    "cluster": "default",
+                    "user": "exec_cred_user"
+                }
+            },
         ],
         "clusters": [
             {
@@ -531,7 +567,24 @@ class TestKubeConfigLoader(BaseTestCase):
                         "name": "gcp",
                         "config": {
                             "access-token": TEST_DATA_BASE64,
-                            "expiry": TEST_TOKEN_EXPIRY,  # always in past
+                            "expiry": TEST_TOKEN_EXPIRY_PAST,  # always in past
+                        }
+                    },
+                    "token": TEST_DATA_BASE64,  # should be ignored
+                    "username": TEST_USERNAME,  # should be ignored
+                    "password": TEST_PASSWORD,  # should be ignored
+                }
+            },
+            # Duplicated from "expired_gcp" so test_load_gcp_token_with_refresh
+            # is isolated from test_gcp_get_api_key_with_prefix.
+            {
+                "name": "expired_gcp_refresh",
+                "user": {
+                    "auth-provider": {
+                        "name": "gcp",
+                        "config": {
+                            "access-token": TEST_DATA_BASE64,
+                            "expiry": TEST_TOKEN_EXPIRY_PAST,  # always in past
                         }
                     },
                     "token": TEST_DATA_BASE64,  # should be ignored
@@ -646,6 +699,16 @@ class TestKubeConfigLoader(BaseTestCase):
                     "client-key-data": TEST_CLIENT_KEY_BASE64,
                 }
             },
+            {
+                "name": "exec_cred_user",
+                "user": {
+                    "exec": {
+                        "apiVersion": "client.authentication.k8s.io/v1beta1",
+                        "command": "aws-iam-authenticator",
+                        "args": ["token", "-i", "dummy-cluster"]
+                    }
+                }
+            },
         ]
     }
 
@@ -674,16 +737,20 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64, loader.token)
 
     def test_gcp_no_refresh(self):
-        expected = FakeConfig(
-            host=TEST_HOST,
-            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
-        actual = FakeConfig()
+        fake_config = FakeConfig()
+        # swagger-generated config has this, but FakeConfig does not.
+        self.assertFalse(hasattr(fake_config, 'get_api_key_with_prefix'))
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="gcp",
             get_google_credentials=lambda: _raise_exception(
-                "SHOULD NOT BE CALLED")).load_and_set(actual)
-        self.assertEqual(expected, actual)
+                "SHOULD NOT BE CALLED")).load_and_set(fake_config)
+        # Should now be populated with a gcp token fetcher.
+        self.assertIsNotNone(fake_config.get_api_key_with_prefix)
+        self.assertEqual(TEST_HOST, fake_config.host)
+        # For backwards compatibility, authorization field should still be set.
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+                         fake_config.api_key['authorization'])
 
     def test_load_gcp_token_no_refresh(self):
         loader = KubeConfigLoader(
@@ -698,19 +765,47 @@ class TestKubeConfigLoader(BaseTestCase):
     def test_load_gcp_token_with_refresh(self):
         def cred(): return None
         cred.token = TEST_ANOTHER_DATA_BASE64
-        cred.expiry = datetime.datetime.now()
+        cred.expiry = datetime.datetime.utcnow()
 
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="expired_gcp",
             get_google_credentials=lambda: cred)
-        original_expiry = _get_expiry(loader)
+        original_expiry = _get_expiry(loader, "expired_gcp")
         self.assertTrue(loader._load_auth_provider_token())
-        new_expiry = _get_expiry(loader)
+        new_expiry = _get_expiry(loader, "expired_gcp")
         # assert that the configs expiry actually updates
         self.assertTrue(new_expiry > original_expiry)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64,
                          loader.token)
+
+    def test_gcp_get_api_key_with_prefix(self):
+        class cred_old:
+            token = TEST_DATA_BASE64
+            expiry = DATETIME_EXPIRY_PAST
+
+        class cred_new:
+            token = TEST_ANOTHER_DATA_BASE64
+            expiry = DATETIME_EXPIRY_FUTURE
+        fake_config = FakeConfig()
+        _get_google_credentials = mock.Mock()
+        _get_google_credentials.side_effect = [cred_old, cred_new]
+
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="expired_gcp_refresh",
+            get_google_credentials=_get_google_credentials)
+        loader.load_and_set(fake_config)
+        original_expiry = _get_expiry(loader, "expired_gcp_refresh")
+        # Call GCP token fetcher.
+        token = fake_config.get_api_key_with_prefix()
+        new_expiry = _get_expiry(loader, "expired_gcp_refresh")
+
+        self.assertTrue(new_expiry > original_expiry)
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64,
+                         loader.token)
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_ANOTHER_DATA_BASE64,
+                         token)
 
     def test_oidc_no_refresh(self):
         loader = KubeConfigLoader(
@@ -897,14 +992,16 @@ class TestKubeConfigLoader(BaseTestCase):
     def test_load_kube_config(self):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
-        config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
         load_kube_config(config_file=config_file, context="simple_token",
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 
     def test_list_kube_config_contexts(self):
-        config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
         contexts, active_context = list_kube_config_contexts(
             config_file=config_file)
         self.assertDictEqual(self.TEST_KUBE_CONFIG['contexts'][0],
@@ -917,7 +1014,8 @@ class TestKubeConfigLoader(BaseTestCase):
                                   contexts)
 
     def test_new_client_from_config(self):
-        config_file = self._create_temp_file(yaml.dump(self.TEST_KUBE_CONFIG))
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
         client = new_client_from_config(
             config_file=config_file, context="simple_token")
         self.assertEqual(TEST_HOST, client.configuration.host)
@@ -941,6 +1039,210 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="non_existing_user").load_and_set(actual)
         self.assertEqual(expected, actual)
+
+    @mock.patch('kubernetes.config.kube_config.ExecProvider.run')
+    def test_user_exec_auth(self, mock):
+        token = "dummy"
+        mock.return_value = {
+            "token": token
+        }
+        expected = FakeConfig(host=TEST_HOST, api_key={
+                              "authorization": BEARER_TOKEN_FORMAT % token})
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="exec_cred_user").load_and_set(actual)
+        self.assertEqual(expected, actual)
+
+
+class TestKubernetesClientConfiguration(BaseTestCase):
+    # Verifies properties of kubernetes.client.Configuration.
+    # These tests guard against changes to the upstream configuration class,
+    # since GCP authorization overrides get_api_key_with_prefix to refresh its
+    # token regularly.
+
+    def test_get_api_key_with_prefix_exists(self):
+        self.assertTrue(hasattr(Configuration, 'get_api_key_with_prefix'))
+
+    def test_get_api_key_with_prefix_returns_token(self):
+        expected_token = 'expected_token'
+        config = Configuration()
+        config.api_key['authorization'] = expected_token
+        self.assertEqual(expected_token,
+                         config.get_api_key_with_prefix('authorization'))
+
+    def test_auth_settings_calls_get_api_key_with_prefix(self):
+        expected_token = 'expected_token'
+
+        def fake_get_api_key_with_prefix(identifier):
+            self.assertEqual('authorization', identifier)
+            return expected_token
+        config = Configuration()
+        config.get_api_key_with_prefix = fake_get_api_key_with_prefix
+        self.assertEqual(expected_token,
+                         config.auth_settings()['BearerToken']['value'])
+
+
+class TestKubeConfigMerger(BaseTestCase):
+    TEST_KUBE_CONFIG_PART1 = {
+        "current-context": "no_user",
+        "contexts": [
+            {
+                "name": "no_user",
+                "context": {
+                    "cluster": "default"
+                }
+            },
+        ],
+        "clusters": [
+            {
+                "name": "default",
+                "cluster": {
+                    "server": TEST_HOST
+                }
+            },
+        ],
+        "users": []
+    }
+
+    TEST_KUBE_CONFIG_PART2 = {
+        "current-context": "",
+        "contexts": [
+            {
+                "name": "ssl",
+                "context": {
+                    "cluster": "ssl",
+                    "user": "ssl"
+                }
+            },
+            {
+                "name": "simple_token",
+                "context": {
+                    "cluster": "default",
+                    "user": "simple_token"
+                }
+            },
+        ],
+        "clusters": [
+            {
+                "name": "ssl",
+                "cluster": {
+                    "server": TEST_SSL_HOST,
+                    "certificate-authority-data":
+                        TEST_CERTIFICATE_AUTH_BASE64,
+                }
+            },
+        ],
+        "users": [
+            {
+                "name": "ssl",
+                "user": {
+                    "token": TEST_DATA_BASE64,
+                    "client-certificate-data": TEST_CLIENT_CERT_BASE64,
+                    "client-key-data": TEST_CLIENT_KEY_BASE64,
+                }
+            },
+        ]
+    }
+
+    TEST_KUBE_CONFIG_PART3 = {
+        "current-context": "no_user",
+        "contexts": [
+            {
+                "name": "expired_oidc",
+                "context": {
+                    "cluster": "default",
+                    "user": "expired_oidc"
+                }
+            },
+            {
+                "name": "ssl",
+                "context": {
+                    "cluster": "skipped-part2-defined-this-context",
+                    "user": "skipped"
+                }
+            },
+        ],
+        "clusters": [
+        ],
+        "users": [
+            {
+                "name": "expired_oidc",
+                "user": {
+                    "auth-provider": {
+                        "name": "oidc",
+                        "config": {
+                            "client-id": "tectonic-kubectl",
+                            "client-secret": "FAKE_SECRET",
+                            "id-token": TEST_OIDC_EXPIRED_LOGIN,
+                            "idp-certificate-authority-data": TEST_OIDC_CA,
+                            "idp-issuer-url": "https://example.org/identity",
+                            "refresh-token":
+                                "lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "simple_token",
+                "user": {
+                    "token": TEST_DATA_BASE64,
+                    "username": TEST_USERNAME,  # should be ignored
+                    "password": TEST_PASSWORD,  # should be ignored
+                }
+            },
+        ]
+    }
+
+    def _create_multi_config(self):
+        files = []
+        for part in (
+                self.TEST_KUBE_CONFIG_PART1,
+                self.TEST_KUBE_CONFIG_PART2,
+                self.TEST_KUBE_CONFIG_PART3):
+            files.append(self._create_temp_file(yaml.safe_dump(part)))
+        return ENV_KUBECONFIG_PATH_SEPARATOR.join(files)
+
+    def test_list_kube_config_contexts(self):
+        kubeconfigs = self._create_multi_config()
+        expected_contexts = [
+            {'context': {'cluster': 'default'}, 'name': 'no_user'},
+            {'context': {'cluster': 'ssl', 'user': 'ssl'}, 'name': 'ssl'},
+            {'context': {'cluster': 'default', 'user': 'simple_token'},
+             'name': 'simple_token'},
+            {'context': {'cluster': 'default', 'user': 'expired_oidc'}, 'name': 'expired_oidc'}]
+
+        contexts, active_context = list_kube_config_contexts(
+            config_file=kubeconfigs)
+
+        self.assertEqual(contexts, expected_contexts)
+        self.assertEqual(active_context, expected_contexts[0])
+
+    def test_new_client_from_config(self):
+        kubeconfigs = self._create_multi_config()
+        client = new_client_from_config(
+            config_file=kubeconfigs, context="simple_token")
+        self.assertEqual(TEST_HOST, client.configuration.host)
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+                         client.configuration.api_key['authorization'])
+
+    def test_save_changes(self):
+        kubeconfigs = self._create_multi_config()
+
+        # load configuration, update token, save config
+        kconf = KubeConfigMerger(kubeconfigs)
+        user = kconf.config['users'].get_with_name('expired_oidc')['user']
+        provider = user['auth-provider']['config']
+        provider.value['id-token'] = "token-changed"
+        kconf.save_changes()
+
+        # re-read configuration
+        kconf = KubeConfigMerger(kubeconfigs)
+        user = kconf.config['users'].get_with_name('expired_oidc')['user']
+        provider = user['auth-provider']['config']
+
+        # new token
+        self.assertEqual(provider.value['id-token'], "token-changed")
 
 
 if __name__ == '__main__':

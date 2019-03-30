@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Copyright 2016 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -85,7 +87,8 @@ class InClusterConfigLoader(object):
 
 
 def load_incluster_config():
-    """Use the service account kubernetes gives to pods to connect to kubernetes
+    """
+    Use the service account kubernetes gives to pods to connect to kubernetes
     cluster. It's intended for clients that expect to be running inside a pod
     running on kubernetes. It will raise an exception if called from a process
     not running in a kubernetes environment."""

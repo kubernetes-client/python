@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Copyright 2016 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +20,7 @@ import pydoc
 from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":return:"
+PYDOC_FOLLOW_PARAM = ":param bool follow:"
 
 # Removing this suffix from return type name should give us event's object
 # type. e.g., if list_namespaces() returns "NamespaceList" type,
@@ -63,7 +66,7 @@ class Watch(object):
         self._raw_return_type = return_type
         self._stop = False
         self._api_client = client.ApiClient()
-        self.resource_version = 0
+        self.resource_version = None
 
     def stop(self):
         self._stop = True
@@ -76,8 +79,17 @@ class Watch(object):
             return return_type[:-len(TYPE_LIST_SUFFIX)]
         return return_type
 
+    def get_watch_argument_name(self, func):
+        if PYDOC_FOLLOW_PARAM in pydoc.getdoc(func):
+            return 'follow'
+        else:
+            return 'watch'
+
     def unmarshal_event(self, data, return_type):
-        js = json.loads(data)
+        try:
+            js = json.loads(data)
+        except ValueError:
+            return data
         js['raw_object'] = js['object']
         if return_type:
             obj = SimpleNamespace(data=json.dumps(js['raw_object']))
@@ -120,8 +132,10 @@ class Watch(object):
 
         self._stop = False
         return_type = self.get_return_type(func)
-        kwargs['watch'] = True
+        kwargs[self.get_watch_argument_name(func)] = True
         kwargs['_preload_content'] = False
+        if 'resource_version' in kwargs:
+            self.resource_version = kwargs['resource_version']
 
         timeouts = ('timeout_seconds' in kwargs)
         while True:
@@ -132,9 +146,12 @@ class Watch(object):
                     if self._stop:
                         break
             finally:
-                kwargs['resource_version'] = self.resource_version
                 resp.close()
                 resp.release_conn()
+                if self.resource_version is not None:
+                    kwargs['resource_version'] = self.resource_version
+                else:
+                    self._stop = True
 
             if timeouts or self._stop:
                 break
