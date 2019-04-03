@@ -1,3 +1,10 @@
+# v10.0.0a1
+**Bug Fix:**
+- Make watch work with read_namespaced_pod_log [kubernetes-client/python-base#93](https://github.com/kubernetes-client/python-base/pull/93)
+
+**New Feature:**
+- Config loader supports loading from multiple kubeconfig files [kubernetes-client/python-base#94](https://github.com/kubernetes-client/python-base/pull/94)
+
 # v9.0.0
 **Bug Fix:**
 - Add fieldSelector parameter to list/watch methods in custom objects spec [kubernetes-client/gen#106](https://github.com/kubernetes-client/gen/pull/106)
