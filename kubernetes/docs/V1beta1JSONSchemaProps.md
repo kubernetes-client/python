@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **minimum** | **float** |  | [optional] 
 **multiple_of** | **float** |  | [optional] 
 **_not** | [**V1beta1JSONSchemaProps**](V1beta1JSONSchemaProps.md) |  | [optional] 
+**nullable** | **bool** |  | [optional] 
 **one_of** | [**list[V1beta1JSONSchemaProps]**](V1beta1JSONSchemaProps.md) |  | [optional] 
 **pattern** | **str** |  | [optional] 
 **pattern_properties** | [**dict(str, V1beta1JSONSchemaProps)**](V1beta1JSONSchemaProps.md) |  | [optional] 
