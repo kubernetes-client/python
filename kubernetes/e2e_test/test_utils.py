@@ -75,7 +75,6 @@ class TestUtils(unittest.TestCase):
             name="nginx-app", namespace="default",
             body={})
 
-
     def test_create_extensions_deployment_from_yaml(self):
         """
         Should be able to create an extensions/v1beta1 deployment.

@@ -60,9 +60,16 @@ def create_from_yaml(
 
     yml_document_all = yaml.safe_load_all(yaml_file)
     # Load all documents from a single YAML file
+    fail_exceptions = []
+
     for yml_document in yml_document_all:
-        create_from_dict(k8s_client, yml_document, verbose,
-                        **kwargs)
+        exceptions = create_from_dict(k8s_client, yml_document, verbose,
+                                      **kwargs)
+        if exceptions:
+            fail_exceptions.extend(exceptions)
+
+    if fail_exceptions:
+        raise FailToCreateError(fail_exceptions)
 
 
 def create_from_dict(k8s_client, yml_document, verbose=False, **kwargs):
@@ -94,7 +101,7 @@ def create_from_dict(k8s_client, yml_document, verbose=False, **kwargs):
 
     # In case we have exceptions waiting for us, raise them
     if api_exceptions:
-        raise FailToCreateError(api_exceptions)
+        return api_exceptions
 
 
 def create_from_yaml_single_item(
