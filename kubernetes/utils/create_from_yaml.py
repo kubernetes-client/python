@@ -36,7 +36,10 @@ def create_from_yaml(
     verbose: If True, print confirmation from the create action.
         Default is False.
     namespace: string. Contains the namespace to create all
-        resources inside
+        resources inside. The namespace must preexist otherwise
+        the resource creation will fail. If the API object in
+        the yaml file already contains a namespace definition
+        this parameter has no effect.
 
     Returns:
     An k8s api object or list of apis objects created from YAML.
