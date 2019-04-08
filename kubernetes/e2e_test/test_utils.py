@@ -16,6 +16,7 @@ import unittest
 
 import yaml
 from kubernetes import utils, client
+from kubernetes.client.rest import ApiException
 from kubernetes.e2e_test import base
 
 
@@ -39,9 +40,14 @@ class TestUtils(unittest.TestCase):
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
         self.assertIsNotNone(dep)
-        app_api.delete_namespaced_deployment(
-            name="nginx-app", namespace="default",
-            body={})
+        while True:
+            try:
+                app_api.delete_namespaced_deployment(
+                    name="nginx-app", namespace="default",
+                    body={})
+                break
+            except ApiException:
+                continue
 
     def test_create_apps_deployment_from_yaml_string(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
@@ -55,9 +61,14 @@ class TestUtils(unittest.TestCase):
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
         self.assertIsNotNone(dep)
-        app_api.delete_namespaced_deployment(
-            name="nginx-app", namespace="default",
-            body={})
+        while True:
+            try:
+                app_api.delete_namespaced_deployment(
+                    name="nginx-app", namespace="default",
+                    body={})
+                break
+            except ApiException:
+                continue
 
     def test_create_apps_deployment_from_yaml_obj(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
@@ -71,9 +82,14 @@ class TestUtils(unittest.TestCase):
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
         self.assertIsNotNone(dep)
-        app_api.delete_namespaced_deployment(
-            name="nginx-app", namespace="default",
-            body={})
+        while True:
+            try:
+                app_api.delete_namespaced_deployment(
+                    name="nginx-app", namespace="default",
+                    body={})
+                break
+            except ApiException:
+                continue
 
     def test_create_extensions_deployment_from_yaml(self):
         """
