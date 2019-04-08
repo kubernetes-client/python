@@ -51,20 +51,20 @@ class TestUtils(unittest.TestCase):
 
     def test_create_apps_deployment_from_yaml_string(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        with open(self.path_prefix + "apps-deployment.yaml") as f:
+        with open(self.path_prefix + "apps-deployment-2.yaml") as f:
             yaml_str = f.read()
 
         utils.create_from_yaml(
             k8s_client, yaml_str)
 
         app_api = client.AppsV1beta1Api(k8s_client)
-        dep = app_api.read_namespaced_deployment(name="nginx-app",
+        dep = app_api.read_namespaced_deployment(name="nginx-app-2",
                                                  namespace="default")
         self.assertIsNotNone(dep)
         while True:
             try:
                 app_api.delete_namespaced_deployment(
-                    name="nginx-app", namespace="default",
+                    name="nginx-app-2", namespace="default",
                     body={})
                 break
             except ApiException:
@@ -75,21 +75,17 @@ class TestUtils(unittest.TestCase):
         with open(self.path_prefix + "apps-deployment.yaml") as f:
             yml_obj = yaml.safe_load(f)
 
-        utils.create_from_dict(
-            k8s_client, yml_obj)
+        yml_obj["metadata"]["name"] = "nginx-app-3"
+
+        utils.create_from_dict(k8s_client, yml_obj)
 
         app_api = client.AppsV1beta1Api(k8s_client)
-        dep = app_api.read_namespaced_deployment(name="nginx-app",
+        dep = app_api.read_namespaced_deployment(name="nginx-app-3",
                                                  namespace="default")
         self.assertIsNotNone(dep)
-        while True:
-            try:
-                app_api.delete_namespaced_deployment(
-                    name="nginx-app", namespace="default",
-                    body={})
-                break
-            except ApiException:
-                continue
+        app_api.delete_namespaced_deployment(
+            name="nginx-app-3", namespace="default",
+            body={})
 
     def test_create_extensions_deployment_from_yaml(self):
         """
