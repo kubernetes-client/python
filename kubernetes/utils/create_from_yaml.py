@@ -14,7 +14,7 @@
 import re
 import sys
 
-if sys.version_info.major > 2:
+if sys.version_info.major < 3:
     from StringIO import StringIO
 else:
     from io import StringIO
