@@ -13,17 +13,16 @@
 # limitations under the License.
 import re
 import sys
-
-if sys.version_info.major < 3:
-    from StringIO import StringIO
-else:
-    from io import StringIO
-
 from os import path
 
 import yaml
 
 from kubernetes import client
+
+if sys.version_info.major < 3:
+    from StringIO import StringIO  # noqa: F406
+else:
+    from io import StringIO  # noqa: F406
 
 
 def create_from_yaml(
