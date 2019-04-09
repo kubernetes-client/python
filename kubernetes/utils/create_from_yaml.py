@@ -11,8 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import io
 import re
+import sys
+
+if sys.version_info.major > 2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 
 from os import path
 
@@ -56,7 +61,11 @@ def create_from_yaml(
     """
     if path.exists(yaml_file):
         with open(path.abspath(yaml_file)) as f:
-            yaml_file = io.StringIO(f.read())
+            content = f.read()
+            try:
+                yaml_file = StringIO(content)
+            except TypeError:
+                yaml_file = StringIO(content.decode('utf-8'))
 
     yml_document_all = yaml.safe_load_all(yaml_file)
     # Load all documents from a single YAML file
