@@ -23,6 +23,7 @@ def main():
 
     v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")
+    print("Hello World")
     ret = v1.list_pod_for_all_namespaces(watch=False)
     for i in ret.items:
         print("%s\t%s\t%s" %
