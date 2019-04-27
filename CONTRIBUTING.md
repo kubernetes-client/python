@@ -1,4 +1,4 @@
-# Contributing guidelines
+# Contributing Guidelines
 
 ## How to become a contributor and submit your own code
 
@@ -21,6 +21,6 @@ Follow either of the two links above to access the appropriate CLA and instructi
 1. Fork the desired repo, develop and test your code changes.
 1. Submit a pull request.
 
-### Adding dependencies
+### Adding Dependencies
 
 If your patch depends on new packages, add those packages to [requirements.txt](requirements.txt) and [setup.py](setup.py).
