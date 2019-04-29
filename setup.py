@@ -16,7 +16,7 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "9.0.0-snapshot"
+CLIENT_VERSION = "10.0.0-snapshot"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "4 - Beta"
 
@@ -27,7 +27,9 @@ DEVELOPMENT_STATUS = "4 - Beta"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-EXTRAS = {}
+EXTRAS = {
+    'adal': ['adal>=1.0.2']
+}
 REQUIRES = []
 with open('requirements.txt') as f:
     for line in f:

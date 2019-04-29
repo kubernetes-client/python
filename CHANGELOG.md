@@ -1,3 +1,38 @@
+# v10.0.0a1
+**Bug Fix:**
+- Make watch work with read_namespaced_pod_log [kubernetes-client/python-base#93](https://github.com/kubernetes-client/python-base/pull/93)
+- Add Rbac support for creating from YAML [kubernetes-client/python#767](https://github.com/kubernetes-client/python/pull/767)
+
+**New Feature:**
+- Config loader supports loading from multiple kubeconfig files [kubernetes-client/python-base#94](https://github.com/kubernetes-client/python-base/pull/94)
+- Add a script to fix setup on Windows [kubernetes-client/python#766](https://github.com/kubernetes-client/python/pull/766)
+- Extend YAML load functionality to \*LIST and multi-resources [kubernetes-client/python#673](https://github.com/kubernetes-client/python/pull/673)
+
+**API Change:**
+- Remove the AdmissionregistrationV1alpha1 API group, containing only the InitializationConfiguration type [kubernetes/kubernetes#72972](https://github.com/kubernetes/kubernetes/pull/72972)
+- Promote Lease API to v1 [kubernetes/kubernetes#72239](https://github.com/kubernetes/kubernetes/pull/72239)
+- The Ingress API is now available via `NetworkingV1beta1Api`. `ExtensionsV1beta1Api` Ingress objects are deprecated and will no longer be served in Kubernetes v1.18 [kubernetes/kubernetes#74057](https://github.com/kubernetes/kubernetes/pull/74057)
+- Introduce RuntimeClass to NodeV1alpha1Api and NodeV1beta1Api [kubernetes/kubernetes#74433](https://github.com/kubernetes/kubernetes/pull/74433)
+- Graduate PriorityClass API to GA SchedulingV1Api [kubernetes/kubernetes#73555](https://github.com/kubernetes/kubernetes/pull/73555)
+- Introduce CSINodeInfo and CSIDriver to StorageV1beta1Api [kubernetes/kubernetes#74283](https://github.com/kubernetes/kubernetes/pull/74283)
+
+# v9.0.0
+**Bug Fix:**
+- Add fieldSelector parameter to list/watch methods in custom objects spec [kubernetes-client/gen#106](https://github.com/kubernetes-client/gen/pull/106)
+
+# v9.0.0b1
+**Breaking Change:**
+- Move dependancy adal under extra require [kubernetes-client/python-base#108](https://github.com/kubernetes-client/python-base/pull/108)
+
+**Bug Fix:**
+- Honor the specified resource version in stream request when watch restarts [kubernetes-client/python-base#109](https://github.com/kubernetes-client/python-base/pull/109)
+
+**API Change:**
+- Add timeoutSeconds parameter to CustomObjectsApi list/watch calls [kubernetes-client/gen#94](https://github.com/kubernetes-client/gen/pull/94)
+
+**New Feature:**
+- Avoid creating unused ThreadPools [kubernetes-client/gen#91](https://github.com/kubernetes-client/gen/pull/91)
+
 # v9.0.0a1
 **Bug Fix:**
 - Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)

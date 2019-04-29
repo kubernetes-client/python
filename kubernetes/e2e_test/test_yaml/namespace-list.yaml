@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: NamespaceList
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: mock-1
+    labels:
+        name: mock-1
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: mock-2
+    labels:
+        name: mock-2
