@@ -1,3 +1,5 @@
+"""Example for Pre Stop Hook """
+
 from kubernetes import client, config
 
 # Fetching and loading Kubernetes Information
