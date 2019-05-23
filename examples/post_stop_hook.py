@@ -16,7 +16,7 @@ container = client.V1Container(
     post_start=client.V1Handler(
        _exec=client.V1ExecAction(
            command=[
-                 'echo \'Hello World\''
+                 "touch kube-test.txt"
                    ]
 
               )#closing for V1ExecAction

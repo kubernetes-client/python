@@ -25,7 +25,7 @@ init_container = client.V1Container(
   image="alpine",
   image_pull_policy="IfNotPresent",
   command=[
-          "echo \"Hello World\""
+          "touch kube-test.txt"
           ],
   volume_mounts=[client.V1VolumeMount(name=volume.name, mount_path="/kube-example")]
 )

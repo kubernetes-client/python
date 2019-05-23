@@ -1,5 +1,3 @@
-#  / approve 
-# /assign @roycaihw
 from kubernetes import client, config
 
 # Fetching and loading Kubernetes Information
@@ -21,7 +19,7 @@ container = client.V1Container(
        _exec=client.V1ExecAction(
            command=[
                     # Commands to be executed in the prestop hook
-                    "echo \"Hello World\""
+                    "touch kube-test.txt"
                    ]
 
               )#closing for V1ExecAction
