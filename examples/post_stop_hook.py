@@ -1,3 +1,5 @@
+"""Example for Post Start Hook """
+
 from kubernetes import client, config
 
 # Fetching and loading Kubernetes Information
