@@ -29,18 +29,12 @@ def main():
 
     api_instance = client.CoreV1Api()
 
-    body = {
-        "metadata": {
-            "labels": {
-                "foo": "bar",
-                "baz": None}
-        }
-    }
+    body = {"metadata": {"labels": {"foo": "bar", "baz": None}}}
 
     api_response = api_instance.patch_node("minikube", body)
 
     pprint(api_response)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

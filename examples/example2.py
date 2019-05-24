@@ -25,7 +25,7 @@ def main():
     count = 10
     w = watch.Watch()
     for event in w.stream(v1.list_namespace, timeout_seconds=10):
-        print("Event: %s %s" % (event['type'], event['object'].metadata.name))
+        print("Event: %s %s" % (event["type"], event["object"].metadata.name))
         count -= 1
         if not count:
             w.stop()
@@ -33,5 +33,5 @@ def main():
     print("Ended.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
