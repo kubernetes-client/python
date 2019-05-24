@@ -49,3 +49,6 @@ deployment = client.ExtensionsV1beta1Deployment(
 extension.create_namespaced_deployment(
     namespace="kube-client",
     body=deployment)
+
+if __name__ == "__main__":
+    main()
