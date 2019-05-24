@@ -24,11 +24,11 @@ container = client.V1Container(
                     "touch kube-test.txt"
                    ]
 
-              )#closing for V1ExecAction
+              )
 
-          )#closing for V1Handler
+          )
 
-     )#closing for V1Lifecycle
+     )
 )
 
 # Template
@@ -42,7 +42,7 @@ spec = client.ExtensionsV1beta1DeploymentSpec(
   replicas=1,
   template=template)
 
-#Deployment
+# Deployment
 deployment = client.ExtensionsV1beta1Deployment(
   api_version="extensions/v1beta1",
   kind="Deployment",
@@ -50,6 +50,6 @@ deployment = client.ExtensionsV1beta1Deployment(
   spec=spec)
 
 # Creation of the Deployment in specified namespace
-extension.create_namespaced_deployment(namespace="kube-client", body=deployment)
-
-
+extension.create_namespaced_deployment(
+    namespace="kube-client",
+    body=deployment)
