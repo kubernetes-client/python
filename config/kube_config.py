@@ -277,18 +277,31 @@ class KubeConfigLoader(object):
         if 'config' not in provider:
             return
 
-        parts = provider['config']['id-token'].split('.')
+        reserved_characters = frozenset(["=", "+", "/"])
+        token = provider['config']['id-token']
 
+        if any(char in token for char in reserved_characters):
+            # Invalid jwt, as it contains url-unsafe chars
+            return
+
+        parts = token.split('.')
         if len(parts) != 3:  # Not a valid JWT
-            return None
+            return
+
+        padding = (4 - len(parts[1]) % 4) * '='
+        if len(padding) == 3:
+            # According to spec, 3 padding characters cannot occur
+            # in a valid jwt
+            # https://tools.ietf.org/html/rfc7515#appendix-C
+            return
 
         if PY3:
             jwt_attributes = json.loads(
-                base64.b64decode(parts[1]).decode('utf-8')
+                base64.b64decode(parts[1] + padding).decode('utf-8')
             )
         else:
             jwt_attributes = json.loads(
-                base64.b64decode(parts[1] + "==")
+                base64.b64decode(parts[1] + padding)
             )
 
         expire = jwt_attributes.get('exp')
