@@ -90,8 +90,8 @@ def create_from_yaml(
 
 def create_from_dict(k8s_client, data, verbose=False, **kwargs):
     """
-    Perform an action from a dictionary containing one or more valid kubernetes
-    objects
+    Perform an action from a dictionary containing valid kubernetes
+    API object (i.e. List, Service, etc).
 
     Input:
     k8s_client: an ApiClient object, initialized with the client args.
