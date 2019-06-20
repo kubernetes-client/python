@@ -23,4 +23,3 @@ LIMIT 20
 More example queries can be found [here](https://gist.github.com/alex/4f100a9592b05e9b4d63)
 
 Reference: https://mail.python.org/pipermail/distutils-sig/2016-May/028986.html
-

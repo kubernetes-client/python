@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
 import re
 import sys
 from os import path
@@ -29,15 +31,26 @@ def create_from_yaml(
         k8s_client,
         yaml_file,
         verbose=False,
+        namespace="default",
         **kwargs):
     """
     Perform an action from a yaml file. Pass True for verbose to
     print confirmation information.
     Input:
-    yaml_file: string. Contains yaml string or a path to yaml file.
+    yaml_file: string. Contains the path to yaml file.
     k8s_client: an ApiClient object, initialized with the client args.
     verbose: If True, print confirmation from the create action.
         Default is False.
+    namespace: string. Contains the namespace to create all
+        resources inside. The namespace must preexist otherwise
+        the resource creation will fail. If the API object in
+        the yaml file already contains a namespace definition
+        this parameter has no effect.
+
+    Returns:
+    An k8s api object or list of apis objects created from YAML.
+    When a single object is generated, return type is dependent
+    on output_list.
 
     Throws a FailToCreateError exception if creation of any object
     fails with helpful messages from the server.

@@ -26,7 +26,17 @@ class TestUtils(unittest.TestCase):
     def setUpClass(cls):
         cls.config = base.get_e2e_configuration()
         cls.path_prefix = "kubernetes/e2e_test/test_yaml/"
+        cls.test_namespace = "e2e-test-utils"
+        k8s_client = client.api_client.ApiClient(configuration=cls.config)
+        core_v1 = client.CoreV1Api(api_client=k8s_client)
+        body = client.V1Namespace(metadata=client.V1ObjectMeta(name=cls.test_namespace))
+        core_v1.create_namespace(body=body)
 
+    @classmethod
+    def tearDownClass(cls):
+        k8s_client = client.api_client.ApiClient(configuration=cls.config)
+        core_v1 = client.CoreV1Api(api_client=k8s_client)
+        core_v1.delete_namespace(name=cls.test_namespace)
     # Tests for creating individual API objects
 
     def test_create_apps_deployment_from_yaml(self):
@@ -376,3 +386,44 @@ class TestUtils(unittest.TestCase):
         ext_api.delete_namespaced_deployment(
             name="triple-nginx", namespace="default",
             body={})
+
+    def test_create_namespaces_apps_deployment_from_yaml(self):
+        """
+        Should be able to create an apps/v1beta1 deployment.
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "apps-deployment.yaml", namespace=self.test_namespace)
+        app_api = client.AppsV1beta1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace=self.test_namespace)
+        self.assertIsNotNone(dep)
+        app_api.delete_namespaced_deployment(
+            name="nginx-app", namespace=self.test_namespace,
+            body={})
+
+    def test_create_from_list_in_multi_resource_yaml(self):
+        """
+        Should be able to create the items in the PodList and a deployment
+        specified in the multi-resource file
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource-with-list.yaml", namespace=self.test_namespace)
+        core_api = client.CoreV1Api(k8s_client)
+        app_api = client.AppsV1beta1Api(k8s_client)
+        pod_0 = core_api.read_namespaced_pod(
+            name="mock-pod-0", namespace=self.test_namespace)
+        self.assertIsNotNone(pod_0)
+        pod_1 = core_api.read_namespaced_pod(
+            name="mock-pod-1", namespace=self.test_namespace)
+        self.assertIsNotNone(pod_1)
+        dep = app_api.read_namespaced_deployment(
+            name="mock", namespace=self.test_namespace)
+        self.assertIsNotNone(dep)
+        core_api.delete_namespaced_pod(
+            name="mock-pod-0", namespace=self.test_namespace, body={})
+        core_api.delete_namespaced_pod(
+            name="mock-pod-1", namespace=self.test_namespace, body={})
+        app_api.delete_namespaced_deployment(
+            name="mock", namespace=self.test_namespace, body={})

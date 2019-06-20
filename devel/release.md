@@ -1,20 +1,20 @@
 # Release process
 
-Release process of python client involve creating (or updating) a release
-branch, update release tags, create distribution packages and upload them to
-pip.
+The release process of the python client involves creating (or updating) a release
+branch, updating release tags, and creating distribution packages and uploading them to
+pypi.
 
 ## Change logs
-Make sure changes logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
-If they are not, follow commits added after last release and update/commit
+Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
+If they are not, follow commits added after the last release and update/commit
 the change logs to master.
 
 Then based on the release, follow one of next two steps.
 
 ## Update pre-release branch
 
-Release branch name should have release-x.x format. All minor and pre-releases
-should be on the same branch. To update an existing branch with master(only for
+The release branch name should have release-x.x format. All minor and pre-releases
+should be on the same branch. To update an existing branch with master (only for
 latest pre-release):
 
 ```bash
@@ -37,8 +37,8 @@ cherry pick first:
 scripts/cherry_pick_pull.sh
 ```
 
-Do not merge master into an stable releast branch. Run the script without 
-parameters and follow its instruction to create cherry pick PR and get the 
+Do not merge master into a stable release branch. Run the script without
+parameters and follow its instructions to create a cherry pick PR. Get the
 PR merged then update your local branch:
 
 ```bash
@@ -49,8 +49,9 @@ git rebase upstream/$RELEASE_BRANCH
 ```
 
 ## Sanity check generated client
-We need to make sure there is no API changes after running update client
-scripts. Such changes should be committed to master branch first. Run this
+
+We need to make sure there are no API changes after running update client
+scripts. Such changes should be committed to the master branch first. Run this
 command:
 
 ```bash
@@ -58,17 +59,17 @@ scripts/update-client.sh
 ```
 
 And make sure there is no API change (version number changes should be fine
-as they will be updated in next step anyway). Do not commit any changes at
-this step and go back to master branch if there is any API changes.
+as they will be updated in the next step anyway). Do not commit any changes at
+this step and go back to the master branch if there are any API changes.
 
 ## Update release tags
 
-Release tags are in scripts/constants.py file. These are the constants you may
+Release tags are in the "scripts/constants.py" file. These are the constants you may
 need to update:
 
 CLIENT_VERSION: Client version should follow x.y.zDn where x,y,z are version
 numbers (integers) and D is one of "a" for alpha or "b" for beta and n is the
-pre-release number. For a final release, "Dn" part should be omitted. Examples:
+pre-release number. For a final release, the "Dn" part should be omitted. Examples:
 1.0.0a1, 2.0.1b2, 1.5.1.
 
 DEVELOPMENT_STATUS: Update it to one of the values of "Development Status"
@@ -89,8 +90,9 @@ git push upstream $RELEASE_BRANCH
 ```
 
 ## Make distribution packages
+
 First make sure you are using a clean version of python. Use virtualenv and
-pyenv packages, make sure you are using python 2.7.12. I would normally do this
+pyenv packages. Make sure you are using python 2.7.12. I would normally do this
 on a clean machine:
 
 (install [pyenv](https://github.com/yyuu/pyenv#installation))
@@ -128,9 +130,9 @@ python setup.py bdist_wheel --universal
 ls dist/
 ```
 
-You should see two files in dist folder. kubernetes\*.whl and kubernetes\*.tar.gz.
+You should see two files in dist folder: "kubernetes\*.whl" and "kubernetes\*.tar.gz".
 
-TODO: We need a dry-run option an some way to test package upload process to pypi.
+TODO: We need a dry-run option and some way to test the package upload process to pypi.
 
 If everything looks good, run this command to upload packages to pypi:
 
@@ -142,13 +144,13 @@ twine upload dist/*
 
 Create a gihub release by starting from
 [this page](https://github.com/kubernetes-client/python/releases).
-Click Deaft new release button. Name the tag the same as CLIENT_VERSION. Change
+Click the `Draft a new release button`. Name the tag the same as CLIENT_VERSION. Change
 the target branch to "release-x.y". If the release is a pre-release, check the
 `This is a pre-release` option.
 
-
 ## Announcement
-Send an announcement email to kubernetes-dev@googlegroups.com with the subject [ANNOUNCE] kubernetes python-client $VERSION is released
+
+Send an announcement email to kubernetes-dev@googlegroups.com with the subject: [ANNOUNCE] kubernetes python-client $VERSION is released
 
 ## Cleanup
 
@@ -158,6 +160,5 @@ rm -rf .release
 ```
 
 TODO: Convert steps in this document to an (semi-) automated script.
-
 
 ref: https://packaging.python.org/distributing/
