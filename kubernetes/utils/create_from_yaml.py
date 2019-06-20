@@ -66,13 +66,12 @@ def create_from_yaml(
         processing of the request.
         Valid values are: - All: all dry run stages will be processed
     """
-    if path.exists(yaml_file):
-        with open(path.abspath(yaml_file)) as f:
-            content = f.read()
-            try:
-                yaml_file = StringIO(content)
-            except TypeError:
-                yaml_file = StringIO(content.decode('utf-8'))
+    with open(path.abspath(yaml_file)) as f:
+        content = f.read()
+        try:
+            yaml_file = StringIO(content)
+        except TypeError:
+            yaml_file = StringIO(content.decode('utf-8'))
 
     yml_document_all = yaml.safe_load_all(yaml_file)
 
