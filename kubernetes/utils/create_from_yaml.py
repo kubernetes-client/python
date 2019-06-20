@@ -75,17 +75,10 @@ def create_from_yaml(
                 yaml_file = StringIO(content.decode('utf-8'))
 
     yml_document_all = yaml.safe_load_all(yaml_file)
-    # Load all documents from a single YAML file
-    fail_exceptions = []
 
     for yml_document in yml_document_all:
-        exceptions = create_from_dict(k8s_client, yml_document, verbose,
-                                      **kwargs)
-        if exceptions:
-            fail_exceptions.extend(exceptions)
-
-    if fail_exceptions:
-        raise FailToCreateError(fail_exceptions)
+        create_from_dict(k8s_client, yml_document, verbose,
+                         **kwargs)
 
 
 def create_from_dict(k8s_client, data, verbose=False, **kwargs):
@@ -99,10 +92,9 @@ def create_from_dict(k8s_client, data, verbose=False, **kwargs):
     verbose: If True, print confirmation from the create action.
         Default is False.
 
-    Returns:
-        A list of `client.rest.ApiException` instances for each object that
-        failed to create. The user of this function can throw discard them.
-
+    Raises:
+        FailToCreateError which holds list of `client.rest.ApiException`
+        instances for each object that failed to create.
     """
     # If it is a list type, will need to iterate its items
     api_exceptions = []
@@ -132,7 +124,7 @@ def create_from_dict(k8s_client, data, verbose=False, **kwargs):
 
     # In case we have exceptions waiting for us, raise them
     if api_exceptions:
-        return api_exceptions
+        raise FailToCreateError(api_exceptions)
 
 
 def create_from_yaml_single_item(
