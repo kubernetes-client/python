@@ -39,11 +39,6 @@ def create_from_yaml(
     verbose: If True, print confirmation from the create action.
         Default is False.
 
-    Returns:
-    An k8s api object or list of apis objects created from YAML.
-    When a single object is generated, return type is dependent
-    on output_list.
-
     Throws a FailToCreateError exception if creation of any object
     fails with helpful messages from the server.
 
@@ -80,19 +75,34 @@ def create_from_yaml(
         raise FailToCreateError(fail_exceptions)
 
 
-def create_from_dict(k8s_client, yml_document, verbose=False, **kwargs):
+def create_from_dict(k8s_client, data, verbose=False, **kwargs):
+    """
+    Perform an action from a dictionary containing one or more valid kubernetes
+    objects
+
+    Input:
+    k8s_client: an ApiClient object, initialized with the client args.
+    data: a dictionary holding valid kubernetes objects
+    verbose: If True, print confirmation from the create action.
+        Default is False.
+
+    Returns:
+        A list of `client.rest.ApiException` instances for each object that
+        failed to create. The user of this function can throw discard them.
+
+    """
     # If it is a list type, will need to iterate its items
     api_exceptions = []
 
-    if "List" in yml_document["kind"]:
+    if "List" in data["kind"]:
         # Could be "List" or "Pod/Service/...List"
         # This is a list type. iterate within its items
-        kind = yml_document["kind"].replace("List", "")
-        for yml_object in yml_document["items"]:
+        kind = data["kind"].replace("List", "")
+        for yml_object in data["items"]:
             # Mitigate cases when server returns a xxxList object
             # See kubernetes-client/python#586
             if kind is not "":
-                yml_object["apiVersion"] = yml_document["apiVersion"]
+                yml_object["apiVersion"] = data["apiVersion"]
                 yml_object["kind"] = kind
             try:
                 create_from_yaml_single_item(
@@ -103,7 +113,7 @@ def create_from_dict(k8s_client, yml_document, verbose=False, **kwargs):
         # This is a single object. Call the single item method
         try:
             create_from_yaml_single_item(
-                k8s_client, yml_document, verbose, **kwargs)
+                k8s_client, data, verbose, **kwargs)
         except client.rest.ApiException as api_exception:
             api_exceptions.append(api_exception)
 
