@@ -14,17 +14,11 @@
 
 
 import re
-import sys
 from os import path
 
 import yaml
 
 from kubernetes import client
-
-if sys.version_info.major < 3:
-    from StringIO import StringIO  # noqa: F406
-else:
-    from io import StringIO  # noqa: F406
 
 
 def create_from_yaml(
@@ -47,14 +41,6 @@ def create_from_yaml(
         the yaml file already contains a namespace definition
         this parameter has no effect.
 
-    Returns:
-    An k8s api object or list of apis objects created from YAML.
-    When a single object is generated, return type is dependent
-    on output_list.
-
-    Throws a FailToCreateError exception if creation of any object
-    fails with helpful messages from the server.
-
     Available parameters for creating <kind>:
     :param async_req bool
     :param bool include_uninitialized: If true, partially initialized
@@ -65,19 +51,24 @@ def create_from_yaml(
         directive will result in an error response and no further
         processing of the request.
         Valid values are: - All: all dry run stages will be processed
+
+    Raises:
+        FailToCreateError which holds list of `client.rest.ApiException`
+        instances for each object that failed to create.
     """
     with open(path.abspath(yaml_file)) as f:
-        content = f.read()
-        try:
-            yaml_file = StringIO(content)
-        except TypeError:
-            yaml_file = StringIO(content.decode('utf-8'))
+        yml_document_all = yaml.safe_load_all(f)
 
-    yml_document_all = yaml.safe_load_all(yaml_file)
+        failures = []
 
-    for yml_document in yml_document_all:
-        create_from_dict(k8s_client, yml_document, verbose,
-                         **kwargs)
+        for yml_document in yml_document_all:
+            try:
+                create_from_dict(k8s_client, yml_document, verbose,
+                                 **kwargs)
+            except FailToCreateError as failure:
+                failures.extend(failure.api_exceptions)
+        if failures:
+            raise FailToCreateError(failures)
 
 
 def create_from_dict(k8s_client, data, verbose=False, **kwargs):
