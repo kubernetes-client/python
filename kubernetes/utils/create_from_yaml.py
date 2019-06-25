@@ -60,10 +60,10 @@ def create_from_yaml(
         yml_document_all = yaml.safe_load_all(f)
 
         failures = []
-
         for yml_document in yml_document_all:
             try:
                 create_from_dict(k8s_client, yml_document, verbose,
+                                 namespace=namespace,
                                  **kwargs)
             except FailToCreateError as failure:
                 failures.extend(failure.api_exceptions)
@@ -71,7 +71,8 @@ def create_from_yaml(
             raise FailToCreateError(failures)
 
 
-def create_from_dict(k8s_client, data, verbose=False, **kwargs):
+def create_from_dict(k8s_client, data, verbose=False, namespace='default',
+                     **kwargs):
     """
     Perform an action from a dictionary containing valid kubernetes
     API object (i.e. List, Service, etc).
@@ -81,6 +82,11 @@ def create_from_dict(k8s_client, data, verbose=False, **kwargs):
     data: a dictionary holding valid kubernetes objects
     verbose: If True, print confirmation from the create action.
         Default is False.
+    namespace: string. Contains the namespace to create all
+        resources inside. The namespace must preexist otherwise
+        the resource creation will fail. If the API object in
+        the yaml file already contains a namespace definition
+        this parameter has no effect.
 
     Raises:
         FailToCreateError which holds list of `client.rest.ApiException`
@@ -101,14 +107,15 @@ def create_from_dict(k8s_client, data, verbose=False, **kwargs):
                 yml_object["kind"] = kind
             try:
                 create_from_yaml_single_item(
-                    k8s_client, yml_object, verbose, **kwargs)
+                    k8s_client, yml_object, verbose, namespace=namespace,
+                    **kwargs)
             except client.rest.ApiException as api_exception:
                 api_exceptions.append(api_exception)
     else:
         # This is a single object. Call the single item method
         try:
             create_from_yaml_single_item(
-                k8s_client, data, verbose, **kwargs)
+                k8s_client, data, verbose, namespace=namespace, **kwargs)
         except client.rest.ApiException as api_exception:
             api_exceptions.append(api_exception)
 
@@ -135,17 +142,17 @@ def create_from_yaml_single_item(
     kind = yml_object["kind"]
     kind = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', kind)
     kind = re.sub('([a-z0-9])([A-Z])', r'\1_\2', kind).lower()
-    # Decide which namespace we are going to put the object in,
-    # if any
-    if "namespace" in yml_object["metadata"]:
-        namespace = yml_object["metadata"]["namespace"]
-    else:
-        namespace = "default"
     # Expect the user to create namespaced objects more often
     if hasattr(k8s_api, "create_namespaced_{0}".format(kind)):
+        # Decide which namespace we are going to put the object in,
+        # if any
+        if "namespace" in yml_object["metadata"]:
+            namespace = yml_object["metadata"]["namespace"]
+            kwargs['namespace'] = namespace
         resp = getattr(k8s_api, "create_namespaced_{0}".format(kind))(
-            body=yml_object, namespace=namespace, **kwargs)
+            body=yml_object, **kwargs)
     else:
+        kwargs.pop('namespace', None)
         resp = getattr(k8s_api, "create_{0}".format(kind))(
             body=yml_object, **kwargs)
     if verbose:
