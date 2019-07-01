@@ -1,3 +1,8 @@
+# v10.0.0
+**Bug Fix:**
+- Fix base64 padding for kube config [kubernetes-client/python-base#79](https://github.com/kubernetes-client/python-base/pull/79)
+- Fix websocket client decoding binary message. Replace non-utf8 data instead of failing [kubernetes-client/python-base#104](https://github.com/kubernetes-client/python-base/pull/104)
+
 # v10.0.0a1
 **Bug Fix:**
 - Make watch work with read_namespaced_pod_log [kubernetes-client/python-base#93](https://github.com/kubernetes-client/python-base/pull/93)
