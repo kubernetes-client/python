@@ -70,7 +70,6 @@ python -m examples.example1
 
 (replace example1 with the example base filename)
 
-
 ## Documentation
 
 All APIs and Models' documentation can be found at the [Generated client's README file](kubernetes/README.md)
@@ -124,13 +123,13 @@ between client-python versions.
 | 6.0 Alpha/Beta  | Kubernetes main repo, 1.10 branch    | ✗                             |
 | 6.0             | Kubernetes main repo, 1.10 branch    | ✗                             |
 | 7.0 Alpha/Beta  | Kubernetes main repo, 1.11 branch    | ✗                             |
-| 7.0             | Kubernetes main repo, 1.11 branch    | ✓                             |
+| 7.0             | Kubernetes main repo, 1.11 branch    | ✗                             |
 | 8.0 Alpha/Beta  | Kubernetes main repo, 1.12 branch    | ✗                             |
 | 8.0             | Kubernetes main repo, 1.12 branch    | ✓                             |
 | 9.0 Alpha/Beta  | Kubernetes main repo, 1.13 branch    | ✗                             |
 | 9.0             | Kubernetes main repo, 1.13 branch    | ✓                             |
-| 10.0 Alpha/Beta | Kubernetes main repo, 1.14 branch    | ✓                             |
-
+| 10.0 Alpha/Beta | Kubernetes main repo, 1.14 branch    | ✗                             |
+| 10.0            | Kubernetes main repo, 1.14 branch    | ✓                             |
 
 Key:
 
@@ -151,10 +150,9 @@ Participation in the Kubernetes community is governed by the [CNCF Code of Condu
 
 ## Kubernetes Incubator
 
-This is a [Kubernetes Incubator project](https://github.com/kubernetes/community/blob/master/incubator.md). 
+This is a [Kubernetes Incubator project](https://github.com/kubernetes/community/blob/master/incubator.md).
 
 * [SIG: sig-api-machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery)
-
 
 ## Troubleshooting
 
@@ -179,10 +177,11 @@ You'll need a version with OpenSSL version 1.0.0 or later.
 
 ### Hostname doesn't match
 
-If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt). 
+If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt).
 Specifically check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
 
 ### Why Exec/Attach calls doesn't work
+
 Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
 of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
 See more at [exec example](examples/exec.py).

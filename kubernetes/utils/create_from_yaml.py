@@ -25,6 +25,7 @@ def create_from_yaml(
         k8s_client,
         yaml_file,
         verbose=False,
+        namespace="default",
         **kwargs):
     """
     Perform an action from a yaml file. Pass True for verbose to
@@ -34,6 +35,11 @@ def create_from_yaml(
     k8s_client: an ApiClient object, initialized with the client args.
     verbose: If True, print confirmation from the create action.
         Default is False.
+    namespace: string. Contains the namespace to create all
+        resources inside. The namespace must preexist otherwise
+        the resource creation will fail. If the API object in
+        the yaml file already contains a namespace definition
+        this parameter has no effect.
 
     Returns:
     An k8s api object or list of apis objects created from YAML.
@@ -73,14 +79,14 @@ def create_from_yaml(
                         yml_object["kind"] = kind
                     try:
                         create_from_yaml_single_item(
-                            k8s_client, yml_object, verbose, **kwargs)
+                            k8s_client, yml_object, verbose, namespace, **kwargs)
                     except client.rest.ApiException as api_exception:
                         api_exceptions.append(api_exception)
             else:
                 # This is a single object. Call the single item method
                 try:
                     create_from_yaml_single_item(
-                        k8s_client, yml_document, verbose, **kwargs)
+                        k8s_client, yml_document, verbose, namespace, **kwargs)
                 except client.rest.ApiException as api_exception:
                     api_exceptions.append(api_exception)
     # In case we have exceptions waiting for us, raise them
@@ -89,7 +95,11 @@ def create_from_yaml(
 
 
 def create_from_yaml_single_item(
-        k8s_client, yml_object, verbose=False, **kwargs):
+        k8s_client,
+        yml_object,
+        verbose=False,
+        namespace="default",
+        **kwargs):
     group, _, version = yml_object["apiVersion"].partition("/")
     if version == "":
         version = group
@@ -110,8 +120,6 @@ def create_from_yaml_single_item(
     # if any
     if "namespace" in yml_object["metadata"]:
         namespace = yml_object["metadata"]["namespace"]
-    else:
-        namespace = "default"
     # Expect the user to create namespaced objects more often
     if hasattr(k8s_api, "create_namespaced_{0}".format(kind)):
         resp = getattr(k8s_api, "create_namespaced_{0}".format(kind))(
