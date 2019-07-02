@@ -8,6 +8,9 @@
 **New Feature:**
 - Add method to dynamically set namespace in yaml utility [kubernetes-client/python#782](https://github.com/kubernetes-client/python/pull/782)
 
+**API Change:**
+- Add json-patch to custom object patch method [kubernetes-client/gen#119](https://github.com/kubernetes-client/gen/pull/119)
+
 # v10.0.0a1
 **Bug Fix:**
 - Make watch work with read_namespaced_pod_log [kubernetes-client/python-base#93](https://github.com/kubernetes-client/python-base/pull/93)
