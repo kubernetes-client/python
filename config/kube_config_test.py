@@ -130,6 +130,10 @@ TEST_OIDC_INVALID_PADDING_LENGTH = ".".join([
 
 TEST_OIDC_CA = _base64(TEST_CERTIFICATE_AUTH)
 
+TEST_AZURE_LOGIN = TEST_OIDC_LOGIN
+TEST_AZURE_TOKEN = "test-azure-token"
+TEST_AZURE_TOKEN_FULL = "Bearer " + TEST_AZURE_TOKEN
+
 
 class BaseTestCase(unittest.TestCase):
 
@@ -421,6 +425,41 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "azure",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure"
+                }
+            },
+            {
+                "name": "azure_num",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure_num"
+                }
+            },
+            {
+                "name": "azure_str",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure_str"
+                }
+            },
+            {
+                "name": "azure_num_error",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure_str_error"
+                }
+            },
+            {
+                "name": "azure_str_error",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure_str_error"
+                }
+            },
+            {
                 "name": "expired_oidc",
                 "context": {
                     "cluster": "default",
@@ -600,6 +639,89 @@ class TestKubeConfigLoader(BaseTestCase):
                         "config": {
                             "id-token": TEST_OIDC_LOGIN
                         }
+                    }
+                }
+            },
+            {
+                "name": "azure",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "apiserver-id": "ApiserverId",
+                            "environment": "AzurePublicCloud",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
+                    }
+                }
+            },
+            {
+                "name": "azure_num",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "apiserver-id": "ApiserverId",
+                            "environment": "AzurePublicCloud",
+                            "expires-in": "0",
+                            "expires-on": "156207275",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
+                    }
+                }
+            },
+            {
+                "name": "azure_str",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "apiserver-id": "ApiserverId",
+                            "environment": "AzurePublicCloud",
+                            "expires-in": "0",
+                            "expires-on": "2018-10-18 00:52:29.044727",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
+                    }
+                }
+            },
+            {
+                "name": "azure_str_error",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "apiserver-id": "ApiserverId",
+                            "environment": "AzurePublicCloud",
+                            "expires-in": "0",
+                            "expires-on": "2018-10-18 00:52",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
+                    }
+                }
+            },
+            {
+                "name": "azure_num_error",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "apiserver-id": "ApiserverId",
+                            "environment": "AzurePublicCloud",
+                            "expires-in": "0",
+                            "expires-on": "-1",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
                     }
                 }
             },
@@ -885,6 +1007,46 @@ class TestKubeConfigLoader(BaseTestCase):
             loader._load_oid_token("oidc_invalid_padding_length"),
             None,
         )
+
+    def test_azure_no_refresh(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure",
+        )
+        self.assertTrue(loader._load_auth_provider_token())
+        self.assertEqual(TEST_AZURE_TOKEN_FULL, loader.token)
+
+    def test_azure_with_expired_num(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure_num",
+        )
+        provider = loader._user['auth-provider']
+        self.assertTrue(loader._azure_is_expired(provider))
+
+    def test_azure_with_expired_str(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure_str",
+        )
+        provider = loader._user['auth-provider']
+        self.assertTrue(loader._azure_is_expired(provider))
+
+    def test_azure_with_expired_str_error(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure_str_error",
+        )
+        provider = loader._user['auth-provider']
+        self.assertRaises(ValueError, loader._azure_is_expired, provider)
+
+    def test_azure_with_expired_int_error(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure_num_error",
+        )
+        provider = loader._user['auth-provider']
+        self.assertRaises(ValueError, loader._azure_is_expired, provider)
 
     def test_user_pass(self):
         expected = FakeConfig(host=TEST_HOST, token=TEST_BASIC_TOKEN)
