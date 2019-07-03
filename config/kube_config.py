@@ -226,7 +226,8 @@ class KubeConfigLoader(object):
         if expires_on.isdigit():
             return int(expires_on) < time.time()
         else:
-            return time.strptime(expires_on, '%Y-%m-%d %H:%M:%S.%f') < time.gmtime()
+            exp_time = time.strptime(expires_on, '%Y-%m-%d %H:%M:%S.%f')
+            return exp_time < time.gmtime()
 
     def _load_azure_token(self, provider):
         if 'config' not in provider:
