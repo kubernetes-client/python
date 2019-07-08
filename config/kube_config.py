@@ -221,13 +221,21 @@ class KubeConfigLoader(object):
         if provider['name'] == 'oidc':
             return self._load_oid_token(provider)
 
+    def _azure_is_expired(self, provider):
+        expires_on = provider['config']['expires-on']
+        if expires_on.isdigit():
+            return int(expires_on) < time.time()
+        else:
+            exp_time = time.strptime(expires_on, '%Y-%m-%d %H:%M:%S.%f')
+            return exp_time < time.gmtime()
+
     def _load_azure_token(self, provider):
         if 'config' not in provider:
             return
         if 'access-token' not in provider['config']:
             return
         if 'expires-on' in provider['config']:
-            if int(provider['config']['expires-on']) < time.gmtime():
+            if self._azure_is_expired(provider):
                 self._refresh_azure_token(provider['config'])
         self.token = 'Bearer %s' % provider['config']['access-token']
         return self.token
