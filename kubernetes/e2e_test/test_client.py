@@ -13,6 +13,7 @@
 # under the License.
 
 import json
+import select
 import time
 import unittest
 import uuid
@@ -105,11 +106,13 @@ class TestClient(unittest.TestCase):
         self.assertFalse(resp.peek_stdout())
         self.assertEqual("test string 2", line)
         resp.write_stdin("exit\n")
-        resp.update(timeout=5)
+        select.select([resp.sock.sock], [], [], timeout=5)
+        resp.update()
         line = resp.read_channel(ERROR_CHANNEL)
         status = json.loads(line)
         self.assertEqual(status['status'], 'Success')
-        resp.update(timeout=5)
+        select.select([resp.sock.sock], [], [], timeout=5)
+        resp.update()
         self.assertFalse(resp.is_open())
 
         number_of_pods = len(api.list_pod_for_all_namespaces().items)
