@@ -108,7 +108,8 @@ done
 # Shut down CI if minikube did not start and show logs
 if [ $MINIKUBE_OK == "false" ]; then
   sudo minikube logs
-  die $LINENO "minikube did not start"
+  echo "minikube did not start (line: ${LINENO})"
+  exit 1
 fi
 
 echo "Dump Kubernetes Objects..."
