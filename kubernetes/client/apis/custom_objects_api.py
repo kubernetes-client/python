@@ -1657,7 +1657,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json-patch+json', 'application/merge-patch+json'])
+            select_header_content_type(['application/merge-patch+json', 'application/json-patch+json'])
 
         # Authentication setting
         auth_settings = ['BearerToken']
@@ -1781,7 +1781,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json-patch+json', 'application/merge-patch+json'])
+            select_header_content_type(['application/merge-patch+json', 'application/json-patch+json'])
 
         # Authentication setting
         auth_settings = ['BearerToken']
@@ -1905,7 +1905,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json-patch+json', 'application/merge-patch+json'])
+            select_header_content_type(['application/merge-patch+json', 'application/json-patch+json'])
 
         # Authentication setting
         auth_settings = ['BearerToken']
@@ -2036,7 +2036,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json-patch+json', 'application/merge-patch+json'])
+            select_header_content_type(['application/merge-patch+json', 'application/json-patch+json'])
 
         # Authentication setting
         auth_settings = ['BearerToken']
@@ -2167,7 +2167,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json-patch+json', 'application/merge-patch+json'])
+            select_header_content_type(['application/merge-patch+json', 'application/json-patch+json'])
 
         # Authentication setting
         auth_settings = ['BearerToken']
@@ -2298,7 +2298,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json-patch+json', 'application/merge-patch+json'])
+            select_header_content_type(['application/merge-patch+json', 'application/json-patch+json'])
 
         # Authentication setting
         auth_settings = ['BearerToken']
