@@ -101,9 +101,6 @@ class V1beta1CustomResourceDefinitionStatus(object):
         :param conditions: The conditions of this V1beta1CustomResourceDefinitionStatus.
         :type: list[V1beta1CustomResourceDefinitionCondition]
         """
-        if conditions is None:
-            raise ValueError("Invalid value for `conditions`, must not be `None`")
-
         self._conditions = conditions
 
     @property
