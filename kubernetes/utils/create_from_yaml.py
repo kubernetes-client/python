@@ -156,7 +156,10 @@ def create_from_yaml_single_item(
         resp = getattr(k8s_api, "create_{0}".format(kind))(
             body=yml_object, **kwargs)
     if verbose:
-        print("{0} created. status='{1}'".format(kind, str(resp.status)))
+        msg = "{0} created.".format(kind)
+        if hasattr(resp, 'status'):
+            msg += " status='{0}'".format(str(resp.status))
+        print(msg)
 
 
 class FailToCreateError(Exception):
