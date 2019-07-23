@@ -44,9 +44,19 @@ else
 fi
 docker --version
 
-# Get the latest stable version of kubernetes
+# Get the latest stable version of kubernetes, this is not always what minikube
+# installs per default
+# See:
+# https://github.com/kubernetes/minikube/blob/master/pkg/minikube/constants/constants.go
 K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 echo "K8S_VERSION : ${K8S_VERSION}"
+
+# You can pass variables to minikube using MINIKUBE_ARGS
+# If using tox you can export TOX_TESTENV_PASSENV.
+# For example, you can run:
+# $ export TOX_TESTENV_PASSENV="MINIKUBE_ARGS=--kubernetes-version=1.X.Y"
+# now tox will run minikube with the specified flag
+MINIKUBE_ARGS=${MINIKUBE_ARGS:-""}
 
 echo "Starting docker service"
 sudo systemctl enable docker.service
@@ -80,7 +90,7 @@ export MINIKUBE_DRIVER=${MINIKUBE_DRIVER:-none}
 # Used bootstrapper to be kubeadm for the most recent k8s version
 # since localkube is depreciated and only supported up to version 1.10.0
 echo "Starting minikube"
-sudo minikube start --vm-driver=$MINIKUBE_DRIVER --bootstrapper=kubeadm --kubernetes-version=$K8S_VERSION --logtostderr
+sudo minikube start --vm-driver=$MINIKUBE_DRIVER --bootstrapper=kubeadm --logtostderr $MINIKUBE_ARGS
 
 MINIKUBE_OK="false"
 
@@ -98,7 +108,8 @@ done
 # Shut down CI if minikube did not start and show logs
 if [ $MINIKUBE_OK == "false" ]; then
   sudo minikube logs
-  die $LINENO "minikube did not start"
+  echo "minikube did not start (line: ${LINENO})"
+  exit 1
 fi
 
 echo "Dump Kubernetes Objects..."

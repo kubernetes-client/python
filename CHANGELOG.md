@@ -1,3 +1,13 @@
+# v10.0.0
+**Bug Fix:**
+- Fix base64 padding for kube config [kubernetes-client/python-base#79](https://github.com/kubernetes-client/python-base/pull/79)
+- Fix websocket client decoding binary message. Replace non-utf8 data instead of failing [kubernetes-client/python-base#104](https://github.com/kubernetes-client/python-base/pull/104)
+- Add email scope to GCP provided credential refresh [kubernetes-client/python-base#110](https://github.com/kubernetes-client/python-base/pull/110)
+- Fix broken urllib3 dependencies [kubernetes-client/python#816](https://github.com/kubernetes-client/python/pull/816)
+
+**New Feature:**
+- Add method to dynamically set namespace in yaml utility [kubernetes-client/python#782](https://github.com/kubernetes-client/python/pull/782)
+
 # v10.0.0a1
 **Bug Fix:**
 - Make watch work with read_namespaced_pod_log [kubernetes-client/python-base#93](https://github.com/kubernetes-client/python-base/pull/93)

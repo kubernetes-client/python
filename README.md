@@ -25,7 +25,7 @@ From [PyPi](https://pypi.python.org/pypi/kubernetes/) directly:
 pip install kubernetes
 ```
 
-## Example
+## Examples
 
 list all pods:
 
@@ -77,7 +77,7 @@ All APIs and Models' documentation can be found at the [Generated client's READM
 ## Compatibility
 
 `client-python` follows [semver](http://semver.org/), so until the major version of
-client-python gets increased, your code will continue to work with explicitly 
+client-python gets increased, your code will continue to work with explicitly
 supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
@@ -123,12 +123,13 @@ between client-python versions.
 | 6.0 Alpha/Beta  | Kubernetes main repo, 1.10 branch    | ✗                             |
 | 6.0             | Kubernetes main repo, 1.10 branch    | ✗                             |
 | 7.0 Alpha/Beta  | Kubernetes main repo, 1.11 branch    | ✗                             |
-| 7.0             | Kubernetes main repo, 1.11 branch    | ✓                             |
+| 7.0             | Kubernetes main repo, 1.11 branch    | ✗                             |
 | 8.0 Alpha/Beta  | Kubernetes main repo, 1.12 branch    | ✗                             |
 | 8.0             | Kubernetes main repo, 1.12 branch    | ✓                             |
 | 9.0 Alpha/Beta  | Kubernetes main repo, 1.13 branch    | ✗                             |
 | 9.0             | Kubernetes main repo, 1.13 branch    | ✓                             |
-| 10.0 Alpha/Beta | Kubernetes main repo, 1.14 branch    | ✓                             |
+| 10.0 Alpha/Beta | Kubernetes main repo, 1.14 branch    | ✗                             |
+| 10.0            | Kubernetes main repo, 1.14 branch    | ✓                             |
 
 Key:
 
@@ -141,17 +142,11 @@ Note: There would be no maintenance for alpha/beta releases except the latest on
 
 ## Community, Support, Discussion
 
-If you have any problem on using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery).
+If you have any problem on using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
 
 ### Code of Conduct
 
 Participation in the Kubernetes community is governed by the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
-
-## Kubernetes Incubator
-
-This is a [Kubernetes Incubator project](https://github.com/kubernetes/community/blob/master/incubator.md).
-
-* [SIG: sig-api-machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery)
 
 ## Troubleshooting
 

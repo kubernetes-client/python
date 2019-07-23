@@ -13,12 +13,10 @@ matrix:
        env: TOXENV=py27-functional
      - python: 2.7
        env: TOXENV=update-pycodestyle
-     - python: 2.7
+     - python: 3.7
        env: TOXENV=docs
      - python: 2.7
        env: TOXENV=coverage,codecov
-     - python: 3.4
-       env: TOXENV=py34
      - python: 3.5
        env: TOXENV=py35
      - python: 3.5
