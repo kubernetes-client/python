@@ -62,9 +62,7 @@ setup(
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils'],
     include_package_data=True,
-    long_description="""\
-    Python client for kubernetes http://kubernetes.io/
-    """,
+    long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
         "Development Status :: %s" % DEVELOPMENT_STATUS,
         "Topic :: Utilities",

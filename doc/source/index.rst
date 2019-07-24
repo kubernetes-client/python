@@ -11,11 +11,11 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   readme
+   README <README.md>
    installation
    usage
    modules
-   contributing
+   contributing <CONTRIBUTING.md>
 
 Indices and tables
 ==================
