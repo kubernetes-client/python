@@ -11,7 +11,7 @@ matrix:
        env: TOXENV=py27-functional
      - python: 2.7
        env: TOXENV=update-pycodestyle
-     - python: 2.7
+     - python: 3.7
        env: TOXENV=docs
      - python: 2.7
        env: TOXENV=coverage,codecov
