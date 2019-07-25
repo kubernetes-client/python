@@ -22,7 +22,7 @@ def main():
     config.load_kube_config()
 
     print("Supported APIs (* is preferred version):")
-    print("%-20s %s" %
+    print("%-40s %s" %
           ("core", ",".join(client.CoreApi().get_api_versions().versions)))
     for api in client.ApisApi().get_api_versions().groups:
         versions = []
