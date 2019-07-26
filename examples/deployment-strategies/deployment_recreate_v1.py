@@ -50,7 +50,7 @@ def main():
       spec=spec)
 
     # Creation of the Deployment in specified namespace
-    extension.create_namespaced_deployment(namespace="ratanb", body=deployment)
+    extension.create_namespaced_deployment(namespace="kube-client", body=deployment)
 
 
 if __name__ == "__main__":
