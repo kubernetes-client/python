@@ -34,7 +34,10 @@ def main():
       image="nginx:1.7.9",
       image_pull_policy="IfNotPresent",
       ports=[client.V1ContainerPort(container_port=80)],
-      volume_mounts=[client.V1VolumeMount(name=volume.name, mount_path="/kube-example")]
+      volume_mounts=[client.V1VolumeMount(
+          name=volume.name,
+          mount_path="/kube-example"
+      )]
     )
 
     # Init-Container
@@ -45,13 +48,21 @@ def main():
       command=[
               "echo \"Hello World\""
               ],
-      volume_mounts=[client.V1VolumeMount(name=volume.name, mount_path="/kube-example")]
+      volume_mounts=[client.V1VolumeMount(
+          name=volume.name,
+          mount_path="/kube-example"
+      )]
     )
 
     # Template
     template = client.V1PodTemplateSpec(
         metadata=client.V1ObjectMeta(labels={"app": "jobtest"}),
-        spec=client.V1PodSpec(init_containers=[init_container], containers=[container], volumes=[volume], restart_policy="Never")
+        spec=client.V1PodSpec(
+            init_containers=[init_container],
+            containers=[container],
+            volumes=[volume],
+            restart_policy="Never"
+        )
     )
 
     # Spec
@@ -67,9 +78,11 @@ def main():
         spec=spec_pod
     )
 
-    extension.create_namespaced_job(namespace="kube-client", body=job)
+    extension.create_namespaced_job(
+        namespace="kube-client",
+        body=job
+    )
 
 
 if __name__ == "__main__":
     main()
-

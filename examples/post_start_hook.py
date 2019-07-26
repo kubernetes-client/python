@@ -37,11 +37,11 @@ def main():
                      'echo \'Hello World\''
                        ]
 
-                  )#closing for V1ExecAction
+                  )
 
-              )#closing for V1Handler
+              )
 
-         )#closing for V1Lifecycle
+         )
     )
 
     # Template
@@ -49,13 +49,12 @@ def main():
       metadata=client.V1ObjectMeta(labels={"app": "hooktest"}),
       spec=client.V1PodSpec(containers=[container]))
 
-
     # Spec
     spec = client.ExtensionsV1beta1DeploymentSpec(
       replicas=1,
       template=template)
 
-    #Deployment
+    # Deployment
     deployment = client.ExtensionsV1beta1Deployment(
       api_version="extensions/v1beta1",
       kind="Deployment",
@@ -63,9 +62,11 @@ def main():
       spec=spec)
 
     # Creation of the Deployment in specified namespace
-    extension.create_namespaced_deployment(namespace="kube-client", body=deployment)
+    extension.create_namespaced_deployment(
+        namespace="kube-client",
+        body=deployment
+    )
 
 
 if __name__ == "__main__":
     main()
-

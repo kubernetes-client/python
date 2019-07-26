@@ -30,7 +30,7 @@ def main():
                 name="service-example"
             ),
             spec=client.V1ServiceSpec(
-                selector={"app":"myapp"},
+                selector={"app": "myapp"},
                 ports=[client.V1ServicePort(
                     port=80,
                     target_port=6785
@@ -44,4 +44,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

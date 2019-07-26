@@ -48,7 +48,10 @@ def main():
     )
 
     # Spec
-    spec = client.ExtensionsV1beta1DeploymentSpec(replicas=1, template=template)
+    spec = client.ExtensionsV1beta1DeploymentSpec(
+        replicas=1,
+        template=template
+    )
 
     # Deployment
     deployment = client.ExtensionsV1beta1Deployment(

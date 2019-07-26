@@ -26,7 +26,9 @@ def main():
     body = client.ExtensionsV1beta1Ingress(
         api_version="v1beta1",
         kind="Ingress",
-        metadata=client.V1ObjectMeta(name="ingress-example", annotations={"nginx.ingress.kubernetes.io/rewrite-target": "/"}),
+        metadata=client.V1ObjectMeta(
+            name="ingress-example",
+            annotations={"nginx.ingress.kubernetes.io/rewrite-target": "/"}),
         spec=client.ExtensionsV1beta1IngressSpec(
             rules=[client.ExtensionsV1beta1IngressRule(
                 host="abc.xyz.com",

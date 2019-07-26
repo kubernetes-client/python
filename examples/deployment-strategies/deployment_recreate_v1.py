@@ -31,18 +31,17 @@ def main():
 
     # Template
     template = client.V1PodTemplateSpec(
-      metadata=client.V1ObjectMeta(labels={"app": "nginx", "version":"v1.0"}),
+      metadata=client.V1ObjectMeta(labels={"app": "nginx", "version": "v1.0"}),
       spec=client.V1PodSpec(containers=[container]))
-
 
     # Spec
     spec = client.ExtensionsV1beta1DeploymentSpec(
       replicas=3,
-      selector=client.V1LabelSelector(match_labels={"app":"nginx"}),
+      selector=client.V1LabelSelector(match_labels={"app": "nginx"}),
       strategy=client.ExtensionsV1beta1DeploymentStrategy(type="Recreate"),
       template=template)
 
-    #Deployment
+    # Deployment
     deployment = client.ExtensionsV1beta1Deployment(
       api_version="extensions/v1beta1",
       kind="Deployment",
@@ -50,7 +49,9 @@ def main():
       spec=spec)
 
     # Creation of the Deployment in specified namespace
-    extension.create_namespaced_deployment(namespace="kube-client", body=deployment)
+    extension.create_namespaced_deployment(
+        namespace="kube-client",
+        body=deployment)
 
 
 if __name__ == "__main__":
