@@ -25,33 +25,33 @@ def main():
 
     # Volume
     volume = client.V1Volume(
-          name="test-volume",
-          empty_dir=client.V1EmptyDirVolumeSource(medium=""))
+        name="test-volume",
+        empty_dir=client.V1EmptyDirVolumeSource(medium=""))
 
     # Container
     container = client.V1Container(
-      name="jobtest",
-      image="nginx:1.7.9",
-      image_pull_policy="IfNotPresent",
-      ports=[client.V1ContainerPort(container_port=80)],
-      volume_mounts=[client.V1VolumeMount(
-          name=volume.name,
-          mount_path="/kube-example"
-      )]
+        name="jobtest",
+        image="nginx:1.7.9",
+        image_pull_policy="IfNotPresent",
+        ports=[client.V1ContainerPort(container_port=80)],
+        volume_mounts=[client.V1VolumeMount(
+            name=volume.name,
+            mount_path="/kube-example"
+        )]
     )
 
     # Init-Container
     init_container = client.V1Container(
-      name="init-container",
-      image="alpine",
-      image_pull_policy="IfNotPresent",
-      command=[
-              "echo \"Hello World\""
-              ],
-      volume_mounts=[client.V1VolumeMount(
-          name=volume.name,
-          mount_path="/kube-example"
-      )]
+        name="init-container",
+        image="alpine",
+        image_pull_policy="IfNotPresent",
+        command=[
+            "echo \"Hello World\""
+        ],
+        volume_mounts=[client.V1VolumeMount(
+            name=volume.name,
+            mount_path="/kube-example"
+        )]
     )
 
     # Template

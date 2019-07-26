@@ -15,7 +15,6 @@
 from os import path
 
 import yaml
-
 from kubernetes import client, config
 
 DEPLOYMENT_NAME = "nginx-deployment"

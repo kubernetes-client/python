@@ -26,7 +26,7 @@ def main():
         metadata=client.V1ObjectMeta(
             name="kube-client-test"
         )
-        )
+    )
     )
 
     # Listing pods in the namespace that we created
@@ -38,7 +38,7 @@ def main():
             i.status.pod_ip,
             i.metadata.namespace,
             i.metadata.name)
-              )
+        )
 
 
 if __name__ == "__main__":

@@ -25,41 +25,41 @@ def main():
 
     # Container
     container = client.V1Container(
-      name="hooktest",
-      image="nginx:1.7.9",
-      image_pull_policy="IfNotPresent",
-      ports=[client.V1ContainerPort(container_port=80)],
+        name="hooktest",
+        image="nginx:1.7.9",
+        image_pull_policy="IfNotPresent",
+        ports=[client.V1ContainerPort(container_port=80)],
 
-      lifecycle=client.V1Lifecycle(
-        post_start=client.V1Handler(
-           _exec=client.V1ExecAction(
-               command=[
-                     'echo \'Hello World\''
-                       ]
-
-                  )
+        lifecycle=client.V1Lifecycle(
+            post_start=client.V1Handler(
+              _exec=client.V1ExecAction(
+                  command=[
+                      'echo \'Hello World\''
+                  ]
 
               )
 
-         )
+            )
+
+        )
     )
 
     # Template
     template = client.V1PodTemplateSpec(
-      metadata=client.V1ObjectMeta(labels={"app": "hooktest"}),
-      spec=client.V1PodSpec(containers=[container]))
+        metadata=client.V1ObjectMeta(labels={"app": "hooktest"}),
+        spec=client.V1PodSpec(containers=[container]))
 
     # Spec
     spec = client.ExtensionsV1beta1DeploymentSpec(
-      replicas=1,
-      template=template)
+        replicas=1,
+        template=template)
 
     # Deployment
     deployment = client.ExtensionsV1beta1Deployment(
-      api_version="extensions/v1beta1",
-      kind="Deployment",
-      metadata=client.V1ObjectMeta(name="hooktest-deployment"),
-      spec=spec)
+        api_version="extensions/v1beta1",
+        kind="Deployment",
+        metadata=client.V1ObjectMeta(name="hooktest-deployment"),
+        spec=spec)
 
     # Creation of the Deployment in specified namespace
     extension.create_namespaced_deployment(
