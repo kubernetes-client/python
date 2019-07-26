@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from os import path
-
 import yaml
 from kubernetes import client, config
 
@@ -45,7 +44,7 @@ def create_deployment_object():
 
 
 def create_deployment(api_instance, deployment):
-    # Create deployement
+    # Create deployment
     api_response = api_instance.create_namespaced_deployment(
         body=deployment,
         namespace="default")
