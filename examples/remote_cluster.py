@@ -23,7 +23,9 @@ def main():
     # Define the barer token we are going to use to authenticate.
     # See here to create the token:
     # https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
-    aToken = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    aToken = "XXXXXXXXXXXXXXXXXXXXXX" \
+             "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+             "XXXXXXXXXXXXXXXXXXXXXXXX"
 
     # Create a configuration object
     aConfiguration = client.Configuration()
