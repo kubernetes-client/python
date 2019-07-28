@@ -114,7 +114,7 @@ class V1SecretVolumeSource(object):
     def optional(self):
         """
         Gets the optional of this V1SecretVolumeSource.
-        Specify whether the Secret or it's keys must be defined
+        Specify whether the Secret or its keys must be defined
 
         :return: The optional of this V1SecretVolumeSource.
         :rtype: bool
@@ -125,7 +125,7 @@ class V1SecretVolumeSource(object):
     def optional(self, optional):
         """
         Sets the optional of this V1SecretVolumeSource.
-        Specify whether the Secret or it's keys must be defined
+        Specify whether the Secret or its keys must be defined
 
         :param optional: The optional of this V1SecretVolumeSource.
         :type: bool

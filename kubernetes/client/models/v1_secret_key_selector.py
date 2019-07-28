@@ -110,7 +110,7 @@ class V1SecretKeySelector(object):
     def optional(self):
         """
         Gets the optional of this V1SecretKeySelector.
-        Specify whether the Secret or it's key must be defined
+        Specify whether the Secret or its key must be defined
 
         :return: The optional of this V1SecretKeySelector.
         :rtype: bool
@@ -121,7 +121,7 @@ class V1SecretKeySelector(object):
     def optional(self, optional):
         """
         Sets the optional of this V1SecretKeySelector.
-        Specify whether the Secret or it's key must be defined
+        Specify whether the Secret or its key must be defined
 
         :param optional: The optional of this V1SecretKeySelector.
         :type: bool
