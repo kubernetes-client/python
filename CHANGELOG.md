@@ -1,3 +1,7 @@
+# v8.0.2
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2019-11324 [kubernetes-client/python#897](https://github.com/kubernetes-client/python/pull/897)
+
 # v8.0.1
 **Bug Fix:**
 - Refresh GCP auth tokens on API retrieval [kubernetes-client/python-base#92](https://github.com/kubernetes-client/python-base/pull/92)
