@@ -2,6 +2,9 @@
 **Bug Fix:**
 - Fix content type regression in custom object patch API [kubernetes-client/python#866](https://github.com/kubernetes-client/python/issues/866)
 
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2019-11324 [kubernetes-client/python#897](https://github.com/kubernetes-client/python/pull/897)
+
 # v10.0.0
 **Bug Fix:**
 - Fix base64 padding for kube config [kubernetes-client/python-base#79](https://github.com/kubernetes-client/python-base/pull/79)
