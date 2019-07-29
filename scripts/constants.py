@@ -18,7 +18,7 @@ import sys
 KUBERNETES_BRANCH = "release-1.12"
 
 # client version for packaging and releasing.
-CLIENT_VERSION = "8.0.1"
+CLIENT_VERSION = "8.0.2"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
