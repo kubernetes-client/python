@@ -14,7 +14,7 @@
 
 __project__ = 'kubernetes'
 # The version is auto-updated. Please do not edit.
-__version__ = "9.0.0"
+__version__ = "9.0.1"
 
 import kubernetes.client
 import kubernetes.config
