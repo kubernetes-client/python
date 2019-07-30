@@ -1,7 +1,6 @@
 # ref: https://docs.travis-ci.com/user/languages/python
 language: python
 dist: xenial
-sudo: required
 
 matrix:
     include:
