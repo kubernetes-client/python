@@ -30,6 +30,9 @@ trap "clean_exit" EXIT
 # Switch off SE-Linux
 setenforce 0
 
+# Request at least 2 CPUs from Travis CI per job
+export TRAVIS_WORKER_DOCKER_CPUS=2
+
 # Mount root to fix dns issues
 # Define $HOME since somehow this is not defined
 HOME=/home/travis
