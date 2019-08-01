@@ -46,6 +46,8 @@ _re_rfc3339 = re.compile(r"(\d\d\d\d)-(\d\d)-(\d\d)"        # full-date
                          re.VERBOSE + re.IGNORECASE)
 _re_timezone = re.compile(r"([-+])(\d\d?):?(\d\d)?")
 
+MICROSEC_PER_SEC = 1000000
+
 
 def parse_rfc3339(s):
     if isinstance(s, datetime.datetime):
@@ -57,8 +59,10 @@ def parse_rfc3339(s):
     dt = [0] * 7
     for x in range(6):
         dt[x] = int(groups[x])
+    us = 0
     if groups[6] is not None:
-        dt[6] = int(groups[6])
+        partial_sec = float(groups[6].replace(",", "."))
+        us = int(MICROSEC_PER_SEC * partial_sec)
     tz = UTC
     if groups[7] is not None and groups[7] != 'Z' and groups[7] != 'z':
         tz_groups = _re_timezone.search(groups[7]).groups()
@@ -72,7 +76,7 @@ def parse_rfc3339(s):
     return datetime.datetime(
         year=dt[0], month=dt[1], day=dt[2],
         hour=dt[3], minute=dt[4], second=dt[5],
-        microsecond=dt[6], tzinfo=tz)
+        microsecond=us, tzinfo=tz)
 
 
 def format_rfc3339(date_time):
