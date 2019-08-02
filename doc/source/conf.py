@@ -13,22 +13,37 @@
 # limitations under the License.
 
 import os
+import re
+import shutil
 import sys
 
-from recommonmark.parser import CommonMarkParser
+from recommonmark.transform import AutoStructify
+
+# Work around https://github.com/readthedocs/recommonmark/issues/152
+new_readme = []
+
+with open("../../README.md", "r") as r:
+    lines = r.readlines()
+    for l in lines:
+        nl = re.sub("\[!\[[\w\s]+\]\(", "[![](", l)
+        new_readme.append(nl)
+
+with open("README.md", "w") as n:
+    n.writelines(new_readme)
+
+# apparently index.rst can't search for markdown not in the same directory
+shutil.copy("../../CONTRIBUTING.md", ".")
 
 sys.path.insert(0, os.path.abspath('../..'))
 # -- General configuration ----------------------------------------------------
-
-source_parsers = {
-    '.md': CommonMarkParser,
-}
 
 source_suffix = ['.rst', '.md']
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
+    'sphinx_markdown_tables',
+    'recommonmark',
     'sphinx.ext.autodoc',
     #'sphinx.ext.intersphinx',
 ]
@@ -80,3 +95,10 @@ latex_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 #intersphinx_mapping = {'http://docs.python.org/': None}
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+            'auto_toc_tree_section': 'Contents',
+            'enable_eval_rst': True,
+            }, True)
+    app.add_transform(AutoStructify)
+
