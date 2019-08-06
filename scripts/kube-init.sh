@@ -70,7 +70,8 @@ sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 
 echo "Download minikube from minikube project"
-wget -O minikube "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
+# Temporary pin minikube to 1.2.0 due to regression in 1.3.0 (https://github.com/kubernetes/minikube/issues/5014)
+wget -O minikube "https://storage.googleapis.com/minikube/releases/v1.2.0/minikube-linux-amd64"
 sudo chmod +x minikube
 sudo mv minikube /usr/local/bin/
 
