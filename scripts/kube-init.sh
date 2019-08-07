@@ -65,14 +65,14 @@ echo "Checking docker service"
 sudo docker ps
 
 echo "Download Kubernetes CLI"
-wget -O kubectl "http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
-sudo chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
+curl -Lo kubectl \
+  https://storage.googleapis.com/kubernetes-release/release/$kv/bin/linux/amd64/kubectl \
+  && sudo install kubectl /usr/local/bin/
 
 echo "Download minikube from minikube project"
-wget -O minikube "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
-sudo chmod +x minikube
-sudo mv minikube /usr/local/bin/
+curl -Lo minikube \
+  https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && sudo install minikube /usr/local/bin/
 
 # L68-100: Set up minikube within Travis CI
 # See https://github.com/kubernetes/minikube/blob/master/README.md#linux-continuous-integration-without-vm-support
@@ -90,7 +90,7 @@ export MINIKUBE_DRIVER=${MINIKUBE_DRIVER:-none}
 # Used bootstrapper to be kubeadm for the most recent k8s version
 # since localkube is depreciated and only supported up to version 1.10.0
 echo "Starting minikube"
-sudo minikube start --vm-driver=$MINIKUBE_DRIVER --bootstrapper=kubeadm --logtostderr $MINIKUBE_ARGS
+sudo -E minikube start --vm-driver=$MINIKUBE_DRIVER --bootstrapper=kubeadm --logtostderr $MINIKUBE_ARGS
 
 MINIKUBE_OK="false"
 
