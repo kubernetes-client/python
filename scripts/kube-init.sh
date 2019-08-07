@@ -66,7 +66,7 @@ sudo docker ps
 
 echo "Download Kubernetes CLI"
 curl -Lo kubectl \
-  https://storage.googleapis.com/kubernetes-release/release/$kv/bin/linux/amd64/kubectl \
+  https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/linux/amd64/kubectl \
   && sudo install kubectl /usr/local/bin/
 
 echo "Download minikube from minikube project"
