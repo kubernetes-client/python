@@ -1,13 +1,20 @@
 ---
 name: Bug report
 about: Share about things that are not working as expected
+labels: kind/bug
 
 ---
 
-/kind bug
+**What happened (please include outputs or screenshots)**:
 
-**Bug description:**
-[Describe the bug in detail including how to reproduce it. Please include any relevant output or screenshots.]
+**What you expected to happen**:
 
-**System information:**
-[Please include your OS, Kubernetes, and kubectl versions as well as anything else that is relevant for us to reproduce or understand the issue.]
+**How to reproduce it (as minimally and precisely as possible)**:
+
+**Anything else we need to know?**:
+
+**Environment**:
+- Kubernetes version (`kubectl version`):
+- OS (e.g., MacOS 10.13.6):
+- Python version (`python --version`)
+- Python client version (`pip list | grep kubernetes`)
