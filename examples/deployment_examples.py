@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from os import path
-
-import yaml
+"""
+This example shows how to work with AppsV1Api to create, modify and delete
+deployments
+"""
 
 from kubernetes import client, config
 
@@ -32,12 +33,13 @@ def create_deployment_object():
         metadata=client.V1ObjectMeta(labels={"app": "nginx"}),
         spec=client.V1PodSpec(containers=[container]))
     # Create the specification of deployment
-    spec = client.AppsV1beta1DeploymentSpec(
+    spec = client.V1DeploymentSpec(
         replicas=3,
-        template=template)
+        template=template,
+        selector={'matchLabels': {'app': 'nginx'}})
     # Instantiate the deployment object
-    deployment = client.AppsV1beta1Deployment(
-        api_version="apps/v1beta1",
+    deployment = client.V1Deployment(
+        api_version="apps/v1",
         kind="Deployment",
         metadata=client.V1ObjectMeta(name=DEPLOYMENT_NAME),
         spec=spec)
@@ -80,16 +82,16 @@ def main():
     # utility. If no argument provided, the config will be loaded from
     # default location.
     config.load_kube_config()
-    apps_v1beta1 = client.AppsV1beta1Api()
+    apps_v1 = client.AppsV1Api()
     # Create a deployment object with client-python API. The deployment we
     # created is same as the `nginx-deployment.yaml` in the /examples folder.
     deployment = create_deployment_object()
 
-    create_deployment(apps_v1beta1, deployment)
+    create_deployment(apps_v1, deployment)
 
-    update_deployment(apps_v1beta1, deployment)
+    update_deployment(apps_v1, deployment)
 
-    delete_deployment(apps_v1beta1)
+    delete_deployment(apps_v1)
 
 
 if __name__ == '__main__':
