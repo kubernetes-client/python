@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a functionality not supported by the project
+about: Suggest a new feature for the project
 labels: kind/feature
 
 ---
