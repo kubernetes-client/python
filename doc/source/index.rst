@@ -14,6 +14,7 @@ Contents:
    README <README.md>
    installation
    usage
+   examples
    modules
    contributing <CONTRIBUTING.md>
 
