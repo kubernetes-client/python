@@ -16,7 +16,7 @@ import unittest
 import uuid
 
 from kubernetes.client import api_client
-from kubernetes.client.apis import batch_v1_api
+from kubernetes.client.api import batch_v1_api
 from kubernetes.e2e_test import base
 
 

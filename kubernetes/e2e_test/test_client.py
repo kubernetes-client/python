@@ -18,7 +18,7 @@ import unittest
 import uuid
 
 from kubernetes.client import api_client
-from kubernetes.client.apis import core_v1_api
+from kubernetes.client.api import core_v1_api
 from kubernetes.e2e_test import base
 from kubernetes.stream import stream
 from kubernetes.stream.ws_client import ERROR_CHANNEL
