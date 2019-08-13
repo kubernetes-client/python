@@ -19,6 +19,8 @@ import uuid
 
 from kubernetes.client import api_client
 from kubernetes.client.apis import core_v1_api
+from kubernetes.client.apis import apiextensions_v1beta1_api
+from kubernetes.client.apis import custom_objects_api
 from kubernetes.e2e_test import base
 from kubernetes.stream import stream
 from kubernetes.stream.ws_client import ERROR_CHANNEL
@@ -234,3 +236,65 @@ class TestClient(unittest.TestCase):
             node = api.read_node(name=item.metadata.name)
             self.assertTrue(len(node.metadata.labels) > 0)
             self.assertTrue(isinstance(node.metadata.labels, dict))
+
+    def test_custom_objects_apis(self):
+        """
+        It should be able to create and patch a namespaced custom object.
+        """
+        client = api_client.ApiClient(configuration=self.config)
+        crd_api = apiextensions_v1beta1_api.ApiextensionsV1beta1Api(client)
+        cr_api = custom_objects_api.CustomObjectsApi(client)
+
+        # create a CRD that defines a namespace-scoped custom resource Foo
+        # TODO: The test objects in this test file are unstructured. Verify
+        # if it makes more sense to switch to typed objects defined under
+        # kubernetes.client.models
+        group_prefix = 'test-crd-' + short_uuid()
+        group = group_prefix + '.test.e2e.com'
+        api_version = group + '/v1'
+        name = 'foos.' + group
+        test_crd = {
+            'kind': 'CustomResourceDefinition',
+            'apiVersion': 'apiextensions.k8s.io/v1beta1',
+            'metadata': {
+                'name': name,
+            },
+            'spec': {
+                'group': group,
+                'versions': [{
+                    'name': 'v1',
+                    'served': True,
+                    'storage': True
+                }],
+                'names': {
+                    'kind': 'Foo',
+                    'plural': 'foos'
+                },
+                'scope': 'Namespaced'
+            }
+        }
+        resp = crd_api.create_custom_resource_definition(body=test_crd)
+        self.assertEqual(name, resp.metadata.name)
+        print('E2E test CRD created')
+
+        # wait for the CRD to be ready
+        time.sleep(5)
+
+        # create a custom object
+        name = 'test-foo-' + short_uuid()
+        resp = cr_api.create_namespaced_custom_object(group=group,
+            version='v1',
+            plural='foos',
+            namespace='default',
+            body={'kind':'Foo', 'apiVersion':api_version, 'metadata':{'name':name}})
+        self.assertEqual(name, resp.metadata.name)
+        print('E2E test CR created')
+
+        # perform an emtpy JSON merge patch on the custom object
+        resp = cr_api.patch_namespaced_custom_object(group=group,
+            version='v1',
+            plural='foos',
+            namespace='default',
+            name=name,
+            body={})
+        self.assertEqual(name, resp.metadata.name)
