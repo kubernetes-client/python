@@ -47,6 +47,13 @@ if [[ -z ${GEN_ROOT:-} ]]; then
     GEN_ROOT="${TEMP_FOLDER}/gen"
     echo ">>> Cloning gen repo"
     git clone --recursive https://github.com/kubernetes-client/gen.git "${GEN_ROOT}"
+    # pick https://github.com/kubernetes-client/gen/pull/97
+    cd "${GEN_ROOT}"
+    git remote add tomplus https://github.com/tomplus/gen.git
+    git fetch tomplus
+    # somehow I couldn't get a clean cherrypick of the commit
+    git checkout tomplus/feat/python-openapi-generator
+    cd "${SCRIPT_ROOT}"
 else
     echo ">>> Reusing gen repo at ${GEN_ROOT}"
 fi
