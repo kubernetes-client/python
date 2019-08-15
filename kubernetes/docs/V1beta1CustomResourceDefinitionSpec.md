@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **conversion** | [**V1beta1CustomResourceConversion**](V1beta1CustomResourceConversion.md) |  | [optional] 
 **group** | **str** | Group is the group this resource belongs in | 
 **names** | [**V1beta1CustomResourceDefinitionNames**](V1beta1CustomResourceDefinitionNames.md) |  | 
+**preserve_unknown_fields** | **bool** | preserveUnknownFields disables pruning of object fields which are not specified in the OpenAPI schema. apiVersion, kind, metadata and known fields inside metadata are always preserved. Defaults to true in v1beta and will default to false in v1. | [optional] 
 **scope** | **str** | Scope indicates whether this resource is cluster or namespace scoped.  Default is namespaced | 
 **subresources** | [**V1beta1CustomResourceSubresources**](V1beta1CustomResourceSubresources.md) |  | [optional] 
 **validation** | [**V1beta1CustomResourceValidation**](V1beta1CustomResourceValidation.md) |  | [optional] 

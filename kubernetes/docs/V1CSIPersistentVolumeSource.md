@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**controller_expand_secret_ref** | [**V1SecretReference**](V1SecretReference.md) |  | [optional] 
 **controller_publish_secret_ref** | [**V1SecretReference**](V1SecretReference.md) |  | [optional] 
 **driver** | **str** | Driver is the name of the driver to use for this volume. Required. | 
 **fs_type** | **str** | Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \&quot;ext4\&quot;, \&quot;xfs\&quot;, \&quot;ntfs\&quot;. | [optional] 

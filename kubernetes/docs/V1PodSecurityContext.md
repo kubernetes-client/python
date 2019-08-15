@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **se_linux_options** | [**V1SELinuxOptions**](V1SELinuxOptions.md) |  | [optional] 
 **supplemental_groups** | **list[int]** | A list of groups applied to the first process run in each container, in addition to the container&#39;s primary GID.  If unspecified, no groups will be added to any container. | [optional] 
 **sysctls** | [**list[V1Sysctl]**](V1Sysctl.md) | Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. | [optional] 
+**windows_options** | [**V1WindowsSecurityContextOptions**](V1WindowsSecurityContextOptions.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
