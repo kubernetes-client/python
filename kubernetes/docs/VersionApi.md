@@ -1,6 +1,6 @@
 # kubernetes.client.VersionApi
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,7 +14,9 @@ Method | HTTP request | Description
 
 get the code version
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -31,7 +33,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.VersionApi(kubernetes.client.ApiClient(configuration))
 
-try: 
+try:
     api_response = api_instance.get_code()
     pprint(api_response)
 except ApiException as e:
@@ -51,7 +53,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
