@@ -1,5 +1,5 @@
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
-index 13b16c2f..41c53429 100644
+index 0bb15d8..acf7b2b 100644
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
 @@ -155,6 +155,10 @@ class RESTClientObject(object):
