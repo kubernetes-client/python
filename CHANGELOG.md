@@ -1,3 +1,7 @@
+# v11.0.0a1
+**New Feature:**
+- Add dynamic client [kubernetes-client/python-base#56](https://github.com/kubernetes-client/python-base/pull/56)
+
 # v10.0.0
 **Bug Fix:**
 - Fix base64 padding for kube config [kubernetes-client/python-base#79](https://github.com/kubernetes-client/python-base/pull/79)
