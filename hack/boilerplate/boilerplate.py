@@ -24,6 +24,10 @@ import os
 import re
 import sys
 
+# list all the files contain a shebang line and should be ignored by this
+# script
+SKIP_FILES = ['hack/boilerplate/boilerplate.py']
+
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "filenames",
@@ -132,10 +136,6 @@ def file_extension(filename):
     return os.path.splitext(filename)[1].split(".")[-1].lower()
 
 
-# list all the files contain 'DO NOT EDIT', but are not generated
-skipped_ungenerated_files = ['hack/boilerplate/boilerplate.py']
-
-
 def normalize_files(files):
     newfiles = []
     for pathname in files:
@@ -143,10 +143,12 @@ def normalize_files(files):
     for i, pathname in enumerate(newfiles):
         if not os.path.isabs(pathname):
             newfiles[i] = os.path.join(args.rootdir, pathname)
+
     return newfiles
 
 
 def get_files(extensions):
+
     files = []
     if len(args.filenames) > 0:
         files = args.filenames
@@ -163,6 +165,8 @@ def get_files(extensions):
         extension = file_extension(pathname)
         if extension in extensions or basename in extensions:
             outfiles.append(pathname)
+
+    outfiles = list(set(outfiles) - set(normalize_files(SKIP_FILES)))
     return outfiles
 
 
