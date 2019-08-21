@@ -32,7 +32,14 @@ class TypeWithDefault(type):
     def __call__(cls):
         if cls._default == None:
             cls._default = type.__call__(cls)
-        return copy.copy(cls._default)
+        new_instance =  copy.copy(cls._default)
+        # second level shadow copy for fields that should not be shared.
+        for k in ["api_key_prefix", "api_key"]:
+            if not hasattr(new_instance, k):
+                continue
+            setattr(new_instance, k, copy.copy(getattr(new_instance, k)))
+        return new_instance
+
 
     def set_default(cls, default):
         cls._default = copy.copy(default)
