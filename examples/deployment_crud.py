@@ -13,8 +13,7 @@
 # limitations under the License.
 
 """
-This example shows how to work with AppsV1Api to create, modify and delete
-deployments
+Creates, updates, and deletes a deployment using AppsV1Api.
 """
 
 from kubernetes import client, config

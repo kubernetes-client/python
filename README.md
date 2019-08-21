@@ -68,7 +68,7 @@ More examples can be found in [examples](examples/) folder. To run examples, run
 python -m examples.example1
 ```
 
-(replace example1 with the example base filename)
+(replace example1 with one of the filenames in the examples folder)
 
 ## Documentation
 
@@ -178,4 +178,4 @@ Specifically check `ipaddress` and `urllib3` package versions to make sure they 
 
 Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
 of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
-See more at [exec example](examples/exec.py).
+See more at [exec example](examples/pod_exec.py).
