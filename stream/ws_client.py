@@ -74,7 +74,11 @@ class WSClient:
             ssl_opts['keyfile'] = configuration.key_file
 
         self.sock = WebSocket(sslopt=ssl_opts, skip_utf8_validation=False)
-        self.sock.connect(url, header=header)
+        if configuration.proxy:
+            proxy_url = urlparse(configuration.proxy)
+            self.sock.connect(url, header=header, http_proxy_host=proxy_url.hostname, http_proxy_port=proxy_url.port)
+        else:
+            self.sock.connect(url, header=header)
         self._connected = True
 
     def peek_channel(self, channel, timeout=0):
