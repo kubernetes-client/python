@@ -140,7 +140,11 @@ class KubeConfigLoader(object):
                  config_base_path="",
                  config_persister=None):
 
-        if isinstance(config_dict, ConfigNode):
+        if config_dict is None:
+            raise ConfigException(
+                'Invalid kube-config. '
+                'Expected config_dict to not be None.')
+        elif isinstance(config_dict, ConfigNode):
             self._config = config_dict
         else:
             self._config = ConfigNode('kube-config', config_dict)
@@ -612,6 +616,11 @@ def _get_kube_config_loader_for_yaml_file(
     kcfg = KubeConfigMerger(filename)
     if persist_config and 'config_persister' not in kwargs:
         kwargs['config_persister'] = kcfg.save_changes()
+
+    if kcfg.config is None:
+        raise ConfigException(
+            'Invalid kube-config file. '
+            'No configuration found.')
 
     return KubeConfigLoader(
         config_dict=kcfg.config,
