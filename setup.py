@@ -16,9 +16,9 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "10.0.0-snapshot"
+CLIENT_VERSION = "11.0.0a1"
 PACKAGE_NAME = "kubernetes"
-DEVELOPMENT_STATUS = "4 - Beta"
+DEVELOPMENT_STATUS = "3 - Alpha"
 
 # To install the library, run the following
 #
@@ -58,7 +58,7 @@ setup(
     tests_require=TESTS_REQUIRES,
     extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
-              'kubernetes.watch', 'kubernetes.client.apis',
+              'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils'],
     include_package_data=True,
