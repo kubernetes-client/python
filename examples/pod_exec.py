@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-Showcases the functionality of exec using a Busybox container.
+Shows the functionality of exec using a Busybox container.
 """
 
 import time

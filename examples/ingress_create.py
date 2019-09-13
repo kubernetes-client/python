@@ -14,7 +14,7 @@
 
 """
 Creates deployment, service, and ingress objects. The ingress allows external
-network access within the cluster.
+network access to the cluster.
 """
 
 from kubernetes import client, config

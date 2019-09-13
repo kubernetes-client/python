@@ -13,13 +13,13 @@
 # limitations under the License.
 
 """
-Showcases loading the Kubernetes config from within the cluster. This script
+Shows how to load a Kubernetes config from within a cluster. This script
 must be run within a pod. You can start a pod with a Python image (for
 example, `python:latest`), exec into the pod, install the library, then run
 this example.
 
 If you get 403 errors from the API server you will have to configure RBAC to
-add the permission to list pods by applying the following manifest:
+add permission to list pods by applying the following manifest:
 
 ---
 kind: ClusterRole

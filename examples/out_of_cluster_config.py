@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-Showcases loading the Kubernetes config from outside of the cluster.
+Shows how to load a Kubernetes config from outside of the cluster.
 """
 
 from kubernetes import client, config

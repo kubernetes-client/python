@@ -30,23 +30,25 @@ def main():
         return
     contexts = [context['name'] for context in contexts]
     active_index = contexts.index(active_context['name'])
-    option, _ = pick(contexts, title="Pick the context to load",
-                     default_index=active_index)
-    # Configs can be set in Configuration class directly or using helper
-    # utility
-    config.load_kube_config(context=option)
+    cluster1, first_index = pick(contexts, title="Pick the first context",
+                                 default_index=active_index)
+    cluster2, _ = pick(contexts, title="Pick the second context",
+                       default_index=first_index)
 
-    print("Active host is %s" % configuration.Configuration().host)
+    client1 = client.CoreV1Api(
+        api_client=config.new_client_from_config(context=cluster1))
+    client2 = client.CoreV1Api(
+        api_client=config.new_client_from_config(context=cluster2))
 
-    v1 = client.CoreV1Api()
-    print("Listing pods with their IPs:")
-    ret = v1.list_pod_for_all_namespaces(watch=False)
-    for item in ret.items:
-        print(
-            "%s\t%s\t%s" %
-            (item.status.pod_ip,
-             item.metadata.namespace,
-             item.metadata.name))
+    print("\nList of pods on %s:" % cluster1)
+    for i in client1.list_pod_for_all_namespaces().items:
+        print("%s\t%s\t%s" %
+              (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
+
+    print("\n\nList of pods on %s:" % cluster2)
+    for i in client2.list_pod_for_all_namespaces().items:
+        print("%s\t%s\t%s" %
+              (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
 
 
 if __name__ == '__main__':

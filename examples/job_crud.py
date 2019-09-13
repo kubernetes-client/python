@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-Creates, updates, and deletes a Job object.
+Creates, updates, and deletes a job object.
 """
 
 from os import path

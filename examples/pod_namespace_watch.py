@@ -15,7 +15,7 @@
 """
 Uses watch to print the stream of events from list namespaces and list pods.
 The script will wait for 10 events related to namespaces to occur within
-the `timeout_seconds` threshold and then move on to waiting for 10 events
+the `timeout_seconds` threshold and then move on to wait for another 10 events
 related to pods to occur within the `timeout_seconds` threshold.
 """
 
