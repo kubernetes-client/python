@@ -12,29 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This example use an example CRD from this tutorial:
-# https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
-#
-# The following yaml manifest has to be applied first:
-#
-# apiVersion: apiextensions.k8s.io/v1beta1
-# kind: CustomResourceDefinition
-# metadata:
-#   name: crontabs.stable.example.com
-# spec:
-#   group: stable.example.com
-#   versions:
-#     - name: v1
-#       served: true
-#       storage: true
-#   scope: Namespaced
-#   names:
-#     plural: crontabs
-#     singular: crontab
-#     kind: CronTab
-#     shortNames:
-#     - ct
+"""
+Uses a Custom Resource Definition (CRD) to create a custom object, in this case
+a CronTab. This example use an example CRD from this tutorial:
+https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
 
+The following yaml manifest has to be applied first:
+
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: crontabs.stable.example.com
+spec:
+  group: stable.example.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+  scope: Namespaced
+  names:
+    plural: crontabs
+    singular: crontab
+    kind: CronTab
+    shortNames:
+    - ct
+"""
 
 from pprint import pprint
 
@@ -42,7 +44,6 @@ from kubernetes import client, config
 
 
 def main():
-
     config.load_kube_config()
 
     api = client.CustomObjectsApi()

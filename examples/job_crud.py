@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Creates, updates, and deletes a job object.
+"""
+
 from os import path
 
 import yaml
@@ -46,7 +50,6 @@ def create_job_object():
 
 
 def create_job(api_instance, job):
-    # Create job
     api_response = api_instance.create_namespaced_job(
         body=job,
         namespace="default")
@@ -56,7 +59,6 @@ def create_job(api_instance, job):
 def update_job(api_instance, job):
     # Update container image
     job.spec.template.spec.containers[0].image = "perl"
-    # Update the job
     api_response = api_instance.patch_namespaced_job(
         name=JOB_NAME,
         namespace="default",
@@ -65,7 +67,6 @@ def update_job(api_instance, job):
 
 
 def delete_job(api_instance):
-    # Delete job
     api_response = api_instance.delete_namespaced_job(
         name=JOB_NAME,
         namespace="default",

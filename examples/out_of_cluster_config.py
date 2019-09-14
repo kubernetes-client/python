@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Shows how to load a Kubernetes config from outside of the cluster.
+"""
+
 from kubernetes import client, config
 
 
@@ -21,19 +25,12 @@ def main():
     # default location.
     config.load_kube_config()
 
-    print("Supported APIs (* is preferred version):")
-    print("%-40s %s" %
-          ("core", ",".join(client.CoreApi().get_api_versions().versions)))
-    for api in client.ApisApi().get_api_versions().groups:
-        versions = []
-        for v in api.versions:
-            name = ""
-            if v.version == api.preferred_version.version and len(
-                    api.versions) > 1:
-                name += "*"
-            name += v.version
-            versions.append(name)
-        print("%-40s %s" % (api.name, ",".join(versions)))
+    v1 = client.CoreV1Api()
+    print("Listing pods with their IPs:")
+    ret = v1.list_pod_for_all_namespaces(watch=False)
+    for i in ret.items:
+        print("%s\t%s\t%s" %
+              (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
 
 
 if __name__ == '__main__':

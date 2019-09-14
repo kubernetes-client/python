@@ -12,25 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from kubernetes import client, config, watch
+"""
+Changes the labels of the "minikube" node. Adds the label "foo" with value
+"bar" and will overwrite the "foo" label if it already exists. Removes the
+label "baz".
+"""
+
+from pprint import pprint
+
+from kubernetes import client, config
 
 
 def main():
-    # Configs can be set in Configuration class directly or using helper
-    # utility. If no argument provided, the config will be loaded from
-    # default location.
     config.load_kube_config()
 
-    v1 = client.CoreV1Api()
-    count = 10
-    w = watch.Watch()
-    for event in w.stream(v1.list_namespace, timeout_seconds=10):
-        print("Event: %s %s" % (event['type'], event['object'].metadata.name))
-        count -= 1
-        if not count:
-            w.stop()
+    api_instance = client.CoreV1Api()
 
-    print("Ended.")
+    body = {
+        "metadata": {
+            "labels": {
+                "foo": "bar",
+                "baz": None}
+        }
+    }
+
+    api_response = api_instance.patch_node("minikube", body)
+
+    pprint(api_response)
 
 
 if __name__ == '__main__':

@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Creates deployment, service, and ingress objects. The ingress allows external
+network access to the cluster.
+"""
+
 from kubernetes import client, config
 
 
@@ -73,7 +78,7 @@ def create_ingress(networking_v1_beta1_api):
         }),
         spec=client.NetworkingV1beta1IngressSpec(
             rules=[client.NetworkingV1beta1IngressRule(
-                host="boddulabs.com",
+                host="example.com",
                 http=client.NetworkingV1beta1HTTPIngressRuleValue(
                     paths=[client.NetworkingV1beta1HTTPIngressPath(
                         path="/",
