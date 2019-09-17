@@ -14,14 +14,18 @@
 
 from kubernetes.client.rest import ApiException
 
-import select
 import certifi
-import time
 import collections
-from websocket import WebSocket, ABNF, enableTrace
-import six
+import select
 import ssl
+import time
+
+import six
+import yaml
+
 from six.moves.urllib.parse import urlencode, quote_plus, urlparse, urlunparse
+
+from websocket import WebSocket, ABNF, enableTrace
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
@@ -203,6 +207,21 @@ class WSClient:
         else:
             while self.is_open():
                 self.update(timeout=None)
+    @property
+    def returncode(self):
+        """
+        The return code, A None value indicates that the process hasn't
+        terminated yet.
+        """
+        if self.is_open():
+            return None
+        else:
+            err = self.read_channel(ERROR_CHANNEL)
+            err = yaml.safe_load(err)
+            if err['status'] == "Success":
+                return 0
+            return int(err['details']['causes'][0]['message'])
+
 
     def close(self, **kwargs):
         """
