@@ -29,6 +29,19 @@ spec:
     - name: v1
       served: true
       storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cronSpec:
+                  type: string
+                image:
+                  type: string
+                replicas:
+                  type: integer
   scope: Namespaced
   names:
     plural: crontabs
@@ -68,6 +81,28 @@ def main():
         body=my_resource,
     )
     print("Resource created")
+
+    # get the resource and print out data
+    resource = api.get_namespaced_custom_object(
+        group="stable.example.com",
+        version="v1",
+        name="my-new-cron-object",
+        namespace="default",
+        plural="crontabs",
+    )
+    print("Resource details:")
+    pprint(resource)
+
+    # patch the resource
+    resource = api.patch_namespaced_custom_object(
+        group="stable.example.com",
+        version="v1",
+        name="my-new-cron-object",
+        namespace="default",
+        plural="crontabs",
+        body={'image': 'my-awesome-cron-image:2'},
+        content_type="application/merge-patch+json"
+    )
 
     # get the resource and print out data
     resource = api.get_namespaced_custom_object(

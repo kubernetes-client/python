@@ -2336,6 +2336,7 @@ class CustomObjectsApi(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -2404,8 +2405,8 @@ class CustomObjectsApi(object):
             ['application/json'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type', self.api_client.\
+            select_header_content_type(['application/merge-patch+json'], 'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2505,6 +2506,7 @@ class CustomObjectsApi(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -2573,8 +2575,8 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type', self.api_client.\
+            select_header_content_type(['application/merge-patch+json'], 'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2674,6 +2676,7 @@ class CustomObjectsApi(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -2742,8 +2745,8 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type', self.api_client.\
+            select_header_content_type(['application/merge-patch+json'], 'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2846,6 +2849,7 @@ class CustomObjectsApi(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -2920,8 +2924,8 @@ class CustomObjectsApi(object):
             ['application/json'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type', self.api_client.\
+            select_header_content_type(['application/merge-patch+json'], 'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3024,6 +3028,7 @@ class CustomObjectsApi(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -3098,8 +3103,8 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type', self.api_client.\
+            select_header_content_type(['application/merge-patch+json'], 'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3202,6 +3207,7 @@ class CustomObjectsApi(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -3276,8 +3282,8 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type', self.api_client.\
+            select_header_content_type(['application/merge-patch+json'], 'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501

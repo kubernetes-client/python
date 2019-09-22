@@ -18250,6 +18250,7 @@ class CoreV1Api(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -18308,8 +18309,10 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type',
+            self.api_client.select_header_content_type(['application/json-patch+json',
+                'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'],
+                'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -20590,6 +20593,7 @@ class CoreV1Api(object):
         all_params.extend(
             [
                 'async_req',
+                'content_type',
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout'
@@ -20648,8 +20652,10 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('content_type',
+            self.api_client.select_header_content_type(['application/json-patch+json',
+                'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'],
+                'PATCH', body_params))
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501

@@ -494,7 +494,7 @@ class ApiClient(object):
         else:
             return ', '.join(accepts)
 
-    def select_header_content_type(self, content_types):
+    def select_header_content_type(self, content_types, method=None, body=None):
         """Returns `Content-Type` based on an array of content_types provided.
 
         :param content_types: List of content-types.
@@ -504,6 +504,21 @@ class ApiClient(object):
             return 'application/json'
 
         content_types = [x.lower() for x in content_types]
+
+        if method and body and method == 'PATCH':
+            # try to select valid content_type
+            if 'application/json-patch+json' in content_types and \
+               'application/merge-patch+json' in content_types:
+                if isinstance(body, list):
+                    return 'application/json-patch+json'
+                else:
+                    # ---
+                    # kubernetes specific - application/strategic-merge-patch+json
+                    # applied as a patch or subclass
+                    if 'application/strategic-merge-patch+json' in content_types:
+                        return 'application/strategic-merge-patch+json'
+                    # ---
+                    return 'application/merge-patch+json'
 
         if 'application/json' in content_types or '*/*' in content_types:
             return 'application/json'
