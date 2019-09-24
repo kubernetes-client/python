@@ -1355,13 +1355,17 @@ class TestKubeConfigMerger(BaseTestCase):
             },
         ]
     }
+    TEST_KUBE_CONFIG_PART4 = {
+        "current-context": "no_user",
+    }
 
     def _create_multi_config(self):
         files = []
         for part in (
                 self.TEST_KUBE_CONFIG_PART1,
                 self.TEST_KUBE_CONFIG_PART2,
-                self.TEST_KUBE_CONFIG_PART3):
+                self.TEST_KUBE_CONFIG_PART3,
+                self.TEST_KUBE_CONFIG_PART4):
             files.append(self._create_temp_file(yaml.safe_dump(part)))
         return ENV_KUBECONFIG_PATH_SEPARATOR.join(files)
 
