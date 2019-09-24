@@ -17,12 +17,12 @@ import uuid
 import yaml
 
 from kubernetes.client import api_client
-from kubernetes.client.apis import extensions_v1beta1_api
+from kubernetes.client.apis import apps_v1_api
 from kubernetes.client.models import v1_delete_options
 from kubernetes.e2e_test import base
 
 
-class TestClientExtensions(unittest.TestCase):
+class TestClientApps(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -30,14 +30,17 @@ class TestClientExtensions(unittest.TestCase):
 
     def test_create_deployment(self):
         client = api_client.ApiClient(configuration=self.config)
-        api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
+        api = apps_v1_api.AppsV1Api(client)
         name = 'nginx-deployment-' + str(uuid.uuid4())
-        deployment = '''apiVersion: extensions/v1beta1
+        deployment = '''apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: %s
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
   template:
     metadata:
       labels:
@@ -45,7 +48,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.7.9
+        image: nginx:1.15.4
         ports:
         - containerPort: 80
 '''
@@ -60,16 +63,19 @@ spec:
 
     def test_create_daemonset(self):
         client = api_client.ApiClient(configuration=self.config)
-        api = extensions_v1beta1_api.ExtensionsV1beta1Api(client)
+        api = apps_v1_api.AppsV1Api(client)
         name = 'nginx-app-' + str(uuid.uuid4())
         daemonset = {
-            'apiVersion': 'extensions/v1beta1',
+            'apiVersion': 'apps/v1',
             'kind': 'DaemonSet',
             'metadata': {
                 'labels': {'app': 'nginx'},
                 'name': '%s' % name,
             },
             'spec': {
+                'selector': {
+                    'matchLabels': {'app': 'nginx'},
+                },
                 'template': {
                     'metadata': {
                         'labels': {'app': 'nginx'},
@@ -77,7 +83,7 @@ spec:
                     'spec': {
                         'containers': [
                             {'name': 'nginx-app',
-                             'image': 'nginx:1.10'},
+                             'image': 'nginx:1.15.4'},
                         ],
                     },
                 },

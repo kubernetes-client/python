@@ -24,7 +24,7 @@ items:
       image: busybox
       command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mock
