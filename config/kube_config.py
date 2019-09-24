@@ -503,7 +503,7 @@ class ConfigNode(object):
 
     def __getitem__(self, key):
         v = self.safe_get(key)
-        if not v:
+        if v is None:
             raise ConfigException(
                 'Invalid kube-config file. Expected key %s in %s'
                 % (key, self.name))
