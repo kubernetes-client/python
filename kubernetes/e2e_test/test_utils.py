@@ -41,12 +41,12 @@ class TestUtils(unittest.TestCase):
 
     def test_create_apps_deployment_from_yaml(self):
         """
-        Should be able to create an apps/v1beta1 deployment.
+        Should be able to create an apps/v1 deployment.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml")
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
         self.assertIsNotNone(dep)
@@ -68,7 +68,7 @@ class TestUtils(unittest.TestCase):
 
         utils.create_from_dict(k8s_client, yml_obj)
 
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app-3",
                                                  namespace="default")
         self.assertIsNotNone(dep)
@@ -289,7 +289,7 @@ class TestUtils(unittest.TestCase):
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
         core_api = client.CoreV1Api(k8s_client)
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         pod_0 = core_api.read_namespaced_pod(
             name="mock-pod-0", namespace="default")
         self.assertIsNotNone(pod_0)
@@ -365,15 +365,16 @@ class TestUtils(unittest.TestCase):
             name="triple-nginx", namespace="default",
             body={})
 
-    def test_create_namespaces_apps_deployment_from_yaml(self):
+    def test_create_namespaced_apps_deployment_from_yaml(self):
         """
-        Should be able to create an apps/v1beta1 deployment.
+        Should be able to create an apps/v1beta1 deployment
+		in a test namespace.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml",
             namespace=self.test_namespace)
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace=self.test_namespace)
         self.assertIsNotNone(dep)
@@ -391,7 +392,7 @@ class TestUtils(unittest.TestCase):
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml",
             namespace=self.test_namespace)
         core_api = client.CoreV1Api(k8s_client)
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         pod_0 = core_api.read_namespaced_pod(
             name="mock-pod-0", namespace=self.test_namespace)
         self.assertIsNotNone(pod_0)
