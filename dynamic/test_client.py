@@ -41,7 +41,9 @@ class TestDynamicClient(unittest.TestCase):
             changeme_api = client.resources.get(
                 api_version='apps.example.com/v1', kind='ClusterChangeMe')
 
-        crd_api = client.resources.get(kind='CustomResourceDefinition')
+        crd_api = client.resources.get(
+            api_version='apiextensions.k8s.io/v1beta1',
+            kind='CustomResourceDefinition')
         name = 'clusterchangemes.apps.example.com'
         crd_manifest = {
             'apiVersion': 'apiextensions.k8s.io/v1beta1',
@@ -138,7 +140,9 @@ class TestDynamicClient(unittest.TestCase):
             changeme_api = client.resources.get(
                 api_version='apps.example.com/v1', kind='ChangeMe')
 
-        crd_api = client.resources.get(kind='CustomResourceDefinition')
+        crd_api = client.resources.get(
+            api_version='apiextensions.k8s.io/v1beta1',
+            kind='CustomResourceDefinition')
         name = 'changemes.apps.example.com'
         crd_manifest = {
             'apiVersion': 'apiextensions.k8s.io/v1beta1',
