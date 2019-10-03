@@ -19,6 +19,7 @@ import os
 import shutil
 import tempfile
 import unittest
+from collections import namedtuple
 
 import mock
 import yaml
@@ -27,9 +28,11 @@ from six import PY3, next
 from kubernetes.client import Configuration
 
 from .config_exception import ConfigException
-from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, ConfigNode,
-                          FileOrData, KubeConfigLoader, KubeConfigMerger,
-                          _cleanup_temp_files, _create_temp_file_with_content,
+from .dateutil import parse_rfc3339
+from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, CommandTokenSource,
+                          ConfigNode, FileOrData, KubeConfigLoader,
+                          KubeConfigMerger, _cleanup_temp_files,
+                          _create_temp_file_with_content,
                           list_kube_config_contexts, load_kube_config,
                           new_client_from_config)
 
@@ -550,6 +553,27 @@ class TestKubeConfigLoader(BaseTestCase):
                     "user": "exec_cred_user"
                 }
             },
+            {
+                "name": "contexttestcmdpath",
+                "context": {
+                    "cluster": "clustertestcmdpath",
+                    "user": "usertestcmdpath"
+                }
+            },
+            {
+                "name": "contexttestcmdpathempty",
+                "context": {
+                    "cluster": "clustertestcmdpath",
+                    "user": "usertestcmdpathempty"
+                }
+            },
+            {
+                "name": "contexttestcmdpathscope",
+                "context": {
+                    "cluster": "clustertestcmdpath",
+                    "user": "usertestcmdpathscope"
+                }
+            }
         ],
         "clusters": [
             {
@@ -588,6 +612,10 @@ class TestKubeConfigLoader(BaseTestCase):
                     "insecure-skip-tls-verify": True,
                 }
             },
+            {
+                "name": "clustertestcmdpath",
+                "cluster": {}
+            }
         ],
         "users": [
             {
@@ -661,7 +689,8 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
+                            "apiserver-id": "00000002-0000-0000-c000-"
+                                            "000000000000",
                             "environment": "AzurePublicCloud",
                             "refresh-token": "refreshToken",
                             "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
@@ -676,7 +705,8 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
+                            "apiserver-id": "00000002-0000-0000-c000-"
+                                            "000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "156207275",
@@ -693,7 +723,8 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
+                            "apiserver-id": "00000002-0000-0000-c000-"
+                                            "000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "2018-10-18 00:52:29.044727",
@@ -710,7 +741,8 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
+                            "apiserver-id": "00000002-0000-0000-c000-"
+                                            "000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "2018-10-18 00:52",
@@ -727,7 +759,8 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
+                            "apiserver-id": "00000002-0000-0000-c000-"
+                                            "000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "-1",
@@ -877,6 +910,40 @@ class TestKubeConfigLoader(BaseTestCase):
                     }
                 }
             },
+            {
+                "name": "usertestcmdpath",
+                "user": {
+                    "auth-provider": {
+                        "name": "gcp",
+                        "config": {
+                            "cmd-path": "cmdtorun"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "usertestcmdpathempty",
+                "user": {
+                    "auth-provider": {
+                        "name": "gcp",
+                        "config": {
+                            "cmd-path": ""
+                        }
+                    }
+                }
+            },
+            {
+                "name": "usertestcmdpathscope",
+                "user": {
+                    "auth-provider": {
+                        "name": "gcp",
+                        "config": {
+                            "cmd-path": "cmd",
+                            "scopes": "scope"
+                        }
+                    }
+                }
+            }
         ]
     }
 
@@ -1279,6 +1346,48 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="exec_cred_user").load_and_set(actual)
         self.assertEqual(expected, actual)
 
+    def test_user_cmd_path(self):
+        A = namedtuple('A', ['token', 'expiry'])
+        token = "dummy"
+        return_value = A(token, parse_rfc3339(datetime.datetime.now()))
+        CommandTokenSource.token = mock.Mock(return_value=return_value)
+        expected = FakeConfig(api_key={
+                              "authorization": BEARER_TOKEN_FORMAT % token})
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="contexttestcmdpath").load_and_set(actual)
+        del actual.get_api_key_with_prefix
+        self.assertEqual(expected, actual)
+
+    def test_user_cmd_path_empty(self):
+        A = namedtuple('A', ['token', 'expiry'])
+        token = "dummy"
+        return_value = A(token, parse_rfc3339(datetime.datetime.now()))
+        CommandTokenSource.token = mock.Mock(return_value=return_value)
+        expected = FakeConfig(api_key={
+                              "authorization": BEARER_TOKEN_FORMAT % token})
+        actual = FakeConfig()
+        self.expect_exception(lambda: KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="contexttestcmdpathempty").load_and_set(actual),
+            "missing access token cmd "
+            "(cmd-path is an empty string in your kubeconfig file)")
+
+    def test_user_cmd_path_with_scope(self):
+        A = namedtuple('A', ['token', 'expiry'])
+        token = "dummy"
+        return_value = A(token, parse_rfc3339(datetime.datetime.now()))
+        CommandTokenSource.token = mock.Mock(return_value=return_value)
+        expected = FakeConfig(api_key={
+                              "authorization": BEARER_TOKEN_FORMAT % token})
+        actual = FakeConfig()
+        self.expect_exception(lambda: KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="contexttestcmdpathscope").load_and_set(actual),
+            "scopes can only be used when kubectl is using "
+            "a gcp service account key")
+
 
 class TestKubernetesClientConfiguration(BaseTestCase):
     # Verifies properties of kubernetes.client.Configuration.
@@ -1421,6 +1530,37 @@ class TestKubeConfigMerger(BaseTestCase):
     TEST_KUBE_CONFIG_PART4 = {
         "current-context": "no_user",
     }
+    # Config with user having cmd-path
+    TEST_KUBE_CONFIG_PART5 = {
+        "contexts": [
+            {
+                "name": "contexttestcmdpath",
+                "context": {
+                    "cluster": "clustertestcmdpath",
+                    "user": "usertestcmdpath"
+                }
+            }
+        ],
+        "clusters": [
+            {
+                "name": "clustertestcmdpath",
+                "cluster": {}
+            }
+        ],
+        "users": [
+            {
+                "name": "usertestcmdpath",
+                "user": {
+                    "auth-provider": {
+                        "name": "gcp",
+                        "config": {
+                            "cmd-path": "cmdtorun"
+                        }
+                    }
+                }
+            }
+        ]
+    }
 
     def _create_multi_config(self):
         files = []
@@ -1428,7 +1568,8 @@ class TestKubeConfigMerger(BaseTestCase):
                 self.TEST_KUBE_CONFIG_PART1,
                 self.TEST_KUBE_CONFIG_PART2,
                 self.TEST_KUBE_CONFIG_PART3,
-                self.TEST_KUBE_CONFIG_PART4):
+                self.TEST_KUBE_CONFIG_PART4,
+                self.TEST_KUBE_CONFIG_PART5):
             files.append(self._create_temp_file(yaml.safe_dump(part)))
         return ENV_KUBECONFIG_PATH_SEPARATOR.join(files)
 
@@ -1439,7 +1580,11 @@ class TestKubeConfigMerger(BaseTestCase):
             {'context': {'cluster': 'ssl', 'user': 'ssl'}, 'name': 'ssl'},
             {'context': {'cluster': 'default', 'user': 'simple_token'},
              'name': 'simple_token'},
-            {'context': {'cluster': 'default', 'user': 'expired_oidc'}, 'name': 'expired_oidc'}]
+            {'context': {'cluster': 'default', 'user': 'expired_oidc'},
+             'name': 'expired_oidc'},
+            {'context': {'cluster': 'clustertestcmdpath',
+                         'user': 'usertestcmdpath'},
+             'name': 'contexttestcmdpath'}]
 
         contexts, active_context = list_kube_config_contexts(
             config_file=kubeconfigs)
