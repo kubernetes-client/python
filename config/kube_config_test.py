@@ -33,6 +33,7 @@ from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, CommandTokenSource,
                           ConfigNode, FileOrData, KubeConfigLoader,
                           KubeConfigMerger, _cleanup_temp_files,
                           _create_temp_file_with_content,
+                          _get_kube_config_loader_for_yaml_file,
                           list_kube_config_contexts, load_kube_config,
                           new_client_from_config)
 
@@ -1387,6 +1388,24 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="contexttestcmdpathscope").load_and_set(actual),
             "scopes can only be used when kubectl is using "
             "a gcp service account key")
+
+    def test__get_kube_config_loader_for_yaml_file_no_persist(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
+        actual = _get_kube_config_loader_for_yaml_file(config_file)
+        self.assertIsNone(actual._config_persister)
+
+    def test__get_kube_config_loader_for_yaml_file_persist(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
+        actual = _get_kube_config_loader_for_yaml_file(config_file,
+                                                       persist_config=True)
+        self.assertTrue(callable(actual._config_persister))
+        self.assertEquals(actual._config_persister.__name__, "save_changes")
 
 
 class TestKubernetesClientConfiguration(BaseTestCase):
