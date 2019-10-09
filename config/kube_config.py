@@ -249,12 +249,15 @@ class KubeConfigLoader(object):
         tenant = config['tenant-id']
         authority = 'https://login.microsoftonline.com/{}'.format(tenant)
         context = adal.AuthenticationContext(
-            authority, validate_authority=True,
+            authority, validate_authority=True, api_version='1.0'
         )
         refresh_token = config['refresh-token']
         client_id = config['client-id']
+        apiserver_id = config.get(
+            'apiserver-id',
+            '00000002-0000-0000-c000-000000000000')
         token_response = context.acquire_token_with_refresh_token(
-            refresh_token, client_id, '00000002-0000-0000-c000-000000000000')
+            refresh_token, client_id, apiserver_id)
 
         provider = self._user['auth-provider']['config']
         provider.value['access-token'] = token_response['accessToken']
