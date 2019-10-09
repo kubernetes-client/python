@@ -458,6 +458,20 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "azure_no_apiserver",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure_no_apiserver"
+                }
+            },
+            {
+                "name": "azure_bad_apiserver",
+                "context": {
+                    "cluster": "default",
+                    "user": "azure_bad_apiserver"
+                }
+            },
+            {
                 "name": "expired_oidc",
                 "context": {
                     "cluster": "default",
@@ -647,7 +661,7 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "ApiserverId",
+                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
                             "environment": "AzurePublicCloud",
                             "refresh-token": "refreshToken",
                             "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
@@ -662,7 +676,7 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "ApiserverId",
+                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "156207275",
@@ -679,7 +693,7 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "ApiserverId",
+                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "2018-10-18 00:52:29.044727",
@@ -696,7 +710,7 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "ApiserverId",
+                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "2018-10-18 00:52",
@@ -713,10 +727,43 @@ class TestKubeConfigLoader(BaseTestCase):
                     "auth-provider": {
                         "config": {
                             "access-token": TEST_AZURE_TOKEN,
-                            "apiserver-id": "ApiserverId",
+                            "apiserver-id": "00000002-0000-0000-c000-000000000000",
                             "environment": "AzurePublicCloud",
                             "expires-in": "0",
                             "expires-on": "-1",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
+                    }
+                }
+            },
+            {
+                "name": "azure_no_apiserver",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "environment": "AzurePublicCloud",
+                            "expires-in": "0",
+                            "expires-on": "156207275",
+                            "refresh-token": "refreshToken",
+                            "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
+                        },
+                        "name": "azure"
+                    }
+                }
+            },
+            {
+                "name": "azure_bad_apiserver",
+                "user": {
+                    "auth-provider": {
+                        "config": {
+                            "access-token": TEST_AZURE_TOKEN,
+                            "apiserver-id": "ApiserverId",
+                            "environment": "AzurePublicCloud",
+                            "expires-in": "0",
+                            "expires-on": "156207275",
                             "refresh-token": "refreshToken",
                             "tenant-id": "9d2ac018-e843-4e14-9e2b-4e0ddac75433"
                         },
@@ -1046,6 +1093,22 @@ class TestKubeConfigLoader(BaseTestCase):
         )
         provider = loader._user['auth-provider']
         self.assertRaises(ValueError, loader._azure_is_expired, provider)
+
+    def test_azure_with_no_apiserver(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure_no_apiserver",
+        )
+        provider = loader._user['auth-provider']
+        self.assertTrue(loader._azure_is_expired(provider))
+
+    def test_azure_with_bad_apiserver(self):
+        loader = KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="azure_bad_apiserver",
+        )
+        provider = loader._user['auth-provider']
+        self.assertTrue(loader._azure_is_expired(provider))
 
     def test_user_pass(self):
         expected = FakeConfig(host=TEST_HOST, token=TEST_BASIC_TOKEN)
