@@ -94,7 +94,7 @@ supported versions of Kubernetes clusters.
 
 Key:
 
-* `✓` Exactly the same features / API objects in both client-python and the Kubernetes
+* `✓`The same features / API objects in both client-python and the Kubernetes
   version.
 * `+` client-python has features or api objects that may not be present in the
   Kubernetes cluster, but everything they have in common will work.
@@ -124,13 +124,13 @@ Key:
 * `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-client/python/issues/177)) published to client-python when they are available.
 * `✗` No longer maintained; please upgrade.
 
-Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. In consistent with Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
+Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. In consistent with the Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
 
-Note: There would be no maintenance for alpha/beta releases except the latest one.
+Note: There would be no maintenance for alpha/beta releases except for the latest one.
 
 ## Community, Support, Discussion
 
-If you have any problem on using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
+If you have any problem with using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
 
 ### Code of Conduct
 
@@ -141,7 +141,7 @@ Participation in the Kubernetes community is governed by the [CNCF Code of Condu
 ### SSLError on macOS
 
 If you get an SSLError, you likely need to update your version of python. The
-version that ships with macOS may not be supported.
+the version that ships with macOS may not be supported.
 
 Install the latest version of python with [brew](https://brew.sh/):
 
@@ -159,10 +159,10 @@ You'll need a version with OpenSSL version 1.0.0 or later.
 
 ### Hostname doesn't match
 
-If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt).
-Specifically check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
+If you get an `ssl.CertificateError` complaining about hostname match, your installed packages do not meet version [requirements](requirements.txt).
+Specifically, check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
 
-### Why Exec/Attach calls doesn't work
+### Why Exec/Attach calls don't work
 
 Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
 of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
