@@ -126,11 +126,11 @@ Key:
 
 Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. In consistent with the Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
 
-Note: There would be no maintenance for alpha/beta releases except for the latest one.
+Note: There would be no maintenance in addition to the last one.
 
 ## Community, Support, Discussion
 
-If you have any problem with using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
+If you have any problem any problem on the package or have any, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
 
 ### Code of Conduct
 
@@ -141,7 +141,7 @@ Participation in the Kubernetes community is governed by the [CNCF Code of Condu
 ### SSLError on macOS
 
 If you get an SSLError, you likely need to update your version of python. The
-the version that ships with macOS may not be supported.
+version that ships with macOS may not be supported.
 
 Install the latest version of python with [brew](https://brew.sh/):
 
