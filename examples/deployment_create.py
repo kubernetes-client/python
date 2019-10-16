@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#importing required library
 from os import path
-
 import yaml
-
 from kubernetes import client, config
 
 
