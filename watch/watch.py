@@ -88,6 +88,8 @@ class Watch(object):
             js = json.loads(data)
         except ValueError:
             return data
+        if not (isinstance(js, dict) and 'object' in js):
+            return data
         js['raw_object'] = js['object']
         if return_type:
             obj = SimpleNamespace(data=json.dumps(js['raw_object']))
