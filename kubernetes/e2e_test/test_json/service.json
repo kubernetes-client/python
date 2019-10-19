@@ -1,0 +1,33 @@
+{
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+        "creationTimestamp": "2019-09-30T04:03:08Z",
+        "labels": {
+            "app": "nginx"
+        },
+        "name": "nginx-deployment",
+        "namespace": "default",
+        "resourceVersion": "1879",
+        "selfLink": "/api/v1/namespaces/default/services/nginx-deployment",
+        "uid": "04c42185-b00f-4245-947d-4fb473979e15"
+    },
+    "spec": {
+        "clusterIP": "10.98.219.120",
+        "ports": [
+            {
+                "port": 80,
+                "protocol": "TCP",
+                "targetPort": 80
+            }
+        ],
+        "selector": {
+            "app": "nginx"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}

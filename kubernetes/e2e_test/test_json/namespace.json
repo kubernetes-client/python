@@ -1,0 +1,19 @@
+{
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": {
+        "creationTimestamp": "2019-09-30T03:43:00Z",
+        "name": "default",
+        "resourceVersion": "148",
+        "selfLink": "/api/v1/namespaces/default",
+        "uid": "96dcb214-c21d-4858-a7d4-b90d09cf9174"
+    },
+    "spec": {
+        "finalizers": [
+            "kubernetes"
+        ]
+    },
+    "status": {
+        "phase": "Active"
+    }
+}

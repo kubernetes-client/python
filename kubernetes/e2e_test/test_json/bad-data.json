@@ -1,0 +1,5 @@
+{
+    "apiVersion": "v1bad",
+    "kind": "Pod",
+    "TestInfo": 12345
+}
