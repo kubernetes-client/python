@@ -180,7 +180,7 @@ def response_type_from_dict(data, verbose=False):
             if verbose:
                 print(
                     "Lookup function found: {} in k8s_api: {} response_type: "
-                    "{} info: ".format(
+                    "{} lookup info: {}".format(
                         fnc_lookup,
                         k8s_api,
                         response_type,
@@ -188,8 +188,8 @@ def response_type_from_dict(data, verbose=False):
         else:
             if verbose:
                 print(
-                    "Lookup function not found: {} in k8s_api: {} response_type: "
-                    "{} info: ".format(
+                    "Lookup function not found: {} in k8s_api: {} "
+                    "response_type: {} lookup info: {}".format(
                         fnc_lookup,
                         k8s_api,
                         response_type,
