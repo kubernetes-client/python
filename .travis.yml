@@ -2,35 +2,41 @@
 language: python
 dist: xenial
 
-matrix:
-    include:
-     - python: 2.7
-       env: TOXENV=py27
-     - python: 2.7
-       env: TOXENV=py27-functional
-     - python: 2.7
-       env: TOXENV=update-pycodestyle
-     - python: 3.7
-       env: TOXENV=docs
-     - python: 2.7
-       env: TOXENV=coverage,codecov
-     - python: 3.5
-       env: TOXENV=py35
-     - python: 3.5
-       env: TOXENV=py35-functional
-     - python: 3.6
-       env: TOXENV=py36
-     - python: 3.6
-       env: TOXENV=py36-functional
-     - python: 3.7
-       env: TOXENV=py37
-     - python: 3.7
-       env: TOXENV=py37-functional
+stages:
+  - verify boilerplate
+  - test
 
 install:
   - pip install tox
 
 script:
   - ./run_tox.sh tox
-  - ./hack/verify-boilerplate.sh
 
+jobs:
+  include:
+    - stage: verify boilerplate
+      script: ./hack/verify-boilerplate.sh
+      python: 3.7
+    - stage: test
+      python: 2.7
+      env: TOXENV=py27
+    - python: 2.7
+      env: TOXENV=py27-functional
+    - python: 2.7
+      env: TOXENV=update-pycodestyle
+    - python: 3.7
+      env: TOXENV=docs
+    - python: 2.7
+      env: TOXENV=coverage,codecov
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.5
+      env: TOXENV=py35-functional
+    - python: 3.6
+      env: TOXENV=py36
+    - python: 3.6
+      env: TOXENV=py36-functional
+    - python: 3.7
+      env: TOXENV=py37
+    - python: 3.7
+      env: TOXENV=py37-functional
