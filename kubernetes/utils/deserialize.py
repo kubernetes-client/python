@@ -14,6 +14,7 @@
 
 
 import re
+import sys
 from os import path
 
 import inspect
@@ -21,7 +22,6 @@ import json
 import yaml
 
 from kubernetes import client
-
 
 class RespMock(object):
     """
@@ -32,12 +32,14 @@ class RespMock(object):
         self.data = None
 
 
-def load_from_json(json_file, verbose=False):
+def load_from_json(json_file, klass=None, verbose=False):
     """
     Load objects from json file. Pass True for verbose to
     print additional information.
     Input:
     json_file: string. Contains the path to json file.
+    klass: class literal for deserialized object,
+    or string of class name.
     verbose: If True, print information about the object lookup info.
         Default is False.
 
@@ -46,18 +48,25 @@ def load_from_json(json_file, verbose=False):
     """
     with open(path.abspath(json_file)) as file:
         data = file.read()
-        data = json.loads(data)
-        obj = load_from_dict(data, verbose=verbose)
+        # python 2 has problems decoding unicode from json.load
+        # use yaml.load instead
+        if sys.version_info[0] < 3:
+            data = yaml.safe_load(data)
+        else:
+            data = json.loads(data)
+        obj = load_from_dict(data, klass=klass, verbose=verbose)
 
         return obj
 
 
-def load_from_yaml(yaml_file, verbose=False):
+def load_from_yaml(yaml_file, klass=None, verbose=False):
     """
     Perform an action from a yaml file. Pass True for verbose to
     print additional information.
     Input:
     yaml_file: string. Contains the path to yaml file.
+    klass: class literal for deserialized object,
+    or string of class name.
     verbose: If True, print information about the object lookup info.
         Default is False.
 
@@ -70,7 +79,7 @@ def load_from_yaml(yaml_file, verbose=False):
         objs = []
         for yml_document in yml_document_all:
             try:
-                obj = load_from_dict(yml_document, verbose=verbose)
+                obj = load_from_dict(yml_document, klass=klass, verbose=verbose)
                 # Prevent returning list of lists when doing multi
                 # document yaml
                 if isinstance(obj, list):
@@ -170,13 +179,13 @@ def response_type_from_dict(data, verbose=False):
                         break
             if verbose:
                 print(
-                    "Lookup function found: {} in k8s_api: {} resp_type: "
+                    "Lookup function found: {} in k8s_api: {} response_type: "
                     "{} info: ".format(fnc_lookup, k8s_api, response_type, info)
                 )
         else:
             if verbose:
                 print(
-                    "Lookup function not found: {} in k8s_api: {} resp_type: "
+                    "Lookup function not found: {} in k8s_api: {} response_type: "
                     "{} info: ".format(fnc_lookup, k8s_api, response_type, info)
                 )
     else:
@@ -186,13 +195,15 @@ def response_type_from_dict(data, verbose=False):
     return response_type
 
 
-def load_from_dict(data, verbose=False):
+def load_from_dict(data, klass=None, verbose=False):
     """
     Load object/objects from a dictionary containing valid kubernetes
     API object (i.e. List, Service, etc).
 
     Input:
     data: a dictionary holding valid kubernetes objects
+    klass: class literal for deserialized object,
+    or string of class name.
     verbose: If True, print additional info.
         Default is False.
     Raises:
@@ -215,7 +226,7 @@ def load_from_dict(data, verbose=False):
                 item["apiVersion"] = data["apiVersion"]
                 item["kind"] = kind
             try:
-                obj = load_single_item(item, verbose=verbose)
+                obj = load_single_item(item, klass=klass, verbose=verbose)
                 obj_list.append(obj)
             except FailToLoadError as load_exception:
                 load_exceptions.append(load_exception)
@@ -224,7 +235,7 @@ def load_from_dict(data, verbose=False):
 
     else:
         try:
-            obj = load_single_item(data, verbose=verbose)
+            obj = load_single_item(data, klass=klass, verbose=verbose)
         except FailToLoadError as load_exception:
             load_exceptions.append(load_exception)
 
@@ -235,12 +246,14 @@ def load_from_dict(data, verbose=False):
     return obj
 
 
-def load_single_item(data, verbose=False):
+def load_single_item(data, klass=None, verbose=False):
     """
     Load a single object from a dictionary containing valid kubernetes
     API object (i.e. List, Service, etc).
     Input:
     data: a dictionary holding a valid kubernetes object
+    klass: class literal for deserialized object,
+    or string of class name.
     verbose: If True, print additional info.
         Default is False.
     """
@@ -248,10 +261,11 @@ def load_single_item(data, verbose=False):
     resp_mock = RespMock()
     resp_mock.data = json.dumps(data)
 
-    # Infer response_type from json data
-    resp_type = response_type_from_dict(data, verbose=verbose)
+    # Infer response_type from json data when not provided
+    if not klass:
+        klass = response_type_from_dict(data, verbose=verbose)
     api_client = client.api_client.ApiClient()
-    obj = api_client.deserialize(response=resp_mock, response_type=resp_type)
+    obj = api_client.deserialize(response=resp_mock, response_type=klass)
 
     return obj
 
@@ -262,12 +276,12 @@ class FailToLoadError(Exception):
     loading a file.
     """
 
-    def __init__(self, load_exceptions=None, reason=None):
+    def __init__(self, load_exceptions=[], reason=""):
         self.load_exceptions = load_exceptions
         self.reason = reason
 
     def __str__(self):
-        msg = "Error loading object"
+        msg = self.reason
         if len(self.load_exceptions) > 1:
             msg = "Error loading {} objects".format(len(self.load_exceptions))
 

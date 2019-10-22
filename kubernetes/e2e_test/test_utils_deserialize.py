@@ -277,11 +277,33 @@ class TestUtils(unittest.TestCase):
             self.assertEqual(pod.metadata.namespace, "default")
             self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
 
+    def test_load_pod_list_with_klass_from_json(self):
+        """
+        Should be able to load a list of pods objects
+        """
+        pods = utils.load_from_json(self.json_path_prefix + "pod-list.json", klass="V1Pod")
+        self.assertIsInstance(pods, list)
+        self.assertEqual(len(pods), 5)
+        for pod in pods:
+            self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
+            self.assertEqual(pod.metadata.namespace, "default")
+            self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
+
     def test_load_pod_from_json(self):
         """
         Should be able to load one pod
         """
         pod = utils.load_from_json(self.json_path_prefix + "pod.json")
+        self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
+        self.assertEqual(pod.metadata.name, "nginx-deployment-54f57cf6bf-hpphg")
+        self.assertEqual(pod.metadata.namespace, "default")
+        self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
+
+    def test_load_pod_with_class_from_json(self):
+        """
+        Should be able to load one pod
+        """
+        pod = utils.load_from_json(self.json_path_prefix + "pod.json", klass="V1Pod")
         self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
         self.assertEqual(pod.metadata.name, "nginx-deployment-54f57cf6bf-hpphg")
         self.assertEqual(pod.metadata.namespace, "default")
@@ -452,5 +474,5 @@ class TestUtils(unittest.TestCase):
         with self.assertRaises(AttributeError) as cm:
             utils.load_from_json(self.json_path_prefix + "bad-data.json")
 
-        exp_error = "module 'kubernetes.client' has no attribute 'CoreV1badApi'"
-        self.assertEqual(exp_error, str(cm.exception))
+        exp_error = "has no attribute 'CoreV1badApi'"
+        self.assertIn(exp_error, str(cm.exception))
