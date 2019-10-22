@@ -12,16 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import inspect
+import json
 import re
 import sys
 from os import path
 
-import inspect
-import json
 import yaml
-
 from kubernetes import client
+
 
 class RespMock(object):
     """
@@ -79,7 +78,8 @@ def load_from_yaml(yaml_file, klass=None, verbose=False):
         objs = []
         for yml_document in yml_document_all:
             try:
-                obj = load_from_dict(yml_document, klass=klass, verbose=verbose)
+                obj = load_from_dict(
+                    yml_document, klass=klass, verbose=verbose)
                 # Prevent returning list of lists when doing multi
                 # document yaml
                 if isinstance(obj, list):
@@ -180,16 +180,23 @@ def response_type_from_dict(data, verbose=False):
             if verbose:
                 print(
                     "Lookup function found: {} in k8s_api: {} response_type: "
-                    "{} info: ".format(fnc_lookup, k8s_api, response_type, info)
-                )
+                    "{} info: ".format(
+                        fnc_lookup,
+                        k8s_api,
+                        response_type,
+                        info))
         else:
             if verbose:
                 print(
                     "Lookup function not found: {} in k8s_api: {} response_type: "
-                    "{} info: ".format(fnc_lookup, k8s_api, response_type, info)
-                )
+                    "{} info: ".format(
+                        fnc_lookup,
+                        k8s_api,
+                        response_type,
+                        info))
     else:
-        msg = "Failed to find a function to inspect; lookup info: {}".format(info)
+        msg = "Failed to find a function to inspect; lookup info: {}".format(
+            info)
         raise FailToLoadError(reason=msg)
 
     return response_type
