@@ -62,9 +62,7 @@ setup(
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils'],
     include_package_data=True,
-    long_description="""\
-    Python client for kubernetes http://kubernetes.io/
-    """,
+    long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
         "Development Status :: %s" % DEVELOPMENT_STATUS,
         "Topic :: Utilities",
@@ -76,9 +74,9 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
 )

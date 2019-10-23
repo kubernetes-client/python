@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from os import path
-
-import yaml
+"""
+Reads the list of available API versions and prints them. Similar to running
+`kubectl api-versions`.
+"""
 
 from kubernetes import client, config
 
@@ -25,12 +26,19 @@ def main():
     # default location.
     config.load_kube_config()
 
-    with open(path.join(path.dirname(__file__), "nginx-deployment.yaml")) as f:
-        dep = yaml.safe_load(f)
-        k8s_beta = client.ExtensionsV1beta1Api()
-        resp = k8s_beta.create_namespaced_deployment(
-            body=dep, namespace="default")
-        print("Deployment created. status='%s'" % str(resp.status))
+    print("Supported APIs (* is preferred version):")
+    print("%-40s %s" %
+          ("core", ",".join(client.CoreApi().get_api_versions().versions)))
+    for api in client.ApisApi().get_api_versions().groups:
+        versions = []
+        for v in api.versions:
+            name = ""
+            if v.version == api.preferred_version.version and len(
+                    api.versions) > 1:
+                name += "*"
+            name += v.version
+            versions.append(name)
+        print("%-40s %s" % (api.name, ",".join(versions)))
 
 
 if __name__ == '__main__':

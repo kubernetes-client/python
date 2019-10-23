@@ -25,7 +25,7 @@ From [PyPi](https://pypi.python.org/pypi/kubernetes/) directly:
 pip install kubernetes
 ```
 
-## Example
+## Examples
 
 list all pods:
 
@@ -68,7 +68,7 @@ More examples can be found in [examples](examples/) folder. To run examples, run
 python -m examples.example1
 ```
 
-(replace example1 with the example base filename)
+(replace example1 with one of the filenames in the examples folder)
 
 ## Documentation
 
@@ -77,24 +77,20 @@ All APIs and Models' documentation can be found at the [Generated client's READM
 ## Compatibility
 
 `client-python` follows [semver](http://semver.org/), so until the major version of
-client-python gets increased, your code will continue to work with explicitly 
+client-python gets increased, your code will continue to work with explicitly
 supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
 
-|                    | Kubernetes 1.5 | Kubernetes 1.6 | Kubernetes 1.7 | Kubernetes 1.8 | Kubernetes 1.9 | Kubernetes 1.10 | Kubernetes 1.11 | Kubernetes 1.12 | Kubernetes 1.13 | Kubernetes 1.14 |
-|--------------------|----------------|----------------|----------------|----------------|----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
-| client-python 1.0  | ✓              | -              | -              |-               |-               |-                |-                |-                |-                |-                |
-| client-python 2.0  | +              | ✓              | -              |-               |-               |-                |-                |-                |-                |-                |
-| client-python 3.0  | +              | +              | ✓              |-               |-               |-                |-                |-                |-                |-                |
-| client-python 4.0  | +              | +              | +              |✓               |-               |-                |-                |-                |-                |-                |
-| client-python 5.0  | +              | +              | +              |+               |✓               |-                |-                |-                |-                |-                |
-| client-python 6.0  | +              | +              | +              |+               |+               |✓                |-                |-                |-                |-                |
-| client-python 7.0  | +              | +              | +              |+               |+               |+                |✓                |-                |-                |-                |
-| client-python 8.0  | +              | +              | +              |+               |+               |+                |+                |✓                |-                |-                |
-| client-python 9.0  | +              | +              | +              |+               |+               |+                |+                |+                |✓                |-                |
-| client-python 10.0 | +              | +              | +              |+               |+               |+                |+                |+                |+                |✓                |
-| client-python HEAD | +              | +              | +              |+               |+               |+                |+                |+                |+                |✓                |
+|                    | Kubernetes 1.9 | Kubernetes 1.10 | Kubernetes 1.11 | Kubernetes 1.12 | Kubernetes 1.13 | Kubernetes 1.14 |
+|--------------------|----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+| client-python 5.0  |✓               |-                |-                |-                |-                |-                |
+| client-python 6.0  |+               |✓                |-                |-                |-                |-                |
+| client-python 7.0  |+               |+                |✓                |-                |-                |-                |
+| client-python 8.0  |+               |+                |+                |✓                |-                |-                |
+| client-python 9.0  |+               |+                |+                |+                |✓                |-                |
+| client-python 10.0 |+               |+                |+                |+                |+                |✓                |
+| client-python HEAD |+               |+                |+                |+                |+                |✓                |
 
 Key:
 
@@ -110,14 +106,6 @@ between client-python versions.
 
 | Client version  | Canonical source for OpenAPI spec    | Maintenance status            |
 |-----------------|--------------------------------------|-------------------------------|
-| 1.0 Alpha/Beta  | Kubernetes main repo, 1.5 branch     | ✗                             |
-| 1.0.x           | Kubernetes main repo, 1.5 branch     | ✗                             |
-| 2.0 Alpha/Beta  | Kubernetes main repo, 1.6 branch     | ✗                             |
-| 2.0.x           | Kubernetes main repo, 1.6 branch     | ✗                             |
-| 3.0 Alpha/Beta  | Kubernetes main repo, 1.7 branch     | ✗                             |
-| 3.0             | Kubernetes main repo, 1.7 branch     | ✗                             |
-| 4.0 Alpha/Beta  | Kubernetes main repo, 1.8 branch     | ✗                             |
-| 4.0             | Kubernetes main repo, 1.8 branch     | ✗                             |
 | 5.0 Alpha/Beta  | Kubernetes main repo, 1.9 branch     | ✗                             |
 | 5.0             | Kubernetes main repo, 1.9 branch     | ✗                             |
 | 6.0 Alpha/Beta  | Kubernetes main repo, 1.10 branch    | ✗                             |
@@ -142,17 +130,11 @@ Note: There would be no maintenance for alpha/beta releases except the latest on
 
 ## Community, Support, Discussion
 
-If you have any problem on using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery).
+If you have any problem on using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
 
 ### Code of Conduct
 
 Participation in the Kubernetes community is governed by the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
-
-## Kubernetes Incubator
-
-This is a [Kubernetes Incubator project](https://github.com/kubernetes/community/blob/master/incubator.md).
-
-* [SIG: sig-api-machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery)
 
 ## Troubleshooting
 
@@ -184,9 +166,9 @@ Specifically check `ipaddress` and `urllib3` package versions to make sure they 
 
 Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
 of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
-See more at [exec example](examples/exec.py).
 
 Using Stream will overwrite the requests protocol in _core_v1_api.CoreV1Api()_ 
 This will cause a failure in  non-exec/attach calls. If you reuse your api client object, you will need to 
 recreate it between api calls that use _stream_ and other api calls.
     
+See more at [exec example](examples/pod_exec.py).

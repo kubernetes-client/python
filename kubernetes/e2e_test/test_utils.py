@@ -14,7 +14,9 @@
 
 import unittest
 
+import yaml
 from kubernetes import utils, client
+from kubernetes.client.rest import ApiException
 from kubernetes.e2e_test import base
 
 
@@ -39,32 +41,39 @@ class TestUtils(unittest.TestCase):
 
     def test_create_apps_deployment_from_yaml(self):
         """
-        Should be able to create an apps/v1beta1 deployment.
+        Should be able to create an apps/v1 deployment.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml")
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
         self.assertIsNotNone(dep)
-        app_api.delete_namespaced_deployment(
-            name="nginx-app", namespace="default",
-            body={})
+        while True:
+            try:
+                app_api.delete_namespaced_deployment(
+                    name="nginx-app", namespace="default",
+                    body={})
+                break
+            except ApiException:
+                continue
 
-    def test_create_extensions_deployment_from_yaml(self):
-        """
-        Should be able to create an extensions/v1beta1 deployment.
-        """
+    def test_create_apps_deployment_from_yaml_obj(self):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
-            k8s_client, self.path_prefix + "extensions-deployment.yaml")
-        ext_api = client.ExtensionsV1beta1Api(k8s_client)
-        dep = ext_api.read_namespaced_deployment(name="nginx-deployment",
+        with open(self.path_prefix + "apps-deployment.yaml") as f:
+            yml_obj = yaml.safe_load(f)
+
+        yml_obj["metadata"]["name"] = "nginx-app-3"
+
+        utils.create_from_dict(k8s_client, yml_obj)
+
+        app_api = client.AppsV1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app-3",
                                                  namespace="default")
         self.assertIsNotNone(dep)
-        ext_api.delete_namespaced_deployment(
-            name="nginx-deployment", namespace="default",
+        app_api.delete_namespaced_deployment(
+            name="nginx-app-3", namespace="default",
             body={})
 
     def test_create_pod_from_yaml(self):
@@ -123,6 +132,20 @@ class TestUtils(unittest.TestCase):
         rbac_api.delete_namespaced_role(
             name="pod-reader", namespace="default", body={})
 
+    def test_create_rbac_role_from_yaml_with_verbose_enabled(self):
+        """
+        Should be able to create an rbac role with verbose enabled.
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
+        rbac_api = client.RbacAuthorizationV1Api(k8s_client)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNotNone(rbac_role)
+        rbac_api.delete_namespaced_role(
+            name="pod-reader", namespace="default", body={})
+
     def test_create_deployment_non_default_namespace_from_yaml(self):
         """
         Should be able to create a namespace "dep",
@@ -134,7 +157,7 @@ class TestUtils(unittest.TestCase):
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "dep-deployment.yaml")
         core_api = client.CoreV1Api(k8s_client)
-        ext_api = client.ExtensionsV1beta1Api(k8s_client)
+        ext_api = client.AppsV1Api(k8s_client)
         nmsp = core_api.read_namespace(name="dep")
         self.assertIsNotNone(nmsp)
         dep = ext_api.read_namespaced_deployment(name="nginx-deployment",
@@ -186,7 +209,7 @@ class TestUtils(unittest.TestCase):
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "list.yaml")
         core_api = client.CoreV1Api(k8s_client)
-        ext_api = client.ExtensionsV1beta1Api(k8s_client)
+        ext_api = client.AppsV1Api(k8s_client)
         svc = core_api.read_namespaced_service(name="list-service-test",
                                                namespace="default")
         self.assertIsNotNone(svc)
@@ -266,7 +289,7 @@ class TestUtils(unittest.TestCase):
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
         core_api = client.CoreV1Api(k8s_client)
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         pod_0 = core_api.read_namespaced_pod(
             name="mock-pod-0", namespace="default")
         self.assertIsNotNone(pod_0)
@@ -317,7 +340,7 @@ class TestUtils(unittest.TestCase):
 
     def test_create_from_multi_resource_yaml_with_multi_conflicts(self):
         """
-        Should create an extensions/v1beta1 deployment
+        Should create an apps/v1 deployment
         and fail to create the same deployment twice.
         Should raise an exception that contains two error messages.
         """
@@ -327,14 +350,14 @@ class TestUtils(unittest.TestCase):
                 k8s_client, self.path_prefix + "triple-nginx.yaml")
         exp_error = ('Error from server (Conflict): {"kind":"Status",'
                      '"apiVersion":"v1","metadata":{},"status":"Failure",'
-                     '"message":"deployments.extensions \\"triple-nginx\\" '
+                     '"message":"deployments.apps \\"triple-nginx\\" '
                      'already exists","reason":"AlreadyExists",'
-                     '"details":{"name":"triple-nginx","group":"extensions",'
+                     '"details":{"name":"triple-nginx","group":"apps",'
                      '"kind":"deployments"},"code":409}\n'
                      )
         exp_error += exp_error
         self.assertEqual(exp_error, str(cm.exception))
-        ext_api = client.ExtensionsV1beta1Api(k8s_client)
+        ext_api = client.AppsV1Api(k8s_client)
         dep = ext_api.read_namespaced_deployment(name="triple-nginx",
                                                  namespace="default")
         self.assertIsNotNone(dep)
@@ -342,14 +365,16 @@ class TestUtils(unittest.TestCase):
             name="triple-nginx", namespace="default",
             body={})
 
-    def test_create_namespaces_apps_deployment_from_yaml(self):
+    def test_create_namespaced_apps_deployment_from_yaml(self):
         """
-        Should be able to create an apps/v1beta1 deployment.
+        Should be able to create an apps/v1beta1 deployment
+		in a test namespace.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
-            k8s_client, self.path_prefix + "apps-deployment.yaml", namespace=self.test_namespace)
-        app_api = client.AppsV1beta1Api(k8s_client)
+            k8s_client, self.path_prefix + "apps-deployment.yaml",
+            namespace=self.test_namespace)
+        app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace=self.test_namespace)
         self.assertIsNotNone(dep)
@@ -357,16 +382,17 @@ class TestUtils(unittest.TestCase):
             name="nginx-app", namespace=self.test_namespace,
             body={})
 
-    def test_create_from_list_in_multi_resource_yaml(self):
+    def test_create_from_list_in_multi_resource_yaml_namespaced(self):
         """
         Should be able to create the items in the PodList and a deployment
-        specified in the multi-resource file
+        specified in the multi-resource file in a test namespace
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
-            k8s_client, self.path_prefix + "multi-resource-with-list.yaml", namespace=self.test_namespace)
+            k8s_client, self.path_prefix + "multi-resource-with-list.yaml",
+            namespace=self.test_namespace)
         core_api = client.CoreV1Api(k8s_client)
-        app_api = client.AppsV1beta1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
         pod_0 = core_api.read_namespaced_pod(
             name="mock-pod-0", namespace=self.test_namespace)
         self.assertIsNotNone(pod_0)

@@ -29,6 +29,26 @@ def short_uuid():
     return id[-12:]
 
 
+def manifest_with_command(name, command):
+    return {
+        'apiVersion': 'v1',
+        'kind': 'Pod',
+        'metadata': {
+            'name': name
+        },
+        'spec': {
+            'containers': [{
+                'image': 'busybox',
+                'name': 'sleep',
+                "args": [
+                    "/bin/sh",
+                    "-c",
+                    command
+                ]
+            }]
+        }
+    }
+
 class TestClient(unittest.TestCase):
 
     @classmethod
@@ -40,25 +60,7 @@ class TestClient(unittest.TestCase):
         api = core_v1_api.CoreV1Api(client)
 
         name = 'busybox-test-' + short_uuid()
-        pod_manifest = {
-            'apiVersion': 'v1',
-            'kind': 'Pod',
-            'metadata': {
-                'name': name
-            },
-            'spec': {
-                'containers': [{
-                    'image': 'busybox',
-                    'name': 'sleep',
-                    "args": [
-                        "/bin/sh",
-                        "-c",
-                        "while true;do date;sleep 5; done"
-                    ]
-                }]
-            }
-        }
-
+        pod_manifest = manifest_with_command(name, "while true;do date;sleep 5; done")
         resp = api.create_namespaced_pod(body=pod_manifest,
                                          namespace='default')
         self.assertEqual(name, resp.metadata.name)
@@ -114,6 +116,45 @@ class TestClient(unittest.TestCase):
 
         number_of_pods = len(api.list_pod_for_all_namespaces().items)
         self.assertTrue(number_of_pods > 0)
+
+        resp = api.delete_namespaced_pod(name=name, body={},
+                                         namespace='default')
+    def test_exit_code(self):
+        client = api_client.ApiClient(configuration=self.config)
+        api = core_v1_api.CoreV1Api(client)
+
+        name = 'busybox-test-' + short_uuid()
+        pod_manifest = manifest_with_command(name, "while true;do date;sleep 5; done")
+        resp = api.create_namespaced_pod(body=pod_manifest,
+                                         namespace='default')
+        self.assertEqual(name, resp.metadata.name)
+        self.assertTrue(resp.status.phase)
+
+        while True:
+            resp = api.read_namespaced_pod(name=name,
+                                           namespace='default')
+            self.assertEqual(name, resp.metadata.name)
+            self.assertTrue(resp.status.phase)
+            if resp.status.phase == 'Running':
+                break
+            time.sleep(1)
+
+        commands_expected_values = (
+            (["false", 1]),
+            (["/bin/sh", "-c", "sleep 1; exit 3"], 3),
+            (["true", 0]),
+            (["/bin/sh", "-c", "ls /"], 0)
+        )
+        for command, value in commands_expected_values:
+            client = stream(api.connect_get_namespaced_pod_exec, name, 'default',
+                                                       command=command,
+                                                       stderr=True, stdin=False,
+                                                       stdout=True, tty=False,
+                                                       _preload_content=False)
+
+            self.assertIsNone(client.returncode)
+            client.run_forever(timeout=10)
+            self.assertEqual(client.returncode, value)
 
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')

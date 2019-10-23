@@ -12,11 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Allows you to pick a context and then lists all pods in the chosen context. A
+context includes a cluster, a user, and a namespace.
+
+Please install the pick library before running this example.
+"""
+
 from kubernetes import client, config
 from kubernetes.client import configuration
-# install pick using "pip install pick". It is not included
-# as a dependency because it only used in examples
-from pick import pick
+from pick import pick  # install pick using `pip install pick`
 
 
 def main():
@@ -32,7 +37,7 @@ def main():
     # utility
     config.load_kube_config(context=option)
 
-    print("Active host is %s" % configuration.host)
+    print("Active host is %s" % configuration.Configuration().host)
 
     v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")
