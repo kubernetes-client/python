@@ -4,10 +4,12 @@
 - Fix a bug in kubeconfig loader that False value gets treated as absence [kubernetes-client/python-base#161](https://github.com/kubernetes-client/python-base/pull/161)
 - Fix a bug in kubeconfig loader where merging valid configs fails if fields are missing [kubernetes-client/python-base#163](https://github.com/kubernetes-client/python-base/pull/163)
 - Fix azure refresh token apiserver id [kubernetes-client/python-base#170](https://github.com/kubernetes-client/python-base/pull/170)
+- Support chunked listing to custom object API [kubernetes-client/gen#130](https://github.com/kubernetes-client/gen/pull/130)
 
 **New Feature:**
 - Add returncode method to WSClient [kubernetes-client/python-base#160](https://github.com/kubernetes-client/python-base/pull/160)
 - Add proxy support to WSClient [kubernetes-client/python-base#157](https://github.com/kubernetes-client/python-base/pull/157)
+- Add util function to parse canonical quantities [kubernetes-client/python#855](https://github.com/kubernetes-client/python/pull/855)
 
 # v11.0.0a1
 **New Feature:**
