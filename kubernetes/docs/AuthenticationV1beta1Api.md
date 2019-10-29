@@ -1,6 +1,6 @@
 # kubernetes.client.AuthenticationV1beta1Api
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -15,7 +15,9 @@ Method | HTTP request | Description
 
 create a TokenReview
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -36,7 +38,7 @@ dry_run = 'dry_run_example' # str | When present, indicates that modifications s
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try: 
+try:
     api_response = api_instance.create_token_review(body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
     pprint(api_response)
 except ApiException as e:
@@ -62,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -74,7 +76,9 @@ Name | Type | Description  | Notes
 
 get available resources
 
-### Example 
+### Example
+
+* Api Key Authentication (BearerToken): 
 ```python
 from __future__ import print_function
 import time
@@ -91,7 +95,7 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = kubernetes.client.AuthenticationV1beta1Api(kubernetes.client.ApiClient(configuration))
 
-try: 
+try:
     api_response = api_instance.get_api_resources()
     pprint(api_response)
 except ApiException as e:
@@ -111,7 +115,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
