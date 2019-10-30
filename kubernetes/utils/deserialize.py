@@ -18,9 +18,12 @@ import re
 import sys
 from os import path
 
+import pydoc
 import yaml
 
 from kubernetes import client
+
+PYDOC_RETURN_LABEL = ":return:"
 
 
 class RespMock(object):
@@ -154,30 +157,8 @@ def response_type_from_dict(data, verbose=False):
 
     if fnc_lookup:
         if hasattr(k8s_api, fnc_lookup):
-            fnc_source, fnc_line_num = inspect.getsourcelines(
-                getattr(k8s_api, fnc_lookup)
-            )
-
-            # Look for response_type parameter in return
-            # self.api_client.call_api
-            return_line_found = False
-            for line in fnc_source:
-                # Look for fnc return line
-                if "return self.api_client.call_api" in line:
-                    return_line_found = True
-                # Search for response_type only after fnc return has
-                # been found
-                if return_line_found:
-                    response_type_regex = r"response_type='(\w*)'"
-                    m = re.search(response_type_regex, line)
-                    if m:
-                        # Group 1 is the extracted str we need from
-                        # regex
-                        # line example: response_type='V1Pod',
-                        # we need to extract V1Pod as response_type
-                        response_type = m.group(1)
-                        # exit loop after first match
-                        break
+            # Get response_type from func pydoc
+            response_type = _find_response_type(getattr(k8s_api, fnc_lookup))
             if verbose:
                 print(
                     "Lookup function found: {} in k8s_api: {} response_type: "
@@ -201,6 +182,13 @@ def response_type_from_dict(data, verbose=False):
         raise FailToLoadError(reason=msg)
 
     return response_type
+
+
+def _find_response_type(func):
+    for line in pydoc.getdoc(func).splitlines():
+        if line.startswith(PYDOC_RETURN_LABEL):
+            return line[len(PYDOC_RETURN_LABEL):].strip()
+    return ""
 
 
 def load_from_dict(data, klass=None, verbose=False):
