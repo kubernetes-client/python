@@ -12,15 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import inspect
 import json
+import pydoc
 import re
 import sys
 from os import path
 
-import pydoc
 import yaml
-
 from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":return:"

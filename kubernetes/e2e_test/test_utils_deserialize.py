@@ -259,7 +259,7 @@ class TestUtils(unittest.TestCase):
     def test_load_namespaced_apps_deployment_from_yaml(self):
         """
         Should be able to load an apps/v1beta1 deployment
-		in a test namespace.
+        in a test namespace.
         """
         obj = utils.load_from_yaml(self.yaml_path_prefix + "apps-deployment.yaml")
         self.assertIsInstance(obj, client.models.v1_deployment.V1Deployment)
@@ -271,7 +271,7 @@ class TestUtils(unittest.TestCase):
         """
         pods = utils.load_from_json(self.json_path_prefix + "pod-list.json")
         self.assertIsInstance(pods, list)
-        self.assertEqual(len(pods), 5)
+        self.assertEqual(len(pods), 2)
         for pod in pods:
             self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
             self.assertEqual(pod.metadata.namespace, "default")
@@ -283,7 +283,7 @@ class TestUtils(unittest.TestCase):
         """
         pods = utils.load_from_json(self.json_path_prefix + "pod-list.json", klass="V1Pod")
         self.assertIsInstance(pods, list)
-        self.assertEqual(len(pods), 5)
+        self.assertEqual(len(pods), 2)
         for pod in pods:
             self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
             self.assertEqual(pod.metadata.namespace, "default")
@@ -291,7 +291,7 @@ class TestUtils(unittest.TestCase):
 
     def test_load_pod_from_json(self):
         """
-        Should be able to load one pod
+        Should be able to load a pod object
         """
         pod = utils.load_from_json(self.json_path_prefix + "pod.json")
         self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
@@ -299,41 +299,15 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(pod.metadata.namespace, "default")
         self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
 
-    def test_load_pod_with_class_from_json(self):
+    def test_load_pod_with_klass_from_json(self):
         """
-        Should be able to load one pod
+        Should be able to load a pod object
         """
         pod = utils.load_from_json(self.json_path_prefix + "pod.json", klass="V1Pod")
         self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
         self.assertEqual(pod.metadata.name, "nginx-deployment-54f57cf6bf-hpphg")
         self.assertEqual(pod.metadata.namespace, "default")
         self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
-
-    def test_load_service_list_from_json(self):
-        """
-        Should be able to load a list of service objects
-        """
-        pods = utils.load_from_json(self.json_path_prefix + "service-list.json")
-        self.assertIsInstance(pods, list)
-        self.assertEqual(len(pods), 2)
-        for pod in pods:
-            self.assertIsInstance(pod, client.models.v1_service.V1Service)
-            self.assertEqual(pod.metadata.namespace, "default")
-            self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
-
-    def test_load_deployment_list_from_json(self):
-        """
-        Should be able to load a list of deployment objects
-        """
-        deployments = utils.load_from_json(
-            self.json_path_prefix + "deployment-list.json"
-        )
-        self.assertIsInstance(deployments, list)
-        self.assertEqual(len(deployments), 3)
-        for deployment in deployments:
-            self.assertIsInstance(deployment, client.models.v1_deployment.V1Deployment)
-            self.assertEqual(deployment.metadata.namespace, "default")
-            self.assertIsInstance(deployment.metadata.creation_timestamp, datetime)
 
     def test_load_deployment_from_json(self):
         """
@@ -343,20 +317,6 @@ class TestUtils(unittest.TestCase):
         self.assertIsInstance(deployment, client.models.v1_deployment.V1Deployment)
         self.assertEqual(deployment.metadata.namespace, "default")
         self.assertIsInstance(deployment.metadata.creation_timestamp, datetime)
-
-    def test_load_replicaset_list_from_json(self):
-        """
-        Should be able to load a list of replicaset objects
-        """
-        replicasets = utils.load_from_json(
-            self.json_path_prefix + "replicaset-list.json"
-        )
-        self.assertIsInstance(replicasets, list)
-        self.assertEqual(len(replicasets), 3)
-        for replicaset in replicasets:
-            self.assertIsInstance(replicaset, client.models.v1_replica_set.V1ReplicaSet)
-            self.assertEqual(replicaset.metadata.namespace, "default")
-            self.assertIsInstance(replicaset.metadata.creation_timestamp, datetime)
 
     def test_load_replicaset_from_json(self):
         """
@@ -369,21 +329,9 @@ class TestUtils(unittest.TestCase):
         self.assertIsInstance(replicaset.metadata.creation_timestamp, datetime)
 
     # Try non-namespaced objects
-    def test_load_namespace_list_from_json(self):
-        """
-        Should be able to load a list of replicaset objects
-        """
-        namespaces = utils.load_from_json(self.json_path_prefix + "namespace-list.json")
-        self.assertIsInstance(namespaces, list)
-        self.assertEqual(len(namespaces), 6)
-        for namespace in namespaces:
-            self.assertIsInstance(namespace, client.models.v1_namespace.V1Namespace)
-            self.assertIsInstance(namespace.metadata.creation_timestamp, datetime)
-            self.assertEqual(namespace.kind, "Namespace")
-
     def test_load_namespace_from_json(self):
         """
-        Should be able to load a list of replicaset objects
+        Should be able to load a namespace objects
         """
         namespace = utils.load_from_json(self.json_path_prefix + "namespace.json")
         self.assertIsInstance(namespace, client.models.v1_namespace.V1Namespace)
@@ -391,21 +339,9 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(namespace.kind, "Namespace")
         self.assertEqual(namespace.metadata.name, "default")
 
-    def test_load_node_list_from_json(self):
-        """
-        Should be able to load a list of replicaset objects
-        """
-        nodes = utils.load_from_json(self.json_path_prefix + "node-list.json")
-        self.assertIsInstance(nodes, list)
-        self.assertEqual(len(nodes), 1)
-        for node in nodes:
-            self.assertIsInstance(node, client.models.v1_node.V1Node)
-            self.assertIsInstance(node.metadata.creation_timestamp, datetime)
-            self.assertEqual(node.kind, "Node")
-
     def test_load_node_from_json(self):
         """
-        Should be able to load a list of replicaset objects
+        Should be able to load a node object
         """
         node = utils.load_from_json(self.json_path_prefix + "node.json")
         self.assertIsInstance(node, client.models.v1_node.V1Node)
@@ -413,23 +349,9 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(node.kind, "Node")
         self.assertEqual(node.metadata.name, "minikube")
 
-    def test_load_apiservice_list_from_json(self):
-        """
-        Should be able to load a list of replicaset objects
-        """
-        apiservices = utils.load_from_json(
-            self.json_path_prefix + "apiservice-list.json"
-        )
-        self.assertIsInstance(apiservices, list)
-        self.assertEqual(len(apiservices), 30)
-        for apiservice in apiservices:
-            self.assertIsInstance(apiservice, client.models.v1_api_service.V1APIService)
-            self.assertIsInstance(apiservice.metadata.creation_timestamp, datetime)
-            self.assertEqual(apiservice.kind, "APIService")
-
     def test_load_apiservice_from_json(self):
         """
-        Should be able to load a list of replicaset objects
+        Should be able to load an apiservice objects
         """
         apiservice = utils.load_from_json(self.json_path_prefix + "apiservice.json")
         self.assertIsInstance(apiservice, client.models.v1_api_service.V1APIService)
@@ -440,7 +362,7 @@ class TestUtils(unittest.TestCase):
     # Try different failures
     def test_load_apiservice_from_json_fail(self):
         """
-        Should not be able to load a list of replicaset objects
+        Should not be able to load an apiservice object
         """
 
         with self.assertRaises(ValueError) as cm:
