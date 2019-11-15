@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**config_map** | [**V1ConfigMapProjection**](V1ConfigMapProjection.md) | information about the configMap data to project | [optional] 
-**downward_api** | [**V1DownwardAPIProjection**](V1DownwardAPIProjection.md) | information about the downwardAPI data to project | [optional] 
-**secret** | [**V1SecretProjection**](V1SecretProjection.md) | information about the secret data to project | [optional] 
-**service_account_token** | [**V1ServiceAccountTokenProjection**](V1ServiceAccountTokenProjection.md) | information about the serviceAccountToken data to project | [optional] 
+**config_map** | [**V1ConfigMapProjection**](V1ConfigMapProjection.md) |  | [optional] 
+**downward_api** | [**V1DownwardAPIProjection**](V1DownwardAPIProjection.md) |  | [optional] 
+**secret** | [**V1SecretProjection**](V1SecretProjection.md) |  | [optional] 
+**service_account_token** | [**V1ServiceAccountTokenProjection**](V1ServiceAccountTokenProjection.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
