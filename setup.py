@@ -58,9 +58,9 @@ setup(
     tests_require=TESTS_REQUIRES,
     extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
-              'kubernetes.watch', 'kubernetes.client.apis',
+              'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
-              'kubernetes.utils'],
+              'kubernetes.utils', 'kubernetes.client.apis'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
