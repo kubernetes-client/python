@@ -1,3 +1,7 @@
+# v11.0.0b2
+**Bug Fix:**
+- Fix a fatal bug in package setup [kubernetes-client/python#1011](https://github.com/kubernetes-client/python/pull/1011)
+
 # v11.0.0b1
 **Bug Fix:**
 - Fix a bug in kubeconfig loader where NoneType gets iterated [kubernetes-client/python-base#158](https://github.com/kubernetes-client/python-base/pull/158)
