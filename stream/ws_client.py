@@ -24,6 +24,7 @@ import six
 import yaml
 
 from six.moves.urllib.parse import urlencode, quote_plus, urlparse, urlunparse
+from six import StringIO
 
 from websocket import WebSocket, ABNF, enableTrace
 
@@ -47,7 +48,7 @@ class WSClient:
         header = []
         self._connected = False
         self._channels = {}
-        self._all = ""
+        self._all = StringIO()
 
         # We just need to pass the Authorization, ignore all the other
         # http headers we get from the generated code
@@ -157,8 +158,8 @@ class WSClient:
         TODO: Maybe we can process this and return a more meaningful map with
         channels mapped for each input.
         """
-        out = self._all
-        self._all = ""
+        out = self._all.getvalue()
+        self._all = self._all.__class__()
         self._channels = {}
         return out
 
@@ -195,7 +196,7 @@ class WSClient:
                         if channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
                             # keeping all messages in the order they received
                             # for non-blocking call.
-                            self._all += data
+                            self._all.write(data)
                         if channel not in self._channels:
                             self._channels[channel] = data
                         else:
