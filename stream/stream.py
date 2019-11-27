@@ -16,7 +16,8 @@ from . import ws_client
 
 
 def stream(func, *args, **kwargs):
-    """Stream given API call using websocket"""
+    """Stream given API call using websocket.
+    Extra kwarg: capture-all=True - captures all stdout+stderr for use with WSClient.read_all()"""
 
     def _intercept_request_call(*args, **kwargs):
         # old generated code's api client has config. new ones has

@@ -34,9 +34,16 @@ STDERR_CHANNEL = 2
 ERROR_CHANNEL = 3
 RESIZE_CHANNEL = 4
 
+class _IgnoredIO:
+    def write(self, _x):
+        pass
+
+    def getvalue(self):
+        raise TypeError("Tried to read_all() from a WSClient configured to not capture. Did you mean `capture_all=True`?")
+
 
 class WSClient:
-    def __init__(self, configuration, url, headers):
+    def __init__(self, configuration, url, headers, capture_all):
         """A websocket client with support for channels.
 
             Exec command uses different channels for different streams. for
@@ -48,7 +55,10 @@ class WSClient:
         header = []
         self._connected = False
         self._channels = {}
-        self._all = StringIO()
+        if capture_all:
+            self._all = StringIO()
+        else:
+            self._all = _IgnoredIO()
 
         # We just need to pass the Authorization, ignore all the other
         # http headers we get from the generated code
@@ -258,6 +268,7 @@ def websocket_call(configuration, *args, **kwargs):
     url = args[1]
     _request_timeout = kwargs.get("_request_timeout", 60)
     _preload_content = kwargs.get("_preload_content", True)
+    capture_all = kwargs.get("capture_all", True)
     headers = kwargs.get("headers")
 
     # Expand command parameter list to indivitual command params
@@ -273,7 +284,7 @@ def websocket_call(configuration, *args, **kwargs):
         url += '?' + urlencode(query_params)
 
     try:
-        client = WSClient(configuration, get_websocket_url(url), headers)
+        client = WSClient(configuration, get_websocket_url(url), headers, capture_all)
         if not _preload_content:
             return client
         client.run_forever(timeout=_request_timeout)
