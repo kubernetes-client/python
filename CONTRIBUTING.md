@@ -20,13 +20,21 @@ The repository of the Kubernetes Python client consists of this main repository 
 ### Where to Submit Your Patch
 
 These folders are automatically generated. You will need to submit a patch to the upstream kubernetes repo [kubernetes](https://github.com/kubernetes/kubernetes) or the OpenAPI generator repo [openapi-generator](https://github.com/OpenAPITools/openapi-generator). This contains:
-[kubernetes/client](kubernetes/client), [kubernetes/test](kubernetes/test), [kubernetes/docs](kubernetes/docs).
+- [kubernetes/client](kubernetes/client)
+- [kubernetes/test](kubernetes/test)
+- [kubernetes/docs](kubernetes/docs).
 
 These folders contain developer written codes in the main repo and the patches should be submitted here:
-[kubernetes/e2e_test](kubernetes/e2e_test), [kubernetes/utils](kubernetes/utils), [examples](examples), [scripts](scripts).
+- [kubernetes/e2e_test](kubernetes/e2e_test)
+- [kubernetes/utils](kubernetes/utils)
+- [examples](examples)
+- [scripts](scripts).
 
 The base repo contains developer written codes only. The patches should be sent to the base repo instead. The scope covers these repos and symbolic links in the main repo:
-kubernetes/base, kubernetes/config, kubernetes/stream, kubernetes/watch.
+- kubernetes/base
+- kubernetes/config
+- kubernetes/stream
+- kubernetes/watch.
 
 ### Contributing A Patch
 
@@ -52,7 +60,7 @@ The symbolic links contained in this repo does not work for Windows operating sy
 
 ### Writing Tests
 
-In addition to running the your fix yourself and tell us that your fix works, you can demonstrate that your fix really works by using unit tests. These unit tests are mainly located in three places. You should put your tests into the places that they fit in.
+In addition to running the your fix yourself and tell us that your fix works, you can demonstrate that your fix really works by using unit tests and end to end tests. These unit tests are mainly located in three places. You should put your tests into the places that they fit in.
 
 1. [Generated tests](kubernetes/test) by OpenAPI generator: these tests should pass and do not require modification.
 2. [End to end tests](kubernetes/e2e_test): these are tests that can only be verified with a live kubernetes server.
@@ -72,3 +80,13 @@ If you write a new end to end (e2e) test, or change behaviors that affect e2e te
 
 3. Check the test results and make corresponding fixes.
 
+## Update the Base Submodule in the Main Repo After Your python-base PR Is Merged
+
+Your contribution of the base repo will not be automatically reflected in the main repo after your PR is merged. Instead, please update the ```base``` submodule in your fork of the main repo as follows:
+```bash
+$ cd kubernetes/base
+$ git fetch origin
+$ git checkout origin/master # assuming your change has been merged into the latest python-base MASTER
+$ cd ../..
+```
+You may now add a release note to [CHANGELOG.md](CHANGELOG.md) if needed and then commit and push to your fork. You can now send a PR to this main repo to complete your contribution.
