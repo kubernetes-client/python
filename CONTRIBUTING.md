@@ -84,9 +84,6 @@ If you write a new end to end (e2e) test, or change behaviors that affect e2e te
 
 Your contribution of the base repo will not be automatically reflected in the main repo after your PR is merged. Instead, please update the ```base``` submodule in your fork of the main repo as follows:
 ```bash
-$ cd kubernetes/base
-$ git fetch origin
-$ git checkout origin/master # assuming your change has been merged into the latest python-base MASTER
-$ cd ../..
+$ git submodule update --remote
 ```
 You may now add a release note to [CHANGELOG.md](CHANGELOG.md) if needed and then commit and push to your fork. You can now send a PR to this main repo to complete your contribution.
