@@ -18,6 +18,7 @@ __version__ = "11.0.0-snapshot"
 
 import kubernetes.client
 import kubernetes.config
+import kubernetes.dynamic
 import kubernetes.watch
 import kubernetes.stream
 import kubernetes.utils
