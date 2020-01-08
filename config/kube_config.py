@@ -20,8 +20,10 @@ import json
 import logging
 import os
 import platform
+import subprocess
 import tempfile
 import time
+from collections import namedtuple
 
 import google.auth
 import google.auth.transport.requests
@@ -133,6 +135,46 @@ class FileOrData(object):
         return self._data
 
 
+class CommandTokenSource(object):
+    def __init__(self, cmd, args, tokenKey, expiryKey):
+        self._cmd = cmd
+        self._args = args
+        if not tokenKey:
+            self._tokenKey = '{.access_token}'
+        else:
+            self._tokenKey = tokenKey
+        if not expiryKey:
+            self._expiryKey = '{.token_expiry}'
+        else:
+            self._expiryKey = expiryKey
+
+    def token(self):
+        fullCmd = self._cmd + (" ") + " ".join(self._args)
+        process = subprocess.Popen(
+            [self._cmd] + self._args,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True)
+        (stdout, stderr) = process.communicate()
+        exit_code = process.wait()
+        if exit_code != 0:
+            msg = 'cmd-path: process returned %d' % exit_code
+            msg += "\nCmd: %s" % fullCmd
+            stderr = stderr.strip()
+            if stderr:
+                msg += '\nStderr: %s' % stderr
+            raise ConfigException(msg)
+        try:
+            data = json.loads(stdout)
+        except ValueError as de:
+            raise ConfigException(
+                'exec: failed to decode process output: %s' % de)
+        A = namedtuple('A', ['token', 'expiry'])
+        return A(
+            token=data['credential']['access_token'],
+            expiry=parse_rfc3339(data['credential']['token_expiry']))
+
+
 class KubeConfigLoader(object):
 
     def __init__(self, config_dict, active_context=None,
@@ -156,7 +198,38 @@ class KubeConfigLoader(object):
         self._config_base_path = config_base_path
         self._config_persister = config_persister
 
+        def _refresh_credentials_with_cmd_path():
+            config = self._user['auth-provider']['config']
+            cmd = config['cmd-path']
+            if len(cmd) == 0:
+                raise ConfigException(
+                    'missing access token cmd '
+                    '(cmd-path is an empty string in your kubeconfig file)')
+            if 'scopes' in config and config['scopes'] != "":
+                raise ConfigException(
+                    'scopes can only be used '
+                    'when kubectl is using a gcp service account key')
+            args = []
+            if 'cmd-args' in config:
+                args = config['cmd-args'].split()
+            else:
+                fields = config['cmd-path'].split()
+                cmd = fields[0]
+                args = fields[1:]
+
+            commandTokenSource = CommandTokenSource(
+                cmd, args,
+                config.safe_get('token-key'),
+                config.safe_get('expiry-key'))
+            return commandTokenSource.token()
+
         def _refresh_credentials():
+            # Refresh credentials using cmd-path
+            if ('auth-provider' in self._user and
+                'config' in self._user['auth-provider'] and
+                    'cmd-path' in self._user['auth-provider']['config']):
+                return _refresh_credentials_with_cmd_path()
+
             credentials, project_id = google.auth.default(scopes=[
                 'https://www.googleapis.com/auth/cloud-platform',
                 'https://www.googleapis.com/auth/userinfo.email'
