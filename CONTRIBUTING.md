@@ -60,7 +60,7 @@ The symbolic links contained in this repo do not work for Windows operating syst
 
 ### Writing Tests
 
-In addition to running the fix yourself and tell us that your fix works, you can demonstrate that your fix really works by using unit tests and end to end tests. Tests are mainly located in three places. You should put your tests into the places that they fit in.
+In addition to running the fix yourself and telling us that your fix works, you can demonstrate that your fix really works by using unit tests and end to end tests. Tests are mainly located in three places. You should put your tests into the places that they fit in.
 
 1. [Generated tests](kubernetes/test) by OpenAPI generator: these tests should pass and do not require modification.
 2. [End to end tests](kubernetes/e2e_test): these are tests that can only be verified with a live kubernetes server.
