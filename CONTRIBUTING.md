@@ -24,13 +24,13 @@ The following folders are automatically generated. You will need to submit a pat
 - [kubernetes/test](kubernetes/test)
 - [kubernetes/docs](kubernetes/docs).
 
-These folders contain developer written codes in the main repo and the patches should be submitted here:
+In this main repo, the following folders contain developer written codes and the patches should be submitted as pull requests here:
 - [kubernetes/e2e_test](kubernetes/e2e_test)
 - [kubernetes/utils](kubernetes/utils)
 - [examples](examples)
 - [scripts](scripts).
 
-The base repo contains developer written codes only. The patches should be sent to the base repo instead. The scope covers these repos and symbolic links in the main repo:
+The following folders and symbolic links in this main repo are in fact from the base repo. The base repo contains developer written codes only. The patches should be sent to the base repo instead:
 - kubernetes/base
 - kubernetes/config
 - kubernetes/stream
@@ -50,7 +50,7 @@ If your patch depends on new packages, add those packages to [requirements.txt](
 
 ### Commits
 
-Generally we would like to see one commit per pull request. However, if the pull request is reasonably large, the PR can be divided into several commits that make logical sense. The commit message should be clear and indicative of the aim of the fix.
+Generally we would like to see one commit per pull request. However, if the pull request is reasonably large, the PR can be divided into several commits that make logical sense. The commit message should be clear and indicative of the aim of the fix. Sometimes multiple commits in a single pull request is acceptable if it meets the Kubernetes [pull request guidelines](https://github.com/kubernetes/community/blob/master/contributors/guide/pull-requests.md#6-squashing-and-commit-titles).
 
 If you have several commits in a pull request and have been asked to squash your commits, please use ```git reset --soft HEAD~N_COMMITS``` and commit again to make your PR a single commit.
 
@@ -68,7 +68,7 @@ In addition to running the fix yourself and telling us that your fix works, you 
 
 ### Coding Style
 
-We use an automatic coding style checker by using the ```diff``` of the autopep8 output and your code file. To make sure that your code passes the coding style checker, run ```autopep8 --in-place --aggressive --aggressive your_code.py``` before committing and submission.
+We use an automatic coding style checker by using the ```diff``` of the autopep8 output and your code file. To make sure that your code passes the coding style checker, run ```autopep8 --in-place --aggressive --aggressive your_code.py``` before committing and submitting.
 
 ## Running Tests Locally
 
