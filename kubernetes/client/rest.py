@@ -17,6 +17,7 @@ import json
 import logging
 import re
 import ssl
+import warnings
 
 import certifi
 # python 2 and python 3 compatibility library
@@ -145,6 +146,11 @@ class RESTClientObject(object):
                   len(_request_timeout) == 2):
                 timeout = urllib3.Timeout(
                     connect=_request_timeout[0], read=_request_timeout[1])
+            else:
+                warnings.warn(
+                    "_request_timeout ignored because it is neither an "
+                    "integer, nor a 2-tuple. This will become an exception "
+                    "in the future.", DeprecationWarning)
 
         if 'Content-Type' not in headers:
             headers['Content-Type'] = 'application/json'
