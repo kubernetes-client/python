@@ -18,6 +18,7 @@ from multiprocessing.pool import ThreadPool
 import os
 import re
 import tempfile
+import dateutil.parser
 
 # python 2 and python 3 compatibility library
 import six
@@ -582,10 +583,7 @@ class ApiClient(object):
         :return: date.
         """
         try:
-            from dateutil.parser import parse
-            return parse(string).date()
-        except ImportError:
-            return string
+            return dateutil.parser.parse(string).date()
         except ValueError:
             raise rest.ApiException(
                 status=0,
@@ -601,10 +599,7 @@ class ApiClient(object):
         :return: datetime.
         """
         try:
-            from dateutil.parser import parse
-            return parse(string)
-        except ImportError:
-            return string
+            return dateutil.parser.parse(string)
         except ValueError:
             raise rest.ApiException(
                 status=0,
