@@ -84,12 +84,7 @@ class Watch(object):
             return 'watch'
 
     def unmarshal_event(self, data, return_type):
-        try:
-            js = json.loads(data)
-        except ValueError:
-            return data
-        if not (isinstance(js, dict) and 'object' in js):
-            return data
+        js = json.loads(data)
         js['raw_object'] = js['object']
         if return_type:
             obj = SimpleNamespace(data=json.dumps(js['raw_object']))
@@ -132,7 +127,8 @@ class Watch(object):
 
         self._stop = False
         return_type = self.get_return_type(func)
-        kwargs[self.get_watch_argument_name(func)] = True
+        watch_arg = self.get_watch_argument_name(func)
+        kwargs[watch_arg] = True
         kwargs['_preload_content'] = False
         if 'resource_version' in kwargs:
             self.resource_version = kwargs['resource_version']
@@ -142,7 +138,12 @@ class Watch(object):
             resp = func(*args, **kwargs)
             try:
                 for line in iter_resp_lines(resp):
-                    yield self.unmarshal_event(line, return_type)
+                    # unmarshal when we are receiving events from watch,
+                    # return raw string when we are streaming log
+                    if watch_arg == "watch":
+                        yield self.unmarshal_event(line, return_type)
+                    else:
+                        yield line
                     if self._stop:
                         break
             finally:
