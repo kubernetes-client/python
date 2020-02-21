@@ -336,7 +336,7 @@ class KubeConfigLoader(object):
         provider.value['access-token'] = token_response['accessToken']
         provider.value['expires-on'] = token_response['expiresOn']
         if self._config_persister:
-            self._config_persister(self._config.value)
+            self._config_persister()
 
     def _load_gcp_token(self, provider):
         if (('config' not in provider) or
@@ -357,7 +357,7 @@ class KubeConfigLoader(object):
         provider.value['access-token'] = credentials.token
         provider.value['expiry'] = format_rfc3339(credentials.expiry)
         if self._config_persister:
-            self._config_persister(self._config.value)
+            self._config_persister()
 
     def _load_oid_token(self, provider):
         if 'config' not in provider:
@@ -398,7 +398,7 @@ class KubeConfigLoader(object):
             self._refresh_oidc(provider)
 
             if self._config_persister:
-                self._config_persister(self._config.value)
+                self._config_persister()
 
         self.token = "Bearer %s" % provider['config']['id-token']
 
@@ -691,7 +691,7 @@ def _get_kube_config_loader_for_yaml_file(
 
     kcfg = KubeConfigMerger(filename)
     if persist_config and 'config_persister' not in kwargs:
-        kwargs['config_persister'] = kcfg.save_changes()
+        kwargs['config_persister'] = kcfg.save_changes
 
     if kcfg.config is None:
         raise ConfigException(
