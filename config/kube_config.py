@@ -326,9 +326,12 @@ class KubeConfigLoader(object):
         )
         refresh_token = config['refresh-token']
         client_id = config['client-id']
-        apiserver_id = config.get(
-            'apiserver-id',
-            '00000002-0000-0000-c000-000000000000')
+        apiserver_id = '00000002-0000-0000-c000-000000000000'
+        try:
+            apiserver_id = config['apiserver-id']
+        except ConfigException:
+            # We've already set a default above
+            pass
         token_response = context.acquire_token_with_refresh_token(
             refresh_token, client_id, apiserver_id)
 
