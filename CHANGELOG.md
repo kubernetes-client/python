@@ -50,6 +50,13 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 - Update `_load_azure_token` to handle str and int [kubernetes-client/python-base#141](https://github.com/kubernetes-client/python-base/pull/141)
 - Correct regex to properly parse rfc3339 microseconds [kubernetes-client/python-base#150](https://github.com/kubernetes-client/python-base/pull/150)
 
+# v10.0.1
+**Bug Fix:**
+- Fix content type regression in custom object patch API [kubernetes-client/python#866](https://github.com/kubernetes-client/python/issues/866)
+
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2019-11324 [kubernetes-client/python#897](https://github.com/kubernetes-client/python/pull/897)
+
 # v10.0.0
 **Bug Fix:**
 - Fix base64 padding for kube config [kubernetes-client/python-base#79](https://github.com/kubernetes-client/python-base/pull/79)
