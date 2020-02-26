@@ -56,6 +56,10 @@ else
     echo ">>> Reusing gen repo at ${GEN_ROOT}"
 fi
 
+# The gen repo has changed significantly, this commit is the proper one to generate
+# release-10 clients with
+(cd ${GEN_ROOT} && git checkout 795993978f8563a9c09089993be4d2b97d492eec)
+
 echo ">>> Running python generator from the gen repo"
 "${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}" 
 mv "${CLIENT_ROOT}/swagger.json" "${SCRIPT_ROOT}/swagger.json"
