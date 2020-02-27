@@ -1,3 +1,7 @@
+# v10.1.0
+**Bug Fix:**
+- Fixed issue in `__del__` method of the `ApiClient` that caused an indefinite hang during garbage collection. *Note* The `ApiClient` `ThreadPool` will no longer be cleaned up automatically during garbage collection, instead the `close` method must be invoked directly, or the `ApiClient` can be used as a context manager. [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
+
 # v10.0.1
 **Bug Fix:**
 - Fix content type regression in custom object patch API [kubernetes-client/python#866](https://github.com/kubernetes-client/python/issues/866)
