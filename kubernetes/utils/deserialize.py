@@ -1,4 +1,4 @@
-# Copyright 2019 The Kubernetes Authors.
+# Copyright 2020 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ import json
 import pydoc
 import re
 import sys
+from copy import deepcopy
 from os import path
 
 import yaml
@@ -115,9 +116,14 @@ def response_type_from_dict(data, verbose=False):
         FailToLoadError which holds list of load failures.
     """
     response_type = None
+    items_kind = None
     failures = []
 
-    group, _, version = data["apiVersion"].partition("/")
+    if "List" in data["kind"]:
+        # Lookup the first item apiVersion
+        group, _, version = data["items"][0]["apiVersion"].partition("/")
+    else:
+        group, _, version = data["apiVersion"].partition("/")
     if version == "":
         version = group
         group = "core"
@@ -133,21 +139,48 @@ def response_type_from_dict(data, verbose=False):
     kind = data["kind"]
     kind = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", kind)
     kind = re.sub("([a-z0-9])([A-Z])", r"\1_\2", kind).lower()
-    # Expect the user to load namespaced objects more often
-    if hasattr(k8s_api, "read_namespaced_{0}_with_http_info".format(kind)):
-        fnc_lookup = "read_namespaced_{0}_with_http_info".format(kind)
-    elif hasattr(k8s_api, "read_{0}_with_http_info".format(kind)):
-        fnc_lookup = "read_{0}_with_http_info".format(kind)
-    # Try with the create if no read fnc found
-    elif hasattr(k8s_api, "create_{0}_with_http_info".format(kind)):
-        fnc_lookup = "create_{0}_with_http_info".format(kind)
+
+    # Expect List of the same kind
+    if "List" in data["kind"] and data["items"]:
+        # Lookup the first item kind
+        items_kind = data["items"][0]["kind"]
+        # Replace CamelCased action_type into snake_case
+        items_kind = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", items_kind)
+        items_kind = re.sub("([a-z0-9])([A-Z])", r"\1_\2", items_kind).lower()
+        # Expect the user to load list of namespaced objects more often
+        if hasattr(
+                k8s_api,
+                "list_namespaced_{0}_with_http_info".format(items_kind)):
+            fnc_lookup = "list_namespaced_{0}_with_http_info".format(
+                items_kind)
+        elif hasattr(
+            k8s_api, "list_{0}_for_all_namespaces_with_http_info".format(items_kind)
+        ):
+            fnc_lookup = "list_{0}__for_all_namespaces_with_http_info".format(
+                items_kind
+            )
+        # Try with non-namespaced list
+        elif hasattr(k8s_api, "list_{0}_with_http_info".format(items_kind)):
+            fnc_lookup = "list_{0}_with_http_info".format(items_kind)
+        else:
+            fnc_lookup = None
     else:
-        fnc_lookup = None
+        # Expect the user to load namespaced objects more often
+        if hasattr(k8s_api, "read_namespaced_{0}_with_http_info".format(kind)):
+            fnc_lookup = "read_namespaced_{0}_with_http_info".format(kind)
+        elif hasattr(k8s_api, "read_{0}_with_http_info".format(kind)):
+            fnc_lookup = "read_{0}_with_http_info".format(kind)
+        # Try with the get if no read fnc found
+        # elif hasattr(k8s_api, "get_{0}_with_http_info".format(kind)):
+        #     fnc_lookup = "get_{0}_with_http_info".format(kind)
+        else:
+            fnc_lookup = None
 
     info = {
         "group": group,
         "version": version,
         "kind": kind,
+        "items_kind": items_kind,
         "fcn_to_call": fcn_to_call,
         "fnc_lookup": fnc_lookup,
     }
@@ -162,19 +195,17 @@ def response_type_from_dict(data, verbose=False):
                 print(
                     "Lookup function found: {} in k8s_api: {} response_type: "
                     "{} lookup info: {}".format(
-                        fnc_lookup,
-                        k8s_api,
-                        response_type,
-                        info))
+                        fnc_lookup, k8s_api, response_type, info
+                    )
+                )
         else:
             if verbose:
                 print(
                     "Lookup function not found: {} in k8s_api: {} "
                     "response_type: {} lookup info: {}".format(
-                        fnc_lookup,
-                        k8s_api,
-                        response_type,
-                        info))
+                        fnc_lookup, k8s_api, response_type, info
+                    )
+                )
     else:
         msg = "Failed to find a function to inspect; lookup info: {}".format(
             info)
@@ -204,33 +235,29 @@ def load_from_dict(data, klass=None, verbose=False):
     Raises:
         FailToLoadError which holds list of load failures.
     """
-    # If it is a list type, will need to iterate its items
     load_exceptions = []
     obj = None
-    if "List" in data["kind"]:
-        obj_list = []
-        # Could be "List" or "Pod/Service/...List"
-        # This is a list type. iterate within its items
-        kind = data["kind"].replace("List", "")
+    # Check if List has multiple kinds and break it:
+    if "List" in data["kind"] and _is_list_multi_kind(data):
         if verbose:
-            print("List detected # of items: {}".format(len(data["items"])))
-        for item in data["items"]:
-            # Mitigate cases when server returns a xxxList object
-            # See kubernetes-client/python#586
-            if kind is not "":
-                item["apiVersion"] = data["apiVersion"]
-                item["kind"] = kind
+            print(
+                "Multi kind list detected kinds: {} items: {}".format(
+                    len(_get_list_kinds(data)), len(data["items"])
+                )
+            )
+        kind_lists = []
+        for kind_list in _break_list_multi_kind(data):
             try:
-                obj = load_single_item(item, klass=klass, verbose=verbose)
-                obj_list.append(obj)
+                obj = load_single_obj(kind_list, klass=klass, verbose=verbose)
+                kind_lists.append(obj)
             except FailToLoadError as load_exception:
                 load_exceptions.append(load_exception)
 
-        obj = obj_list
+        obj = kind_lists
 
     else:
         try:
-            obj = load_single_item(data, klass=klass, verbose=verbose)
+            obj = load_single_obj(data, klass=klass, verbose=verbose)
         except FailToLoadError as load_exception:
             load_exceptions.append(load_exception)
 
@@ -241,7 +268,55 @@ def load_from_dict(data, klass=None, verbose=False):
     return obj
 
 
-def load_single_item(data, klass=None, verbose=False):
+def _is_list_multi_kind(data):
+    """
+    Helper function to detect if it's a multi-kind list.
+    Input:
+    data: a dictionary holding a kubernetes object list
+    """
+    return True if len(_get_list_kinds(data)) > 1 else False
+
+
+def _get_list_kinds(data):
+    """
+    Helper function to extract the kinds in a list.
+    Input:
+    data: a dictionary holding a kubernetes object list
+    """
+    kinds = []
+
+    # Add kinds in an ordered way:
+    for obj in data.get("items"):
+        kind = obj.get("kind")
+        if kind not in kinds:
+            kinds.append(kind)
+
+    return kinds
+
+
+def _break_list_multi_kind(data):
+    """
+    Helper function to break a multi kind list into separate
+    kind lists.
+    Input:
+    data: a dictionary holding a multi kind kubernetes object list
+    """
+    kinds = _get_list_kinds(data)
+    new_list = []
+
+    for kind in kinds:
+        new_data = deepcopy(data)
+        kind_list = list(
+            filter(
+                lambda obj: obj["kind"] == kind,
+                data["items"]))
+        new_data["items"] = kind_list
+        new_list.append(new_data)
+
+    return new_list
+
+
+def load_single_obj(data, klass=None, verbose=False):
     """
     Load a single object from a dictionary containing valid kubernetes
     API object (i.e. List, Service, etc).

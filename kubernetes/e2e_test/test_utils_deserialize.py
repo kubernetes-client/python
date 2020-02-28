@@ -181,15 +181,19 @@ class TestUtils(unittest.TestCase):
         obj = utils.load_from_dict(yml_obj)
         self.assertIsInstance(obj, list)
         self.assertEqual(len(obj), 2)
-        self.assertIsInstance(obj[0], client.models.v1_service.V1Service)
-        self.assertIsInstance(obj[1], client.models.v1_deployment.V1Deployment)
+        self.assertIsInstance(obj[0], client.models.v1_service_list.V1ServiceList)
+        self.assertIsInstance(obj[0].items[0], client.models.v1_service.V1Service)
+        self.assertIsInstance(obj[1], client.models.v1_deployment_list.V1DeploymentList)
+        self.assertIsInstance(obj[1].items[0], client.models.v1_deployment.V1Deployment)
 
     def test_load_general_list_from_yaml(self):
         obj = utils.load_from_yaml(self.yaml_path_prefix + "list.yaml")
         self.assertIsInstance(obj, list)
         self.assertEqual(len(obj), 2)
-        self.assertIsInstance(obj[0], client.models.v1_service.V1Service)
-        self.assertIsInstance(obj[1], client.models.v1_deployment.V1Deployment)
+        self.assertIsInstance(obj[0], client.models.v1_service_list.V1ServiceList)
+        self.assertIsInstance(obj[0].items[0], client.models.v1_service.V1Service)
+        self.assertIsInstance(obj[1], client.models.v1_deployment_list.V1DeploymentList)
+        self.assertIsInstance(obj[1].items[0], client.models.v1_deployment.V1Deployment)
 
     def test_load_namespace_list_from_dict(self):
         """
@@ -200,13 +204,13 @@ class TestUtils(unittest.TestCase):
             yml_obj = yaml.safe_load(f)
 
         obj = utils.load_from_dict(yml_obj)
-        self.assertIsInstance(obj, list)
-        self.assertEqual(len(obj), 2)
-        self.assertIsInstance(obj[0], client.models.v1_namespace.V1Namespace)
-        self.assertIsInstance(obj[1], client.models.v1_namespace.V1Namespace)
-        nmsp_1 = obj[0]
+        self.assertIsInstance(obj, client.models.v1_namespace_list.V1NamespaceList)
+        self.assertEqual(len(obj.items), 2)
+        self.assertIsInstance(obj.items[0], client.models.v1_namespace.V1Namespace)
+        self.assertIsInstance(obj.items[1], client.models.v1_namespace.V1Namespace)
+        nmsp_1 = obj.items[0]
         self.assertIsNotNone(nmsp_1)
-        nmsp_2 = obj[1]
+        nmsp_2 = obj.items[1]
         self.assertIsNotNone(nmsp_2)
         self.assertEqual(nmsp_1.metadata.name, "mock-1")
         self.assertEqual(nmsp_2.metadata.name, "mock-2")
@@ -217,13 +221,13 @@ class TestUtils(unittest.TestCase):
         from a kind: NamespaceList yaml file
         """
         obj = utils.load_from_yaml(self.yaml_path_prefix + "namespace-list.yaml")
-        self.assertIsInstance(obj, list)
-        self.assertEqual(len(obj), 2)
-        self.assertIsInstance(obj[0], client.models.v1_namespace.V1Namespace)
-        self.assertIsInstance(obj[1], client.models.v1_namespace.V1Namespace)
-        nmsp_1 = obj[0]
+        self.assertIsInstance(obj, client.models.v1_namespace_list.V1NamespaceList)
+        self.assertEqual(len(obj.items), 2)
+        self.assertIsInstance(obj.items[0], client.models.v1_namespace.V1Namespace)
+        self.assertIsInstance(obj.items[1], client.models.v1_namespace.V1Namespace)
+        nmsp_1 = obj.items[0]
         self.assertIsNotNone(nmsp_1)
-        nmsp_2 = obj[1]
+        nmsp_2 = obj.items[1]
         self.assertIsNotNone(nmsp_2)
         self.assertEqual(nmsp_1.metadata.name, "mock-1")
         self.assertEqual(nmsp_2.metadata.name, "mock-2")
@@ -251,10 +255,11 @@ class TestUtils(unittest.TestCase):
             self.yaml_path_prefix + "multi-resource-with-list.yaml"
         )
         self.assertIsInstance(obj, list)
-        self.assertEqual(len(obj), 3)
-        self.assertIsInstance(obj[0], client.models.v1_pod.V1Pod)
-        self.assertIsInstance(obj[1], client.models.v1_pod.V1Pod)
-        self.assertIsInstance(obj[2], client.models.v1_deployment.V1Deployment)
+        self.assertEqual(len(obj), 2)
+        self.assertIsInstance(obj[0], client.models.v1_pod_list.V1PodList)
+        self.assertEqual(len(obj[0].items), 2)
+        self.assertIsInstance(obj[0].items[0], client.models.v1_pod.V1Pod)
+        self.assertIsInstance(obj[1], client.models.v1_deployment.V1Deployment)
 
     def test_load_namespaced_apps_deployment_from_yaml(self):
         """
@@ -270,9 +275,9 @@ class TestUtils(unittest.TestCase):
         Should be able to load a list of pods objects
         """
         pods = utils.load_from_json(self.json_path_prefix + "pod-list.json")
-        self.assertIsInstance(pods, list)
-        self.assertEqual(len(pods), 2)
-        for pod in pods:
+        self.assertIsInstance(pods, client.models.v1_pod_list.V1PodList)
+        self.assertEqual(len(pods.items), 2)
+        for pod in pods.items:
             self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
             self.assertEqual(pod.metadata.namespace, "default")
             self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
@@ -281,10 +286,10 @@ class TestUtils(unittest.TestCase):
         """
         Should be able to load a list of pods objects
         """
-        pods = utils.load_from_json(self.json_path_prefix + "pod-list.json", klass="V1Pod")
-        self.assertIsInstance(pods, list)
-        self.assertEqual(len(pods), 2)
-        for pod in pods:
+        pods = utils.load_from_json(self.json_path_prefix + "pod-list.json", klass="V1PodList")
+        self.assertIsInstance(pods, client.models.v1_pod_list.V1PodList)
+        self.assertEqual(len(pods.items), 2)
+        for pod in pods.items:
             self.assertIsInstance(pod, client.models.v1_pod.V1Pod)
             self.assertEqual(pod.metadata.namespace, "default")
             self.assertIsInstance(pod.metadata.creation_timestamp, datetime)
