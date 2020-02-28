@@ -171,8 +171,8 @@ def response_type_from_dict(data, verbose=False):
         elif hasattr(k8s_api, "read_{0}_with_http_info".format(kind)):
             fnc_lookup = "read_{0}_with_http_info".format(kind)
         # Try with the get if no read fnc found
-        # elif hasattr(k8s_api, "get_{0}_with_http_info".format(kind)):
-        #     fnc_lookup = "get_{0}_with_http_info".format(kind)
+        elif hasattr(k8s_api, "get_{0}_with_http_info".format(kind)):
+            fnc_lookup = "get_{0}_with_http_info".format(kind)
         else:
             fnc_lookup = None
 
