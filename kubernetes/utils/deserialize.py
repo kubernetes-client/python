@@ -238,7 +238,7 @@ def load_from_dict(data, klass=None, verbose=False):
     load_exceptions = []
     obj = None
     # Check if List has multiple kinds and break it:
-    if "List" in data["kind"] and _is_list_multi_kind(data):
+    if "kind" in data and "List" in data["kind"] and _is_list_multi_kind(data):
         if verbose:
             print(
                 "Multi kind list detected kinds: {} items: {}".format(

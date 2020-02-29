@@ -25,6 +25,26 @@ class TestUtils(unittest.TestCase):
         cls.json_path_prefix = "kubernetes/e2e_test/test_json/"
         cls.yaml_path_prefix = "kubernetes/e2e_test/test_yaml/"
 
+    def test_load_config_map_env_source_from_simple_dict(self):
+        """
+        Should be able to load an object with limited data
+        and passing the klass.
+        """
+        data = {"name": "source"}
+        obj = utils.load_from_dict(data, klass="V1ConfigMapEnvSource")
+        self.assertIsInstance(obj, client.models.v1_config_map_env_source.V1ConfigMapEnvSource)
+        self.assertEqual(obj.name, "source")
+
+    def test_load_secret_env_source_from_simple_dict(self):
+        """
+        Should be able to load an object with limited data
+        and passing the klass.
+        """
+        data = {"name": "source"}
+        obj = utils.load_from_dict(data, klass="V1SecretEnvSource")
+        self.assertIsInstance(obj, client.models.v1_secret_env_source.V1SecretEnvSource)
+        self.assertEqual(obj.name, "source")
+
     def test_load_apps_deployment_from_dict(self):
         """
         Should be able to load  apps/v1 deployment.
