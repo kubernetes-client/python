@@ -82,6 +82,12 @@ def main():
     # default location.
     config.load_kube_config()
     apps_v1 = client.AppsV1Api()
+
+    # Uncomment the following lines to enable debug logging
+    # c = client.Configuration()
+    # c.debug = True
+    # apps_v1 = client.AppsV1Api(api_client=client.ApiClient(configuration=c))
+
     # Create a deployment object with client-python API. The deployment we
     # created is same as the `nginx-deployment.yaml` in the /examples folder.
     deployment = create_deployment_object()

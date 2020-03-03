@@ -17,7 +17,7 @@ import uuid
 import yaml
 
 from kubernetes.client import api_client
-from kubernetes.client.apis import apps_v1_api
+from kubernetes.client.api import apps_v1_api
 from kubernetes.client.models import v1_delete_options
 from kubernetes.e2e_test import base
 

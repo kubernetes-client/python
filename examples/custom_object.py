@@ -53,8 +53,10 @@ def main():
         "apiVersion": "stable.example.com/v1",
         "kind": "CronTab",
         "metadata": {"name": "my-new-cron-object"},
-        "cronSpec": "* * * * */5",
-        "image": "my-awesome-cron-image",
+        "spec": {
+            "cronSpec": "* * * * */5",
+            "image": "my-awesome-cron-image"
+        }
     }
 
     # create the resource

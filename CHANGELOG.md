@@ -1,3 +1,9 @@
+# v11.0.0
+
+**Deprecation Notice**
+v11.0.0 of the client follows the Kubernetes [deprecation policy](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) and will
+be deprecated as and when Kubernetes version v1.15 gets deprecated.
+
 # v11.0.0b2
 **Bug Fix:**
 - Fix a fatal bug in package setup [kubernetes-client/python#1011](https://github.com/kubernetes-client/python/pull/1011)
@@ -43,6 +49,13 @@
 **Bug Fix:**
 - Update `_load_azure_token` to handle str and int [kubernetes-client/python-base#141](https://github.com/kubernetes-client/python-base/pull/141)
 - Correct regex to properly parse rfc3339 microseconds [kubernetes-client/python-base#150](https://github.com/kubernetes-client/python-base/pull/150)
+
+# v10.0.1
+**Bug Fix:**
+- Fix content type regression in custom object patch API [kubernetes-client/python#866](https://github.com/kubernetes-client/python/issues/866)
+
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2019-11324 [kubernetes-client/python#897](https://github.com/kubernetes-client/python/pull/897)
 
 # v10.0.0
 **Bug Fix:**
@@ -270,7 +283,7 @@
 - Restricting the websocket-client to <=0.40 #299
 
 # v3.0.0a1
-- Update client to kubernetes 1.7 
+- Update client to kubernetes 1.7
 - Support ThirdPartyResources (TPR) and CustomResourceDefinitions (CRD). Note that TPR is deprecated in kubernetes #251 #201
 - Better dependency management #136
 - Add support for python3.6 #244
@@ -325,7 +338,7 @@
 
 # v1.0.0a3
 
-- Add context switch to kube config loader #46 
+- Add context switch to kube config loader #46
 - Add default kube config location #64
 - Add suport for accessing multiple clusters #7
 - Bugfix: Python client does not resolve relative paths in kubeconfig #68

@@ -60,7 +60,8 @@ setup(
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
-              'kubernetes.utils', 'kubernetes.client.apis'],
+              'kubernetes.utils', 'kubernetes.client.apis',
+              'kubernetes.dynamic'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
