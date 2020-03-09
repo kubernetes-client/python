@@ -1,4 +1,3 @@
-# ref: https://docs.travis-ci.com/user/languages/python
 language: python
 dist: xenial
 services:
@@ -37,9 +36,11 @@ script:
 - tox
 deploy:
   provider: pypi
-  user: kubernetes
+  user: __token__
   password:
-    secure: OVHREmGNJ759LN4ZDygMrauxWVWzpiFqmeDthI/l2O7I/C0jhC0b1y744lTmr++6PvY+Ao2fzFWE2QPg8xEdYSR6X/GUDh5nlncSs41FE4BJSIL/LO0H6SaFhXQ/IzLYEOJxZVnCaqGMvcACpkt/h8h78HEp7wsMghjAjp6gQgzSVM05/jq59xv0KofnEtRzUezgS2IVFdmrtr6F/RnDzgZfBKmtzxajG/J3WzcPMCS2nOVyl+SuDWsyqhv3d6xyDY9aBQrb/OsfyHYZ4084WaMtynHYI9x8pj9bg5I4cvIjcaZEy3PO4qz88iDo1UpsT8DIv3dv//mw916Ef60Rpsj9ATEd7EZ3Xq9qtrb6KvOuESjLrHkTA3JaXDcMcUC5EezKVWXsg9KLrK+QcSIkhXYsYDj92D4yket//V9Q5qEQa8NhOzRBxo/9rjs0oNqKZu0dZqwmpiIkLOpy8Gj3KgDbgdZF462E9+YdO2t6Lm93rf5S903JPW3sBiQQzEbgRWLvqWQbApvBANXZmpy3C4OR7eeAzhxVqi/VkiJUp+jzlmutTCt30T56YIRhPVIe3Bem2c4V3YonRWAm8u7XMdkVQzbifkoW4/0wwQNMOvD25XZEoWWN4mpzGQG32dFkXym+zZ49NJ1Ah4qgtBtBGjv5Nf94YW5OdTuxcHMYp0Y=
+    secure: gY5Rixj7mWHC9XP5qV5DfWGdX4ZVwCEUElnQA2OeIg235I3eMBqRFM4Q/SKwAG2DzgIWNKsXXVQsZHp7BAjWFMFVQloiU7zohuBRToJUim9U1RaqAjUIr4OU7JPtXenAl5zyyBdywvJiG8UZ4wmt1DBYtdpozQvOwDXvOxNTmElKh5mfDhiSsipmFr2198NtIhiRVC+CZliZsi6osUkt+G6yl9CW+SJU3otgzdaS+VBP26HO0kWHMJiDKvQoIl/Q50IqJUWieFhCLh7lSV71VNVEmM4bMcYK8cAv3zMZHo6REKHF7xrF5tzYMXqpmEGt6L798d2H4BISr6BIlYgiYCatjyE9hxih9iBzGs0XaGUUFD8u1iuzOQI76a5dapG/DixQrGD2o9Gn/Qw6Zp9USIuKZSWUn5hSobwxJUKVNy+afpaJNQUb2W9Hj+jMXAnBDodCzo3nu+QF8GN72cmk3uqVyKUVABtI4kNe3qcEx3DyKfoh7aqJrgydeaRwESKuZ41l5CA+vqXSbbNW8z1MYDYgVdwEyRFsLg6aQk5pPsxuiILaaGy13TUndhuC+GuKcW6wCDf6WpUAwwGAF8+sz4hZ1pfSUdE3F8nfDBW3Bv+G9cB/cKkWJ2vOd9httRrvir8qUc/xPP5aW4pacnfNCQ04Iep/k4PCAdYJDtVGhCY=
+  skip_existing: true
   on:
     tags: true
-  distributions: "sdist bdist_wheel"
+    repo: kubernetes-client/python
+  distributions: sdist bdist_wheel
