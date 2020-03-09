@@ -2,39 +2,44 @@
 language: python
 dist: xenial
 services:
-  - docker
-
+- docker
 matrix:
-    include:
-     - python: 2.7
-       env: TOXENV=py27
-     - python: 2.7
-       env: TOXENV=py27-functional
-     - python: 2.7
-       env: TOXENV=update-pycodestyle
-     - python: 3.7
-       env: TOXENV=docs
-     - python: 2.7
-       env: TOXENV=coverage,codecov
-     - python: 3.5
-       env: TOXENV=py35
-     - python: 3.5
-       env: TOXENV=py35-functional
-     - python: 3.6
-       env: TOXENV=py36
-     - python: 3.6
-       env: TOXENV=py36-functional
-     - python: 3.7
-       env: TOXENV=py37
-     - python: 3.7
-       env: TOXENV=py37-functional
-     - python: 3.8
-       env: TOXENV=py38
-     - python: 3.8
-       env: TOXENV=py38-functional
-
+  include:
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 2.7
+    env: TOXENV=py27-functional
+  - python: 2.7
+    env: TOXENV=update-pycodestyle
+  - python: 3.7
+    env: TOXENV=docs
+  - python: 2.7
+    env: TOXENV=coverage,codecov
+  - python: 3.5
+    env: TOXENV=py35
+  - python: 3.5
+    env: TOXENV=py35-functional
+  - python: 3.6
+    env: TOXENV=py36
+  - python: 3.6
+    env: TOXENV=py36-functional
+  - python: 3.7
+    env: TOXENV=py37
+  - python: 3.7
+    env: TOXENV=py37-functional
+  - python: 3.8
+    env: TOXENV=py38
+  - python: 3.8
+    env: TOXENV=py38-functional
 install:
-  - pip install tox
-
+- pip install tox
 script:
-  - tox
+- tox
+deploy:
+  provider: pypi
+  user: kubernetes
+  password:
+    secure: OVHREmGNJ759LN4ZDygMrauxWVWzpiFqmeDthI/l2O7I/C0jhC0b1y744lTmr++6PvY+Ao2fzFWE2QPg8xEdYSR6X/GUDh5nlncSs41FE4BJSIL/LO0H6SaFhXQ/IzLYEOJxZVnCaqGMvcACpkt/h8h78HEp7wsMghjAjp6gQgzSVM05/jq59xv0KofnEtRzUezgS2IVFdmrtr6F/RnDzgZfBKmtzxajG/J3WzcPMCS2nOVyl+SuDWsyqhv3d6xyDY9aBQrb/OsfyHYZ4084WaMtynHYI9x8pj9bg5I4cvIjcaZEy3PO4qz88iDo1UpsT8DIv3dv//mw916Ef60Rpsj9ATEd7EZ3Xq9qtrb6KvOuESjLrHkTA3JaXDcMcUC5EezKVWXsg9KLrK+QcSIkhXYsYDj92D4yket//V9Q5qEQa8NhOzRBxo/9rjs0oNqKZu0dZqwmpiIkLOpy8Gj3KgDbgdZF462E9+YdO2t6Lm93rf5S903JPW3sBiQQzEbgRWLvqWQbApvBANXZmpy3C4OR7eeAzhxVqi/VkiJUp+jzlmutTCt30T56YIRhPVIe3Bem2c4V3YonRWAm8u7XMdkVQzbifkoW4/0wwQNMOvD25XZEoWWN4mpzGQG32dFkXym+zZ49NJ1Ah4qgtBtBGjv5Nf94YW5OdTuxcHMYp0Y=
+  on:
+    tags: true
+  distributions: "sdist bdist_wheel"
