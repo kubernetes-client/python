@@ -13,8 +13,9 @@ jobs:
   include:
   - stage: verify-tag
     python: 3.7
-    script: |
-      [ "v$(python -c 'import kubernetes ; print(kubernetes.__version__)')" == "${TRAVIS_TAG}" ]
+    script: >
+      [ "v$(python -c 'import kubernetes ; print(kubernetes.__version__)')" == "${TRAVIS_TAG}" ] &&
+      [[ "${TRAVIS_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(([ab]|dev|rc)[0-9]+)?$ ]]
   - stage: test
     python: 2.7
     env: TOXENV=update-pycodestyle
