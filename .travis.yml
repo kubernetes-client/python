@@ -2,18 +2,29 @@ language: python
 dist: xenial
 services:
 - docker
-matrix:
+
+install:
+- pip install tox
+
+script:
+- tox
+
+jobs:
   include:
-  - python: 2.7
-    env: TOXENV=py27
-  - python: 2.7
-    env: TOXENV=py27-functional
-  - python: 2.7
+  - stage: verify-tag
+    python: 3.7
+    script: [ "v$(python -c 'import kubernetes ; print(kubernetes.__version__)')" == "${TRAVIS_TAG}" ]
+  - stage: test
+    python: 2.7
     env: TOXENV=update-pycodestyle
   - python: 3.7
     env: TOXENV=docs
   - python: 2.7
     env: TOXENV=coverage,codecov
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 2.7
+    env: TOXENV=py27-functional
   - python: 3.5
     env: TOXENV=py35
   - python: 3.5
@@ -30,17 +41,22 @@ matrix:
     env: TOXENV=py38
   - python: 3.8
     env: TOXENV=py38-functional
-install:
-- pip install tox
-script:
-- tox
-deploy:
-  provider: pypi
-  user: __token__
-  password:
-    secure: gY5Rixj7mWHC9XP5qV5DfWGdX4ZVwCEUElnQA2OeIg235I3eMBqRFM4Q/SKwAG2DzgIWNKsXXVQsZHp7BAjWFMFVQloiU7zohuBRToJUim9U1RaqAjUIr4OU7JPtXenAl5zyyBdywvJiG8UZ4wmt1DBYtdpozQvOwDXvOxNTmElKh5mfDhiSsipmFr2198NtIhiRVC+CZliZsi6osUkt+G6yl9CW+SJU3otgzdaS+VBP26HO0kWHMJiDKvQoIl/Q50IqJUWieFhCLh7lSV71VNVEmM4bMcYK8cAv3zMZHo6REKHF7xrF5tzYMXqpmEGt6L798d2H4BISr6BIlYgiYCatjyE9hxih9iBzGs0XaGUUFD8u1iuzOQI76a5dapG/DixQrGD2o9Gn/Qw6Zp9USIuKZSWUn5hSobwxJUKVNy+afpaJNQUb2W9Hj+jMXAnBDodCzo3nu+QF8GN72cmk3uqVyKUVABtI4kNe3qcEx3DyKfoh7aqJrgydeaRwESKuZ41l5CA+vqXSbbNW8z1MYDYgVdwEyRFsLg6aQk5pPsxuiILaaGy13TUndhuC+GuKcW6wCDf6WpUAwwGAF8+sz4hZ1pfSUdE3F8nfDBW3Bv+G9cB/cKkWJ2vOd9httRrvir8qUc/xPP5aW4pacnfNCQ04Iep/k4PCAdYJDtVGhCY=
-  skip_existing: true
-  on:
-    tags: true
-    repo: kubernetes-client/python
-  distributions: sdist bdist_wheel
+  - stage: deploy
+    script: skip
+    deploy:
+      provider: pypi
+      user: __token__
+      password:
+        secure: gY5Rixj7mWHC9XP5qV5DfWGdX4ZVwCEUElnQA2OeIg235I3eMBqRFM4Q/SKwAG2DzgIWNKsXXVQsZHp7BAjWFMFVQloiU7zohuBRToJUim9U1RaqAjUIr4OU7JPtXenAl5zyyBdywvJiG8UZ4wmt1DBYtdpozQvOwDXvOxNTmElKh5mfDhiSsipmFr2198NtIhiRVC+CZliZsi6osUkt+G6yl9CW+SJU3otgzdaS+VBP26HO0kWHMJiDKvQoIl/Q50IqJUWieFhCLh7lSV71VNVEmM4bMcYK8cAv3zMZHo6REKHF7xrF5tzYMXqpmEGt6L798d2H4BISr6BIlYgiYCatjyE9hxih9iBzGs0XaGUUFD8u1iuzOQI76a5dapG/DixQrGD2o9Gn/Qw6Zp9USIuKZSWUn5hSobwxJUKVNy+afpaJNQUb2W9Hj+jMXAnBDodCzo3nu+QF8GN72cmk3uqVyKUVABtI4kNe3qcEx3DyKfoh7aqJrgydeaRwESKuZ41l5CA+vqXSbbNW8z1MYDYgVdwEyRFsLg6aQk5pPsxuiILaaGy13TUndhuC+GuKcW6wCDf6WpUAwwGAF8+sz4hZ1pfSUdE3F8nfDBW3Bv+G9cB/cKkWJ2vOd9httRrvir8qUc/xPP5aW4pacnfNCQ04Iep/k4PCAdYJDtVGhCY=
+      skip_existing: true
+      on:
+        tags: true
+        repo: kubernetes-client/python
+      distributions: sdist bdist_wheel
+
+stages:
+- name: verify-tag
+  if: (tag is present) and (type = push)
+- test
+- name: deploy
+  if: (tag is present) and (type = push)
