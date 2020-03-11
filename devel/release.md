@@ -19,8 +19,12 @@ to add [this file](https://github.com/kubernetes-client/python/blob/0976d59d6ff2
 under `kubernetes/client/apis/` to ensure the package is backwards compatible.
 For more details, see [#974](https://github.com/kubernetes-client/python/issues/974)
 
+3. Add ability to the client to be used as Context Manager [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
+
 Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does,
 then create your PR for review.
+
+Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply changes from the above functionalities. **As mentioned above the script should be run after finishing the section `Update release tags`. Also, ensure a clean working directory before applying the script**
 
 ## Change logs
 Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
