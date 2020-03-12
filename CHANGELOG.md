@@ -14,8 +14,9 @@ Kubernetes API Version: 1.15.10
 
 **Bug Fix:**
 
-- Add kubernetes.dynamic to setup.py pkg list[kubernetes-client/python#1096](https://github.com/kubernetes-client/python/pull/1096)
-- Fix custom object API example[kubernetes-client/python#1049](https://github.com/kubernetes-client/python/pull/1049)
+- Add kubernetes.dynamic to setup.py pkg list [kubernetes-client/python#1096](https://github.com/kubernetes-client/python/pull/1096)
+- Fixed issue in `__del__` method of the `ApiClient` that caused an indefinite hang during garbage collection. [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
+- Fix custom object API example [kubernetes-client/python#1049](https://github.com/kubernetes-client/python/pull/1049)
 - Fix deprecation warning in E2E tests [kubernetes-client/python#1036](https://github.com/kubernetes-client/python/pull/1036)
 - Use `==/!=` to compare str, bytes, and int literals [kubernetes-client/python#1007](https://github.com/kubernetes-client/python/pull/1007)
 - Fix apiserver_id 'get' method [kubernetes-client/python-base#184](https://github.com/kubernetes-client/python-base/pull/184)
