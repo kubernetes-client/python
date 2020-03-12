@@ -82,25 +82,24 @@ supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
 
-|                    | Kubernetes 1.9 | Kubernetes 1.10 | Kubernetes 1.11 | Kubernetes 1.12 | Kubernetes 1.13 | Kubernetes 1.14 | Kubernetes 1.15 |
-|--------------------|----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
-| client-python 5.0  |✓               |-                |-                |-                |-                |-                |-                |
-| client-python 6.0  |+               |✓                |-                |-                |-                |-                |-                |
-| client-python 7.0  |+               |+                |✓                |-                |-                |-                |-                |
-| client-python 8.0  |+               |+                |+                |✓                |-                |-                |-                |
-| client-python 9.0  |+               |+                |+                |+                |✓                |-                |-                |
-| client-python 10.0 |+               |+                |+                |+                |+                |✓                |-                |
-| client-python 11.0 |+               |+                |+                |+                |+                |+                |✓                |
-| client-python HEAD |+               |+                |+                |+                |+                |+                |✓                |
+|                    | Kubernetes 1.13 | Kubernetes 1.14 | Kubernetes 1.15 |
+|--------------------|-----------------|-----------------|-----------------|
+| client-python 9.0  |✓                |+-               |+-               |
+| client-python 10.0 |+-               |✓                |+-               |
+| client-python 11.0 |+-               |+-               |✓                |
+| client-python HEAD |+-               |+-               |+-               |
 
 Key:
 
 * `✓` Exactly the same features / API objects in both client-python and the Kubernetes
   version.
-* `+` client-python has features or api objects that may not be present in the
-  Kubernetes cluster, but everything they have in common will work.
-* `-` The Kubernetes cluster has features the client-python library can't use
-  (additional API objects, etc).
+* `+` client-python has features or API objects that may not be present in the Kubernetes
+ cluster, either due to that client-python has additional new API, or that the server has
+ removed old API. However, everything they have in common (i.e., most APIs) will work.
+ Please note that alpha APIs may vanish or change significantly in a single release.
+* `-` The Kubernetes cluster has features the client-python library can't use, either due
+ to the server has additional new API, or that client-python has removed old API. However,
+ everything they share in common (i.e., most APIs) will work.
 
 See the [CHANGELOG](./CHANGELOG.md) for a detailed description of changes
 between client-python versions.
