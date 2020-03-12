@@ -14,10 +14,11 @@
 
 __project__ = 'kubernetes'
 # The version is auto-updated. Please do not edit.
-__version__ = "11.0.0b2"
+__version__ = "11.0.0"
 
 import kubernetes.client
 import kubernetes.config
+import kubernetes.dynamic
 import kubernetes.watch
 import kubernetes.stream
 import kubernetes.utils

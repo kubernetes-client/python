@@ -1,3 +1,33 @@
+# v11.0.0
+
+Kubernetes API Version: 1.15.10
+
+**API Change:**
+
+- Deleting CustomObjects doesn't require passing in the body anymore [kubernetes-client/gen#142](https://github.com/kubernetes-client/gen/pull/142)
+
+**New Feature:**
+
+- Add ability to the client to be used as Context Manager [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
+- Enable the use of dynamic client [kubernetes-client/python#1035](https://github.com/kubernetes-client/python/pull/1035)
+- Add option to refresh gcp token when config is cmd-path [kubernetes-client/python-base#175](https://github.com/kubernetes-client/python-base/pull/175)
+
+**Bug Fix:**
+
+- Add kubernetes.dynamic to setup.py pkg list[kubernetes-client/python#1096](https://github.com/kubernetes-client/python/pull/1096)
+- Fix custom object API example[kubernetes-client/python#1049](https://github.com/kubernetes-client/python/pull/1049)
+- Fix deprecation warning in E2E tests [kubernetes-client/python#1036](https://github.com/kubernetes-client/python/pull/1036)
+- Use `==/!=` to compare str, bytes, and int literals [kubernetes-client/python#1007](https://github.com/kubernetes-client/python/pull/1007)
+- Fix apiserver_id 'get' method [kubernetes-client/python-base#184](https://github.com/kubernetes-client/python-base/pull/184)
+- Fix persist_config flag and function calls [kubernetes-client/python-base#169](https://github.com/kubernetes-client/python-base/pull/169)
+- Fix memory inneficiencies in the WebSocket client [kubernetes-client/python-base#178](https://github.com/kubernetes-client/python-base/pull/178)
+- Fix functionality to watch logs when log line is not a JSON-serialized object [kubernetes-client/python-base#171](https://github.com/kubernetes-client/python-base/pull/171)
+- Detect binary payloads and send the correct opcode [kubernetes-client/python-base#152](https://github.com/kubernetes-client/python-base/pull/152)
+
+**Deprecation Notice**
+v11.0.0 of the client follows the Kubernetes [deprecation policy](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) and will
+be deprecated as and when Kubernetes version v1.15 gets deprecated.
+
 # v11.0.0b2
 **Bug Fix:**
 - Fix a fatal bug in package setup [kubernetes-client/python#1011](https://github.com/kubernetes-client/python/pull/1011)
@@ -43,6 +73,13 @@
 **Bug Fix:**
 - Update `_load_azure_token` to handle str and int [kubernetes-client/python-base#141](https://github.com/kubernetes-client/python-base/pull/141)
 - Correct regex to properly parse rfc3339 microseconds [kubernetes-client/python-base#150](https://github.com/kubernetes-client/python-base/pull/150)
+
+# v10.0.1
+**Bug Fix:**
+- Fix content type regression in custom object patch API [kubernetes-client/python#866](https://github.com/kubernetes-client/python/issues/866)
+
+**Security Fix:**
+- Bump urllib3 version to pick up security fix for CVE-2019-11324 [kubernetes-client/python#897](https://github.com/kubernetes-client/python/pull/897)
 
 # v10.0.0
 **Bug Fix:**
@@ -270,7 +307,7 @@
 - Restricting the websocket-client to <=0.40 #299
 
 # v3.0.0a1
-- Update client to kubernetes 1.7 
+- Update client to kubernetes 1.7
 - Support ThirdPartyResources (TPR) and CustomResourceDefinitions (CRD). Note that TPR is deprecated in kubernetes #251 #201
 - Better dependency management #136
 - Add support for python3.6 #244
@@ -325,7 +362,7 @@
 
 # v1.0.0a3
 
-- Add context switch to kube config loader #46 
+- Add context switch to kube config loader #46
 - Add default kube config location #64
 - Add suport for accessing multiple clusters #7
 - Bugfix: Python client does not resolve relative paths in kubeconfig #68
