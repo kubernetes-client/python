@@ -23,7 +23,7 @@ from abc import abstractmethod, abstractproperty
 from urllib3.exceptions import ProtocolError, MaxRetryError
 
 from kubernetes import __version__
-from .exceptions import NotFoundError, ResourceNotFoundError, ResourceNotUniqueError, ApiException
+from .exceptions import NotFoundError, ResourceNotFoundError, ResourceNotUniqueError, ApiException, ServiceUnavailableError
 from .resource import Resource, ResourceList
 
 
@@ -155,7 +155,10 @@ class Discoverer(object):
         subresources = {}
 
         path = '/'.join(filter(None, [prefix, group, version]))
-        resources_response = self.client.request('GET', path).resources or []
+        try:
+            resources_response = self.client.request('GET', path).resources or []
+        except ServiceUnavailableError:
+            resources_response = []
 
         resources_raw = list(filter(lambda resource: '/' not in resource['name'], resources_response))
         subresources_raw = list(filter(lambda resource: '/' in resource['name'], resources_response))
@@ -251,13 +254,11 @@ class LazyDiscoverer(Discoverer):
                 # Check if we've requested resources for this group
                 if not resourcePart.resources:
                     prefix, group, version = reqParams[0], reqParams[1], part
-                    try:
-                        resourcePart.resources = self.get_resources_for_api_version(prefix,
-                            group, part, resourcePart.preferred)
-                    except NotFoundError:
-                        raise ResourceNotFoundError
+                    resourcePart.resources = self.get_resources_for_api_version(
+                        prefix, group, part, resourcePart.preferred)
+
                     self._cache['resources'][prefix][group][version] = resourcePart
-                    self.__update_cache=True
+                    self.__update_cache = True
                 return self.__search(parts[1:], resourcePart.resources, reqParams)
             elif isinstance(resourcePart, dict):
                 # In this case parts [0] will be a specified prefix, group, version
