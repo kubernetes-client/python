@@ -67,6 +67,7 @@ target/
 .idea/*
 *.iml
 .vscode
+.DS_Store
 
 # created by sphinx documentation build
 doc/source/README.md
