@@ -17,7 +17,7 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from k8s.client.api_client import ApiClient
+from kubernetes.client.api_client import ApiClient
 
 
 class AppsApi(object):

@@ -25,7 +25,7 @@ def main():
     print("Creating virtualservice:")
     https = []
     matchs = []
-    matchs.append(client.IstioNetworkingV1alpha3HTTPMatchRequest(uri={"exact": "/productpage"}))
+    matchs.append(client.IstioNetworkingV1alpha3HTTPMatchRequest(uri={"exact": "/productp"}))
     port = client.IstioNetworkingV1alpha3PortSelector(number=9080)
     dest = client.IstioNetworkingV1alpha3Destination(host="productpage", port=port, subset="v1")
     routes = []
@@ -35,7 +35,7 @@ def main():
     virtual_service = client.IstioNetworkingV1alpha3VirtualService(api_version="networking.istio.io/v1alpha3",
                                                                    kind="VirtualService",
                                                                    spec=spec,
-                                                                   metadata=client.V1ObjectMeta(name="bookinfo"))
+                                                                   metadata=client.V1ObjectMeta(name="bookinfos"))
     ret = v1.create_namespaced_virtual_service(body=virtual_service, namespace="default")
     print("result:%s" % ret)
 
