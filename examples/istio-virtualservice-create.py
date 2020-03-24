@@ -22,7 +22,7 @@ def main():
     config.load_kube_config()
 
     v1 = client.IstioV1alpha3Api()
-    print("Creating virtualservice:")
+    print("Creating virtual service:")
     https = []
     matchs = []
     matchs.append(client.IstioNetworkingV1alpha3HTTPMatchRequest(uri={"exact": "/productp"}))
@@ -35,7 +35,7 @@ def main():
     virtual_service = client.IstioNetworkingV1alpha3VirtualService(api_version="networking.istio.io/v1alpha3",
                                                                    kind="VirtualService",
                                                                    spec=spec,
-                                                                   metadata=client.V1ObjectMeta(name="bookinfos"))
+                                                                   metadata=client.V1ObjectMeta(name="bookinfo"))
     ret = v1.create_namespaced_virtual_service(body=virtual_service, namespace="default")
     print("result:%s" % ret)
 
