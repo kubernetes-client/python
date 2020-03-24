@@ -24,7 +24,7 @@ def parse_quantity(quantity):
     See https://github.com/kubernetes/apimachinery/blob/master/pkg/api/resource/quantity.go
 
     Input:
-    quanity: string. kubernetes canonical form quantity
+    quantity: string. kubernetes canonical form quantity
 
     Returns:
     Decimal
