@@ -9,7 +9,7 @@ pypi.
 There are some hot issues with the client generation that require manual fixes.
 ***The steps in this section should be performed after you finished the section "Update release tags".***
 
-1. Restore custom object patch hehavior. You should apply [this commit](https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede)
+1. Restore custom object patch behavior. You should apply [this commit](https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede)
 to ensure custom object patch behavior is backwards compatible. For more
 details, see [#866](https://github.com/kubernetes-client/python/issues/866) and
 [#959](https://github.com/kubernetes-client/python/pull/959).
@@ -163,7 +163,7 @@ twine upload dist/*
 
 ## Create github release
 
-Create a gihub release by starting from
+Create a github release by starting from
 [this page](https://github.com/kubernetes-client/python/releases).
 Click the `Draft a new release button`. Name the tag the same as CLIENT_VERSION. Change
 the target branch to "release-x.y". If the release is a pre-release, check the
