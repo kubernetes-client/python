@@ -43,6 +43,7 @@ from kubernetes.client.api.events_api import EventsApi
 from kubernetes.client.api.events_v1beta1_api import EventsV1beta1Api
 from kubernetes.client.api.extensions_api import ExtensionsApi
 from kubernetes.client.api.extensions_v1beta1_api import ExtensionsV1beta1Api
+from kubernetes.client.api.istio_v1alpha3_api import IstioV1alpha3Api
 from kubernetes.client.api.logs_api import LogsApi
 from kubernetes.client.api.networking_api import NetworkingApi
 from kubernetes.client.api.networking_v1_api import NetworkingV1Api
