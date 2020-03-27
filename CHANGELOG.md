@@ -1,3 +1,11 @@
+# v12.0.0
+
+Kubernetes API Version: 1.16
+
+**Deprecation Notice**
+v12.0.0 of the client follows the Kubernetes [deprecation policy](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) and will
+be deprecated as and when Kubernetes version v1.16 gets deprecated.
+
 # v11.0.0
 
 Kubernetes API Version: 1.15.10
