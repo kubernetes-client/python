@@ -1,4 +1,4 @@
-# kubernetes.client.AuthorizationV1Api
+# client.AuthorizationV1Api
 
 All URIs are relative to *http://localhost*
 
@@ -24,20 +24,20 @@ create a LocalSubjectAccessReview
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AuthorizationV1Api(kubernetes.client.ApiClient(configuration))
+api_instance = client.AuthorizationV1Api(client.ApiClient(configuration))
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.V1LocalSubjectAccessReview() # V1LocalSubjectAccessReview | 
+body = client.V1LocalSubjectAccessReview() # V1LocalSubjectAccessReview | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -87,19 +87,19 @@ create a SelfSubjectAccessReview
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AuthorizationV1Api(kubernetes.client.ApiClient(configuration))
-body = kubernetes.client.V1SelfSubjectAccessReview() # V1SelfSubjectAccessReview | 
+api_instance = client.AuthorizationV1Api(client.ApiClient(configuration))
+body = client.V1SelfSubjectAccessReview() # V1SelfSubjectAccessReview | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -148,19 +148,19 @@ create a SelfSubjectRulesReview
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AuthorizationV1Api(kubernetes.client.ApiClient(configuration))
-body = kubernetes.client.V1SelfSubjectRulesReview() # V1SelfSubjectRulesReview | 
+api_instance = client.AuthorizationV1Api(client.ApiClient(configuration))
+body = client.V1SelfSubjectRulesReview() # V1SelfSubjectRulesReview | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -209,19 +209,19 @@ create a SubjectAccessReview
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AuthorizationV1Api(kubernetes.client.ApiClient(configuration))
-body = kubernetes.client.V1SubjectAccessReview() # V1SubjectAccessReview | 
+api_instance = client.AuthorizationV1Api(client.ApiClient(configuration))
+body = client.V1SubjectAccessReview() # V1SubjectAccessReview | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -270,18 +270,18 @@ get available resources
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.AuthorizationV1Api(kubernetes.client.ApiClient(configuration))
+api_instance = client.AuthorizationV1Api(client.ApiClient(configuration))
 
 try:
     api_response = api_instance.get_api_resources()

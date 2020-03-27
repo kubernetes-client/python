@@ -1,4 +1,4 @@
-# kubernetes.client.VersionApi
+# client.VersionApi
 
 All URIs are relative to *http://localhost*
 
@@ -20,18 +20,18 @@ get the code version
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.VersionApi(kubernetes.client.ApiClient(configuration))
+api_instance = client.VersionApi(client.ApiClient(configuration))
 
 try:
     api_response = api_instance.get_code()
