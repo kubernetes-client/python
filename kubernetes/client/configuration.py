@@ -97,6 +97,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
 
         # Proxy URL
         self.proxy = None
+        self.proxy_headers = None
         # Safe chars for path_param
         self.safe_chars_for_path_param = ''
 
