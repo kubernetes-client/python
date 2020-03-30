@@ -75,6 +75,10 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 - Update `_load_azure_token` to handle str and int [kubernetes-client/python-base#141](https://github.com/kubernetes-client/python-base/pull/141)
 - Correct regex to properly parse rfc3339 microseconds [kubernetes-client/python-base#150](https://github.com/kubernetes-client/python-base/pull/150)
 
+# v10.1.0
+**Bug Fix:**
+- Fixed issue in `__del__` method of the `ApiClient` that caused an indefinite hang during garbage collection. *Note* The `ApiClient` `ThreadPool` will no longer be cleaned up automatically during garbage collection, instead the `close` method must be invoked directly, or the `ApiClient` can be used as a context manager. [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
+
 # v10.0.1
 **Bug Fix:**
 - Fix content type regression in custom object patch API [kubernetes-client/python#866](https://github.com/kubernetes-client/python/issues/866)
