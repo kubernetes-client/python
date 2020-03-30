@@ -4,6 +4,28 @@ The release process of the python client involves creating (or updating) a relea
 branch, updating release tags, and creating distribution packages and uploading them to
 pypi.
 
+## Hot issues
+
+There are some hot issues with the client generation that require manual fixes.
+***The steps in this section should be performed after you finished the section "Update release tags".***
+
+1. Restore custom object patch behavior. You should apply [this commit](https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede)
+to ensure custom object patch behavior is backwards compatible. For more
+details, see [#866](https://github.com/kubernetes-client/python/issues/866) and
+[#959](https://github.com/kubernetes-client/python/pull/959).
+
+2. Add alias package kubernetes.client.apis with deprecation warning. You need
+to add [this file](https://github.com/kubernetes-client/python/blob/0976d59d6ff206f2f428cabc7a6b7b1144843b2a/kubernetes/client/apis/__init__.py)
+under `kubernetes/client/apis/` to ensure the package is backwards compatible.
+For more details, see [#974](https://github.com/kubernetes-client/python/issues/974)
+
+3. Add ability to the client to be used as Context Manager [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
+
+Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does,
+then create your PR for review.
+
+Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply changes from the above functionalities. **As mentioned above the script should be run after finishing the section `Update release tags`. Also, ensure a clean working directory before applying the script**
+
 ## Change logs
 Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
 If they are not, follow commits added after the last release and update/commit
@@ -85,6 +107,9 @@ scripts/update-client.sh
 and commit changes (should be only version number changes) to the release branch.
 Name the commit something like "Update version constants for XXX release".
 
+***After you finished the steps above, refer to the section "Hot issues" and
+apply the manual fixes.***
+
 ```bash
 git push upstream $RELEASE_BRANCH
 ```
@@ -142,7 +167,7 @@ twine upload dist/*
 
 ## Create github release
 
-Create a gihub release by starting from
+Create a github release by starting from
 [this page](https://github.com/kubernetes-client/python/releases).
 Click the `Draft a new release button`. Name the tag the same as CLIENT_VERSION. Change
 the target branch to "release-x.y". If the release is a pre-release, check the
