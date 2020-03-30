@@ -1,4 +1,4 @@
-# kubernetes.client.LogsApi
+# client.LogsApi
 
 All URIs are relative to *http://localhost*
 
@@ -19,18 +19,18 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.LogsApi(kubernetes.client.ApiClient(configuration))
+api_instance = client.LogsApi(client.ApiClient(configuration))
 logpath = 'logpath_example' # str | path to the log
 
 try:
@@ -71,18 +71,18 @@ void (empty response body)
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: BearerToken
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = kubernetes.client.LogsApi(kubernetes.client.ApiClient(configuration))
+api_instance = client.LogsApi(client.ApiClient(configuration))
 
 try:
     api_instance.log_file_list_handler()
