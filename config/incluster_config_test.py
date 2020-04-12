@@ -15,12 +15,17 @@
 import os
 import tempfile
 import unittest
+import datetime
+import time
+
+from kubernetes.client import Configuration
 
 from .config_exception import ConfigException
 from .incluster_config import (SERVICE_HOST_ENV_NAME, SERVICE_PORT_ENV_NAME,
                                InClusterConfigLoader, _join_host_port)
 
 _TEST_TOKEN = "temp_token"
+_TEST_NEW_TOKEN = "temp_new_token"
 _TEST_CERT = "temp_cert"
 _TEST_HOST = "127.0.0.1"
 _TEST_PORT = "80"
@@ -50,6 +55,12 @@ class InClusterConfigTest(unittest.TestCase):
         os.close(handler)
         return name
 
+    def _overwrite_file_with_content(self, name, content=""):
+        handler = os.open(name, os.O_RDWR)
+        os.truncate(name, 0)
+        os.write(handler, str.encode(content))
+        os.close(handler)
+
     def get_test_loader(
             self,
             token_filename=None,
@@ -77,6 +88,25 @@ class InClusterConfigTest(unittest.TestCase):
         self.assertEqual("https://" + _TEST_HOST_PORT, loader.host)
         self.assertEqual(cert_filename, loader.ssl_ca_cert)
         self.assertEqual(_TEST_TOKEN, loader.token)
+
+    def test_refresh_token(self):
+        loader = self.get_test_loader()
+        loader._token_refresh_period = datetime.timedelta(seconds=5)
+        loader.load_and_set()
+        config = Configuration()
+
+        self.assertEqual('bearer '+_TEST_TOKEN, config.get_api_key_with_prefix('authorization'))
+        self.assertEqual(_TEST_TOKEN, loader.token)
+        self.assertIsNotNone(loader.token_expires_at)
+
+        old_token = loader.token
+        old_token_expires_at = loader.token_expires_at
+        self._overwrite_file_with_content(loader._token_filename, _TEST_NEW_TOKEN)
+        time.sleep(5)
+
+        self.assertEqual('bearer '+_TEST_NEW_TOKEN, config.get_api_key_with_prefix('authorization'))
+        self.assertEqual(_TEST_NEW_TOKEN, loader.token)
+        self.assertGreater(loader.token_expires_at, old_token_expires_at)
 
     def _should_fail_load(self, config_loader, reason):
         try:
