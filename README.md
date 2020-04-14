@@ -19,7 +19,7 @@ cd python
 python setup.py install
 ```
 
-From [PyPi](https://pypi.python.org/pypi/kubernetes/) directly:
+From [PyPI](https://pypi.python.org/pypi/kubernetes/) directly:
 
 ```
 pip install kubernetes
