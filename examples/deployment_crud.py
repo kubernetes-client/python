@@ -26,7 +26,12 @@ def create_deployment_object():
     container = client.V1Container(
         name="nginx",
         image="nginx:1.15.4",
-        ports=[client.V1ContainerPort(container_port=80)])
+        ports=[client.V1ContainerPort(container_port=80)],
+        resources=client.V1ResourceRequirements(
+            requests={"cpu": "100m", "memory": "200Mi"},
+            limits={"cpu": "500m", "memory": "500Mi"}
+        )
+    )
     # Create and configurate a spec section
     template = client.V1PodTemplateSpec(
         metadata=client.V1ObjectMeta(labels={"app": "nginx"}),
