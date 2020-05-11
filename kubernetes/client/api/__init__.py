@@ -4,8 +4,10 @@ from __future__ import absolute_import
 
 # import apis into api package
 from kubernetes.client.api.admissionregistration_api import AdmissionregistrationApi
+from kubernetes.client.api.admissionregistration_v1_api import AdmissionregistrationV1Api
 from kubernetes.client.api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api
 from kubernetes.client.api.apiextensions_api import ApiextensionsApi
+from kubernetes.client.api.apiextensions_v1_api import ApiextensionsV1Api
 from kubernetes.client.api.apiextensions_v1beta1_api import ApiextensionsV1beta1Api
 from kubernetes.client.api.apiregistration_api import ApiregistrationApi
 from kubernetes.client.api.apiregistration_v1_api import ApiregistrationV1Api
@@ -39,6 +41,8 @@ from kubernetes.client.api.coordination_v1beta1_api import CoordinationV1beta1Ap
 from kubernetes.client.api.core_api import CoreApi
 from kubernetes.client.api.core_v1_api import CoreV1Api
 from kubernetes.client.api.custom_objects_api import CustomObjectsApi
+from kubernetes.client.api.discovery_api import DiscoveryApi
+from kubernetes.client.api.discovery_v1alpha1_api import DiscoveryV1alpha1Api
 from kubernetes.client.api.events_api import EventsApi
 from kubernetes.client.api.events_v1beta1_api import EventsV1beta1Api
 from kubernetes.client.api.extensions_api import ExtensionsApi
