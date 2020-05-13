@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
 import os
 import tempfile
-import unittest
-import datetime
 import time
+import unittest
 
 from kubernetes.client import Configuration
 
@@ -33,14 +33,17 @@ _TEST_HOST_PORT = "127.0.0.1:80"
 _TEST_IPV6_HOST = "::1"
 _TEST_IPV6_HOST_PORT = "[::1]:80"
 
-_TEST_ENVIRON = {SERVICE_HOST_ENV_NAME: _TEST_HOST,
-                 SERVICE_PORT_ENV_NAME: _TEST_PORT}
-_TEST_IPV6_ENVIRON = {SERVICE_HOST_ENV_NAME: _TEST_IPV6_HOST,
-                      SERVICE_PORT_ENV_NAME: _TEST_PORT}
+_TEST_ENVIRON = {
+    SERVICE_HOST_ENV_NAME: _TEST_HOST,
+    SERVICE_PORT_ENV_NAME: _TEST_PORT
+}
+_TEST_IPV6_ENVIRON = {
+    SERVICE_HOST_ENV_NAME: _TEST_IPV6_HOST,
+    SERVICE_PORT_ENV_NAME: _TEST_PORT
+}
 
 
 class InClusterConfigTest(unittest.TestCase):
-
     def setUp(self):
         self._temp_files = []
 
@@ -55,25 +58,18 @@ class InClusterConfigTest(unittest.TestCase):
         os.close(handler)
         return name
 
-    def _overwrite_file_with_content(self, name, content=""):
-        handler = os.open(name, os.O_RDWR)
-        os.truncate(name, 0)
-        os.write(handler, str.encode(content))
-        os.close(handler)
-
-    def get_test_loader(
-            self,
-            token_filename=None,
-            cert_filename=None,
-            environ=_TEST_ENVIRON):
+    def get_test_loader(self,
+                        token_filename=None,
+                        cert_filename=None,
+                        environ=_TEST_ENVIRON):
         if not token_filename:
             token_filename = self._create_file_with_temp_content(_TEST_TOKEN)
         if not cert_filename:
             cert_filename = self._create_file_with_temp_content(_TEST_CERT)
-        return InClusterConfigLoader(
-            token_filename=token_filename,
-            cert_filename=cert_filename,
-            environ=environ)
+        return InClusterConfigLoader(token_filename=token_filename,
+                                     cert_filename=cert_filename,
+                                     try_refresh_token=True,
+                                     environ=environ)
 
     def test_join_host_port(self):
         self.assertEqual(_TEST_HOST_PORT,
@@ -87,25 +83,29 @@ class InClusterConfigTest(unittest.TestCase):
         loader._load_config()
         self.assertEqual("https://" + _TEST_HOST_PORT, loader.host)
         self.assertEqual(cert_filename, loader.ssl_ca_cert)
-        self.assertEqual(_TEST_TOKEN, loader.token)
+        self.assertEqual('bearer ' + _TEST_TOKEN, loader.token)
 
     def test_refresh_token(self):
         loader = self.get_test_loader()
-        loader._token_refresh_period = datetime.timedelta(seconds=5)
-        loader.load_and_set()
         config = Configuration()
+        loader.load_and_set(config)
 
-        self.assertEqual('bearer '+_TEST_TOKEN, config.get_api_key_with_prefix('authorization'))
-        self.assertEqual(_TEST_TOKEN, loader.token)
+        self.assertEqual('bearer ' + _TEST_TOKEN,
+                         config.get_api_key_with_prefix('authorization'))
+        self.assertEqual('bearer ' + _TEST_TOKEN, loader.token)
         self.assertIsNotNone(loader.token_expires_at)
 
         old_token = loader.token
         old_token_expires_at = loader.token_expires_at
-        self._overwrite_file_with_content(loader._token_filename, _TEST_NEW_TOKEN)
-        time.sleep(5)
+        loader._token_filename = self._create_file_with_temp_content(
+            _TEST_NEW_TOKEN)
+        self.assertEqual('bearer ' + _TEST_TOKEN,
+                         config.get_api_key_with_prefix('authorization'))
 
-        self.assertEqual('bearer '+_TEST_NEW_TOKEN, config.get_api_key_with_prefix('authorization'))
-        self.assertEqual(_TEST_NEW_TOKEN, loader.token)
+        loader.token_expires_at = datetime.datetime.now()
+        self.assertEqual('bearer ' + _TEST_NEW_TOKEN,
+                         config.get_api_key_with_prefix('authorization'))
+        self.assertEqual('bearer ' + _TEST_NEW_TOKEN, loader.token)
         self.assertGreater(loader.token_expires_at, old_token_expires_at)
 
     def _should_fail_load(self, config_loader, reason):
@@ -122,9 +122,10 @@ class InClusterConfigTest(unittest.TestCase):
         self._should_fail_load(loader, "no port specified")
 
     def test_empty_port(self):
-        loader = self.get_test_loader(
-            environ={SERVICE_HOST_ENV_NAME: _TEST_HOST,
-                     SERVICE_PORT_ENV_NAME: ""})
+        loader = self.get_test_loader(environ={
+            SERVICE_HOST_ENV_NAME: _TEST_HOST,
+            SERVICE_PORT_ENV_NAME: ""
+        })
         self._should_fail_load(loader, "empty port specified")
 
     def test_no_host(self):
@@ -133,9 +134,10 @@ class InClusterConfigTest(unittest.TestCase):
         self._should_fail_load(loader, "no host specified")
 
     def test_empty_host(self):
-        loader = self.get_test_loader(
-            environ={SERVICE_HOST_ENV_NAME: "",
-                     SERVICE_PORT_ENV_NAME: _TEST_PORT})
+        loader = self.get_test_loader(environ={
+            SERVICE_HOST_ENV_NAME: "",
+            SERVICE_PORT_ENV_NAME: _TEST_PORT
+        })
         self._should_fail_load(loader, "empty host specified")
 
     def test_no_cert_file(self):
