@@ -688,28 +688,19 @@ class KubeConfigMerger:
             yaml.safe_dump(self.config_files[path], f,
                            default_flow_style=False)
 
-
 def _get_kube_config_loader_for_yaml_file(
         filename, persist_config=False, **kwargs):
-
-    kcfg = KubeConfigMerger(filename)
-    if persist_config and 'config_persister' not in kwargs:
-        kwargs['config_persister'] = kcfg.save_changes
-
-    if kcfg.config is None:
-        raise ConfigException(
-            'Invalid kube-config file. '
-            'No configuration found.')
-
-    return KubeConfigLoader(
-        config_dict=kcfg.config,
-        config_base_path=None,
+    return _get_kube_config_loader(
+        filename=filename,
+        persist_config=persist_config,
         **kwargs)
 
 def _get_kube_config_loader(
-        filename=None,config_dict=None, persist_config=False, **kwargs):
-
-    if (config_dict is None):
+        filename=None,
+        config_dict=None,
+        persist_config=False,
+        **kwargs):
+    if config_dict is None:
         kcfg = KubeConfigMerger(filename)
         if persist_config and 'config_persister' not in kwargs:
             kwargs['config_persister'] = kcfg.save_changes
