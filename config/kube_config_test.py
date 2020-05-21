@@ -1380,15 +1380,6 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG)
         self.assertIsNone(actual._config_persister)
 
-    def test__get_kube_config_loader_dict_persist(self):
-        expected = FakeConfig(host=TEST_HOST,
-                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
-        actual = _get_kube_config_loader(config_dict=self.TEST_KUBE_CONFIG,
-                                         persist_config=True)
-        self.assertTrue(callable(actual._config_persister))
-        self.assertEquals(actual._config_persister.__name__, "save_changes")
-
-
 class TestKubernetesClientConfiguration(BaseTestCase):
     # Verifies properties of kubernetes.client.Configuration.
     # These tests guard against changes to the upstream configuration class,
