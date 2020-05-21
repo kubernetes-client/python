@@ -1376,7 +1376,7 @@ class TestKubeConfigLoader(BaseTestCase):
     def test__get_kube_config_loader_dict_no_persist(self):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
-        actual = _get_kube_config_loader_for_yaml_file(
+        actual = _get_kube_config_loader(
             config_dict=self.TEST_KUBE_CONFIG)
         self.assertIsNone(actual._config_persister)
 
