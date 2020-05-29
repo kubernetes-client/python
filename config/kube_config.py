@@ -472,11 +472,31 @@ class KubeConfigLoader(object):
             return
         try:
             status = ExecProvider(self._user['exec']).run()
-            if 'token' not in status:
-                logging.error('exec: missing token field in plugin output')
-                return None
-            self.token = "Bearer %s" % status['token']
-            return True
+            if 'token' in status:
+                self.token = "Bearer %s" % status['token']
+                return True
+            if 'clientCertificateData' in status:
+                # https://kubernetes.io/docs/reference/access-authn-authz/authentication/#input-and-output-formats
+                # Plugin has provided certificates instead of a token.
+                if 'clientKeyData' not in status:
+                    logging.error('exec: missing clientKeyData field in '
+                                  'plugin output')
+                    return None
+                base_path = self._get_base_path(self._cluster.path)
+                self.cert_file = FileOrData(
+                    status, None,
+                    data_key_name='clientCertificateData',
+                    file_base_path=base_path,
+                    base64_file_content=False).as_file()
+                self.key_file = FileOrData(
+                    status, None,
+                    data_key_name='clientKeyData',
+                    file_base_path=base_path,
+                    base64_file_content=False).as_file()
+                return True
+            logging.error('exec: missing token or clientCertificateData field '
+                          'in plugin output')
+            return None
         except Exception as e:
             logging.error(str(e))
 
@@ -512,12 +532,16 @@ class KubeConfigLoader(object):
                 self.ssl_ca_cert = FileOrData(
                     self._cluster, 'certificate-authority',
                     file_base_path=base_path).as_file()
-                self.cert_file = FileOrData(
-                    self._user, 'client-certificate',
-                    file_base_path=base_path).as_file()
-                self.key_file = FileOrData(
-                    self._user, 'client-key',
-                    file_base_path=base_path).as_file()
+                if 'cert_file' not in self.__dict__:
+                    # cert_file could have been provided by
+                    # _load_from_exec_plugin; only load from the _user
+                    # section if we need it.
+                    self.cert_file = FileOrData(
+                        self._user, 'client-certificate',
+                        file_base_path=base_path).as_file()
+                    self.key_file = FileOrData(
+                        self._user, 'client-key',
+                        file_base_path=base_path).as_file()
         if 'insecure-skip-tls-verify' in self._cluster:
             self.verify_ssl = not self._cluster['insecure-skip-tls-verify']
 
