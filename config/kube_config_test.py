@@ -1342,7 +1342,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = _get_kube_config_loader_for_yaml_file(config_file,
                                                        persist_config=True)
         self.assertTrue(callable(actual._config_persister))
-        self.assertEquals(actual._config_persister.__name__, "save_changes")
+        self.assertEqual(actual._config_persister.__name__, "save_changes")
 
 
 class TestKubernetesClientConfiguration(BaseTestCase):
@@ -1517,6 +1517,26 @@ class TestKubeConfigMerger(BaseTestCase):
             }
         ]
     }
+    TEST_KUBE_CONFIG_PART6 = {
+        "current-context": "no_user",
+        "contexts": [
+            {
+                "name": "no_user",
+                "context": {
+                    "cluster": "default"
+                }
+            },
+        ],
+        "clusters": [
+            {
+                "name": "default",
+                "cluster": {
+                    "server": TEST_HOST
+                }
+            },
+        ],
+        "users": None
+    }
 
     def _create_multi_config(self):
         files = []
@@ -1525,7 +1545,8 @@ class TestKubeConfigMerger(BaseTestCase):
                 self.TEST_KUBE_CONFIG_PART2,
                 self.TEST_KUBE_CONFIG_PART3,
                 self.TEST_KUBE_CONFIG_PART4,
-                self.TEST_KUBE_CONFIG_PART5):
+                self.TEST_KUBE_CONFIG_PART5,
+                self.TEST_KUBE_CONFIG_PART6):
             files.append(self._create_temp_file(yaml.safe_dump(part)))
         return ENV_KUBECONFIG_PATH_SEPARATOR.join(files)
 
