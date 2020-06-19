@@ -760,7 +760,7 @@ def load_kube_config(config_file=None, context=None,
 def load_kube_config_from_dict(config_dict, context=None,
                      client_configuration=None,
                      persist_config=True):
-    """Loads authentication and cluster information from kube-config file
+    """Loads authentication and cluster information from config_dict file
     and stores them in kubernetes.client.configuration.
 
     :param config_dict: Takes the config file as a dict.
