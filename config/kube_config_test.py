@@ -33,9 +33,10 @@ from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, CommandTokenSource,
                           ConfigNode, FileOrData, KubeConfigLoader,
                           KubeConfigMerger, _cleanup_temp_files,
                           _create_temp_file_with_content,
+                          _get_kube_config_loader,
                           _get_kube_config_loader_for_yaml_file,
                           list_kube_config_contexts, load_kube_config,
-                          new_client_from_config)
+                          load_kube_config_from_dict, new_client_from_config)
 
 BEARER_TOKEN_FORMAT = "Bearer %s"
 
@@ -1229,6 +1230,16 @@ class TestKubeConfigLoader(BaseTestCase):
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 
+    def test_load_kube_config_from_dict(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+
+        actual = FakeConfig()
+        load_kube_config_from_dict(config_dict=self.TEST_KUBE_CONFIG,
+                                   context="simple_token",
+                                   client_configuration=actual)
+        self.assertEqual(expected, actual)
+
     def test_list_kube_config_contexts(self):
         config_file = self._create_temp_file(
             yaml.safe_dump(self.TEST_KUBE_CONFIG))
@@ -1344,6 +1355,30 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertTrue(callable(actual._config_persister))
         self.assertEquals(actual._config_persister.__name__, "save_changes")
 
+    def test__get_kube_config_loader_file_no_persist(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
+        actual = _get_kube_config_loader(filename=config_file)
+        self.assertIsNone(actual._config_persister)
+
+    def test__get_kube_config_loader_file_persist(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
+        actual = _get_kube_config_loader(filename=config_file,
+                                         persist_config=True)
+        self.assertTrue(callable(actual._config_persister))
+        self.assertEquals(actual._config_persister.__name__, "save_changes")
+
+    def test__get_kube_config_loader_dict_no_persist(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        actual = _get_kube_config_loader(
+            config_dict=self.TEST_KUBE_CONFIG)
+        self.assertIsNone(actual._config_persister)
 
 class TestKubernetesClientConfiguration(BaseTestCase):
     # Verifies properties of kubernetes.client.Configuration.

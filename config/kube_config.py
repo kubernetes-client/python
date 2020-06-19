@@ -688,31 +688,43 @@ class KubeConfigMerger:
             yaml.safe_dump(self.config_files[path], f,
                            default_flow_style=False)
 
-
 def _get_kube_config_loader_for_yaml_file(
         filename, persist_config=False, **kwargs):
-
-    kcfg = KubeConfigMerger(filename)
-    if persist_config and 'config_persister' not in kwargs:
-        kwargs['config_persister'] = kcfg.save_changes
-
-    if kcfg.config is None:
-        raise ConfigException(
-            'Invalid kube-config file. '
-            'No configuration found.')
-
-    return KubeConfigLoader(
-        config_dict=kcfg.config,
-        config_base_path=None,
+    return _get_kube_config_loader(
+        filename=filename,
+        persist_config=persist_config,
         **kwargs)
 
+def _get_kube_config_loader(
+        filename=None,
+        config_dict=None,
+        persist_config=False,
+        **kwargs):
+    if config_dict is None:
+        kcfg = KubeConfigMerger(filename)
+        if persist_config and 'config_persister' not in kwargs:
+            kwargs['config_persister'] = kcfg.save_changes
+
+        if kcfg.config is None:
+            raise ConfigException(
+                'Invalid kube-config file. '
+                'No configuration found.')
+        return KubeConfigLoader(
+            config_dict=kcfg.config,
+            config_base_path=None,
+            **kwargs)
+    else:
+        return KubeConfigLoader(
+            config_dict=config_dict,
+            config_base_path=None,
+            **kwargs)
 
 def list_kube_config_contexts(config_file=None):
 
     if config_file is None:
         config_file = KUBE_CONFIG_DEFAULT_LOCATION
 
-    loader = _get_kube_config_loader_for_yaml_file(config_file)
+    loader = _get_kube_config_loader(filename=config_file)
     return loader.list_contexts(), loader.current_context
 
 
@@ -734,8 +746,8 @@ def load_kube_config(config_file=None, context=None,
     if config_file is None:
         config_file = KUBE_CONFIG_DEFAULT_LOCATION
 
-    loader = _get_kube_config_loader_for_yaml_file(
-        config_file, active_context=context,
+    loader = _get_kube_config_loader(
+        filename=config_file, active_context=context,
         persist_config=persist_config)
 
     if client_configuration is None:
@@ -745,6 +757,36 @@ def load_kube_config(config_file=None, context=None,
     else:
         loader.load_and_set(client_configuration)
 
+def load_kube_config_from_dict(config_dict, context=None,
+                     client_configuration=None,
+                     persist_config=True):
+    """Loads authentication and cluster information from config_dict file
+    and stores them in kubernetes.client.configuration.
+
+    :param config_dict: Takes the config file as a dict.
+    :param context: set the active context. If is set to None, current_context
+        from config file will be used.
+    :param client_configuration: The kubernetes.client.Configuration to
+        set configs to.
+    :param persist_config: If True, config file will be updated when changed
+        (e.g GCP token refresh).
+    """
+
+    if config_dict is None:
+        raise ConfigException(
+            'Invalid kube-config dict. '
+            'No configuration found.')
+
+    loader = _get_kube_config_loader(
+        config_dict=config_dict, active_context=context,
+        persist_config=persist_config)
+
+    if client_configuration is None:
+        config = type.__call__(Configuration)
+        loader.load_and_set(config)
+        Configuration.set_default(config)
+    else:
+        loader.load_and_set(client_configuration)
 
 def new_client_from_config(
         config_file=None,
