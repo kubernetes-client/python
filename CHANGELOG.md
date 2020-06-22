@@ -1,9 +1,11 @@
 # v12.0.0a1-snapshot
 
-Kubernetes API Version: 1.16.9
+Kubernetes API Version: 1.16.11
 
 **API Change:**
 
+- Resolve regression in metadata.managedFields handling in update/patch requests submitted by older API clients ([#91748](https://github.com/kubernetes/kubernetes/pull/91748), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
+- Fix bug where sending a status update completely wipes managedFields for some types. ([#90033](https://github.com/kubernetes/kubernetes/pull/90033), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
 - The `MutatingWebhookConfiguration` and `ValidatingWebhookConfiguration` APIs have been promoted to `admissionregistration.k8s.io/v1`:
   - `failurePolicy` default changed from `Ignore` to `Fail` for v1
   - `matchPolicy` default changed from `Exact` to `Equivalent` for v1
@@ -423,4 +425,3 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 
 # v1.0.0-alpha1
 Skipped because of a failed initial release.
-
