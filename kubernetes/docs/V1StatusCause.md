@@ -1,5 +1,6 @@
 # V1StatusCause
 
+StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

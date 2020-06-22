@@ -1,5 +1,6 @@
 # AppsV1beta1Scale
 
+Scale represents a scaling request for a resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

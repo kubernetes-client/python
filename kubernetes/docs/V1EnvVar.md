@@ -1,5 +1,6 @@
 # V1EnvVar
 
+EnvVar represents an environment variable present in a Container.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

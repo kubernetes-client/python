@@ -1,5 +1,6 @@
 # V1ServicePort
 
+ServicePort contains information on service's port.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

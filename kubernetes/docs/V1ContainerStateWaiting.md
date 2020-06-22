@@ -1,5 +1,6 @@
 # V1ContainerStateWaiting
 
+ContainerStateWaiting is a waiting state of a container.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

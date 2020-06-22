@@ -1,5 +1,6 @@
 # V1NodeDaemonEndpoints
 
+NodeDaemonEndpoints lists ports opened by daemons running on the Node.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

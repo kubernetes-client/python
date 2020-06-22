@@ -1,5 +1,6 @@
 # V1ScaleSpec
 
+ScaleSpec describes the attributes of a scale subresource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

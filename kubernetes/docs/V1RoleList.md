@@ -1,5 +1,6 @@
 # V1RoleList
 
+RoleList is a collection of Roles
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

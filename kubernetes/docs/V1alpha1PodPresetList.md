@@ -1,5 +1,6 @@
 # V1alpha1PodPresetList
 
+PodPresetList is a list of PodPreset objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

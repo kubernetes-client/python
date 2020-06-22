@@ -1,5 +1,6 @@
 # V1alpha1Webhook
 
+Webhook holds the configuration of the webhook
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

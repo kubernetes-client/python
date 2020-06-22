@@ -1,5 +1,6 @@
 # V1CustomResourceDefinitionCondition
 
+CustomResourceDefinitionCondition contains details for the current condition of this pod.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1TCPSocketAction
 
+TCPSocketAction describes an action based on opening a socket
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

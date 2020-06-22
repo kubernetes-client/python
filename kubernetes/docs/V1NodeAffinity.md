@@ -1,5 +1,6 @@
 # V1NodeAffinity
 
+Node affinity is a group of node affinity scheduling rules.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

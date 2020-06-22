@@ -1,5 +1,6 @@
 # V1RollingUpdateDeployment
 
+Spec to control the desired behavior of rolling update.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

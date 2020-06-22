@@ -1,5 +1,6 @@
 # V1ComponentStatus
 
+ComponentStatus (and ComponentStatusList) holds the cluster validation info.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

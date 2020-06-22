@@ -1,5 +1,6 @@
 # AppsV1beta1Deployment
 
+DEPRECATED - This group version of Deployment is deprecated by apps/v1beta2/Deployment. See the release notes for more information. Deployment enables declarative updates for Pods and ReplicaSets.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

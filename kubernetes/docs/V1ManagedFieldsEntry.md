@@ -1,5 +1,6 @@
 # V1ManagedFieldsEntry
 
+ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

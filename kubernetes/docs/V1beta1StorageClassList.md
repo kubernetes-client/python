@@ -1,5 +1,6 @@
 # V1beta1StorageClassList
 
+StorageClassList is a collection of storage classes.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

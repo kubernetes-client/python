@@ -1,5 +1,6 @@
 # V1beta1CSINodeDriver
 
+CSINodeDriver holds information about the specification of one CSI driver installed on a node
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

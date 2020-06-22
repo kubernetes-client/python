@@ -1,5 +1,6 @@
 # AppsV1beta1DeploymentStatus
 
+DeploymentStatus is the most recently observed status of the Deployment.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

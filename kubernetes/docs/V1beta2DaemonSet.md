@@ -1,5 +1,6 @@
 # V1beta2DaemonSet
 
+DEPRECATED - This group version of DaemonSet is deprecated by apps/v1/DaemonSet. See the release notes for more information. DaemonSet represents the configuration of a daemon set.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1VolumeNodeResources
 
+VolumeNodeResources is a set of resource limits for scheduling of volumes.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1ResourceQuotaSpec
 
+ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

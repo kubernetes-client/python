@@ -1,5 +1,6 @@
 # V1CustomResourceDefinitionVersion
 
+CustomResourceDefinitionVersion describes a version for CRD.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1NonResourceAttributes
 
+NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1LoadBalancerStatus
 
+LoadBalancerStatus represents the status of a load-balancer.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1DeleteOptions
 
+DeleteOptions may be provided when deleting an API object.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

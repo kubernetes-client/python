@@ -1,5 +1,6 @@
 # V1EndpointAddress
 
+EndpointAddress is a tuple that describes single IP address.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

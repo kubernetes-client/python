@@ -1,5 +1,6 @@
 # ExtensionsV1beta1Scale
 
+represents a scaling request for a resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta2DaemonSetCondition
 
+DaemonSetCondition describes the state of a DaemonSet at a certain point.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

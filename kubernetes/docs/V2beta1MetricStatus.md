@@ -1,5 +1,6 @@
 # V2beta1MetricStatus
 
+MetricStatus describes the last-read state of a single metric.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

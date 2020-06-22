@@ -1,5 +1,6 @@
 # V1NamespaceCondition
 
+NamespaceCondition contains details about state of namespace.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

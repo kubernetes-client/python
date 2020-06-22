@@ -1,5 +1,6 @@
 # V1LimitRangeItem
 
+LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

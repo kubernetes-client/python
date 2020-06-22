@@ -1,5 +1,6 @@
 # V1beta2StatefulSetList
 
+StatefulSetList is a collection of StatefulSets.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

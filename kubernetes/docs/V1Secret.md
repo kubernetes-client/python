@@ -1,5 +1,6 @@
 # V1Secret
 
+Secret holds secret data of a certain type. The total bytes of the values in the Data field must be less than MaxSecretSize bytes.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

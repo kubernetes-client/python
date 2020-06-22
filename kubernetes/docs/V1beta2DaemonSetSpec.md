@@ -1,5 +1,6 @@
 # V1beta2DaemonSetSpec
 
+DaemonSetSpec is the specification of a daemon set.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1DaemonSetUpdateStrategy
 
+DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1TokenReviewStatus
 
+TokenReviewStatus is the result of the token authentication request.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

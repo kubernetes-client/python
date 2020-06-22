@@ -1,5 +1,6 @@
 # V1alpha1PodPreset
 
+PodPreset is a policy resource that defines additional runtime requirements for a Pod.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

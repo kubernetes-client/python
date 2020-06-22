@@ -1,5 +1,6 @@
 # V1JobList
 
+JobList is a collection of jobs.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

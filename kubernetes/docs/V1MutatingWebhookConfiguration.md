@@ -1,5 +1,6 @@
 # V1MutatingWebhookConfiguration
 
+MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

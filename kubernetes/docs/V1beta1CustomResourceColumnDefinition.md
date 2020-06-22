@@ -1,5 +1,6 @@
 # V1beta1CustomResourceColumnDefinition
 
+CustomResourceColumnDefinition specifies a column for server side printing.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

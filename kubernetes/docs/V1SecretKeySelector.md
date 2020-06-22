@@ -1,5 +1,6 @@
 # V1SecretKeySelector
 
+SecretKeySelector selects a key of a Secret.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

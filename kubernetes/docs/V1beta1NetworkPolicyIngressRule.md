@@ -1,5 +1,6 @@
 # V1beta1NetworkPolicyIngressRule
 
+DEPRECATED 1.9 - This group version of NetworkPolicyIngressRule is deprecated by networking/v1/NetworkPolicyIngressRule. This NetworkPolicyIngressRule matches traffic if and only if the traffic matches both ports AND from.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

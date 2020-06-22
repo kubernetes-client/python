@@ -1,5 +1,6 @@
 # V1PodAffinity
 
+Pod affinity is a group of inter pod affinity scheduling rules.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

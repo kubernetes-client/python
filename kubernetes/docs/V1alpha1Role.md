@@ -1,5 +1,6 @@
 # V1alpha1Role
 
+Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

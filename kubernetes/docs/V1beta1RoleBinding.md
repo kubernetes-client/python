@@ -1,5 +1,6 @@
 # V1beta1RoleBinding
 
+RoleBinding references a role, but does not contain it.  It can reference a Role in the same namespace or a ClusterRole in the global namespace. It adds who information via Subjects and namespace information by which namespace it exists in.  RoleBindings in a given namespace only have effect in that namespace.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

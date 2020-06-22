@@ -1,5 +1,6 @@
 # V1PersistentVolumeSpec
 
+PersistentVolumeSpec is the specification of a persistent volume.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1alpha1PodPresetSpec
 
+PodPresetSpec is a description of a pod preset.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

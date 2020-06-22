@@ -1,5 +1,6 @@
 # V2beta1ObjectMetricStatus
 
+ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

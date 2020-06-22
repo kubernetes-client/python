@@ -1,5 +1,6 @@
 # V1HorizontalPodAutoscalerStatus
 
+current status of a horizontal pod autoscaler
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

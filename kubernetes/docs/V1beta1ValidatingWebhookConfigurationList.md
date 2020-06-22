@@ -1,5 +1,6 @@
 # V1beta1ValidatingWebhookConfigurationList
 
+ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

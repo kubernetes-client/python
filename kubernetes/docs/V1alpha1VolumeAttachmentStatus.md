@@ -1,5 +1,6 @@
 # V1alpha1VolumeAttachmentStatus
 
+VolumeAttachmentStatus is the status of a VolumeAttachment request.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

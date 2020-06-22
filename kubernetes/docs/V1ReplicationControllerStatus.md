@@ -1,5 +1,6 @@
 # V1ReplicationControllerStatus
 
+ReplicationControllerStatus represents the current status of a replication controller.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

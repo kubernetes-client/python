@@ -1,5 +1,6 @@
 # V1beta1SubjectAccessReviewStatus
 
+SubjectAccessReviewStatus
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

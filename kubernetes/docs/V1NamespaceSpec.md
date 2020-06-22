@@ -1,5 +1,6 @@
 # V1NamespaceSpec
 
+NamespaceSpec describes the attributes on a Namespace.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

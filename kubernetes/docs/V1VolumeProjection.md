@@ -1,5 +1,6 @@
 # V1VolumeProjection
 
+Projection that may be projected along with other supported volume types
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

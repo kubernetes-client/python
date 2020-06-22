@@ -1,5 +1,6 @@
 # V1CustomResourceDefinitionList
 
+CustomResourceDefinitionList is a list of CustomResourceDefinition objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

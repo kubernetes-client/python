@@ -1,5 +1,6 @@
 # V1alpha1Endpoint
 
+Endpoint represents a single logical \"backend\" implementing a service.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

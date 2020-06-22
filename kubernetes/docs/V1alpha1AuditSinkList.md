@@ -1,5 +1,6 @@
 # V1alpha1AuditSinkList
 
+AuditSinkList is a list of AuditSink items.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1UserInfo
 
+UserInfo holds the information about the user needed to implement the user.Info interface.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

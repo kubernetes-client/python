@@ -1,5 +1,6 @@
 # V1Affinity
 
+Affinity is a group of affinity scheduling rules.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

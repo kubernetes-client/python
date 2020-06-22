@@ -1,5 +1,6 @@
 # V1PodTemplateSpec
 
+PodTemplateSpec describes the data a pod should have when created from a template
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

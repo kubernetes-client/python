@@ -1,5 +1,6 @@
 # V1ProjectedVolumeSource
 
+Represents a projected volume source
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

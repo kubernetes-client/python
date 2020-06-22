@@ -1,5 +1,6 @@
 # V1APIServiceSpec
 
+APIServiceSpec contains information for locating and communicating with a server. Only https is supported, though you are able to disable certificate verification.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

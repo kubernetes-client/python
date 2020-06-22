@@ -1,5 +1,6 @@
 # V1LabelSelectorRequirement
 
+A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

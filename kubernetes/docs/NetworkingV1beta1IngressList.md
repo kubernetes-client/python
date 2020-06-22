@@ -1,5 +1,6 @@
 # NetworkingV1beta1IngressList
 
+IngressList is a collection of Ingress.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

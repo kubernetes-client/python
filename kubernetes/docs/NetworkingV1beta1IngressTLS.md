@@ -1,5 +1,6 @@
 # NetworkingV1beta1IngressTLS
 
+IngressTLS describes the transport layer security associated with an Ingress.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

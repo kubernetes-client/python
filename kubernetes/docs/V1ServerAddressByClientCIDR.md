@@ -1,5 +1,6 @@
 # V1ServerAddressByClientCIDR
 
+ServerAddressByClientCIDR helps the kubernetes.client to determine the server address that they should use, depending on the kubernetes.clientCIDR that they match.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

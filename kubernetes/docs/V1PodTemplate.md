@@ -1,5 +1,6 @@
 # V1PodTemplate
 
+PodTemplate describes a template for creating copies of a predefined pod.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

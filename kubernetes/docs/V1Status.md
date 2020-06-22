@@ -1,5 +1,6 @@
 # V1Status
 
+Status is a return value for calls that don't return other objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

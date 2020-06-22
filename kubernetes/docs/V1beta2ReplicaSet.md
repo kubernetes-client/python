@@ -1,5 +1,6 @@
 # V1beta2ReplicaSet
 
+DEPRECATED - This group version of ReplicaSet is deprecated by apps/v1/ReplicaSet. See the release notes for more information. ReplicaSet ensures that a specified number of pod replicas are running at any given time.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

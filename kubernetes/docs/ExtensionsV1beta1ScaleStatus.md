@@ -1,5 +1,6 @@
 # ExtensionsV1beta1ScaleStatus
 
+represents the current status of a scale subresource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

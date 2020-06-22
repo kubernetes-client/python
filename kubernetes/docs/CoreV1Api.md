@@ -214,31 +214,35 @@ connect DELETE requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_delete_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_delete_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_delete_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_delete_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -261,6 +265,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -273,32 +283,36 @@ connect DELETE requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_delete_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_delete_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_delete_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_delete_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -322,6 +336,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -334,31 +354,35 @@ connect DELETE requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_delete_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_delete_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_delete_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_delete_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -381,6 +405,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -393,32 +423,36 @@ connect DELETE requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_delete_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_delete_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_delete_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_delete_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -442,6 +476,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -454,30 +494,34 @@ connect DELETE requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_delete_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_delete_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_delete_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_delete_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -499,6 +543,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -511,31 +561,35 @@ connect DELETE requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_delete_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_delete_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_delete_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_delete_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -558,6 +612,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -570,23 +630,27 @@ connect GET requests to attach of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodAttachOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodAttachOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 container = 'container_example' # str | The container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
 stderr = True # bool | Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true. (optional)
@@ -594,11 +658,11 @@ stdin = True # bool | Stdin if true, redirects the standard input stream of the 
 stdout = True # bool | Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true. (optional)
 tty = True # bool | TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false. (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_pod_attach(name, namespace, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_pod_attach: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_pod_attach(name, namespace, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_pod_attach: %s\n" % e)
 ```
 
 ### Parameters
@@ -625,6 +689,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -637,23 +707,27 @@ connect GET requests to exec of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodExecOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodExecOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 command = 'command_example' # str | Command is the remote command to execute. argv array. Not executed within a shell. (optional)
 container = 'container_example' # str | Container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
@@ -662,11 +736,11 @@ stdin = True # bool | Redirect the standard input stream of the pod for this cal
 stdout = True # bool | Redirect the standard output stream of the pod for this call. Defaults to true. (optional)
 tty = True # bool | TTY if true indicates that a tty will be allocated for the exec call. Defaults to false. (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_pod_exec(name, namespace, command=command, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_pod_exec: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_pod_exec(name, namespace, command=command, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_pod_exec: %s\n" % e)
 ```
 
 ### Parameters
@@ -695,6 +769,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_get_namespaced_pod_portforward**
@@ -706,31 +786,35 @@ connect GET requests to portforward of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodPortForwardOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodPortForwardOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 ports = 56 # int | List of ports to forward Required when using WebSockets (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_pod_portforward(name, namespace, ports=ports)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_pod_portforward: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_pod_portforward(name, namespace, ports=ports)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_pod_portforward: %s\n" % e)
 ```
 
 ### Parameters
@@ -754,6 +838,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_get_namespaced_pod_proxy**
@@ -765,31 +855,35 @@ connect GET requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -812,6 +906,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -824,32 +924,36 @@ connect GET requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -873,6 +977,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -885,31 +995,35 @@ connect GET requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -932,6 +1046,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -944,32 +1064,36 @@ connect GET requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_get_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -993,6 +1117,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1005,30 +1135,34 @@ connect GET requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_get_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1050,6 +1184,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1062,31 +1202,35 @@ connect GET requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_get_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_get_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_get_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_get_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1109,6 +1253,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1121,31 +1271,35 @@ connect HEAD requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_head_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_head_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_head_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_head_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1168,6 +1322,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1180,32 +1340,36 @@ connect HEAD requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_head_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_head_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_head_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_head_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1229,6 +1393,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1241,31 +1411,35 @@ connect HEAD requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_head_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_head_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_head_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_head_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1288,6 +1462,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1300,32 +1480,36 @@ connect HEAD requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_head_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_head_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_head_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_head_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1349,6 +1533,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1361,30 +1551,34 @@ connect HEAD requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_head_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_head_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_head_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_head_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1406,6 +1600,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1418,31 +1618,35 @@ connect HEAD requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_head_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_head_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_head_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_head_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1465,6 +1669,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1477,31 +1687,35 @@ connect OPTIONS requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_options_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_options_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_options_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_options_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1524,6 +1738,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1536,32 +1756,36 @@ connect OPTIONS requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_options_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_options_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_options_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_options_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1586,6 +1810,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_options_namespaced_service_proxy**
@@ -1597,31 +1827,35 @@ connect OPTIONS requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_options_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_options_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_options_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_options_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1645,6 +1879,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_options_namespaced_service_proxy_with_path**
@@ -1656,32 +1896,36 @@ connect OPTIONS requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_options_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_options_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_options_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_options_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1706,6 +1950,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_options_node_proxy**
@@ -1717,30 +1967,34 @@ connect OPTIONS requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_options_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_options_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_options_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_options_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1763,6 +2017,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_options_node_proxy_with_path**
@@ -1774,31 +2034,35 @@ connect OPTIONS requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_options_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_options_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_options_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_options_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1822,6 +2086,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_patch_namespaced_pod_proxy**
@@ -1833,31 +2103,35 @@ connect PATCH requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_patch_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_patch_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_patch_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_patch_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -1881,6 +2155,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_patch_namespaced_pod_proxy_with_path**
@@ -1892,32 +2172,36 @@ connect PATCH requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_patch_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_patch_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_patch_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_patch_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1942,6 +2226,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_patch_namespaced_service_proxy**
@@ -1953,31 +2243,35 @@ connect PATCH requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_patch_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_patch_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_patch_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_patch_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2001,6 +2295,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_patch_namespaced_service_proxy_with_path**
@@ -2012,32 +2312,36 @@ connect PATCH requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_patch_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_patch_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_patch_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_patch_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2062,6 +2366,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_patch_node_proxy**
@@ -2073,30 +2383,34 @@ connect PATCH requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_patch_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_patch_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_patch_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_patch_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2119,6 +2433,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_patch_node_proxy_with_path**
@@ -2130,31 +2450,35 @@ connect PATCH requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_patch_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_patch_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_patch_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_patch_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2178,6 +2502,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_namespaced_pod_attach**
@@ -2189,23 +2519,27 @@ connect POST requests to attach of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodAttachOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodAttachOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 container = 'container_example' # str | The container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
 stderr = True # bool | Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true. (optional)
@@ -2213,11 +2547,11 @@ stdin = True # bool | Stdin if true, redirects the standard input stream of the 
 stdout = True # bool | Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true. (optional)
 tty = True # bool | TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false. (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_pod_attach(name, namespace, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_pod_attach: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_pod_attach(name, namespace, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_pod_attach: %s\n" % e)
 ```
 
 ### Parameters
@@ -2245,6 +2579,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_namespaced_pod_exec**
@@ -2256,23 +2596,27 @@ connect POST requests to exec of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodExecOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodExecOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 command = 'command_example' # str | Command is the remote command to execute. argv array. Not executed within a shell. (optional)
 container = 'container_example' # str | Container in which to execute the command. Defaults to only container if there is only one container in the pod. (optional)
@@ -2281,11 +2625,11 @@ stdin = True # bool | Redirect the standard input stream of the pod for this cal
 stdout = True # bool | Redirect the standard output stream of the pod for this call. Defaults to true. (optional)
 tty = True # bool | TTY if true indicates that a tty will be allocated for the exec call. Defaults to false. (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_pod_exec(name, namespace, command=command, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_pod_exec: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_pod_exec(name, namespace, command=command, container=container, stderr=stderr, stdin=stdin, stdout=stdout, tty=tty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_pod_exec: %s\n" % e)
 ```
 
 ### Parameters
@@ -2314,6 +2658,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_namespaced_pod_portforward**
@@ -2325,31 +2675,35 @@ connect POST requests to portforward of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodPortForwardOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodPortForwardOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 ports = 56 # int | List of ports to forward Required when using WebSockets (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_pod_portforward(name, namespace, ports=ports)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_pod_portforward: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_pod_portforward(name, namespace, ports=ports)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_pod_portforward: %s\n" % e)
 ```
 
 ### Parameters
@@ -2373,6 +2727,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_namespaced_pod_proxy**
@@ -2384,31 +2744,35 @@ connect POST requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2431,6 +2795,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: */*
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2443,32 +2813,36 @@ connect POST requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2493,6 +2867,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_namespaced_service_proxy**
@@ -2504,31 +2884,35 @@ connect POST requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2552,6 +2936,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_namespaced_service_proxy_with_path**
@@ -2563,32 +2953,36 @@ connect POST requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_post_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2613,6 +3007,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_node_proxy**
@@ -2624,30 +3024,34 @@ connect POST requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_post_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2670,6 +3074,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_post_node_proxy_with_path**
@@ -2681,31 +3091,35 @@ connect POST requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_post_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_post_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_post_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_post_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2729,6 +3143,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_put_namespaced_pod_proxy**
@@ -2740,31 +3160,35 @@ connect PUT requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_put_namespaced_pod_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_put_namespaced_pod_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_put_namespaced_pod_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_put_namespaced_pod_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2788,6 +3212,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_put_namespaced_pod_proxy_with_path**
@@ -2799,32 +3229,36 @@ connect PUT requests to proxy of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to pod. (optional)
 
-try:
-    api_response = api_instance.connect_put_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_put_namespaced_pod_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_put_namespaced_pod_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_put_namespaced_pod_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2849,6 +3283,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_put_namespaced_service_proxy**
@@ -2860,31 +3300,35 @@ connect PUT requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_put_namespaced_service_proxy(name, namespace, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_put_namespaced_service_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_put_namespaced_service_proxy(name, namespace, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_put_namespaced_service_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -2908,6 +3352,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_put_namespaced_service_proxy_with_path**
@@ -2919,32 +3369,36 @@ connect PUT requests to proxy of Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceProxyOptions
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy. (optional)
 
-try:
-    api_response = api_instance.connect_put_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_put_namespaced_service_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_put_namespaced_service_proxy_with_path(name, namespace, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_put_namespaced_service_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -2969,6 +3423,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_put_node_proxy**
@@ -2980,30 +3440,34 @@ connect PUT requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_put_node_proxy(name, path=path)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_put_node_proxy: %s\n" % e)
+    try:
+        api_response = api_instance.connect_put_node_proxy(name, path=path)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_put_node_proxy: %s\n" % e)
 ```
 
 ### Parameters
@@ -3026,6 +3490,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **connect_put_node_proxy_with_path**
@@ -3037,31 +3507,35 @@ connect PUT requests to proxy of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the NodeProxyOptions
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the NodeProxyOptions
 path = 'path_example' # str | path to the resource
 path2 = 'path_example' # str | Path is the URL path to use for the current proxy request to node. (optional)
 
-try:
-    api_response = api_instance.connect_put_node_proxy_with_path(name, path, path2=path2)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->connect_put_node_proxy_with_path: %s\n" % e)
+    try:
+        api_response = api_instance.connect_put_node_proxy_with_path(name, path, path2=path2)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->connect_put_node_proxy_with_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -3085,6 +3559,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespace**
@@ -3096,32 +3576,36 @@ create a Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-body = kubernetes.client.V1Namespace() # V1Namespace | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    body = kubernetes.client.V1Namespace() # V1Namespace | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespace(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespace: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespace(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespace: %s\n" % e)
 ```
 
 ### Parameters
@@ -3146,6 +3630,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_binding**
@@ -3157,33 +3649,37 @@ create a Binding
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Binding() # V1Binding | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_binding(namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_binding: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_binding(namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_binding: %s\n" % e)
 ```
 
 ### Parameters
@@ -3209,6 +3705,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_config_map**
@@ -3220,33 +3724,37 @@ create a ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ConfigMap() # V1ConfigMap | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_config_map(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_config_map(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -3272,6 +3780,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_endpoints**
@@ -3283,33 +3799,37 @@ create Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Endpoints() # V1Endpoints | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_endpoints(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_endpoints(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -3335,6 +3855,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_event**
@@ -3346,33 +3874,37 @@ create an Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Event() # V1Event | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_event(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_event(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -3398,6 +3930,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_limit_range**
@@ -3409,33 +3949,37 @@ create a LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1LimitRange() # V1LimitRange | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_limit_range(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_limit_range(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -3461,6 +4005,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_persistent_volume_claim**
@@ -3472,33 +4024,37 @@ create a PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PersistentVolumeClaim() # V1PersistentVolumeClaim | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_persistent_volume_claim(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_persistent_volume_claim(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -3524,6 +4080,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_pod**
@@ -3535,33 +4099,37 @@ create a Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Pod() # V1Pod | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_pod(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_pod(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -3587,6 +4155,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_pod_binding**
@@ -3598,34 +4174,38 @@ create binding of a Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Binding
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Binding
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Binding() # V1Binding | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_pod_binding(name, namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_pod_binding: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_pod_binding(name, namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_pod_binding: %s\n" % e)
 ```
 
 ### Parameters
@@ -3652,6 +4232,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_pod_eviction**
@@ -3663,34 +4251,38 @@ create eviction of a Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Eviction
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Eviction
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1beta1Eviction() # V1beta1Eviction | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_pod_eviction(name, namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_pod_eviction: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_pod_eviction(name, namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_pod_eviction: %s\n" % e)
 ```
 
 ### Parameters
@@ -3717,6 +4309,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_pod_template**
@@ -3728,33 +4328,37 @@ create a PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PodTemplate() # V1PodTemplate | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_pod_template(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_pod_template(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -3780,6 +4384,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_replication_controller**
@@ -3791,33 +4403,37 @@ create a ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ReplicationController() # V1ReplicationController | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_replication_controller(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_replication_controller(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -3843,6 +4459,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_resource_quota**
@@ -3854,33 +4478,37 @@ create a ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ResourceQuota() # V1ResourceQuota | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_resource_quota(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_resource_quota(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -3906,6 +4534,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_secret**
@@ -3917,33 +4553,37 @@ create a Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Secret() # V1Secret | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_secret(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_secret(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -3969,6 +4609,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_service**
@@ -3980,33 +4628,37 @@ create a Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Service() # V1Service | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_service(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_service: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_service(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -4032,6 +4684,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_service_account**
@@ -4043,33 +4703,37 @@ create a ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ServiceAccount() # V1ServiceAccount | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_service_account(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_service_account(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -4095,6 +4759,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_service_account_token**
@@ -4106,34 +4778,38 @@ create token of a ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the TokenRequest
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the TokenRequest
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1TokenRequest() # V1TokenRequest | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.create_namespaced_service_account_token(name, namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_namespaced_service_account_token: %s\n" % e)
+    try:
+        api_response = api_instance.create_namespaced_service_account_token(name, namespace, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_namespaced_service_account_token: %s\n" % e)
 ```
 
 ### Parameters
@@ -4160,6 +4836,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_node**
@@ -4171,32 +4855,36 @@ create a Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-body = kubernetes.client.V1Node() # V1Node | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    body = kubernetes.client.V1Node() # V1Node | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_node(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_node: %s\n" % e)
+    try:
+        api_response = api_instance.create_node(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -4221,6 +4909,14 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_persistent_volume**
@@ -4232,32 +4928,36 @@ create a PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.create_persistent_volume(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->create_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.create_persistent_volume(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->create_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -4282,10 +4982,18 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_config_map**
-> V1Status delete_collection_namespaced_config_map(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_config_map(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4293,25 +5001,28 @@ delete collection of ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4322,14 +5033,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_config_map(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_config_map(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -4338,7 +5048,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4349,8 +5058,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4365,10 +5073,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_endpoints**
-> V1Status delete_collection_namespaced_endpoints(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_endpoints(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4376,25 +5090,28 @@ delete collection of Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4405,14 +5122,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_endpoints(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_endpoints(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -4421,7 +5137,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4432,8 +5147,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4448,10 +5162,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_event**
-> V1Status delete_collection_namespaced_event(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_event(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4459,25 +5179,28 @@ delete collection of Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4488,14 +5211,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_event(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_event(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -4504,7 +5226,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4515,8 +5236,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4531,10 +5251,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_limit_range**
-> V1Status delete_collection_namespaced_limit_range(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_limit_range(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4542,25 +5268,28 @@ delete collection of LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4571,14 +5300,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_limit_range(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_limit_range(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -4587,7 +5315,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4598,8 +5325,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4614,10 +5340,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_persistent_volume_claim**
-> V1Status delete_collection_namespaced_persistent_volume_claim(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_persistent_volume_claim(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4625,25 +5357,28 @@ delete collection of PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4654,14 +5389,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_persistent_volume_claim(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_persistent_volume_claim(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -4670,7 +5404,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4681,8 +5414,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4697,10 +5429,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_pod**
-> V1Status delete_collection_namespaced_pod(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_pod(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4708,25 +5446,28 @@ delete collection of Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4737,14 +5478,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_pod(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_pod(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -4753,7 +5493,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4764,8 +5503,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4780,10 +5518,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_pod_template**
-> V1Status delete_collection_namespaced_pod_template(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_pod_template(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4791,25 +5535,28 @@ delete collection of PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4820,14 +5567,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_pod_template(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_pod_template(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -4836,7 +5582,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4847,8 +5592,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4863,10 +5607,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_replication_controller**
-> V1Status delete_collection_namespaced_replication_controller(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_replication_controller(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4874,25 +5624,28 @@ delete collection of ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4903,14 +5656,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_replication_controller(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_replication_controller(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -4919,7 +5671,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -4930,8 +5681,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -4946,10 +5696,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_resource_quota**
-> V1Status delete_collection_namespaced_resource_quota(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_resource_quota(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -4957,25 +5713,28 @@ delete collection of ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -4986,14 +5745,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_resource_quota(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_resource_quota(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -5002,7 +5760,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -5013,8 +5770,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5029,10 +5785,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_secret**
-> V1Status delete_collection_namespaced_secret(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_secret(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -5040,25 +5802,28 @@ delete collection of Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -5069,14 +5834,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_secret(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_secret(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -5085,7 +5849,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -5096,8 +5859,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5112,10 +5874,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_service_account**
-> V1Status delete_collection_namespaced_service_account(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_namespaced_service_account(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -5123,25 +5891,28 @@ delete collection of ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -5152,14 +5923,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_namespaced_service_account(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_namespaced_service_account(namespace, pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -5168,7 +5938,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -5179,8 +5948,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5195,10 +5963,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_node**
-> V1Status delete_collection_node(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_node(pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -5206,24 +5980,27 @@ delete collection of Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -5234,14 +6011,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_node(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_node: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_node(pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -5249,7 +6025,6 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -5260,8 +6035,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5276,10 +6050,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_persistent_volume**
-> V1Status delete_collection_persistent_volume(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
+> V1Status delete_collection_persistent_volume(pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
 
 
 
@@ -5287,24 +6067,27 @@ delete collection of PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -5315,14 +6098,13 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 resource_version = 'resource_version_example' # str | When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. (optional)
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
-watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
-v1_delete_options = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
+body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_collection_persistent_volume(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch, v1_delete_options=v1_delete_options)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_collection_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.delete_collection_persistent_volume(pretty=pretty, _continue=_continue, dry_run=dry_run, field_selector=field_selector, grace_period_seconds=grace_period_seconds, label_selector=label_selector, limit=limit, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, resource_version=resource_version, timeout_seconds=timeout_seconds, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_collection_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -5330,7 +6112,6 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **allow_watch_bookmarks** | **bool**| allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. | [optional] 
  **_continue** | **str**| The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] 
@@ -5341,8 +6122,7 @@ Name | Type | Description  | Notes
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] 
  **resource_version** | **str**| When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv. | [optional] 
  **timeout_seconds** | **int**| Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] 
- **watch** | **bool**| Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] 
- **v1_delete_options** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
+ **body** | [**V1DeleteOptions**](V1DeleteOptions.md)|  | [optional] 
 
 ### Return type
 
@@ -5356,6 +6136,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -5368,23 +6154,27 @@ delete a Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
@@ -5392,11 +6182,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespace(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespace: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespace(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespace: %s\n" % e)
 ```
 
 ### Parameters
@@ -5424,6 +6214,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_config_map**
@@ -5435,23 +6232,27 @@ delete a ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ConfigMap
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5460,11 +6261,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_config_map(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_config_map(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -5493,6 +6294,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_endpoints**
@@ -5504,23 +6312,27 @@ delete Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Endpoints
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5529,11 +6341,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_endpoints(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_endpoints(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -5562,6 +6374,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_event**
@@ -5573,23 +6392,27 @@ delete an Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Event
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5598,11 +6421,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_event(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_event(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -5631,6 +6454,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_limit_range**
@@ -5642,23 +6472,27 @@ delete a LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the LimitRange
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5667,11 +6501,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_limit_range(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_limit_range(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -5700,6 +6534,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_persistent_volume_claim**
@@ -5711,23 +6552,27 @@ delete a PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5736,11 +6581,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -5769,6 +6614,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod**
@@ -5780,23 +6632,27 @@ delete a Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5805,11 +6661,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_pod(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_pod(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -5838,6 +6694,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod_template**
@@ -5849,23 +6712,27 @@ delete a PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodTemplate
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5874,11 +6741,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_pod_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_pod_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -5907,6 +6774,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_replication_controller**
@@ -5918,23 +6792,27 @@ delete a ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -5943,11 +6821,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_replication_controller(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_replication_controller(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -5976,6 +6854,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_resource_quota**
@@ -5987,23 +6872,27 @@ delete a ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -6012,11 +6901,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_resource_quota(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_resource_quota(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -6045,6 +6934,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_secret**
@@ -6056,23 +6952,27 @@ delete a Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Secret
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -6081,11 +6981,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_secret(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_secret(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -6114,6 +7014,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_service**
@@ -6125,23 +7032,27 @@ delete a Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -6150,11 +7061,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_service(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_service: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_service(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -6183,6 +7094,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_service_account**
@@ -6194,23 +7112,27 @@ delete a ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceAccount
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
@@ -6219,11 +7141,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_namespaced_service_account(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.delete_namespaced_service_account(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -6252,6 +7174,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_node**
@@ -6263,23 +7192,27 @@ delete a Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
@@ -6287,11 +7220,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_node(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_node: %s\n" % e)
+    try:
+        api_response = api_instance.delete_node(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -6319,6 +7252,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_persistent_volume**
@@ -6330,23 +7270,27 @@ delete a PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
@@ -6354,11 +7298,11 @@ orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, 
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground. (optional)
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
-try:
-    api_response = api_instance.delete_persistent_volume(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->delete_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.delete_persistent_volume(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->delete_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -6386,6 +7330,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_api_resources**
@@ -6397,28 +7348,32 @@ get available resources
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    api_response = api_instance.get_api_resources()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->get_api_resources: %s\n" % e)
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    
+    try:
+        api_response = api_instance.get_api_resources()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->get_api_resources: %s\n" % e)
 ```
 
 ### Parameters
@@ -6437,6 +7392,12 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_component_status**
@@ -6448,23 +7409,27 @@ list objects of kind ComponentStatus
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -6474,11 +7439,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_component_status(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_component_status: %s\n" % e)
+    try:
+        api_response = api_instance.list_component_status(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_component_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -6508,6 +7473,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_config_map_for_all_namespaces**
@@ -6519,23 +7490,27 @@ list or watch objects of kind ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -6545,11 +7520,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_config_map_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_config_map_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_config_map_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_config_map_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -6579,6 +7554,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_endpoints_for_all_namespaces**
@@ -6590,23 +7571,27 @@ list or watch objects of kind Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -6616,11 +7601,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_endpoints_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_endpoints_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_endpoints_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_endpoints_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -6650,6 +7635,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_event_for_all_namespaces**
@@ -6661,23 +7652,27 @@ list or watch objects of kind Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -6687,11 +7682,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_event_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_event_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_event_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_event_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -6721,6 +7716,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_limit_range_for_all_namespaces**
@@ -6732,23 +7733,27 @@ list or watch objects of kind LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -6758,11 +7763,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_limit_range_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_limit_range_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_limit_range_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_limit_range_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -6792,6 +7797,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespace**
@@ -6803,23 +7814,27 @@ list or watch objects of kind Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -6829,11 +7844,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespace(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespace: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespace(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespace: %s\n" % e)
 ```
 
 ### Parameters
@@ -6863,6 +7878,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_config_map**
@@ -6874,23 +7895,27 @@ list or watch objects of kind ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -6901,11 +7926,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_config_map(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_config_map(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -6936,6 +7961,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_endpoints**
@@ -6947,23 +7978,27 @@ list or watch objects of kind Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -6974,11 +8009,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_endpoints(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_endpoints(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -7009,6 +8044,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_event**
@@ -7020,23 +8061,27 @@ list or watch objects of kind Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7047,11 +8092,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_event(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_event(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -7082,6 +8127,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_limit_range**
@@ -7093,23 +8144,27 @@ list or watch objects of kind LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7120,11 +8175,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_limit_range(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_limit_range(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -7155,6 +8210,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_persistent_volume_claim**
@@ -7166,23 +8227,27 @@ list or watch objects of kind PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7193,11 +8258,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_persistent_volume_claim(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_persistent_volume_claim(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -7228,6 +8293,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_pod**
@@ -7239,23 +8310,27 @@ list or watch objects of kind Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7266,11 +8341,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_pod(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_pod(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -7301,6 +8376,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_pod_template**
@@ -7312,23 +8393,27 @@ list or watch objects of kind PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7339,11 +8424,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_pod_template(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_pod_template(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -7374,6 +8459,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_replication_controller**
@@ -7385,23 +8476,27 @@ list or watch objects of kind ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7412,11 +8507,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_replication_controller(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_replication_controller(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -7447,6 +8542,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_resource_quota**
@@ -7458,23 +8559,27 @@ list or watch objects of kind ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7485,11 +8590,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_resource_quota(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_resource_quota(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -7520,6 +8625,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_secret**
@@ -7531,23 +8642,27 @@ list or watch objects of kind Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7558,11 +8673,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_secret(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_secret(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -7593,6 +8708,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_service**
@@ -7604,23 +8725,27 @@ list or watch objects of kind Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7631,11 +8756,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_service(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_service: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_service(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -7666,6 +8791,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_namespaced_service_account**
@@ -7677,23 +8808,27 @@ list or watch objects of kind ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
@@ -7704,11 +8839,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_namespaced_service_account(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.list_namespaced_service_account(namespace, pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -7739,6 +8874,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_node**
@@ -7750,23 +8891,27 @@ list or watch objects of kind Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7776,11 +8921,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_node(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_node: %s\n" % e)
+    try:
+        api_response = api_instance.list_node(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -7810,6 +8955,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_persistent_volume**
@@ -7821,23 +8972,27 @@ list or watch objects of kind PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
@@ -7847,11 +9002,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_persistent_volume(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.list_persistent_volume(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -7881,6 +9036,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_persistent_volume_claim_for_all_namespaces**
@@ -7892,23 +9053,27 @@ list or watch objects of kind PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -7918,11 +9083,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_persistent_volume_claim_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_persistent_volume_claim_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_persistent_volume_claim_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_persistent_volume_claim_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -7952,6 +9117,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_pod_for_all_namespaces**
@@ -7963,23 +9134,27 @@ list or watch objects of kind Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -7989,11 +9164,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_pod_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_pod_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_pod_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_pod_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8023,6 +9198,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_pod_template_for_all_namespaces**
@@ -8034,23 +9215,27 @@ list or watch objects of kind PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -8060,11 +9245,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_pod_template_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_pod_template_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_pod_template_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_pod_template_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8094,6 +9279,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_replication_controller_for_all_namespaces**
@@ -8105,23 +9296,27 @@ list or watch objects of kind ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -8131,11 +9326,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_replication_controller_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_replication_controller_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_replication_controller_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_replication_controller_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8165,6 +9360,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_resource_quota_for_all_namespaces**
@@ -8176,23 +9377,27 @@ list or watch objects of kind ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -8202,11 +9407,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_resource_quota_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_resource_quota_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_resource_quota_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_resource_quota_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8236,6 +9441,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_secret_for_all_namespaces**
@@ -8247,23 +9458,27 @@ list or watch objects of kind Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -8273,11 +9488,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_secret_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_secret_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_secret_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_secret_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8307,6 +9522,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_service_account_for_all_namespaces**
@@ -8318,23 +9539,27 @@ list or watch objects of kind ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -8344,11 +9569,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_service_account_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_service_account_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_service_account_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_service_account_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8378,6 +9603,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_service_for_all_namespaces**
@@ -8389,23 +9620,27 @@ list or watch objects of kind Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    allow_watch_bookmarks = True # bool | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta. (optional)
 _continue = '_continue_example' # str | The continue option should be set when retrieving more results from the server. Since this value is server defined, kubernetes.clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the kubernetes.client needs a consistent list, it must restart their list without the continue field. Otherwise, the kubernetes.client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. (optional)
 field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields. Defaults to everything. (optional)
 label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
@@ -8415,11 +9650,11 @@ resource_version = 'resource_version_example' # str | When specified with a watc
 timeout_seconds = 56 # int | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. (optional)
 watch = True # bool | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. (optional)
 
-try:
-    api_response = api_instance.list_service_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->list_service_for_all_namespaces: %s\n" % e)
+    try:
+        api_response = api_instance.list_service_for_all_namespaces(allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, pretty=pretty, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->list_service_for_all_namespaces: %s\n" % e)
 ```
 
 ### Parameters
@@ -8449,6 +9684,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespace**
@@ -8460,34 +9701,38 @@ partially update the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespace(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespace: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespace(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespace: %s\n" % e)
 ```
 
 ### Parameters
@@ -8495,7 +9740,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Namespace | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8513,6 +9758,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -8525,34 +9776,38 @@ partially update status of the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespace_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespace_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespace_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespace_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -8560,7 +9815,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Namespace | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8579,6 +9834,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_config_map**
@@ -8590,35 +9851,39 @@ partially update the specified ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ConfigMap
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_config_map(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_config_map(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -8627,7 +9892,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ConfigMap | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8646,6 +9911,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_endpoints**
@@ -8657,35 +9928,39 @@ partially update the specified Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Endpoints
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_endpoints(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_endpoints(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -8694,7 +9969,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Endpoints | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8713,6 +9988,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_event**
@@ -8724,35 +10005,39 @@ partially update the specified Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Event
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_event(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_event(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -8761,7 +10046,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Event | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8780,6 +10065,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_limit_range**
@@ -8791,35 +10082,39 @@ partially update the specified LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the LimitRange
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_limit_range(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_limit_range(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -8828,7 +10123,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the LimitRange | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8847,6 +10142,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_persistent_volume_claim**
@@ -8858,35 +10159,39 @@ partially update the specified PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_persistent_volume_claim(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_persistent_volume_claim(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -8895,7 +10200,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolumeClaim | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8913,6 +10218,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -8925,35 +10236,39 @@ partially update status of the specified PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_persistent_volume_claim_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_persistent_volume_claim_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_persistent_volume_claim_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_persistent_volume_claim_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -8962,7 +10277,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolumeClaim | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -8981,6 +10296,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_pod**
@@ -8992,35 +10313,39 @@ partially update the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_pod(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_pod(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -9029,7 +10354,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Pod | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9047,6 +10372,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -9059,35 +10390,39 @@ partially update status of the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_pod_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_pod_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_pod_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_pod_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -9096,7 +10431,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Pod | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9115,6 +10450,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_pod_template**
@@ -9126,35 +10467,39 @@ partially update the specified PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodTemplate
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_pod_template(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_pod_template(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -9163,7 +10508,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PodTemplate | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9182,6 +10527,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_replication_controller**
@@ -9193,35 +10544,39 @@ partially update the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_replication_controller(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_replication_controller(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -9230,7 +10585,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ReplicationController | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9249,6 +10604,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_replication_controller_scale**
@@ -9260,35 +10621,39 @@ partially update scale of the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Scale
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_replication_controller_scale: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_replication_controller_scale: %s\n" % e)
 ```
 
 ### Parameters
@@ -9297,7 +10662,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Scale | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9316,6 +10681,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_replication_controller_status**
@@ -9327,35 +10698,39 @@ partially update status of the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_replication_controller_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_replication_controller_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_replication_controller_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_replication_controller_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -9364,7 +10739,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ReplicationController | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9383,6 +10758,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_resource_quota**
@@ -9394,35 +10775,39 @@ partially update the specified ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_resource_quota(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_resource_quota(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -9431,7 +10816,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ResourceQuota | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9449,6 +10834,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -9461,35 +10852,39 @@ partially update status of the specified ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_resource_quota_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_resource_quota_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_resource_quota_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_resource_quota_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -9498,7 +10893,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ResourceQuota | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9517,6 +10912,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_secret**
@@ -9528,35 +10929,39 @@ partially update the specified Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Secret
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_secret(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_secret(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -9565,7 +10970,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Secret | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9584,6 +10989,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_service**
@@ -9595,35 +11006,39 @@ partially update the specified Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_service(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_service: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_service(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -9632,7 +11047,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Service | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9651,6 +11066,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_service_account**
@@ -9662,35 +11083,39 @@ partially update the specified ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceAccount
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_service_account(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_service_account(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -9699,7 +11124,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the ServiceAccount | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9718,6 +11143,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_service_status**
@@ -9729,35 +11160,39 @@ partially update status of the specified Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_namespaced_service_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_namespaced_service_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_namespaced_service_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_namespaced_service_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -9766,7 +11201,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Service | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9785,6 +11220,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_node**
@@ -9796,34 +11237,38 @@ partially update the specified Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_node(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_node: %s\n" % e)
+    try:
+        api_response = api_instance.patch_node(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -9831,7 +11276,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Node | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9849,6 +11294,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -9861,34 +11312,38 @@ partially update status of the specified Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_node_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_node_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -9896,7 +11351,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the Node | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9915,6 +11370,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_persistent_volume**
@@ -9926,34 +11387,38 @@ partially update the specified PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_persistent_volume(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.patch_persistent_volume(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -9961,7 +11426,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolume | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -9979,6 +11444,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -9991,34 +11462,38 @@ partially update status of the specified PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
-body = kubernetes.client.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | 
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
+body = None # object | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
-try:
-    api_response = api_instance.patch_persistent_volume_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->patch_persistent_volume_status: %s\n" % e)
+    try:
+        api_response = api_instance.patch_persistent_volume_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->patch_persistent_volume_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -10026,7 +11501,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PersistentVolume | 
- **body** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)|  | 
+ **body** | **object**|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
@@ -10045,6 +11520,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_component_status**
@@ -10056,30 +11537,34 @@ read the specified ComponentStatus
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ComponentStatus
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ComponentStatus
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_component_status(name, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_component_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_component_status(name, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_component_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -10102,6 +11587,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespace**
@@ -10113,32 +11604,36 @@ read the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespace(name, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespace: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespace(name, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespace: %s\n" % e)
 ```
 
 ### Parameters
@@ -10163,6 +11658,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespace_status**
@@ -10174,30 +11675,34 @@ read status of the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespace_status(name, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespace_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespace_status(name, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespace_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -10220,6 +11725,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_config_map**
@@ -10231,33 +11742,37 @@ read the specified ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ConfigMap
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_config_map(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_config_map(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -10283,6 +11798,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_endpoints**
@@ -10294,33 +11815,37 @@ read the specified Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Endpoints
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_endpoints(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_endpoints(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -10346,6 +11871,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_event**
@@ -10357,33 +11888,37 @@ read the specified Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Event
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_event(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_event(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -10409,6 +11944,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_limit_range**
@@ -10420,33 +11961,37 @@ read the specified LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the LimitRange
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_limit_range(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_limit_range(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -10472,6 +12017,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_persistent_volume_claim**
@@ -10483,33 +12034,37 @@ read the specified PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -10535,6 +12090,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_persistent_volume_claim_status**
@@ -10546,31 +12107,35 @@ read status of the specified PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_persistent_volume_claim_status(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_persistent_volume_claim_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_persistent_volume_claim_status(name, namespace, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_persistent_volume_claim_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -10594,6 +12159,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_pod**
@@ -10605,33 +12176,37 @@ read the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_pod(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_pod(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -10657,6 +12232,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_pod_log**
@@ -10668,23 +12249,27 @@ read log of the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 container = 'container_example' # str | The container for which to stream logs. Defaults to only container if there is one container in the pod. (optional)
 follow = True # bool | Follow the log stream of the pod. Defaults to false. (optional)
@@ -10695,11 +12280,11 @@ since_seconds = 56 # int | A relative time in seconds before the current time fr
 tail_lines = 56 # int | If set, the number of lines from the end of the logs to show. If not specified, logs are shown from the creation of the container or sinceSeconds or sinceTime (optional)
 timestamps = True # bool | If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_pod_log(name, namespace, container=container, follow=follow, limit_bytes=limit_bytes, pretty=pretty, previous=previous, since_seconds=since_seconds, tail_lines=tail_lines, timestamps=timestamps)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_pod_log: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_pod_log(name, namespace, container=container, follow=follow, limit_bytes=limit_bytes, pretty=pretty, previous=previous, since_seconds=since_seconds, tail_lines=tail_lines, timestamps=timestamps)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_pod_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -10730,6 +12315,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_pod_status**
@@ -10741,31 +12332,35 @@ read status of the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_pod_status(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_pod_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_pod_status(name, namespace, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_pod_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -10789,6 +12384,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_pod_template**
@@ -10800,33 +12401,37 @@ read the specified PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodTemplate
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_pod_template(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_pod_template(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -10852,6 +12457,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_replication_controller**
@@ -10863,33 +12474,37 @@ read the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_replication_controller(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_replication_controller(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -10915,6 +12530,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_replication_controller_scale**
@@ -10926,31 +12547,35 @@ read scale of the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Scale
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_replication_controller_scale(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_replication_controller_scale: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_replication_controller_scale(name, namespace, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_replication_controller_scale: %s\n" % e)
 ```
 
 ### Parameters
@@ -10974,6 +12599,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_replication_controller_status**
@@ -10985,31 +12616,35 @@ read status of the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_replication_controller_status(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_replication_controller_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_replication_controller_status(name, namespace, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_replication_controller_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -11033,6 +12668,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_resource_quota**
@@ -11044,33 +12685,37 @@ read the specified ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_resource_quota(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_resource_quota(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -11096,6 +12741,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_resource_quota_status**
@@ -11107,31 +12758,35 @@ read status of the specified ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_resource_quota_status(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_resource_quota_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_resource_quota_status(name, namespace, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_resource_quota_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -11155,6 +12810,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_secret**
@@ -11166,33 +12827,37 @@ read the specified Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Secret
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_secret(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_secret(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -11218,6 +12883,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_service**
@@ -11229,33 +12900,37 @@ read the specified Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_service(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_service: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_service(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -11281,6 +12956,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_service_account**
@@ -11292,33 +12973,37 @@ read the specified ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceAccount
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_service_account(name, namespace, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_service_account(name, namespace, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -11344,6 +13029,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_service_status**
@@ -11355,31 +13046,35 @@ read status of the specified Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_namespaced_service_status(name, namespace, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_namespaced_service_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_namespaced_service_status(name, namespace, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_namespaced_service_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -11403,6 +13098,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_node**
@@ -11414,32 +13115,36 @@ read the specified Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_node(name, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_node: %s\n" % e)
+    try:
+        api_response = api_instance.read_node(name, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -11463,6 +13168,12 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -11475,30 +13186,34 @@ read status of the specified Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_node_status(name, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_node_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_node_status(name, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_node_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -11521,6 +13236,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_persistent_volume**
@@ -11532,32 +13253,36 @@ read the specified PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
 export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
-try:
-    api_response = api_instance.read_persistent_volume(name, pretty=pretty, exact=exact, export=export)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.read_persistent_volume(name, pretty=pretty, exact=exact, export=export)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -11582,6 +13307,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_persistent_volume_status**
@@ -11593,30 +13324,34 @@ read status of the specified PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.read_persistent_volume_status(name, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->read_persistent_volume_status: %s\n" % e)
+    try:
+        api_response = api_instance.read_persistent_volume_status(name, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->read_persistent_volume_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -11639,6 +13374,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespace**
@@ -11650,33 +13391,37 @@ replace the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
 body = kubernetes.client.V1Namespace() # V1Namespace | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespace(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespace: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespace(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespace: %s\n" % e)
 ```
 
 ### Parameters
@@ -11701,6 +13446,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -11713,33 +13465,37 @@ replace finalize of the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
 body = kubernetes.client.V1Namespace() # V1Namespace | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 
-try:
-    api_response = api_instance.replace_namespace_finalize(name, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespace_finalize: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespace_finalize(name, body, dry_run=dry_run, field_manager=field_manager, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespace_finalize: %s\n" % e)
 ```
 
 ### Parameters
@@ -11764,6 +13520,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -11776,33 +13539,37 @@ replace status of the specified Namespace
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Namespace
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Namespace
 body = kubernetes.client.V1Namespace() # V1Namespace | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespace_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespace_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespace_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespace_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -11828,6 +13595,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_config_map**
@@ -11839,34 +13613,38 @@ replace the specified ConfigMap
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ConfigMap
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ConfigMap
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ConfigMap() # V1ConfigMap | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_config_map(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_config_map: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_config_map(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_config_map: %s\n" % e)
 ```
 
 ### Parameters
@@ -11893,6 +13671,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_endpoints**
@@ -11904,34 +13689,38 @@ replace the specified Endpoints
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Endpoints
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Endpoints
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Endpoints() # V1Endpoints | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_endpoints(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_endpoints: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_endpoints(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_endpoints: %s\n" % e)
 ```
 
 ### Parameters
@@ -11958,6 +13747,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_event**
@@ -11969,34 +13765,38 @@ replace the specified Event
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Event
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Event() # V1Event | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_event(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_event: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_event(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_event: %s\n" % e)
 ```
 
 ### Parameters
@@ -12023,6 +13823,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_limit_range**
@@ -12034,34 +13841,38 @@ replace the specified LimitRange
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the LimitRange
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the LimitRange
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1LimitRange() # V1LimitRange | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_limit_range(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_limit_range: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_limit_range(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_limit_range: %s\n" % e)
 ```
 
 ### Parameters
@@ -12088,6 +13899,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_persistent_volume_claim**
@@ -12099,34 +13917,38 @@ replace the specified PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PersistentVolumeClaim() # V1PersistentVolumeClaim | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_persistent_volume_claim(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_persistent_volume_claim: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_persistent_volume_claim(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_persistent_volume_claim: %s\n" % e)
 ```
 
 ### Parameters
@@ -12152,6 +13974,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -12164,34 +13993,38 @@ replace status of the specified PersistentVolumeClaim
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolumeClaim
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolumeClaim
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PersistentVolumeClaim() # V1PersistentVolumeClaim | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_persistent_volume_claim_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_persistent_volume_claim_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_persistent_volume_claim_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_persistent_volume_claim_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -12218,6 +14051,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_pod**
@@ -12229,34 +14069,38 @@ replace the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Pod() # V1Pod | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_pod(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_pod: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_pod(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_pod: %s\n" % e)
 ```
 
 ### Parameters
@@ -12282,6 +14126,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -12294,34 +14145,38 @@ replace status of the specified Pod
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Pod
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Pod
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Pod() # V1Pod | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_pod_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_pod_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_pod_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_pod_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -12348,6 +14203,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_pod_template**
@@ -12359,34 +14221,38 @@ replace the specified PodTemplate
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PodTemplate
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PodTemplate
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1PodTemplate() # V1PodTemplate | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_pod_template(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_pod_template: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_pod_template(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_pod_template: %s\n" % e)
 ```
 
 ### Parameters
@@ -12413,6 +14279,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_replication_controller**
@@ -12424,34 +14297,38 @@ replace the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ReplicationController() # V1ReplicationController | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_replication_controller(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_replication_controller: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_replication_controller(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_replication_controller: %s\n" % e)
 ```
 
 ### Parameters
@@ -12478,6 +14355,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_replication_controller_scale**
@@ -12489,34 +14373,38 @@ replace scale of the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Scale
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Scale
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Scale() # V1Scale | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_replication_controller_scale: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_replication_controller_scale(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_replication_controller_scale: %s\n" % e)
 ```
 
 ### Parameters
@@ -12543,6 +14431,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_replication_controller_status**
@@ -12554,34 +14449,38 @@ replace status of the specified ReplicationController
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ReplicationController
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ReplicationController
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ReplicationController() # V1ReplicationController | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_replication_controller_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_replication_controller_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_replication_controller_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_replication_controller_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -12608,6 +14507,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_resource_quota**
@@ -12619,34 +14525,38 @@ replace the specified ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ResourceQuota() # V1ResourceQuota | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_resource_quota(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_resource_quota: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_resource_quota(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_resource_quota: %s\n" % e)
 ```
 
 ### Parameters
@@ -12672,6 +14582,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -12684,34 +14601,38 @@ replace status of the specified ResourceQuota
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ResourceQuota
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ResourceQuota
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ResourceQuota() # V1ResourceQuota | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_resource_quota_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_resource_quota_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_resource_quota_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_resource_quota_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -12738,6 +14659,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_secret**
@@ -12749,34 +14677,38 @@ replace the specified Secret
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Secret
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Secret
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Secret() # V1Secret | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_secret(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_secret: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_secret(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_secret: %s\n" % e)
 ```
 
 ### Parameters
@@ -12803,6 +14735,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_service**
@@ -12814,34 +14753,38 @@ replace the specified Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Service() # V1Service | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_service(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_service: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_service(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -12868,6 +14811,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_service_account**
@@ -12879,34 +14829,38 @@ replace the specified ServiceAccount
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the ServiceAccount
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the ServiceAccount
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1ServiceAccount() # V1ServiceAccount | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_service_account(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_service_account: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_service_account(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_service_account: %s\n" % e)
 ```
 
 ### Parameters
@@ -12933,6 +14887,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_service_status**
@@ -12944,34 +14905,38 @@ replace status of the specified Service
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Service
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Service
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 body = kubernetes.client.V1Service() # V1Service | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_namespaced_service_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_namespaced_service_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_namespaced_service_status(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_namespaced_service_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -12998,6 +14963,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_node**
@@ -13009,33 +14981,37 @@ replace the specified Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
 body = kubernetes.client.V1Node() # V1Node | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_node(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_node: %s\n" % e)
+    try:
+        api_response = api_instance.replace_node(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -13060,6 +15036,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -13072,33 +15055,37 @@ replace status of the specified Node
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the Node
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the Node
 body = kubernetes.client.V1Node() # V1Node | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_node_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_node_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -13124,6 +15111,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_persistent_volume**
@@ -13135,33 +15129,37 @@ replace the specified PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
 body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_persistent_volume(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_persistent_volume: %s\n" % e)
+    try:
+        api_response = api_instance.replace_persistent_volume(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_persistent_volume: %s\n" % e)
 ```
 
 ### Parameters
@@ -13186,6 +15184,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -13198,33 +15203,37 @@ replace status of the specified PersistentVolume
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.CoreV1Api(kubernetes.client.ApiClient(configuration))
-name = 'name_example' # str | name of the PersistentVolume
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.CoreV1Api(api_client)
+    name = 'name_example' # str | name of the PersistentVolume
 body = kubernetes.client.V1PersistentVolume() # V1PersistentVolume | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 
-try:
-    api_response = api_instance.replace_persistent_volume_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreV1Api->replace_persistent_volume_status: %s\n" % e)
+    try:
+        api_response = api_instance.replace_persistent_volume_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreV1Api->replace_persistent_volume_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -13249,6 +15258,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

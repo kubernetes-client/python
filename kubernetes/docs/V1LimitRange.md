@@ -1,5 +1,6 @@
 # V1LimitRange
 
+LimitRange sets resource usage limits for each kind of resource in a Namespace.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

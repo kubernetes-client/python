@@ -1,5 +1,6 @@
 # V1DeploymentStrategy
 
+DeploymentStrategy describes how to replace existing pods with new ones.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

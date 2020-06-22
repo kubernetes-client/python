@@ -1,5 +1,6 @@
 # V1LoadBalancerIngress
 
+LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the service should be sent to an ingress point.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

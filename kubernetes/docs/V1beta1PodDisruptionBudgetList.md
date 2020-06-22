@@ -1,5 +1,6 @@
 # V1beta1PodDisruptionBudgetList
 
+PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # PolicyV1beta1SupplementalGroupsStrategyOptions
 
+SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

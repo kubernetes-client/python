@@ -1,5 +1,6 @@
 # V1beta1MutatingWebhookConfiguration
 
+MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object. Deprecated in v1.16, planned for removal in v1.19. Use admissionregistration.k8s.io/v1 MutatingWebhookConfiguration instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

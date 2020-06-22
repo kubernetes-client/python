@@ -1,5 +1,6 @@
 # ExtensionsV1beta1PodSecurityPolicyList
 
+PodSecurityPolicyList is a list of PodSecurityPolicy objects. Deprecated: use PodSecurityPolicyList from policy API Group instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # ExtensionsV1beta1FSGroupStrategyOptions
 
+FSGroupStrategyOptions defines the strategy type and options used to create the strategy. Deprecated: use FSGroupStrategyOptions from policy API Group instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

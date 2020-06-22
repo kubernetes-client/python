@@ -1,5 +1,6 @@
 # V1AzureDiskVolumeSource
 
+AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

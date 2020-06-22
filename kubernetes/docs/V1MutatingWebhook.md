@@ -1,5 +1,6 @@
 # V1MutatingWebhook
 
+MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

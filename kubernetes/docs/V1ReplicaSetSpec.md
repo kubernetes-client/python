@@ -1,5 +1,6 @@
 # V1ReplicaSetSpec
 
+ReplicaSetSpec is the specification of a ReplicaSet.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

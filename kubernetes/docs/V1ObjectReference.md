@@ -1,5 +1,6 @@
 # V1ObjectReference
 
+ObjectReference contains enough information to let you inspect or modify the referred object.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

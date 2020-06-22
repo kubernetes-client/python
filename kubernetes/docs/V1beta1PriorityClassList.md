@@ -1,5 +1,6 @@
 # V1beta1PriorityClassList
 
+PriorityClassList is a collection of priority classes.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

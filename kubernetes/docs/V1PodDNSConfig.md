@@ -1,5 +1,6 @@
 # V1PodDNSConfig
 
+PodDNSConfig defines the DNS parameters of a pod in addition to those generated from DNSPolicy.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

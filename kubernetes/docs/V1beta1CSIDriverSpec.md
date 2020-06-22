@@ -1,5 +1,6 @@
 # V1beta1CSIDriverSpec
 
+CSIDriverSpec is the specification of a CSIDriver.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

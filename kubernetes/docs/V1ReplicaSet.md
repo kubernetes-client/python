@@ -1,5 +1,6 @@
 # V1ReplicaSet
 
+ReplicaSet ensures that a specified number of pod replicas are running at any given time.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

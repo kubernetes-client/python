@@ -1,5 +1,6 @@
 # V1AggregationRule
 
+AggregationRule describes how to locate ClusterRoles to aggregate into the ClusterRole
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

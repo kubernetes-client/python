@@ -1,5 +1,6 @@
 # V1PortworxVolumeSource
 
+PortworxVolumeSource represents a Portworx volume resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

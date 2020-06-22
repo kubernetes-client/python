@@ -1,5 +1,6 @@
 # V1beta1PolicyRule
 
+PolicyRule holds information that describes a policy rule, but does not contain information about who the rule applies to or which namespace the rule applies to.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

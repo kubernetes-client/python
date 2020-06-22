@@ -1,5 +1,6 @@
 # V1APIResource
 
+APIResource specifies the name of a resource and whether it is namespaced.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
