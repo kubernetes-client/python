@@ -688,12 +688,14 @@ class KubeConfigMerger:
             yaml.safe_dump(self.config_files[path], f,
                            default_flow_style=False)
 
+
 def _get_kube_config_loader_for_yaml_file(
         filename, persist_config=False, **kwargs):
     return _get_kube_config_loader(
         filename=filename,
         persist_config=persist_config,
         **kwargs)
+
 
 def _get_kube_config_loader(
         filename=None,
@@ -718,6 +720,7 @@ def _get_kube_config_loader(
             config_dict=config_dict,
             config_base_path=None,
             **kwargs)
+
 
 def list_kube_config_contexts(config_file=None):
 
@@ -757,9 +760,10 @@ def load_kube_config(config_file=None, context=None,
     else:
         loader.load_and_set(client_configuration)
 
+
 def load_kube_config_from_dict(config_dict, context=None,
-                     client_configuration=None,
-                     persist_config=True):
+                               client_configuration=None,
+                               persist_config=True):
     """Loads authentication and cluster information from config_dict file
     and stores them in kubernetes.client.configuration.
 
@@ -787,6 +791,7 @@ def load_kube_config_from_dict(config_dict, context=None,
         Configuration.set_default(config)
     else:
         loader.load_and_set(client_configuration)
+
 
 def new_client_from_config(
         config_file=None,

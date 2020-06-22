@@ -1380,6 +1380,7 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG)
         self.assertIsNone(actual._config_persister)
 
+
 class TestKubernetesClientConfiguration(BaseTestCase):
     # Verifies properties of kubernetes.client.Configuration.
     # These tests guard against changes to the upstream configuration class,
