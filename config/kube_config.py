@@ -663,9 +663,8 @@ class KubeConfigMerger:
             for item in ('clusters', 'contexts', 'users'):
                 config_merged[item] = []
             self.config_merged = ConfigNode(path, config_merged, path)
-
         for item in ('clusters', 'contexts', 'users'):
-            self._merge(item, config.get(item, {}), path)
+            self._merge(item, config.get(item, []) or [], path)
         self.config_files[path] = config
 
     def _merge(self, item, add_cfg, path):
