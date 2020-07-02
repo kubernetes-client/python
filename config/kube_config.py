@@ -97,6 +97,8 @@ class FileOrData(object):
         self._file = None
         self._data = None
         self._base64_file_content = base64_file_content
+        if not obj:
+            return
         if data_key_name in obj:
             self._data = obj[data_key_name]
         elif file_key_name in obj:

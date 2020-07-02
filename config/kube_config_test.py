@@ -255,6 +255,16 @@ class TestFileOrData(BaseTestCase):
                        data_key_name=TEST_DATA_KEY, base64_file_content=False)
         self.assertEqual(TEST_DATA, self.get_file_content(t.as_file()))
 
+    def test_file_given_no_object(self):
+        t = FileOrData(obj=None, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY)
+        self.assertEqual(t.as_file(), None)
+
+    def test_file_given_no_object_data(self):
+        t = FileOrData(obj=None, file_key_name=TEST_FILE_KEY,
+                       data_key_name=TEST_DATA_KEY)
+        self.assertEqual(t.as_data(), None)
+
 
 class TestConfigNode(BaseTestCase):
 
