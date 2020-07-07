@@ -72,6 +72,7 @@ def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwar
         this parameter has no effect.
     Raises:
         FailToDeleteError which holds list of `client.rest.ApiException`
+        FailToCreateError which holds list of `client.rest.ApiException`
         instances for each object that failed to delete.
     """
     api_exceptions = []
