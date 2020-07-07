@@ -76,6 +76,7 @@ def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwar
     """
     api_exceptions = []
     try:
+        # call function delete_from_yaml_single_item 
         delete_from_yaml_single_item(
             k8s_client, yml_document, verbose, namespace=namespace, **kwargs
         )
@@ -117,9 +118,10 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
         )
 
     else:
+        # get name of object to delete
         name = yml_document["metadata"]["name"]
         kwargs.pop('namespace', None)
-        res = getattr(k8s_api,"delete_namespaced_{}".format(kind))(
+        res = getattr(k8s_api,"delete_{}".format(kind))(
          **kwargs,name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5)
         )
     if verbose:
@@ -128,11 +130,6 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
             msg += " status='{0}'".format(str(res.status))
         print(msg)
                 
-
-
-
-
-
 
 class FailToCreateError(Exception):
     """
