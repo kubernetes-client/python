@@ -115,10 +115,14 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
         #call function to delete from namespace
         res = getattr(k8s_api,"delete_namespaced_{}".format(kind))(
 <<<<<<< HEAD
+<<<<<<< HEAD
          name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5),**kwargs)
 =======
          name=name,**kwargs,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5))
 >>>>>>> change syntax for delete operation
+=======
+         name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5),**kwargs)
+>>>>>>> resolve kwargs error for python2.7
 
     else:
         # get name of object to delete
@@ -126,10 +130,14 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
         kwargs.pop('namespace', None)
         res = getattr(k8s_api,"delete_{}".format(kind))(
 <<<<<<< HEAD
+<<<<<<< HEAD
          name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5),**kwargs)
 =======
          name=name,**kwargs,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5))
 >>>>>>> change syntax for delete operation
+=======
+         name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5),**kwargs)
+>>>>>>> resolve kwargs error for python2.7
     if verbose:
         msg = "{0} deleted.".format(kind)
         if hasattr(res, 'status'):
