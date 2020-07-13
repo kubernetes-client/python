@@ -34,7 +34,7 @@ def delete_from_yaml(
             processing of the request.
             Valid values are: - All: all dry run stages will be processed
         Raises:
-            FailToCreateError which holds list of `client.rest.ApiException`
+            FailToDeleteError which holds list of `client.rest.ApiException`
             instances for each object that failed to delete.
         '''
         # open yml file
@@ -49,12 +49,12 @@ def delete_from_yaml(
                     delete_from_dict(k8s_client,yml_document,verbose,
                                  namespace=namespace,
                                  **kwargs)    
-                except FailToCreateError as failure:
+                except FailToDeleteError as failure:
                     # if error is returned add to failures list
                     failures.extend(failure.api_exceptions)
             if failures:
                 #display the error 
-                raise FailToCreateError(failures)
+                raise FailToDeleteError(failures)
 
 def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwargs):
     """
@@ -71,7 +71,7 @@ def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwar
         the yaml file already contains a namespace definition
         this parameter has no effect.
     Raises:
-        FailToCreateError which holds list of `client.rest.ApiException`
+        FailToDeleteError which holds list of `client.rest.ApiException`
         instances for each object that failed to delete.
     """
     api_exceptions = []
@@ -84,7 +84,7 @@ def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwar
         api_exceptions.append(api_exception)
 
     if api_exceptions:
-        raise FailToCreateError(api_exceptions)
+        raise FailToDeleteError(api_exceptions)
 
 
 def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwargs):
@@ -97,7 +97,6 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
     group = "".join(group.rsplit(".k8s.io", 1))
     # convert group name from DNS subdomain format to
     # python class name convention
-    group = "".join(word.capitalize() for word in group.split('.'))
     group = "".join(word.capitalize() for word in group.split('.'))
     func = "{0}{1}Api".format(group, version.capitalize())
     k8s_api = getattr(client, func)(k8s_client)
@@ -129,10 +128,10 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
         print(msg)
                 
 
-class FailToCreateError(Exception):
+class FailToDeleteError(Exception):
     """
     An exception class for handling error if an error occurred when
-    handling a yaml file.
+    handling a yaml file during deletion of the resource.
     """
 
     def __init__(self, api_exceptions):
