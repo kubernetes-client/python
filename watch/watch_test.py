@@ -16,6 +16,8 @@ import unittest
 
 from mock import Mock, call
 
+from kubernetes import client
+
 from .watch import Watch
 
 
@@ -266,6 +268,31 @@ class WatchTests(unittest.TestCase):
         except KeyError:
             pass
             # expected
+
+        fake_api.get_thing.assert_called_once_with(
+            _preload_content=False, watch=True)
+        fake_resp.read_chunked.assert_called_once_with(decode_content=False)
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
+
+    def test_watch_with_error_event(self):
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.read_chunked = Mock(
+            return_value=[
+                '{"type": "ERROR", "object": {"code": 410, '
+                '"reason": "Gone", "message": "error message"}}\n'])
+
+        fake_api = Mock()
+        fake_api.get_thing = Mock(return_value=fake_resp)
+
+        w = Watch()
+        try:
+            for _ in w.stream(fake_api.get_thing):
+                self.fail(self, "Should fail with ApiException.")
+        except client.rest.ApiException:
+            pass
 
         fake_api.get_thing.assert_called_once_with(
             _preload_content=False, watch=True)
