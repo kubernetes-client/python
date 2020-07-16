@@ -171,9 +171,10 @@ class Watch(object):
                                 retry_after_410 = True
                                 break
                             else:
-                                reason = "%s: %s" % (obj['reason'], obj['message'])
-                                raise client.rest.ApiException(status=obj['code'],
-                                                               reason=reason)
+                                reason = "%s: %s" % (
+                                    obj['reason'], obj['message'])
+                                raise client.rest.ApiException(
+                                    status=obj['code'], reason=reason)
                         else:
                             retry_after_410 = False
                             yield event
