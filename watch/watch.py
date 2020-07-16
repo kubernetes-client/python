@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import http
 import json
 import pydoc
+import sys
 
 from kubernetes import client
 
@@ -27,6 +27,15 @@ PYDOC_FOLLOW_PARAM = ":param bool follow:"
 # of type "Namespace". In case this assumption is not true, user should
 # provide return_type to Watch class's __init__.
 TYPE_LIST_SUFFIX = "List"
+
+
+PY2 = sys.version_info[0] == 2
+if PY2:
+    import httplib
+    HTTP_STATUS_GONE = httplib.GONE
+else:
+    import http
+    HTTP_STATUS_GONE = http.HTTPStatus.GONE
 
 
 class SimpleNamespace:
@@ -158,13 +167,14 @@ class Watch(object):
                             # Current request expired, let's retry,
                             # but only if we have not already retried.
                             if not retry_after_410 and \
-                                    obj['code'] == http.HTTPStatus.GONE:
+                                    obj['code'] == HTTP_STATUS_GONE:
                                 retry_after_410 = True
                                 break
                             else:
-                                reason = "%s: %s" % (obj['reason'], obj['message'])
-                                raise client.rest.ApiException(status=obj['code'],
-                                                               reason=reason)
+                                reason = "%s: %s" % (
+                                    obj['reason'], obj['message'])
+                                raise client.rest.ApiException(
+                                    status=obj['code'], reason=reason)
                         else:
                             retry_after_410 = False
                             yield event
