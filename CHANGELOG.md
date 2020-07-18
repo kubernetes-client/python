@@ -50,6 +50,25 @@ Kubernetes API Version: 1.16.11
 - Fixes a bug in loading kubeconfig when there are no users in the config [kubernetes-client/python-base#198](https://github.com/kubernetes-client/python-base/pull/198)
 - Retry expired watches [kubernetes-client/python-base#133](https://github.com/kubernetes-client/python-base/pull/133)
 
+**OpenAPI Generator Changes:**
+
+OpenAPI Generator has been updated to v4.3.0 from v3.3.4. Following are links to Python client related changes throughout the OpenAPI releases above v3.3.4 to v4.3.0:
+
+- [v4.3.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.3.0+label%3A%22Client%3A+Python%22)
+- [v4.2.3](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.3+label%3A%22Client%3A+Python%22)
+- [v4.2.2](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.2+label%3A%22Client%3A+Python%22)
+- [v4.2.1](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.1+label%3A%22Client%3A+Python%22)
+- [v4.2.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.0+label%3A%22Client%3A+Python%22)
+- [v4.1.3](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.3+label%3A%22Client%3A+Python%22)
+- [v4.1.2](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.2+label%3A%22Client%3A+Python%22)
+- [v4.1.1](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.1+label%3A%22Client%3A+Python%22)
+- [v4.1.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.0+label%3A%22Client%3A+Python%22)
+- [v4.0.3](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.0.3+label%3A%22Client%3A+Python%22)
+- [v4.0.2](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.0.2+label%3A%22Client%3A+Python%22)
+- [v4.0.1](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Apr+milestone%3A4.0.1+is%3Amerged+label%3A%22Client%3A+Python%22)
+- [v4.0.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Apr+milestone%3A4.0.0+is%3Amerged+label%3A%22Client%3A+Python%22)
+
+
 # v11.0.0
 
 Kubernetes API Version: 1.15.10
