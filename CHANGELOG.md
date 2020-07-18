@@ -41,8 +41,14 @@ Kubernetes API Version: 1.16.11
 
 **New Feature:**
 
+- Adds the ability to load kubeconfig from a dictionary [kubernetes-client/python-base#195](https://github.com/kubernetes-client/python-base/pull/195)
 - Allow incluster to accept pass-in config [kubernetes-client/python-base#193](https://github.com/kubernetes-client/python-base/pull/193)
 - Set expiration on token of incluster config and reload the token if it expires [kubernetes-client/python-base#191](https://github.com/kubernetes-client/python-base/pull/191)
+
+**Bug Fix:**
+
+- Fixes a bug in loading kubeconfig when there are no users in the config [kubernetes-client/python-base#198](https://github.com/kubernetes-client/python-base/pull/198)
+- Retry expired watches [kubernetes-client/python-base#133](https://github.com/kubernetes-client/python-base/pull/133)
 
 # v11.0.0
 
