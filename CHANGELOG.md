@@ -1,6 +1,6 @@
 # v12.0.0a1-snapshot
 
-Kubernetes API Version: 1.16.11
+Kubernetes API Version: 1.16.14
 
 **API Change:**
 
