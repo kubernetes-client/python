@@ -1,5 +1,6 @@
 # V1ResourceRequirements
 
+ResourceRequirements describes the compute resource requirements.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

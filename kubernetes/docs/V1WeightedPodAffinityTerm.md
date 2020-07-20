@@ -1,5 +1,6 @@
 # V1WeightedPodAffinityTerm
 
+The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

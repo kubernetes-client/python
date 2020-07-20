@@ -1,5 +1,6 @@
 # ExtensionsV1beta1IngressBackend
 
+IngressBackend describes all endpoints for a given service and port.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

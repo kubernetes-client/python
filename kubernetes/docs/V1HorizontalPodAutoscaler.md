@@ -1,5 +1,6 @@
 # V1HorizontalPodAutoscaler
 
+configuration of a horizontal pod autoscaler.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

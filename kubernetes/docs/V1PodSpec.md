@@ -1,5 +1,6 @@
 # V1PodSpec
 
+PodSpec is a description of a pod.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

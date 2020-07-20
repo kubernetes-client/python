@@ -1,5 +1,6 @@
 # V1beta2RollingUpdateDaemonSet
 
+Spec to control the desired behavior of daemon set rolling update.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

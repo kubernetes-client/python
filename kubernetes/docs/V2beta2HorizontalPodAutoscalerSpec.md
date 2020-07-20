@@ -1,5 +1,6 @@
 # V2beta2HorizontalPodAutoscalerSpec
 
+HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

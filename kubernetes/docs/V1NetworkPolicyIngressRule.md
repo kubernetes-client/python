@@ -1,5 +1,6 @@
 # V1NetworkPolicyIngressRule
 
+NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

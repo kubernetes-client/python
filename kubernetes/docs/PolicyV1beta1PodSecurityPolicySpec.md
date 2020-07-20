@@ -1,5 +1,6 @@
 # PolicyV1beta1PodSecurityPolicySpec
 
+PodSecurityPolicySpec defines the policy enforced.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

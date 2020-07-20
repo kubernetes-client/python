@@ -1,5 +1,6 @@
 # V1alpha1Scheduling
 
+Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

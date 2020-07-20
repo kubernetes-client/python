@@ -1,5 +1,6 @@
 # V1alpha1ClusterRoleBinding
 
+ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in the global namespace, and adds who information via Subject.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

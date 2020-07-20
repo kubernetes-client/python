@@ -1,5 +1,6 @@
 # V1beta1Overhead
 
+Overhead structure represents the resource overhead associated with running a pod.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1alpha1EndpointPort
 
+EndpointPort represents a Port used by an EndpointSlice
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

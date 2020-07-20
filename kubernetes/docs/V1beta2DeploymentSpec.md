@@ -1,5 +1,6 @@
 # V1beta2DeploymentSpec
 
+DeploymentSpec is the specification of the desired behavior of the Deployment.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

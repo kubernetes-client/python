@@ -1,9 +1,11 @@
 # v12.0.0a1-snapshot
 
-Kubernetes API Version: 1.16.9
+Kubernetes API Version: 1.16.11
 
 **API Change:**
 
+- Resolve regression in metadata.managedFields handling in update/patch requests submitted by older API clients ([#91748](https://github.com/kubernetes/kubernetes/pull/91748), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
+- Fix bug where sending a status update completely wipes managedFields for some types. ([#90033](https://github.com/kubernetes/kubernetes/pull/90033), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
 - The `MutatingWebhookConfiguration` and `ValidatingWebhookConfiguration` APIs have been promoted to `admissionregistration.k8s.io/v1`:
   - `failurePolicy` default changed from `Ignore` to `Fail` for v1
   - `matchPolicy` default changed from `Exact` to `Equivalent` for v1
@@ -36,6 +38,36 @@ Kubernetes API Version: 1.16.9
 - Omit nil or empty field when calculating container hash value to avoid hash changed. For a new field with a non-nil default value in the container spec, the hash would still get changed. ([#57741](https://github.com/kubernetes/kubernetes/pull/57741), [@dixudx](https://github.com/dixudx))
 - Property `conditions` in `apiextensions.v1beta1.CustomResourceDefinitionStatus` and `apiextensions.v1.CustomResourceDefinitionStatus` is now optional instead of required. ([#64996](https://github.com/kubernetes/kubernetes/pull/64996), [@roycaihw](https://github.com/roycaihw))
 - When the status of a CustomResourceDefinition condition changes, its corresponding `lastTransitionTime` is now updated. ([#69655](https://github.com/kubernetes/kubernetes/pull/69655), [@CaoShuFeng](https://github.com/CaoShuFeng))
+
+**New Feature:**
+
+- Adds the ability to load kubeconfig from a dictionary [kubernetes-client/python-base#195](https://github.com/kubernetes-client/python-base/pull/195)
+- Allow incluster to accept pass-in config [kubernetes-client/python-base#193](https://github.com/kubernetes-client/python-base/pull/193)
+- Set expiration on token of incluster config and reload the token if it expires [kubernetes-client/python-base#191](https://github.com/kubernetes-client/python-base/pull/191)
+
+**Bug Fix:**
+
+- Fixes a bug in loading kubeconfig when there are no users in the config [kubernetes-client/python-base#198](https://github.com/kubernetes-client/python-base/pull/198)
+- Retry expired watches [kubernetes-client/python-base#133](https://github.com/kubernetes-client/python-base/pull/133)
+
+**OpenAPI Generator Changes:**
+
+OpenAPI Generator has been updated to v4.3.0 from v3.3.4. Following are links to Python client related changes throughout the OpenAPI releases above v3.3.4 to v4.3.0:
+
+- [v4.3.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.3.0+label%3A%22Client%3A+Python%22)
+- [v4.2.3](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.3+label%3A%22Client%3A+Python%22)
+- [v4.2.2](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.2+label%3A%22Client%3A+Python%22)
+- [v4.2.1](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.1+label%3A%22Client%3A+Python%22)
+- [v4.2.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.2.0+label%3A%22Client%3A+Python%22)
+- [v4.1.3](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.3+label%3A%22Client%3A+Python%22)
+- [v4.1.2](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.2+label%3A%22Client%3A+Python%22)
+- [v4.1.1](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.1+label%3A%22Client%3A+Python%22)
+- [v4.1.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.1.0+label%3A%22Client%3A+Python%22)
+- [v4.0.3](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.0.3+label%3A%22Client%3A+Python%22)
+- [v4.0.2](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Amerged+is%3Apr+milestone%3A4.0.2+label%3A%22Client%3A+Python%22)
+- [v4.0.1](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Apr+milestone%3A4.0.1+is%3Amerged+label%3A%22Client%3A+Python%22)
+- [v4.0.0](https://github.com/OpenAPITools/openapi-generator/pulls?q=is%3Apr+milestone%3A4.0.0+is%3Amerged+label%3A%22Client%3A+Python%22)
+
 
 # v11.0.0
 
@@ -423,4 +455,3 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 
 # v1.0.0-alpha1
 Skipped because of a failed initial release.
-

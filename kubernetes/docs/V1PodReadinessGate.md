@@ -1,5 +1,6 @@
 # V1PodReadinessGate
 
+PodReadinessGate contains the reference to a pod condition
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

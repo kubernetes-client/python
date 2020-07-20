@@ -1,5 +1,6 @@
 # V1RoleBindingList
 
+RoleBindingList is a collection of RoleBindings
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1ObjectFieldSelector
 
+ObjectFieldSelector selects an APIVersioned field of an object.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

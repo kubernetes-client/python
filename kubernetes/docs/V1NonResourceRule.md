@@ -1,5 +1,6 @@
 # V1NonResourceRule
 
+NonResourceRule holds information that describes a rule for the non-resource
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

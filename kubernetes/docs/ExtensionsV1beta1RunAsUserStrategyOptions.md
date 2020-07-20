@@ -1,5 +1,6 @@
 # ExtensionsV1beta1RunAsUserStrategyOptions
 
+RunAsUserStrategyOptions defines the strategy type and any options used to create the strategy. Deprecated: use RunAsUserStrategyOptions from policy API Group instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

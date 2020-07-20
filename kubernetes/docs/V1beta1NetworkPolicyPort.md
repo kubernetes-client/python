@@ -1,5 +1,6 @@
 # V1beta1NetworkPolicyPort
 
+DEPRECATED 1.9 - This group version of NetworkPolicyPort is deprecated by networking/v1/NetworkPolicyPort.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

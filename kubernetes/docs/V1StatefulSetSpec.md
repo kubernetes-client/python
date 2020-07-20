@@ -1,5 +1,6 @@
 # V1StatefulSetSpec
 
+A StatefulSetSpec is the specification of a StatefulSet.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

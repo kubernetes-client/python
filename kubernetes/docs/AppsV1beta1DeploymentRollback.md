@@ -1,5 +1,6 @@
 # AppsV1beta1DeploymentRollback
 
+DEPRECATED. DeploymentRollback stores the information required to rollback a deployment.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

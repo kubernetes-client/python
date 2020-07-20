@@ -1,5 +1,6 @@
 # V1ServiceAccountList
 
+ServiceAccountList is a list of ServiceAccount objects
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

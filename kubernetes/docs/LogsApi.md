@@ -15,28 +15,32 @@ Method | HTTP request | Description
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.LogsApi(kubernetes.client.ApiClient(configuration))
-logpath = 'logpath_example' # str | path to the log
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    api_instance.log_file_handler(logpath)
-except ApiException as e:
-    print("Exception when calling LogsApi->log_file_handler: %s\n" % e)
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.LogsApi(api_client)
+    logpath = 'logpath_example' # str | path to the log
+
+    try:
+        api_instance.log_file_handler(logpath)
+    except ApiException as e:
+        print("Exception when calling LogsApi->log_file_handler: %s\n" % e)
 ```
 
 ### Parameters
@@ -58,6 +62,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**401** | Unauthorized |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **log_file_list_handler**
@@ -67,27 +76,31 @@ void (empty response body)
 
 ### Example
 
-* Api Key Authentication (BearerToken): 
+* Api Key Authentication (BearerToken):
 ```python
 from __future__ import print_function
 import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.LogsApi(kubernetes.client.ApiClient(configuration))
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    api_instance.log_file_list_handler()
-except ApiException as e:
-    print("Exception when calling LogsApi->log_file_list_handler: %s\n" % e)
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.LogsApi(api_client)
+    
+    try:
+        api_instance.log_file_list_handler()
+    except ApiException as e:
+        print("Exception when calling LogsApi->log_file_list_handler: %s\n" % e)
 ```
 
 ### Parameters
@@ -105,6 +118,11 @@ void (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

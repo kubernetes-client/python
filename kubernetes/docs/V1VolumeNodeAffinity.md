@@ -1,5 +1,6 @@
 # V1VolumeNodeAffinity
 
+VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1alpha1RuntimeClassList
 
+RuntimeClassList is a list of RuntimeClass objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

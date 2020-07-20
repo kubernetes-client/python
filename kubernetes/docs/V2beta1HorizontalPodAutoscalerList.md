@@ -1,5 +1,6 @@
 # V2beta1HorizontalPodAutoscalerList
 
+HorizontalPodAutoscaler is a list of horizontal pod autoscaler objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

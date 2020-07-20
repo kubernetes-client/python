@@ -35,8 +35,10 @@ if ! [[ $GIT_BRANCH =~ .*release-.* ]]; then
 fi
 
 # Patching commit for custom client behavior
+# UPDATE: The commit being cherry-picked is updated since the the client generated in 1adaaecd0879d7315f48259ad8d6cbd66b835385
+# differs from the initial hotfix
 # Ref: https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede
-git cherry-pick -n 9959273625b999ae9a8f0679c4def2ee7d699ede
+git cherry-pick -n a138dcbb7a9da972402a847ce982b027e0224e60
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for custom client behavior
@@ -47,8 +49,9 @@ else
 fi
 
 # Patching commits for enabling from kubernetes import apis
+# UPDATE: The commit being cherry-picked is updated to include both the commits as one
 # Ref: https://github.com/kubernetes-client/python/blob/0976d59d6ff206f2f428cabc7a6b7b1144843b2a/kubernetes/client/apis/__init__.py
-git cherry-pick -n dee078639b5e848db73232397087a81f1a336510 b3164930dd1789dd66915acd6772f92f512cec47
+git cherry-pick -n 228a29a982aee922831c3af4fef66a7846ce4bb8
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for enabling from kubernetes import apis
@@ -59,8 +62,9 @@ else
 fi;
 
 # Patching commits for Client Context Manager
+# UPDATE: OpenAPI generator v4.3.0 has the context manager as a functionality. Cherry-picking just the tests for completeness.
 # Ref: https://github.com/kubernetes-client/python/pull/1073
-git cherry-pick -n 18d21df367bf9ab5554635f5c6d107f2cf2206a5 13dffb897617f87aaaee247095107d7011e002d5
+git cherry-pick -n 13dffb897617f87aaaee247095107d7011e002d5
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for Client Context Manager

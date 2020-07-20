@@ -1,5 +1,6 @@
 # V1beta1CronJob
 
+CronJob represents the configuration of a single cron job.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

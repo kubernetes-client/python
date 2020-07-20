@@ -1,5 +1,6 @@
 # ExtensionsV1beta1PodSecurityPolicySpec
 
+PodSecurityPolicySpec defines the policy enforced. Deprecated: use PodSecurityPolicySpec from policy API Group instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

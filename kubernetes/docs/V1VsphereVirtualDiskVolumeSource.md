@@ -1,5 +1,6 @@
 # V1VsphereVirtualDiskVolumeSource
 
+Represents a vSphere volume resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

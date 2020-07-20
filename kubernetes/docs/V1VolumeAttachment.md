@@ -1,5 +1,6 @@
 # V1VolumeAttachment
 
+VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified node.  VolumeAttachment objects are non-namespaced.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

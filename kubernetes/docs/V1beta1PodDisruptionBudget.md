@@ -1,5 +1,6 @@
 # V1beta1PodDisruptionBudget
 
+PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

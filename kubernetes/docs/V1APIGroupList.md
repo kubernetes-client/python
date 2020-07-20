@@ -1,5 +1,6 @@
 # V1APIGroupList
 
+APIGroupList is a list of APIGroup, to allow kubernetes.clients to discover the API at /apis.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

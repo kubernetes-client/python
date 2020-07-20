@@ -1,5 +1,6 @@
 # V1NetworkPolicySpec
 
+NetworkPolicySpec provides the specification of a NetworkPolicy
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

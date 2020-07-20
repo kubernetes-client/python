@@ -1,5 +1,6 @@
 # V1ClientIPConfig
 
+ClientIPConfig represents the configurations of Client IP based session affinity.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

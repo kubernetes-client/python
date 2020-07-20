@@ -1,5 +1,6 @@
 # V1Event
 
+Event is a report of an event somewhere in the cluster.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

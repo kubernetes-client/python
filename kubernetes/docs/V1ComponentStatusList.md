@@ -1,5 +1,6 @@
 # V1ComponentStatusList
 
+Status of all the conditions for the component as a list of ComponentStatus objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

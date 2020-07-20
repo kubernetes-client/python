@@ -1,5 +1,6 @@
 # V1ServiceSpec
 
+ServiceSpec describes the attributes that a user creates on a service.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1NetworkPolicySpec
 
+DEPRECATED 1.9 - This group version of NetworkPolicySpec is deprecated by networking/v1/NetworkPolicySpec.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

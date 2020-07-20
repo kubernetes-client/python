@@ -1,5 +1,6 @@
 # V1beta1ResourceRule
 
+ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

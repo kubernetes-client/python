@@ -1,5 +1,6 @@
 # V1FCVolumeSource
 
+Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1StatefulSetStatus
 
+StatefulSetStatus represents the current state of a StatefulSet.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

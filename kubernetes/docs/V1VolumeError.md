@@ -1,5 +1,6 @@
 # V1VolumeError
 
+VolumeError captures an error encountered during a volume operation.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1alpha1AuditSink
 
+AuditSink represents a cluster level audit sink
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

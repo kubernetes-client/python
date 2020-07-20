@@ -1,5 +1,6 @@
 # V1ServiceAccountTokenProjection
 
+ServiceAccountTokenProjection represents a projected service account token volume. This projection can be used to insert a service account token into the pods runtime filesystem for use against APIs (Kubernetes API Server or otherwise).
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

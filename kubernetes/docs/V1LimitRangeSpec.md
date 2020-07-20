@@ -1,5 +1,6 @@
 # V1LimitRangeSpec
 
+LimitRangeSpec defines a min/max usage limit for resources that match on kind.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

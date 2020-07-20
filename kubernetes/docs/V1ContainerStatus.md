@@ -1,5 +1,6 @@
 # V1ContainerStatus
 
+ContainerStatus contains details for the current status of this container.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

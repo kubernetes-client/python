@@ -1,5 +1,6 @@
 # V1TokenRequest
 
+TokenRequest requests a token for a given service account.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

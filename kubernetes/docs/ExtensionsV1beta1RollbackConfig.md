@@ -1,5 +1,6 @@
 # ExtensionsV1beta1RollbackConfig
 
+DEPRECATED.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1EndpointsList
 
+EndpointsList is a list of endpoints.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

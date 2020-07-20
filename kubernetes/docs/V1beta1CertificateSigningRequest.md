@@ -1,5 +1,6 @@
 # V1beta1CertificateSigningRequest
 
+Describes a certificate signing request
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

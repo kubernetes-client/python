@@ -1,5 +1,6 @@
 # V1PodList
 
+PodList is a list of Pods.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

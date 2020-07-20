@@ -1,5 +1,6 @@
 # V2beta2CrossVersionObjectReference
 
+CrossVersionObjectReference contains enough information to let you identify the referred resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

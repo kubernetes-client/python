@@ -1,5 +1,6 @@
 # V1AttachedVolume
 
+AttachedVolume describes a volume attached to a node
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1WebhookConversion
 
+WebhookConversion describes how to call a conversion webhook
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1NetworkPolicy
 
+DEPRECATED 1.9 - This group version of NetworkPolicy is deprecated by networking/v1/NetworkPolicy. NetworkPolicy describes what network traffic is allowed for a set of Pods
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

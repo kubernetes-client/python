@@ -1,5 +1,6 @@
 # V1alpha1WebhookThrottleConfig
 
+WebhookThrottleConfig holds the configuration for throttling events
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

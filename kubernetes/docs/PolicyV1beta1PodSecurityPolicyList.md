@@ -1,5 +1,6 @@
 # PolicyV1beta1PodSecurityPolicyList
 
+PodSecurityPolicyList is a list of PodSecurityPolicy objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1CronJobList
 
+CronJobList is a collection of cron jobs.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

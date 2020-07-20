@@ -1,5 +1,6 @@
 # V1ValidatingWebhookConfiguration
 
+ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and object without changing it.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1APIServiceCondition
 
+APIServiceCondition describes the state of an APIService at a particular point
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

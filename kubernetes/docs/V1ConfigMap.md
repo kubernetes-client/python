@@ -1,5 +1,6 @@
 # V1ConfigMap
 
+ConfigMap holds configuration data for pods to consume.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

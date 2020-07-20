@@ -1,5 +1,6 @@
 # V1NodeCondition
 
+NodeCondition contains condition information for a node.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

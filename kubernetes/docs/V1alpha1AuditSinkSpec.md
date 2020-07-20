@@ -1,5 +1,6 @@
 # V1alpha1AuditSinkSpec
 
+AuditSinkSpec holds the spec for the audit sink
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

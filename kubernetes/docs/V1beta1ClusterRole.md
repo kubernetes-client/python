@@ -1,5 +1,6 @@
 # V1beta1ClusterRole
 
+ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding or ClusterRoleBinding.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

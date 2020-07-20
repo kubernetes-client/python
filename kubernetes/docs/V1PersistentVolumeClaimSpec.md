@@ -1,5 +1,6 @@
 # V1PersistentVolumeClaimSpec
 
+PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

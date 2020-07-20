@@ -1,5 +1,6 @@
 # V1APIServiceList
 
+APIServiceList is a list of APIService objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

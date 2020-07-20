@@ -1,5 +1,6 @@
 # V1ScopedResourceSelectorRequirement
 
+A scoped-resource selector requirement is a selector that contains values, a scope name, and an operator that relates the scope name and values.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

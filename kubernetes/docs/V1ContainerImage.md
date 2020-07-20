@@ -1,5 +1,6 @@
 # V1ContainerImage
 
+Describe a container image
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

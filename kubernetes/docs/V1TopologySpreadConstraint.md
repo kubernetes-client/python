@@ -1,5 +1,6 @@
 # V1TopologySpreadConstraint
 
+TopologySpreadConstraint specifies how to spread matching pods among the given topology.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

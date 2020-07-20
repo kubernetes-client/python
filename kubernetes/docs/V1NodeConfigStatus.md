@@ -1,5 +1,6 @@
 # V1NodeConfigStatus
 
+NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1CustomResourceDefinitionNames
 
+CustomResourceDefinitionNames indicates the names to serve this CustomResourceDefinition
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

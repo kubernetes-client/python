@@ -1,5 +1,6 @@
 # V1beta1CSINodeList
 
+CSINodeList is a collection of CSINode objects.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

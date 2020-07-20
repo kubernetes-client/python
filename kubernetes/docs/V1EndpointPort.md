@@ -1,5 +1,6 @@
 # V1EndpointPort
 
+EndpointPort is a tuple that describes a single port.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1alpha1WebhookClientConfig
 
+WebhookClientConfig contains the information to make a connection with the webhook
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

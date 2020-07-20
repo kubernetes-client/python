@@ -14,7 +14,7 @@ Python 2.7 and 3.4+
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on Github, you can install directly from Github
+If the python package is hosted on a repository, you can install directly using:
 
 ```sh
 pip install git+https://github.com/kubernetes-client/python.git
@@ -23,7 +23,7 @@ pip install git+https://github.com/kubernetes-client/python.git
 
 Then import the package:
 ```python
-import kubernetes.client 
+import kubernetes.client
 ```
 
 ### Setuptools
@@ -51,21 +51,28 @@ import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
-# Configure API key authorization: BearerToken
 configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['authorization'] = 'Bearer'
 
-# create an instance of the API class
-api_instance = kubernetes.client.AdmissionregistrationApi(kubernetes.client.ApiClient(configuration))
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    api_response = api_instance.get_api_group()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdmissionregistrationApi->get_api_group: %s\n" % e)
-
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.AdmissionregistrationApi(api_client)
+    
+    try:
+        api_response = api_instance.get_api_group()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AdmissionregistrationApi->get_api_group: %s\n" % e)
+    
 ```
 
 ## Documentation for API Endpoints
@@ -648,10 +655,10 @@ Class | Method | HTTP request | Description
 *CoreV1Api* | [**replace_persistent_volume_status**](docs/CoreV1Api.md#replace_persistent_volume_status) | **PUT** /api/v1/persistentvolumes/{name}/status | 
 *CustomObjectsApi* | [**create_cluster_custom_object**](docs/CustomObjectsApi.md#create_cluster_custom_object) | **POST** /apis/{group}/{version}/{plural} | 
 *CustomObjectsApi* | [**create_namespaced_custom_object**](docs/CustomObjectsApi.md#create_namespaced_custom_object) | **POST** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
-*CustomObjectsApi* | [**delete_cluster_custom_object**](docs/CustomObjectsApi.md#delete_cluster_custom_object) | **DELETE** /apis/{group}/{version}/{plural} | 
-*CustomObjectsApi* | [**delete_cluster_custom_object_0**](docs/CustomObjectsApi.md#delete_cluster_custom_object_0) | **DELETE** /apis/{group}/{version}/{plural}/{name} | 
-*CustomObjectsApi* | [**delete_namespaced_custom_object**](docs/CustomObjectsApi.md#delete_namespaced_custom_object) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
-*CustomObjectsApi* | [**delete_namespaced_custom_object_0**](docs/CustomObjectsApi.md#delete_namespaced_custom_object_0) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
+*CustomObjectsApi* | [**delete_cluster_custom_object**](docs/CustomObjectsApi.md#delete_cluster_custom_object) | **DELETE** /apis/{group}/{version}/{plural}/{name} | 
+*CustomObjectsApi* | [**delete_collection_cluster_custom_object**](docs/CustomObjectsApi.md#delete_collection_cluster_custom_object) | **DELETE** /apis/{group}/{version}/{plural} | 
+*CustomObjectsApi* | [**delete_collection_namespaced_custom_object**](docs/CustomObjectsApi.md#delete_collection_namespaced_custom_object) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
+*CustomObjectsApi* | [**delete_namespaced_custom_object**](docs/CustomObjectsApi.md#delete_namespaced_custom_object) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
 *CustomObjectsApi* | [**get_cluster_custom_object**](docs/CustomObjectsApi.md#get_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural}/{name} | 
 *CustomObjectsApi* | [**get_cluster_custom_object_scale**](docs/CustomObjectsApi.md#get_cluster_custom_object_scale) | **GET** /apis/{group}/{version}/{plural}/{name}/scale | 
 *CustomObjectsApi* | [**get_cluster_custom_object_status**](docs/CustomObjectsApi.md#get_cluster_custom_object_status) | **GET** /apis/{group}/{version}/{plural}/{name}/status | 

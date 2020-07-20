@@ -1,5 +1,6 @@
 # PolicyV1beta1PodSecurityPolicy
 
+PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

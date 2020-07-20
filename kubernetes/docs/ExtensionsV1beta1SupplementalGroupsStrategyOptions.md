@@ -1,5 +1,6 @@
 # ExtensionsV1beta1SupplementalGroupsStrategyOptions
 
+SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy. Deprecated: use SupplementalGroupsStrategyOptions from policy API Group instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

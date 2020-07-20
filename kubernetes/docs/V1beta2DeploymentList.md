@@ -1,5 +1,6 @@
 # V1beta2DeploymentList
 
+DeploymentList is a list of Deployments.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1beta1Event
 
+Event is a report of an event somewhere in the cluster. It generally denotes some state change in the system.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

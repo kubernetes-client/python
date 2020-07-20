@@ -1,5 +1,6 @@
 # V1Job
 
+Job represents the configuration of a single job.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

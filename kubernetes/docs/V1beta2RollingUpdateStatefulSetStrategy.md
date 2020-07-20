@@ -1,5 +1,6 @@
 # V1beta2RollingUpdateStatefulSetStrategy
 
+RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1PersistentVolumeStatus
 
+PersistentVolumeStatus is the current status of a persistent volume.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

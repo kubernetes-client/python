@@ -1,5 +1,6 @@
 # V1PersistentVolumeClaimList
 
+PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

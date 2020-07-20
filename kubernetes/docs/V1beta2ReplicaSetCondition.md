@@ -1,5 +1,6 @@
 # V1beta2ReplicaSetCondition
 
+ReplicaSetCondition describes the state of a replica set at a certain point.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

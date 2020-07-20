@@ -1,5 +1,6 @@
 # V1Sysctl
 
+Sysctl defines a kernel parameter to be set
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

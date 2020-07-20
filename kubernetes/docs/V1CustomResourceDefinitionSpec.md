@@ -1,5 +1,6 @@
 # V1CustomResourceDefinitionSpec
 
+CustomResourceDefinitionSpec describes how a user wants their resource to appear
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

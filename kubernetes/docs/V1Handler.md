@@ -1,5 +1,6 @@
 # V1Handler
 
+Handler defines a specific action that should be taken
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

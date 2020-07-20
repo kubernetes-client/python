@@ -1,5 +1,6 @@
 # V1StatefulSetCondition
 
+StatefulSetCondition describes the state of a statefulset at a certain point.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # V1Lease
 
+Lease defines a lease concept.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

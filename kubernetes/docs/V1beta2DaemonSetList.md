@@ -1,5 +1,6 @@
 # V1beta2DaemonSetList
 
+DaemonSetList is a collection of daemon sets.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

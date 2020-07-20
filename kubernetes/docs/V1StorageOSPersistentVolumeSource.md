@@ -1,5 +1,6 @@
 # V1StorageOSPersistentVolumeSource
 
+Represents a StorageOS persistent volume resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

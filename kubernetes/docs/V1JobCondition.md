@@ -1,5 +1,6 @@
 # V1JobCondition
 
+JobCondition describes current state of a job.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

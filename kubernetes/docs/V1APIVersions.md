@@ -1,5 +1,6 @@
 # V1APIVersions
 
+APIVersions lists the versions that are available, to allow kubernetes.clients to discover the API at /api, which is the root path of the legacy v1 API.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

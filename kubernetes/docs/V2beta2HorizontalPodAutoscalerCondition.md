@@ -1,5 +1,6 @@
 # V2beta2HorizontalPodAutoscalerCondition
 
+HorizontalPodAutoscalerCondition describes the state of a HorizontalPodAutoscaler at a certain point.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

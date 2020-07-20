@@ -1,5 +1,6 @@
 # V1Toleration
 
+The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect> using the matching operator <operator>.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
