@@ -24,7 +24,7 @@ import six
 from six.moves.urllib.parse import urlencode
 import urllib3
 
-from kubernetes.client.exceptions import ApiException, ApiValueError
+from client.exceptions import ApiException, ApiValueError
 
 
 logger = logging.getLogger(__name__)
@@ -157,10 +157,6 @@ class RESTClientObject(object):
                 if query_params:
                     url += '?' + urlencode(query_params)
                 if re.search('json', headers['Content-Type'], re.IGNORECASE):
-                    if headers['Content-Type'] == 'application/json-patch+json':
-                        if not isinstance(body, list):
-                            headers['Content-Type'] = \
-                                'application/strategic-merge-patch+json'
                     request_body = None
                     if body is not None:
                         request_body = json.dumps(body)

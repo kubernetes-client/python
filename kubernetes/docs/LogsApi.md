@@ -1,4 +1,4 @@
-# kubernetes.client.LogsApi
+# client.LogsApi
 
 All URIs are relative to *http://localhost*
 
@@ -19,10 +19,10 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 # Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -31,10 +31,10 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
 
-# Enter a context with an instance of the API kubernetes.client
-with kubernetes.client.ApiClient(configuration) as api_client:
+# Enter a context with an instance of the API client
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.LogsApi(api_client)
+    api_instance = client.LogsApi(api_client)
     logpath = 'logpath_example' # str | path to the log
 
     try:
@@ -80,10 +80,10 @@ void (empty response body)
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 # Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -92,10 +92,10 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
 
-# Enter a context with an instance of the API kubernetes.client
-with kubernetes.client.ApiClient(configuration) as api_client:
+# Enter a context with an instance of the API client
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.LogsApi(api_client)
+    api_instance = client.LogsApi(api_client)
     
     try:
         api_instance.log_file_list_handler()

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **deprecated_last_timestamp** | **datetime** | Deprecated field assuring backward compatibility with core.v1 Event type | [optional] 
 **deprecated_source** | [**V1EventSource**](V1EventSource.md) |  | [optional] 
 **event_time** | **datetime** | Required. Time when this Event was first observed. | 
-**kind** | **str** | Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the kubernetes.client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds | [optional] 
+**kind** | **str** | Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds | [optional] 
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **note** | **str** | Optional. A human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB. | [optional] 
 **reason** | **str** | Why the action was taken. | [optional] 

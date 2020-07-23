@@ -1,4 +1,4 @@
-# kubernetes.client.AuthenticationV1Api
+# client.AuthenticationV1Api
 
 All URIs are relative to *http://localhost*
 
@@ -21,10 +21,10 @@ create a TokenReview
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 # Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -33,11 +33,11 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
 
-# Enter a context with an instance of the API kubernetes.client
-with kubernetes.client.ApiClient(configuration) as api_client:
+# Enter a context with an instance of the API client
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.AuthenticationV1Api(api_client)
-    body = kubernetes.client.V1TokenReview() # V1TokenReview | 
+    api_instance = client.AuthenticationV1Api(api_client)
+    body = client.V1TokenReview() # V1TokenReview | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
@@ -94,10 +94,10 @@ get available resources
 ```python
 from __future__ import print_function
 import time
-import kubernetes.client
-from kubernetes.client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
+configuration = client.Configuration()
 # Configure API key authorization: BearerToken
 configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -106,10 +106,10 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
 
-# Enter a context with an instance of the API kubernetes.client
-with kubernetes.client.ApiClient(configuration) as api_client:
+# Enter a context with an instance of the API client
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.AuthenticationV1Api(api_client)
+    api_instance = client.AuthenticationV1Api(api_client)
     
     try:
         api_response = api_instance.get_api_resources()

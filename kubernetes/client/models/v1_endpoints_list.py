@@ -15,7 +15,7 @@ import re  # noqa: F401
 
 import six
 
-from kubernetes.client.configuration import Configuration
+from client.configuration import Configuration
 
 
 class V1EndpointsList(object):
