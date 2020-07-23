@@ -82,11 +82,11 @@ supported versions of Kubernetes clusters.
 
 #### Compatibility matrix
 
-|                    | Kubernetes 1.13 | Kubernetes 1.14 | Kubernetes 1.15 |
+|                    | Kubernetes 1.14 | Kubernetes 1.15 | Kubernetes 1.16 |
 |--------------------|-----------------|-----------------|-----------------|
-| client-python 9.0  |✓                |+-               |+-               |
-| client-python 10.0 |+-               |✓                |+-               |
-| client-python 11.0 |+-               |+-               |✓                |
+| client-python 10.0 |✓                |+-               |+-               |
+| client-python 11.0 |+-               |✓                |+-               |
+| client-python 12.0 |+-               |+-               |✓                |
 | client-python HEAD |+-               |+-               |+-               |
 
 Key:
@@ -115,11 +115,13 @@ between client-python versions.
 | 8.0 Alpha/Beta  | Kubernetes main repo, 1.12 branch    | ✗                             |
 | 8.0             | Kubernetes main repo, 1.12 branch    | ✗                             |
 | 9.0 Alpha/Beta  | Kubernetes main repo, 1.13 branch    | ✗                             |
-| 9.0             | Kubernetes main repo, 1.13 branch    | ✓                             |
+| 9.0             | Kubernetes main repo, 1.13 branch    | ✗                             |
 | 10.0 Alpha/Beta | Kubernetes main repo, 1.14 branch    | ✗                             |
 | 10.0            | Kubernetes main repo, 1.14 branch    | ✓                             |
 | 11.0 Alpha/Beta | Kubernetes main repo, 1.15 branch    | ✗                             |
 | 11.0            | Kubernetes main repo, 1.15 branch    | ✓                             |
+| 12.0 Alpha/Beta | Kubernetes main repo, 1.16 branch    | ✗                             |
+| 12.0            | Kubernetes main repo, 1.16 branch    | ✓                             |
 
 Key:
 
