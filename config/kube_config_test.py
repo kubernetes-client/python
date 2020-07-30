@@ -552,6 +552,13 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "exec_cred_user_certificate",
+                "context": {
+                    "cluster": "ssl",
+                    "user": "exec_cred_user_certificate"
+                }
+            },
+            {
                 "name": "contexttestcmdpath",
                 "context": {
                     "cluster": "clustertestcmdpath",
@@ -872,6 +879,16 @@ class TestKubeConfigLoader(BaseTestCase):
                         "apiVersion": "client.authentication.k8s.io/v1beta1",
                         "command": "aws-iam-authenticator",
                         "args": ["token", "-i", "dummy-cluster"]
+                    }
+                }
+            },
+            {
+                "name": "exec_cred_user_certificate",
+                "user": {
+                    "exec": {
+                        "apiVersion": "client.authentication.k8s.io/v1beta1",
+                        "command": "custom-certificate-authenticator",
+                        "args": []
                     }
                 }
             },
@@ -1303,6 +1320,24 @@ class TestKubeConfigLoader(BaseTestCase):
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="exec_cred_user").load_and_set(actual)
+        self.assertEqual(expected, actual)
+
+    @mock.patch('kubernetes.config.kube_config.ExecProvider.run')
+    def test_user_exec_auth_certificates(self, mock):
+        mock.return_value = {
+            "clientCertificateData": TEST_CLIENT_CERT,
+            "clientKeyData": TEST_CLIENT_KEY,
+        }
+        expected = FakeConfig(
+            host=TEST_SSL_HOST,
+            cert_file=self._create_temp_file(TEST_CLIENT_CERT),
+            key_file=self._create_temp_file(TEST_CLIENT_KEY),
+            ssl_ca_cert=self._create_temp_file(TEST_CERTIFICATE_AUTH),
+            verify_ssl=True)
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="exec_cred_user_certificate").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_user_cmd_path(self):
