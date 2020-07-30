@@ -1,4 +1,4 @@
-# v12.0.0a1-snapshot
+# v12.0.0a1
 
 Kubernetes API Version: 1.16.14
 
