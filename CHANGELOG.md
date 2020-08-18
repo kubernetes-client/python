@@ -44,6 +44,7 @@ Kubernetes API Version: 1.16.14
 - Adds the ability to load kubeconfig from a dictionary [kubernetes-client/python-base#195](https://github.com/kubernetes-client/python-base/pull/195)
 - Allow incluster to accept pass-in config [kubernetes-client/python-base#193](https://github.com/kubernetes-client/python-base/pull/193)
 - Set expiration on token of incluster config and reload the token if it expires [kubernetes-client/python-base#191](https://github.com/kubernetes-client/python-base/pull/191)
+- Accept and use client certificates from authentication plugins [kubernetes-client/python-base#205](https://github.com/kubernetes-client/python-base/pull/205)
 
 **Bug Fix:**
 
