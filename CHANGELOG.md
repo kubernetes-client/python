@@ -1,4 +1,14 @@
-# v12.0.0a1-snapshot
+# v12.0.0b1
+
+Kubernetes API Version: 1.16.14
+
+**New Feature:**
+- Accept and use client certificates from authentication plugins [kubernetes-client/python-base#205](https://github.com/kubernetes-client/python-base/pull/205)
+
+**Bug Fix:**
+- Return when object is None in FileOrData class [kubernetes-client/python-base#201](https://github.com/kubernetes-client/python-base/pull/201)
+
+# v12.0.0a1
 
 Kubernetes API Version: 1.16.14
 
@@ -44,7 +54,6 @@ Kubernetes API Version: 1.16.14
 - Adds the ability to load kubeconfig from a dictionary [kubernetes-client/python-base#195](https://github.com/kubernetes-client/python-base/pull/195)
 - Allow incluster to accept pass-in config [kubernetes-client/python-base#193](https://github.com/kubernetes-client/python-base/pull/193)
 - Set expiration on token of incluster config and reload the token if it expires [kubernetes-client/python-base#191](https://github.com/kubernetes-client/python-base/pull/191)
-- Accept and use client certificates from authentication plugins [kubernetes-client/python-base#205](https://github.com/kubernetes-client/python-base/pull/205)
 
 **Bug Fix:**
 
