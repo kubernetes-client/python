@@ -1258,12 +1258,13 @@ class TestKubeConfigLoader(BaseTestCase):
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 
-    def test_load_kube_config_from_stringio(self):
+    def test_load_kube_config_from_fileish(self):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
-        kubeconfig = self._create_stringio_config()
+        config_fileish = io.StringIO()
+        config_fileish.write(yaml.safe_dump(self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
-        load_kube_config(config_file=kubeconfig, context="simple_token", client_configuration=actual)
+        load_kube_config(config_file=config_fileish, context="simple_token", client_configuration=actual)
         self.assertEqual(expected, actual)
 
     def test_load_kube_config_from_dict(self):
@@ -1641,11 +1642,6 @@ class TestKubeConfigMerger(BaseTestCase):
                 self.TEST_KUBE_CONFIG_PART6):
             files.append(self._create_temp_file(yaml.safe_dump(part)))
         return ENV_KUBECONFIG_PATH_SEPARATOR.join(files)
-
-    def _create_stringio_config(self):
-        obj = io.StringIO()
-        obj.write(self.TEST_KUBE_CONFIG_PART1)
-        return obj
 
     def test_list_kube_config_contexts(self):
         kubeconfigs = self._create_multi_config()
