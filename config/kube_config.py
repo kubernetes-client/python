@@ -19,6 +19,7 @@ import datetime
 import json
 import logging
 import os
+import io
 import platform
 import subprocess
 import tempfile
@@ -667,18 +668,30 @@ class KubeConfigMerger:
         self.paths = []
         self.config_files = {}
         self.config_merged = None
-
-        for path in paths.split(ENV_KUBECONFIG_PATH_SEPARATOR):
-            if path:
-                path = os.path.expanduser(path)
-                if os.path.exists(path):
-                    self.paths.append(path)
-                    self.load_config(path)
-        self.config_saved = copy.deepcopy(self.config_files)
+        if hasattr(paths, 'read'):
+            self.load_config_from_fileish(paths)
+        else:
+            for path in paths.split(ENV_KUBECONFIG_PATH_SEPARATOR):
+                if path:
+                    path = os.path.expanduser(path)
+                    if os.path.exists(path):
+                        self.paths.append(path)
+                        self.load_config(path)
+            self.config_saved = copy.deepcopy(self.config_files)
 
     @property
     def config(self):
         return self.config_merged
+
+    def load_config_from_fileish(self, string):
+        if hasattr(string, 'getvalue'):
+            config = yaml.safe_load(string.getvalue())
+        else:
+            config = yaml.safe_load(string.read())
+
+        if self.config_merged is None:
+            self.config_merged = copy.deepcopy(config)
+        # doesn't need to do any further merging
 
     def load_config(self, path):
         with open(path) as f:

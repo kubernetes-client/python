@@ -16,6 +16,7 @@ import base64
 import datetime
 import json
 import os
+import io
 import shutil
 import tempfile
 import unittest
@@ -1257,6 +1258,14 @@ class TestKubeConfigLoader(BaseTestCase):
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 
+    def test_load_kube_config_from_stringio(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        kubeconfig = self._create_stringio_config()
+        actual = FakeConfig()
+        load_kube_config(config_file=kubeconfig, context="simple_token", client_configuration=actual)
+        self.assertEqual(expected, actual)
+
     def test_load_kube_config_from_dict(self):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
@@ -1633,6 +1642,11 @@ class TestKubeConfigMerger(BaseTestCase):
             files.append(self._create_temp_file(yaml.safe_dump(part)))
         return ENV_KUBECONFIG_PATH_SEPARATOR.join(files)
 
+    def _create_stringio_config(self):
+        obj = io.StringIO()
+        obj.write(self.TEST_KUBE_CONFIG_PART1)
+        return obj
+
     def test_list_kube_config_contexts(self):
         kubeconfigs = self._create_multi_config()
         expected_contexts = [
@@ -1659,6 +1673,7 @@ class TestKubeConfigMerger(BaseTestCase):
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.configuration.api_key['authorization'])
+
 
     def test_save_changes(self):
         kubeconfigs = self._create_multi_config()
