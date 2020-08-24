@@ -25,8 +25,6 @@ def delete_from_yaml(
             this parameter has no effect.
         Available parameters for creating <kind>:
         :param async_req bool
-        :param bool include_uninitialized: If true, partially initialized
-            resources are included in the response.
         :param str pretty: If 'true', then the output is pretty printed.
         :param str dry_run: When present, indicates that modifications
             should not be persisted. An invalid or unrecognized dryRun
