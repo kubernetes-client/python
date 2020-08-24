@@ -408,3 +408,140 @@ class TestUtils(unittest.TestCase):
             name="mock-pod-1", namespace=self.test_namespace, body={})
         app_api.delete_namespaced_deployment(
             name="mock", namespace=self.test_namespace, body={})
+
+    
+    def test_delete_apps_deployment_from_yaml(self):
+        """
+        Should delete a deployment 
+
+        First create deployment from file and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "apps-deployment.yaml")
+        app_api = client.AppsV1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace="default")
+        self.assertIsNotNone(dep)
+        """
+        Deployment should be created 
+
+        Now delete deployment using delete_from_yaml method
+        """
+        utils.delete_from_yaml(k8s_client, self.path_prefix + "apps-deployment.yaml")
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace="default")
+        self.assertIsNone(dep)
+
+    def test_delete_pod_from_yaml(self):
+        """
+        Should be able to delete pod
+
+        Create pod from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "core-pod.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        pod = core_api.read_namespaced_pod(name="myapp-pod",
+                                           namespace="default")
+        self.assertIsNotNone(pod)
+        """
+        Delete pod using delete_from_yaml
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "core-pod.yaml")
+        pod = core_api.read_namespaced_pod(name="myapp-pod",
+                                           namespace="default")
+        self.assertIsNone(pod)
+
+    def test_delete_service_from_yaml(self):
+        """
+        Should be able to delete a service
+
+        Create service from yaml first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "core-service.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        svc = core_api.read_namespaced_service(name="my-service",
+                                               namespace="default")
+        self.assertIsNotNone(svc)
+        """
+        Delete service from yaml
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "core-service.yaml")
+        svc = core_api.read_namespaced_service(name="my-service",
+                                               namespace="default")
+        self.assertIsNone(svc)
+
+    def test_delete_namespace_from_yaml(self):
+        """
+        Should be able to delete a namespace
+
+        Create namespace from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "core-namespace.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        nmsp = core_api.read_namespace(name="development")
+        self.assertIsNotNone(nmsp)
+        """
+        Delete namespace from yaml
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "core-namespace.yaml")
+        nmsp = core_api.read_namespace(name="development")
+        self.assertIsNone(nmsp)
+
+    def test_delete_rbac_role_from_yaml(self):
+        """
+        Should be able to delete rbac role
+
+        Create rbac role from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml")
+        rbac_api = client.RbacAuthorizationV1Api(k8s_client)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNotNone(rbac_role)
+        """
+        Delete rbac role from yaml
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml")
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNone(rbac_role)
+
+    def test_delete_rbac_role_from_yaml_with_verbose_enabled(self):
+        """
+        Should delete a rbac role with verbose enabled
+
+        Create rbac role with verbose enabled and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
+        rbac_api = client.RbacAuthorizationV1Api(k8s_client)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNotNone(rbac_role)
+        """
+        Delete the rbac role from yaml
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNone(rbac_role) 
+
+
+
+
+
