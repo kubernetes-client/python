@@ -13,14 +13,16 @@
 # under the License.
 
 import json
+import socket
 import time
 import unittest
+import urllib.request
 import uuid
 
 from kubernetes.client import api_client
 from kubernetes.client.api import core_v1_api
 from kubernetes.e2e_test import base
-from kubernetes.stream import stream
+from kubernetes.stream import stream, portforward
 from kubernetes.stream.ws_client import ERROR_CHANNEL
 
 
@@ -119,6 +121,7 @@ class TestClient(unittest.TestCase):
 
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
+
     def test_exit_code(self):
         client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
@@ -155,6 +158,121 @@ class TestClient(unittest.TestCase):
             self.assertIsNone(client.returncode)
             client.run_forever(timeout=10)
             self.assertEqual(client.returncode, value)
+
+        resp = api.delete_namespaced_pod(name=name, body={},
+                                         namespace='default')
+
+    def test_portforward_raw(self):
+        client = api_client.ApiClient(configuration=self.config)
+        api = core_v1_api.CoreV1Api(client)
+
+        name = 'portforward-raw-' + short_uuid()
+        pod_manifest = manifest_with_command(name, "while true;do nc -l -p 1234 -e /bin/cat; done")
+        resp = api.create_namespaced_pod(body=pod_manifest,
+                                         namespace='default')
+        self.assertEqual(name, resp.metadata.name)
+        self.assertTrue(resp.status.phase)
+
+        while True:
+            resp = api.read_namespaced_pod(name=name,
+                                           namespace='default')
+            self.assertEqual(name, resp.metadata.name)
+            self.assertTrue(resp.status.phase)
+            if resp.status.phase != 'Pending':
+                break
+            time.sleep(1)
+
+        pf1234 = portforward(api.connect_get_namespaced_pod_portforward,
+                         name, 'default',
+                         ports='1234')
+        sock1234 = pf1234.socket(1234)
+        sock1234.settimeout(1)
+        sent1234 = b'Test port 1234 forwarding...'
+        sock1234.sendall(sent1234)
+        reply1234 = b''
+        while True:
+            try:
+                reply1234 += sock1234.recv(1024)
+            except socket.timeout:
+                break
+        sock1234.close()
+        self.assertEqual(reply1234, sent1234)
+        self.assertIsNone(pf1234.error(1234))
+
+        pf9999 = portforward(api.connect_get_namespaced_pod_portforward,
+                         name, 'default',
+                         ports='9999:1234')
+        sock9999 = pf9999.socket(9999)
+        sock9999.settimeout(1)
+        sent9999 = b'Test port 9999 forwarding...'
+        sock9999.sendall(sent9999)
+        reply9999 = b''
+        while True:
+            try:
+                reply9999 += sock9999.recv(1024)
+            except socket.timeout:
+                break
+        self.assertEqual(reply9999, sent9999)
+        sock9999.close()
+        self.assertIsNone(pf9999.error(9999))
+
+        resp = api.delete_namespaced_pod(name=name, body={},
+                                         namespace='default')
+
+    def test_portforward_http(self):
+        client = api_client.ApiClient(configuration=self.config)
+        api = core_v1_api.CoreV1Api(client)
+
+        name = 'portforward-http-' +  short_uuid()
+        pod_manifest = {
+            'apiVersion': 'v1',
+            'kind': 'Pod',
+            'metadata': {
+                'name': name
+            },
+            'spec': {
+                'containers': [{
+                    'name': 'nginx',
+                    'image': 'nginx',
+                }]
+            }
+        }
+
+        resp = api.create_namespaced_pod(body=pod_manifest,
+                                         namespace='default')
+        self.assertEqual(name, resp.metadata.name)
+        self.assertTrue(resp.status.phase)
+
+        while True:
+            resp = api.read_namespaced_pod(name=name,
+                                           namespace='default')
+            self.assertEqual(name, resp.metadata.name)
+            self.assertTrue(resp.status.phase)
+            if resp.status.phase != 'Pending':
+                break
+            time.sleep(1)
+
+        def kubernetes_create_connection(address, *args, **kwargs):
+            dns_name = address[0]
+            if isinstance(dns_name, bytes):
+                dns_name = dns_name.decode()
+            dns_name = dns_name.split(".")
+            if len(dns_name) != 3 or dns_name[2] != "kubernetes":
+                return socket_create_connection(address, *args, **kwargs)
+            pf = portforward(api.connect_get_namespaced_pod_portforward,
+                             dns_name[0], dns_name[1], ports=str(address[1]))
+            return pf.socket(address[1])
+
+        socket_create_connection = socket.create_connection
+        try:
+            socket.create_connection = kubernetes_create_connection
+            response = urllib.request.urlopen('http://%s.default.kubernetes/' % name)
+            html = response.read().decode('utf-8')
+        finally:
+            socket.create_connection = socket_create_connection
+
+        self.assertEqual(response.status, 200)
+        self.assertTrue('<h1>Welcome to nginx!</h1>' in html)
 
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
