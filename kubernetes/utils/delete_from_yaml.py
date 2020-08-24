@@ -1,3 +1,18 @@
+# Copyright 2018 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 import re
 from os import path
 
@@ -73,13 +88,32 @@ def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwar
         instances for each object that failed to delete.
     """
     api_exceptions = []
-    try:
-        # call function delete_from_yaml_single_item 
-        delete_from_yaml_single_item(
-            k8s_client, yml_document, verbose, namespace=namespace, **kwargs
-        )
-    except client.rest.ApiException as api_exception:
-        api_exceptions.append(api_exception)
+
+    if "List" in yml_document["kind"]:
+        #For cases where it is List Pod/Service...
+        # For such cases iterate over the items
+        kind = yml_document["kind"].replace("List","")
+        for yml_doc in yml_document["items"]:
+            if kind!="":
+                yml_doc["apiVersion"]=yml_document["apiVersion"]
+                yml_doc["kind"]= kind
+            try:
+                # call function delete_from_yaml_single_item 
+                delete_from_yaml_single_item(
+                    k8s_client, yml_doc, verbose, namespace=namespace, **kwargs
+                )
+            except client.rest.ApiException as api_exception:
+                api_exceptions.append(api_exception)
+    
+    else:
+
+        try:
+            # call function delete_from_yaml_single_item 
+            delete_from_yaml_single_item(
+                k8s_client, yml_document, verbose, namespace=namespace, **kwargs
+            )
+        except client.rest.ApiException as api_exception:
+            api_exceptions.append(api_exception)
 
     if api_exceptions:
         raise FailToDeleteError(api_exceptions)

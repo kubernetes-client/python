@@ -541,6 +541,75 @@ class TestUtils(unittest.TestCase):
             name="pod-reader", namespace="default")
         self.assertIsNone(rbac_role) 
 
+    # Deletion Tests for multi resource objects in yaml files
+
+    def test_delete_from_multi_resource_yaml(self):
+        """
+        Should be able to delete service and replication controller 
+        from the multi resource yaml files
+
+        Create the resources first and ensure they exist
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        svc = core_api.read_namespaced_service(name="mock",
+                                               namespace="default")
+        self.assertIsNotNone(svc)
+        ctr = core_api.read_namespaced_replication_controller(
+            name="mock", namespace="default")
+        self.assertIsNotNone(ctr)
+        """
+        Delete service and replication controller using yaml file
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource.yaml")
+        svc = core_api.read_namespaced_service(name="mock",
+                                               namespace="default")
+        self.assertIsNone(svc)
+        ctr = core_api.read_namespaced_replication_controller(
+            name="mock", namespace="default")
+        self.assertIsNone(ctr)
+    
+    def test_delete_from_list_in_multi_resource_yaml(self):
+        """
+        Should delete the items in PodList and the deployment in the yaml file
+
+        Create the items first and ensure they exist
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
+        pod_0 = core_api.read_namespaced_pod(
+            name="mock-pod-0", namespace="default")
+        self.assertIsNotNone(pod_0)
+        pod_1 = core_api.read_namespaced_pod(
+            name="mock-pod-1", namespace="default")
+        self.assertIsNotNone(pod_1)
+        dep = app_api.read_namespaced_deployment(
+            name="mock", namespace="default")
+        self.assertIsNotNone(dep)
+        """
+        Delete the PodList and Deployment using the yaml file
+        """
+        utils.delete_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
+        pod_0 = core_api.read_namespaced_pod(
+            name="mock-pod-0", namespace="default")
+        self.assertIsNone(pod_0)
+        pod_1 = core_api.read_namespaced_pod(
+            name="mock-pod-1", namespace="default")
+        self.assertIsNone(pod_1)
+        dep = app_api.read_namespaced_deployment(
+            name="mock", namespace="default")
+        self.assertIsNone(dep)
+    
+
+
+
 
 
 
