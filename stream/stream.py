@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import types
+
 from . import ws_client
 
 
@@ -19,19 +21,10 @@ def stream(func, *args, **kwargs):
     """Stream given API call using websocket.
     Extra kwarg: capture-all=True - captures all stdout+stderr for use with WSClient.read_all()"""
 
-    def _intercept_request_call(*args, **kwargs):
-        # old generated code's api client has config. new ones has
-        # configuration
-        try:
-            config = func.__self__.api_client.configuration
-        except AttributeError:
-            config = func.__self__.api_client.config
-
-        return ws_client.websocket_call(config, *args, **kwargs)
-
-    prev_request = func.__self__.api_client.request
+    api_client = func.__self__.api_client
+    prev_request = api_client.request
     try:
-        func.__self__.api_client.request = _intercept_request_call
+        api_client.request = types.MethodType(ws_client.websocket_call, api_client)
         return func(*args, **kwargs)
     finally:
-        func.__self__.api_client.request = prev_request
+        api_client.request = prev_request
