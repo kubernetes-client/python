@@ -12,26 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import functools
+
 from . import ws_client
 
 
-def stream(func, *args, **kwargs):
-    """Stream given API call using websocket.
-    Extra kwarg: capture-all=True - captures all stdout+stderr for use with WSClient.read_all()"""
-
-    def _intercept_request_call(*args, **kwargs):
-        # old generated code's api client has config. new ones has
-        # configuration
-        try:
-            config = func.__self__.api_client.configuration
-        except AttributeError:
-            config = func.__self__.api_client.config
-
-        return ws_client.websocket_call(config, *args, **kwargs)
-
-    prev_request = func.__self__.api_client.request
+def _websocket_reqeust(websocket_request, api_method, *args, **kwargs):
+    """Override the ApiClient.request method with an alternative websocket based
+    method and call the supplied Kubernetes API method with that in place."""
+    api_client = api_method.__self__.api_client
+    # old generated code's api client has config. new ones has configuration
     try:
-        func.__self__.api_client.request = _intercept_request_call
-        return func(*args, **kwargs)
+        configuration = api_client.configuration
+    except AttributeError:
+        configuration = api_client.config
+    prev_request = api_client.request
+    try:
+        api_client.request = functools.partial(websocket_request, configuration)
+        return api_method(*args, **kwargs)
     finally:
-        func.__self__.api_client.request = prev_request
+        api_client.request = prev_request
+
+
+stream = functools.partial(_websocket_reqeust, ws_client.websocket_call)
