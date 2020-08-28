@@ -283,18 +283,9 @@ def create_websocket(configuration, url, headers=None):
     return websocket
 
 
-def _configuration(api_client):
-    # old generated code's api client has config. new ones has
-    # configuration
-    try:
-        return api_client.configuration
-    except AttributeError:
-        return api_client.config
-
-
-def websocket_call(api_client, _method, url, **kwargs):
+def websocket_call(configuration, _method, url, **kwargs):
     """An internal function to be called in api-client when a websocket
-    connection is required. args and kwargs are the parameters of
+    connection is required. method, url, and kwargs are the parameters of
     apiClient.request method."""
 
     url = get_websocket_url(url, kwargs.get("query_params"))
@@ -304,7 +295,7 @@ def websocket_call(api_client, _method, url, **kwargs):
     capture_all = kwargs.get("capture_all", True)
 
     try:
-        client = WSClient(_configuration(api_client), url, headers, capture_all)
+        client = WSClient(configuration, url, headers, capture_all)
         if not _preload_content:
             return client
         client.run_forever(timeout=_request_timeout)

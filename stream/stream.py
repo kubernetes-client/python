@@ -12,19 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import types
+import functools
 
 from . import ws_client
 
 
-def stream(func, *args, **kwargs):
-    """Stream given API call using websocket.
-    Extra kwarg: capture-all=True - captures all stdout+stderr for use with WSClient.read_all()"""
-
-    api_client = func.__self__.api_client
+def _websocket_reqeust(websocket_request, api_method, *args, **kwargs):
+    """Override the ApiClient.request method with an alternative websocket based
+    method and call the supplied Kubernetes API method with that in place."""
+    api_client = api_method.__self__.api_client
+    # old generated code's api client has config. new ones has configuration
+    try:
+        configuration = api_client.configuration
+    except AttributeError:
+        configuration = api_client.config
     prev_request = api_client.request
     try:
-        api_client.request = types.MethodType(ws_client.websocket_call, api_client)
-        return func(*args, **kwargs)
+        api_client.request = functools.partial(websocket_request, configuration)
+        return api_method(*args, **kwargs)
     finally:
         api_client.request = prev_request
+
+
+stream = functools.partial(_websocket_reqeust, ws_client.websocket_call)
