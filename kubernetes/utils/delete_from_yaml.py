@@ -78,6 +78,7 @@ def delete_from_dict(k8s_client,yml_document, verbose,namespace="default",**kwar
     data: a dictionary holding valid kubernetes objects
     verbose: If True, print confirmation from the create action.
         Default is False.
+    yml_document: dictonary holding valid kubernetes object
     namespace: string. Contains the namespace to create all
         resources inside. The namespace must preexist otherwise
         the resource creation will fail. If the API object in
@@ -145,14 +146,14 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
         name = yml_document["metadata"]["name"]
         #call function to delete from namespace
         res = getattr(k8s_api,"delete_namespaced_{}".format(kind))(
-         name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5),**kwargs)
+         name=name,body=client.V1DeleteOptions(propagation_policy="Background", grace_period_seconds=5),**kwargs)
 
     else:
         # get name of object to delete
         name = yml_document["metadata"]["name"]
         kwargs.pop('namespace', None)
         res = getattr(k8s_api,"delete_{}".format(kind))(
-         name=name,body=client.V1DeleteOptions(propagation_policy="Foreground", grace_period_seconds=5),**kwargs)
+         name=name,body=client.V1DeleteOptions(propagation_policy="Background", grace_period_seconds=5),**kwargs)
     if verbose:
         msg = "{0} deleted.".format(kind)
         if hasattr(res, 'status'):
@@ -176,3 +177,4 @@ class FailToDeleteError(Exception):
                 api_exception.reason, api_exception.body)
         return msg
         
+
