@@ -429,8 +429,6 @@ class TestUtils(unittest.TestCase):
         Now delete deployment using delete_from_yaml method
         """
         utils.delete_from_yaml(k8s_client, self.path_prefix + "apps-deployment.yaml")
-        dep = app_api.read_namespaced_deployment(name="nginx-app",
-                                                 namespace="default")
         self.assertIsNone(dep)
 
     def test_delete_pod_from_yaml(self):
@@ -451,8 +449,6 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "core-pod.yaml")
-        pod = core_api.read_namespaced_pod(name="myapp-pod",
-                                           namespace="default")
         self.assertIsNone(pod)
 
     def test_delete_service_from_yaml(self):
