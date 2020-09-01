@@ -249,7 +249,7 @@ class PortForward:
             raise ValueError("Invalid port number")
         return self.ports[port_number].socket
 
-    def error(self, port_number):
+    def error_channel(self, port_number):
         if port_number not in self.ports:
             raise ValueError("Invalid port number")
         return self.ports[port_number].error
@@ -276,7 +276,7 @@ class PortForward:
 
             def setsockopt(self, level, optname, value):
                 # The following socket option is not valid with a socket created from socketpair,
-                # and is set when creating an SSLSocket from this socket.
+                # and is set by the http.client.HTTPConnection.connect method.
                 if level == socket.IPPROTO_TCP and optname == socket.TCP_NODELAY:
                     return
                 self._socket.setsockopt(level, optname, value)
@@ -288,8 +288,10 @@ class PortForward:
         python_ports = {}
         rlist = []
         for port in self.ports.values():
+            # Setup the data channel for this port number
             channel_ports.append(port)
             channel_initialized.append(False)
+            # Setup the error channel for this port number
             channel_ports.append(port)
             channel_initialized.append(False)
             python_ports[port.python] = port
@@ -455,7 +457,8 @@ def portforward_call(configuration, _method, url, **kwargs):
         if key == 'ports':
             for port in value.split(','):
                 try:
-                    port = int(port)
+                    # The last specified port is the remote port
+                    port = int(port.split(':')[-1])
                     if not (0 < port < 65536):
                         raise ValueError
                     ports.append(port)
