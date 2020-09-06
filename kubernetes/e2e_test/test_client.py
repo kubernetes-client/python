@@ -13,6 +13,7 @@
 # under the License.
 
 import json
+import select
 import socket
 import time
 import unittest
@@ -167,7 +168,10 @@ class TestClient(unittest.TestCase):
         api = core_v1_api.CoreV1Api(client)
 
         name = 'portforward-raw-' + short_uuid()
-        pod_manifest = manifest_with_command(name, "while true;do nc -l -p 1234 -e /bin/cat; done")
+        pod_manifest = manifest_with_command(
+            name,
+            'for port in 1234 1235;do ((while true;do nc -l -p $port -e /bin/cat; done)&);done;sleep 60',
+        )
         resp = api.create_namespaced_pod(body=pod_manifest,
                                          namespace='default')
         self.assertEqual(name, resp.metadata.name)
@@ -182,39 +186,61 @@ class TestClient(unittest.TestCase):
                 break
             time.sleep(1)
 
-        pf1234 = portforward(api.connect_get_namespaced_pod_portforward,
+        pf = portforward(api.connect_get_namespaced_pod_portforward,
                          name, 'default',
-                         ports='1234')
-        sock1234 = pf1234.socket(1234)
-        sock1234.settimeout(1)
+                         ports='1234,1235')
+        sock1234 = pf.socket(1234)
+        sock1235 = pf.socket(1235)
+        sock1234.setblocking(True)
+        sock1235.setblocking(True)
         sent1234 = b'Test port 1234 forwarding...'
+        sent1235 = b'Test port 1235 forwarding...'
         sock1234.sendall(sent1234)
+        sock1235.sendall(sent1235)
         reply1234 = b''
+        reply1235 = b''
         while True:
-            try:
-                reply1234 += sock1234.recv(1024)
-            except socket.timeout:
+            rlist = []
+            if sock1234.fileno() != -1:
+                rlist.append(sock1234)
+            if sock1235.fileno() != -1:
+                rlist.append(sock1235)
+            if not rlist:
                 break
-        sock1234.close()
+            r, _w, _x = select.select(rlist, [], [], 1)
+            if not r:
+                break
+            if sock1234 in r:
+                data = sock1234.recv(1024)
+                if data:
+                    reply1234 += data
+                else:
+                    assert False, 'Unexpected sock1234 close'
+            if sock1235 in r:
+                data = sock1235.recv(1024)
+                if data:
+                    reply1235 += data
+                else:
+                    assert False, 'Unexpected sock1235 close'
         self.assertEqual(reply1234, sent1234)
-        self.assertIsNone(pf1234.error(1234))
-
-        pf9999 = portforward(api.connect_get_namespaced_pod_portforward,
-                         name, 'default',
-                         ports='9999:1234')
-        sock9999 = pf9999.socket(9999)
-        sock9999.settimeout(1)
-        sent9999 = b'Test port 9999 forwarding...'
-        sock9999.sendall(sent9999)
-        reply9999 = b''
-        while True:
-            try:
-                reply9999 += sock9999.recv(1024)
-            except socket.timeout:
-                break
-        self.assertEqual(reply9999, sent9999)
-        sock9999.close()
-        self.assertIsNone(pf9999.error(9999))
+        self.assertEqual(reply1235, sent1235)
+        for sock in (sock1234, sock1235):
+            sent = b'Another test using fileno %s' % str(sock.fileno()).encode()
+            sock.sendall(sent)
+            reply = b''
+            while True:
+                r, _w, _x = select.select([sock], [], [], 1)
+                if not r:
+                    break
+                data = sock.recv(1024)
+                if data:
+                    reply += data
+                else:
+                    assert False, 'Unexpected sock close'
+            self.assertEqual(reply, sent)
+            sock.close()
+        self.assertIsNone(pf.error(1234))
+        self.assertIsNone(pf.error(1235))
 
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
