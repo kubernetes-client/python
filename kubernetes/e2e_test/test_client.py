@@ -170,7 +170,11 @@ class TestClient(unittest.TestCase):
         name = 'portforward-raw-' + short_uuid()
         pod_manifest = manifest_with_command(
             name,
-            'for port in 1234 1235;do ((while true;do nc -l -p $port -e /bin/cat; done)&);done;sleep 60',
+            ' '.join((
+                '((while true;do nc -l -p 1234 -e /bin/cat; done)&);',
+                '((while true;do nc -l -p 1235 -e /bin/cat; done)&);',
+                'sleep 60',
+            ))
         )
         resp = api.create_namespaced_pod(body=pod_manifest,
                                          namespace='default')
@@ -188,7 +192,8 @@ class TestClient(unittest.TestCase):
 
         pf = portforward(api.connect_get_namespaced_pod_portforward,
                          name, 'default',
-                         ports='1234,1235')
+                         ports='1234,1235,1236')
+        self.assertTrue(pf.connected)
         sock1234 = pf.socket(1234)
         sock1235 = pf.socket(1235)
         sock1234.setblocking(True)
@@ -212,19 +217,23 @@ class TestClient(unittest.TestCase):
                 break
             if sock1234 in r:
                 data = sock1234.recv(1024)
-                if data:
-                    reply1234 += data
-                else:
-                    assert False, 'Unexpected sock1234 close'
+                self.assertNotEqual(data, b'', "Unexpected socket close")
+                reply1234 += data
             if sock1235 in r:
                 data = sock1235.recv(1024)
-                if data:
-                    reply1235 += data
-                else:
-                    assert False, 'Unexpected sock1235 close'
+                self.assertNotEqual(data, b'', "Unexpected socket close")
+                reply1235 += data
         self.assertEqual(reply1234, sent1234)
         self.assertEqual(reply1235, sent1235)
+        self.assertTrue(pf.connected)
+
+        sock = pf.socket(1236)
+        self.assertRaises(BrokenPipeError, sock.sendall, b'This should fail...')
+        self.assertIsNotNone(pf.error(1236))
+        sock.close()
+
         for sock in (sock1234, sock1235):
+            self.assertTrue(pf.connected)
             sent = b'Another test using fileno %s' % str(sock.fileno()).encode()
             sock.sendall(sent)
             reply = b''
@@ -233,12 +242,11 @@ class TestClient(unittest.TestCase):
                 if not r:
                     break
                 data = sock.recv(1024)
-                if data:
-                    reply += data
-                else:
-                    assert False, 'Unexpected sock close'
+                self.assertNotEqual(data, b'', "Unexpected socket close")
+                reply += data
             self.assertEqual(reply, sent)
             sock.close()
+        self.assertFalse(pf.connected)
         self.assertIsNone(pf.error(1234))
         self.assertIsNone(pf.error(1235))
 

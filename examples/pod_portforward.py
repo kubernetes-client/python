@@ -33,7 +33,7 @@ from kubernetes.stream import portforward
 # to the go client, which opens a local port that the go application then has
 # to open to get a socket to transmit data.
 #
-# This simplifies the python application, there is not local port to worry
+# This simplifies the python application, there is not a local port to worry
 # about if that port number is available. Nor does the python application have
 # to then deal with opening this local port. The socket used to transmit data
 # is immediately provided to the python application.
