@@ -322,19 +322,21 @@ class PortForward:
                 rlist.append(self.websocket)
                 if kubernetes_data:
                     wlist.append(self.websocket)
-            all_closed = True
+            local_all_closed = True
             for port in self.local_ports.values():
                 if port.python.fileno() != -1:
-                    if port.data:
-                        wlist.append(port.python)
-                        all_closed = False
+                    if self.websocket.connected:
+                        rlist.append(port.python)
+                        if port.data:
+                            wlist.append(port.python)
+                        local_all_closed = False
                     else:
-                        if self.websocket.connected:
-                            rlist.append(port.python)
-                            all_closed = False
+                        if port.data:
+                            wlist.append(port.python)
+                            local_all_closed = False
                         else:
                             port.python.close()
-            if all_closed and (not self.websocket.connected or not kubernetes_data):
+            if local_all_closed and not (self.websocket.connected and kubernetes_data):
                 self.websocket.close()
                 return
             r, w, _ = select.select(rlist, wlist, [])
