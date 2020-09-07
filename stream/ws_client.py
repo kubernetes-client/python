@@ -249,6 +249,10 @@ class PortForward:
             daemon=True
         ).start()
 
+    @property
+    def connected(self):
+        return self.websocket.connected
+
     def socket(self, port_number):
         if port_number not in self.local_ports:
             raise ValueError("Invalid port number")
@@ -276,8 +280,8 @@ class PortForward:
             s, self.python = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
             # The self.socket half of the pair is used by the python application to send
             # and receive data to the eventual pod port. It is wrapped in the _Socket class
-            # because a socket pair is an AF_UNIX socket, not a AF_NET socket. This allows
-            # intercepting setting AF_INET socket options that would error against an AD_UNIX
+            # because a socket pair is an AF_UNIX socket, not a AF_INET socket. This allows
+            # intercepting setting AF_INET socket options that would error against an AF_UNIX
             # socket.
             self.socket = self._Socket(s)
             # Data accumulated from the websocket to be sent to the python application.
@@ -325,17 +329,17 @@ class PortForward:
             local_all_closed = True
             for port in self.local_ports.values():
                 if port.python.fileno() != -1:
-                    if self.websocket.connected:
-                        rlist.append(port.python)
-                        if port.data:
-                            wlist.append(port.python)
-                        local_all_closed = False
-                    else:
+                    if port.error or not self.websocket.connected:
                         if port.data:
                             wlist.append(port.python)
                             local_all_closed = False
                         else:
                             port.python.close()
+                    else:
+                        rlist.append(port.python)
+                        if port.data:
+                            wlist.append(port.python)
+                        local_all_closed = False
             if local_all_closed and not (self.websocket.connected and kubernetes_data):
                 self.websocket.close()
                 return
