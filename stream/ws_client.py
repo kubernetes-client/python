@@ -243,11 +243,12 @@ class PortForward:
         # There is a thread run per PortForward instance which performs the translation between the
         # raw socket data sent by the python application and the websocket protocol. This thread
         # terminates after either side has closed all ports, and after flushing all pending data.
-        threading.Thread(
+        proxy = threading.Thread(
             name="Kubernetes port forward proxy: %s" % ', '.join([str(port) for port in ports]),
-            target=self._proxy,
-            daemon=True
-        ).start()
+            target=self._proxy
+        )
+        proxy.daemon = True
+        proxy.start()
 
     @property
     def connected(self):
@@ -272,7 +273,7 @@ class PortForward:
             # The remote port number
             self.port_number = port_number
             # The websocket channel byte number for this port
-            self.channel = bytes([ix * 2])
+            self.channel = six.int2byte(ix * 2)
             # A socket pair is created to provide a means of translating the data flow
             # between the python application and the kubernetes websocket. The self.python
             # half of the socket pair is used by the _proxy method to receive and send data
@@ -350,9 +351,9 @@ class PortForward:
                     if opcode == ABNF.OPCODE_BINARY:
                         if not frame.data:
                             raise RuntimeError("Unexpected frame data size")
-                        channel = frame.data[0]
+                        channel = six.byte2int(frame.data)
                         if channel >= len(channel_ports):
-                            raise RuntimeError("Unexpected channel number: " + str(channel))
+                            raise RuntimeError("Unexpected channel number: %s" % channel)
                         port = channel_ports[channel]
                         if channel_initialized[channel]:
                             if channel % 2:
@@ -366,14 +367,14 @@ class PortForward:
                                 raise RuntimeError(
                                     "Unexpected initial channel frame data size"
                                 )
-                            port_number = frame.data[1] + (frame.data[2] * 256)
+                            port_number = six.byte2int(frame.data[1:2]) + (six.byte2int(frame.data[2:3]) * 256)
                             if port_number != port.port_number:
                                 raise RuntimeError(
-                                    "Unexpected port number in initial channel frame: " + str(port_number)
+                                    "Unexpected port number in initial channel frame: %s" % port_number
                                 )
                             channel_initialized[channel] = True
                     elif opcode not in (ABNF.OPCODE_PING, ABNF.OPCODE_PONG, ABNF.OPCODE_CLOSE):
-                        raise RuntimeError("Unexpected websocket opcode: " + str(opcode))
+                        raise RuntimeError("Unexpected websocket opcode: %s" % opcode)
                 else:
                     port = local_ports[sock]
                     data = port.python.recv(1024 * 1024)
@@ -383,8 +384,7 @@ class PortForward:
                             ABNF.OPCODE_BINARY,
                         ).format()
                     else:
-                        if not port.data:
-                            port.python.close()
+                        port.python.close()
             for sock in w:
                 if sock == self.websocket:
                     sent = self.websocket.sock.send(kubernetes_data)
