@@ -124,6 +124,7 @@ def portforward_commands(api_instance):
     # urllib.request. The same can be done with urllib3.util.connection.create_connection
     # if the "requests" package is used.
     socket_create_connection = socket.create_connection
+
     def kubernetes_create_connection(address, *args, **kwargs):
         dns_name = address[0]
         if isinstance(dns_name, bytes):
@@ -144,7 +145,8 @@ def portforward_commands(api_instance):
                         port = service_port.target_port
                         break
                 else:
-                    raise RuntimeError("Unable to find service port: %s" % port)
+                    raise RuntimeError(
+                        "Unable to find service port: %s" % port)
                 label_selector = []
                 for key, value in service.spec.selector.items():
                     label_selector.append("%s=%s" % (key, value))
@@ -164,16 +166,21 @@ def portforward_commands(api_instance):
                             continue
                         break
                     else:
-                        raise RuntimeError("Unable to find service port name: %s" % port)
+                        raise RuntimeError(
+                            "Unable to find service port name: %s" % port)
             elif dns_name[1] != 'pod':
-                raise RuntimeError("Unsupported resource type: %s" % dns_name[1])
+                raise RuntimeError(
+                    "Unsupported resource type: %s" %
+                    dns_name[1])
         pf = portforward(api_instance.connect_get_namespaced_pod_portforward,
                          name, namespace, ports=str(port))
         return pf.socket(port)
     socket.create_connection = kubernetes_create_connection
 
-    # Access the nginx http server using the "<pod-name>.pod.<namespace>.kubernetes" dns name.
-    response = urllib.request.urlopen('http://%s.pod.default.kubernetes' % name)
+    # Access the nginx http server using the
+    # "<pod-name>.pod.<namespace>.kubernetes" dns name.
+    response = urllib.request.urlopen(
+        'http://%s.pod.default.kubernetes' % name)
     html = response.read().decode('utf-8')
     response.close()
     print('Status:', response.status)
