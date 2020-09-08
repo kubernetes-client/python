@@ -17,7 +17,6 @@ import select
 import socket
 import time
 import unittest
-import urllib.request
 import uuid
 
 from kubernetes.client import api_client
@@ -26,6 +25,7 @@ from kubernetes.e2e_test import base
 from kubernetes.stream import stream, portforward
 from kubernetes.stream.ws_client import ERROR_CHANNEL
 
+import six.moves.urllib.request as urllib_request
 
 def short_uuid():
     id = str(uuid.uuid4())
@@ -228,7 +228,7 @@ class TestClient(unittest.TestCase):
         self.assertTrue(pf.connected)
 
         sock = pf.socket(1236)
-        self.assertRaises(BrokenPipeError, sock.sendall, b'This should fail...')
+        self.assertRaises(socket.error, sock.sendall, b'This should fail...')
         self.assertIsNotNone(pf.error(1236))
         sock.close()
 
@@ -246,6 +246,7 @@ class TestClient(unittest.TestCase):
                 reply += data
             self.assertEqual(reply, sent)
             sock.close()
+        time.sleep(1)
         self.assertFalse(pf.connected)
         self.assertIsNone(pf.error(1234))
         self.assertIsNone(pf.error(1235))
@@ -300,12 +301,12 @@ class TestClient(unittest.TestCase):
         socket_create_connection = socket.create_connection
         try:
             socket.create_connection = kubernetes_create_connection
-            response = urllib.request.urlopen('http://%s.default.kubernetes/' % name)
+            response = urllib_request.urlopen('http://%s.default.kubernetes/' % name)
             html = response.read().decode('utf-8')
         finally:
             socket.create_connection = socket_create_connection
 
-        self.assertEqual(response.status, 200)
+        self.assertEqual(response.code, 200)
         self.assertTrue('<h1>Welcome to nginx!</h1>' in html)
 
         resp = api.delete_namespaced_pod(name=name, body={},

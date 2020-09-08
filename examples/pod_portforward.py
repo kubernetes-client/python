@@ -19,7 +19,8 @@ Shows the functionality of portforward streaming using an nginx container.
 import select
 import socket
 import time
-import urllib.request
+
+import six.moves.urllib.request as urllib_request
 
 from kubernetes import config
 from kubernetes.client import Configuration
@@ -179,11 +180,11 @@ def portforward_commands(api_instance):
 
     # Access the nginx http server using the
     # "<pod-name>.pod.<namespace>.kubernetes" dns name.
-    response = urllib.request.urlopen(
+    response = urllib_request.urlopen(
         'http://%s.pod.default.kubernetes' % name)
     html = response.read().decode('utf-8')
     response.close()
-    print('Status:', response.status)
+    print('Status Code: %s' % response.code)
     print(html)
 
 
