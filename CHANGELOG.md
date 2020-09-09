@@ -1,3 +1,13 @@
+# v12.0.0b1
+
+Kubernetes API Version: 1.16.14
+
+**New Feature:**
+- Accept and use client certificates from authentication plugins [kubernetes-client/python-base#205](https://github.com/kubernetes-client/python-base/pull/205)
+
+**Bug Fix:**
+- Return when object is None in FileOrData class [kubernetes-client/python-base#201](https://github.com/kubernetes-client/python-base/pull/201)
+
 # v12.0.0a1
 
 Kubernetes API Version: 1.16.14
