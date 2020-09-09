@@ -1265,7 +1265,7 @@ class TestKubeConfigLoader(BaseTestCase):
         #py3 (won't have unicode) vs py2 (requires it)
         try:
             unicode('')
-            config_file_like_object.write(unicode(yaml.safe_dump(self.TEST_KUBE_CONFIG)), errors='replace')
+            config_file_like_object.write(unicode(yaml.safe_dump(self.TEST_KUBE_CONFIG), errors='replace'))
         except NameError:
             config_file_like_object.write(yaml.safe_dump(self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
