@@ -14,6 +14,7 @@
 
 import base64
 import datetime
+import io
 import json
 import os
 import shutil
@@ -1247,7 +1248,7 @@ class TestKubeConfigLoader(BaseTestCase):
         finally:
             shutil.rmtree(temp_dir)
 
-    def test_load_kube_config(self):
+    def test_load_kube_config_from_file_path(self):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         config_file = self._create_temp_file(
@@ -1257,10 +1258,32 @@ class TestKubeConfigLoader(BaseTestCase):
                          client_configuration=actual)
         self.assertEqual(expected, actual)
 
+    def test_load_kube_config_from_file_like_object(self):
+        expected = FakeConfig(host=TEST_HOST,
+                              token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
+        config_file_like_object = io.StringIO()
+        # py3 (won't have unicode) vs py2 (requires it)
+        try:
+            unicode('')
+            config_file_like_object.write(
+                unicode(
+                    yaml.safe_dump(
+                        self.TEST_KUBE_CONFIG),
+                    errors='replace'))
+        except NameError:
+            config_file_like_object.write(
+                yaml.safe_dump(
+                    self.TEST_KUBE_CONFIG))
+        actual = FakeConfig()
+        load_kube_config(
+            config_file=config_file_like_object,
+            context="simple_token",
+            client_configuration=actual)
+        self.assertEqual(expected, actual)
+
     def test_load_kube_config_from_dict(self):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
-
         actual = FakeConfig()
         load_kube_config_from_dict(config_dict=self.TEST_KUBE_CONFIG,
                                    context="simple_token",
