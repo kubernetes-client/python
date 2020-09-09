@@ -14,9 +14,9 @@
 
 import base64
 import datetime
+import io
 import json
 import os
-import io
 import shutil
 import tempfile
 import unittest
@@ -1272,13 +1272,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     errors='replace'))
         except NameError:
             config_file_like_object.write(
-                    yaml.safe_dump(
-                        self.TEST_KUBE_CONFIG))
+                yaml.safe_dump(
+                    self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
         load_kube_config(
-                config_file=config_file_like_object,
-                context="simple_token",
-                client_configuration=actual)
+            config_file=config_file_like_object,
+            context="simple_token",
+            client_configuration=actual)
         self.assertEqual(expected, actual)
 
     def test_load_kube_config_from_dict(self):

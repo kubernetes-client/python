@@ -19,7 +19,6 @@ import datetime
 import json
 import logging
 import os
-import io
 import platform
 import subprocess
 import tempfile
