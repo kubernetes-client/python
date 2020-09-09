@@ -1262,15 +1262,23 @@ class TestKubeConfigLoader(BaseTestCase):
         expected = FakeConfig(host=TEST_HOST,
                               token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64)
         config_file_like_object = io.StringIO()
-        #py3 (won't have unicode) vs py2 (requires it)
+        # py3 (won't have unicode) vs py2 (requires it)
         try:
             unicode('')
-            config_file_like_object.write(unicode(yaml.safe_dump(self.TEST_KUBE_CONFIG), errors='replace'))
+            config_file_like_object.write(
+                unicode(
+                    yaml.safe_dump(
+                        self.TEST_KUBE_CONFIG),
+                    errors='replace'))
         except NameError:
-            config_file_like_object.write(yaml.safe_dump(self.TEST_KUBE_CONFIG))
+            config_file_like_object.write(
+                    yaml.safe_dump(
+                        self.TEST_KUBE_CONFIG))
         actual = FakeConfig()
-        load_kube_config(config_file=config_file_like_object, context="simple_token",
-                         client_configuration=actual)
+        load_kube_config(
+                config_file=config_file_like_object,
+                context="simple_token",
+                client_configuration=actual)
         self.assertEqual(expected, actual)
 
     def test_load_kube_config_from_dict(self):
@@ -1674,7 +1682,6 @@ class TestKubeConfigMerger(BaseTestCase):
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.configuration.api_key['authorization'])
-
 
     def test_save_changes(self):
         kubeconfigs = self._create_multi_config()
