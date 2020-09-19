@@ -55,8 +55,6 @@ command:
 scripts/update-client.sh
 ```
 
-Remove the tests directory (ref: https://github.com/kubernetes-client/python/commit/ec9c944f076999543cd2122aff2d86f969d82548).
-
 Commit changes (should be only version number changes) to the release branch.
 Name the commit something like "Update version constants for XXX release".
 
@@ -84,8 +82,9 @@ For more details, see [#974](https://github.com/kubernetes-client/python/issues/
 
 3. Add ability to the client to be used as Context Manager [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
 
-Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does, then create
-your PR for review.
+4. Remove the tests directory (ref: https://github.com/kubernetes-client/python/commit/ec9c944f076999543cd2122aff2d86f969d82548). See the [upstream issue](https://github.com/OpenAPITools/openapi-generator/issues/5377) for more information.
+
+Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does, then create your PR for review.
 
 Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply
 changes from the above functionalities. **As mentioned above the script should be run after finishing the section `Update release tags`. Also, ensure a clean working directory before applying the script**
