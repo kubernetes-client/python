@@ -429,7 +429,17 @@ class TestUtils(unittest.TestCase):
         Now delete deployment using delete_from_yaml method
         """
         utils.delete_from_yaml(k8s_client, self.path_prefix + "apps-deployment.yaml")
-        self.assertIsNone(dep)
+        deployment_status=False
+        try:
+            response=app_api.read_namespaced_deployment(name="nginx-app",namespace="default")
+            deployment_status=True
+        except Exception as e:
+            self.assertFalse(deployment_status)
+
+        self.assertFalse(deployment_status)
+
+
+        
 
     def test_delete_pod_from_yaml(self):
         """
@@ -449,7 +459,15 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "core-pod.yaml")
-        self.assertIsNone(pod)
+        pod_status=False
+        try:
+            response = core_api.read_namespaced_pod(name="myapp-pod",
+                                            namespace="default")
+            pod_status=True
+        except Exception as e:
+            self.assertFalse(pod_status)
+        self.assertFalse(pod_status)
+            
 
     def test_delete_service_from_yaml(self):
         """
@@ -469,9 +487,16 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "core-service.yaml")
-        svc = core_api.read_namespaced_service(name="my-service",
-                                               namespace="default")
-        self.assertIsNone(svc)
+        service_status=False
+        try:
+            response = core_api.read_namespaced_service(name="my-service",namespace="default")
+            service_status=True 
+        except Exception as e:
+            self.assertFalse(service_status)
+        self.assertFalse(service_status)
+
+
+
 
     def test_delete_namespace_from_yaml(self):
         """
@@ -490,8 +515,15 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "core-namespace.yaml")
-        nmsp = core_api.read_namespace(name="development")
-        self.assertIsNone(nmsp)
+        namespace_status=False
+        try:
+            response=core_api.read_namespace(name="development")
+            namespace_status=True
+        except Exception as e:
+            self.assertFalse(namespace_status)
+        self.assertFalse(namespace_status)
+
+
 
     def test_delete_rbac_role_from_yaml(self):
         """
@@ -511,9 +543,14 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "rbac-role.yaml")
-        rbac_role = rbac_api.read_namespaced_role(
+        rbac_role_status=False
+        try:
+            response = rbac_api.read_namespaced_role(
             name="pod-reader", namespace="default")
-        self.assertIsNone(rbac_role)
+            rbac_role_status=True
+        except Exception as e:
+            self.assertFalse(rbac_role_status)
+        self.assertFalse(rbac_role_status)
 
     def test_delete_rbac_role_from_yaml_with_verbose_enabled(self):
         """
@@ -533,9 +570,15 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
-        rbac_role = rbac_api.read_namespaced_role(
+        
+        rbac_role_status=False
+        try:
+            response=rbac_api.read_namespaced_role(
             name="pod-reader", namespace="default")
-        self.assertIsNone(rbac_role) 
+            rbac_role_status=True
+        except Exception as e:
+            self.assertFalse(rbac_role_status)
+        self.assertFalse(rbac_role_status)
 
     # Deletion Tests for multi resource objects in yaml files
 
@@ -561,12 +604,24 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "multi-resource.yaml")
-        svc = core_api.read_namespaced_service(name="mock",
+        svc_status=False
+        replication_status=False
+        try:
+            resp_svc= core_api.read_namespaced_service(name="mock",
                                                namespace="default")
-        self.assertIsNone(svc)
-        ctr = core_api.read_namespaced_replication_controller(
+            svc_status=True
+            resp_repl= core_api.read_namespaced_replication_controller(
             name="mock", namespace="default")
-        self.assertIsNone(ctr)
+            repl_status = True
+        except Exception as e:
+            self.assertFalse(svc_status)
+            self.assertFalse(repl_status)
+        self.assertFalse(svc_status)
+        self.assertFalse(repl_status)
+
+
+
+
     
     def test_delete_from_list_in_multi_resource_yaml(self):
         """
@@ -593,15 +648,30 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
-        pod_0 = core_api.read_namespaced_pod(
+        pod0_status=False
+        pod1_status=False
+        deploy_status=False
+        try:
+            core_api.read_namespaced_pod(
             name="mock-pod-0", namespace="default")
-        self.assertIsNone(pod_0)
-        pod_1 = core_api.read_namespaced_pod(
+            core_api.read_namespaced_pod(
             name="mock-pod-1", namespace="default")
-        self.assertIsNone(pod_1)
-        dep = app_api.read_namespaced_deployment(
+            app_api.read_namespaced_deployment(
             name="mock", namespace="default")
-        self.assertIsNone(dep)
+            pod0_status=True
+            pod1_status=True
+            deploy_status=True
+        except Exception as e:
+            self.assertFalse(pod0_status)
+            self.assertFalse(pod1_status)
+            self.assertFalse(deploy_status)
+        self.assertFalse(pod0_status)
+        self.assertFalse(pod1_status)
+        self.assertFalse(deploy_status)
+
+
+
+
     
 
 
