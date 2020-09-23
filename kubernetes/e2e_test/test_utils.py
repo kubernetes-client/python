@@ -496,35 +496,6 @@ class TestUtils(unittest.TestCase):
         self.assertFalse(service_status)
 
 
-
-
-    def test_delete_namespace_from_yaml(self):
-        """
-        Should be able to delete a namespace
-
-        Create namespace from file first and ensure it is created
-        """
-        k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
-            k8s_client, self.path_prefix + "core-namespace.yaml")
-        core_api = client.CoreV1Api(k8s_client)
-        nmsp = core_api.read_namespace(name="development")
-        self.assertIsNotNone(nmsp)
-        """
-        Delete namespace from yaml
-        """
-        utils.delete_from_yaml(
-            k8s_client, self.path_prefix + "core-namespace.yaml")
-        namespace_status=False
-        try:
-            response=core_api.read_namespace(name="development")
-            namespace_status=True
-        except Exception as e:
-            self.assertFalse(namespace_status)
-        self.assertFalse(namespace_status)
-
-
-
     def test_delete_rbac_role_from_yaml(self):
         """
         Should be able to delete rbac role
@@ -612,12 +583,12 @@ class TestUtils(unittest.TestCase):
             svc_status=True
             resp_repl= core_api.read_namespaced_replication_controller(
             name="mock", namespace="default")
-            repl_status = True
+            replication_status = True
         except Exception as e:
             self.assertFalse(svc_status)
-            self.assertFalse(repl_status)
+            self.assertFalse(replication_status)
         self.assertFalse(svc_status)
-        self.assertFalse(repl_status)
+        self.assertFalse(replication_status)
 
 
 
