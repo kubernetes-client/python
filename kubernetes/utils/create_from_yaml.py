@@ -138,6 +138,7 @@ def create_from_dict(k8s_client, data, verbose=False, namespace='default',
 
     return k8s_objects
 
+
 def create_from_yaml_single_item(
         k8s_client, yml_object, verbose=False, **kwargs):
     group, _, version = yml_object["apiVersion"].partition("/")
