@@ -215,10 +215,23 @@ def response_type_from_dict(data, verbose=False):
 
 
 def _find_response_type(func):
+    """
+    Lookup the response type of a function from the pydoc text
+    """
+    func_response_type = ""
     for line in pydoc.getdoc(func).splitlines():
         if line.startswith(PYDOC_RETURN_LABEL):
-            return line[len(PYDOC_RETURN_LABEL):].strip()
-    return ""
+            func_return_line_content = line[len(PYDOC_RETURN_LABEL):].strip()
+            # The latest codegen generates different return line text with
+            # tuple items
+            if func_return_line_content.startswith("tuple("):
+                # The response type is the first item in the tuple
+                func_response_type = func_return_line_content.split(
+                    ",")[0].replace("tuple(", "")
+            else:
+                func_response_type = func_return_line_content
+
+    return func_response_type
 
 
 def load_from_dict(data, klass=None, verbose=False):
