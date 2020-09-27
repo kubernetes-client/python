@@ -137,7 +137,7 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
     kind = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', kind)
     kind = re.sub('([a-z0-9])([A-Z])', r'\1_\2', kind).lower()
 
-    if getattr(k8s_api,"delete_namespaced_{}".format(kind)):
+    try:
         # load namespace if provided in yml file
         if "namespace" in yml_document["metadata"]:
             namespace = yml_document["metadata"]["namespace"]
@@ -148,7 +148,7 @@ def delete_from_yaml_single_item(k8s_client, yml_document, verbose=False, **kwar
         res = getattr(k8s_api,"delete_namespaced_{}".format(kind))(
          name=name,body=client.V1DeleteOptions(propagation_policy="Background", grace_period_seconds=5),**kwargs)
 
-    else:
+    except:
         # get name of object to delete
         name = yml_document["metadata"]["name"]
         kwargs.pop('namespace', None)
