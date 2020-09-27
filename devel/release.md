@@ -1,8 +1,69 @@
 # Release process
 
-The release process of the python client involves creating (or updating) a release
-branch, updating release tags, and creating distribution packages and uploading them to
-pypi.
+The release process for the python client involves creating (or updating) a
+release branch, updating release tags, and creating distribution packages and
+uploading them to pypi.
+
+There are several releases per version:
+- snapshot
+- a1 (alpha release)
+- b1 (beta release)
+- final release
+
+Between each release, there is a waiting period of about two weeks for users to
+report issues. Typically, there is a single alpha or beta release, but if there
+are a higher than expected number of issues there can be multiple releases
+(e.g, a2 or b2).
+
+## Create or update release branch
+
+The release branch name should have release-x.x format. All minor and pre-releases
+should be on the same branch. To update an existing branch with master (only for
+latest pre-release):
+
+```bash
+export RELEASE_BRANCH=release-x.y
+git checkout $RELEASE_BRANCH
+git fetch upstream
+git rebase upstream/$RELEASE_BRANCH
+git pull upstream master
+```
+
+You may need to fix some conflicts. For auto-generated files, you can commit
+either version. They will be updated to the current version in the next step.
+
+## Update release tags
+
+Release tags are in the "scripts/constants.py" file. These are the constants you
+may need to update:
+
+CLIENT_VERSION: Client version should follow x.y.zDn where x,y,z are version
+numbers (integers) and D is one of "a" for alpha or "b" for beta and n is the
+pre-release number. For a final release, the "Dn" part should be omitted.
+Examples:
+- 1.0.0a1 (alpha release)
+- 2.0.1b2 (beta release)
+- 1.5.1 (final release)
+
+DEVELOPMENT_STATUS: Update it to one of the values of "Development Status" in
+[this list](https://pypi.python.org/pypi?%3Aaction=list_classifiers).
+
+After changing constants to proper versions, update the client using this
+command:
+
+```bash
+scripts/update-client.sh
+```
+
+Commit changes (should be only version number changes) to the release branch.
+Name the commit something like "Update version constants for XXX release".
+
+***After you finished the steps above, refer to the section "Hot issues" and
+apply the manual fixes.***
+
+```bash
+git push upstream $RELEASE_BRANCH
+```
 
 ## Hot issues
 
@@ -21,34 +82,24 @@ For more details, see [#974](https://github.com/kubernetes-client/python/issues/
 
 3. Add ability to the client to be used as Context Manager [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
 
-Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does,
-then create your PR for review.
+4. Remove the tests directory (ref: https://github.com/kubernetes-client/python/commit/ec9c944f076999543cd2122aff2d86f969d82548). See the [upstream issue](https://github.com/OpenAPITools/openapi-generator/issues/5377) for more information.
 
-Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply changes from the above functionalities. **As mentioned above the script should be run after finishing the section `Update release tags`. Also, ensure a clean working directory before applying the script**
+Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does, then create your PR for review.
+
+Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply
+changes from the above functionalities. **As mentioned above the script should be run after finishing the section `Update release tags`. Also, ensure a clean working directory before applying the script**
 
 ## Change logs
+
 Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
 If they are not, follow commits added after the last release and update/commit
 the change logs to master.
 
 Then based on the release, follow one of next two steps.
 
-## Update pre-release branch
+## README
 
-The release branch name should have release-x.x format. All minor and pre-releases
-should be on the same branch. To update an existing branch with master (only for
-latest pre-release):
-
-```bash
-export RELEASE_BRANCH=release-x.y
-git checkout $RELEASE_BRANCH
-git fetch upstream
-git rebase upstream/$RELEASE_BRANCH
-git pull upstream master
-```
-
-You may need to fix some conflicts. For auto-generated files, you can commit
-either version. They will be updated to the current version in the next step.
+Update the compatibility matrix and maintenance status in the README file.
 
 ## Patch a release branch
 
@@ -83,36 +134,6 @@ scripts/update-client.sh
 And make sure there is no API change (version number changes should be fine
 as they will be updated in the next step anyway). Do not commit any changes at
 this step and go back to the master branch if there are any API changes.
-
-## Update release tags
-
-Release tags are in the "scripts/constants.py" file. These are the constants you may
-need to update:
-
-CLIENT_VERSION: Client version should follow x.y.zDn where x,y,z are version
-numbers (integers) and D is one of "a" for alpha or "b" for beta and n is the
-pre-release number. For a final release, the "Dn" part should be omitted. Examples:
-1.0.0a1, 2.0.1b2, 1.5.1.
-
-DEVELOPMENT_STATUS: Update it to one of the values of "Development Status"
-in [this list](https://pypi.python.org/pypi?%3Aaction=list_classifiers).
-
-after changing constants to proper versions, update the client using this
-command:
-
-```bash
-scripts/update-client.sh
-```
-
-and commit changes (should be only version number changes) to the release branch.
-Name the commit something like "Update version constants for XXX release".
-
-***After you finished the steps above, refer to the section "Hot issues" and
-apply the manual fixes.***
-
-```bash
-git push upstream $RELEASE_BRANCH
-```
 
 ## Make distribution packages
 

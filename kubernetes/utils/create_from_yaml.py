@@ -52,6 +52,9 @@ def create_from_yaml(
         processing of the request.
         Valid values are: - All: all dry run stages will be processed
 
+    Returns:
+        The created kubernetes API objects.
+
     Raises:
         FailToCreateError which holds list of `client.rest.ApiException`
         instances for each object that failed to create.
@@ -60,15 +63,19 @@ def create_from_yaml(
         yml_document_all = yaml.safe_load_all(f)
 
         failures = []
+        k8s_objects = []
         for yml_document in yml_document_all:
             try:
-                create_from_dict(k8s_client, yml_document, verbose,
-                                 namespace=namespace,
-                                 **kwargs)
+                created = create_from_dict(k8s_client, yml_document, verbose,
+                                           namespace=namespace,
+                                           **kwargs)
+                k8s_objects.append(created)
             except FailToCreateError as failure:
                 failures.extend(failure.api_exceptions)
         if failures:
             raise FailToCreateError(failures)
+
+        return k8s_objects
 
 
 def create_from_dict(k8s_client, data, verbose=False, namespace='default',
@@ -88,12 +95,16 @@ def create_from_dict(k8s_client, data, verbose=False, namespace='default',
         the yaml file already contains a namespace definition
         this parameter has no effect.
 
+    Returns:
+        The created kubernetes API objects.
+
     Raises:
         FailToCreateError which holds list of `client.rest.ApiException`
         instances for each object that failed to create.
     """
     # If it is a list type, will need to iterate its items
     api_exceptions = []
+    k8s_objects = []
 
     if "List" in data["kind"]:
         # Could be "List" or "Pod/Service/...List"
@@ -106,22 +117,26 @@ def create_from_dict(k8s_client, data, verbose=False, namespace='default',
                 yml_object["apiVersion"] = data["apiVersion"]
                 yml_object["kind"] = kind
             try:
-                create_from_yaml_single_item(
+                created = create_from_yaml_single_item(
                     k8s_client, yml_object, verbose, namespace=namespace,
                     **kwargs)
+                k8s_objects.append(created)
             except client.rest.ApiException as api_exception:
                 api_exceptions.append(api_exception)
     else:
         # This is a single object. Call the single item method
         try:
-            create_from_yaml_single_item(
+            created = create_from_yaml_single_item(
                 k8s_client, data, verbose, namespace=namespace, **kwargs)
+            k8s_objects.append(created)
         except client.rest.ApiException as api_exception:
             api_exceptions.append(api_exception)
 
     # In case we have exceptions waiting for us, raise them
     if api_exceptions:
         raise FailToCreateError(api_exceptions)
+
+    return k8s_objects
 
 
 def create_from_yaml_single_item(
@@ -160,6 +175,7 @@ def create_from_yaml_single_item(
         if hasattr(resp, 'status'):
             msg += " status='{0}'".format(str(resp.status))
         print(msg)
+    return resp
 
 
 class FailToCreateError(Exception):
