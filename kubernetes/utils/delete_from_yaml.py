@@ -174,7 +174,7 @@ class FailToDeleteError(Exception):
     def __str__(self):
         msg = ""
         for api_exception in self.api_exceptions:
-            msg += "Error from server ({0}): {1}".format(
+            msg += "Error from server ({0}):{1}".format(
                 api_exception.reason, api_exception.body)
         return msg
         
