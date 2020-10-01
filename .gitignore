@@ -1,4 +1,4 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files / buid develop eggs
 __pycache__/
 *.py[cod]
 *$py.class
