@@ -1,11 +1,12 @@
-certifi>=14.05.14 # MPL
-six>=1.9.0  # MIT
-python-dateutil>=2.5.3  # BSD
-setuptools>=21.0.0  # PSF/ZPL
-pyyaml>=3.12  # MIT
-google-auth>=1.0.1  # Apache-2.0
-ipaddress>=1.0.17;python_version=="2.7"  # PSF
-websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
-requests # Apache-2.0
-requests-oauthlib # ISC
-urllib3>=1.24.2  # MIT
+certifi>=2020.6.20 # MPL
+six>=1.15.0  # MIT
+python-dateutil>=2.8.1  # BSD
+setuptools>=50.3.0  # PSF/ZPL
+pyyaml>=5.3.1 # MIT
+google-auth>=1.22.0  # Apache-2.0
+ipaddress>=1.0.23;
+python_version=="3.8"  # PSF
+websocket-client>=0.57.0 # LGPLv2+
+requests==2.24.0 # Apache-2.0
+requests-oauthlib==1.3.0 # ISC
+urllib3==1.25.10  # MIT
