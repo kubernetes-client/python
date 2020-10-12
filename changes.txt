@@ -1,0 +1,30 @@
+6d64cf67 Merge pull request #1265 from kubernetes-client/dependabot/github_actions/actions/setup-python-v2.1.3
+d31652a3 Bump actions/setup-python from v2.1.2 to v2.1.3
+945aac9f Merge pull request #1260 from kubernetes-client/dependabot/github_actions/actions/setup-python-v2.1.2
+d1ccbf22 Merge pull request #1262 from sighingnow/ht/return-created
+bbdfb73c Fixes for code format.
+9e534d02 Returns the created k8s objects in create_from_{dict,yaml}.
+f41b95b0 Merge pull request #1229 from scottilee/releasedocs
+f72d2a50 Bump actions/setup-python from v1 to v2.1.2
+f2b03567 Merge pull request #1259 from brendandburns/dependa
+a8243646 Add dependabot.
+b1cea7ef Address comments about hot issues
+1be69369 Merge branch 'master' of https://github.com/kubernetes-client/python into releasedocs
+457ac54a Merge pull request #1254 from palnabarun/cherry-pick-12.0.0b1-notes
+de822a28 Update the CHANGELOG and README
+0a78dc1e Merge pull request #1253 from ryphon/file-like-base-update
+a2ede702 touching readme with newline to check test validity
+8e1c331c updating base for file-like config load support
+42db3552 Merge pull request #1252 from unki/master
+32cb3f91 remove duplicate-lines from kubernetes/README.md
+4079c67c Merge pull request #1237 from iciclespider/port-forwarding
+b1dd9c4f Install socat on Kubernetes node for use by port forwarding.
+3da49a20 Update kubernetes/base to latest master with portforwarding implementation.
+c1249c9c Support both python 2.7 and 3.x.
+d9ec734a Fix tox errors.
+8afcebdf Add test that checks for portforward port error return value.
+49f3b6e0 Rework port forwarding unittest and example.
+fada718e Unittests and example for portforwarding ability added in python-base.
+482b8558 Update release README
+a1db8670 Remove redundant release doc
+b5603d8e Merge pull request #1220 from greed42/plugin-certificates
