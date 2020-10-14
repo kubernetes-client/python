@@ -35,9 +35,10 @@ setenforce 0
 HOME=/home/travis
 sudo mount --make-rshared /
 
-# Install conntrack (required by minikube/K8s 1.18+)
+# Install conntrack (required by minikube/K8s 1.18+),
+# and socat, which is required for port forwarding.
 sudo apt-get update
-sudo apt-get install -y conntrack
+sudo apt-get install -y conntrack socat
 
 # Install docker if needed
 path_to_executable=$(which docker)
