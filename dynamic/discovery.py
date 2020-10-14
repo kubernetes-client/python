@@ -254,8 +254,11 @@ class LazyDiscoverer(Discoverer):
                 # Check if we've requested resources for this group
                 if not resourcePart.resources:
                     prefix, group, version = reqParams[0], reqParams[1], part
-                    resourcePart.resources = self.get_resources_for_api_version(
-                        prefix, group, part, resourcePart.preferred)
+                    try:
+                        resourcePart.resources = self.get_resources_for_api_version(
+                            prefix, group, part, resourcePart.preferred)
+                    except NotFoundError:
+                        raise ResourceNotFoundError
 
                     self._cache['resources'][prefix][group][version] = resourcePart
                     self.__update_cache = True
