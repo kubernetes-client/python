@@ -1,3 +1,25 @@
+# v12.0.1
+
+Kubernetes API Version: 1.16.15
+
+**Breaking Change:**
+
+- `kubernetes.config.Configuration()` will now return the default "initial" configuration, `kubernetes.config.Configuration.get_default_copy()` will return the default configuration if there is a default set via `Configuration.set_default(c)`, otherwise, it will also return the default "initial" configuration. [OpenAPITools/openapi-generator#4485](https://github.com/OpenAPITools/openapi-generator/pull/4485), [OpenAPITools/openapi-generator#5315](https://github.com/OpenAPITools/openapi-generator/pull/5315). **Note: ** This change also affects v12.0.0a1, v12.0.0b1 and v12.0.0.
+
+**Bug Fix:**
+- Prevent 503s from killing the client during discovery [kubernetes-client/python-base#187](https://github.com/kubernetes-client/python-base/pull/187)
+
+
+# v12.0.0
+
+Kubernetes API Version: 1.16.15
+
+**New Feature:**
+- Implement Port Forwarding [kubernetes-client/python-base#210](https://github.com/kubernetes-client/python-base/pull/210), [kubernetes-client/python-base#211](https://github.com/kubernetes-client/python-base/pull/211), [kubernetes-client/python#1237](https://github.com/kubernetes-client/python/pull/1237)
+- Support loading configuration from file-like objects [kubernetes-client/python-base#208](https://github.com/kubernetes-client/python-base/pull/208)
+- Returns the created k8s objects in `create_from_{dict,yaml}` [kubernetes-client/python#1262](https://github.com/kubernetes-client/python/pull/1262)
+
+
 # v12.0.0b1
 
 Kubernetes API Version: 1.16.14
