@@ -72,7 +72,7 @@ python -m examples.example1
 
 ## Documentation
 
-All APIs and Models' documentation can be found at the [Generated client's README file](kubernetes/README.md)
+All APIs and Model's documentation can be found at the [Generated client's README file](kubernetes/README.md)
 
 ## Compatibility
 
@@ -94,11 +94,11 @@ Key:
 * `✓` Exactly the same features / API objects in both client-python and the Kubernetes
   version.
 * `+` client-python has features or API objects that may not be present in the Kubernetes
- cluster, either due to that client-python has additional new API, or that the server has
- removed old API. However, everything they have in common (i.e., most APIs) will work.
+ cluster, either due to that client-python has an additional new API, or that the server has
+ removed the old API. However, everything they have in common (i.e., most APIs) will work.
  Please note that alpha APIs may vanish or change significantly in a single release.
 * `-` The Kubernetes cluster has features the client-python library can't use, either due
- to the server has additional new API, or that client-python has removed old API. However,
+ to the server has an additional new API, or that client-python has removed the old API. However,
  everything they share in common (i.e., most APIs) will work.
 
 See the [CHANGELOG](./CHANGELOG.md) for a detailed description of changes
@@ -126,7 +126,7 @@ Key:
 * `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-client/python/issues/177)) published to client-python when they are available.
 * `✗` No longer maintained; please upgrade.
 
-Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. In consistent with Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
+Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. Inconsistent with the Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
 
 Note: There would be no maintenance for alpha/beta releases except the latest one.
 
@@ -161,17 +161,17 @@ You'll need a version with OpenSSL version 1.0.0 or later.
 
 ### Hostname doesn't match
 
-If you get an `ssl.CertificateError` complaining about hostname match, your installed packages does not meet version [requirements](requirements.txt).
-Specifically check `ipaddress` and `urllib3` package versions to make sure they met requirements in [requirements.txt](requirements.txt) file.
+If you get an `ssl.CertificateError` complaining about hostname match, your installed packages do not meet version [requirements](requirements.txt).
+Specifically, check `ipaddress` and `urllib3` package versions to make sure they met requirements in the [requirements.txt](requirements.txt) file.
 
-### Why Exec/Attach calls doesn't work
+### Why Exec/Attach calls don't work
 
-Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
+Starting from 4.0 release, we do not support directly calling exec or attach calls. You should use stream module to call them. So instead
 of `resp = api.connect_get_namespaced_pod_exec(name, ...` you should call `resp = stream(api.connect_get_namespaced_pod_exec, name, ...`.
 
 Using Stream will overwrite the requests protocol in _core_v1_api.CoreV1Api()_
-This will cause a failure in  non-exec/attach calls. If you reuse your api client object, you will need to
-recreate it between api calls that use _stream_ and other api calls.
+This will cause a failure in  non-exec/attach calls. If you reuse your API client object, you will need to
+recreate it between API calls that use _stream_ and other API calls.
 
 See more at [exec example](examples/pod_exec.py).
 
