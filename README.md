@@ -8,6 +8,7 @@
 [![Client Support Level](https://img.shields.io/badge/kubernetes%20client-beta-green.svg?style=flat&colorA=306CE8)](http://bit.ly/kubernetes-client-support-badge)
 
 Python client for the [kubernetes](http://kubernetes.io/) API.
+#kubernetes is an open Sorce Platform that offers deployment,maintenanace,and scalling Features
 
 ## Installation
 
