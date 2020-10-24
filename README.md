@@ -72,7 +72,7 @@ python -m examples.example1
 
 ## Documentation
 
-All APIs and Model's documentation can be found at the [Generated client's README file](kubernetes/README.md)
+All APIs and Models' documentation can be found at the [Generated client's README file](kubernetes/README.md)
 
 ## Compatibility
 
@@ -126,7 +126,7 @@ Key:
 * `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-client/python/issues/177)) published to client-python when they are available.
 * `✗` No longer maintained; please upgrade.
 
-Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. Inconsistent with the Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
+Kubernetes supports [three minor releases](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew) at a time. "Support" means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. In consistent with the Kubernetes support policy, we expect to support **three GA major releases** (corresponding to three Kubernetes minor releases) at a time.
 
 Note: There would be no maintenance for alpha/beta releases except the latest one.
 
