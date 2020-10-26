@@ -14,7 +14,7 @@
 
 import unittest
 
-import yaml
+from ruamel import yaml
 from kubernetes import utils, client
 from kubernetes.client.rest import ApiException
 from kubernetes.e2e_test import base

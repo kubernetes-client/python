@@ -16,7 +16,7 @@
 import re
 from os import path
 
-import yaml
+from ruamel import yaml
 
 from kubernetes import client
 

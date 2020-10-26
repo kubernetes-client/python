@@ -14,7 +14,7 @@
 
 import unittest
 import uuid
-import yaml
+from ruamel import yaml
 
 from kubernetes.client import api_client
 from kubernetes.client.api import apps_v1_api
