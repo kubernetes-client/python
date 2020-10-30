@@ -62,3 +62,4 @@ stages:
 - test
 - name: deploy
   if: (tag is present) and (type = push)
+  #details
