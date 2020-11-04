@@ -24,6 +24,10 @@ Kubernetes API Version: 1.16.14
 
 Kubernetes API Version: 1.16.14
 
+**Breaking Change:**
+
+- `kubernetes.config.Configuration()` will now return the default "initial" configuration, `kubernetes.config.Configuration.get_default_copy()` will return the default configuration if there is a default set via `Configuration.set_default(c)`, otherwise, it will also return the default "initial" configuration. [OpenAPITools/openapi-generator#4485](https://github.com/OpenAPITools/openapi-generator/pull/4485), [OpenAPITools/openapi-generator#5315](https://github.com/OpenAPITools/openapi-generator/pull/5315)
+
 **API Change:**
 
 - Resolve regression in metadata.managedFields handling in update/patch requests submitted by older API clients ([#91748](https://github.com/kubernetes/kubernetes/pull/91748), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
