@@ -1,3 +1,25 @@
+# v17.0.0-snapshot
+
+Kubernetes API Version: 1.17.13
+
+**Important Information:**
+
+- The Kubernetes Python client versioning scheme has changed. The version numbers used till Kubernetes Python Client v12.y.z lagged behind the actual Kubernetes minor version numbers. From this release, the client is moving a version format `vY.Z.P` where `Y` and `Z` are respectively from the Kubernetes version `v1.Y.Z` and `P` would incremented due to changes on the Python client side itself. Ref: https://github.com/kubernetes-client/python/issues/1244
+- Python 2 had reached [End of Life](https://www.python.org/doc/sunset-python-2/) on January 1, 2020. The Kubernetes Python Client will drop support for Python 2 from the next release (v18.0.0) and will no longer provide support to older clients as per the [Kubernetes support policy](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions).
+
+
+**API Change:**
+- Fixed: log timestamps now include trailing zeros to maintain a fixed width ([#91207](https://github.com/kubernetes/kubernetes/pull/91207), [@iamchuckss](https://github.com/iamchuckss)) [SIG Apps and Node]
+- Resolve regression in metadata.managedFields handling in update/patch requests submitted by older API clients ([#92008](https://github.com/kubernetes/kubernetes/pull/92008), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
+ - Fix bug where sending a status update completely wipes managedFields for some types. ([#90032](https://github.com/kubernetes/kubernetes/pull/90032), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
+ - Fixes a regression with clients prior to 1.15 not being able to update podIP in pod status, or podCIDR in node spec, against >= 1.16 API servers ([#88505](https://github.com/kubernetes/kubernetes/pull/88505), [@liggitt](https://github.com/liggitt)) [SIG Apps and Network]
+ - CustomResourceDefinitions now validate documented API semantics of `x-kubernetes-list-type` and `x-kubernetes-map-type` atomic to reject non-atomic sub-types. ([#84722](https://github.com/kubernetes/kubernetes/pull/84722), [@sttts](https://github.com/sttts))
+- Kube-apiserver: The `AdmissionConfiguration` type accepted by `--admission-control-config-file` has been promoted to `apiserver.config.k8s.io/v1` with no schema changes. ([#85098](https://github.com/kubernetes/kubernetes/pull/85098), [@liggitt](https://github.com/liggitt))
+- Fixed EndpointSlice port name validation to match Endpoint port name validation (allowing port names longer than 15 characters) ([#84481](https://github.com/kubernetes/kubernetes/pull/84481), [@robscott](https://github.com/robscott))
+- CustomResourceDefinitions introduce `x-kubernetes-map-type` annotation as a CRD API extension. Enables this particular validation for server-side apply. ([#84113](https://github.com/kubernetes/kubernetes/pull/84113), [@enxebre](https://github.com/enxebre))
+
+To read the full CHANGELOG visit [here](https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-1.17.md).
+
 # v12.0.1
 
 Kubernetes API Version: 1.16.15
