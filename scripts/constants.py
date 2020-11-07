@@ -15,10 +15,10 @@
 import sys
 
 # Kubernetes branch to get the OpenAPI spec from.
-KUBERNETES_BRANCH = "release-1.16"
+KUBERNETES_BRANCH = "release-1.17"
 
 # client version for packaging and releasing.
-CLIENT_VERSION = "12.0.0-snapshot"
+CLIENT_VERSION = "17.0.0-snapshot"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
