@@ -48,9 +48,9 @@ Kubernetes API Version: 1.18.17
 To read the full CHANGELOG visit [here](https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-1.18.md).
 
 
-# v17.0.0-snapshot
+# v17.14.0a1
 
-Kubernetes API Version: 1.17.13
+Kubernetes API Version: 1.17.14
 
 **Important Information:**
 
