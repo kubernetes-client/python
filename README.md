@@ -115,11 +115,13 @@ between client-python versions.
 | 8.0 Alpha/Beta  | Kubernetes main repo, 1.12 branch    | ✗                             |
 | 8.0             | Kubernetes main repo, 1.12 branch    | ✗                             |
 | 9.0 Alpha/Beta  | Kubernetes main repo, 1.13 branch    | ✗                             |
-| 9.0             | Kubernetes main repo, 1.13 branch    | ✓                             |
+| 9.0             | Kubernetes main repo, 1.13 branch    | ✗                             |
 | 10.0 Alpha/Beta | Kubernetes main repo, 1.14 branch    | ✗                             |
 | 10.0            | Kubernetes main repo, 1.14 branch    | ✓                             |
 | 11.0 Alpha/Beta | Kubernetes main repo, 1.15 branch    | ✗                             |
 | 11.0            | Kubernetes main repo, 1.15 branch    | ✓                             |
+| 12.0 Alpha/Beta | Kubernetes main repo, 1.16 branch    | ✗                             |
+| 12.0            | Kubernetes main repo, 1.16 branch    | ✓                             |
 
 Key:
 
@@ -174,4 +176,3 @@ This will cause a failure in  non-exec/attach calls. If you reuse your api clien
 recreate it between api calls that use _stream_ and other api calls.
 
 See more at [exec example](examples/pod_exec.py).
-
