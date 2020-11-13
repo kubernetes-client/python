@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_pod_security_policy**
-> PolicyV1beta1PodSecurityPolicy create_pod_security_policy(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+> V1beta1PodSecurityPolicy create_pod_security_policy(body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
 
 
 
@@ -129,7 +129,7 @@ configuration.host = "http://localhost"
 with kubernetes.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = kubernetes.client.PolicyV1beta1Api(api_client)
-    body = kubernetes.client.PolicyV1beta1PodSecurityPolicy() # PolicyV1beta1PodSecurityPolicy | 
+    body = kubernetes.client.V1beta1PodSecurityPolicy() # V1beta1PodSecurityPolicy | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
@@ -145,14 +145,14 @@ field_manager = 'field_manager_example' # str | fieldManager is a name associate
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**PolicyV1beta1PodSecurityPolicy**](PolicyV1beta1PodSecurityPolicy.md)|  | 
+ **body** | [**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
 
 ### Return type
 
-[**PolicyV1beta1PodSecurityPolicy**](PolicyV1beta1PodSecurityPolicy.md)
+[**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)
 
 ### Authorization
 
@@ -430,7 +430,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_pod_security_policy**
-> V1Status delete_pod_security_policy(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta1PodSecurityPolicy delete_pod_security_policy(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -487,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)
 
 ### Authorization
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_pod_security_policy**
-> PolicyV1beta1PodSecurityPolicyList list_pod_security_policy(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
+> V1beta1PodSecurityPolicyList list_pod_security_policy(pretty=pretty, allow_watch_bookmarks=allow_watch_bookmarks, _continue=_continue, field_selector=field_selector, label_selector=label_selector, limit=limit, resource_version=resource_version, timeout_seconds=timeout_seconds, watch=watch)
 
 
 
@@ -794,7 +794,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PolicyV1beta1PodSecurityPolicyList**](PolicyV1beta1PodSecurityPolicyList.md)
+[**V1beta1PodSecurityPolicyList**](V1beta1PodSecurityPolicyList.md)
 
 ### Authorization
 
@@ -968,7 +968,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_pod_security_policy**
-> PolicyV1beta1PodSecurityPolicy patch_pod_security_policy(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
+> V1beta1PodSecurityPolicy patch_pod_security_policy(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, force=force)
 
 
 
@@ -1023,7 +1023,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PolicyV1beta1PodSecurityPolicy**](PolicyV1beta1PodSecurityPolicy.md)
+[**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)
 
 ### Authorization
 
@@ -1185,7 +1185,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_pod_security_policy**
-> PolicyV1beta1PodSecurityPolicy read_pod_security_policy(name, pretty=pretty, exact=exact, export=export)
+> V1beta1PodSecurityPolicy read_pod_security_policy(name, pretty=pretty, exact=exact, export=export)
 
 
 
@@ -1236,7 +1236,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PolicyV1beta1PodSecurityPolicy**](PolicyV1beta1PodSecurityPolicy.md)
+[**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)
 
 ### Authorization
 
@@ -1408,7 +1408,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_pod_security_policy**
-> PolicyV1beta1PodSecurityPolicy replace_pod_security_policy(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+> V1beta1PodSecurityPolicy replace_pod_security_policy(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
 
 
 
@@ -1437,7 +1437,7 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = kubernetes.client.PolicyV1beta1Api(api_client)
     name = 'name_example' # str | name of the PodSecurityPolicy
-body = kubernetes.client.PolicyV1beta1PodSecurityPolicy() # PolicyV1beta1PodSecurityPolicy | 
+body = kubernetes.client.V1beta1PodSecurityPolicy() # V1beta1PodSecurityPolicy | 
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
@@ -1454,14 +1454,14 @@ field_manager = 'field_manager_example' # str | fieldManager is a name associate
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the PodSecurityPolicy | 
- **body** | [**PolicyV1beta1PodSecurityPolicy**](PolicyV1beta1PodSecurityPolicy.md)|  | 
+ **body** | [**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)|  | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
 
 ### Return type
 
-[**PolicyV1beta1PodSecurityPolicy**](PolicyV1beta1PodSecurityPolicy.md)
+[**V1beta1PodSecurityPolicy**](V1beta1PodSecurityPolicy.md)
 
 ### Authorization
 
