@@ -1,6 +1,6 @@
 # V1beta1RoleList
 
-RoleList is a collection of Roles
+RoleList is a collection of Roles Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleList, and will no longer be served in v1.20.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
