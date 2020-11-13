@@ -80,14 +80,12 @@ All APIs and Models' documentation can be found at the [Generated client's READM
 client-python gets increased, your code will continue to work with explicitly
 supported versions of Kubernetes clusters.
 
-#### Compatibility matrix
+#### Compatibility matrix of supported client versions
 
-|                    | Kubernetes 1.13 | Kubernetes 1.14 | Kubernetes 1.15 |
-|--------------------|-----------------|-----------------|-----------------|
-| client-python 9.0  |✓                |+-               |+-               |
-| client-python 10.0 |+-               |✓                |+-               |
-| client-python 11.0 |+-               |+-               |✓                |
-| client-python HEAD |+-               |+-               |+-               |
+- [client 9.y.z](https://pypi.org/project/kubernetes/9.0.1/): Kubernetes 1.12 or below (+-), Kubernetes 1.13 (✓), Kubernetes 1.14 or above (+-)
+- [client 10.y.z](https://pypi.org/project/kubernetes/10.1.0/): Kubernetes 1.13 or below (+-), Kubernetes 1.14 (✓), Kubernetes 1.14 or above (+-)
+- [client 11.y.z](https://pypi.org/project/kubernetes/11.0.0/): Kubernetes 1.14 or below (+-), Kubernetes 1.15 (✓), Kubernetes 1.16 or above (+-)
+- [client 12.y.z](https://pypi.org/project/kubernetes/12.0.1/): Kubernetes 1.15 or below (+-), Kubernetes 1.16 (✓), Kubernetes 1.17 or above (+-)
 
 Key:
 
