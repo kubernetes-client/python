@@ -133,6 +133,8 @@ Kubernetes supports [three minor releases](https://github.com/kubernetes/communi
 
 Note: There would be no maintenance for alpha/beta releases except the latest one.
 
+**Exception to the above support rule:** Since we are running behind on releases, we will support Alpha/Beta releases for a greater number of clients until we catch up with the upstream version.
+
 ## Community, Support, Discussion
 
 If you have any problem on using the package or any suggestions, please start with reaching the [Kubernetes clients slack channel](https://kubernetes.slack.com/messages/C76GB48RK/), or filing an [issue](https://github.com/kubernetes-client/python/issues) to let us know. You can also reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery), where this project falls under.
