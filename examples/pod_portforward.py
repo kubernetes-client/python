@@ -21,7 +21,6 @@ import socket
 import time
 
 import six.moves.urllib.request as urllib_request
-
 from kubernetes import config
 from kubernetes.client import Configuration
 from kubernetes.client.api import core_v1_api
@@ -122,7 +121,8 @@ def portforward_commands(api_instance):
         print("Port 80 has the following error: %s" % error)
 
     # Monkey patch socket.create_connection which is used by http.client and
-    # urllib.request. The same can be done with urllib3.util.connection.create_connection
+    # urllib.request.
+    # The same can be done with urllib3.util.connection.create_connection
     # if the "requests" package is used.
     socket_create_connection = socket.create_connection
 
