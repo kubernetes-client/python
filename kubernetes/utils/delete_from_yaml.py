@@ -17,13 +17,11 @@ import re
 from os import path
 
 import yaml
-
 from kubernetes import client
 
 
 def delete_from_yaml(k8s_client, yaml_file, verbose=False,
                      namespace="default", **kwargs):
-
     """Input:
     yaml_file: string. Contains the path to yaml file.
     k8s_client: an ApiClient object, initialized with the client args.
@@ -108,28 +106,23 @@ def delete_from_yaml_single_item(k8s_client,
     kind = yml_document["kind"]
     kind = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', kind)
     kind = re.sub('([a-z0-9])([A-Z])', r'\1_\2', kind).lower()
-    api_exceptions = []
-
-    try:
-        # load namespace if provided in yml file
+    if hasattr(k8s_api, "create_namespaced_{0}".format(kind)):
         if "namespace" in yml_document["metadata"]:
             namespace = yml_document["metadata"]["namespace"]
             kwargs["namespace"] = namespace
         name = yml_document["metadata"]["name"]
         res = getattr(k8s_api, "delete_namespaced_{}".format(kind))(
-         name=name,
-         body=client.V1DeleteOptions(propagation_policy="Background",
-                                     grace_period_seconds=5), **kwargs)
-
-    except client.rest.ApiException as api_exception:
-        api_exceptions.append(api_exception)
+            name=name,
+            body=client.V1DeleteOptions(propagation_policy="Background",
+                                        grace_period_seconds=5), **kwargs)
+    else:
         # get name of object to delete
         name = yml_document["metadata"]["name"]
         kwargs.pop('namespace', None)
         res = getattr(k8s_api, "delete_{}".format(kind))(
-         name=name,
-         body=client.V1DeleteOptions(propagation_policy="Background",
-                                     grace_period_seconds=5), **kwargs)
+            name=name,
+            body=client.V1DeleteOptions(propagation_policy="Background",
+                                        grace_period_seconds=5), **kwargs)
     if verbose:
         msg = "{0} deleted.".format(kind)
         if hasattr(res, 'status'):
