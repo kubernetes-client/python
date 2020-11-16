@@ -88,6 +88,8 @@ supported versions of Kubernetes clusters.
 - [client 12.y.z](https://pypi.org/project/kubernetes/12.0.1/): Kubernetes 1.15 or below (+-), Kubernetes 1.16 (✓), Kubernetes 1.17 or above (+-)
 - [client 17.y.z](https://pypi.org/project/kubernetes/17.14.0a1/): Kubernetes 1.16 or below (+-), Kubernetes 1.17 (✓), Kubernetes 1.18 or above (+-)
 
+> See [here](#homogenizing-the-kubernetes-python-client-versions) for an explaination of why there is no v13-v16 release.
+
 Key:
 
 * `✓` Exactly the same features / API objects in both client-python and the Kubernetes
@@ -123,6 +125,8 @@ between client-python versions.
 | 12.0            | Kubernetes main repo, 1.16 branch    | ✓                             |
 | 17.0 Alpha/Beta | Kubernetes main repo, 1.17 branch    | ✓                             |
 
+> See [here](#homogenizing-the-kubernetes-python-client-versions) for an explaination of why there is no v13-v16 release.
+
 Key:
 
 * `✓` Changes in main Kubernetes repo are manually ([should be automated](https://github.com/kubernetes-client/python/issues/177)) published to client-python when they are available.
@@ -133,6 +137,12 @@ Kubernetes supports [three minor releases](https://github.com/kubernetes/communi
 Note: There would be no maintenance for alpha/beta releases except the latest one.
 
 **Exception to the above support rule:** Since we are running behind on releases, we will support Alpha/Beta releases for a greater number of clients until we catch up with the upstream version.
+
+## Homogenizing the Kubernetes Python Client versions
+
+The client releases v12 and before following a versioning schema where the major version was 4 integer positions behind the Kubernetes minor on which the client is based on. For example, v12.0.0 is based on Kubernetes v1.16, v11.0.0 is based on Kubernetes v1.15 and so on.
+
+This created a lot of confusion tracking two different version numbers for each client release. It was decided to homogenize the version scheme starting from the Kubernetes Python client based on Kubernetes v1.17. The versioning scheme of the client from this release would be vY.Z.P where Y and Z are the Kubernetes minor and patch release numbers from Kubernets v1.Y.Z and P is the client specific patch release numbers to accomodate changes and fixes done specifically to the client. For more details, refer [this issue](https://github.com/kubernetes-client/python/issues/1244).
 
 ## Community, Support, Discussion
 
