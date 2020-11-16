@@ -86,6 +86,7 @@ supported versions of Kubernetes clusters.
 - [client 10.y.z](https://pypi.org/project/kubernetes/10.1.0/): Kubernetes 1.13 or below (+-), Kubernetes 1.14 (✓), Kubernetes 1.14 or above (+-)
 - [client 11.y.z](https://pypi.org/project/kubernetes/11.0.0/): Kubernetes 1.14 or below (+-), Kubernetes 1.15 (✓), Kubernetes 1.16 or above (+-)
 - [client 12.y.z](https://pypi.org/project/kubernetes/12.0.1/): Kubernetes 1.15 or below (+-), Kubernetes 1.16 (✓), Kubernetes 1.17 or above (+-)
+- [client 17.y.z](https://pypi.org/project/kubernetes/17.14.0a1/): Kubernetes 1.16 or below (+-), Kubernetes 1.17 (✓), Kubernetes 1.18 or above (+-)
 
 Key:
 
