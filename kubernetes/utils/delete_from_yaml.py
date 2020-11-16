@@ -42,7 +42,6 @@ def delete_from_yaml(k8s_client, yaml_file, verbose=False,
         Valid values are: - All: all dry run stages will be processed
     Raises:
         FailToDeleteError which holds list of `client.rest.ApiException`
-        FailToCreateError which holds list of `client.rest.ApiException`
         instances for each object that failed to delete.
     """
     with open(path.abspath(yaml_file)) as f:
