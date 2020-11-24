@@ -15,8 +15,6 @@ from kubernetes.client.api.apiregistration_v1beta1_api import ApiregistrationV1b
 from kubernetes.client.api.apis_api import ApisApi
 from kubernetes.client.api.apps_api import AppsApi
 from kubernetes.client.api.apps_v1_api import AppsV1Api
-from kubernetes.client.api.apps_v1beta1_api import AppsV1beta1Api
-from kubernetes.client.api.apps_v1beta2_api import AppsV1beta2Api
 from kubernetes.client.api.auditregistration_api import AuditregistrationApi
 from kubernetes.client.api.auditregistration_v1alpha1_api import AuditregistrationV1alpha1Api
 from kubernetes.client.api.authentication_api import AuthenticationApi
@@ -42,11 +40,13 @@ from kubernetes.client.api.core_api import CoreApi
 from kubernetes.client.api.core_v1_api import CoreV1Api
 from kubernetes.client.api.custom_objects_api import CustomObjectsApi
 from kubernetes.client.api.discovery_api import DiscoveryApi
-from kubernetes.client.api.discovery_v1alpha1_api import DiscoveryV1alpha1Api
+from kubernetes.client.api.discovery_v1beta1_api import DiscoveryV1beta1Api
 from kubernetes.client.api.events_api import EventsApi
 from kubernetes.client.api.events_v1beta1_api import EventsV1beta1Api
 from kubernetes.client.api.extensions_api import ExtensionsApi
 from kubernetes.client.api.extensions_v1beta1_api import ExtensionsV1beta1Api
+from kubernetes.client.api.flowcontrol_apiserver_api import FlowcontrolApiserverApi
+from kubernetes.client.api.flowcontrol_apiserver_v1alpha1_api import FlowcontrolApiserverV1alpha1Api
 from kubernetes.client.api.logs_api import LogsApi
 from kubernetes.client.api.networking_api import NetworkingApi
 from kubernetes.client.api.networking_v1_api import NetworkingV1Api
