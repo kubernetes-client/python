@@ -1,6 +1,6 @@
 # V1EnvFromSource
 
-EnvFromSource represents the source of a set of ConfigMaps
+EnvFromSource represents the source of a set of ConfigMaps or Secrets.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
