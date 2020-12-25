@@ -19,6 +19,7 @@ import datetime
 import json
 import logging
 import os
+import pathlib
 import platform
 import subprocess
 import tempfile
@@ -45,7 +46,7 @@ except ImportError:
     pass
 
 EXPIRY_SKEW_PREVENTION_DELAY = datetime.timedelta(minutes=5)
-KUBE_CONFIG_DEFAULT_LOCATION = os.environ.get('KUBECONFIG', '~/.kube/config')
+KUBE_CONFIG_DEFAULT_LOCATION = os.environ.get('KUBECONFIG', f'{pathlib.Path.home()}/.kube/config')
 ENV_KUBECONFIG_PATH_SEPARATOR = ';' if platform.system() == 'Windows' else ':'
 _temp_files = {}
 
