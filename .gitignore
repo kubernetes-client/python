@@ -70,4 +70,5 @@ target/
 
 # created by sphinx documentation build
 doc/source/README.md
+doc/source/CONTRIBUTING.md
 doc/_build
