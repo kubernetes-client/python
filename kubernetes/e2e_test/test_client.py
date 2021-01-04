@@ -462,9 +462,13 @@ class TestClient(unittest.TestCase):
         test_configmap['data']['config.json'] = "{}"
         resp = api.patch_namespaced_config_map(
             name=name, namespace='default', body=test_configmap)
+        print('patch configmap')
+        print(resp)
 
         resp = api.delete_namespaced_config_map(
             name=name, body={}, namespace='default')
+        print('delete configmap')
+        print(resp)
 
         resp = api.list_namespaced_config_map('default', pretty=True)
         self.assertEqual([], resp.items)
