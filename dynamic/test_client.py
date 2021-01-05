@@ -331,6 +331,9 @@ class TestDynamicClient(unittest.TestCase):
             "apiVersion": "v1",
             "metadata": {
                 "name": name,
+                "labels": {
+                    "e2e-test": "true",
+                },
             },
             "data": {
                 "config.json": "{\"command\":\"/usr/bin/mysqld_safe\"}",
@@ -344,7 +347,7 @@ class TestDynamicClient(unittest.TestCase):
         self.assertEqual(name, resp.metadata.name)
 
         resp = api.get(
-            name=name, namespace='default')
+            name=name, namespace='default', label_selector="e2e-test=true")
         self.assertEqual(name, resp.metadata.name)
 
         test_configmap['data']['config.json'] = "{}"
@@ -354,7 +357,7 @@ class TestDynamicClient(unittest.TestCase):
         resp = api.delete(
             name=name, body={}, namespace='default')
 
-        resp = api.get(namespace='default', pretty=True)
+        resp = api.get(namespace='default', pretty=True, label_selector="e2e-test=true")
         self.assertEqual([], resp.items)
 
     def test_node_apis(self):
