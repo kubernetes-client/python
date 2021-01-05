@@ -443,6 +443,7 @@ class TestClient(unittest.TestCase):
             "apiVersion": "v1",
             "metadata": {
                 "name": name,
+                "labels": {"e2e-tests": "true"},
             },
             "data": {
                 "config.json": "{\"command\":\"/usr/bin/mysqld_safe\"}",
@@ -466,7 +467,7 @@ class TestClient(unittest.TestCase):
         resp = api.delete_namespaced_config_map(
             name=name, body={}, namespace='default')
 
-        resp = api.list_namespaced_config_map('default', pretty=True)
+        resp = api.list_namespaced_config_map('default', pretty=True, label_selector="e2e-tests=true")
         self.assertEqual([], resp.items)
 
     def test_node_apis(self):
