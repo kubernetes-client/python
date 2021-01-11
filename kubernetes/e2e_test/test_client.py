@@ -19,14 +19,21 @@ import socket
 import time
 import unittest
 import uuid
+import six
 
 from kubernetes.client import api_client
 from kubernetes.client.api import core_v1_api
 from kubernetes.e2e_test import base
 from kubernetes.stream import stream, portforward
 from kubernetes.stream.ws_client import ERROR_CHANNEL
+from kubernetes.client.rest import ApiException
 
 import six.moves.urllib.request as urllib_request
+
+if six.PY3:
+    from http import HTTPStatus
+else:
+    import httplib
 
 def short_uuid():
     id = str(uuid.uuid4())
@@ -65,6 +72,27 @@ class TestClient(unittest.TestCase):
 
         name = 'busybox-test-' + short_uuid()
         pod_manifest = manifest_with_command(name, "while true;do date;sleep 5; done")
+
+        # wait for the default service account to be created
+        timeout = time.time() + 30
+        while True:
+            if time.time() > timeout:
+                print('timeout waiting for default service account creation')
+                break
+            try:
+                resp = api.read_namespaced_service_account(name='default',
+                                                           namespace='default')
+            except ApiException as e:
+                if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
+                    six.PY3 is False and e.status != httplib.NOT_FOUND):
+                    print('error: %s' % e)
+                    self.fail(msg="unexpected error getting default service account")
+                print('default service not found yet: %s' % e)
+                time.sleep(1)
+                continue
+            self.assertEqual('default', resp.metadata.name)
+            break
+
         resp = api.create_namespaced_pod(body=pod_manifest,
                                          namespace='default')
         self.assertEqual(name, resp.metadata.name)
@@ -130,6 +158,28 @@ class TestClient(unittest.TestCase):
 
         name = 'busybox-test-' + short_uuid()
         pod_manifest = manifest_with_command(name, "while true;do date;sleep 5; done")
+
+        # wait for the default service account to be created
+        timeout = time.time() + 30
+        while True:
+            if time.time() > timeout:
+                print('timeout waiting for default service account creation')
+                break
+
+            try:
+                resp = api.read_namespaced_service_account(name='default',
+                                                           namespace='default')
+            except ApiException as e:
+                if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
+                    six.PY3 is False and e.status != httplib.NOT_FOUND):
+                    print('error: %s' % e)
+                    self.fail(msg="unexpected error getting default service account")
+                print('default service not found yet: %s' % e)
+                time.sleep(1)
+                continue
+            self.assertEqual('default', resp.metadata.name)
+            break
+
         resp = api.create_namespaced_pod(body=pod_manifest,
                                          namespace='default')
         self.assertEqual(name, resp.metadata.name)
