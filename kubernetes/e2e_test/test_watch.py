@@ -32,6 +32,7 @@ def config_map_with_value(name, value):
         "kind": "ConfigMap",
         "metadata": {
             "name": name,
+            "labels": {"e2e-tests": "true"},
         },
         "data": {
             "key": value,
@@ -57,7 +58,7 @@ class TestClient(unittest.TestCase):
             body=configmap_a, namespace='default')
 
         # list all configmaps and extract the resource version
-        resp = api.list_namespaced_config_map('default')
+        resp = api.list_namespaced_config_map('default', label_selector="e2e-tests=true")
         rv = resp.metadata.resource_version
 
         # create another configmap
@@ -73,7 +74,7 @@ class TestClient(unittest.TestCase):
 
         # delete all configmaps
         api.delete_collection_namespaced_config_map(
-            namespace='default')
+            namespace='default', label_selector="e2e-tests=true")
 
         w = watch.Watch()
         # expect to observe all events happened after the initial LIST
@@ -83,7 +84,8 @@ class TestClient(unittest.TestCase):
         for event in w.stream(api.list_namespaced_config_map,
                               namespace='default',
                               resource_version=rv,
-                              timeout_seconds=5):
+                              timeout_seconds=5,
+                              label_selector="e2e-tests=true"):
             self.assertEqual(event['type'], expect[i])
             # Kubernetes doesn't guarantee the order of the two objects
             # being deleted
