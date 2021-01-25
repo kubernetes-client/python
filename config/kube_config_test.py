@@ -1292,12 +1292,18 @@ class TestKubeConfigLoader(BaseTestCase):
 
     def test_load_kube_config_from_empty_file(self):
         config_file_like_object = io.StringIO()
-        self.assertRaises(ConfigException, load_kube_config, config_file_like_object)
+        self.assertRaises(
+            ConfigException,
+            load_kube_config,
+            config_file_like_object)
 
     def test_load_kube_config_from_empty_file_like_object(self):
         config_file = self._create_temp_file(
             yaml.safe_dump(None))
-        self.assertRaises(ConfigException, load_kube_config, config_file)
+        self.assertRaises(
+            ConfigException,
+            load_kube_config,
+            config_file)
 
     def test_list_kube_config_contexts(self):
         config_file = self._create_temp_file(
