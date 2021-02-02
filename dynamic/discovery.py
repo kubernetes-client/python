@@ -15,8 +15,10 @@
 import os
 import six
 import json
+import logging
 import hashlib
 import tempfile
+from functools import partial
 from collections import defaultdict
 from abc import abstractmethod, abstractproperty
 
@@ -54,11 +56,12 @@ class Discoverer(object):
         else:
             try:
                 with open(self.__cache_file, 'r') as f:
-                    self._cache = json.load(f, cls=CacheDecoder(self.client))
+                    self._cache = json.load(f, cls=partial(CacheDecoder, self.client))
                 if self._cache.get('library_version') != __version__:
                     # Version mismatch, need to refresh cache
                     self.invalidate_cache()
-            except Exception:
+            except Exception as e:
+                logging.error("load cache error: %s", e)
                 self.invalidate_cache()
         self._load_server_info()
         self.discover()
