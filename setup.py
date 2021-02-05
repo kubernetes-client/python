@@ -61,7 +61,7 @@ setup(
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils', 'kubernetes.client.apis',
-              'kubernetes.dynamic'],
+              'kubernetes.dynamic', 'kubernetes.leaderelection'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
