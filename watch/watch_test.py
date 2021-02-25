@@ -288,14 +288,64 @@ class WatchTests(unittest.TestCase):
         fake_api.get_thing = Mock(return_value=fake_resp)
 
         w = Watch()
+        # No events are generated when no initial resourceVersion is passed
+        # No retry is attempted either, preventing an ApiException
+        assert not list(w.stream(fake_api.get_thing))
+
+        fake_api.get_thing.assert_called_once_with(
+            _preload_content=False, watch=True)
+        fake_resp.read_chunked.assert_called_once_with(decode_content=False)
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
+
+    def test_watch_retries_on_error_event(self):
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.read_chunked = Mock(
+            return_value=[
+                '{"type": "ERROR", "object": {"code": 410, '
+                '"reason": "Gone", "message": "error message"}}\n'])
+
+        fake_api = Mock()
+        fake_api.get_thing = Mock(return_value=fake_resp)
+
+        w = Watch()
         try:
-            for _ in w.stream(fake_api.get_thing):
+            for _ in w.stream(fake_api.get_thing, resource_version=0):
+                self.fail(self, "Should fail with ApiException.")
+        except client.rest.ApiException:
+            pass
+
+        # Two calls should be expected during a retry
+        fake_api.get_thing.assert_has_calls(
+            [call(resource_version=0, _preload_content=False, watch=True)] * 2)
+        fake_resp.read_chunked.assert_has_calls(
+            [call(decode_content=False)] * 2)
+        assert fake_resp.close.call_count == 2
+        assert fake_resp.release_conn.call_count == 2
+
+    def test_watch_with_error_event_and_timeout_param(self):
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.read_chunked = Mock(
+            return_value=[
+                '{"type": "ERROR", "object": {"code": 410, '
+                '"reason": "Gone", "message": "error message"}}\n'])
+
+        fake_api = Mock()
+        fake_api.get_thing = Mock(return_value=fake_resp)
+
+        w = Watch()
+        try:
+            for _ in w.stream(fake_api.get_thing, timeout_seconds=10):
                 self.fail(self, "Should fail with ApiException.")
         except client.rest.ApiException:
             pass
 
         fake_api.get_thing.assert_called_once_with(
-            _preload_content=False, watch=True)
+            _preload_content=False, watch=True, timeout_seconds=10)
         fake_resp.read_chunked.assert_called_once_with(decode_content=False)
         fake_resp.close.assert_called_once()
         fake_resp.release_conn.assert_called_once()

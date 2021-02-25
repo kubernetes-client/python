@@ -151,7 +151,9 @@ class Watch(object):
         if 'resource_version' in kwargs:
             self.resource_version = kwargs['resource_version']
 
-        timeouts = ('timeout_seconds' in kwargs)
+        # Do not attempt retries if user specifies a timeout.
+        # We want to ensure we are returning within that timeout.
+        disable_retries = ('timeout_seconds' in kwargs)
         retry_after_410 = False
         while True:
             resp = func(*args, **kwargs)
@@ -164,9 +166,9 @@ class Watch(object):
                         if isinstance(event, dict) \
                                 and event['type'] == 'ERROR':
                             obj = event['raw_object']
-                            # Current request expired, let's retry,
+                            # Current request expired, let's retry, (if enabled)
                             # but only if we have not already retried.
-                            if not retry_after_410 and \
+                            if not disable_retries and not retry_after_410 and \
                                     obj['code'] == HTTP_STATUS_GONE:
                                 retry_after_410 = True
                                 break
@@ -190,5 +192,5 @@ class Watch(object):
                 else:
                     self._stop = True
 
-            if timeouts or self._stop:
+            if self._stop or disable_retries:
                 break
