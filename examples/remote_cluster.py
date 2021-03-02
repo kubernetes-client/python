@@ -20,7 +20,7 @@ from kubernetes import client, config
 
 
 def main():
-    # Define the barer token we are going to use to authenticate.
+    # Define the bearer token we are going to use to authenticate.
     # See here to create the token:
     # https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
     aToken = "<token>"
