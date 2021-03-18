@@ -15,8 +15,12 @@
 
 import re
 from os import path
+
 import yaml
+
 from kubernetes import client
+
+
 def delete_from_yaml(k8s_client, yaml_file, verbose=False,
                      namespace="default", **kwargs):
     """Input:
@@ -53,6 +57,8 @@ def delete_from_yaml(k8s_client, yaml_file, verbose=False,
                 failures.extend(failure.api_exceptions)
         if failures:
             raise FailToDeleteError(failures)
+
+
 def delete_from_dict(k8s_client, yml_document, verbose,
                      namespace="default", **kwargs):
     api_exceptions = []
@@ -80,6 +86,8 @@ def delete_from_dict(k8s_client, yml_document, verbose,
 
     if api_exceptions:
         raise FailToDeleteError(api_exceptions)
+
+
 def delete_from_yaml_single_item(k8s_client,
                                  yml_document, verbose=False, **kwargs):
     # get group and version from apiVersion
@@ -119,13 +127,17 @@ def delete_from_yaml_single_item(k8s_client,
         if hasattr(res, 'status'):
             msg += " status='{0}'".format(str(res.status))
         print(msg)
+
+
 class FailToDeleteError(Exception):
     """
     An exception class for handling error if an error occurred when
     handling a yaml file during deletion of the resource.
     """
+
     def __init__(self, api_exceptions):
         self.api_exceptions = api_exceptions
+
     def __str__(self):
         msg = ""
         for api_exception in self.api_exceptions:
