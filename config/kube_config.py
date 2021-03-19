@@ -120,7 +120,7 @@ class FileOrData(object):
             else:
                 self._file = _create_temp_file_with_content(self._data)
         if self._file and not os.path.isfile(self._file):
-            raise ConfigException("File does not exists: %s" % self._file)
+            raise ConfigException("File does not exist: %s" % self._file)
         return self._file
 
     def as_data(self):
