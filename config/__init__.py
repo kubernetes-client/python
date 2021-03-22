@@ -26,10 +26,13 @@ from .kube_config import (
 def load_config(**kwargs):
     """
     Wrapper function to load the kube_config.
-    It will initially try to load_kube_config from provided path, then check if the KUBE_CONFIG_DEFAULT_LOCATION exists
-    If neither exists- it will fall back to load_incluster_config and inform the user accordingly.
+    It will initially try to load_kube_config from provided path,
+    then check if the KUBE_CONFIG_DEFAULT_LOCATION exists
+    If neither exists- it will fall back to load_incluster_config
+    and inform the user accordingly.
 
-    :param kwargs: A combination of all possible kwargs that can be passed to either load_kube_config or
+    :param kwargs: A combination of all possible kwargs that
+    can be passed to either load_kube_config or
     load_incluster_config functions.
     """
     if "kube_config_path" in kwargs.keys() or os.path.exists(
@@ -37,6 +40,8 @@ def load_config(**kwargs):
         load_kube_config(**kwargs)
     else:
         print(
-            "kube_config_path not provided and default location ({0}) does not exist. "
-            "Using inCluster Config. This might not work.".format(KUBE_CONFIG_DEFAULT_LOCATION))
+            "kube_config_path not provided and "
+            "default location ({0}) does not exist. "
+            "Using inCluster Config. "
+            "This might not work.".format(KUBE_CONFIG_DEFAULT_LOCATION))
         load_incluster_config(**kwargs)
