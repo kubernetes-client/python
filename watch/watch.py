@@ -32,15 +32,14 @@ TYPE_LIST_SUFFIX = "List"
 PY2 = sys.version_info[0] == 2
 if PY2:
     import httplib
-
     HTTP_STATUS_GONE = httplib.GONE
 else:
     import http
-
     HTTP_STATUS_GONE = http.HTTPStatus.GONE
 
 
 class SimpleNamespace:
+
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
@@ -56,7 +55,7 @@ def iter_resp_lines(resp):
     prev = ""
     for seg in resp.read_chunked(decode_content=False):
         if isinstance(seg, bytes):
-            seg = seg.decode("utf8")
+            seg = seg.decode('utf8')
         seg = prev + seg
         lines = seg.split("\n")
         if not seg.endswith("\n"):
@@ -70,6 +69,7 @@ def iter_resp_lines(resp):
 
 
 class Watch(object):
+
     def __init__(self, return_type=None):
         self._raw_return_type = return_type
         self._stop = False
@@ -84,31 +84,29 @@ class Watch(object):
             return self._raw_return_type
         return_type = _find_return_type(func)
         if return_type.endswith(TYPE_LIST_SUFFIX):
-            return return_type[: -len(TYPE_LIST_SUFFIX)]
+            return return_type[:-len(TYPE_LIST_SUFFIX)]
         return return_type
 
     def get_watch_argument_name(self, func):
         if PYDOC_FOLLOW_PARAM in pydoc.getdoc(func):
-            return "follow"
+            return 'follow'
         else:
-            return "watch"
+            return 'watch'
 
     def unmarshal_event(self, data, return_type):
         js = json.loads(data)
-        js["raw_object"] = js["object"]
-        if return_type and js["type"] != "ERROR":
-            obj = SimpleNamespace(data=json.dumps(js["raw_object"]))
-            js["object"] = self._api_client.deserialize(obj, return_type)
-            if hasattr(js["object"], "metadata"):
-                self.resource_version = js["object"].metadata.resource_version
+        js['raw_object'] = js['object']
+        if return_type and js['type'] != 'ERROR':
+            obj = SimpleNamespace(data=json.dumps(js['raw_object']))
+            js['object'] = self._api_client.deserialize(obj, return_type)
+            if hasattr(js['object'], 'metadata'):
+                self.resource_version = js['object'].metadata.resource_version
             # For custom objects that we don't have model defined, json
             # deserialization results in dictionary
-            elif (
-                isinstance(js["object"], dict)
-                and "metadata" in js["object"]
-                and "resourceVersion" in js["object"]["metadata"]
-            ):
-                self.resource_version = js["object"]["metadata"]["resourceVersion"]
+            elif (isinstance(js['object'], dict) and 'metadata' in js['object']
+                  and 'resourceVersion' in js['object']['metadata']):
+                self.resource_version = js['object']['metadata'][
+                    'resourceVersion']
         return js
 
     def stream(self, func, *args, **kwargs):
@@ -149,13 +147,13 @@ class Watch(object):
         return_type = self.get_return_type(func)
         watch_arg = self.get_watch_argument_name(func)
         kwargs[watch_arg] = True
-        kwargs["_preload_content"] = False
-        if "resource_version" in kwargs:
-            self.resource_version = kwargs["resource_version"]
+        kwargs['_preload_content'] = False
+        if 'resource_version' in kwargs:
+            self.resource_version = kwargs['resource_version']
 
         # Do not attempt retries if user specifies a timeout.
         # We want to ensure we are returning within that timeout.
-        disable_retries = "timeout_seconds" in kwargs
+        disable_retries = ('timeout_seconds' in kwargs)
         retry_after_410 = False
         while True:
             resp = func(*args, **kwargs)
@@ -165,23 +163,20 @@ class Watch(object):
                     # return raw string when we are streaming log
                     if watch_arg == "watch":
                         event = self.unmarshal_event(line, return_type)
-                        if isinstance(event, dict) and event["type"] == "ERROR":
-                            obj = event["raw_object"]
+                        if isinstance(event, dict) \
+                                and event['type'] == 'ERROR':
+                            obj = event['raw_object']
                             # Current request expired, let's retry, (if enabled)
                             # but only if we have not already retried.
-                            if (
-                                not disable_retries
-                                and not retry_after_410
-                                and obj["code"] == HTTP_STATUS_GONE
-                            ):
+                            if not disable_retries and not retry_after_410 and \
+                                    obj['code'] == HTTP_STATUS_GONE:
                                 retry_after_410 = True
                                 break
                             else:
                                 reason = "%s: %s" % (
-                                    obj["reason"], obj["message"])
+                                    obj['reason'], obj['message'])
                                 raise client.rest.ApiException(
-                                    status=obj["code"], reason=reason
-                                )
+                                    status=obj['code'], reason=reason)
                         else:
                             retry_after_410 = False
                             yield event
@@ -193,7 +188,7 @@ class Watch(object):
                 resp.close()
                 resp.release_conn()
                 if self.resource_version is not None:
-                    kwargs["resource_version"] = self.resource_version
+                    kwargs['resource_version'] = self.resource_version
                 else:
                     self._stop = True
 
