@@ -48,7 +48,7 @@ class SimpleNamespace:
 def _find_return_type(func):
     for line in pydoc.getdoc(func).splitlines():
         if line.startswith(PYDOC_RETURN_LABEL):
-            return line[len(PYDOC_RETURN_LABEL) :].strip()
+            return line[len(PYDOC_RETURN_LABEL):].strip()
     return ""
 
 
@@ -177,7 +177,8 @@ class Watch(object):
                                 retry_after_410 = True
                                 break
                             else:
-                                reason = "%s: %s" % (obj["reason"], obj["message"])
+                                reason = "%s: %s" % (
+                                    obj["reason"], obj["message"])
                                 raise client.rest.ApiException(
                                     status=obj["code"], reason=reason
                                 )
