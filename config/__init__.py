@@ -15,8 +15,12 @@
 import os
 from .config_exception import ConfigException
 from .incluster_config import load_incluster_config
-from .kube_config import (list_kube_config_contexts, load_kube_config,
-                          load_kube_config_from_dict, new_client_from_config, KUBE_CONFIG_DEFAULT_LOCATION)
+from .kube_config import (
+    list_kube_config_contexts,
+    load_kube_config,
+    load_kube_config_from_dict,
+    new_client_from_config,
+    KUBE_CONFIG_DEFAULT_LOCATION)
 
 
 def load_config(**kwargs):
@@ -28,9 +32,11 @@ def load_config(**kwargs):
     :param kwargs: A combination of all possible kwargs that can be passed to either load_kube_config or
     load_incluster_config functions.
     """
-    if "kube_config_path" in kwargs.keys() or os.path.exists(KUBE_CONFIG_DEFAULT_LOCATION):
+    if "kube_config_path" in kwargs.keys() or os.path.exists(
+            KUBE_CONFIG_DEFAULT_LOCATION):
         load_kube_config(**kwargs)
     else:
-        print("kube_config_path not provided and default location ({0}) does not exist. "
-              "Using inCluster Config. This might not work.".format(KUBE_CONFIG_DEFAULT_LOCATION))
+        print(
+            "kube_config_path not provided and default location ({0}) does not exist. "
+            "Using inCluster Config. This might not work.".format(KUBE_CONFIG_DEFAULT_LOCATION))
         load_incluster_config(**kwargs)
