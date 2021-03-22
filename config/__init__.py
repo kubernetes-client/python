@@ -31,6 +31,6 @@ def load_config(**kwargs):
     if "kube_config_path" in kwargs.keys() or os.path.exists(KUBE_CONFIG_DEFAULT_LOCATION):
         load_kube_config(**kwargs)
     else:
-        print(f"kube_config_path not provided and default location ({KUBE_CONFIG_DEFAULT_LOCATION}) does not exist. "
-              "Using inCluster Config. This might not work.")
+        print("kube_config_path not provided and default location ({0}) does not exist. "
+              "Using inCluster Config. This might not work.".format(KUBE_CONFIG_DEFAULT_LOCATION))
         load_incluster_config(**kwargs)
