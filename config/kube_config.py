@@ -120,7 +120,7 @@ class FileOrData(object):
             else:
                 self._file = _create_temp_file_with_content(self._data)
         if self._file and not os.path.isfile(self._file):
-            raise ConfigException("File does not exists: %s" % self._file)
+            raise ConfigException("File does not exist: %s" % self._file)
         return self._file
 
     def as_data(self):
@@ -682,6 +682,9 @@ class KubeConfigMerger:
         else:
             config = yaml.safe_load(string.read())
 
+        if config is None:
+            raise ConfigException(
+                'Invalid kube-config.')
         if self.config_merged is None:
             self.config_merged = copy.deepcopy(config)
         # doesn't need to do any further merging
@@ -698,6 +701,11 @@ class KubeConfigMerger:
     def load_config(self, path):
         with open(path) as f:
             config = yaml.safe_load(f)
+
+        if config is None:
+            raise ConfigException(
+                'Invalid kube-config. '
+                '%s file is empty' % path)
 
         if self.config_merged is None:
             config_merged = copy.deepcopy(config)

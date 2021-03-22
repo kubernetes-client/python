@@ -178,7 +178,7 @@ class TestFileOrData(BaseTestCase):
         temp_filename = NON_EXISTING_FILE
         obj = {TEST_FILE_KEY: temp_filename}
         t = FileOrData(obj=obj, file_key_name=TEST_FILE_KEY)
-        self.expect_exception(t.as_file, "does not exists")
+        self.expect_exception(t.as_file, "does not exist")
 
     def test_file_given_data(self):
         obj = {TEST_DATA_KEY: TEST_DATA_BASE64}
@@ -1165,7 +1165,7 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="ssl-no_file")
         self.expect_exception(
             loader.load_and_set,
-            "does not exists",
+            "does not exist",
             FakeConfig())
 
     def test_ssl(self):
@@ -1289,6 +1289,21 @@ class TestKubeConfigLoader(BaseTestCase):
                                    context="simple_token",
                                    client_configuration=actual)
         self.assertEqual(expected, actual)
+
+    def test_load_kube_config_from_empty_file_like_object(self):
+        config_file_like_object = io.StringIO()
+        self.assertRaises(
+            ConfigException,
+            load_kube_config,
+            config_file_like_object)
+
+    def test_load_kube_config_from_empty_file(self):
+        config_file = self._create_temp_file(
+            yaml.safe_dump(None))
+        self.assertRaises(
+            ConfigException,
+            load_kube_config,
+            config_file)
 
     def test_list_kube_config_contexts(self):
         config_file = self._create_temp_file(

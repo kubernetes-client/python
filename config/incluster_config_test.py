@@ -142,7 +142,7 @@ class InClusterConfigTest(unittest.TestCase):
 
     def test_no_cert_file(self):
         loader = self.get_test_loader(cert_filename="not_exists_file_1123")
-        self._should_fail_load(loader, "cert file does not exists")
+        self._should_fail_load(loader, "cert file does not exist")
 
     def test_empty_cert_file(self):
         loader = self.get_test_loader(
@@ -151,7 +151,7 @@ class InClusterConfigTest(unittest.TestCase):
 
     def test_no_token_file(self):
         loader = self.get_test_loader(token_filename="not_exists_file_1123")
-        self._should_fail_load(loader, "token file does not exists")
+        self._should_fail_load(loader, "token file does not exist")
 
     def test_empty_token_file(self):
         loader = self.get_test_loader(
