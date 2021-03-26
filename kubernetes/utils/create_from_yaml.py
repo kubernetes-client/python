@@ -26,7 +26,8 @@ LOWER_OR_NUM_FOLLOWED_BY_UPPER_RE = re.compile('([a-z0-9])([A-Z])')
 
 def create_from_yaml(
         k8s_client,
-        yaml_file,
+        yaml_file=None,
+        yaml_objects=None,
         verbose=False,
         namespace="default",
         **kwargs):
@@ -36,6 +37,8 @@ def create_from_yaml(
     Input:
     yaml_file: string. Contains the path to yaml file.
     k8s_client: an ApiClient object, initialized with the client args.
+    yaml_objects: List[dict]. Optional list of YAML objects; used instead
+        of reading the `yaml_file`. Default is None.
     verbose: If True, print confirmation from the create action.
         Default is False.
     namespace: string. Contains the namespace to create all
@@ -62,12 +65,11 @@ def create_from_yaml(
         FailToCreateError which holds list of `client.rest.ApiException`
         instances for each object that failed to create.
     """
-    with open(path.abspath(yaml_file)) as f:
-        yml_document_all = yaml.safe_load_all(f)
 
+    def create_with(objects):
         failures = []
         k8s_objects = []
-        for yml_document in yml_document_all:
+        for yml_document in objects:
             if yml_document is None:
                 continue
             try:
@@ -79,8 +81,18 @@ def create_from_yaml(
                 failures.extend(failure.api_exceptions)
         if failures:
             raise FailToCreateError(failures)
-
         return k8s_objects
+
+    if yaml_objects:
+        yml_document_all = yaml_objects
+        return create_with(yml_document_all)
+    elif yaml_file:
+        with open(path.abspath(yaml_file)) as f:
+            yml_document_all = yaml.safe_load_all(f)
+            return create_with(yml_document_all)
+    else:
+        raise ValueError(
+            'One of `yaml_file` or `yaml_objects` arguments must be provided')
 
 
 def create_from_dict(k8s_client, data, verbose=False, namespace='default',
