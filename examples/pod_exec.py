@@ -117,8 +117,11 @@ def exec_commands(api_instance):
 
 def main():
     config.load_kube_config()
-    c = Configuration()
-    c.assert_hostname = False
+    try:
+        c = Configuration().get_default_copy()
+    except AttributeError:
+        c = Configuration()
+        c.assert_hostname = False
     Configuration.set_default(c)
     core_v1 = core_v1_api.CoreV1Api()
 
