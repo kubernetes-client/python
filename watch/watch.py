@@ -53,7 +53,7 @@ def _find_return_type(func):
 
 def iter_resp_lines(resp):
     prev = ""
-    for seg in resp.read_chunked(decode_content=False):
+    for seg in resp.stream(amt=None, decode_content=False):
         if isinstance(seg, bytes):
             seg = seg.decode('utf8')
         seg = prev + seg
