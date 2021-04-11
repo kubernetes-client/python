@@ -42,6 +42,9 @@ SETTING_FILE="${TEMP_FOLDER}/settings"
 echo "export KUBERNETES_BRANCH=\"$(python ${SCRIPT_ROOT}/constants.py KUBERNETES_BRANCH)\"" > $SETTING_FILE
 echo "export CLIENT_VERSION=\"$(python ${SCRIPT_ROOT}/constants.py CLIENT_VERSION)\"" >> $SETTING_FILE
 echo "export PACKAGE_NAME=\"client\"" >> $SETTING_FILE
+# Workaround for https://github.com/kubernetes-client/gen/pull/183.
+# The env is required but not used by python client.
+echo "export LIBRARY=\"undefined\"" >> $SETTING_FILE
 
 if [[ -z ${GEN_ROOT:-} ]]; then
     GEN_ROOT="${TEMP_FOLDER}/gen"
