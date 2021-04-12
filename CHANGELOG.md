@@ -1,3 +1,18 @@
+# v18
+
+**New Feature:**
+- Support leader election. [kubernetes-client/python-base#206](https://github.com/kubernetes-client/python-base/pull/206)
+
+**Bug Fix:**
+- Raise exception when an empty config file is passed to load_kube_config. [kubernetes-client/python-base#223](https://github.com/kubernetes-client/python-base/pull/223)
+- fix: load cache error when CacheDecoder object is not callable. [kubernetes-client/python-base#226](https://github.com/kubernetes-client/python-base/pull/226)
+- Fix Watch retries with 410 errors. [kubernetes-client/python-base#227](https://github.com/kubernetes-client/python-base/pull/227)
+- Automatically handles chunked or non-chunked responses. Fix ResponseNotChunked error from watch. [kubernetes-client/python-base#231](https://github.com/kubernetes-client/python-base/pull/231)
+
+**API Change:**
+- Add allowWatchBookmarks, resoureVersionMatch parameters to custom objects. [kubernetes-client/gen#180](https://github.com/kubernetes-client/gen/pull/180)
+
+
 # v18.0.0-snapshot
 
 Kubernetes API Version: 1.18.12

@@ -16,7 +16,7 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "18.0.0-snapshot"
+CLIENT_VERSION = "18.17.0a1"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
@@ -61,7 +61,7 @@ setup(
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils', 'kubernetes.client.apis',
-              'kubernetes.dynamic'],
+              'kubernetes.dynamic', 'kubernetes.leaderelection'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
