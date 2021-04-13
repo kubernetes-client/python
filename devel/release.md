@@ -1,8 +1,8 @@
 # Release process
 
 The release process for the python client involves creating (or updating) a
-release branch, updating release tags, and creating distribution packages and
-uploading them to pypi.
+release branch, updating python-base submodule, updating release tags, and
+creating distribution packages and uploading them to pypi.
 
 There are several releases per version:
 - snapshot
@@ -31,6 +31,21 @@ git pull upstream master
 
 You may need to fix some conflicts. For auto-generated files, you can commit
 either version. They will be updated to the current version in the next step.
+
+A workaround for merge conflicts is to manually cherrypick the change from the
+master branch to the release branch. See https://github.com/kubernetes-client/python/pull/1411
+for examples.
+
+For any user-facing changes in the master branch, write down the release notes
+in [CHANGELOG.md](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md)
+
+## Update python-base submodule
+
+Follow the [instruction](https://github.com/kubernetes-client/python/blob/master/devel/submodules.md#update-submodule)
+to update python-base submodule.
+
+For any user-facing changes in python-base, write down the release notes
+in [CHANGELOG.md](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md)
 
 ## Update release tags
 
@@ -86,6 +101,11 @@ For more details, see [#974](https://github.com/kubernetes-client/python/issues/
 
 5. Add tests for the default `Configuration` behavior (ref: https://github.com/kubernetes-client/python/pull/1303 and https://github.com/kubernetes-client/python/pull/1285). The commit [1ffa61d0650e4c93e0d7f0becd2c54797eafd407](https://github.com/kubernetes-client/python/pull/1285/commits/1ffa61d0650e4c93e0d7f0becd2c54797eafd407) should be cherry-picked.
 
+6. If you see an error `gen/openapi/openapi-generator/client-generator.sh: line 83: LIBRARY: unbound variable`
+while running `scripts/update-client.sh`, cherrypick the commit https://github.com/kubernetes-client/python/pull/1411/commits/e43ab1e4ad30dcce30b6ae99365afa736f119ab5
+to your local branch and retry. Once the [fix in gen repo](https://github.com/kubernetes-client/gen/pull/187)
+is merged, this workaround should be no longer needed.
+
 Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does, then create your PR for review.
 
 Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply
@@ -137,7 +157,11 @@ And make sure there is no API change (version number changes should be fine
 as they will be updated in the next step anyway). Do not commit any changes at
 this step and go back to the master branch if there are any API changes.
 
-## Make distribution packages
+## [Legacy] Make distribution packages
+
+NOTE: we have a deploy stage in the [travis config](https://github.com/kubernetes-client/python/blob/b839eee939455d17b99f1335f6318732c6bea77c/.travis.yml#L97-L109)
+which automatically publishes the packages when a new tag is pushed to the repo.
+This step is no longer needed. Proceed to the "Create github release" step.
 
 First make sure you are using a clean version of python. Use virtualenv and
 pyenv packages. Make sure you are using python 2.7.12. I would normally do this
@@ -190,11 +214,16 @@ twine upload dist/*
 
 ## Create github release
 
+NOTE: this step requires write permission to the repo. Contact one of the
+project admins for help creating the release.
+
 Create a github release by starting from
 [this page](https://github.com/kubernetes-client/python/releases).
 Click the `Draft a new release button`. Name the tag the same as CLIENT_VERSION. Change
 the target branch to "release-x.y". If the release is a pre-release, check the
 `This is a pre-release` option.
+
+The tag will be automatically pushed once the release page is created.
 
 ## Announcement
 
