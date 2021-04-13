@@ -255,6 +255,19 @@ class WatchTests(unittest.TestCase):
         self.assertEqual("1", event['object']['metadata']['resourceVersion'])
         self.assertEqual("1", w.resource_version)
 
+    def test_unmarshal_with_bookmark(self):
+        w = Watch()
+        event = w.unmarshal_event(
+            '{"type":"BOOKMARK","object":{"kind":"Job","apiVersion":"batch/v1"'
+            ',"metadata":{"resourceVersion":"1"},"spec":{"template":{'
+            '"metadata":{},"spec":{"containers":null}}},"status":{}}}',
+            'V1Job')
+        self.assertEqual("BOOKMARK", event['type'])
+        # Watch.resource_version is *not* updated, as BOOKMARK is treated the
+        # same as ERROR for a quick fix of decoding exception,
+        # resource_version in BOOKMARK is *not* used at all.
+        self.assertEqual(None, w.resource_version)
+
     def test_watch_with_exception(self):
         fake_resp = Mock()
         fake_resp.close = Mock()
