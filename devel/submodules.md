@@ -23,7 +23,7 @@ git submodule update --init
 If you changed [kubernetes-client/python-base](https://github.com/kubernetes-client/python-base) and want to pull your changes into this repo run this command:
 
 ```bash
-git submodule update --remote
+scripts/update-submodule.sh
 ```
 
-Once updated, you should create a new PR to commit changes to the repository.
+Create a commit "generated python-base update" and send a PR to the main repo.
