@@ -75,3 +75,35 @@ function util::changelog::find_section_in_range {
   done
   echo $line
 }
+
+# write_changelog writes release_notes to section in target_release
+function util::changelog::write_changelog {
+  local target_release="$1"
+  local section="$2"
+  local release_notes="$3"
+
+  # find the place in the changelog that we want to edit
+  local line_to_edit="1"
+  if util::changelog::has_release $target_release; then
+    # the target release exists
+    release_first_line=$(util::changelog::find_release_start $target_release)
+    release_last_line=$(util::changelog::find_release_end $target_release)
+    if util::changelog::has_section_in_range "$section" "$release_first_line" "$release_last_line"; then
+      # prepend to existing section
+      line_to_edit=$(($(util::changelog::find_section_in_range "$section" "$release_first_line" "$release_last_line")+1))
+    else
+      # add a new section; plus 4 so that the section is placed below "Kubernetes API Version"
+      line_to_edit=$(($(util::changelog::find_release_start $target_release)+4))
+      release_notes="$section\n$release_notes\n"
+    fi
+  else
+    # add a new release
+    release_notes="# $target_release\n\nKubernetes API Version: To Be Updated\n\n$section\n$release_notes\n"
+  fi
+
+  echo "Writing the following release notes to CHANGELOG line $line_to_edit:"
+  echo -e $release_notes
+
+  # update changelog
+  sed -i "${line_to_edit}i${release_notes}" $changelog
+}

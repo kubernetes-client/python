@@ -26,4 +26,4 @@ If you changed [kubernetes-client/python-base](https://github.com/kubernetes-cli
 scripts/update-submodule.sh
 ```
 
-Create a commit "generated python-base update" and send a PR to the main repo.
+After the script finishes, please create a commit "generated python-base update" and send a PR to this repository.
