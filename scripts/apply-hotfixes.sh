@@ -24,21 +24,11 @@ then
     exit 1
 fi
 
-# Check if the current branch is a release branch (release-*)
-# If it is not a release branch, don't let the patch be applied
-GIT_BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-if ! [[ $GIT_BRANCH =~ .*release-.* ]]; then
-    echo Current branch: $GIT_BRANCH
-    echo You are not in a release branch, e.g., release-11.0, release-10.0
-    echo Please switch to a release branch to run this script.
-    exit 1
-fi
-
 # Patching commit for custom client behavior
 # UPDATE: The commit being cherry-picked is updated since the the client generated in 1adaaecd0879d7315f48259ad8d6cbd66b835385
 # differs from the initial hotfix
 # Ref: https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede
-git cherry-pick -n 9959273625b999ae9a8f0679c4def2ee7d699ede
+git cherry-pick -n 90aa6f6ab9a391e35d63a84af27e14cc5d5ce947
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for custom client behavior
@@ -77,7 +67,7 @@ fi;
 # Patching commits for Tolerating Null Sources on Projected Volumes
 # TODO: remove this patch when we release v20 clients
 # Ref: https://github.com/kubernetes-client/python/pull/1497
-git cherry-pick -n f3dbc8cbf1ab2aaf5e3bd8c0f0fc068e67823971
+git cherry-pick -n ee0e332776d9002bea07d328d49e90ed8c221795
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for Tolerating Null Sources on Projected Volumes
