@@ -29,6 +29,19 @@ spec:
     - name: v1
       served: true
       storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cronSpec:
+                  type: string
+                image:
+                  type: string
+                replicas:
+                  type: integer
   scope: Namespaced
   names:
     plural: crontabs
