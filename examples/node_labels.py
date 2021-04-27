@@ -36,7 +36,7 @@ def main():
         }
     }
    
-    # Creating a list of cluster nodes
+    # Listing the cluster nodes
     node_list = api_instance.list_node()
     
     print("%s\t\t%s" % ("NAME", "LABELS"))
