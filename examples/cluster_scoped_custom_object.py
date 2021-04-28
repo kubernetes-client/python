@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-Uses a Custom Resource Definition (CRD) to create a custom object, in this case
+Uses a Custom Resource Definition (CRD) to create a Custom Resource (CR), in this case
 a CronTab. This example use an example CRD from this tutorial:
 https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
 
