@@ -36,10 +36,10 @@ def main():
                 "baz": None}
         }
     }
-   
+
     # Listing the cluster nodes
     node_list = api_instance.list_node()
-    
+
     print("%s\t\t%s" % ("NAME", "LABELS"))
     # Patching the node labels
     for node in node_list.items:
