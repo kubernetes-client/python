@@ -90,6 +90,7 @@ def main():
         plural="crontabs",
         body=test_resource,
     )
+    print("[INFO] Custom resource `test-crontab` created!\n")
 
     # get the cluster scoped resource
     resource = api.get_cluster_custom_object(
@@ -98,7 +99,7 @@ def main():
         name="test-crontab",
         plural="crontabs",
     )
-    print("%s\t\t%s" % ("NAME", "SCHEDULE"))
+    print("%s\t\t%s" % ("NAME", "CRON-SPEC"))
     print(
         "%s\t%s\n" %
         (resource["metadata"]["name"],
@@ -112,7 +113,8 @@ def main():
         name="test-crontab",
         body=cronspec_patch,
     )
-    print("%s\t\t%s" % ("NAME", "PATCHED_SCHEDULE"))
+    print("[INFO] Custom resource `test-crontab` patched to update the cronSpec schedule!\n")
+    print("%s\t\t%s" % ("NAME", "PATCHED-CRON-SPEC"))
     print(
         "%s\t%s\n" %
         (patched_resource["metadata"]["name"],
@@ -126,6 +128,7 @@ def main():
         name="test-crontab",
         body=metadata_label_patch,
     )
+    print("[INFO] Custom resource `test-crontab` patched to apply new metadata labels!\n")
     print("%s\t\t%s" % ("NAME", "PATCHED_LABELS"))
     print(
         "%s\t%s\n" %
@@ -140,7 +143,7 @@ def main():
         plural="crontabs",
         body=client.V1DeleteOptions(),
     )
-    print("Resource `test-crontab` deleted!")
+    print("[INFO] Custom resource `test-crontab` deleted!")
 
 
 if __name__ == "__main__":
