@@ -68,7 +68,7 @@ def main():
         "metadata": {"name": "test-crontab"},
         "spec": {"cronSpec": "* * * * */5", "image": "my-awesome-cron-image"},
     }
-    
+
     # patch to update the `spec.cronSpec` field
     cronspec_patch = {
         "spec": {"cronSpec": "* * * * */15", "image": "my-awesome-cron-image"}
