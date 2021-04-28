@@ -23,6 +23,7 @@ This example demonstrates the following:
 
 from kubernetes import client, config
 
+
 def main():
     config.load_kube_config()
 
@@ -37,8 +38,7 @@ def main():
     }
    
     # Listing the cluster nodes
-    node_list = api_instance.list_node()
-    
+    node_list = api_instance.list_node()   
     print("%s\t\t%s" % ("NAME", "LABELS"))
 
     # Patching the node labels
