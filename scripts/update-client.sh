@@ -24,6 +24,22 @@ set -o pipefail
 # The openapi-generator version used by this client
 export OPENAPI_GENERATOR_COMMIT="v4.3.0"
 
+# OS X sed doesn't support "--version". This way we can tell if OS X sed is
+# used.
+if ! sed --version &>/dev/null; then
+  # OS X sed and GNU sed aren't compatible with backup flag "-i". Namely
+  # sed -i ... - does not work on OS X
+  # sed -i'' ... - does not work on certain OS X versions
+  # sed -i '' ... - does not work on GNU
+  echo ">>> OS X sed detected, which may be incompatible with this script. Please install and use GNU sed instead:
+  $ brew install gnu-sed
+  $ brew info gnu-sed
+  # Find the path to the installed gnu-sed and add it to your PATH. The default
+  # is:
+  #   PATH=\"/Users/\$USER/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH\""
+  exit 1
+fi
+
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
 CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
