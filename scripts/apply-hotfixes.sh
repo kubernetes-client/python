@@ -38,7 +38,7 @@ fi
 # UPDATE: The commit being cherry-picked is updated since the the client generated in 1adaaecd0879d7315f48259ad8d6cbd66b835385
 # differs from the initial hotfix
 # Ref: https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede
-git cherry-pick -n a138dcbb7a9da972402a847ce982b027e0224e60
+git cherry-pick -n 9959273625b999ae9a8f0679c4def2ee7d699ede
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for custom client behavior
@@ -51,7 +51,7 @@ fi
 # Patching commits for enabling from kubernetes import apis
 # UPDATE: The commit being cherry-picked is updated to include both the commits as one
 # Ref: https://github.com/kubernetes-client/python/blob/0976d59d6ff206f2f428cabc7a6b7b1144843b2a/kubernetes/client/apis/__init__.py
-git cherry-pick -n 228a29a982aee922831c3af4fef66a7846ce4bb8
+git cherry-pick -n 56ab983036bcb5c78eee91483c1e610da69216d1
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for enabling from kubernetes import apis
