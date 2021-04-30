@@ -1,3 +1,18 @@
+# v17.17.0b1
+
+Kubernetes API Version: 1.17.17
+
+Changelog since v17.14.0a1:
+
+**New Feature:**
+- Add Python 3.9 to build [kubernetes-client/python#1311](https://github.com/kubernetes-client/python/pull/1311)
+- Enable leaderelection [kubernetes-client/python#1363](https://github.com/kubernetes-client/python/pull/1363)
+
+**Bug Fix:**
+- fix: load cache error when CacheDecoder object is not callable [kubernetes-client/python-base#226](https://github.com/kubernetes-client/python-base/pull/226)
+- raise exception when an empty config file is passed to load_kube_config [kubernetes-client/python-base#223](https://github.com/kubernetes-client/python-base/pull/223)
+- Fix bug with Watch and 410 retries [kubernetes-client/python-base#227](https://github.com/kubernetes-client/python-base/pull/227)
+
 # v17.14.0a1
 
 Kubernetes API Version: 1.17.14
