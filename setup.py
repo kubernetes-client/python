@@ -61,7 +61,7 @@ setup(
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils', 'kubernetes.client.apis',
-              'kubernetes.dynamic'],
+              'kubernetes.dynamic', 'kubernetes.leaderelection'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     classifiers=[
@@ -79,5 +79,6 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
 )

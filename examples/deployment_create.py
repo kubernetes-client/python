@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Creates a deployment using AppsV1Api from file nginx-deployment.yaml.
+"""
+
 from os import path
 
 import yaml
