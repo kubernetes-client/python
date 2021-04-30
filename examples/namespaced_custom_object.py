@@ -17,7 +17,7 @@ Uses a Custom Resource Definition (CRD) to create a custom object, in this case
 a CronTab. This example use an example CRD from this tutorial:
 https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
 
-The following yaml manifest has to be applied first:
+The following yaml manifest has to be applied first for namespaced scoped CRD:
 
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -29,6 +29,19 @@ spec:
     - name: v1
       served: true
       storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cronSpec:
+                  type: string
+                image:
+                  type: string
+                replicas:
+                  type: integer
   scope: Namespaced
   names:
     plural: crontabs
@@ -59,6 +72,11 @@ def main():
         }
     }
 
+    # patch to update the `spec.cronSpec` field
+    patch_body = {
+        "spec": {"cronSpec": "* * * * */10", "image": "my-awesome-cron-image"}
+    }
+
     # create the resource
     api.create_namespaced_custom_object(
         group="stable.example.com",
@@ -79,6 +97,18 @@ def main():
     )
     print("Resource details:")
     pprint(resource)
+
+    # patch the namespaced custom object to update the `spec.cronSpec` field
+    patch_resource = api.patch_namespaced_custom_object(
+        group="stable.example.com",
+        version="v1",
+        name="my-new-cron-object",
+        namespace="default",
+        plural="crontabs",
+        body=patch_body,
+    )
+    print("Resource details:")
+    pprint(patch_resource)
 
     # delete it
     api.delete_namespaced_custom_object(

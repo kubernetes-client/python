@@ -20,6 +20,9 @@ import yaml
 
 from kubernetes import client
 
+UPPER_FOLLOWED_BY_LOWER_RE = re.compile('(.)([A-Z][a-z]+)')
+LOWER_OR_NUM_FOLLOWED_BY_UPPER_RE = re.compile('([a-z0-9])([A-Z])')
+
 
 def create_from_yaml(
         k8s_client,
@@ -155,8 +158,8 @@ def create_from_yaml_single_item(
     k8s_api = getattr(client, fcn_to_call)(k8s_client)
     # Replace CamelCased action_type into snake_case
     kind = yml_object["kind"]
-    kind = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', kind)
-    kind = re.sub('([a-z0-9])([A-Z])', r'\1_\2', kind).lower()
+    kind = UPPER_FOLLOWED_BY_LOWER_RE.sub(r'\1_\2', kind)
+    kind = LOWER_OR_NUM_FOLLOWED_BY_UPPER_RE.sub(r'\1_\2', kind).lower()
     # Expect the user to create namespaced objects more often
     if hasattr(k8s_api, "create_namespaced_{0}".format(kind)):
         # Decide which namespace we are going to put the object in,
