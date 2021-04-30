@@ -1,3 +1,35 @@
+# v17.17.0b1
+
+Kubernetes API Version: 1.17.17
+
+**Important Information:**
+
+- The Kubernetes Python client versioning scheme has changed. The version numbers used till Kubernetes Python Client v12.y.z lagged behind the actual Kubernetes minor version numbers. From this release, the client is moving a version format `vY.Z.P` where `Y` and `Z` are respectively from the Kubernetes version `v1.Y.Z` and `P` would incremented due to changes on the Python client side itself. Ref: https://github.com/kubernetes-client/python/issues/1244
+- Python 2 had reached [End of Life](https://www.python.org/doc/sunset-python-2/) on January 1, 2020. The Kubernetes Python Client will drop support for Python 2 from the next release (v18.0.0) and will no longer provide support to older clients as per the [Kubernetes support policy](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions).
+
+
+**API Change:**
+- Fix counting error in service/nodeport/loadbalancer quota check (#97830, @pacoxu) [SIG API Machinery and Network]
+- GCE Internal LoadBalancer sync loop will now release the ILB IP address upon sync failure. An error in ILB forwarding rule creation will no longer leak IP addresses. (#97740, @prameshj) [SIG Cloud Provider and Network]
+
+- Add a new flag to set priority for the kubelet on Windows nodes so that workloads cannot overwhelm the node there by disrupting kubelet process. (#96159, - @ravisantoshgudimetla) [SIG Node]
+- Cordoned nodes are now deregistered from AWS target groups. (#85920, @hoelzro) [SIG Cloud Provider]
+- Client-go header logging (at verbosity levels >= 9) now masks Authorization header contents (#95316, @sfowl) [SIG API Machinery]
+
+- Add a new flag to set priority for the kubelet on Windows nodes so that workloads cannot overwhelm the node there by disrupting kubelet process. (#96159, - @ravisantoshgudimetla) [SIG Node]
+- Avoid GCE API calls when initializing GCE CloudProvider for Kubelets. Avoid unnecessary GCE API calls when adding IP alises or reflecting them in Node object in - GCE cloud provider. (#96864, @tosi3k) [SIG Apps, Cloud Provider and Network]
+- Azure: check the nil error before invoke err.Error() (#96623, @nilo19) [SIG Cloud Provider]
+- Bump node-problem-detector version to v0.8.5 to fix OOM detection in with Linux kernels 5.1+ (#96716, @tosi3k) [SIG Cloud Provider, Scalability and Testing]
+- Exposes and sets a default timeout for the SubjectAccessReview client for DelegatingAuthorizationOptions (#96153, @p0lyn0mial) [SIG API Machinery and Cloud - Provider]
+- Fix memory leak in kube-apiserver when underlying time goes forth and back. (#96266, @chenyw1990) [SIG API Machinery]
+- Fix pull image error from multiple ACRs using azure managed identity (#96355, @andyzhangx) [SIG Cloud Provider]
+- Fix: resize Azure disk issue when it's in attached state (#96705, @andyzhangx) [SIG Cloud Provider]
+- Fixed kubelet creating extra sandbox for pods with RestartPolicyOnFailure after all containers succeeded (#92614, @tnqn) [SIG Node and Testing]
+- New Azure instance types do now have correct max data disk count information. (#94340, @ialidzhikov) [SIG Cloud Provider and Storage]
+- In GKE alpha clusters it will be possible to use the service annotation cloud.google.com/network-tier: Standard (#88487, @zioproto) [SIG Cloud Provider]
+
+To read the full CHANGELOG visit [here](https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-1.17.md).
+
 # v17.14.0a1
 
 Kubernetes API Version: 1.17.14
