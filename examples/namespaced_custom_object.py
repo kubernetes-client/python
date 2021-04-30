@@ -72,6 +72,11 @@ def main():
         }
     }
 
+    # patch to update the `spec.cronSpec` field
+    patch_body = {
+        "spec": {"cronSpec": "* * * * */10", "image": "my-awesome-cron-image"}
+    }
+
     # create the resource
     api.create_namespaced_custom_object(
         group="stable.example.com",
@@ -92,6 +97,18 @@ def main():
     )
     print("Resource details:")
     pprint(resource)
+
+    # patch the namespaced custom object to update the `spec.cronSpec` field
+    patch_resource = api.patch_namespaced_custom_object(
+        group="stable.example.com",
+        version="v1",
+        name="my-new-cron-object",
+        namespace="default",
+        plural="crontabs",
+        body=patch_body,
+    )
+    print("Resource details:")
+    pprint(patch_resource)
 
     # delete it
     api.delete_namespaced_custom_object(
