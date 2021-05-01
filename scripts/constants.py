@@ -18,13 +18,13 @@ import sys
 KUBERNETES_BRANCH = "release-1.17"
 
 # client version for packaging and releasing.
-CLIENT_VERSION = "17.14.0a1"
+CLIENT_VERSION = "17.17.0b1"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
 
 # Stage of development, mainly used in setup.py's classifiers.
-DEVELOPMENT_STATUS = "3 - Alpha"
+DEVELOPMENT_STATUS = "4 - Beta"
 
 
 # If called directly, return the constant value given
