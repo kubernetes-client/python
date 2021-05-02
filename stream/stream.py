@@ -17,7 +17,7 @@ import functools
 from . import ws_client
 
 
-def _websocket_reqeust(websocket_request, force_kwargs, api_method, *args, **kwargs):
+def _websocket_request(websocket_request, force_kwargs, api_method, *args, **kwargs):
     """Override the ApiClient.request method with an alternative websocket based
     method and call the supplied Kubernetes API method with that in place."""
     if force_kwargs:
@@ -37,5 +37,5 @@ def _websocket_reqeust(websocket_request, force_kwargs, api_method, *args, **kwa
         api_client.request = prev_request
 
 
-stream = functools.partial(_websocket_reqeust, ws_client.websocket_call, None)
-portforward = functools.partial(_websocket_reqeust, ws_client.portforward_call, {'_preload_content':False})
+stream = functools.partial(_websocket_request, ws_client.websocket_call, None)
+portforward = functools.partial(_websocket_request, ws_client.portforward_call, {'_preload_content':False})
