@@ -1,3 +1,70 @@
+# v17.17.0b1
+
+Kubernetes API Version: 1.17.17
+
+Changelog since v17.14.0a1:
+
+**New Feature:**
+- Add Python 3.9 to build [kubernetes-client/python#1311](https://github.com/kubernetes-client/python/pull/1311)
+- Enable leaderelection [kubernetes-client/python#1363](https://github.com/kubernetes-client/python/pull/1363)
+
+**API Change:**
+- Add allowWatchBookmarks, resoureVersionMatch parameters to custom objects. [kubernetes-client/gen#180](https://github.com/kubernetes-client/gen/pull/180)
+
+**Bug Fix:**
+- fix: load cache error when CacheDecoder object is not callable [kubernetes-client/python-base#226](https://github.com/kubernetes-client/python-base/pull/226)
+- raise exception when an empty config file is passed to load_kube_config [kubernetes-client/python-base#223](https://github.com/kubernetes-client/python-base/pull/223)
+- Fix bug with Watch and 410 retries [kubernetes-client/python-base#227](https://github.com/kubernetes-client/python-base/pull/227)
+
+# v18.17.0a1
+
+Kubernetes API Version: 1.18.17
+
+**Important Information:**
+
+- The Kubernetes Python client versioning scheme has changed. The version numbers used till Kubernetes Python Client v12.y.z lagged behind the actual Kubernetes minor version numbers. From this release, the client is moving a version format `vY.Z.P` where `Y` and `Z` are respectively from the Kubernetes version `v1.Y.Z` and `P` would incremented due to changes on the Python client side itself. Ref: https://github.com/kubernetes-client/python/issues/1244
+- Python 2 had reached [End of Life](https://www.python.org/doc/sunset-python-2/) on January 1, 2020. The Kubernetes Python Client has dropped support for Python 2 from this release (v18.0.0) and will no longer provide support to older clients as per the [Kubernetes support policy](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions).
+
+**Deprecations:**
+- The following deprecated APIs can no longer be served:
+  - All resources under `apps/v1beta1` and `apps/v1beta2` - use `apps/v1` instead
+  - `daemonsets`, `deployments`, `replicasets` resources under `extensions/v1beta1` - use `apps/v1` instead
+  - `networkpolicies` resources under `extensions/v1beta1` - use `networking.k8s.io/v1` instead
+  - `podsecuritypolicies` resources under `extensions/v1beta1` - use `policy/v1beta1` instead ([#85903](https://github.com/kubernetes/kubernetes/pull/85903), [@liggitt](https://github.com/liggitt)) [SIG API Machinery, Apps, Cluster Lifecycle, Instrumentation and Testing]
+
+**New Feature:**
+- Support leader election. [kubernetes-client/python-base#206](https://github.com/kubernetes-client/python-base/pull/206)
+
+**Bug Fix:**
+- Raise exception when an empty config file is passed to load_kube_config. [kubernetes-client/python-base#223](https://github.com/kubernetes-client/python-base/pull/223)
+- fix: load cache error when CacheDecoder object is not callable. [kubernetes-client/python-base#226](https://github.com/kubernetes-client/python-base/pull/226)
+- Fix Watch retries with 410 errors. [kubernetes-client/python-base#227](https://github.com/kubernetes-client/python-base/pull/227)
+- Automatically handles chunked or non-chunked responses. Fix ResponseNotChunked error from watch. [kubernetes-client/python-base#231](https://github.com/kubernetes-client/python-base/pull/231)
+
+**API Change:**
+- Add allowWatchBookmarks, resoureVersionMatch parameters to custom objects. [kubernetes-client/gen#180](https://github.com/kubernetes-client/gen/pull/180)
+- Fix bug in reflector that couldn't recover from "Too large resource version" errors ([#92537](https://github.com/kubernetes/kubernetes/pull/92537), [@wojtek-t](https://github.com/wojtek-t)) [SIG API Machinery]
+- Fixed: log timestamps now include trailing zeros to maintain a fixed width ([#91207](https://github.com/kubernetes/kubernetes/pull/91207), [@iamchuckss](https://github.com/iamchuckss)) [SIG Apps and Node]
+- Fixed: log timestamps now include trailing zeros to maintain a fixed width ([#91207](https://github.com/kubernetes/kubernetes/pull/91207), [@iamchuckss](https://github.com/iamchuckss)) [SIG Apps and Node]
+- Resolve regression in metadata.managedFields handling in update/patch requests submitted by older API clients ([#92007](https://github.com/kubernetes/kubernetes/pull/92007), [@apelisse](https://github.com/apelisse)) [SIG API Machinery and Testing]
+- A new IngressClass resource has been added to enable better Ingress configuration. ([#88509](https://github.com/kubernetes/kubernetes/pull/88509), [@robscott](https://github.com/robscott)) [SIG API Machinery, Apps, CLI, Network, Node and Testing]
+- The CSIDriver API has graduated to storage.k8s.io/v1, and is now available for use. ([#84814](https://github.com/kubernetes/kubernetes/pull/84814), [@huffmanca](https://github.com/huffmanca)) [SIG Storage]
+- autoscaling/v2beta2 HorizontalPodAutoscaler added a `spec.behavior` field that allows scale behavior to be configured. Behaviors are specified separately for scaling up and down. In each direction a stabilization window can be specified as well as a list of policies and how to select amongst them. Policies can limit the absolute number of pods added or removed, or the percentage of pods added or removed. ([#74525](https://github.com/kubernetes/kubernetes/pull/74525), [@gliush](https://github.com/gliush)) [SIG API Machinery, Apps, Autoscaling and CLI]
+- Ingress:
+  - `spec.ingressClassName` replaces the deprecated `kubernetes.io/ingress.class` annotation, and allows associating an Ingress object with a particular controller.
+  - path definitions added a `pathType` field to allow indicating how the specified path should be matched against incoming requests. Valid values are `Exact`, `Prefix`, and `ImplementationSpecific` ([#88587](https://github.com/kubernetes/kubernetes/pull/88587), [@cmluciano](https://github.com/cmluciano)) [SIG Apps, Cluster Lifecycle and Network]
+- The alpha feature `AnyVolumeDataSource` enables PersistentVolumeClaim objects to use the spec.dataSource field to reference a custom type as a data source ([#88636](https://github.com/kubernetes/kubernetes/pull/88636), [@bswartz](https://github.com/bswartz)) [SIG Apps and Storage]
+- The alpha feature `ConfigurableFSGroupPolicy` enables v1 Pods to specify a spec.securityContext.fsGroupChangePolicy policy to control how file permissions are applied to volumes mounted into the pod. ([#88488](https://github.com/kubernetes/kubernetes/pull/88488), [@gnufied](https://github.com/gnufied)) [SIG  Storage]
+- The alpha feature `ServiceAppProtocol` enables setting an `appProtocol` field in ServicePort and EndpointPort definitions. ([#88503](https://github.com/kubernetes/kubernetes/pull/88503), [@robscott](https://github.com/robscott)) [SIG Apps and Network]
+- The alpha feature `ImmutableEphemeralVolumes` enables an `immutable` field in both Secret and ConfigMap objects to mark their contents as immutable. ([#86377](https://github.com/kubernetes/kubernetes/pull/86377), [@wojtek-t](https://github.com/wojtek-t)) [SIG Apps, CLI and Testing]
+- The beta feature `ServerSideApply` enables tracking and managing changed fields for all new objects, which means there will be `managedFields` in `metadata` with the list of managers and their owned fields.
+- The alpha feature `ServiceAccountIssuerDiscovery` enables publishing OIDC discovery information and service account token verification keys at `/.well-known/openid-configuration` and `/openid/v1/jwks` endpoints by API servers configured to issue service account tokens. ([#80724](https://github.com/kubernetes/kubernetes/pull/80724), [@cceckman](https://github.com/cceckman)) [SIG API Machinery, Auth, Cluster Lifecycle and Testing]
+- CustomResourceDefinition schemas that use `x-kubernetes-list-map-keys` to specify properties that uniquely identify list items must make those properties required or have a default value, to ensure those properties are present for all list items. See https://kubernetes.io/docs/reference/using-api/api-concepts/&#35;merge-strategy for details. ([#88076](https://github.com/kubernetes/kubernetes/pull/88076), [@eloyekunle](https://github.com/eloyekunle)) [SIG API Machinery and Testing]
+- CustomResourceDefinition schemas that use `x-kubernetes-list-type: map` or `x-kubernetes-list-type: set` now enable validation that the list items in the corresponding custom resources are unique. ([#84920](https://github.com/kubernetes/kubernetes/pull/84920), [@sttts](https://github.com/sttts)) [SIG API Machinery]
+
+
+To read the full CHANGELOG visit [here](https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-1.18.md).
+
 # v17.14.0a1
 
 Kubernetes API Version: 1.17.14
