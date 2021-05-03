@@ -21,10 +21,44 @@ This example demonstrates the following:
 """
 
 from kubernetes import config, dynamic
+from kubernetes import client as k8s_client
 from kubernetes.dynamic.exceptions import ResourceNotFoundError
 from kubernetes.client import api_client
 import time
 
+def list_ingressroute_for_all_namespaces(group, version, plural):
+    custom_object_api = k8s_client.CustomObjectsApi()
+
+    list_of_ingress_routes = custom_object_api.list_cluster_custom_object(
+        group, version, plural
+    )
+    print(
+        "%s\t\t\t%s\t\t\t%s\t\t%s\t\t\t\t%s"
+        % ("NAME", "NAMESPACE", "FQDN", "TLS", "STRATEGY")
+    )
+    for item in list_of_ingress_routes["items"]:
+        print(
+            "%s\t%s\t\t%s\t%s\t%s"
+            % (
+                item["metadata"]["name"],
+                item["metadata"]["namespace"],
+                item["spec"]["virtualhost"]["fqdn"],
+                item["spec"]["virtualhost"]["tls"],
+                item["spec"]["strategy"]
+            )
+        )
+
+def create_namespace(namespace_api, name):
+    namespace_manifest = {
+        "apiVersion": "v1",
+        "kind": "Namespace",
+        "metadata": {"name": name, "resourceversion": "v1"},
+    }
+    namespace_api.create(body=namespace_manifest)
+
+
+def delete_namespace(namespace_api, name):
+    namespace_api.delete(name=name)
 
 def main():
     # Creating a dynamic client
@@ -36,6 +70,8 @@ def main():
     crd_api = client.resources.get(
         api_version="apiextensions.k8s.io/v1", kind="CustomResourceDefinition"
     )
+
+    namespace_api = client.resources.get(api_version="v1", kind="Namespace")
 
     # Creating a Namespaced CRD named "ingressroutes.apps.example.com"
     name = "ingressroutes.apps.example.com"
@@ -115,12 +151,18 @@ def main():
 
     # Creating a custom resource (CR) `ingress-route-*`, using the above CRD `ingressroutes.apps.example.com`
 
+    namespace_first = "test-namespace-first"
+    namespace_second = "test-namespace-second"
+
+    create_namespace(namespace_api, namespace_first)
+    create_namespace(namespace_api, namespace_second)
+
     ingressroute_manifest_first = {
         "apiVersion": "apps.example.com/v1",
         "kind": "IngressRoute",
         "metadata": {
             "name": "ingress-route-first",
-            "namespace": "default",
+            "namespace": namespace_first,
         },
         "spec": {
             "virtualhost": {
@@ -136,7 +178,7 @@ def main():
         "kind": "IngressRoute",
         "metadata": {
             "name": "ingress-route-second",
-            "namespace": "default",
+            "namespace": namespace_second,
         },
         "spec": {
             "virtualhost": {
@@ -147,28 +189,15 @@ def main():
         },
     }
 
-    ingressroute_api.create(body=ingressroute_manifest_first, namespace="default")
-    ingressroute_api.create(body=ingressroute_manifest_second, namespace="default")
+    ingressroute_api.create(body=ingressroute_manifest_first, namespace=namespace_first)
+    ingressroute_api.create(body=ingressroute_manifest_second, namespace=namespace_second)
     print("\n[INFO] custom resources `ingress-route-*` created\n")
 
     # Listing the `ingress-route-*` custom resources
 
-    ingress_routes_list = ingressroute_api.get()
-    print(
-        "%s\t\t\t%s\t%s\t\t%s\t\t\t\t%s"
-        % ("NAME", "NAMESPACE", "FQDN", "TLS", "STRATEGY")
+    list_ingressroute_for_all_namespaces(
+        group="apps.example.com", version="v1", plural="ingressroutes"
     )
-    for item in ingress_routes_list.items:
-        print(
-            "%s\t%s\t\t%s\t%s\t%s"
-            % (
-                item.metadata.name,
-                item.metadata.namespace,
-                item.spec.virtualhost.fqdn,
-                item.spec.virtualhost.tls,
-                item.spec.strategy,
-            )
-        )
 
     # Patching the ingressroutes custom resources
 
@@ -185,33 +214,29 @@ def main():
     print(
         "\n[INFO] custom resources `ingress-route-*` patched to update the strategy\n"
     )
-    ingress_routes_list = ingressroute_api.get()
-    print(
-        "%s\t\t\t%s\t%s\t\t%s\t\t\t\t%s"
-        % ("NAME", "NAMESPACE", "FQDN", "TLS", "STRATEGY")
+    list_ingressroute_for_all_namespaces(
+        group="apps.example.com", version="v1", plural="ingressroutes"
     )
-    for item in ingress_routes_list.items:
-        print(
-            "%s\t%s\t\t%s\t%s\t%s"
-            % (
-                item.metadata.name,
-                item.metadata.namespace,
-                item.spec.virtualhost.fqdn,
-                item.spec.virtualhost.tls,
-                item.spec.strategy,
-            )
-        )
 
     # Deleting the ingressroutes custom resources
 
     delete_ingressroute_first = ingressroute_api.delete(
-        name="ingress-route-first", namespace="default"
+        name="ingress-route-first", namespace=namespace_first
     )
     delete_ingressroute_second = ingressroute_api.delete(
-        name="ingress-route-second", namespace="default"
+        name="ingress-route-second", namespace=namespace_second
     )
 
     print("\n[INFO] custom resources `ingress-route-*` deleted")
+
+    # Deleting the namespaces
+
+    delete_namespace(namespace_api, namespace_first)
+    time.sleep(4)
+    delete_namespace(namespace_api, namespace_second)
+    time.sleep(4)
+
+    print("\n[INFO] test namespaces deleted")
 
     # Deleting the ingressroutes.apps.example.com custom resource definition
 
