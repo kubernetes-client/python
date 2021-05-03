@@ -14,10 +14,10 @@
 
 """
 This example demonstrates the following:
-    - Creation of a namespaced scoped custom resource definition (CRD) using dynamic-client
-    - Creation of custom resources (CR) using the above created CRD
-    - List, patch(update), delete the custom resources
-    - Delete the custom resource defintion
+    - Creation of a custom resource definition (CRD) using dynamic-client
+    - Creation of namespaced custom resources (CR) using the above CRD
+    - List, patch (update), delete the custom resources
+    - Delete the custom resource defintion (CRD)
 """
 
 from kubernetes import config, dynamic
@@ -34,30 +34,58 @@ def main():
 
     # fetching the custom resource definition (CRD) api
     crd_api = client.resources.get(
-        api_version="apiextensions.k8s.io/v1beta1", kind="CustomResourceDefinition"
+        api_version="apiextensions.k8s.io/v1", kind="CustomResourceDefinition"
     )
 
     # Creating a Namespaced CRD named "ingressroutes.apps.example.com"
     name = "ingressroutes.apps.example.com"
 
     crd_manifest = {
-        "apiVersion": "apiextensions.k8s.io/v1beta1",
+        "apiVersion": "apiextensions.k8s.io/v1",
         "kind": "CustomResourceDefinition",
-        "metadata": {
-            "name": name,
-            "namespace": "default",
-        },
+        "metadata": {"name": name, "namespace": "default"},
         "spec": {
             "group": "apps.example.com",
-            "names": {
-                "kind": "IngressRoute",
-                "listKind": "IngressRouteList",
-                "plural": "ingressroutes",
-                "singular": "ingressroute",
-            },
+            "versions": [
+                {
+                    "name": "v1",
+                    "schema": {
+                        "openAPIV3Schema": {
+                            "properties": {
+                                "spec": {
+                                    "properties": {
+                                        "strategy": {"type": "string"},
+                                        "virtualhost": {
+                                            "properties": {
+                                                "fqdn": {"type": "string"},
+                                                "tls": {
+                                                    "properties": {
+                                                        "secretName": {"type": "string"}
+                                                    },
+                                                    "type": "object",
+                                                },
+                                            },
+                                            "type": "object",
+                                        },
+                                    },
+                                    "type": "object",
+                                }
+                            },
+                            "type": "object",
+                        }
+                    },
+                    "served": True,
+                    "storage": True,
+                }
+            ],
             "scope": "Namespaced",
-            "version": "v1",
-            "subresources": {"status": {}},
+            "names": {
+                "plural": "ingressroutes",
+                "listKind": "IngressRouteList",
+                "singular": "ingressroute",
+                "kind": "IngressRoute",
+                "shortNames": ["ir"],
+            },
         },
     }
 
@@ -87,14 +115,20 @@ def main():
 
     # Creating a custom resource (CR) `ingress-route-*`, using the above CRD `ingressroutes.apps.example.com`
 
-    ingressroute_manifest_one = {
+    ingressroute_manifest_first = {
         "apiVersion": "apps.example.com/v1",
         "kind": "IngressRoute",
         "metadata": {
-            "name": "ingress-route-one",
+            "name": "ingress-route-first",
             "namespace": "default",
         },
-        "spec": {},
+        "spec": {
+            "virtualhost": {
+                "fqdn": "www.google.com",
+                "tls": {"secretName": "google-tls"},
+            },
+            "strategy": "RoundRobin",
+        },
     }
 
     ingressroute_manifest_second = {
@@ -104,47 +138,74 @@ def main():
             "name": "ingress-route-second",
             "namespace": "default",
         },
-        "spec": {},
+        "spec": {
+            "virtualhost": {
+                "fqdn": "www.yahoo.com",
+                "tls": {"secretName": "yahoo-tls"},
+            },
+            "strategy": "RoundRobin",
+        },
     }
 
-    ingressroute_api.create(body=ingressroute_manifest_one, namespace="default")
+    ingressroute_api.create(body=ingressroute_manifest_first, namespace="default")
     ingressroute_api.create(body=ingressroute_manifest_second, namespace="default")
     print("\n[INFO] custom resources `ingress-route-*` created\n")
 
     # Listing the `ingress-route-*` custom resources
 
     ingress_routes_list = ingressroute_api.get()
-    print("%s\t\t\t\t%s\t%s" % ("NAME", "NAMESPACE", "SPEC"))
+    print(
+        "%s\t\t\t%s\t%s\t\t%s\t\t\t\t%s"
+        % ("NAME", "NAMESPACE", "FQDN", "TLS", "STRATEGY")
+    )
     for item in ingress_routes_list.items:
         print(
-            "%s\t\t%s\t\t%s" % (item.metadata.name, item.metadata.namespace, item.spec)
+            "%s\t%s\t\t%s\t%s\t%s"
+            % (
+                item.metadata.name,
+                item.metadata.namespace,
+                item.spec.virtualhost.fqdn,
+                item.spec.virtualhost.tls,
+                item.spec.strategy,
+            )
         )
 
     # Patching the ingressroutes custom resources
 
-    ingressroute_manifest_one["spec"]["entrypoints"] = ["websecure"]
-    ingressroute_manifest_second["spec"]["entrypoints"] = ["web"]
+    ingressroute_manifest_first["spec"]["strategy"] = "Random"
+    ingressroute_manifest_second["spec"]["strategy"] = "WeightedLeastRequest"
 
-    patch_ingressroute_one = ingressroute_api.patch(
-        body=ingressroute_manifest_one, content_type="application/merge-patch+json"
+    patch_ingressroute_first = ingressroute_api.patch(
+        body=ingressroute_manifest_first, content_type="application/merge-patch+json"
     )
     patch_ingressroute_second = ingressroute_api.patch(
         body=ingressroute_manifest_second, content_type="application/merge-patch+json"
     )
 
-    print("\n[INFO] custom resources `ingress-route-*` patched\n")
-    patched_ingress_routes_list = ingressroute_api.get()
-    print("%s\t\t\t\t%s\t%s" % ("NAME", "NAMESPACE", "SPEC"))
-    for item in patched_ingress_routes_list.items:
+    print(
+        "\n[INFO] custom resources `ingress-route-*` patched to update the strategy\n"
+    )
+    ingress_routes_list = ingressroute_api.get()
+    print(
+        "%s\t\t\t%s\t%s\t\t%s\t\t\t\t%s"
+        % ("NAME", "NAMESPACE", "FQDN", "TLS", "STRATEGY")
+    )
+    for item in ingress_routes_list.items:
         print(
-            "%s\t\t%s\t\t%s"
-            % (item.metadata.name, item.metadata.namespace, str(item.spec))
+            "%s\t%s\t\t%s\t%s\t%s"
+            % (
+                item.metadata.name,
+                item.metadata.namespace,
+                item.spec.virtualhost.fqdn,
+                item.spec.virtualhost.tls,
+                item.spec.strategy,
+            )
         )
 
     # Deleting the ingressroutes custom resources
 
-    delete_ingressroute_one = ingressroute_api.delete(
-        name="ingress-route-one", namespace="default"
+    delete_ingressroute_first = ingressroute_api.delete(
+        name="ingress-route-first", namespace="default"
     )
     delete_ingressroute_second = ingressroute_api.delete(
         name="ingress-route-second", namespace="default"
