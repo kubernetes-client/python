@@ -219,11 +219,14 @@ class DynamicClient(object):
         header_params = params.get('header_params', {})
         form_params = []
         local_var_files = {}
-        # HTTP header `Accept`
-        header_params['Accept'] = self.client.select_header_accept([
-            'application/json',
-            'application/yaml',
-        ])
+
+        # Checking Accept header.
+        new_header_params = dict((key.lower(), value) for key, value in header_params.items())
+        if not 'accept' in new_header_params:
+            header_params['Accept'] = self.client.select_header_accept([
+                'application/json',
+                'application/yaml',
+            ])
 
         # HTTP header `Content-Type`
         if params.get('content_type'):

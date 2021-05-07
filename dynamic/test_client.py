@@ -359,7 +359,7 @@ class TestDynamicClient(unittest.TestCase):
 
         resp = api.get(namespace='default', pretty=True, label_selector="e2e-test=true")
         self.assertEqual([], resp.items)
-
+    
     def test_node_apis(self):
         client = DynamicClient(api_client.ApiClient(configuration=self.config))
         api = client.resources.get(api_version='v1', kind='Node')
@@ -367,3 +367,19 @@ class TestDynamicClient(unittest.TestCase):
         for item in api.get().items:
             node = api.get(name=item.metadata.name)
             self.assertTrue(len(dict(node.metadata.labels)) > 0)
+    
+    # test_node_apis_partial_object_metadata lists all nodes in the cluster, but only retrieves object metadata
+    def test_node_apis_partial_object_metadata(self):
+        client = DynamicClient(api_client.ApiClient(configuration=self.config))
+        api = client.resources.get(api_version='v1', kind='Node')
+        
+        params = {'header_params': {'Accept': 'application/json;as=PartialObjectMetadataList;v=v1;g=meta.k8s.io'}}
+        resp = api.get(**params)
+        self.assertEqual('PartialObjectMetadataList', resp.kind)
+        self.assertEqual('meta.k8s.io/v1', resp.apiVersion)
+
+        params = {'header_params': {'aCcePt': 'application/json;as=PartialObjectMetadataList;v=v1;g=meta.k8s.io'}}
+        resp = api.get(**params)
+        self.assertEqual('PartialObjectMetadataList', resp.kind)
+        self.assertEqual('meta.k8s.io/v1', resp.apiVersion)
+
