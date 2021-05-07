@@ -56,7 +56,8 @@ def create_job(api_instance, job):
         body=job,
         namespace="default")
     print("Job created. status='%s'" % str(api_response.status))
-    print("Job status='%s'" % str(get_job_status(api_instance)))
+    get_job_status(api_instance)
+
 
 
 def get_job_status(api_instance):
@@ -68,7 +69,7 @@ def get_job_status(api_instance):
         if api_response.status.succeeded is not None or api_response.status.failed is not None:
             job_completed = True
         sleep(1)
-    return api_response.status
+        print("Job status='%s'" % str(api_response.status))
 
 
 def update_job(api_instance, job):
