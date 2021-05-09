@@ -1,6 +1,8 @@
 # v17.0.0-snapshot
 
-Kubernetes API Version: To Be Updated
+Kubernetes API Version: 1.17.17
+
+Changelog since v17.17.0b1:
 
 ### Bug or Regression
 - Fix watch stream non-chunked response handling ([kubernetes-client/python-base#231](https://github.com/kubernetes-client/python-base/pull/231), [@dhague](https://github.com/dhague))
