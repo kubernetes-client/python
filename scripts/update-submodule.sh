@@ -31,6 +31,22 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# OS X sed doesn't support "--version". This way we can tell if OS X sed is
+# used.
+if ! sed --version &>/dev/null; then
+  # OS X sed and GNU sed aren't compatible with backup flag "-i". Namely
+  # sed -i ... - does not work on OS X
+  # sed -i'' ... - does not work on certain OS X versions
+  # sed -i '' ... - does not work on GNU
+  echo ">>> OS X sed detected, which may be incompatible with this script. Please install and use GNU sed instead:
+  $ brew install gnu-sed
+  $ brew info gnu-sed
+  # Find the path to the installed gnu-sed and add it to your PATH. The default
+  # is:
+  #   PATH=\"/Users/\$USER/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH\""
+  exit 1
+fi
+
 repo_root="$(git rev-parse --show-toplevel)"
 declare -r repo_root
 cd "${repo_root}"
