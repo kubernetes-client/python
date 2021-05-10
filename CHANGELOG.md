@@ -1,3 +1,17 @@
+# v17.0.0-snapshot
+
+Kubernetes API Version: 1.17.17
+
+Changelog since v17.17.0b1:
+
+### Bug or Regression
+- Fix watch stream non-chunked response handling ([kubernetes-client/python-base#231](https://github.com/kubernetes-client/python-base/pull/231), [@dhague](https://github.com/dhague))
+- Fixed a decoding error for BOOTMARK watch events ([kubernetes-client/python-base#234](https://github.com/kubernetes-client/python-base/pull/234), [@yliaog](https://github.com/yliaog))
+
+### Feature
+- Load_kube_config_from_dict() support define custom temp files path ([kubernetes-client/python-base#233](https://github.com/kubernetes-client/python-base/pull/233), [@onecer](https://github.com/onecer))
+- The dynamic client now supports customizing http "Accept" header through the `header_params` parameter, which can be used to customizing API server response, e.g. retrieving object metadata only. ([kubernetes-client/python-base#236](https://github.com/kubernetes-client/python-base/pull/236), [@Yashks1994](https://github.com/Yashks1994))
+
 # v17.17.0b1
 
 Kubernetes API Version: 1.17.17
