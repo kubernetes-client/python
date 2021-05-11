@@ -19,6 +19,7 @@ from multiprocessing.pool import ThreadPool
 import os
 import re
 import tempfile
+from urllib3.connection import HTTPHeaderDict
 
 # python 2 and python 3 compatibility library
 import six
@@ -133,7 +134,7 @@ class ApiClient(object):
             header_params['Cookie'] = self.cookie
         if header_params:
             header_params = self.sanitize_for_serialization(header_params)
-            header_params = dict(self.parameters_to_tuples(header_params,
+            header_params = HTTPHeaderDict(self.parameters_to_tuples(header_params,
                                                            collection_formats))
 
         # path parameters
