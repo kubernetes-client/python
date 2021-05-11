@@ -31,11 +31,15 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+
 repo_root="$(git rev-parse --show-toplevel)"
 declare -r repo_root
 cd "${repo_root}"
 
 source scripts/util/changelog.sh
+source scripts/util/common.sh
+
+util::common::check_sed
 go get k8s.io/release/cmd/release-notes
 
 TARGET_RELEASE=${TARGET_RELEASE:-"v$(grep "^CLIENT_VERSION = \"" scripts/constants.py | sed "s/CLIENT_VERSION = \"//g" | sed "s/\"//g")"}
