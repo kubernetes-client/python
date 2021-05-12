@@ -1,4 +1,4 @@
-# v17.0.0-snapshot
+# v17.17.0
 
 Kubernetes API Version: 1.17.17
 
