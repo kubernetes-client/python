@@ -17,6 +17,7 @@ Creates, updates, and deletes a job object.
 """
 
 from os import path
+from time import sleep
 
 import yaml
 
@@ -54,6 +55,20 @@ def create_job(api_instance, job):
         body=job,
         namespace="default")
     print("Job created. status='%s'" % str(api_response.status))
+    get_job_status(api_instance)
+
+
+def get_job_status(api_instance):
+    job_completed = False
+    while not job_completed:
+        api_response = api_instance.read_namespaced_job_status(
+            name=JOB_NAME,
+            namespace="default")
+        if api_response.status.succeeded is not None or \
+                api_response.status.failed is not None:
+            job_completed = True
+        sleep(1)
+        print("Job status='%s'" % str(api_response.status))
 
 
 def update_job(api_instance, job):
