@@ -676,7 +676,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_csi_driver**
-> V1Status delete_csi_driver(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta1CSIDriver delete_csi_driver(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1beta1CSIDriver**](V1beta1CSIDriver.md)
 
 ### Authorization
 
@@ -754,7 +754,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_csi_node**
-> V1Status delete_csi_node(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta1CSINode delete_csi_node(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -811,7 +811,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1beta1CSINode**](V1beta1CSINode.md)
 
 ### Authorization
 
@@ -832,7 +832,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_storage_class**
-> V1Status delete_storage_class(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta1StorageClass delete_storage_class(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -889,7 +889,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1beta1StorageClass**](V1beta1StorageClass.md)
 
 ### Authorization
 
@@ -910,7 +910,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_volume_attachment**
-> V1Status delete_volume_attachment(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta1VolumeAttachment delete_volume_attachment(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -967,7 +967,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1beta1VolumeAttachment**](V1beta1VolumeAttachment.md)
 
 ### Authorization
 

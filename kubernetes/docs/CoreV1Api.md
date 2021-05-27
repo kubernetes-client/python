@@ -6544,7 +6544,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_persistent_volume_claim**
-> V1Status delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1PersistentVolumeClaim delete_namespaced_persistent_volume_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -6603,7 +6603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1PersistentVolumeClaim**](V1PersistentVolumeClaim.md)
 
 ### Authorization
 
@@ -6624,7 +6624,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod**
-> V1Status delete_namespaced_pod(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1Pod delete_namespaced_pod(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -6683,7 +6683,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1Pod**](V1Pod.md)
 
 ### Authorization
 
@@ -6704,7 +6704,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod_template**
-> V1Status delete_namespaced_pod_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1PodTemplate delete_namespaced_pod_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -6763,7 +6763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1PodTemplate**](V1PodTemplate.md)
 
 ### Authorization
 
@@ -6864,7 +6864,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_resource_quota**
-> V1Status delete_namespaced_resource_quota(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1ResourceQuota delete_namespaced_resource_quota(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -6923,7 +6923,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1ResourceQuota**](V1ResourceQuota.md)
 
 ### Authorization
 
@@ -7104,7 +7104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_service_account**
-> V1Status delete_namespaced_service_account(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1ServiceAccount delete_namespaced_service_account(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -7163,7 +7163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1ServiceAccount**](V1ServiceAccount.md)
 
 ### Authorization
 
@@ -7262,7 +7262,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_persistent_volume**
-> V1Status delete_persistent_volume(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1PersistentVolume delete_persistent_volume(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 
 
@@ -7319,7 +7319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+[**V1PersistentVolume**](V1PersistentVolume.md)
 
 ### Authorization
 
