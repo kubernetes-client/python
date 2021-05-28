@@ -214,6 +214,10 @@ class TestClient(unittest.TestCase):
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
 
+    # Skipping this test as this flakes a lot
+    # See: https://github.com/kubernetes-client/python/issues/1300
+    # Re-enable the test once the flakiness is investigated
+    @unittest.skip("skipping due to extreme flakiness")
     def test_portforward_raw(self):
         client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
