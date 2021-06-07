@@ -52,7 +52,9 @@ echo "export PACKAGE_NAME=\"client\"" >> $SETTING_FILE
 if [[ -z ${GEN_ROOT:-} ]]; then
     GEN_ROOT="${TEMP_FOLDER}/gen"
     echo ">>> Cloning gen repo"
-    git clone --recursive https://github.com/kubernetes-client/gen.git "${GEN_ROOT}"
+    # TODO: use the upstream repo after we merge the necessary config change
+    # there
+    git clone --recursive https://github.com/roycaihw/gen.git "${GEN_ROOT}"
 else
     echo ">>> Reusing gen repo at ${GEN_ROOT}"
 fi
