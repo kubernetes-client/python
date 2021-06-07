@@ -1,6 +1,7 @@
 # V1SelfSubjectAccessReviewSpec
 
 SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

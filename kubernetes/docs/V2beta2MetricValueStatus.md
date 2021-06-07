@@ -1,6 +1,7 @@
 # V2beta2MetricValueStatus
 
 MetricValueStatus holds the current value for a metric
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

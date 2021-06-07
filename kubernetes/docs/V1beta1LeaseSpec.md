@@ -1,6 +1,7 @@
 # V1beta1LeaseSpec
 
 LeaseSpec is a specification of a Lease.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

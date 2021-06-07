@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Kubernetes
 
@@ -10,18 +8,26 @@
 """
 
 
-from __future__ import absolute_import
-
 import re  # noqa: F401
+import sys  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
-
-from kubernetes.client.api_client import ApiClient
-from kubernetes.client.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
+from kubernetes.client.api_client import ApiClient, Endpoint as _Endpoint
+from kubernetes.client.model_utils import (  # noqa: F401
+    check_allowed_values,
+    check_validations,
+    date,
+    datetime,
+    file_type,
+    none_type,
+    validate_and_convert_types
 )
+from kubernetes.client.model.v1_api_resource_list import V1APIResourceList
+from kubernetes.client.model.v1_delete_options import V1DeleteOptions
+from kubernetes.client.model.v1_status import V1Status
+from kubernetes.client.model.v1beta1_pod_disruption_budget import V1beta1PodDisruptionBudget
+from kubernetes.client.model.v1beta1_pod_disruption_budget_list import V1beta1PodDisruptionBudgetList
+from kubernetes.client.model.v1beta1_pod_security_policy import V1beta1PodSecurityPolicy
+from kubernetes.client.model.v1beta1_pod_security_policy_list import V1beta1PodSecurityPolicyList
 
 
 class PolicyV1beta1Api(object):
@@ -36,2755 +42,2984 @@ class PolicyV1beta1Api(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def create_namespaced_pod_disruption_budget(self, namespace, body, **kwargs):  # noqa: E501
-        """create_namespaced_pod_disruption_budget  # noqa: E501
+        def __create_namespaced_pod_disruption_budget(
+            self,
+            namespace,
+            body,
+            **kwargs
+        ):
+            """create_namespaced_pod_disruption_budget  # noqa: E501
 
-        create a PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_namespaced_pod_disruption_budget(namespace, body, async_req=True)
-        >>> result = thread.get()
+            create a PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1beta1PodDisruptionBudget body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_namespaced_pod_disruption_budget_with_http_info(namespace, body, **kwargs)  # noqa: E501
+            >>> thread = api.create_namespaced_pod_disruption_budget(namespace, body, async_req=True)
+            >>> result = thread.get()
 
-    def create_namespaced_pod_disruption_budget_with_http_info(self, namespace, body, **kwargs):  # noqa: E501
-        """create_namespaced_pod_disruption_budget  # noqa: E501
+            Args:
+                namespace (str): object name and auth scope, such as for teams and projects
+                body (V1beta1PodDisruptionBudget):
 
-        create a PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_namespaced_pod_disruption_budget_with_http_info(namespace, body, async_req=True)
-        >>> result = thread.get()
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1beta1PodDisruptionBudget body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['namespace'] = \
+                namespace
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        local_var_params = locals()
-
-        all_params = [
-            'namespace',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets',
+                'operation_id': 'create_namespaced_pod_disruption_budget',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'namespace',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'namespace',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'namespace':
+                        (str,),
+                    'body':
+                        (V1beta1PodDisruptionBudget,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'namespace': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__create_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __create_pod_security_policy(
+            self,
+            body,
+            **kwargs
+        ):
+            """create_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            create a PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.create_pod_security_policy(body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                body (V1beta1PodSecurityPolicy):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodSecurityPolicy
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def create_pod_security_policy(self, body, **kwargs):  # noqa: E501
-        """create_pod_security_policy  # noqa: E501
-
-        create a PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_pod_security_policy(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1PodSecurityPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodSecurityPolicy
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_pod_security_policy_with_http_info(body, **kwargs)  # noqa: E501
-
-    def create_pod_security_policy_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_pod_security_policy  # noqa: E501
-
-        create a PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_pod_security_policy_with_http_info(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1PodSecurityPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodSecurityPolicy, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodSecurityPolicy,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies',
+                'operation_id': 'create_pod_security_policy',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'body':
+                        (V1beta1PodSecurityPolicy,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__create_pod_security_policy
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `create_pod_security_policy`")  # noqa: E501
+        def __delete_collection_namespaced_pod_disruption_budget(
+            self,
+            namespace,
+            **kwargs
+        ):
+            """delete_collection_namespaced_pod_disruption_budget  # noqa: E501
 
-        collection_formats = {}
+            delete collection of PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_collection_namespaced_pod_disruption_budget(namespace, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                namespace (str): object name and auth scope, such as for teams and projects
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['namespace'] = \
+                namespace
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodSecurityPolicy',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_collection_namespaced_pod_disruption_budget(self, namespace, **kwargs):  # noqa: E501
-        """delete_collection_namespaced_pod_disruption_budget  # noqa: E501
-
-        delete collection of PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_namespaced_pod_disruption_budget(namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_collection_namespaced_pod_disruption_budget_with_http_info(namespace, **kwargs)  # noqa: E501
-
-    def delete_collection_namespaced_pod_disruption_budget_with_http_info(self, namespace, **kwargs):  # noqa: E501
-        """delete_collection_namespaced_pod_disruption_budget  # noqa: E501
-
-        delete collection of PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_namespaced_pod_disruption_budget_with_http_info(namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'namespace',
-            'pretty',
-            '_continue',
-            'dry_run',
-            'field_selector',
-            'grace_period_seconds',
-            'label_selector',
-            'limit',
-            'orphan_dependents',
-            'propagation_policy',
-            'resource_version',
-            'timeout_seconds',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_collection_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets',
+                'operation_id': 'delete_collection_namespaced_pod_disruption_budget',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'namespace',
+                    'pretty',
+                    '_continue',
+                    'dry_run',
+                    'field_selector',
+                    'grace_period_seconds',
+                    'label_selector',
+                    'limit',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'resource_version',
+                    'timeout_seconds',
+                    'body',
+                ],
+                'required': [
+                    'namespace',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'namespace':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    '_continue':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    '_continue': 'continue',
+                    'dry_run': 'dryRun',
+                    'field_selector': 'fieldSelector',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                },
+                'location_map': {
+                    'namespace': 'path',
+                    'pretty': 'query',
+                    '_continue': 'query',
+                    'dry_run': 'query',
+                    'field_selector': 'query',
+                    'grace_period_seconds': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_collection_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_collection_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __delete_collection_pod_security_policy(
+            self,
+            **kwargs
+        ):
+            """delete_collection_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            delete collection of PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.delete_collection_pod_security_policy(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_collection_pod_security_policy(self, **kwargs):  # noqa: E501
-        """delete_collection_pod_security_policy  # noqa: E501
-
-        delete collection of PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_pod_security_policy(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_collection_pod_security_policy_with_http_info(**kwargs)  # noqa: E501
-
-    def delete_collection_pod_security_policy_with_http_info(self, **kwargs):  # noqa: E501
-        """delete_collection_pod_security_policy  # noqa: E501
-
-        delete collection of PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_pod_security_policy_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            '_continue',
-            'dry_run',
-            'field_selector',
-            'grace_period_seconds',
-            'label_selector',
-            'limit',
-            'orphan_dependents',
-            'propagation_policy',
-            'resource_version',
-            'timeout_seconds',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_collection_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies',
+                'operation_id': 'delete_collection_pod_security_policy',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    '_continue',
+                    'dry_run',
+                    'field_selector',
+                    'grace_period_seconds',
+                    'label_selector',
+                    'limit',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'resource_version',
+                    'timeout_seconds',
+                    'body',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    '_continue':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    '_continue': 'continue',
+                    'dry_run': 'dryRun',
+                    'field_selector': 'fieldSelector',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    '_continue': 'query',
+                    'dry_run': 'query',
+                    'field_selector': 'query',
+                    'grace_period_seconds': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_collection_pod_security_policy
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_collection_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __delete_namespaced_pod_disruption_budget(
+            self,
+            name,
+            namespace,
+            **kwargs
+        ):
+            """delete_namespaced_pod_disruption_budget  # noqa: E501
 
-        collection_formats = {}
+            delete a PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_namespaced_pod_disruption_budget(name, namespace, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_namespaced_pod_disruption_budget(self, name, namespace, **kwargs):  # noqa: E501
-        """delete_namespaced_pod_disruption_budget  # noqa: E501
-
-        delete a PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_namespaced_pod_disruption_budget(name, namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_namespaced_pod_disruption_budget_with_http_info(name, namespace, **kwargs)  # noqa: E501
-
-    def delete_namespaced_pod_disruption_budget_with_http_info(self, name, namespace, **kwargs):  # noqa: E501
-        """delete_namespaced_pod_disruption_budget  # noqa: E501
-
-        delete a PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_namespaced_pod_disruption_budget_with_http_info(name, namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'pretty',
-            'dry_run',
-            'grace_period_seconds',
-            'orphan_dependents',
-            'propagation_policy',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}',
+                'operation_id': 'delete_namespaced_pod_disruption_budget',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'pretty',
+                    'dry_run',
+                    'grace_period_seconds',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'body',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'grace_period_seconds': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __delete_pod_security_policy(
+            self,
+            name,
+            **kwargs
+        ):
+            """delete_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            delete a PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.delete_pod_security_policy(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
+            Args:
+                name (str): name of the PodSecurityPolicy
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodSecurityPolicy
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_pod_security_policy(self, name, **kwargs):  # noqa: E501
-        """delete_pod_security_policy  # noqa: E501
-
-        delete a PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_pod_security_policy(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodSecurityPolicy
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_pod_security_policy_with_http_info(name, **kwargs)  # noqa: E501
-
-    def delete_pod_security_policy_with_http_info(self, name, **kwargs):  # noqa: E501
-        """delete_pod_security_policy  # noqa: E501
-
-        delete a PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_pod_security_policy_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodSecurityPolicy, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'dry_run',
-            'grace_period_seconds',
-            'orphan_dependents',
-            'propagation_policy',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodSecurityPolicy,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies/{name}',
+                'operation_id': 'delete_pod_security_policy',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'dry_run',
+                    'grace_period_seconds',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'body',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'grace_period_seconds': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_pod_security_policy
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `delete_pod_security_policy`")  # noqa: E501
+        def __get_api_resources(
+            self,
+            **kwargs
+        ):
+            """get_api_resources  # noqa: E501
 
-        collection_formats = {}
+            get available resources  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.get_api_resources(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1APIResourceList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies/{name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodSecurityPolicy',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def get_api_resources(self, **kwargs):  # noqa: E501
-        """get_api_resources  # noqa: E501
-
-        get available resources  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_api_resources(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1APIResourceList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_api_resources_with_http_info(**kwargs)  # noqa: E501
-
-    def get_api_resources_with_http_info(self, **kwargs):  # noqa: E501
-        """get_api_resources  # noqa: E501
-
-        get available resources  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_api_resources_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1APIResourceList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_api_resources = _Endpoint(
+            settings={
+                'response_type': (V1APIResourceList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/',
+                'operation_id': 'get_api_resources',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_api_resources
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_api_resources" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __list_namespaced_pod_disruption_budget(
+            self,
+            namespace,
+            **kwargs
+        ):
+            """list_namespaced_pod_disruption_budget  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.list_namespaced_pod_disruption_budget(namespace, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
+            Args:
+                namespace (str): object name and auth scope, such as for teams and projects
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudgetList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['namespace'] = \
+                namespace
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1APIResourceList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_namespaced_pod_disruption_budget(self, namespace, **kwargs):  # noqa: E501
-        """list_namespaced_pod_disruption_budget  # noqa: E501
-
-        list or watch objects of kind PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_namespaced_pod_disruption_budget(namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudgetList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_namespaced_pod_disruption_budget_with_http_info(namespace, **kwargs)  # noqa: E501
-
-    def list_namespaced_pod_disruption_budget_with_http_info(self, namespace, **kwargs):  # noqa: E501
-        """list_namespaced_pod_disruption_budget  # noqa: E501
-
-        list or watch objects of kind PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_namespaced_pod_disruption_budget_with_http_info(namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudgetList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'namespace',
-            'pretty',
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudgetList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets',
+                'operation_id': 'list_namespaced_pod_disruption_budget',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'namespace',
+                    'pretty',
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [
+                    'namespace',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'namespace':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'namespace': 'path',
+                    'pretty': 'query',
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __list_pod_disruption_budget_for_all_namespaces(
+            self,
+            **kwargs
+        ):
+            """list_pod_disruption_budget_for_all_namespaces  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.list_pod_disruption_budget_for_all_namespaces(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudgetList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudgetList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_pod_disruption_budget_for_all_namespaces(self, **kwargs):  # noqa: E501
-        """list_pod_disruption_budget_for_all_namespaces  # noqa: E501
-
-        list or watch objects of kind PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_pod_disruption_budget_for_all_namespaces(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudgetList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_pod_disruption_budget_for_all_namespaces_with_http_info(**kwargs)  # noqa: E501
-
-    def list_pod_disruption_budget_for_all_namespaces_with_http_info(self, **kwargs):  # noqa: E501
-        """list_pod_disruption_budget_for_all_namespaces  # noqa: E501
-
-        list or watch objects of kind PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_pod_disruption_budget_for_all_namespaces_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudgetList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'pretty',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_pod_disruption_budget_for_all_namespaces = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudgetList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/poddisruptionbudgets',
+                'operation_id': 'list_pod_disruption_budget_for_all_namespaces',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'pretty',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'pretty':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'pretty': 'pretty',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'pretty': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_pod_disruption_budget_for_all_namespaces
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_pod_disruption_budget_for_all_namespaces" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __list_pod_security_policy(
+            self,
+            **kwargs
+        ):
+            """list_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.list_pod_security_policy(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodSecurityPolicyList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/poddisruptionbudgets', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudgetList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_pod_security_policy(self, **kwargs):  # noqa: E501
-        """list_pod_security_policy  # noqa: E501
-
-        list or watch objects of kind PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_pod_security_policy(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodSecurityPolicyList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_pod_security_policy_with_http_info(**kwargs)  # noqa: E501
-
-    def list_pod_security_policy_with_http_info(self, **kwargs):  # noqa: E501
-        """list_pod_security_policy  # noqa: E501
-
-        list or watch objects of kind PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_pod_security_policy_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodSecurityPolicyList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodSecurityPolicyList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies',
+                'operation_id': 'list_pod_security_policy',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_pod_security_policy
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __patch_namespaced_pod_disruption_budget(
+            self,
+            name,
+            namespace,
+            body,
+            **kwargs
+        ):
+            """patch_namespaced_pod_disruption_budget  # noqa: E501
 
-        collection_formats = {}
+            partially update the specified PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.patch_namespaced_pod_disruption_budget(name, namespace, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodSecurityPolicyList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_namespaced_pod_disruption_budget(self, name, namespace, body, **kwargs):  # noqa: E501
-        """patch_namespaced_pod_disruption_budget  # noqa: E501
-
-        partially update the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_namespaced_pod_disruption_budget(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_namespaced_pod_disruption_budget_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
-
-    def patch_namespaced_pod_disruption_budget_with_http_info(self, name, namespace, body, **kwargs):  # noqa: E501
-        """patch_namespaced_pod_disruption_budget  # noqa: E501
-
-        partially update the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_namespaced_pod_disruption_budget_with_http_info(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}',
+                'operation_id': 'patch_namespaced_pod_disruption_budget',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __patch_namespaced_pod_disruption_budget_status(
+            self,
+            name,
+            namespace,
+            body,
+            **kwargs
+        ):
+            """patch_namespaced_pod_disruption_budget_status  # noqa: E501
 
-        collection_formats = {}
+            partially update status of the specified PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.patch_namespaced_pod_disruption_budget_status(name, namespace, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_namespaced_pod_disruption_budget_status(self, name, namespace, body, **kwargs):  # noqa: E501
-        """patch_namespaced_pod_disruption_budget_status  # noqa: E501
-
-        partially update status of the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_namespaced_pod_disruption_budget_status(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_namespaced_pod_disruption_budget_status_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
-
-    def patch_namespaced_pod_disruption_budget_status_with_http_info(self, name, namespace, body, **kwargs):  # noqa: E501
-        """patch_namespaced_pod_disruption_budget_status  # noqa: E501
-
-        partially update status of the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_namespaced_pod_disruption_budget_status_with_http_info(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_namespaced_pod_disruption_budget_status = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status',
+                'operation_id': 'patch_namespaced_pod_disruption_budget_status',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_namespaced_pod_disruption_budget_status
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_namespaced_pod_disruption_budget_status" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod_disruption_budget_status`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod_disruption_budget_status`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod_disruption_budget_status`")  # noqa: E501
+        def __patch_pod_security_policy(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """patch_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            partially update the specified PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.patch_pod_security_policy(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the PodSecurityPolicy
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodSecurityPolicy
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_pod_security_policy(self, name, body, **kwargs):  # noqa: E501
-        """patch_pod_security_policy  # noqa: E501
-
-        partially update the specified PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_pod_security_policy(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodSecurityPolicy
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_pod_security_policy_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def patch_pod_security_policy_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """patch_pod_security_policy  # noqa: E501
-
-        partially update the specified PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_pod_security_policy_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodSecurityPolicy, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodSecurityPolicy,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies/{name}',
+                'operation_id': 'patch_pod_security_policy',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_pod_security_policy
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_pod_security_policy`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_pod_security_policy`")  # noqa: E501
+        def __read_namespaced_pod_disruption_budget(
+            self,
+            name,
+            namespace,
+            **kwargs
+        ):
+            """read_namespaced_pod_disruption_budget  # noqa: E501
 
-        collection_formats = {}
+            read the specified PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.read_namespaced_pod_disruption_budget(name, namespace, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                exact (bool): Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.. [optional]
+                export (bool): Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies/{name}', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodSecurityPolicy',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_namespaced_pod_disruption_budget(self, name, namespace, **kwargs):  # noqa: E501
-        """read_namespaced_pod_disruption_budget  # noqa: E501
-
-        read the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_namespaced_pod_disruption_budget(name, namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_namespaced_pod_disruption_budget_with_http_info(name, namespace, **kwargs)  # noqa: E501
-
-    def read_namespaced_pod_disruption_budget_with_http_info(self, name, namespace, **kwargs):  # noqa: E501
-        """read_namespaced_pod_disruption_budget  # noqa: E501
-
-        read the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_namespaced_pod_disruption_budget_with_http_info(name, namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'pretty',
-            'exact',
-            'export'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}',
+                'operation_id': 'read_namespaced_pod_disruption_budget',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'pretty',
+                    'exact',
+                    'export',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'exact':
+                        (bool,),
+                    'export':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'exact': 'exact',
+                    'export': 'export',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'pretty': 'query',
+                    'exact': 'query',
+                    'export': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __read_namespaced_pod_disruption_budget_status(
+            self,
+            name,
+            namespace,
+            **kwargs
+        ):
+            """read_namespaced_pod_disruption_budget_status  # noqa: E501
 
-        collection_formats = {}
+            read status of the specified PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.read_namespaced_pod_disruption_budget_status(name, namespace, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'exact' in local_var_params and local_var_params['exact'] is not None:  # noqa: E501
-            query_params.append(('exact', local_var_params['exact']))  # noqa: E501
-        if 'export' in local_var_params and local_var_params['export'] is not None:  # noqa: E501
-            query_params.append(('export', local_var_params['export']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_namespaced_pod_disruption_budget_status(self, name, namespace, **kwargs):  # noqa: E501
-        """read_namespaced_pod_disruption_budget_status  # noqa: E501
-
-        read status of the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_namespaced_pod_disruption_budget_status(name, namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_namespaced_pod_disruption_budget_status_with_http_info(name, namespace, **kwargs)  # noqa: E501
-
-    def read_namespaced_pod_disruption_budget_status_with_http_info(self, name, namespace, **kwargs):  # noqa: E501
-        """read_namespaced_pod_disruption_budget_status  # noqa: E501
-
-        read status of the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_namespaced_pod_disruption_budget_status_with_http_info(name, namespace, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'pretty'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_namespaced_pod_disruption_budget_status = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status',
+                'operation_id': 'read_namespaced_pod_disruption_budget_status',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'pretty',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'pretty':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'pretty': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_namespaced_pod_disruption_budget_status
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_namespaced_pod_disruption_budget_status" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_disruption_budget_status`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_disruption_budget_status`")  # noqa: E501
+        def __read_pod_security_policy(
+            self,
+            name,
+            **kwargs
+        ):
+            """read_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            read the specified PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.read_pod_security_policy(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
+            Args:
+                name (str): name of the PodSecurityPolicy
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                exact (bool): Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.. [optional]
+                export (bool): Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodSecurityPolicy
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_pod_security_policy(self, name, **kwargs):  # noqa: E501
-        """read_pod_security_policy  # noqa: E501
-
-        read the specified PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_pod_security_policy(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodSecurityPolicy
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_pod_security_policy_with_http_info(name, **kwargs)  # noqa: E501
-
-    def read_pod_security_policy_with_http_info(self, name, **kwargs):  # noqa: E501
-        """read_pod_security_policy  # noqa: E501
-
-        read the specified PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_pod_security_policy_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodSecurityPolicy, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'exact',
-            'export'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodSecurityPolicy,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies/{name}',
+                'operation_id': 'read_pod_security_policy',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'exact',
+                    'export',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'exact':
+                        (bool,),
+                    'export':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'exact': 'exact',
+                    'export': 'export',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'exact': 'query',
+                    'export': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_pod_security_policy
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_pod_security_policy`")  # noqa: E501
+        def __replace_namespaced_pod_disruption_budget(
+            self,
+            name,
+            namespace,
+            body,
+            **kwargs
+        ):
+            """replace_namespaced_pod_disruption_budget  # noqa: E501
 
-        collection_formats = {}
+            replace the specified PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.replace_namespaced_pod_disruption_budget(name, namespace, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'exact' in local_var_params and local_var_params['exact'] is not None:  # noqa: E501
-            query_params.append(('exact', local_var_params['exact']))  # noqa: E501
-        if 'export' in local_var_params and local_var_params['export'] is not None:  # noqa: E501
-            query_params.append(('export', local_var_params['export']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
+                body (V1beta1PodDisruptionBudget):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies/{name}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodSecurityPolicy',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_namespaced_pod_disruption_budget(self, name, namespace, body, **kwargs):  # noqa: E501
-        """replace_namespaced_pod_disruption_budget  # noqa: E501
-
-        replace the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_namespaced_pod_disruption_budget(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1beta1PodDisruptionBudget body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_namespaced_pod_disruption_budget_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
-
-    def replace_namespaced_pod_disruption_budget_with_http_info(self, name, namespace, body, **kwargs):  # noqa: E501
-        """replace_namespaced_pod_disruption_budget  # noqa: E501
-
-        replace the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_namespaced_pod_disruption_budget_with_http_info(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1beta1PodDisruptionBudget body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_namespaced_pod_disruption_budget = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}',
+                'operation_id': 'replace_namespaced_pod_disruption_budget',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'body':
+                        (V1beta1PodDisruptionBudget,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_namespaced_pod_disruption_budget
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_namespaced_pod_disruption_budget" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod_disruption_budget`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod_disruption_budget`")  # noqa: E501
+        def __replace_namespaced_pod_disruption_budget_status(
+            self,
+            name,
+            namespace,
+            body,
+            **kwargs
+        ):
+            """replace_namespaced_pod_disruption_budget_status  # noqa: E501
 
-        collection_formats = {}
+            replace status of the specified PodDisruptionBudget  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.replace_namespaced_pod_disruption_budget_status(name, namespace, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                name (str): name of the PodDisruptionBudget
+                namespace (str): object name and auth scope, such as for teams and projects
+                body (V1beta1PodDisruptionBudget):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodDisruptionBudget
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['namespace'] = \
+                namespace
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_namespaced_pod_disruption_budget_status(self, name, namespace, body, **kwargs):  # noqa: E501
-        """replace_namespaced_pod_disruption_budget_status  # noqa: E501
-
-        replace status of the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_namespaced_pod_disruption_budget_status(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1beta1PodDisruptionBudget body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodDisruptionBudget
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_namespaced_pod_disruption_budget_status_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
-
-    def replace_namespaced_pod_disruption_budget_status_with_http_info(self, name, namespace, body, **kwargs):  # noqa: E501
-        """replace_namespaced_pod_disruption_budget_status  # noqa: E501
-
-        replace status of the specified PodDisruptionBudget  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_namespaced_pod_disruption_budget_status_with_http_info(name, namespace, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodDisruptionBudget (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1beta1PodDisruptionBudget body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodDisruptionBudget, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'namespace',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_namespaced_pod_disruption_budget_status = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodDisruptionBudget,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status',
+                'operation_id': 'replace_namespaced_pod_disruption_budget_status',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'namespace',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'namespace',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'namespace':
+                        (str,),
+                    'body':
+                        (V1beta1PodDisruptionBudget,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'namespace': 'namespace',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'namespace': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_namespaced_pod_disruption_budget_status
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_namespaced_pod_disruption_budget_status" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod_disruption_budget_status`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod_disruption_budget_status`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod_disruption_budget_status`")  # noqa: E501
+        def __replace_pod_security_policy(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """replace_pod_security_policy  # noqa: E501
 
-        collection_formats = {}
+            replace the specified PodSecurityPolicy  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-        if 'namespace' in local_var_params:
-            path_params['namespace'] = local_var_params['namespace']  # noqa: E501
+            >>> thread = api.replace_pod_security_policy(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                name (str): name of the PodSecurityPolicy
+                body (V1beta1PodSecurityPolicy):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1PodSecurityPolicy
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodDisruptionBudget',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_pod_security_policy(self, name, body, **kwargs):  # noqa: E501
-        """replace_pod_security_policy  # noqa: E501
-
-        replace the specified PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_pod_security_policy(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param V1beta1PodSecurityPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1PodSecurityPolicy
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_pod_security_policy_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def replace_pod_security_policy_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """replace_pod_security_policy  # noqa: E501
-
-        replace the specified PodSecurityPolicy  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_pod_security_policy_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the PodSecurityPolicy (required)
-        :param V1beta1PodSecurityPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1PodSecurityPolicy, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_pod_security_policy = _Endpoint(
+            settings={
+                'response_type': (V1beta1PodSecurityPolicy,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/policy/v1beta1/podsecuritypolicies/{name}',
+                'operation_id': 'replace_pod_security_policy',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        (V1beta1PodSecurityPolicy,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_pod_security_policy
         )
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_pod_security_policy" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_pod_security_policy`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_pod_security_policy`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/policy/v1beta1/podsecuritypolicies/{name}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1PodSecurityPolicy',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)

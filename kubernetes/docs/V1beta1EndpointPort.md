@@ -1,6 +1,7 @@
 # V1beta1EndpointPort
 
 EndpointPort represents a Port used by an EndpointSlice
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

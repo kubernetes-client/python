@@ -1,6 +1,7 @@
 # V1alpha1PriorityLevelConfigurationCondition
 
 PriorityLevelConfigurationCondition defines the condition of priority level.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

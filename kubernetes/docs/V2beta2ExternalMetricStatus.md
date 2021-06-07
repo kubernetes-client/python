@@ -1,6 +1,7 @@
 # V2beta2ExternalMetricStatus
 
 ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

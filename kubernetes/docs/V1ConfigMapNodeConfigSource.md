@@ -1,6 +1,7 @@
 # V1ConfigMapNodeConfigSource
 
 ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

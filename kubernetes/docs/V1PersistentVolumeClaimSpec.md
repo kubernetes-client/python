@@ -1,10 +1,11 @@
 # V1PersistentVolumeClaimSpec
 
 PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_modes** | **list[str]** | AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 | [optional] 
+**access_modes** | **[str]** | AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 | [optional] 
 **data_source** | [**V1TypedLocalObjectReference**](V1TypedLocalObjectReference.md) |  | [optional] 
 **resources** | [**V1ResourceRequirements**](V1ResourceRequirements.md) |  | [optional] 
 **selector** | [**V1LabelSelector**](V1LabelSelector.md) |  | [optional] 

@@ -1,6 +1,7 @@
 # ExtensionsV1beta1HTTPIngressPath
 
 HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

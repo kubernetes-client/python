@@ -1,6 +1,7 @@
 # V1Deployment
 
 Deployment enables declarative updates for Pods and ReplicaSets.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

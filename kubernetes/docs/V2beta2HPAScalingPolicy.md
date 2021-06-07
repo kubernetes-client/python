@@ -1,6 +1,7 @@
 # V2beta2HPAScalingPolicy
 
 HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

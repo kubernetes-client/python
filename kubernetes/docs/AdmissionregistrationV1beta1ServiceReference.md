@@ -1,6 +1,7 @@
 # AdmissionregistrationV1beta1ServiceReference
 
 ServiceReference holds a reference to Service.legacy.k8s.io
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

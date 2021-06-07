@@ -1,6 +1,7 @@
 # V1alpha1FlowSchemaCondition
 
 FlowSchemaCondition describes conditions for a FlowSchema.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

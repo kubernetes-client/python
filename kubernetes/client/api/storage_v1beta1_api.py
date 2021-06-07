@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Kubernetes
 
@@ -10,18 +8,30 @@
 """
 
 
-from __future__ import absolute_import
-
 import re  # noqa: F401
+import sys  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
-
-from kubernetes.client.api_client import ApiClient
-from kubernetes.client.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
+from kubernetes.client.api_client import ApiClient, Endpoint as _Endpoint
+from kubernetes.client.model_utils import (  # noqa: F401
+    check_allowed_values,
+    check_validations,
+    date,
+    datetime,
+    file_type,
+    none_type,
+    validate_and_convert_types
 )
+from kubernetes.client.model.v1_api_resource_list import V1APIResourceList
+from kubernetes.client.model.v1_delete_options import V1DeleteOptions
+from kubernetes.client.model.v1_status import V1Status
+from kubernetes.client.model.v1beta1_csi_driver import V1beta1CSIDriver
+from kubernetes.client.model.v1beta1_csi_driver_list import V1beta1CSIDriverList
+from kubernetes.client.model.v1beta1_csi_node import V1beta1CSINode
+from kubernetes.client.model.v1beta1_csi_node_list import V1beta1CSINodeList
+from kubernetes.client.model.v1beta1_storage_class import V1beta1StorageClass
+from kubernetes.client.model.v1beta1_storage_class_list import V1beta1StorageClassList
+from kubernetes.client.model.v1beta1_volume_attachment import V1beta1VolumeAttachment
+from kubernetes.client.model.v1beta1_volume_attachment_list import V1beta1VolumeAttachmentList
 
 
 class StorageV1beta1Api(object):
@@ -36,4115 +46,4451 @@ class StorageV1beta1Api(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def create_csi_driver(self, body, **kwargs):  # noqa: E501
-        """create_csi_driver  # noqa: E501
+        def __create_csi_driver(
+            self,
+            body,
+            **kwargs
+        ):
+            """create_csi_driver  # noqa: E501
 
-        create a CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_csi_driver(body, async_req=True)
-        >>> result = thread.get()
+            create a CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        :param async_req bool: execute request asynchronously
-        :param V1beta1CSIDriver body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSIDriver
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_csi_driver_with_http_info(body, **kwargs)  # noqa: E501
+            >>> thread = api.create_csi_driver(body, async_req=True)
+            >>> result = thread.get()
 
-    def create_csi_driver_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_csi_driver  # noqa: E501
+            Args:
+                body (V1beta1CSIDriver):
 
-        create a CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_csi_driver_with_http_info(body, async_req=True)
-        >>> result = thread.get()
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        :param async_req bool: execute request asynchronously
-        :param V1beta1CSIDriver body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSIDriver, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
+            Returns:
+                V1beta1CSIDriver
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        local_var_params = locals()
-
-        all_params = [
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSIDriver,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers',
+                'operation_id': 'create_csi_driver',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'body':
+                        (V1beta1CSIDriver,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__create_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `create_csi_driver`")  # noqa: E501
+        def __create_csi_node(
+            self,
+            body,
+            **kwargs
+        ):
+            """create_csi_node  # noqa: E501
 
-        collection_formats = {}
+            create a CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.create_csi_node(body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                body (V1beta1CSINode):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSINode
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSIDriver',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def create_csi_node(self, body, **kwargs):  # noqa: E501
-        """create_csi_node  # noqa: E501
-
-        create a CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_csi_node(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1CSINode body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSINode
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_csi_node_with_http_info(body, **kwargs)  # noqa: E501
-
-    def create_csi_node_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_csi_node  # noqa: E501
-
-        create a CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_csi_node_with_http_info(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1CSINode body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSINode, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSINode,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes',
+                'operation_id': 'create_csi_node',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'body':
+                        (V1beta1CSINode,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__create_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `create_csi_node`")  # noqa: E501
+        def __create_storage_class(
+            self,
+            body,
+            **kwargs
+        ):
+            """create_storage_class  # noqa: E501
 
-        collection_formats = {}
+            create a StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.create_storage_class(body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                body (V1beta1StorageClass):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1StorageClass
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSINode',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def create_storage_class(self, body, **kwargs):  # noqa: E501
-        """create_storage_class  # noqa: E501
-
-        create a StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_storage_class(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1StorageClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1StorageClass
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_storage_class_with_http_info(body, **kwargs)  # noqa: E501
-
-    def create_storage_class_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_storage_class  # noqa: E501
-
-        create a StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_storage_class_with_http_info(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1StorageClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1StorageClass, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1beta1StorageClass,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses',
+                'operation_id': 'create_storage_class',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'body':
+                        (V1beta1StorageClass,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__create_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `create_storage_class`")  # noqa: E501
+        def __create_volume_attachment(
+            self,
+            body,
+            **kwargs
+        ):
+            """create_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            create a VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.create_volume_attachment(body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                body (V1beta1VolumeAttachment):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1VolumeAttachment
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1StorageClass',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def create_volume_attachment(self, body, **kwargs):  # noqa: E501
-        """create_volume_attachment  # noqa: E501
-
-        create a VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_volume_attachment(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1VolumeAttachment body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1VolumeAttachment
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_volume_attachment_with_http_info(body, **kwargs)  # noqa: E501
-
-    def create_volume_attachment_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_volume_attachment  # noqa: E501
-
-        create a VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_volume_attachment_with_http_info(body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param V1beta1VolumeAttachment body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1VolumeAttachment, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1beta1VolumeAttachment,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments',
+                'operation_id': 'create_volume_attachment',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'body':
+                        (V1beta1VolumeAttachment,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__create_volume_attachment
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `create_volume_attachment`")  # noqa: E501
+        def __delete_collection_csi_driver(
+            self,
+            **kwargs
+        ):
+            """delete_collection_csi_driver  # noqa: E501
 
-        collection_formats = {}
+            delete collection of CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_collection_csi_driver(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1VolumeAttachment',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_collection_csi_driver(self, **kwargs):  # noqa: E501
-        """delete_collection_csi_driver  # noqa: E501
-
-        delete collection of CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_csi_driver(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_collection_csi_driver_with_http_info(**kwargs)  # noqa: E501
-
-    def delete_collection_csi_driver_with_http_info(self, **kwargs):  # noqa: E501
-        """delete_collection_csi_driver  # noqa: E501
-
-        delete collection of CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_csi_driver_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            '_continue',
-            'dry_run',
-            'field_selector',
-            'grace_period_seconds',
-            'label_selector',
-            'limit',
-            'orphan_dependents',
-            'propagation_policy',
-            'resource_version',
-            'timeout_seconds',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_collection_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers',
+                'operation_id': 'delete_collection_csi_driver',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    '_continue',
+                    'dry_run',
+                    'field_selector',
+                    'grace_period_seconds',
+                    'label_selector',
+                    'limit',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'resource_version',
+                    'timeout_seconds',
+                    'body',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    '_continue':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    '_continue': 'continue',
+                    'dry_run': 'dryRun',
+                    'field_selector': 'fieldSelector',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    '_continue': 'query',
+                    'dry_run': 'query',
+                    'field_selector': 'query',
+                    'grace_period_seconds': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_collection_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_collection_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __delete_collection_csi_node(
+            self,
+            **kwargs
+        ):
+            """delete_collection_csi_node  # noqa: E501
 
-        collection_formats = {}
+            delete collection of CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_collection_csi_node(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_collection_csi_node(self, **kwargs):  # noqa: E501
-        """delete_collection_csi_node  # noqa: E501
-
-        delete collection of CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_csi_node(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_collection_csi_node_with_http_info(**kwargs)  # noqa: E501
-
-    def delete_collection_csi_node_with_http_info(self, **kwargs):  # noqa: E501
-        """delete_collection_csi_node  # noqa: E501
-
-        delete collection of CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_csi_node_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            '_continue',
-            'dry_run',
-            'field_selector',
-            'grace_period_seconds',
-            'label_selector',
-            'limit',
-            'orphan_dependents',
-            'propagation_policy',
-            'resource_version',
-            'timeout_seconds',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_collection_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes',
+                'operation_id': 'delete_collection_csi_node',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    '_continue',
+                    'dry_run',
+                    'field_selector',
+                    'grace_period_seconds',
+                    'label_selector',
+                    'limit',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'resource_version',
+                    'timeout_seconds',
+                    'body',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    '_continue':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    '_continue': 'continue',
+                    'dry_run': 'dryRun',
+                    'field_selector': 'fieldSelector',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    '_continue': 'query',
+                    'dry_run': 'query',
+                    'field_selector': 'query',
+                    'grace_period_seconds': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_collection_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_collection_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __delete_collection_storage_class(
+            self,
+            **kwargs
+        ):
+            """delete_collection_storage_class  # noqa: E501
 
-        collection_formats = {}
+            delete collection of StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_collection_storage_class(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_collection_storage_class(self, **kwargs):  # noqa: E501
-        """delete_collection_storage_class  # noqa: E501
-
-        delete collection of StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_storage_class(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_collection_storage_class_with_http_info(**kwargs)  # noqa: E501
-
-    def delete_collection_storage_class_with_http_info(self, **kwargs):  # noqa: E501
-        """delete_collection_storage_class  # noqa: E501
-
-        delete collection of StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_storage_class_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            '_continue',
-            'dry_run',
-            'field_selector',
-            'grace_period_seconds',
-            'label_selector',
-            'limit',
-            'orphan_dependents',
-            'propagation_policy',
-            'resource_version',
-            'timeout_seconds',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_collection_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses',
+                'operation_id': 'delete_collection_storage_class',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    '_continue',
+                    'dry_run',
+                    'field_selector',
+                    'grace_period_seconds',
+                    'label_selector',
+                    'limit',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'resource_version',
+                    'timeout_seconds',
+                    'body',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    '_continue':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    '_continue': 'continue',
+                    'dry_run': 'dryRun',
+                    'field_selector': 'fieldSelector',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    '_continue': 'query',
+                    'dry_run': 'query',
+                    'field_selector': 'query',
+                    'grace_period_seconds': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_collection_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_collection_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __delete_collection_volume_attachment(
+            self,
+            **kwargs
+        ):
+            """delete_collection_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            delete collection of VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_collection_volume_attachment(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1Status
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_collection_volume_attachment(self, **kwargs):  # noqa: E501
-        """delete_collection_volume_attachment  # noqa: E501
-
-        delete collection of VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_volume_attachment(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1Status
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_collection_volume_attachment_with_http_info(**kwargs)  # noqa: E501
-
-    def delete_collection_volume_attachment_with_http_info(self, **kwargs):  # noqa: E501
-        """delete_collection_volume_attachment  # noqa: E501
-
-        delete collection of VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_collection_volume_attachment_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            '_continue',
-            'dry_run',
-            'field_selector',
-            'grace_period_seconds',
-            'label_selector',
-            'limit',
-            'orphan_dependents',
-            'propagation_policy',
-            'resource_version',
-            'timeout_seconds',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_collection_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1Status,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments',
+                'operation_id': 'delete_collection_volume_attachment',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    '_continue',
+                    'dry_run',
+                    'field_selector',
+                    'grace_period_seconds',
+                    'label_selector',
+                    'limit',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'resource_version',
+                    'timeout_seconds',
+                    'body',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    '_continue':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    '_continue': 'continue',
+                    'dry_run': 'dryRun',
+                    'field_selector': 'fieldSelector',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    '_continue': 'query',
+                    'dry_run': 'query',
+                    'field_selector': 'query',
+                    'grace_period_seconds': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_collection_volume_attachment
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_collection_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __delete_csi_driver(
+            self,
+            name,
+            **kwargs
+        ):
+            """delete_csi_driver  # noqa: E501
 
-        collection_formats = {}
+            delete a CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.delete_csi_driver(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
+            Args:
+                name (str): name of the CSIDriver
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSIDriver
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1Status',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_csi_driver(self, name, **kwargs):  # noqa: E501
-        """delete_csi_driver  # noqa: E501
-
-        delete a CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_csi_driver(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSIDriver
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_csi_driver_with_http_info(name, **kwargs)  # noqa: E501
-
-    def delete_csi_driver_with_http_info(self, name, **kwargs):  # noqa: E501
-        """delete_csi_driver  # noqa: E501
-
-        delete a CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_csi_driver_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSIDriver, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'dry_run',
-            'grace_period_seconds',
-            'orphan_dependents',
-            'propagation_policy',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSIDriver,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers/{name}',
+                'operation_id': 'delete_csi_driver',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'dry_run',
+                    'grace_period_seconds',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'body',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'grace_period_seconds': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `delete_csi_driver`")  # noqa: E501
+        def __delete_csi_node(
+            self,
+            name,
+            **kwargs
+        ):
+            """delete_csi_node  # noqa: E501
 
-        collection_formats = {}
+            delete a CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.delete_csi_node(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
+            Args:
+                name (str): name of the CSINode
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSINode
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers/{name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSIDriver',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_csi_node(self, name, **kwargs):  # noqa: E501
-        """delete_csi_node  # noqa: E501
-
-        delete a CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_csi_node(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSINode
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_csi_node_with_http_info(name, **kwargs)  # noqa: E501
-
-    def delete_csi_node_with_http_info(self, name, **kwargs):  # noqa: E501
-        """delete_csi_node  # noqa: E501
-
-        delete a CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_csi_node_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSINode, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'dry_run',
-            'grace_period_seconds',
-            'orphan_dependents',
-            'propagation_policy',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSINode,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes/{name}',
+                'operation_id': 'delete_csi_node',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'dry_run',
+                    'grace_period_seconds',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'body',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'grace_period_seconds': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `delete_csi_node`")  # noqa: E501
+        def __delete_storage_class(
+            self,
+            name,
+            **kwargs
+        ):
+            """delete_storage_class  # noqa: E501
 
-        collection_formats = {}
+            delete a StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.delete_storage_class(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
+            Args:
+                name (str): name of the StorageClass
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1StorageClass
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes/{name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSINode',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_storage_class(self, name, **kwargs):  # noqa: E501
-        """delete_storage_class  # noqa: E501
-
-        delete a StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_storage_class(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1StorageClass
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_storage_class_with_http_info(name, **kwargs)  # noqa: E501
-
-    def delete_storage_class_with_http_info(self, name, **kwargs):  # noqa: E501
-        """delete_storage_class  # noqa: E501
-
-        delete a StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_storage_class_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1StorageClass, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'dry_run',
-            'grace_period_seconds',
-            'orphan_dependents',
-            'propagation_policy',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1beta1StorageClass,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses/{name}',
+                'operation_id': 'delete_storage_class',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'dry_run',
+                    'grace_period_seconds',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'body',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'grace_period_seconds': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `delete_storage_class`")  # noqa: E501
+        def __delete_volume_attachment(
+            self,
+            name,
+            **kwargs
+        ):
+            """delete_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            delete a VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.delete_volume_attachment(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
+            Args:
+                name (str): name of the VolumeAttachment
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                grace_period_seconds (int): The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.. [optional]
+                orphan_dependents (bool): Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.. [optional]
+                propagation_policy (str): Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.. [optional]
+                body (V1DeleteOptions): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1VolumeAttachment
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses/{name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1StorageClass',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_volume_attachment(self, name, **kwargs):  # noqa: E501
-        """delete_volume_attachment  # noqa: E501
-
-        delete a VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_volume_attachment(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1VolumeAttachment
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_volume_attachment_with_http_info(name, **kwargs)  # noqa: E501
-
-    def delete_volume_attachment_with_http_info(self, name, **kwargs):  # noqa: E501
-        """delete_volume_attachment  # noqa: E501
-
-        delete a VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_volume_attachment_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1VolumeAttachment, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'dry_run',
-            'grace_period_seconds',
-            'orphan_dependents',
-            'propagation_policy',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1beta1VolumeAttachment,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}',
+                'operation_id': 'delete_volume_attachment',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'dry_run',
+                    'grace_period_seconds',
+                    'orphan_dependents',
+                    'propagation_policy',
+                    'body',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'grace_period_seconds':
+                        (int,),
+                    'orphan_dependents':
+                        (bool,),
+                    'propagation_policy':
+                        (str,),
+                    'body':
+                        (V1DeleteOptions,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'grace_period_seconds': 'gracePeriodSeconds',
+                    'orphan_dependents': 'orphanDependents',
+                    'propagation_policy': 'propagationPolicy',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'grace_period_seconds': 'query',
+                    'orphan_dependents': 'query',
+                    'propagation_policy': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_volume_attachment
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `delete_volume_attachment`")  # noqa: E501
+        def __get_api_resources(
+            self,
+            **kwargs
+        ):
+            """get_api_resources  # noqa: E501
 
-        collection_formats = {}
+            get available resources  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.get_api_resources(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
-            query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
-            query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
-            query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1APIResourceList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1VolumeAttachment',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def get_api_resources(self, **kwargs):  # noqa: E501
-        """get_api_resources  # noqa: E501
-
-        get available resources  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_api_resources(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1APIResourceList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_api_resources_with_http_info(**kwargs)  # noqa: E501
-
-    def get_api_resources_with_http_info(self, **kwargs):  # noqa: E501
-        """get_api_resources  # noqa: E501
-
-        get available resources  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_api_resources_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1APIResourceList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_api_resources = _Endpoint(
+            settings={
+                'response_type': (V1APIResourceList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/',
+                'operation_id': 'get_api_resources',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_api_resources
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_api_resources" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __list_csi_driver(
+            self,
+            **kwargs
+        ):
+            """list_csi_driver  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.list_csi_driver(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSIDriverList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1APIResourceList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_csi_driver(self, **kwargs):  # noqa: E501
-        """list_csi_driver  # noqa: E501
-
-        list or watch objects of kind CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_csi_driver(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSIDriverList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_csi_driver_with_http_info(**kwargs)  # noqa: E501
-
-    def list_csi_driver_with_http_info(self, **kwargs):  # noqa: E501
-        """list_csi_driver  # noqa: E501
-
-        list or watch objects of kind CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_csi_driver_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSIDriverList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSIDriverList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers',
+                'operation_id': 'list_csi_driver',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __list_csi_node(
+            self,
+            **kwargs
+        ):
+            """list_csi_node  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.list_csi_node(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSINodeList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSIDriverList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_csi_node(self, **kwargs):  # noqa: E501
-        """list_csi_node  # noqa: E501
-
-        list or watch objects of kind CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_csi_node(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSINodeList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_csi_node_with_http_info(**kwargs)  # noqa: E501
-
-    def list_csi_node_with_http_info(self, **kwargs):  # noqa: E501
-        """list_csi_node  # noqa: E501
-
-        list or watch objects of kind CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_csi_node_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSINodeList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSINodeList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes',
+                'operation_id': 'list_csi_node',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __list_storage_class(
+            self,
+            **kwargs
+        ):
+            """list_storage_class  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.list_storage_class(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1StorageClassList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSINodeList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_storage_class(self, **kwargs):  # noqa: E501
-        """list_storage_class  # noqa: E501
-
-        list or watch objects of kind StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_storage_class(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1StorageClassList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_storage_class_with_http_info(**kwargs)  # noqa: E501
-
-    def list_storage_class_with_http_info(self, **kwargs):  # noqa: E501
-        """list_storage_class  # noqa: E501
-
-        list or watch objects of kind StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_storage_class_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1StorageClassList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1beta1StorageClassList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses',
+                'operation_id': 'list_storage_class',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __list_volume_attachment(
+            self,
+            **kwargs
+        ):
+            """list_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            list or watch objects of kind VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.list_volume_attachment(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                allow_watch_bookmarks (bool): allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.. [optional]
+                _continue (str): The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.. [optional]
+                field_selector (str): A selector to restrict the list of returned objects by their fields. Defaults to everything.. [optional]
+                label_selector (str): A selector to restrict the list of returned objects by their labels. Defaults to everything.. [optional]
+                limit (int): limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.. [optional]
+                resource_version (str): When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.. [optional]
+                timeout_seconds (int): Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.. [optional]
+                watch (bool): Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1VolumeAttachmentList
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1StorageClassList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_volume_attachment(self, **kwargs):  # noqa: E501
-        """list_volume_attachment  # noqa: E501
-
-        list or watch objects of kind VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_volume_attachment(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1VolumeAttachmentList
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_volume_attachment_with_http_info(**kwargs)  # noqa: E501
-
-    def list_volume_attachment_with_http_info(self, **kwargs):  # noqa: E501
-        """list_volume_attachment  # noqa: E501
-
-        list or watch objects of kind VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_volume_attachment_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1VolumeAttachmentList, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pretty',
-            'allow_watch_bookmarks',
-            '_continue',
-            'field_selector',
-            'label_selector',
-            'limit',
-            'resource_version',
-            'timeout_seconds',
-            'watch'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1beta1VolumeAttachmentList,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments',
+                'operation_id': 'list_volume_attachment',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pretty',
+                    'allow_watch_bookmarks',
+                    '_continue',
+                    'field_selector',
+                    'label_selector',
+                    'limit',
+                    'resource_version',
+                    'timeout_seconds',
+                    'watch',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pretty':
+                        (str,),
+                    'allow_watch_bookmarks':
+                        (bool,),
+                    '_continue':
+                        (str,),
+                    'field_selector':
+                        (str,),
+                    'label_selector':
+                        (str,),
+                    'limit':
+                        (int,),
+                    'resource_version':
+                        (str,),
+                    'timeout_seconds':
+                        (int,),
+                    'watch':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'pretty': 'pretty',
+                    'allow_watch_bookmarks': 'allowWatchBookmarks',
+                    '_continue': 'continue',
+                    'field_selector': 'fieldSelector',
+                    'label_selector': 'labelSelector',
+                    'limit': 'limit',
+                    'resource_version': 'resourceVersion',
+                    'timeout_seconds': 'timeoutSeconds',
+                    'watch': 'watch',
+                },
+                'location_map': {
+                    'pretty': 'query',
+                    'allow_watch_bookmarks': 'query',
+                    '_continue': 'query',
+                    'field_selector': 'query',
+                    'label_selector': 'query',
+                    'limit': 'query',
+                    'resource_version': 'query',
+                    'timeout_seconds': 'query',
+                    'watch': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf',
+                    'application/json;stream=watch',
+                    'application/vnd.kubernetes.protobuf;stream=watch'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_volume_attachment
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __patch_csi_driver(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """patch_csi_driver  # noqa: E501
 
-        collection_formats = {}
+            partially update the specified CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.patch_csi_driver(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
-            query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
-            query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
-            query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
-            query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
-            query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
-            query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
-            query_params.append(('watch', local_var_params['watch']))  # noqa: E501
+            Args:
+                name (str): name of the CSIDriver
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSIDriver
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/json;stream=watch', 'application/vnd.kubernetes.protobuf;stream=watch'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1VolumeAttachmentList',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_csi_driver(self, name, body, **kwargs):  # noqa: E501
-        """patch_csi_driver  # noqa: E501
-
-        partially update the specified CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_csi_driver(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSIDriver
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_csi_driver_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def patch_csi_driver_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """patch_csi_driver  # noqa: E501
-
-        partially update the specified CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_csi_driver_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSIDriver, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSIDriver,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers/{name}',
+                'operation_id': 'patch_csi_driver',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_csi_driver`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_csi_driver`")  # noqa: E501
+        def __patch_csi_node(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """patch_csi_node  # noqa: E501
 
-        collection_formats = {}
+            partially update the specified CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.patch_csi_node(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the CSINode
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSINode
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers/{name}', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSIDriver',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_csi_node(self, name, body, **kwargs):  # noqa: E501
-        """patch_csi_node  # noqa: E501
-
-        partially update the specified CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_csi_node(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSINode
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_csi_node_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def patch_csi_node_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """patch_csi_node  # noqa: E501
-
-        partially update the specified CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_csi_node_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSINode, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSINode,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes/{name}',
+                'operation_id': 'patch_csi_node',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_csi_node`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_csi_node`")  # noqa: E501
+        def __patch_storage_class(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """patch_storage_class  # noqa: E501
 
-        collection_formats = {}
+            partially update the specified StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.patch_storage_class(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the StorageClass
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1StorageClass
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes/{name}', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSINode',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_storage_class(self, name, body, **kwargs):  # noqa: E501
-        """patch_storage_class  # noqa: E501
-
-        partially update the specified StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_storage_class(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1StorageClass
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_storage_class_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def patch_storage_class_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """patch_storage_class  # noqa: E501
-
-        partially update the specified StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_storage_class_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1StorageClass, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1beta1StorageClass,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses/{name}',
+                'operation_id': 'patch_storage_class',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_storage_class`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_storage_class`")  # noqa: E501
+        def __patch_volume_attachment(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """patch_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            partially update the specified VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.patch_volume_attachment(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the VolumeAttachment
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).. [optional]
+                force (bool): Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1VolumeAttachment
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses/{name}', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1StorageClass',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def patch_volume_attachment(self, name, body, **kwargs):  # noqa: E501
-        """patch_volume_attachment  # noqa: E501
-
-        partially update the specified VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_volume_attachment(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1VolumeAttachment
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.patch_volume_attachment_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def patch_volume_attachment_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """patch_volume_attachment  # noqa: E501
-
-        partially update the specified VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.patch_volume_attachment_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1VolumeAttachment, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager',
-            'force'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.patch_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1beta1VolumeAttachment,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}',
+                'operation_id': 'patch_volume_attachment',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                    'force',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                    'force':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                    'force': 'force',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                    'force': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [
+                    'application/json-patch+json',
+                    'application/merge-patch+json',
+                    'application/strategic-merge-patch+json',
+                    'application/apply-patch+yaml'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_volume_attachment
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method patch_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `patch_volume_attachment`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `patch_volume_attachment`")  # noqa: E501
+        def __read_csi_driver(
+            self,
+            name,
+            **kwargs
+        ):
+            """read_csi_driver  # noqa: E501
 
-        collection_formats = {}
+            read the specified CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.read_csi_driver(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
+            Args:
+                name (str): name of the CSIDriver
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                exact (bool): Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.. [optional]
+                export (bool): Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSIDriver
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1VolumeAttachment',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_csi_driver(self, name, **kwargs):  # noqa: E501
-        """read_csi_driver  # noqa: E501
-
-        read the specified CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_csi_driver(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSIDriver
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_csi_driver_with_http_info(name, **kwargs)  # noqa: E501
-
-    def read_csi_driver_with_http_info(self, name, **kwargs):  # noqa: E501
-        """read_csi_driver  # noqa: E501
-
-        read the specified CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_csi_driver_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSIDriver, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'exact',
-            'export'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSIDriver,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers/{name}',
+                'operation_id': 'read_csi_driver',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'exact',
+                    'export',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'exact':
+                        (bool,),
+                    'export':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'exact': 'exact',
+                    'export': 'export',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'exact': 'query',
+                    'export': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_csi_driver`")  # noqa: E501
+        def __read_csi_node(
+            self,
+            name,
+            **kwargs
+        ):
+            """read_csi_node  # noqa: E501
 
-        collection_formats = {}
+            read the specified CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.read_csi_node(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'exact' in local_var_params and local_var_params['exact'] is not None:  # noqa: E501
-            query_params.append(('exact', local_var_params['exact']))  # noqa: E501
-        if 'export' in local_var_params and local_var_params['export'] is not None:  # noqa: E501
-            query_params.append(('export', local_var_params['export']))  # noqa: E501
+            Args:
+                name (str): name of the CSINode
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                exact (bool): Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.. [optional]
+                export (bool): Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSINode
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers/{name}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSIDriver',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_csi_node(self, name, **kwargs):  # noqa: E501
-        """read_csi_node  # noqa: E501
-
-        read the specified CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_csi_node(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSINode
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_csi_node_with_http_info(name, **kwargs)  # noqa: E501
-
-    def read_csi_node_with_http_info(self, name, **kwargs):  # noqa: E501
-        """read_csi_node  # noqa: E501
-
-        read the specified CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_csi_node_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSINode, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'exact',
-            'export'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSINode,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes/{name}',
+                'operation_id': 'read_csi_node',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'exact',
+                    'export',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'exact':
+                        (bool,),
+                    'export':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'exact': 'exact',
+                    'export': 'export',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'exact': 'query',
+                    'export': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_csi_node`")  # noqa: E501
+        def __read_storage_class(
+            self,
+            name,
+            **kwargs
+        ):
+            """read_storage_class  # noqa: E501
 
-        collection_formats = {}
+            read the specified StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.read_storage_class(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'exact' in local_var_params and local_var_params['exact'] is not None:  # noqa: E501
-            query_params.append(('exact', local_var_params['exact']))  # noqa: E501
-        if 'export' in local_var_params and local_var_params['export'] is not None:  # noqa: E501
-            query_params.append(('export', local_var_params['export']))  # noqa: E501
+            Args:
+                name (str): name of the StorageClass
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                exact (bool): Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.. [optional]
+                export (bool): Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1StorageClass
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes/{name}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSINode',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_storage_class(self, name, **kwargs):  # noqa: E501
-        """read_storage_class  # noqa: E501
-
-        read the specified StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_storage_class(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1StorageClass
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_storage_class_with_http_info(name, **kwargs)  # noqa: E501
-
-    def read_storage_class_with_http_info(self, name, **kwargs):  # noqa: E501
-        """read_storage_class  # noqa: E501
-
-        read the specified StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_storage_class_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1StorageClass, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'exact',
-            'export'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1beta1StorageClass,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses/{name}',
+                'operation_id': 'read_storage_class',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'exact',
+                    'export',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'exact':
+                        (bool,),
+                    'export':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'exact': 'exact',
+                    'export': 'export',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'exact': 'query',
+                    'export': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_storage_class`")  # noqa: E501
+        def __read_volume_attachment(
+            self,
+            name,
+            **kwargs
+        ):
+            """read_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            read the specified VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.read_volume_attachment(name, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'exact' in local_var_params and local_var_params['exact'] is not None:  # noqa: E501
-            query_params.append(('exact', local_var_params['exact']))  # noqa: E501
-        if 'export' in local_var_params and local_var_params['export'] is not None:  # noqa: E501
-            query_params.append(('export', local_var_params['export']))  # noqa: E501
+            Args:
+                name (str): name of the VolumeAttachment
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                exact (bool): Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.. [optional]
+                export (bool): Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1VolumeAttachment
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses/{name}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1StorageClass',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def read_volume_attachment(self, name, **kwargs):  # noqa: E501
-        """read_volume_attachment  # noqa: E501
-
-        read the specified VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_volume_attachment(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1VolumeAttachment
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.read_volume_attachment_with_http_info(name, **kwargs)  # noqa: E501
-
-    def read_volume_attachment_with_http_info(self, name, **kwargs):  # noqa: E501
-        """read_volume_attachment  # noqa: E501
-
-        read the specified VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.read_volume_attachment_with_http_info(name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param bool exact: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-        :param bool export: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1VolumeAttachment, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'pretty',
-            'exact',
-            'export'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.read_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1beta1VolumeAttachment,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}',
+                'operation_id': 'read_volume_attachment',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'pretty',
+                    'exact',
+                    'export',
+                ],
+                'required': [
+                    'name',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'pretty':
+                        (str,),
+                    'exact':
+                        (bool,),
+                    'export':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'exact': 'exact',
+                    'export': 'export',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'pretty': 'query',
+                    'exact': 'query',
+                    'export': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__read_volume_attachment
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method read_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_volume_attachment`")  # noqa: E501
+        def __replace_csi_driver(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """replace_csi_driver  # noqa: E501
 
-        collection_formats = {}
+            replace the specified CSIDriver  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.replace_csi_driver(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'exact' in local_var_params and local_var_params['exact'] is not None:  # noqa: E501
-            query_params.append(('exact', local_var_params['exact']))  # noqa: E501
-        if 'export' in local_var_params and local_var_params['export'] is not None:  # noqa: E501
-            query_params.append(('export', local_var_params['export']))  # noqa: E501
+            Args:
+                name (str): name of the CSIDriver
+                body (V1beta1CSIDriver):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSIDriver
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1VolumeAttachment',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_csi_driver(self, name, body, **kwargs):  # noqa: E501
-        """replace_csi_driver  # noqa: E501
-
-        replace the specified CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_csi_driver(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param V1beta1CSIDriver body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSIDriver
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_csi_driver_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def replace_csi_driver_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """replace_csi_driver  # noqa: E501
-
-        replace the specified CSIDriver  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_csi_driver_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSIDriver (required)
-        :param V1beta1CSIDriver body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSIDriver, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_csi_driver = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSIDriver,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csidrivers/{name}',
+                'operation_id': 'replace_csi_driver',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        (V1beta1CSIDriver,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_csi_driver
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_csi_driver" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_csi_driver`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_csi_driver`")  # noqa: E501
+        def __replace_csi_node(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """replace_csi_node  # noqa: E501
 
-        collection_formats = {}
+            replace the specified CSINode  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.replace_csi_node(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                name (str): name of the CSINode
+                body (V1beta1CSINode):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1CSINode
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csidrivers/{name}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSIDriver',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_csi_node(self, name, body, **kwargs):  # noqa: E501
-        """replace_csi_node  # noqa: E501
-
-        replace the specified CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_csi_node(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param V1beta1CSINode body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1CSINode
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_csi_node_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def replace_csi_node_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """replace_csi_node  # noqa: E501
-
-        replace the specified CSINode  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_csi_node_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the CSINode (required)
-        :param V1beta1CSINode body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1CSINode, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_csi_node = _Endpoint(
+            settings={
+                'response_type': (V1beta1CSINode,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/csinodes/{name}',
+                'operation_id': 'replace_csi_node',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        (V1beta1CSINode,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_csi_node
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_csi_node" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_csi_node`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_csi_node`")  # noqa: E501
+        def __replace_storage_class(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """replace_storage_class  # noqa: E501
 
-        collection_formats = {}
+            replace the specified StorageClass  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.replace_storage_class(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                name (str): name of the StorageClass
+                body (V1beta1StorageClass):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1StorageClass
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/csinodes/{name}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1CSINode',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_storage_class(self, name, body, **kwargs):  # noqa: E501
-        """replace_storage_class  # noqa: E501
-
-        replace the specified StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_storage_class(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param V1beta1StorageClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1StorageClass
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_storage_class_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def replace_storage_class_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """replace_storage_class  # noqa: E501
-
-        replace the specified StorageClass  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_storage_class_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the StorageClass (required)
-        :param V1beta1StorageClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1StorageClass, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_storage_class = _Endpoint(
+            settings={
+                'response_type': (V1beta1StorageClass,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/storageclasses/{name}',
+                'operation_id': 'replace_storage_class',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        (V1beta1StorageClass,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_storage_class
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_storage_class" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_storage_class`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_storage_class`")  # noqa: E501
+        def __replace_volume_attachment(
+            self,
+            name,
+            body,
+            **kwargs
+        ):
+            """replace_volume_attachment  # noqa: E501
 
-        collection_formats = {}
+            replace the specified VolumeAttachment  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
+            >>> thread = api.replace_volume_attachment(name, body, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
+            Args:
+                name (str): name of the VolumeAttachment
+                body (V1beta1VolumeAttachment):
 
-        header_params = {}
+            Keyword Args:
+                pretty (str): If 'true', then the output is pretty printed.. [optional]
+                dry_run (str): When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed. [optional]
+                field_manager (str): fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                V1beta1VolumeAttachment
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['name'] = \
+                name
+            kwargs['body'] = \
+                body
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/storageclasses/{name}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1StorageClass',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def replace_volume_attachment(self, name, body, **kwargs):  # noqa: E501
-        """replace_volume_attachment  # noqa: E501
-
-        replace the specified VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_volume_attachment(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param V1beta1VolumeAttachment body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: V1beta1VolumeAttachment
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.replace_volume_attachment_with_http_info(name, body, **kwargs)  # noqa: E501
-
-    def replace_volume_attachment_with_http_info(self, name, body, **kwargs):  # noqa: E501
-        """replace_volume_attachment  # noqa: E501
-
-        replace the specified VolumeAttachment  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_volume_attachment_with_http_info(name, body, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the VolumeAttachment (required)
-        :param V1beta1VolumeAttachment body: (required)
-        :param str pretty: If 'true', then the output is pretty printed.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(V1beta1VolumeAttachment, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'name',
-            'body',
-            'pretty',
-            'dry_run',
-            'field_manager'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.replace_volume_attachment = _Endpoint(
+            settings={
+                'response_type': (V1beta1VolumeAttachment,),
+                'auth': [
+                    'BearerToken'
+                ],
+                'endpoint_path': '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}',
+                'operation_id': 'replace_volume_attachment',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'name',
+                    'body',
+                    'pretty',
+                    'dry_run',
+                    'field_manager',
+                ],
+                'required': [
+                    'name',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'name':
+                        (str,),
+                    'body':
+                        (V1beta1VolumeAttachment,),
+                    'pretty':
+                        (str,),
+                    'dry_run':
+                        (str,),
+                    'field_manager':
+                        (str,),
+                },
+                'attribute_map': {
+                    'name': 'name',
+                    'pretty': 'pretty',
+                    'dry_run': 'dryRun',
+                    'field_manager': 'fieldManager',
+                },
+                'location_map': {
+                    'name': 'path',
+                    'body': 'body',
+                    'pretty': 'query',
+                    'dry_run': 'query',
+                    'field_manager': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json',
+                    'application/yaml',
+                    'application/vnd.kubernetes.protobuf'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__replace_volume_attachment
         )
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method replace_volume_attachment" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `replace_volume_attachment`")  # noqa: E501
-        # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `replace_volume_attachment`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'name' in local_var_params:
-            path_params['name'] = local_var_params['name']  # noqa: E501
-
-        query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
-            query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
-            query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
-            query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['BearerToken']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apis/storage.k8s.io/v1beta1/volumeattachments/{name}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='V1beta1VolumeAttachment',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)

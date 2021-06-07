@@ -1,6 +1,7 @@
 # AdmissionregistrationV1beta1WebhookClientConfig
 
 WebhookClientConfig contains the information to make a TLS connection with the webhook
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

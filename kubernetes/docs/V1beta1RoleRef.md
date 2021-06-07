@@ -1,6 +1,7 @@
 # V1beta1RoleRef
 
 RoleRef contains information that points to the role being used
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

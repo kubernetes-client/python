@@ -1,11 +1,12 @@
 # V1beta1SubjectAccessReviewSpec
 
 SubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**extra** | **dict(str, list[str])** | Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here. | [optional] 
-**group** | **list[str]** | Groups is the groups you&#39;re testing for. | [optional] 
+**extra** | **{str: ([str],)}** | Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here. | [optional] 
+**group** | **[str]** | Groups is the groups you&#39;re testing for. | [optional] 
 **non_resource_attributes** | [**V1beta1NonResourceAttributes**](V1beta1NonResourceAttributes.md) |  | [optional] 
 **resource_attributes** | [**V1beta1ResourceAttributes**](V1beta1ResourceAttributes.md) |  | [optional] 
 **uid** | **str** | UID information about the requesting user. | [optional] 

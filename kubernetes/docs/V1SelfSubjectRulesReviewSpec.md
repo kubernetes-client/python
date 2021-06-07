@@ -1,5 +1,6 @@
 # V1SelfSubjectRulesReviewSpec
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
