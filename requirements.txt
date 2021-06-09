@@ -2,7 +2,7 @@ certifi>=14.05.14 # MPL
 six>=1.9.0  # MIT
 python-dateutil>=2.5.3  # BSD
 setuptools>=21.0.0  # PSF/ZPL
-pyyaml>=3.12  # MIT
+pyyaml>=5.4.1  # MIT
 google-auth>=1.0.1  # Apache-2.0
 ipaddress>=1.0.17;python_version=="2.7"  # PSF
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
