@@ -26,7 +26,7 @@ def load_config(**kwargs):
     Wrapper function to load the kube_config.
     It will initially try to load_kube_config from provided path,
     then check if the KUBE_CONFIG_DEFAULT_LOCATION exists
-    If neither exists- it will fall back to load_incluster_config
+    If neither exists, it will fall back to load_incluster_config
     and inform the user accordingly.
 
     :param kwargs: A combination of all possible kwargs that
