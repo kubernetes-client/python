@@ -1,3 +1,11 @@
+# v18.20.0b1
+
+Kubernetes API Version: 1.18.20
+
+**Important Information:**
+
+- Python 2 had reached [End of Life](https://www.python.org/doc/sunset-python-2/) on January 1, 2020. The Kubernetes Python Client has dropped support for Python 2 from this release (v18.20.0b1) and will no longer provide support to older clients as per the [Kubernetes support policy](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions).
+
 # v18.17.0a1
 
 Kubernetes API Version: 1.18.17
@@ -47,6 +55,37 @@ Kubernetes API Version: 1.18.17
 
 To read the full CHANGELOG visit [here](https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-1.18.md).
 
+# v17.17.0
+
+Kubernetes API Version: 1.17.17
+
+Changelog since v17.17.0b1:
+
+### Bug or Regression
+- Fix watch stream non-chunked response handling ([kubernetes-client/python-base#231](https://github.com/kubernetes-client/python-base/pull/231), [@dhague](https://github.com/dhague))
+- Fixed a decoding error for BOOTMARK watch events ([kubernetes-client/python-base#234](https://github.com/kubernetes-client/python-base/pull/234), [@yliaog](https://github.com/yliaog))
+
+### Feature
+- Load_kube_config_from_dict() support define custom temp files path ([kubernetes-client/python-base#233](https://github.com/kubernetes-client/python-base/pull/233), [@onecer](https://github.com/onecer))
+- The dynamic client now supports customizing http "Accept" header through the `header_params` parameter, which can be used to customizing API server response, e.g. retrieving object metadata only. ([kubernetes-client/python-base#236](https://github.com/kubernetes-client/python-base/pull/236), [@Yashks1994](https://github.com/Yashks1994))
+
+# v17.17.0b1
+
+Kubernetes API Version: 1.17.17
+
+Changelog since v17.14.0a1:
+
+**New Feature:**
+- Add Python 3.9 to build [kubernetes-client/python#1311](https://github.com/kubernetes-client/python/pull/1311)
+- Enable leaderelection [kubernetes-client/python#1363](https://github.com/kubernetes-client/python/pull/1363)
+
+**API Change:**
+- Add allowWatchBookmarks, resoureVersionMatch parameters to custom objects. [kubernetes-client/gen#180](https://github.com/kubernetes-client/gen/pull/180)
+
+**Bug Fix:**
+- fix: load cache error when CacheDecoder object is not callable [kubernetes-client/python-base#226](https://github.com/kubernetes-client/python-base/pull/226)
+- raise exception when an empty config file is passed to load_kube_config [kubernetes-client/python-base#223](https://github.com/kubernetes-client/python-base/pull/223)
+- Fix bug with Watch and 410 retries [kubernetes-client/python-base#227](https://github.com/kubernetes-client/python-base/pull/227)
 
 # v17.14.0a1
 
