@@ -99,9 +99,6 @@ class V1ProjectedVolumeSource(object):
         :param sources: The sources of this V1ProjectedVolumeSource.  # noqa: E501
         :type: list[V1VolumeProjection]
         """
-        if self.local_vars_configuration.client_side_validation and sources is None:  # noqa: E501
-            raise ValueError("Invalid value for `sources`, must not be `None`")  # noqa: E501
-
         self._sources = sources
 
     def to_dict(self):
