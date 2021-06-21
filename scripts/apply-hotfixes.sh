@@ -74,4 +74,17 @@ else
     exit 1
 fi;
 
+# Patching commits for Tolerating Null Sources on Projected Volumes
+# UPDATE: OpenAPI generator v4.3.0 has the context manager as a functionality. Cherry-picking just the tests for completeness.
+# Ref: https://github.com/kubernetes-client/python/pull/1497
+git cherry-pick -n f3dbc8cbf1ab2aaf5e3bd8c0f0fc068e67823971
+if [ $? -eq 0 ]
+then
+    echo Succesfully patched changes for Tolerating Null Sources on Projected Volumes
+else
+    echo Failed to patch changes for Tolerating Null Sources on Projected Volumes
+    git restore --staged .
+    exit 1
+fi;
+
 git commit -m "Apply hotfixes"
