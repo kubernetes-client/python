@@ -67,7 +67,7 @@ done
 
 echo "--- applying isort"
 for SOURCE in $SOURCES; do
-    isort -y $SOURCE
+    isort $SOURCE
 done
 
 echo "--- check pycodestyle (all need to be fixed manually)"

@@ -19,9 +19,10 @@ context includes a cluster, a user, and a namespace.
 Please install the pick library before running this example.
 """
 
+from pick import pick  # install pick using `pip install pick`
+
 from kubernetes import client, config
 from kubernetes.client import configuration
-from pick import pick  # install pick using `pip install pick`
 
 
 def main():

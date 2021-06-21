@@ -13,12 +13,13 @@
 # limitations under the License.
 
 """
-Changes the labels of the "minikube" node. Adds the label "foo" with value
-"bar" and will overwrite the "foo" label if it already exists. Removes the
-label "baz".
+This example demonstrates the following:
+    - Get a list of all the cluster nodes
+    - Iterate through each node list item
+        - Add or overwirite label "foo" with the value "bar"
+        - Remove the label "baz"
+    - Return the list of node with updated labels
 """
-
-from pprint import pprint
 
 from kubernetes import client, config
 
@@ -36,9 +37,14 @@ def main():
         }
     }
 
-    api_response = api_instance.patch_node("minikube", body)
+    # Listing the cluster nodes
+    node_list = api_instance.list_node()
 
-    pprint(api_response)
+    print("%s\t\t%s" % ("NAME", "LABELS"))
+    # Patching the node labels
+    for node in node_list.items:
+        api_response = api_instance.patch_node(node.metadata.name, body)
+        print("%s\t%s" % (node.metadata.name, node.metadata.labels))
 
 
 if __name__ == '__main__':

@@ -21,6 +21,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# The openapi-generator version used by this client
+export OPENAPI_GENERATOR_COMMIT="v4.3.0"
+
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
 CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
@@ -31,11 +34,14 @@ pushd "${SCRIPT_ROOT}" > /dev/null
 SCRIPT_ROOT=`pwd`
 popd > /dev/null
 
+source ${SCRIPT_ROOT}/util/common.sh
+util::common::check_sed
+
 pushd "${CLIENT_ROOT}" > /dev/null
 CLIENT_ROOT=`pwd`
 popd > /dev/null
 
-TEMP_FOLDER=$(mktemp -d) 
+TEMP_FOLDER=$(mktemp -d)
 trap "rm -rf ${TEMP_FOLDER}" EXIT SIGINT
 
 SETTING_FILE="${TEMP_FOLDER}/settings"
