@@ -1,3 +1,11 @@
+# v18.20.0b1
+
+Kubernetes API Version: 1.18.20
+
+**Important Information:**
+
+- Python 2 had reached [End of Life](https://www.python.org/doc/sunset-python-2/) on January 1, 2020. The Kubernetes Python Client has dropped support for Python 2 from this release (v18.20.0b1) and will no longer provide support to older clients as per the [Kubernetes support policy](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions).
+
 # v18.17.0a1
 
 Kubernetes API Version: 1.18.17
