@@ -12,7 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from .config_exception import ConfigException
 from .incluster_config import load_incluster_config
-from .kube_config import (list_kube_config_contexts, load_kube_config,
+from .kube_config import (KUBE_CONFIG_DEFAULT_LOCATION,
+                          list_kube_config_contexts, load_kube_config,
                           load_kube_config_from_dict, new_client_from_config)
+
+
+def load_config(**kwargs):
+    """
+    Wrapper function to load the kube_config.
+    It will initially try to load_kube_config from provided path,
+    then check if the KUBE_CONFIG_DEFAULT_LOCATION exists
+    If neither exists, it will fall back to load_incluster_config
+    and inform the user accordingly.
+
+    :param kwargs: A combination of all possible kwargs that
+    can be passed to either load_kube_config or
+    load_incluster_config functions.
+    """
+    if "kube_config_path" in kwargs.keys() or os.path.exists(
+            KUBE_CONFIG_DEFAULT_LOCATION):
+        load_kube_config(**kwargs)
+    else:
+        print(
+            "kube_config_path not provided and "
+            "default location ({0}) does not exist. "
+            "Using inCluster Config. "
+            "This might not work.".format(KUBE_CONFIG_DEFAULT_LOCATION))
+        load_incluster_config(**kwargs)
