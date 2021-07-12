@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+from os.path import exists, expanduser
 
 from .config_exception import ConfigException
 from .incluster_config import load_incluster_config
@@ -33,8 +33,7 @@ def load_config(**kwargs):
     can be passed to either load_kube_config or
     load_incluster_config functions.
     """
-    if "kube_config_path" in kwargs.keys() or os.path.exists(
-            KUBE_CONFIG_DEFAULT_LOCATION):
+    if "kube_config_path" in kwargs.keys() or exists(expanduser(KUBE_CONFIG_DEFAULT_LOCATION)):
         load_kube_config(**kwargs)
     else:
         print(
