@@ -68,6 +68,8 @@ def create_from_yaml(
         failures = []
         k8s_objects = []
         for yml_document in yml_document_all:
+            if yml_document is None:
+                continue
             try:
                 created = create_from_dict(k8s_client, yml_document, verbose,
                                            namespace=namespace,
