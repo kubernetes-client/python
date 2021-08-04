@@ -144,7 +144,7 @@ class DynamicClient(object):
 
         return self.request('patch', path, body=body, content_type=content_type, **kwargs)
 
-    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None):
+    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None):
         """
         Stream events for a resource from the Kubernetes API
 
@@ -156,6 +156,7 @@ class DynamicClient(object):
         :param resource_version: The version with which to filter results. Only events with
                                  a resource_version greater than this value will be returned
         :param timeout: The amount of time in seconds to wait before terminating the stream
+        :param watcher: The Watcher object that will be used to stream the resource
 
         :return: Event object with these keys:
                    'type': The type of event such as "ADDED", "DELETED", etc.
@@ -164,13 +165,17 @@ class DynamicClient(object):
 
         Example:
             client = DynamicClient(k8s_client)
+            watcher = watch.Watch()
             v1_pods = client.resources.get(api_version='v1', kind='Pod')
 
-            for e in v1_pods.watch(resource_version=0, namespace=default, timeout=5):
+            for e in v1_pods.watch(resource_version=0, namespace=default, timeout=5, watcher=watcher):
                 print(e['type'])
                 print(e['object'].metadata)
+                # If you want to gracefully stop the stream watcher
+                watcher.stop()
         """
-        watcher = watch.Watch()
+        if not watcher: watcher = watch.Watch()
+
         for event in watcher.stream(
             resource.get,
             namespace=namespace,
