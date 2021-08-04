@@ -60,8 +60,6 @@ configuration.api_key['authorization'] = 'YOUR_API_KEY'
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
