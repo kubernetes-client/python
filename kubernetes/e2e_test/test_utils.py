@@ -13,8 +13,10 @@
 # under the License.
 
 import unittest
+from os import path
 
 import yaml
+
 from kubernetes import utils, client
 from kubernetes.client.rest import ApiException
 from kubernetes.e2e_test import base
@@ -37,6 +39,7 @@ class TestUtils(unittest.TestCase):
         k8s_client = client.api_client.ApiClient(configuration=cls.config)
         core_v1 = client.CoreV1Api(api_client=k8s_client)
         core_v1.delete_namespace(name=cls.test_namespace)
+
     # Tests for creating individual API objects
 
     def test_create_apps_deployment_from_yaml(self):
@@ -46,6 +49,31 @@ class TestUtils(unittest.TestCase):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml")
+        app_api = client.AppsV1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace="default")
+        self.assertIsNotNone(dep)
+        while True:
+            try:
+                app_api.delete_namespaced_deployment(
+                    name="nginx-app", namespace="default",
+                    body={})
+                break
+            except ApiException:
+                continue
+
+    def test_create_apps_deployment_from_yaml_object(self):
+        """
+        Should be able to pass YAM objects directly to helper function.
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        _path = self.path_prefix + "apps-deployment.yaml"
+        with open(path.abspath(_path)) as f:
+            yaml_objects = yaml.safe_load_all(f)
+            utils.create_from_yaml(
+                k8s_client,
+                yaml_objects=yaml_objects,
+            )
         app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
