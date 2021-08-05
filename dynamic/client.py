@@ -220,6 +220,8 @@ class DynamicClient(object):
             query_params.append(('propagationPolicy', params['propagation_policy']))
         if params.get('orphan_dependents') is not None:
             query_params.append(('orphanDependents', params['orphan_dependents']))
+        if params.get('dry_run') is not None:
+            query_params.append(('dryRun', params['dry_run']))
 
         header_params = params.get('header_params', {})
         form_params = []
