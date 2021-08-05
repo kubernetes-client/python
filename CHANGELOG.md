@@ -1,3 +1,7 @@
+# v18.20.0
+
+Kubernetes API Version: 1.18.20
+
 # v18.20.0b1
 
 Kubernetes API Version: 1.18.20
