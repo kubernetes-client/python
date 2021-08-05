@@ -1,3 +1,12 @@
+# v18.0.0-snapshot
+
+Kubernetes API Version: To Be Updated
+
+### Feature
+- Support for the dryRun parameter has been added to the dynamic client. ([kubernetes-client/python-base#247](https://github.com/kubernetes-client/python-base/pull/247), [@gravesm](https://github.com/gravesm))
+- The `python2` support will be removed in 18.0.0 beta release. All the tests will use `python3` versions. ([kubernetes-client/python-base#238](https://github.com/kubernetes-client/python-base/pull/238), [@Priyankasaggu11929](https://github.com/Priyankasaggu11929))
+- The dynamic client now supports customizing http "Accept" header through the `header_params` parameter, which can be used to customizing API server response, e.g. retrieving object metadata only. ([kubernetes-client/python-base#236](https://github.com/kubernetes-client/python-base/pull/236), [@Yashks1994](https://github.com/Yashks1994))
+
 # v18.20.0b1
 
 Kubernetes API Version: 1.18.20
