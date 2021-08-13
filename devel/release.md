@@ -15,7 +15,11 @@ report issues. Typically, there is a single alpha or beta release, but if there
 are a higher than expected number of issues there can be multiple releases
 (e.g, a2 or b2).
 
-## Create or update release branch
+## 1. Update submodules
+
+Update submodules by referring to this [link](https://github.com/kubernetes-client/python/blob/master/devel/submodules.md#update-submodule). Commit the changes and open a pull request.
+
+## 2. Create or update release branch
 
 The release branch name should have release-x.x format. All minor and pre-releases
 should be on the same branch. To update an existing branch with master (only for
@@ -26,13 +30,13 @@ export RELEASE_BRANCH=release-x.y
 git checkout $RELEASE_BRANCH
 git fetch upstream
 git rebase upstream/$RELEASE_BRANCH
-git pull upstream master
+git pull -X theirs upstream master
 ```
 
 You may need to fix some conflicts. For auto-generated files, you can commit
 either version. They will be updated to the current version in the next step.
 
-## Update release tags
+## 3. Update release tags
 
 Release tags are in the "scripts/constants.py" file. These are the constants you
 may need to update:
@@ -55,20 +59,29 @@ command:
 scripts/update-client.sh
 ```
 
+**NOTE**: If you see a lot of new or modified files under the `kubernetes/test/`
+directory, delete everything except `kubernetes/test/test_api_client.py` and
+`kubernetes/test/test_configuration.py`.
+
 Commit changes (should be only version number changes) to the release branch.
 Name the commit something like "Update version constants for XXX release".
 
-***After you finished the steps above, refer to the section "Hot issues" and
+***After you finished the steps above, refer to the section, "Hot issues", and
 apply the manual fixes.***
 
 ```bash
 git push upstream $RELEASE_BRANCH
 ```
 
-## Hot issues
+## 4. Hot issues
+
+Use the `scripts/apply-hotfixes.sh` script to apply the fixes below in one step.
+**As mentioned above, the script should be run after finishing the section "Update release tags". Also, ensure a clean working directory before applying the script.**
+
+Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does.
 
 There are some hot issues with the client generation that require manual fixes.
-***The steps in this section should be performed after you finished the section "Update release tags".***
+**The steps below are deprecated and only exist for documentation purposess. They should be performed using the `scripts/apply-hotfixes.sh` script mentioned above.**
 
 1. Restore custom object patch behavior. You should apply [this commit](https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede)
 to ensure custom object patch behavior is backwards compatible. For more
@@ -86,12 +99,7 @@ For more details, see [#974](https://github.com/kubernetes-client/python/issues/
 
 5. Add tests for the default `Configuration` behavior (ref: https://github.com/kubernetes-client/python/pull/1303 and https://github.com/kubernetes-client/python/pull/1285). The commit [1ffa61d0650e4c93e0d7f0becd2c54797eafd407](https://github.com/kubernetes-client/python/pull/1285/commits/1ffa61d0650e4c93e0d7f0becd2c54797eafd407) should be cherry-picked.
 
-Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does, then create your PR for review.
-
-Alternatively, you can use the `scripts/apply-hotfixes.sh` script to apply
-changes from the above functionalities. **As mentioned above the script should be run after finishing the section `Update release tags`. Also, ensure a clean working directory before applying the script**
-
-## Change logs
+## 5. CHANGELOG
 
 Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
 If they are not, follow commits added after the last release and update/commit
@@ -99,9 +107,14 @@ the change logs to master.
 
 Then based on the release, follow one of next two steps.
 
-## README
+## 6. README
 
 Update the compatibility matrix and maintenance status in the README file.
+
+## Submit pull request
+
+Typically after the you've completed steps 2-6 above you can push your changes
+open a pull request against `kubernetes-client:release-x.y`
 
 ## Patch a release branch
 
@@ -188,7 +201,7 @@ If everything looks good, run this command to upload packages to pypi:
 twine upload dist/*
 ```
 
-## Create github release
+## Create Github release
 
 Create a github release by starting from
 [this page](https://github.com/kubernetes-client/python/releases).
