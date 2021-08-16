@@ -1,6 +1,6 @@
-# v18.0.0-snapshot
+# v18.20.0
 
-Kubernetes API Version: To Be Updated
+Kubernetes API Version: 1.18.20
 
 ### Feature
 - Support for the dryRun parameter has been added to the dynamic client. ([kubernetes-client/python-base#247](https://github.com/kubernetes-client/python-base/pull/247), [@gravesm](https://github.com/gravesm))
