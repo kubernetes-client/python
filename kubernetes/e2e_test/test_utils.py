@@ -306,7 +306,7 @@ class TestUtils(unittest.TestCase):
             name="mock", namespace="default")
         self.assertIsNotNone(ctr)
         core_api.delete_namespaced_replication_controller(
-            name="mock", namespace="default", body={})
+            name="mock", namespace="default", propagation_policy="Background")
         core_api.delete_namespaced_service(name="mock",
                                            namespace="default", body={})
 
@@ -364,7 +364,7 @@ class TestUtils(unittest.TestCase):
             name="mock-2", namespace="default")
         self.assertIsNotNone(ctr)
         core_api.delete_namespaced_replication_controller(
-            name="mock-2", namespace="default", body={})
+            name="mock-2", namespace="default", propagation_policy="Background")
         core_api.delete_namespaced_service(name="mock-2",
                                            namespace="default", body={})
 

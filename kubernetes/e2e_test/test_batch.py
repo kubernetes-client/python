@@ -55,4 +55,4 @@ class TestClientBatch(unittest.TestCase):
         self.assertEqual(name, resp.metadata.name)
 
         resp = api.delete_namespaced_job(
-            name=name, body={}, namespace='default')
+            name=name, namespace='default', propagation_policy='Background')

@@ -498,7 +498,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(2, resp.spec.replicas)
 
         resp = api.delete_namespaced_replication_controller(
-            name=name, body={}, namespace='default')
+            name=name, namespace='default', propagation_policy='Background')
 
     def test_configmap_apis(self):
         client = api_client.ApiClient(configuration=self.config)
