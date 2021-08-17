@@ -35,6 +35,7 @@ if six.PY3:
 else:
     import httplib
 
+
 def short_uuid():
     id = str(uuid.uuid4())
     return id[-12:]
@@ -60,6 +61,7 @@ def manifest_with_command(name, command):
         }
     }
 
+
 class TestClient(unittest.TestCase):
 
     @classmethod
@@ -71,7 +73,8 @@ class TestClient(unittest.TestCase):
         api = core_v1_api.CoreV1Api(client)
 
         name = 'busybox-test-' + short_uuid()
-        pod_manifest = manifest_with_command(name, "while true;do date;sleep 5; done")
+        pod_manifest = manifest_with_command(
+            name, "while true;do date;sleep 5; done")
 
         # wait for the default service account to be created
         timeout = time.time() + 30
@@ -84,9 +87,10 @@ class TestClient(unittest.TestCase):
                                                            namespace='default')
             except ApiException as e:
                 if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
-                    six.PY3 is False and e.status != httplib.NOT_FOUND):
+                        six.PY3 is False and e.status != httplib.NOT_FOUND):
                     print('error: %s' % e)
-                    self.fail(msg="unexpected error getting default service account")
+                    self.fail(
+                        msg="unexpected error getting default service account")
                 print('default service not found yet: %s' % e)
                 time.sleep(1)
                 continue
@@ -111,25 +115,25 @@ class TestClient(unittest.TestCase):
                         '-c',
                         'for i in $(seq 1 3); do date; done']
         resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
-                                                   command=exec_command,
-                                                   stderr=False, stdin=False,
-                                                   stdout=True, tty=False)
+                      command=exec_command,
+                      stderr=False, stdin=False,
+                      stdout=True, tty=False)
         print('EXEC response : %s' % resp)
         self.assertEqual(3, len(resp.splitlines()))
 
         exec_command = 'uptime'
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
-                                                    command=exec_command,
-                                                    stderr=False, stdin=False,
-                                                    stdout=True, tty=False)
+                      command=exec_command,
+                      stderr=False, stdin=False,
+                      stdout=True, tty=False)
         print('EXEC response : %s' % resp)
         self.assertEqual(1, len(resp.splitlines()))
 
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
-                                                    command='/bin/sh',
-                                                    stderr=True, stdin=True,
-                                                    stdout=True, tty=False,
-                                                    _preload_content=False)
+                      command='/bin/sh',
+                      stderr=True, stdin=True,
+                      stdout=True, tty=False,
+                      _preload_content=False)
         resp.write_stdin("echo test string 1\n")
         line = resp.readline_stdout(timeout=5)
         self.assertFalse(resp.peek_stderr())
@@ -157,7 +161,8 @@ class TestClient(unittest.TestCase):
         api = core_v1_api.CoreV1Api(client)
 
         name = 'busybox-test-' + short_uuid()
-        pod_manifest = manifest_with_command(name, "while true;do date;sleep 5; done")
+        pod_manifest = manifest_with_command(
+            name, "while true;do date;sleep 5; done")
 
         # wait for the default service account to be created
         timeout = time.time() + 30
@@ -171,9 +176,10 @@ class TestClient(unittest.TestCase):
                                                            namespace='default')
             except ApiException as e:
                 if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
-                    six.PY3 is False and e.status != httplib.NOT_FOUND):
+                        six.PY3 is False and e.status != httplib.NOT_FOUND):
                     print('error: %s' % e)
-                    self.fail(msg="unexpected error getting default service account")
+                    self.fail(
+                        msg="unexpected error getting default service account")
                 print('default service not found yet: %s' % e)
                 time.sleep(1)
                 continue
@@ -201,11 +207,16 @@ class TestClient(unittest.TestCase):
             (["/bin/sh", "-c", "ls /"], 0)
         )
         for command, value in commands_expected_values:
-            client = stream(api.connect_get_namespaced_pod_exec, name, 'default',
-                                                       command=command,
-                                                       stderr=True, stdin=False,
-                                                       stdout=True, tty=False,
-                                                       _preload_content=False)
+            client = stream(
+                api.connect_get_namespaced_pod_exec,
+                name,
+                'default',
+                command=command,
+                stderr=True,
+                stdin=False,
+                stdout=True,
+                tty=False,
+                _preload_content=False)
 
             self.assertIsNone(client.returncode)
             client.run_forever(timeout=10)
@@ -337,7 +348,8 @@ class TestClient(unittest.TestCase):
 
         for sock in (sock1234, sock1235):
             self.assertTrue(pf.connected)
-            sent = b'Another test using fileno %s' % str(sock.fileno()).encode()
+            sent = b'Another test using fileno %s' % str(
+                sock.fileno()).encode()
             sock.sendall(sent)
             reply = b''
             while True:
@@ -361,7 +373,7 @@ class TestClient(unittest.TestCase):
         client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
 
-        name = 'portforward-http-' +  short_uuid()
+        name = 'portforward-http-' + short_uuid()
         pod_manifest = {
             'apiVersion': 'v1',
             'kind': 'Pod',
@@ -404,7 +416,8 @@ class TestClient(unittest.TestCase):
         socket_create_connection = socket.create_connection
         try:
             socket.create_connection = kubernetes_create_connection
-            response = urllib_request.urlopen('http://%s.default.kubernetes/' % name)
+            response = urllib_request.urlopen(
+                'http://%s.default.kubernetes/' % name)
             html = response.read().decode('utf-8')
         finally:
             socket.create_connection = socket_create_connection
@@ -521,7 +534,8 @@ class TestClient(unittest.TestCase):
         resp = api.delete_namespaced_config_map(
             name=name, body={}, namespace='default')
 
-        resp = api.list_namespaced_config_map('default', pretty=True, label_selector="e2e-tests=true")
+        resp = api.list_namespaced_config_map(
+            'default', pretty=True, label_selector="e2e-tests=true")
         self.assertEqual([], resp.items)
 
     def test_node_apis(self):

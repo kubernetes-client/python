@@ -31,7 +31,9 @@ class TestUtils(unittest.TestCase):
         cls.test_namespace = "e2e-test-utils"
         k8s_client = client.api_client.ApiClient(configuration=cls.config)
         core_v1 = client.CoreV1Api(api_client=k8s_client)
-        body = client.V1Namespace(metadata=client.V1ObjectMeta(name=cls.test_namespace))
+        body = client.V1Namespace(
+            metadata=client.V1ObjectMeta(
+                name=cls.test_namespace))
         core_v1.create_namespace(body=body)
 
     @classmethod
@@ -396,7 +398,7 @@ class TestUtils(unittest.TestCase):
     def test_create_namespaced_apps_deployment_from_yaml(self):
         """
         Should be able to create an apps/v1beta1 deployment
-		in a test namespace.
+                in a test namespace.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(

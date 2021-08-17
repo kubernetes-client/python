@@ -26,7 +26,6 @@ class TestClientBatch(unittest.TestCase):
     def setUpClass(cls):
         cls.config = base.get_e2e_configuration()
 
-
     def test_job_apis(self):
         client = api_client.ApiClient(configuration=self.config)
         api = batch_v1_api.BatchV1Api(client)
