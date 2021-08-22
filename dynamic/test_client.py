@@ -20,6 +20,7 @@ from kubernetes.e2e_test import base
 from kubernetes.client import api_client
 
 from . import DynamicClient
+from .resource import ResourceInstance, ResourceField
 from .exceptions import ResourceNotFoundError
 
 
@@ -392,3 +393,32 @@ class TestDynamicClient(unittest.TestCase):
         resp = api.get(**params)
         self.assertEqual('PartialObjectMetadataList', resp.kind)
         self.assertEqual('meta.k8s.io/v1', resp.apiVersion)
+
+
+class TestDynamicClientSerialization(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        config = base.get_e2e_configuration()
+        cls.client = DynamicClient(api_client.ApiClient(configuration=config))
+        cls.pod_manifest = {
+            'apiVersion': 'v1',
+            'kind': 'Pod',
+            'metadata': {'name': 'foo-pod'},
+            'spec': {'containers': [{'name': "main", 'image': "busybox"}]},
+        }
+
+    def test_dict_type(self):
+        self.assertEqual(self.client.serialize_body(self.pod_manifest), self.pod_manifest)
+
+    def test_resource_instance_type(self):
+        inst = ResourceInstance(self.client, self.pod_manifest)
+        self.assertEqual(self.client.serialize_body(inst), self.pod_manifest)
+
+    def test_resource_field(self):
+        """`ResourceField` is a special type which overwrites `__getattr__` method to return `None`
+        when a non-existent attribute was accessed. which means it can pass any `hasattr(...)` tests.
+        """
+        res = ResourceField(foo='bar')
+        # method will return original object when it doesn't know how to proceed
+        self.assertEqual(self.client.serialize_body(res), res)
