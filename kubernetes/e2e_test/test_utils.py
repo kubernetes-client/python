@@ -439,6 +439,30 @@ class TestUtils(unittest.TestCase):
         app_api.delete_namespaced_deployment(
             name="mock", namespace=self.test_namespace, body={})
 
+    def test_delete_namespace_from_yaml(self):
+        """
+        Should be able to delete a namespace
+        Create namespace from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        time.sleep(120)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "core-namespace.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        nmsp = core_api.read_namespace(name="development")
+        self.assertIsNotNone(nmsp)
+        """
+        Delete namespace from yaml
+        """
+        utils.delete_from_yaml(k8s_client, self.path_prefix + "core-namespace.yaml")
+        time.sleep(120)
+        namespace_status=False
+        try:
+            response=core_api.read_namespace(name="development")
+            namespace_status=True
+        except Exception as e:
+            self.assertFalse(namespace_status)
+        self.assertFalse(namespace_status)
     
     def test_delete_apps_deployment_from_yaml(self):
         """
@@ -458,6 +482,7 @@ class TestUtils(unittest.TestCase):
         """
         utils.delete_from_yaml(k8s_client, self.path_prefix + "apps-deployment.yaml")
         deployment_status=False
+        time.sleep(120)
         try:
             response=app_api.read_namespaced_deployment(name="nginx-app",namespace="default")
             deployment_status=True
@@ -484,38 +509,13 @@ class TestUtils(unittest.TestCase):
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "core-service.yaml")
         service_status=False
+        time.sleep(120)
         try:
             response = core_api.read_namespaced_service(name="my-service",namespace="default")
             service_status=True 
         except Exception as e:
             self.assertFalse(service_status)
         self.assertFalse(service_status)
-
-    def test_delete_namespace_from_yaml(self):
-        """
-        Should be able to delete a namespace
-        Create namespace from file first and ensure it is created
-        """
-        k8s_client = client.api_client.ApiClient(configuration=self.config)
-        time.sleep(120)
-        utils.create_from_yaml(
-            k8s_client, self.path_prefix + "core-namespace.yaml")
-        core_api = client.CoreV1Api(k8s_client)
-        nmsp = core_api.read_namespace(name="development")
-        self.assertIsNotNone(nmsp)
-        """
-        Delete namespace from yaml
-        """
-        utils.delete_from_yaml(k8s_client, self.path_prefix + "core-namespace.yaml")
-        time.sleep(120)
-        namespace_status=False
-        try:
-            response=core_api.read_namespace(name="development")
-            namespace_status=True
-        except Exception as e:
-            self.assertFalse(namespace_status)
-        self.assertFalse(namespace_status)
-
     
     def test_delete_pod_from_yaml(self):
         """
@@ -564,6 +564,7 @@ class TestUtils(unittest.TestCase):
         utils.delete_from_yaml(
             k8s_client, self.path_prefix + "rbac-role.yaml")
         rbac_role_status=False
+        time.sleep(120)
         try:
             response = rbac_api.read_namespaced_role(
             name="pod-reader", namespace="default")
@@ -591,6 +592,7 @@ class TestUtils(unittest.TestCase):
             k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
         
         rbac_role_status=False
+        time.sleep(120)
         try:
             response=rbac_api.read_namespaced_role(
             name="pod-reader", namespace="default")
@@ -625,6 +627,7 @@ class TestUtils(unittest.TestCase):
             k8s_client, self.path_prefix + "multi-resource.yaml")
         svc_status=False
         replication_status=False
+        time.sleep(120)
         try:
             resp_svc= core_api.read_namespaced_service(name="mock",
                                                namespace="default")

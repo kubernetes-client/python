@@ -21,21 +21,21 @@ import yaml
 from kubernetes import client
 
 
-def create_from_yaml(k8s_client, yaml_file,yaml_objects=None ,verbose=False,
+def create_from_yaml(k8s_client, yaml_file=None,yaml_objects=None ,verbose=False,
                      namespace="default", **kwargs):
     operation = "create"
     operate_from_yaml(k8s_client, yaml_file, operation,yaml_objects,verbose=False,
                       namespace="default", **kwargs)
 
 
-def delete_from_yaml(k8s_client, yaml_file,yaml_objects=None ,verbose=False,
+def delete_from_yaml(k8s_client, yaml_file=None,yaml_objects=None ,verbose=False,
                      namespace="default", **kwargs):
     operation = "delete"
     operate_from_yaml(k8s_client, yaml_file, operation,yaml_objects,verbose=False,
                       namespace="default", **kwargs)
 
 
-def operate_from_yaml(k8s_client, yaml_file, operation,yaml_objects=None,verbose=False,
+def operate_from_yaml(k8s_client, yaml_file=None, operation=None,yaml_objects=None,verbose=False,
                       namespace="default", **kwargs):
     """
     Input:
@@ -60,7 +60,7 @@ def operate_from_yaml(k8s_client, yaml_file, operation,yaml_objects=None,verbose
         FailToExecuteError which holds list of `client.rest.ApiException`
         instances for each object that failed to delete.
     """
-    def create_with(objects):
+    def operate_with(objects):
         failures = []
         k8s_objects = []
         for yml_document in objects:
@@ -78,11 +78,11 @@ def operate_from_yaml(k8s_client, yaml_file, operation,yaml_objects=None,verbose
         return k8s_objects
     if yaml_objects:
         yml_document_all = yaml_objects
-        return create_with(yml_document_all)
+        return operate_with(yml_document_all)
     elif yaml_file:
         with open(path.abspath(yaml_file)) as f:
             yml_document_all = yaml.safe_load_all(f)
-            return create_with(yml_document_all)
+            return operate_with(yml_document_all)
     else:
         raise ValueError(
             'One of `yaml_file` or `yaml_objects` arguments must be provided')
