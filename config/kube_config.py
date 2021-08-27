@@ -359,6 +359,8 @@ class KubeConfigLoader(object):
             self._refresh_gcp_token()
 
         self.token = "Bearer %s" % provider['config']['access-token']
+        if 'expiry' in provider['config']:
+            self.expiry = parse_rfc3339(provider['config']['expiry'])
         return self.token
 
     def _refresh_gcp_token(self):
@@ -483,8 +485,7 @@ class KubeConfigLoader(object):
             status = ExecProvider(self._user['exec']).run()
             if 'token' in status:
                 self.token = "Bearer %s" % status['token']
-                return True
-            if 'clientCertificateData' in status:
+            elif 'clientCertificateData' in status:
                 # https://kubernetes.io/docs/reference/access-authn-authz/authentication/#input-and-output-formats
                 # Plugin has provided certificates instead of a token.
                 if 'clientKeyData' not in status:
@@ -504,10 +505,13 @@ class KubeConfigLoader(object):
                     file_base_path=base_path,
                     base64_file_content=False,
                     temp_file_path=self._temp_file_path).as_file()
-                return True
-            logging.error('exec: missing token or clientCertificateData field '
-                          'in plugin output')
-            return None
+            else:
+                logging.error('exec: missing token or clientCertificateData '
+                              'field in plugin output')
+                return None
+            if 'expirationTimestamp' in status:
+                self.expiry = parse_rfc3339(status['expirationTimestamp'])
+            return True
         except Exception as e:
             logging.error(str(e))
 
@@ -560,25 +564,15 @@ class KubeConfigLoader(object):
         if 'insecure-skip-tls-verify' in self._cluster:
             self.verify_ssl = not self._cluster['insecure-skip-tls-verify']
 
-    def _using_gcp_auth_provider(self):
-        return self._user and \
-            'auth-provider' in self._user and \
-            'name' in self._user['auth-provider'] and \
-            self._user['auth-provider']['name'] == 'gcp'
-
     def _set_config(self, client_configuration):
-        if self._using_gcp_auth_provider():
-            # GCP auth tokens must be refreshed regularly, but swagger expects
-            # a constant token. Replace the swagger-generated client config's
-            # get_api_key_with_prefix method with our own to allow automatic
-            # token refresh.
-            def _gcp_get_api_key(*args):
-                return self._load_gcp_token(self._user['auth-provider'])
-            client_configuration.get_api_key_with_prefix = _gcp_get_api_key
         if 'token' in self.__dict__:
-            # Note: this line runs for GCP auth tokens as well, but this entry
-            # will not be updated upon GCP token refresh.
             client_configuration.api_key['authorization'] = self.token
+
+            def _refresh_api_key(client_configuration):
+                if ('expiry' in self.__dict__ and _is_expired(self.expiry)):
+                    self._load_authentication()
+                    self._set_config(client_configuration)
+            client_configuration.refresh_api_key_hook = _refresh_api_key
         # copy these keys directly from self to configuration object
         keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl']
         for key in keys:
