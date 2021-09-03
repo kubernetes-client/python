@@ -38,3 +38,24 @@ class TestDiscoverer(unittest.TestCase):
 
         # test no Discoverer._write_cache called
         self.assertTrue(mtime1 == mtime2)
+
+    def test_cache_decoder_resource_and_subresource(self):
+        client = DynamicClient(api_client.ApiClient(configuration=self.config))
+        # first invalidate cache
+        client.resources.invalidate_cache()
+
+        # do Discoverer.__init__
+        client = DynamicClient(api_client.ApiClient(configuration=self.config))
+        # the resources of client will use _cache['resources'] in memory
+        deploy1 = client.resources.get(kind='Deployment')
+
+        # do Discoverer.__init__
+        client = DynamicClient(api_client.ApiClient(configuration=self.config))
+        # the resources of client will use _cache['resources'] decode from cache file
+        deploy2 = client.resources.get(kind='Deployment')
+
+        # test Resource is the same
+        self.assertTrue(deploy1 == deploy2)
+
+        # test Subresource is the same
+        self.assertTrue(deploy1.status == deploy2.status)

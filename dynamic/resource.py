@@ -48,7 +48,7 @@ class Resource(object):
         self.extra_args = kwargs
 
     def to_dict(self):
-        return {
+        d = {
             '_type': 'Resource',
             'prefix': self.prefix,
             'group': self.group,
@@ -58,12 +58,13 @@ class Resource(object):
             'verbs': self.verbs,
             'name': self.name,
             'preferred': self.preferred,
-            'singular_name': self.singular_name,
-            'short_names': self.short_names,
+            'singularName': self.singular_name,
+            'shortNames': self.short_names,
             'categories': self.categories,
             'subresources': {k: sr.to_dict() for k, sr in self.subresources.items()},
-            'extra_args': self.extra_args,
         }
+        d.update(self.extra_args)
+        return d
 
     @property
     def group_version(self):
@@ -236,7 +237,7 @@ class Subresource(Resource):
         self.api_version = parent.api_version
         self.kind = kwargs.pop('kind')
         self.name = kwargs.pop('name')
-        self.subresource = self.name.split('/')[1]
+        self.subresource = kwargs.pop('subresource', None) or self.name.split('/')[1]
         self.namespaced = kwargs.pop('namespaced', False)
         self.verbs = kwargs.pop('verbs', None)
         self.extra_args = kwargs
@@ -262,14 +263,15 @@ class Subresource(Resource):
         return partial(getattr(self.parent.client, name), self)
 
     def to_dict(self):
-        return {
+        d = {
             'kind': self.kind,
             'name': self.name,
             'subresource': self.subresource,
             'namespaced': self.namespaced,
-            'verbs': self.verbs,
-            'extra_args': self.extra_args,
+            'verbs': self.verbs
         }
+        d.update(self.extra_args)
+        return d
 
 
 class ResourceInstance(object):
