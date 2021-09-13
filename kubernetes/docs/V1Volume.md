@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **csi** | [**V1CSIVolumeSource**](V1CSIVolumeSource.md) |  | [optional] 
 **downward_api** | [**V1DownwardAPIVolumeSource**](V1DownwardAPIVolumeSource.md) |  | [optional] 
 **empty_dir** | [**V1EmptyDirVolumeSource**](V1EmptyDirVolumeSource.md) |  | [optional] 
+**ephemeral** | [**V1EphemeralVolumeSource**](V1EphemeralVolumeSource.md) |  | [optional] 
 **fc** | [**V1FCVolumeSource**](V1FCVolumeSource.md) |  | [optional] 
 **flex_volume** | [**V1FlexVolumeSource**](V1FlexVolumeSource.md) |  | [optional] 
 **flocker** | [**V1FlockerVolumeSource**](V1FlockerVolumeSource.md) |  | [optional] 
