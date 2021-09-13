@@ -13,32 +13,32 @@
 # limitations under the License.
 
 """
-Script has functions helping GET , UPDATE and DELETE for kind : HorizontalPodAutoscaler
-The below class has common function for HPA referenced from core_v1_api.py with little tweaks.
+Script has functions helping:
+GET, UPDATE and DELETE for kind : HorizontalPodAutoscaler.
+The below class has common functions for HPA referenced
+from core_v1_api.py with little tweaks.
 """
 
 from kubernetes import client, config
-from kubernetes.client.exceptions import (  
+from kubernetes.client.exceptions import (
     ApiTypeError,
     ApiValueError
 )
 
 
 import six
-import sys 
+
 
 class KubeExample():
 
-    def __init__(self,kube_config_file=None,namespace=None):
+    def __init__(self, kube_config_file=None, namespace=None):
         """
         """
-        self.kube_config_file=kube_config_file
-        self.namespace=namespace
+        self.kube_config_file = kube_config_file
+        self.namespace = namespace
         config.load_kube_config(kube_config_file)
         self.api_client = client.CoreV1Api().api_client
-        
 
-    
     def patch_namespaced_hpa(self, name, namespace, body, **kwargs):  # noqa: E501
         """patch_namespaced_hpa # noqa: E501
 
@@ -69,11 +69,8 @@ class KubeExample():
         """
         kwargs['_return_http_data_only'] = True
 
-        return self.hpa_namespaced_with_http_info(name, namespace, body,_request_type='PATCH',_ignore_params=[],**kwargs)  # noqa: E501
-    
-    
+        return self.hpa_namespaced_with_http_info(name, namespace, body, _request_type='PATCH', _ignore_params=[], **kwargs)  # noqa: E501
 
-    
     def get_namespaced_hpa(self, name, namespace, **kwargs):  # noqa: E501
         """get_namespaced_hpa # noqa: E501
 
@@ -102,9 +99,8 @@ class KubeExample():
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.hpa_namespaced_with_http_info(name=name, namespace=namespace,body=None,_request_type='GET',_ignore_params=['body'] )  # noqa: E501
+        return self.hpa_namespaced_with_http_info(name=name, namespace=namespace, body=None, _request_type='GET', _ignore_params=['body'])  # noqa: E501
 
-    
     def delete_namespaced_hpa(self, name, namespace, **kwargs):  # noqa: E501
         """get_namespaced_hpa # noqa: E501
 
@@ -133,9 +129,7 @@ class KubeExample():
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.hpa_namespaced_with_http_info(name=name, namespace=namespace,body=None,_request_type='DELETE',_ignore_params=['body'] )  # noqa: E501
-
-
+        return self.hpa_namespaced_with_http_info(name=name, namespace=namespace, body=None, _request_type='DELETE', _ignore_params=['body'])  # noqa: E501
 
     def hpa_namespaced_with_http_info(self, name, namespace, body, **kwargs):  # noqa: E501
         """patch_namespaced_hpa  # noqa: E501
@@ -162,17 +156,15 @@ class KubeExample():
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeout 
-		:param _ignore_params : defaults to []
-		:param _request_type: defaults to GET. 
-								 
+                                 (connection, read) timeout
+        :param _ignore_params : defaults to []
+        :param _request_type: defaults to GET.
         :return: **
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         local_var_params = locals()
-         
         all_params = [
             'name',
             'namespace',
@@ -189,7 +181,7 @@ class KubeExample():
                 '_preload_content',
                 '_request_timeout',
                 '_request_type',
-                '_ignore_params' 
+                '_ignore_params'
             ]
         )
 
@@ -200,20 +192,20 @@ class KubeExample():
                     " to method patch_namespaced_hpa" % key
                 )
             local_var_params[key] = val
-		
+
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
         if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+                                                       local_var_params['name'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_hpa`")  # noqa: E501
         # verify the required parameter 'namespace' is set
         if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+                                                       local_var_params['namespace'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_hpa`")  # noqa: E501
-			
+
         # verify the required parameter 'body' is set
         if self.api_client.client_side_validation and 'body' not in local_var_params['_ignore_params'] and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+                                                                                                            local_var_params['body'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_hpa`")  # noqa: E501
 
         collection_formats = {}
@@ -223,7 +215,7 @@ class KubeExample():
             path_params['name'] = local_var_params['name']  # noqa: E501
         if 'namespace' in local_var_params:
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
-         
+
         query_params = []
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
@@ -248,64 +240,56 @@ class KubeExample():
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
-        #header_params['Accept'] = self.api_client.select_header_accept(['application/json'])  
-
-
         # HTTP header `Content-Type`
+
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-        #header_params['Content-Type'] = self.api_client.select_header_content_type( ['application/json']) 
-         
+
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        print(local_var_params['_request_type'] )
-        
+        print(local_var_params['_request_type'])
+
         return self.api_client.call_api(
-            '/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}', local_var_params['_request_type'] ,
+            '/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}', local_var_params['_request_type'],  # noqa: E501
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            #response_type='V1Pod',  # noqa: E501
+            # response_type='V1Pod',  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req',False),
+            async_req=local_var_params.get('async_req', False),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', False),
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
-    
 
 
+def main():
+    kubeEx = KubeExample(kube_config_file="<kube config file>", namespace="<namespace>")  # noqa: E501
+    namespace = "<namespace>"
+    hpa = "<hpa>"
 
-
-
-if __name__ == '__main__':
-    
-    #kubeEx=KubeExample(kube_config_file="<kube config file>",namespace="<namespace>")	
-	namespace=<ns>
-	hpa=<hpa>
-	
-	     	
-	##Patching max and min replicas in Horizontal pod autoscaler.  
-	resp=kubeEx.patch_namespaced_hpa(hpa,namespace,{"spec":{"maxReplicas":3, "minReplicas":3} })
+    """
+     Patching max and min replicas in Horizontal pod autoscaler.
+    """
+    resp = kubeEx.patch_namespaced_hpa(hpa, namespace, {"spec": {"maxReplicas": 3, "minReplicas": 3}})  # noqa: E501
     print(resp)
-    
-	##Getting details of Horizontal pod autoscaler.  
-    resp_get,status,dict=kubeEx.get_namespaced_hpa(hpa,namespace)	
+
+    """
+      Getting details of Horizontal pod autoscaler.
+    """
+    resp_get, status, dict = kubeEx.get_namespaced_hpa(hpa, namespace)
     print(resp_get.read().decode())
-    
-	##Delete of Horizontal pod autoscaler.  
-    resp_del=kubeEx.delete_namespaced_hpa(hpa,namespace)
+
+    """Delete of Horizontal pod autoscaler.
+    """
+    resp_del = kubeEx.delete_namespaced_hpa(hpa, namespace)
     print(resp_del)
 
 
-    #kubeEx=KubeExample(kube_config_file="rviya2_rqsmrmvamm_kubeconfig",namespace=namespace)
-	#resp=kubeEx.patch_namespaced_hpa("foo-web-data-access","d34641",{"spec":{"maxReplicas":3, "minReplicas":3} })
-	#print(resp)
-	#resp_get,status,dict=kubeEx.get_namespaced_hpa("foo-web-data-access","d34641")
-	#print(resp_get.read().decode())
-	#resp_del=kubeEx.delete_namespaced_hpa("foo-web-data-access","d34641")
-	#print(resp_del)
-	
+if __name__ == '__main__':
+
+    print("In main")
+    main()
