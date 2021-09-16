@@ -98,7 +98,12 @@ class DynamicClient(object):
         return namespace
 
     def serialize_body(self, body):
-        if hasattr(body, 'to_dict'):
+        """Serialize body to raw dict so apiserver can handle it
+
+        :param body: kubernetes resource body, current support: Union[Dict, ResourceInstance]
+        """
+        # This should match any `ResourceInstance` instances
+        if callable(getattr(body, 'to_dict', None)):
             return body.to_dict()
         return body or {}
 
