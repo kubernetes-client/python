@@ -56,6 +56,9 @@
 # - add a sentence about "changes since {last release}". In most cases our
 #   releases should be sequential. This script (the workflow above) is based on
 #   this assumption, and we should make the release note clear about that.
+# - update readme; if it's a real release (instead of a snapshot in master
+#   branch), also create a PR to update changelog and readme in the master
+#   branch
 #
 # Usage:
 #   $ KUBERNETES_BRANCH=release-1.19 CLIENT_VERSION=19.0.0-snapshot DEVELOPMENT_STATUS="3 - Alpha" scripts/release.sh
