@@ -64,6 +64,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# used by the client generator: https://github.com/kubernetes-client/gen/blob/729332ad08f0f4d98983b7beb027e2f657236ef9/openapi/openapi-generator/client-generator.sh#L52
+export USERNAME=kubernetes
+
 repo_root="$(git rev-parse --show-toplevel)"
 declare -r repo_root
 cd "${repo_root}"
