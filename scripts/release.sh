@@ -117,12 +117,13 @@ scripts/apply-hotfixes.sh
 git reset HEAD~2
 # custom object API is hosted in gen repo. Commit API change separately for
 # easier review
-if [[ -z "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
+if [[ -n "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
   git add kubernetes/client/api/custom_objects_api.py
   git commit -m "generated client change for custom_objects"
 fi
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json
-git commit -m "generated API change"
+# verify if there are staged changes, then commit
+git diff-index --quiet --cached HEAD || git commit -m "generated API change"
 git add .
 git commit -m "generated client change"
 echo "Release finished successfully."
