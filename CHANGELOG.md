@@ -2,6 +2,12 @@
 
 Kubernetes API Version: v1.19.14
 
+### Bug Fix
+- Type checking in `Client.serialize_body()` was made more restrictive and robust. ([kubernetes-client/python-base#241](https://github.com/kubernetes-client/python-base/pull/241), [@piglei](https://github.com/piglei))
+
+### Feature
+- Support for the dryRun parameter has been added to the dynamic client. ([kubernetes-client/python-base#247](https://github.com/kubernetes-client/python-base/pull/247), [@gravesm](https://github.com/gravesm))
+
 ### API Change
 - We have added a new Priority & Fairness rule that exempts all probes (/readyz, /healthz, /livez) to prevent 
   restarting of "healthy" kube-apiserver instance(s) by kubelet. ([kubernetes/kubernetes#101113](https://github.com/kubernetes/kubernetes/pull/101113), [@tkashem](https://github.com/tkashem)) [SIG API Machinery]
