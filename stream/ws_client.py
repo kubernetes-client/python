@@ -449,18 +449,24 @@ def create_websocket(configuration, url, headers=None):
     connect_opt = {
          'header': header
     }
+
+    if configuration.proxy or coniguration.proxy_headers:
+        connect_opt = websocket_proxycare(connect_opt, configuration, url, headers)
+
+    websocket.connect(url, **connect_opt)
+    return websocket
+
+def websocket_proxycare(connect_opt, configuration, url, headers):
     if configuration.proxy:
         proxy_url = urlparse(configuration.proxy)
         connect_opt.update({'http_proxy_host': proxy_url.hostname, 'http_proxy_port': proxy_url.port})
     if configuration.proxy_headers:
-       for key,value in configuration.proxy_headers.items():
-          if key == 'proxy-authorization' and value.startswith('Basic'):
-             b64value = value.split()[1]
-             auth = b64decode(b64value).decode().split(':')
-             connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
-
-    websocket.connect(url, **connect_opt)
-    return websocket
+        for key,value in configuration.proxy_headers.items():
+            if key == 'proxy-authorization' and value.startswith('Basic'):
+                b64value = value.split()[1]
+                auth = b64decode(b64value).decode().split(':')
+                connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
+    return(connect_opt)
 
 
 def websocket_call(configuration, _method, url, **kwargs):
