@@ -2,6 +2,10 @@
 
 Kubernetes API Version: v1.19.15
 
+**Important Information:**
+
+- The Kubernetes Python client versioning scheme has changed. The version numbers used till Kubernetes Python Client v12.y.z lagged behind the actual Kubernetes minor version numbers. From this release, the client is moving a version format `vY.Z.P` where `Y` and `Z` are respectively from the Kubernetes version `v1.Y.Z` and `P` would incremented due to changes on the Python client side itself. Ref: https://github.com/kubernetes-client/python/issues/1244
+
 ### Bug Fix
 - Type checking in `Client.serialize_body()` was made more restrictive and robust. ([kubernetes-client/python-base#241](https://github.com/kubernetes-client/python-base/pull/241), [@piglei](https://github.com/piglei))
 
