@@ -29,7 +29,7 @@ from six.moves.urllib.parse import urlencode, urlparse, urlunparse
 from six import StringIO
 
 from websocket import WebSocket, ABNF, enableTrace
-from base64 import b64decode
+from base64 import urlsafe_b64decode
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
@@ -464,7 +464,7 @@ def websocket_proxycare(connect_opt, configuration, url, headers):
         for key,value in configuration.proxy_headers.items():
             if key == 'proxy-authorization' and value.startswith('Basic'):
                 b64value = value.split()[1]
-                auth = b64decode(b64value).decode().split(':')
+                auth = urlsafe_b64decode(b64value).decode().split(':')
                 connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
     return(connect_opt)
 
