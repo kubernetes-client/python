@@ -29,6 +29,7 @@ from six.moves.urllib.parse import urlencode, urlparse, urlunparse
 from six import StringIO
 
 from websocket import WebSocket, ABNF, enableTrace
+from base64 import urlsafe_b64decode
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
@@ -445,12 +446,27 @@ def create_websocket(configuration, url, headers=None):
         ssl_opts['keyfile'] = configuration.key_file
 
     websocket = WebSocket(sslopt=ssl_opts, skip_utf8_validation=False)
+    connect_opt = {
+         'header': header
+    }
+
+    if configuration.proxy or coniguration.proxy_headers:
+        connect_opt = websocket_proxycare(connect_opt, configuration, url, headers)
+
+    websocket.connect(url, **connect_opt)
+    return websocket
+
+def websocket_proxycare(connect_opt, configuration, url, headers):
     if configuration.proxy:
         proxy_url = urlparse(configuration.proxy)
-        websocket.connect(url, header=header, http_proxy_host=proxy_url.hostname, http_proxy_port=proxy_url.port)
-    else:
-        websocket.connect(url, header=header)
-    return websocket
+        connect_opt.update({'http_proxy_host': proxy_url.hostname, 'http_proxy_port': proxy_url.port})
+    if configuration.proxy_headers:
+        for key,value in configuration.proxy_headers.items():
+            if key == 'proxy-authorization' and value.startswith('Basic'):
+                b64value = value.split()[1]
+                auth = urlsafe_b64decode(b64value).decode().split(':')
+                connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
+    return(connect_opt)
 
 
 def websocket_call(configuration, _method, url, **kwargs):

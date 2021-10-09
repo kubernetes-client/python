@@ -15,7 +15,21 @@
 import unittest
 
 from .ws_client import get_websocket_url
+from .ws_client import websocket_proxycare
+from kubernetes.client.configuration import Configuration
 
+try:
+    import urllib3
+    urllib3.disable_warnings()
+except ImportError:
+    pass
+
+def dictval(dict, key, default=None):
+    try:
+        val = dict[key]
+    except KeyError:
+        val = default
+    return val
 
 class WSClientTest(unittest.TestCase):
 
@@ -32,6 +46,21 @@ class WSClientTest(unittest.TestCase):
                 ]:
             self.assertEqual(get_websocket_url(url), ws_url)
 
+    def test_websocket_proxycare(self):
+        for proxy, idpass, expect_host, expect_port, expect_auth in [
+                ( None,                             None,        None,                None, None ),
+                ( 'http://proxy.example.com:8080/', None,        'proxy.example.com', 8080, None ),
+                ( 'http://proxy.example.com:8080/', 'user:pass', 'proxy.example.com', 8080, ('user','pass'))
+                ]:
+            config = Configuration()
+            if proxy is not None:
+                setattr(config, 'proxy', proxy)
+            if idpass is not None:
+                setattr(config, 'proxy_headers', urllib3.util.make_headers(proxy_basic_auth=idpass))
+            connect_opt = websocket_proxycare( {}, config, None, None)
+            self.assertEqual( dictval(connect_opt,'http_proxy_host'), expect_host)
+            self.assertEqual( dictval(connect_opt,'http_proxy_port'), expect_port)
+            self.assertEqual( dictval(connect_opt,'http_proxy_auth'), expect_auth)
 
 if __name__ == '__main__':
     unittest.main()
