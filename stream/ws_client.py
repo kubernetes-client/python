@@ -450,7 +450,7 @@ def create_websocket(configuration, url, headers=None):
          'header': header
     }
 
-    if configuration.proxy or coniguration.proxy_headers:
+    if configuration.proxy or configuration.proxy_headers:
         connect_opt = websocket_proxycare(connect_opt, configuration, url, headers)
 
     websocket.connect(url, **connect_opt)
