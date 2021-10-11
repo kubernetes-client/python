@@ -149,6 +149,20 @@ class DynamicClient(object):
 
         return self.request('patch', path, body=body, content_type=content_type, **kwargs)
 
+    def server_side_apply(self, resource, body=None, name=None, namespace=None, force_conflicts=None, **kwargs):
+        body = self.serialize_body(body)
+        name = name or body.get('metadata', {}).get('name')
+        if not name:
+            raise ValueError("name is required to patch {}.{}".format(resource.group_version, resource.kind))
+        if resource.namespaced:
+            namespace = self.ensure_namespace(resource, namespace, body)
+
+        # force content type to 'application/apply-patch+yaml'
+        kwargs.update({'content_type': 'application/apply-patch+yaml'})
+        path = resource.path(name=name, namespace=namespace)
+
+        return self.request('patch', path, body=body, force_conflicts=force_conflicts, **kwargs)
+
     def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None):
         """
         Stream events for a resource from the Kubernetes API
@@ -227,6 +241,10 @@ class DynamicClient(object):
             query_params.append(('orphanDependents', params['orphan_dependents']))
         if params.get('dry_run') is not None:
             query_params.append(('dryRun', params['dry_run']))
+        if params.get('field_manager') is not None:
+            query_params.append(('fieldManager', params['field_manager']))
+        if params.get('force_conflicts') is not None:
+            query_params.append(('force', params['force_conflicts']))
 
         header_params = params.get('header_params', {})
         form_params = []

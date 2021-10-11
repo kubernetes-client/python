@@ -15,6 +15,7 @@
 import time
 import unittest
 import uuid
+import json
 
 from kubernetes.e2e_test import base
 from kubernetes.client import api_client
@@ -393,6 +394,29 @@ class TestDynamicClient(unittest.TestCase):
         resp = api.get(**params)
         self.assertEqual('PartialObjectMetadataList', resp.kind)
         self.assertEqual('meta.k8s.io/v1', resp.apiVersion)
+
+    def test_server_side_apply_api(self):
+        client = DynamicClient(api_client.ApiClient(configuration=self.config))
+        api = client.resources.get(
+            api_version='v1', kind='Pod')
+
+        name = 'pod-' + short_uuid()
+        pod_manifest = {
+                'apiVersion': 'v1',
+                'kind': 'Pod',
+                'metadata': {'labels': {'name': name},
+                            'name': name},
+                'spec': {'containers': [{
+                            'image': 'nginx',
+                            'name': 'nginx',
+                            'ports': [{'containerPort': 80,
+                                            'protocol': 'TCP'}]}]}}
+
+        body = json.dumps(pod_manifest).encode()
+        resp = api.server_side_apply(
+            name=name, namespace='default', body=body,
+            field_manager='kubernetes-unittests', dry_run="All")
+        self.assertEqual('kubernetes-unittests', resp.metadata.managedFields[0].manager)
 
 
 class TestDynamicClientSerialization(unittest.TestCase):
