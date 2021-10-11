@@ -1,4 +1,4 @@
-# v19.15.0a1
+# v19.15.0b1
 
 Kubernetes API Version: v1.19.15
 
