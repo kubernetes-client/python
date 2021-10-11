@@ -2,6 +2,12 @@
 
 Kubernetes API Version: v1.19.15
 
+- No changes. The same as `v19.15.0a1`.
+
+# v19.15.0a1
+
+Kubernetes API Version: v1.19.15
+
 ### Bug Fix
 - Type checking in `Client.serialize_body()` was made more restrictive and robust. ([kubernetes-client/python-base#241](https://github.com/kubernetes-client/python-base/pull/241), [@piglei](https://github.com/piglei))
 
