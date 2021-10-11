@@ -6,6 +6,7 @@ Kubernetes API Version: v1.19.15
 - Type checking in `Client.serialize_body()` was made more restrictive and robust. ([kubernetes-client/python-base#241](https://github.com/kubernetes-client/python-base/pull/241), [@piglei](https://github.com/piglei))
 
 ### Feature
+- Support Proxy Authentication in websocket client(stream/ws_client) like REST client. ([kubernetes-client/python-base#256](https://github.com/kubernetes-client/python-base/pull/256), [@itaru2622](https://github.com/itaru2622))
 - Support for the dryRun parameter has been added to the dynamic client. ([kubernetes-client/python-base#247](https://github.com/kubernetes-client/python-base/pull/247), [@gravesm](https://github.com/gravesm))
 
 ### API Change
