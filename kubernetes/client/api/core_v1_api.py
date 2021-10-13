@@ -1082,6 +1082,8 @@ class CoreV1Api(object):
             query_params.append(('stdin', local_var_params['stdin']))  # noqa: E501
         if 'stdout' in local_var_params and local_var_params['stdout'] is not None:  # noqa: E501
             query_params.append(('stdout', local_var_params['stdout']))  # noqa: E501
+        else:
+            query_params.append(('stdout', True))
         if 'tty' in local_var_params and local_var_params['tty'] is not None:  # noqa: E501
             query_params.append(('tty', local_var_params['tty']))  # noqa: E501
 
