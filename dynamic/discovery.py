@@ -237,7 +237,11 @@ class LazyDiscoverer(Discoverer):
         return self.parse_api_groups(request_resources=False, update=True)['apis'].keys()
 
     def search(self, **kwargs):
-        results = self.__search(self.__build_search(**kwargs), self.__resources, [])
+        # In first call, ignore ResourceNotFoundError and set default value for results
+        try:
+            results = self.__search(self.__build_search(**kwargs), self.__resources, [])
+        except ResourceNotFoundError:
+            results = []
         if not results:
             self.invalidate_cache()
             results = self.__search(self.__build_search(**kwargs), self.__resources, [])
