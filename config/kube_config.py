@@ -70,7 +70,8 @@ def _create_temp_file_with_content(content, temp_file_path=None):
         return _temp_files[content_key]
     if temp_file_path and not os.path.isdir(temp_file_path):
         os.makedirs(name=temp_file_path)
-    _, name = tempfile.mkstemp(dir=temp_file_path)
+    fd, name = tempfile.mkstemp(dir=temp_file_path)
+    os.close(fd)
     _temp_files[content_key] = name
     with open(name, 'wb') as fd:
         fd.write(content.encode() if isinstance(content, str) else content)
