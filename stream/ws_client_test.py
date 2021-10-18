@@ -47,20 +47,30 @@ class WSClientTest(unittest.TestCase):
             self.assertEqual(get_websocket_url(url), ws_url)
 
     def test_websocket_proxycare(self):
-        for proxy, idpass, expect_host, expect_port, expect_auth in [
-                ( None,                             None,        None,                None, None ),
-                ( 'http://proxy.example.com:8080/', None,        'proxy.example.com', 8080, None ),
-                ( 'http://proxy.example.com:8080/', 'user:pass', 'proxy.example.com', 8080, ('user','pass'))
+        for proxy, idpass, no_proxy, expect_host, expect_port, expect_auth, expect_noproxy in [
+                ( None,                             None,        None,                            None,                None, None, None ),
+                ( 'http://proxy.example.com:8080/', None,        None,                            'proxy.example.com', 8080, None, None ),
+                ( 'http://proxy.example.com:8080/', 'user:pass', None,                            'proxy.example.com', 8080, ('user','pass'), None),
+                ( 'http://proxy.example.com:8080/', 'user:pass', '',                              'proxy.example.com', 8080, ('user','pass'), None),
+                ( 'http://proxy.example.com:8080/', 'user:pass', '*',                             'proxy.example.com', 8080, ('user','pass'), ['*']),
+                ( 'http://proxy.example.com:8080/', 'user:pass', '.example.com',                  'proxy.example.com', 8080, ('user','pass'), ['.example.com']),
+                ( 'http://proxy.example.com:8080/', 'user:pass', 'localhost,.local,.example.com',  'proxy.example.com', 8080, ('user','pass'), ['localhost','.local','.example.com']),
                 ]:
+            # setup input
             config = Configuration()
             if proxy is not None:
                 setattr(config, 'proxy', proxy)
             if idpass is not None:
                 setattr(config, 'proxy_headers', urllib3.util.make_headers(proxy_basic_auth=idpass))
+            if no_proxy is not None:
+                setattr(config, 'no_proxy', no_proxy)
+            # setup done
+            # test starts
             connect_opt = websocket_proxycare( {}, config, None, None)
             self.assertEqual( dictval(connect_opt,'http_proxy_host'), expect_host)
             self.assertEqual( dictval(connect_opt,'http_proxy_port'), expect_port)
             self.assertEqual( dictval(connect_opt,'http_proxy_auth'), expect_auth)
+            self.assertEqual( dictval(connect_opt,'http_no_proxy'), expect_noproxy)
 
 if __name__ == '__main__':
     unittest.main()

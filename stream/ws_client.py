@@ -30,6 +30,7 @@ from six import StringIO
 
 from websocket import WebSocket, ABNF, enableTrace
 from base64 import urlsafe_b64decode
+from requests.utils import should_bypass_proxies
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
@@ -457,6 +458,12 @@ def create_websocket(configuration, url, headers=None):
     return websocket
 
 def websocket_proxycare(connect_opt, configuration, url, headers):
+    """ An internal function to be called in api-client when a websocket
+        create is requested.
+    """
+    if configuration.no_proxy:
+        connect_opt.update({ 'http_no_proxy': configuration.no_proxy.split(',') })
+
     if configuration.proxy:
         proxy_url = urlparse(configuration.proxy)
         connect_opt.update({'http_proxy_host': proxy_url.hostname, 'http_proxy_port': proxy_url.port})
