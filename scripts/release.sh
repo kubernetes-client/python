@@ -67,14 +67,25 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# Verify git status
+if git_status=$(git status --porcelain --untracked=no 2>/dev/null) && [[ -n "${git_status}" ]]; then
+  echo "!!! Dirty tree. Clean up and try again."
+  exit 1
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+declare -r REPO_ROOT
+cd "${REPO_ROOT}"
+declare -r REBASEMAGIC="${REPO_ROOT}/.git/rebase-apply"
+if [[ -e "${REBASEMAGIC}" ]]; then
+  echo "!!! 'git rebase' or 'git am' in progress. Clean up and try again."
+  exit 1
+fi
+
 # Set constants used by the client generator.
 export USERNAME=kubernetes
 
 # Set up utilities.
-repo_root="$(git rev-parse --show-toplevel)"
-declare -r repo_root
-cd "${repo_root}"
-
 source scripts/util/changelog.sh
 source scripts/util/kube_changelog.sh
 
@@ -82,6 +93,45 @@ source scripts/util/kube_changelog.sh
 KUBERNETES_BRANCH=${KUBERNETES_BRANCH:-$(python3 "scripts/constants.py" KUBERNETES_BRANCH)}
 CLIENT_VERSION=${CLIENT_VERSION:-$(python3 "scripts/constants.py" CLIENT_VERSION)}
 DEVELOPMENT_STATUS=${DEVELOPMENT_STATUS:-$(python3 "scripts/constants.py" DEVELOPMENT_STATUS)}
+
+# Create a local branch
+STARTINGBRANCH=$(git symbolic-ref --short HEAD)
+declare -r STARTINGBRANCH
+gitamcleanup=false
+function return_to_kansas {
+  if [[ "${gitamcleanup}" == "true" ]]; then
+    echo
+    echo "+++ Aborting in-progress git am."
+    git am --abort >/dev/null 2>&1 || true
+  fi
+
+  echo "+++ Returning you to the ${STARTINGBRANCH} branch and cleaning up."
+  git checkout -f "${STARTINGBRANCH}" >/dev/null 2>&1 || true
+}
+trap return_to_kansas EXIT
+
+remote_branch=upstream/master
+if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
+  remote_branch=upstream/release-"${CLIENT_VERSION%%.*}".0
+fi
+echo "+++ Updating remotes..."
+git remote update upstream origin
+if ! git log -n1 --format=%H "${remote_branch}" >/dev/null 2>&1; then
+  echo "!!! '${remote_branch}' not found."
+  echo "    (In particular, it needs to be a valid, existing remote branch that I can 'git checkout'.)"
+  exit 1
+fi
+
+newbranch="$(echo "automated-release-of-${CLIENT_VERSION}-${remote_branch}" | sed 's/\//-/g')"
+newbranchuniq="${newbranch}-$(date +%s)"
+declare -r newbranchuniq
+echo "+++ Creating local branch ${newbranchuniq}"
+git checkout -b "${newbranchuniq}" "${remote_branch}"
+
+# If it's an actual release, pull master branch
+if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
+  git pull -X theirs upstream master
+fi
 
 # Get Kubernetes API versions
 old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
