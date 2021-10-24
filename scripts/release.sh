@@ -67,9 +67,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# used by the client generator: https://github.com/kubernetes-client/gen/blob/729332ad08f0f4d98983b7beb027e2f657236ef9/openapi/openapi-generator/client-generator.sh#L52
+# Set constants used by the client generator.
 export USERNAME=kubernetes
 
+# Set up utilities.
 repo_root="$(git rev-parse --show-toplevel)"
 declare -r repo_root
 cd "${repo_root}"
@@ -77,25 +78,25 @@ cd "${repo_root}"
 source scripts/util/changelog.sh
 source scripts/util/kube_changelog.sh
 
-old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
-old_k8s_api_version=$(util::changelog::get_k8s_api_version "v$old_client_version")
+# Read user inputs or values locally.
 KUBERNETES_BRANCH=${KUBERNETES_BRANCH:-$(python3 "scripts/constants.py" KUBERNETES_BRANCH)}
 CLIENT_VERSION=${CLIENT_VERSION:-$(python3 "scripts/constants.py" CLIENT_VERSION)}
 DEVELOPMENT_STATUS=${DEVELOPMENT_STATUS:-$(python3 "scripts/constants.py" DEVELOPMENT_STATUS)}
 
-# get Kubernetes API Version
+# Get Kubernetes API versions
+old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
+old_k8s_api_version=$(util::changelog::get_k8s_api_version "v$old_client_version")
 new_k8s_api_version=$(util::kube_changelog::find_latest_patch_version $KUBERNETES_BRANCH)
 echo "Old Kubernetes API Version: $old_k8s_api_version"
 echo "New Kubernetes API Version: $new_k8s_api_version"
 
+# Update version constants
 sed -i "s/^KUBERNETES_BRANCH =.*$/KUBERNETES_BRANCH = \"$KUBERNETES_BRANCH\"/g" scripts/constants.py
 sed -i "s/^CLIENT_VERSION =.*$/CLIENT_VERSION = \"$CLIENT_VERSION\"/g" scripts/constants.py
 sed -i "s/^DEVELOPMENT_STATUS =.*$/DEVELOPMENT_STATUS = \"$DEVELOPMENT_STATUS\"/g" scripts/constants.py
 git commit -am "update version constants for $CLIENT_VERSION release"
 
-util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version $new_k8s_api_version
-
-# get API change release notes since $old_k8s_api_version.
+# Update CHANGELOG with API change release notes since $old_k8s_api_version.
 # NOTE: $old_k8s_api_version may be one-minor-version behind $KUBERNETES_BRANCH, e.g.
 #   KUBERNETES_BRANCH=release-1.19
 #   old_k8s_api_version=1.18.17
@@ -106,30 +107,34 @@ util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version 
 # TODO(roycaihw): not all Kubernetes API changes modify the OpenAPI spec.
 # Download the patch and skip if the spec is not modified. Also we want to
 # look at other k/k sections like "deprecation"
+util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version $new_k8s_api_version
 release_notes=$(util::kube_changelog::get_api_changelog "$KUBERNETES_BRANCH" "$old_k8s_api_version")
 if [[ -n "$release_notes" ]]; then
   util::changelog::write_changelog v$CLIENT_VERSION "### API Change" "$release_notes"
 fi
-
 git commit -am "update changelog"
 
-# run client generator
+# Re-generate the client
 scripts/update-client.sh
 
+# Apply hotfixes
 rm -r kubernetes/test/
 git add .
 git commit -m "temporary generated commit"
 scripts/apply-hotfixes.sh
 git reset HEAD~2
-# custom object API is hosted in gen repo. Commit API change separately for
-# easier review
+
+# Custom object API is hosted in gen repo. Commit custom object API change
+# separately for easier review
 if [[ -n "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
   git add kubernetes/client/api/custom_objects_api.py
   git commit -m "generated client change for custom_objects"
 fi
+# Check if there is any API change, then commit
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json
-# verify if there are staged changes, then commit
 git diff-index --quiet --cached HEAD || git commit -m "generated API change"
+# Commit everything else
 git add .
 git commit -m "generated client change"
+
 echo "Release finished successfully."
