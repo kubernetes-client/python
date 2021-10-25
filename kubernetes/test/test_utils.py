@@ -17,10 +17,8 @@ from os import path
 
 import yaml
 
-from kubernetes import utils, client
+from kubernetes import client
 from kubernetes.client import V1Deployment
-from kubernetes.client.rest import ApiException
-from kubernetes.e2e_test import base
 
 
 class TestUtils(unittest.TestCase):
