@@ -143,7 +143,7 @@ echo "New Kubernetes API Version: $new_k8s_api_version"
 # Update version constants
 sed -i "s/^KUBERNETES_BRANCH =.*$/KUBERNETES_BRANCH = \"$KUBERNETES_BRANCH\"/g" scripts/constants.py
 sed -i "s/^CLIENT_VERSION =.*$/CLIENT_VERSION = \"$CLIENT_VERSION\"/g" scripts/constants.py
-sed -i "s/^DEVELOPMENT_STATUS =.*$/DEVELOPMENT_STATUS = \"$DEVELOPMENT_STATUS\"/g" scripts/constants.py
+sed -i "s:^DEVELOPMENT_STATUS =.*$:DEVELOPMENT_STATUS = \"$DEVELOPMENT_STATUS\":g" scripts/constants.py
 git commit -am "update version constants for $CLIENT_VERSION release"
 
 # Update CHANGELOG with API change release notes since $old_k8s_api_version.
