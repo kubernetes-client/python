@@ -156,9 +156,6 @@ class Configuration(object):
         self.proxy = None
         """Proxy URL
         """
-        self.no_proxy = None
-        """bypass proxy for host in the no_proxy list.
-        """
         self.proxy_headers = None
         """Proxy headers
         """
@@ -350,7 +347,7 @@ class Configuration(object):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: release-1.19\n"\
-               "SDK Package Version: 19.15.0b1".\
+               "SDK Package Version: 19.15.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
