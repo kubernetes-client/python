@@ -128,17 +128,40 @@ declare -r newbranchuniq
 echo "+++ Creating local branch ${newbranchuniq}"
 git checkout -b "${newbranchuniq}" "${remote_branch}"
 
-# If it's an actual release, pull master branch
-if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
-  git pull -X theirs upstream master
-fi
-
 # Get Kubernetes API versions
 old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
 old_k8s_api_version=$(util::changelog::get_k8s_api_version "v$old_client_version")
 new_k8s_api_version=$(util::kube_changelog::find_latest_patch_version $KUBERNETES_BRANCH)
 echo "Old Kubernetes API Version: $old_k8s_api_version"
 echo "New Kubernetes API Version: $new_k8s_api_version"
+
+# If it's an actual release, pull master branch
+if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
+  git pull -X theirs upstream master
+
+  # Collect release notes from master branch
+  start_sha=$(git log upstream/release-19.0..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
+  end_sha=$(git log upstream/release-19.0..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
+  output="/tmp/python-master-relnote.md"
+  release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
+  sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
+
+  IFS_backup=$IFS
+  IFS=$'\n'
+  sections=($(grep "^### " $output))
+  IFS=$IFS_backup
+  for section in "${sections[@]}"; do
+    # ignore section titles and empty lines; replace newline with liternal "\n"
+    master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
+    util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
+  done
+  git add .
+  if ! git diff-index --quiet --cached HEAD; then
+    util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
+    git add .
+    git commit -m "update changelog with release notes from master branch"
+  fi
+fi
 
 # Update version constants
 sed -i "s/^KUBERNETES_BRANCH =.*$/KUBERNETES_BRANCH = \"$KUBERNETES_BRANCH\"/g" scripts/constants.py
