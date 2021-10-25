@@ -28,7 +28,7 @@ fi
 # UPDATE: The commit being cherry-picked is updated since the the client generated in 1adaaecd0879d7315f48259ad8d6cbd66b835385
 # differs from the initial hotfix
 # Ref: https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede
-git cherry-pick -n 90aa6f6ab9a391e35d63a84af27e14cc5d5ce947
+git cherry-pick -n 88397bcc5b3b348a41dbf641367756b86552d362
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for custom client behavior
