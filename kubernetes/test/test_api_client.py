@@ -6,7 +6,8 @@ import weakref
 import unittest
 
 import kubernetes
-
+from kubernetes.client.configuration import Configuration
+import urllib3
 
 class TestApiClient(unittest.TestCase):
 
@@ -23,3 +24,28 @@ class TestApiClient(unittest.TestCase):
         self.assertIsNotNone(client._pool)
         atexit._run_exitfuncs()
         self.assertIsNone(client._pool)
+
+    def test_rest_proxycare(self):
+
+        pool = { 'proxy': urllib3.ProxyManager, 'direct': urllib3.PoolManager }
+
+        for dst, proxy, no_proxy, expected_pool in [
+             ( 'http://kube.local/',           None,                       None,                           pool['direct']),
+             ( 'http://kube.local/',          'http://proxy.local:8080/',  None,                           pool['proxy']),
+             ( 'http://127.0.0.1:8080/',      'http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['direct']),
+             ( 'http://kube.local/',          'http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['direct']),
+             ( 'http://kube.others.com:1234/','http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['proxy']),
+             ( 'http://kube.others.com:1234/','http://proxy.local:8080/',  '*',                            pool['direct']),
+        ]:
+            # setup input
+            config = Configuration()
+            setattr(config, 'host', dst)
+            if proxy is not None:
+                setattr(config, 'proxy', proxy)
+            if no_proxy is not None:
+                setattr(config, 'no_proxy', no_proxy)
+            # setup done
+
+            # test
+            client = kubernetes.client.ApiClient(configuration=config)
+            self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )

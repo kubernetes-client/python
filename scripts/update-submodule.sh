@@ -40,7 +40,7 @@ source scripts/util/changelog.sh
 source scripts/util/common.sh
 
 util::common::check_sed
-go get k8s.io/release/cmd/release-notes
+go install k8s.io/release/cmd/release-notes@latest
 
 TARGET_RELEASE=${TARGET_RELEASE:-"v$(grep "^CLIENT_VERSION = \"" scripts/constants.py | sed "s/CLIENT_VERSION = \"//g" | sed "s/\"//g")"}
 
