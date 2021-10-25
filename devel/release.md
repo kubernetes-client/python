@@ -15,11 +15,50 @@ report issues. Typically, there is a single alpha or beta release, but if there
 are a higher than expected number of issues there can be multiple releases
 (e.g, a2 or b2).
 
-## 1. Update submodules
+## Automated release
+
+### 1. (Optional) Update submodules
 
 Update submodules by referring to this [link](https://github.com/kubernetes-client/python/blob/master/devel/submodules.md#update-submodule). Commit the changes and open a pull request.
 
-## 2. Create or update release branch
+### 2. Run the release script and send a PR
+
+```
+export MINOR_VERSION=x
+export PATCH_VERSION=y  # The latest patch version for the minor version. Not required for snapshot.
+```
+To create a snapshot:
+```
+$ KUBERNETES_BRANCH=release-1.${MINOR_VERSION} CLIENT_VERSION=${MINOR_VERSION}.0.0-snapshot DEVELOPMENT_STATUS="3 - Alpha" scripts/release.sh
+```
+To create an a1 release:
+```
+$ KUBERNETES_BRANCH=release-1.${MINOR_VERSION} CLIENT_VERSION=${MINOR_VERSION}.${PATCH_VERSION}.0a1 DEVELOPMENT_STATUS="3 - Alpha" scripts/release.sh
+```
+To create a b1 release:
+```
+$ KUBERNETES_BRANCH=release-1.${MINOR_VERSION} CLIENT_VERSION=${MINOR_VERSION}.${PATCH_VERSION}.0b1 DEVELOPMENT_STATUS="4 - Beta" scripts/release.sh
+```
+To create a stable release:
+```
+$ KUBERNETES_BRANCH=release-1.${MINOR_VERSION} CLIENT_VERSION=${MINOR_VERSION}.${PATCH_VERSION}.0 DEVELOPMENT_STATUS="5 - Production/Stable" scripts/release.sh
+```
+### 3. README
+
+Update the compatibility matrix and maintenance status in the README file.
+
+### Submit pull request
+
+Typically after the you've completed steps 2-6 above you can push your changes
+open a pull request against `kubernetes-client:release-x.y`
+
+## (Deprecated) Manual release
+
+### 1. Update submodules
+
+Update submodules by referring to this [link](https://github.com/kubernetes-client/python/blob/master/devel/submodules.md#update-submodule). Commit the changes and open a pull request.
+
+### 2. Create or update release branch
 
 The release branch name should have release-x.x format. All minor and pre-releases
 should be on the same branch. To update an existing branch with master (only for
@@ -36,7 +75,7 @@ git pull -X theirs upstream master
 You may need to fix some conflicts. For auto-generated files, you can commit
 either version. They will be updated to the current version in the next step.
 
-## 3. Update release tags
+### 3. Update release tags
 
 Release tags are in the "scripts/constants.py" file. These are the constants you
 may need to update:
@@ -73,7 +112,7 @@ apply the manual fixes.***
 git push upstream $RELEASE_BRANCH
 ```
 
-## 4. Hot issues
+### 4. Hot issues
 
 Use the `scripts/apply-hotfixes.sh` script to apply the fixes below in one step.
 **As mentioned above, the script should be run after finishing the section "Update release tags". Also, ensure a clean working directory before applying the script.**
@@ -99,7 +138,7 @@ For more details, see [#974](https://github.com/kubernetes-client/python/issues/
 
 5. Add tests for the default `Configuration` behavior (ref: https://github.com/kubernetes-client/python/pull/1303 and https://github.com/kubernetes-client/python/pull/1285). The commit [1ffa61d0650e4c93e0d7f0becd2c54797eafd407](https://github.com/kubernetes-client/python/pull/1285/commits/1ffa61d0650e4c93e0d7f0becd2c54797eafd407) should be cherry-picked.
 
-## 5. CHANGELOG
+### 5. CHANGELOG
 
 Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
 If they are not, follow commits added after the last release and update/commit
@@ -107,11 +146,11 @@ the change logs to master.
 
 Then based on the release, follow one of next two steps.
 
-## 6. README
+### 6. README
 
 Update the compatibility matrix and maintenance status in the README file.
 
-## Submit pull request
+### Submit pull request
 
 Typically after the you've completed steps 2-6 above you can push your changes
 open a pull request against `kubernetes-client:release-x.y`
@@ -219,7 +258,5 @@ Send an announcement email to kubernetes-dev@googlegroups.com with the subject: 
 deactivate
 rm -rf .release
 ```
-
-TODO: Convert steps in this document to an (semi-) automated script.
 
 ref: https://packaging.python.org/distributing/
