@@ -67,35 +67,109 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# used by the client generator: https://github.com/kubernetes-client/gen/blob/729332ad08f0f4d98983b7beb027e2f657236ef9/openapi/openapi-generator/client-generator.sh#L52
+# Verify git status
+if git_status=$(git status --porcelain --untracked=no 2>/dev/null) && [[ -n "${git_status}" ]]; then
+  echo "!!! Dirty tree. Clean up and try again."
+  exit 1
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+declare -r REPO_ROOT
+cd "${REPO_ROOT}"
+declare -r REBASEMAGIC="${REPO_ROOT}/.git/rebase-apply"
+if [[ -e "${REBASEMAGIC}" ]]; then
+  echo "!!! 'git rebase' or 'git am' in progress. Clean up and try again."
+  exit 1
+fi
+
+# Set constants used by the client generator.
 export USERNAME=kubernetes
 
-repo_root="$(git rev-parse --show-toplevel)"
-declare -r repo_root
-cd "${repo_root}"
-
+# Set up utilities.
 source scripts/util/changelog.sh
 source scripts/util/kube_changelog.sh
 
-old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
-old_k8s_api_version=$(util::changelog::get_k8s_api_version "v$old_client_version")
+# Read user inputs or values locally.
 KUBERNETES_BRANCH=${KUBERNETES_BRANCH:-$(python3 "scripts/constants.py" KUBERNETES_BRANCH)}
 CLIENT_VERSION=${CLIENT_VERSION:-$(python3 "scripts/constants.py" CLIENT_VERSION)}
 DEVELOPMENT_STATUS=${DEVELOPMENT_STATUS:-$(python3 "scripts/constants.py" DEVELOPMENT_STATUS)}
 
-# get Kubernetes API Version
+# Create a local branch
+STARTINGBRANCH=$(git symbolic-ref --short HEAD)
+declare -r STARTINGBRANCH
+gitamcleanup=false
+function return_to_kansas {
+  if [[ "${gitamcleanup}" == "true" ]]; then
+    echo
+    echo "+++ Aborting in-progress git am."
+    git am --abort >/dev/null 2>&1 || true
+  fi
+
+  echo "+++ Returning you to the ${STARTINGBRANCH} branch and cleaning up."
+  git checkout -f "${STARTINGBRANCH}" >/dev/null 2>&1 || true
+}
+trap return_to_kansas EXIT
+
+remote_branch=upstream/master
+if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
+  remote_branch=upstream/release-"${CLIENT_VERSION%%.*}".0
+fi
+echo "+++ Updating remotes..."
+git remote update upstream origin
+if ! git log -n1 --format=%H "${remote_branch}" >/dev/null 2>&1; then
+  echo "!!! '${remote_branch}' not found."
+  echo "    (In particular, it needs to be a valid, existing remote branch that I can 'git checkout'.)"
+  exit 1
+fi
+
+newbranch="$(echo "automated-release-of-${CLIENT_VERSION}-${remote_branch}" | sed 's/\//-/g')"
+newbranchuniq="${newbranch}-$(date +%s)"
+declare -r newbranchuniq
+echo "+++ Creating local branch ${newbranchuniq}"
+git checkout -b "${newbranchuniq}" "${remote_branch}"
+
+# Get Kubernetes API versions
+old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
+old_k8s_api_version=$(util::changelog::get_k8s_api_version "v$old_client_version")
 new_k8s_api_version=$(util::kube_changelog::find_latest_patch_version $KUBERNETES_BRANCH)
 echo "Old Kubernetes API Version: $old_k8s_api_version"
 echo "New Kubernetes API Version: $new_k8s_api_version"
 
+# If it's an actual release, pull master branch
+if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
+  git pull -X theirs upstream master --no-edit
+
+  # Collect release notes from master branch
+  start_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
+  end_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
+  output="/tmp/python-master-relnote.md"
+  release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
+  sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
+
+  IFS_backup=$IFS
+  IFS=$'\n'
+  sections=($(grep "^### " $output))
+  IFS=$IFS_backup
+  for section in "${sections[@]}"; do
+    # ignore section titles and empty lines; replace newline with liternal "\n"
+    master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
+    util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
+  done
+  git add .
+  if ! git diff-index --quiet --cached HEAD; then
+    util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
+    git add .
+    git commit -m "update changelog with release notes from master branch"
+  fi
+fi
+
+# Update version constants
 sed -i "s/^KUBERNETES_BRANCH =.*$/KUBERNETES_BRANCH = \"$KUBERNETES_BRANCH\"/g" scripts/constants.py
 sed -i "s/^CLIENT_VERSION =.*$/CLIENT_VERSION = \"$CLIENT_VERSION\"/g" scripts/constants.py
-sed -i "s/^DEVELOPMENT_STATUS =.*$/DEVELOPMENT_STATUS = \"$DEVELOPMENT_STATUS\"/g" scripts/constants.py
+sed -i "s:^DEVELOPMENT_STATUS =.*$:DEVELOPMENT_STATUS = \"$DEVELOPMENT_STATUS\":g" scripts/constants.py
 git commit -am "update version constants for $CLIENT_VERSION release"
 
-util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version $new_k8s_api_version
-
-# get API change release notes since $old_k8s_api_version.
+# Update CHANGELOG with API change release notes since $old_k8s_api_version.
 # NOTE: $old_k8s_api_version may be one-minor-version behind $KUBERNETES_BRANCH, e.g.
 #   KUBERNETES_BRANCH=release-1.19
 #   old_k8s_api_version=1.18.17
@@ -110,26 +184,30 @@ release_notes=$(util::kube_changelog::get_api_changelog "$KUBERNETES_BRANCH" "$o
 if [[ -n "$release_notes" ]]; then
   util::changelog::write_changelog v$CLIENT_VERSION "### API Change" "$release_notes"
 fi
+git add .
+git diff-index --quiet --cached HEAD || git commit -am "update changelog"
 
-git commit -am "update changelog"
-
-# run client generator
+# Re-generate the client
 scripts/update-client.sh
 
+# Apply hotfixes
 rm -r kubernetes/test/
 git add .
 git commit -m "temporary generated commit"
 scripts/apply-hotfixes.sh
 git reset HEAD~2
-# custom object API is hosted in gen repo. Commit API change separately for
-# easier review
+
+# Custom object API is hosted in gen repo. Commit custom object API change
+# separately for easier review
 if [[ -n "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
   git add kubernetes/client/api/custom_objects_api.py
   git commit -m "generated client change for custom_objects"
 fi
+# Check if there is any API change, then commit
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json
-# verify if there are staged changes, then commit
 git diff-index --quiet --cached HEAD || git commit -m "generated API change"
+# Commit everything else
 git add .
 git commit -m "generated client change"
-echo "Release finished successfully."
+
+echo "Release finished successfully. Please create a PR from branch ${newbranchuniq}."
