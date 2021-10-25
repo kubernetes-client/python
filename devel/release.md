@@ -43,14 +43,25 @@ To create a stable release:
 ```
 $ KUBERNETES_BRANCH=release-1.${MINOR_VERSION} CLIENT_VERSION=${MINOR_VERSION}.${PATCH_VERSION}.0 DEVELOPMENT_STATUS="5 - Production/Stable" scripts/release.sh
 ```
-### 3. README
+Checkout the generated local branch (named "automated-release-of-xxx") to
+continue with the remaining steps.
+
+### 3. README (not required for snapshots)
 
 Update the compatibility matrix and maintenance status in the README file.
 
-### Submit pull request
+### 4. Submit pull request
 
-Typically after the you've completed steps 2-6 above you can push your changes
-open a pull request against `kubernetes-client:release-x.y`
+For snapshots, create a PR against the master repo.
+
+For actual releases, create:
+- a PR against the release branch
+- a second PR against the master branch to cherrypick the CHANGELOG and README
+  changes.
+
+### 5. (Repo admin) Create release branch
+
+After merging a new snapshot, create a release branch from the master branch.
 
 ## (Deprecated) Manual release
 
