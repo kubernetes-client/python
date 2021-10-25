@@ -64,17 +64,4 @@ else
     exit 1
 fi;
 
-# Patching commits for Tolerating Null Sources on Projected Volumes
-# TODO: remove this patch when we release v20 clients
-# Ref: https://github.com/kubernetes-client/python/pull/1497
-git cherry-pick -n ee0e332776d9002bea07d328d49e90ed8c221795
-if [ $? -eq 0 ]
-then
-    echo Succesfully patched changes for Tolerating Null Sources on Projected Volumes
-else
-    echo Failed to patch changes for Tolerating Null Sources on Projected Volumes
-    git restore --staged .
-    exit 1
-fi;
-
 git commit -m "Apply hotfixes"
