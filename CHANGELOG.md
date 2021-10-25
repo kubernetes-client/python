@@ -1,3 +1,10 @@
+# v19.15.0
+
+Kubernetes API Version: v1.19.15
+
+### Feature
+- The new parameter 'no_proxy' has been added to configuration for the REST and websocket client. ([kubernetes-client/python#1579](https://github.com/kubernetes-client/python/pull/1579), [@itaru2622](https://github.com/itaru2622))//github.com/itaru2622))//github.com/itaru2622))//github.com/itaru2622))//github.com/itaru2622))//github.com/itaru2622))//github.com/itaru2622))//github.com/itaru2622))
+
 # v19.15.0b1
 
 Kubernetes API Version: v1.19.15
