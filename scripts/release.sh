@@ -140,8 +140,8 @@ if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
   git pull -X theirs upstream master --no-edit
 
   # Collect release notes from master branch
-  start_sha=$(git log upstream/release-19.0..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
-  end_sha=$(git log upstream/release-19.0..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
+  start_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
+  end_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
   output="/tmp/python-master-relnote.md"
   release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
   sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
