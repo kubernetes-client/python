@@ -180,6 +180,10 @@ git commit -am "update version constants for $CLIENT_VERSION release"
 # TODO(roycaihw): not all Kubernetes API changes modify the OpenAPI spec.
 # Download the patch and skip if the spec is not modified. Also we want to
 # look at other k/k sections like "deprecation"
+if [[ $CLIENT_VERSION == *"snapshot"* ]]; then
+  # Update "Kubernetes API Version" if we are generating a snapshot
+  util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version $new_k8s_api_version
+fi
 release_notes=$(util::kube_changelog::get_api_changelog "$KUBERNETES_BRANCH" "$old_k8s_api_version")
 if [[ -n "$release_notes" ]]; then
   util::changelog::write_changelog v$CLIENT_VERSION "### API Change" "$release_notes"
@@ -210,4 +214,4 @@ git diff-index --quiet --cached HEAD || git commit -m "generated API change"
 git add .
 git commit -m "generated client change"
 
-echo "Release finished successfully. Please create a PR from branch ${newbranchuniq}."
+echo "Release finished successfully. Please create a PR from branch ${newbranchuniq}"
