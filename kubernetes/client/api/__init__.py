@@ -3,6 +3,7 @@ from __future__ import absolute_import
 # flake8: noqa
 
 # import apis into api package
+from kubernetes.client.api.well_known_api import WellKnownApi
 from kubernetes.client.api.admissionregistration_api import AdmissionregistrationApi
 from kubernetes.client.api.admissionregistration_v1_api import AdmissionregistrationV1Api
 from kubernetes.client.api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api
@@ -47,13 +48,18 @@ from kubernetes.client.api.extensions_api import ExtensionsApi
 from kubernetes.client.api.extensions_v1beta1_api import ExtensionsV1beta1Api
 from kubernetes.client.api.flowcontrol_apiserver_api import FlowcontrolApiserverApi
 from kubernetes.client.api.flowcontrol_apiserver_v1alpha1_api import FlowcontrolApiserverV1alpha1Api
+from kubernetes.client.api.flowcontrol_apiserver_v1beta1_api import FlowcontrolApiserverV1beta1Api
+from kubernetes.client.api.internal_apiserver_api import InternalApiserverApi
+from kubernetes.client.api.internal_apiserver_v1alpha1_api import InternalApiserverV1alpha1Api
 from kubernetes.client.api.logs_api import LogsApi
 from kubernetes.client.api.networking_api import NetworkingApi
 from kubernetes.client.api.networking_v1_api import NetworkingV1Api
 from kubernetes.client.api.networking_v1beta1_api import NetworkingV1beta1Api
 from kubernetes.client.api.node_api import NodeApi
+from kubernetes.client.api.node_v1_api import NodeV1Api
 from kubernetes.client.api.node_v1alpha1_api import NodeV1alpha1Api
 from kubernetes.client.api.node_v1beta1_api import NodeV1beta1Api
+from kubernetes.client.api.openid_api import OpenidApi
 from kubernetes.client.api.policy_api import PolicyApi
 from kubernetes.client.api.policy_v1beta1_api import PolicyV1beta1Api
 from kubernetes.client.api.rbac_authorization_api import RbacAuthorizationApi
@@ -64,8 +70,6 @@ from kubernetes.client.api.scheduling_api import SchedulingApi
 from kubernetes.client.api.scheduling_v1_api import SchedulingV1Api
 from kubernetes.client.api.scheduling_v1alpha1_api import SchedulingV1alpha1Api
 from kubernetes.client.api.scheduling_v1beta1_api import SchedulingV1beta1Api
-from kubernetes.client.api.settings_api import SettingsApi
-from kubernetes.client.api.settings_v1alpha1_api import SettingsV1alpha1Api
 from kubernetes.client.api.storage_api import StorageApi
 from kubernetes.client.api.storage_v1_api import StorageV1Api
 from kubernetes.client.api.storage_v1alpha1_api import StorageV1alpha1Api

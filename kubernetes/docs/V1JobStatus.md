@@ -5,8 +5,8 @@ JobStatus represents the current state of a Job.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active** | **int** | The number of actively running pods. | [optional] 
-**completion_time** | **datetime** | Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. | [optional] 
-**conditions** | [**list[V1JobCondition]**](V1JobCondition.md) | The latest available observations of an object&#39;s current state. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/ | [optional] 
+**completion_time** | **datetime** | Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. The completion time is only set when the job finishes successfully. | [optional] 
+**conditions** | [**list[V1JobCondition]**](V1JobCondition.md) | The latest available observations of an object&#39;s current state. When a job fails, one of the conditions will have type &#x3D;&#x3D; \&quot;Failed\&quot;. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/ | [optional] 
 **failed** | **int** | The number of pods which reached phase Failed. | [optional] 
 **start_time** | **datetime** | Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. | [optional] 
 **succeeded** | **int** | The number of pods which reached phase Succeeded. | [optional] 
