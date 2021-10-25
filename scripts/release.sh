@@ -137,7 +137,7 @@ echo "New Kubernetes API Version: $new_k8s_api_version"
 
 # If it's an actual release, pull master branch
 if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
-  git pull -X theirs upstream master
+  git pull -X theirs upstream master --no-edit
 
   # Collect release notes from master branch
   start_sha=$(git log upstream/release-19.0..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
