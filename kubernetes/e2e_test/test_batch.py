@@ -26,7 +26,6 @@ class TestClientBatch(unittest.TestCase):
     def setUpClass(cls):
         cls.config = base.get_e2e_configuration()
 
-
     def test_job_apis(self):
         client = api_client.ApiClient(configuration=self.config)
         api = batch_v1_api.BatchV1Api(client)
@@ -56,4 +55,4 @@ class TestClientBatch(unittest.TestCase):
         self.assertEqual(name, resp.metadata.name)
 
         resp = api.delete_namespaced_job(
-            name=name, body={}, namespace='default')
+            name=name, namespace='default', propagation_policy='Background')
