@@ -64,4 +64,18 @@ else
     exit 1
 fi;
 
+# Patching commit for no_proxy support
+# UPDATE: The commit being cherry-picked is updated kubernetes/client/ unless OpenAPI generator v5.3.1 involved (offinical support of no_proxy feature).
+# Ref: https://github.com/kubernetes-client/python/pull/1579/commits/95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc and conversations in the PR.
+git cherry-pick -n 95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc
+if [ $? -eq 0 ]
+then
+    echo Succesfully patched changes for no_proxy support
+else
+    echo Failed to patch changes for no_proxy support
+    git restore --staged .
+    exit 1
+fi;
+
+
 git commit -m "Apply hotfixes"
