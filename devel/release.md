@@ -22,8 +22,11 @@ are a higher than expected number of issues there can be multiple releases
 Update submodules by referring to this [link](https://github.com/kubernetes-client/python/blob/master/devel/submodules.md#update-submodule). Commit the changes and open a pull request.
 
 ### 2. Run the release script and send a PR
+Generate a Github personal access token following instruction
+[link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 ```
+export GITHUB_TOKEN=t  # github-personal-access-token
 export MINOR_VERSION=x
 export PATCH_VERSION=y  # The latest patch version for the minor version. Not required for snapshot.
 ```
