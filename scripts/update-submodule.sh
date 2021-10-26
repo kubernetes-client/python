@@ -50,20 +50,24 @@ git submodule update --remote
 # download release notes
 start_sha=$(git diff | grep "^-Subproject commit " | sed 's/-Subproject commit //g')
 end_sha=$(git diff | grep "^+Subproject commit " | sed 's/+Subproject commit //g')
-output="/tmp/python-base-relnote.md"
+output="/tmp/python-base-relnote-$(date +%s).md"
 release-notes --dependencies=false --org kubernetes-client --repo python-base --start-sha $start_sha --end-sha $end_sha --output $output
-sed -i 's/(\[\#/(\[kubernetes-client\/python-base\#/g' $output
+if [ -s $output ]; then
+  sed -i 's/(\[\#/(\[kubernetes-client\/python-base\#/g' $output
 
-# update changelog
-IFS_backup=$IFS
-IFS=$'\n'
-sections=($(grep "^### " $output))
-IFS=$IFS_backup
-for section in "${sections[@]}"; do
-  # ignore section titles and empty lines; replace newline with liternal "\n"
-  release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
-  util::changelog::write_changelog "$TARGET_RELEASE" "$section" "$release_notes"
-done
+  # update changelog
+  IFS_backup=$IFS
+  IFS=$'\n'
+  sections=($(grep "^### " $output))
+  IFS=$IFS_backup
+  for section in "${sections[@]}"; do
+    # ignore section titles and empty lines; replace newline with liternal "\n"
+    release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
+    util::changelog::write_changelog "$TARGET_RELEASE" "$section" "$release_notes"
+  done
 
-rm -f $output
-echo "Successfully updated CHANGELOG for submodule."
+  rm -f $output
+  echo "Successfully updated CHANGELOG for submodule."
+else
+  echo "No CHANGELOG for submodule."
+fi
