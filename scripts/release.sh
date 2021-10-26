@@ -158,10 +158,10 @@ if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
         master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
         util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
       done
-      git add .
+      git add .  # Allows us to check if there are any staged release note changes
       if ! git diff-index --quiet --cached HEAD; then
         util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
-        git add .
+        git add .  # Include the API version update before we commit
         git commit -m "update changelog with release notes from master branch"
       fi
     fi
