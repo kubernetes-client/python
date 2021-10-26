@@ -140,26 +140,28 @@ if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
   git pull -X theirs upstream master --no-edit
 
   # Collect release notes from master branch
-  start_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
-  end_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
-  output="/tmp/python-master-relnote.md"
-  release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
-  sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
+  if [[ $(git log ${remote_branch}..upstream/master | grep ^commit) ]]; then
+    start_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
+    end_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
+    output="/tmp/python-master-relnote.md"
+    release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
+    sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
 
-  IFS_backup=$IFS
-  IFS=$'\n'
-  sections=($(grep "^### " $output))
-  IFS=$IFS_backup
-  for section in "${sections[@]}"; do
-    # ignore section titles and empty lines; replace newline with liternal "\n"
-    master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
-    util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
-  done
-  git add .
-  if ! git diff-index --quiet --cached HEAD; then
-    util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
+    IFS_backup=$IFS
+    IFS=$'\n'
+    sections=($(grep "^### " $output))
+    IFS=$IFS_backup
+    for section in "${sections[@]}"; do
+      # ignore section titles and empty lines; replace newline with liternal "\n"
+      master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
+      util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
+    done
     git add .
-    git commit -m "update changelog with release notes from master branch"
+    if ! git diff-index --quiet --cached HEAD; then
+      util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
+      git add .
+      git commit -m "update changelog with release notes from master branch"
+    fi
   fi
 fi
 
