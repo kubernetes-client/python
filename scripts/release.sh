@@ -140,26 +140,31 @@ if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
   git pull -X theirs upstream master --no-edit
 
   # Collect release notes from master branch
-  start_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
-  end_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
-  output="/tmp/python-master-relnote.md"
-  release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
-  sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
+  if [[ $(git log ${remote_branch}..upstream/master | grep ^commit) ]]; then
+    start_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | tail -n1 | sed 's/commit //g')
+    end_sha=$(git log ${remote_branch}..upstream/master | grep ^commit | head -n1 | sed 's/commit //g')
+    output="/tmp/python-master-relnote-$(date +%s).md"
+    release-notes --dependencies=false --org kubernetes-client --repo python --start-sha $start_sha --end-sha $end_sha --output $output
+    # Collect release notes from the output if non-empty
+    if [ -s $output ]; then
+      sed -i 's/(\[\#/(\[kubernetes-client\/python\#/g' $output
 
-  IFS_backup=$IFS
-  IFS=$'\n'
-  sections=($(grep "^### " $output))
-  IFS=$IFS_backup
-  for section in "${sections[@]}"; do
-    # ignore section titles and empty lines; replace newline with liternal "\n"
-    master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
-    util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
-  done
-  git add .
-  if ! git diff-index --quiet --cached HEAD; then
-    util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
-    git add .
-    git commit -m "update changelog with release notes from master branch"
+      IFS_backup=$IFS
+      IFS=$'\n'
+      sections=($(grep "^### " $output))
+      IFS=$IFS_backup
+      for section in "${sections[@]}"; do
+        # ignore section titles and empty lines; replace newline with liternal "\n"
+        master_release_notes=$(sed -n "/$section/,/###/{/###/!p}" $output | sed -n "{/^$/!p}" | sed ':a;N;$!ba;s/\n/\\n/g')
+        util::changelog::write_changelog v$CLIENT_VERSION "$section" "$master_release_notes"
+      done
+      git add .  # Allows us to check if there are any staged release note changes
+      if ! git diff-index --quiet --cached HEAD; then
+        util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
+        git add .  # Include the API version update before we commit
+        git commit -m "update changelog with release notes from master branch"
+      fi
+    fi
   fi
 fi
 
@@ -180,9 +185,12 @@ git commit -am "update version constants for $CLIENT_VERSION release"
 # TODO(roycaihw): not all Kubernetes API changes modify the OpenAPI spec.
 # Download the patch and skip if the spec is not modified. Also we want to
 # look at other k/k sections like "deprecation"
-if [[ $CLIENT_VERSION == *"snapshot"* ]]; then
-  # Update "Kubernetes API Version" if we are generating a snapshot
+if [[ $old_client_version == *"snapshot"* ]]; then
+  # If the old client version was a snapshot, update the changelog in place
   util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version $new_k8s_api_version
+else
+  # Otherwise add a new section in the changelog
+  util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
 fi
 release_notes=$(util::kube_changelog::get_api_changelog "$KUBERNETES_BRANCH" "$old_k8s_api_version")
 if [[ -n "$release_notes" ]]; then
