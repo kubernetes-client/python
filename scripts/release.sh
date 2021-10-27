@@ -185,9 +185,12 @@ git commit -am "update version constants for $CLIENT_VERSION release"
 # TODO(roycaihw): not all Kubernetes API changes modify the OpenAPI spec.
 # Download the patch and skip if the spec is not modified. Also we want to
 # look at other k/k sections like "deprecation"
-if [[ $CLIENT_VERSION == *"snapshot"* ]]; then
-  # Update "Kubernetes API Version" if we are generating a snapshot
+if [[ $old_client_version == *"snapshot"* ]]; then
+  # If the old client version was a snapshot, update the changelog in place
   util::changelog::update_release_api_version $CLIENT_VERSION $old_client_version $new_k8s_api_version
+else
+  # Otherwise add a new section in the changelog
+  util::changelog::update_release_api_version $CLIENT_VERSION $CLIENT_VERSION $new_k8s_api_version
 fi
 release_notes=$(util::kube_changelog::get_api_changelog "$KUBERNETES_BRANCH" "$old_k8s_api_version")
 if [[ -n "$release_notes" ]]; then
