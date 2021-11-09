@@ -177,7 +177,7 @@ brew install python
 Once installed, you can query the version of OpenSSL like so:
 
 ```
-python -c "import ssl; print ssl.OPENSSL_VERSION"
+python -c "import ssl; print (ssl.OPENSSL_VERSION)"
 ```
 
 You'll need a version with OpenSSL version 1.0.0 or later.
