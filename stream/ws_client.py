@@ -280,7 +280,7 @@ class PortForward:
             # between the python application and the kubernetes websocket. The self.python
             # half of the socket pair is used by the _proxy method to receive and send data
             # to the running python application.
-            s, self.python = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+            s, self.python = socket.socketpair()
             # The self.socket half of the pair is used by the python application to send
             # and receive data to the eventual pod port. It is wrapped in the _Socket class
             # because a socket pair is an AF_UNIX socket, not a AF_INET socket. This allows
