@@ -650,3 +650,15 @@ from kubernetes.client.models.v2beta2_pods_metric_status import V2beta2PodsMetri
 from kubernetes.client.models.v2beta2_resource_metric_source import V2beta2ResourceMetricSource
 from kubernetes.client.models.v2beta2_resource_metric_status import V2beta2ResourceMetricStatus
 from kubernetes.client.models.version_info import VersionInfo
+
+
+def register_custom_model(model):
+    """
+    register custom model for deserializing.
+    :param model: the class of custom model
+    :return:
+    """
+    model_name = model.__name__
+    if getattr(globals(), model_name, None):
+        raise Exception(f'Model {model_name} has registered!')
+    globals()[model_name] = model
