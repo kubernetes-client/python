@@ -37,7 +37,7 @@ from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, CommandTokenSource,
                           _get_kube_config_loader,
                           _get_kube_config_loader_for_yaml_file,
                           list_kube_config_contexts, load_kube_config,
-                          load_kube_config_from_dict, new_client_from_config)
+                          load_kube_config_from_dict, new_client_from_config, new_client_from_config_dict)
 
 BEARER_TOKEN_FORMAT = "Bearer %s"
 
@@ -1347,6 +1347,13 @@ class TestKubeConfigLoader(BaseTestCase):
             yaml.safe_dump(self.TEST_KUBE_CONFIG))
         client = new_client_from_config(
             config_file=config_file, context="simple_token")
+        self.assertEqual(TEST_HOST, client.configuration.host)
+        self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+                         client.configuration.api_key['authorization'])
+
+    def test_new_client_from_config_dict(self):
+        client = new_client_from_config_dict(
+            config_dict=self.TEST_KUBE_CONFIG, context="simple_token")
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.configuration.api_key['authorization'])
