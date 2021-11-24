@@ -15,7 +15,7 @@
 from kubernetes.client.rest import ApiException
 from kubernetes import client, config
 from kubernetes.client.api_client import ApiClient
-from leaderelection.leaderelectionrecord import LeaderElectionRecord
+from ..leaderelectionrecord import LeaderElectionRecord
 import json
 import logging
 logging.basicConfig(level=logging.INFO)
