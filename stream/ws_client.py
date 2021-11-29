@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
 
 from kubernetes.client.rest import ApiException, ApiValueError
 
@@ -165,8 +166,25 @@ class WSClient:
         if not self.sock.connected:
             self._connected = False
             return
-        r, _, _ = select.select(
-            (self.sock.sock, ), (), (), timeout)
+
+        # The options here are:
+        # select.select() - this will work on most OS, however, it has a
+        #                   limitation of only able to read fd numbers up to 1024.
+        #                   i.e. does not scale well. This was the original
+        #                   implementation.
+        # select.poll()   - this will work on most unix based OS, but not as
+        #                   efficient as epoll. Will work for fd numbers above 1024.
+        # select.epoll()  - newest and most efficient way of polling.
+        #                   However, only works on linux.
+        if sys.platform.startswith('linux') or sys.platform in ['darwin']:
+            poll = select.poll()
+            poll.register(self.sock.sock, select.POLLIN)
+            r = poll.poll(timeout)
+            poll.unregister(self.sock.sock)
+        else:
+            r, _, _ = select.select(
+                (self.sock.sock, ), (), (), timeout)
+
         if r:
             op_code, frame = self.sock.recv_data_frame(True)
             if op_code == ABNF.OPCODE_CLOSE:
