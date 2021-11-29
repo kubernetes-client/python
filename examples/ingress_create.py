@@ -34,6 +34,9 @@ def create_deployment(apps_v1_api):
     # Spec
     spec = client.V1DeploymentSpec(
         replicas=1,
+        selector=client.V1LabelSelector(
+            match_labels={"app": "deployment"}
+        ),
         template=template)
     # Deployment
     deployment = client.V1Deployment(
@@ -69,23 +72,27 @@ def create_service():
     core_v1_api.create_namespaced_service(namespace="default", body=body)
 
 
-def create_ingress(networking_v1_beta1_api):
-    body = client.NetworkingV1beta1Ingress(
-        api_version="networking.k8s.io/v1beta1",
+def create_ingress(networking_v1_api):
+    body = client.V1Ingress(
+        api_version="networking.k8s.io/v1",
         kind="Ingress",
         metadata=client.V1ObjectMeta(name="ingress-example", annotations={
             "nginx.ingress.kubernetes.io/rewrite-target": "/"
         }),
-        spec=client.NetworkingV1beta1IngressSpec(
-            rules=[client.NetworkingV1beta1IngressRule(
+        spec=client.V1IngressSpec(
+            rules=[client.V1IngressRule(
                 host="example.com",
-                http=client.NetworkingV1beta1HTTPIngressRuleValue(
-                    paths=[client.NetworkingV1beta1HTTPIngressPath(
+                http=client.V1HTTPIngressRuleValue(
+                    paths=[client.V1HTTPIngressPath(
                         path="/",
-                        backend=client.NetworkingV1beta1IngressBackend(
-                            service_port=5678,
-                            service_name="service-example")
-
+                        path_type="Exact",
+                        backend=client.V1IngressBackend(
+                            service=client.V1IngressServiceBackend(
+                                port=client.V1ServiceBackendPort(
+                                    number=5678,
+                                ),
+                                name="service-example")
+                            )
                     )]
                 )
             )
@@ -94,7 +101,7 @@ def create_ingress(networking_v1_beta1_api):
     )
     # Creation of the Deployment in specified namespace
     # (Can replace "default" with a namespace you may have created)
-    networking_v1_beta1_api.create_namespaced_ingress(
+    networking_v1_api.create_namespaced_ingress(
         namespace="default",
         body=body
     )
@@ -104,11 +111,11 @@ def main():
     # Fetching and loading local Kubernetes Information
     config.load_kube_config()
     apps_v1_api = client.AppsV1Api()
-    networking_v1_beta1_api = client.NetworkingV1beta1Api()
+    networking_v1_api = client.NetworkingV1Api()
 
     create_deployment(apps_v1_api)
     create_service()
-    create_ingress(networking_v1_beta1_api)
+    create_ingress(networking_v1_api)
 
 
 if __name__ == "__main__":
