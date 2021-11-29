@@ -3124,7 +3124,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_controller_revision**
-> V1ControllerRevision read_namespaced_controller_revision(name, namespace, pretty=pretty, exact=exact, export=export)
+> V1ControllerRevision read_namespaced_controller_revision(name, namespace, pretty=pretty)
 
 
 
@@ -3155,11 +3155,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     name = 'name_example' # str | name of the ControllerRevision
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_namespaced_controller_revision(name, namespace, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_namespaced_controller_revision(name, namespace, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AppsV1Api->read_namespaced_controller_revision: %s\n" % e)
@@ -3172,8 +3170,6 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the ControllerRevision | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -3197,7 +3193,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_daemon_set**
-> V1DaemonSet read_namespaced_daemon_set(name, namespace, pretty=pretty, exact=exact, export=export)
+> V1DaemonSet read_namespaced_daemon_set(name, namespace, pretty=pretty)
 
 
 
@@ -3228,11 +3224,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     name = 'name_example' # str | name of the DaemonSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_namespaced_daemon_set(name, namespace, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_namespaced_daemon_set(name, namespace, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AppsV1Api->read_namespaced_daemon_set: %s\n" % e)
@@ -3245,8 +3239,6 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the DaemonSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -3339,7 +3331,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_deployment**
-> V1Deployment read_namespaced_deployment(name, namespace, pretty=pretty, exact=exact, export=export)
+> V1Deployment read_namespaced_deployment(name, namespace, pretty=pretty)
 
 
 
@@ -3370,11 +3362,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     name = 'name_example' # str | name of the Deployment
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_namespaced_deployment(name, namespace, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_namespaced_deployment(name, namespace, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AppsV1Api->read_namespaced_deployment: %s\n" % e)
@@ -3387,8 +3377,6 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Deployment | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -3550,7 +3538,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_replica_set**
-> V1ReplicaSet read_namespaced_replica_set(name, namespace, pretty=pretty, exact=exact, export=export)
+> V1ReplicaSet read_namespaced_replica_set(name, namespace, pretty=pretty)
 
 
 
@@ -3581,11 +3569,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     name = 'name_example' # str | name of the ReplicaSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_namespaced_replica_set(name, namespace, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_namespaced_replica_set(name, namespace, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AppsV1Api->read_namespaced_replica_set: %s\n" % e)
@@ -3598,8 +3584,6 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the ReplicaSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -3761,7 +3745,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_stateful_set**
-> V1StatefulSet read_namespaced_stateful_set(name, namespace, pretty=pretty, exact=exact, export=export)
+> V1StatefulSet read_namespaced_stateful_set(name, namespace, pretty=pretty)
 
 
 
@@ -3792,11 +3776,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     name = 'name_example' # str | name of the StatefulSet
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_namespaced_stateful_set(name, namespace, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_namespaced_stateful_set(name, namespace, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AppsV1Api->read_namespaced_stateful_set: %s\n" % e)
@@ -3809,8 +3791,6 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the StatefulSet | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 

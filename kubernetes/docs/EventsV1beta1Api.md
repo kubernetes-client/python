@@ -568,7 +568,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_namespaced_event**
-> V1beta1Event read_namespaced_event(name, namespace, pretty=pretty, exact=exact, export=export)
+> V1beta1Event read_namespaced_event(name, namespace, pretty=pretty)
 
 
 
@@ -599,11 +599,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     name = 'name_example' # str | name of the Event
 namespace = 'namespace_example' # str | object name and auth scope, such as for teams and projects
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_namespaced_event(name, namespace, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_namespaced_event(name, namespace, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling EventsV1beta1Api->read_namespaced_event: %s\n" % e)
@@ -616,8 +614,6 @@ Name | Type | Description  | Notes
  **name** | **str**| name of the Event | 
  **namespace** | **str**| object name and auth scope, such as for teams and projects | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 

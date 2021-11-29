@@ -1767,7 +1767,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_csi_driver**
-> V1CSIDriver read_csi_driver(name, pretty=pretty, exact=exact, export=export)
+> V1CSIDriver read_csi_driver(name, pretty=pretty)
 
 
 
@@ -1797,11 +1797,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     api_instance = kubernetes.client.StorageV1Api(api_client)
     name = 'name_example' # str | name of the CSIDriver
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_csi_driver(name, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_csi_driver(name, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling StorageV1Api->read_csi_driver: %s\n" % e)
@@ -1813,8 +1811,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the CSIDriver | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -1838,7 +1834,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_csi_node**
-> V1CSINode read_csi_node(name, pretty=pretty, exact=exact, export=export)
+> V1CSINode read_csi_node(name, pretty=pretty)
 
 
 
@@ -1868,11 +1864,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     api_instance = kubernetes.client.StorageV1Api(api_client)
     name = 'name_example' # str | name of the CSINode
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_csi_node(name, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_csi_node(name, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling StorageV1Api->read_csi_node: %s\n" % e)
@@ -1884,8 +1878,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the CSINode | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -1909,7 +1901,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_storage_class**
-> V1StorageClass read_storage_class(name, pretty=pretty, exact=exact, export=export)
+> V1StorageClass read_storage_class(name, pretty=pretty)
 
 
 
@@ -1939,11 +1931,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     api_instance = kubernetes.client.StorageV1Api(api_client)
     name = 'name_example' # str | name of the StorageClass
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_storage_class(name, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_storage_class(name, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling StorageV1Api->read_storage_class: %s\n" % e)
@@ -1955,8 +1945,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the StorageClass | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
@@ -1980,7 +1968,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_volume_attachment**
-> V1VolumeAttachment read_volume_attachment(name, pretty=pretty, exact=exact, export=export)
+> V1VolumeAttachment read_volume_attachment(name, pretty=pretty)
 
 
 
@@ -2010,11 +1998,9 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     api_instance = kubernetes.client.StorageV1Api(api_client)
     name = 'name_example' # str | name of the VolumeAttachment
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
-exact = True # bool | Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18. (optional)
-export = True # bool | Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. (optional)
 
     try:
-        api_response = api_instance.read_volume_attachment(name, pretty=pretty, exact=exact, export=export)
+        api_response = api_instance.read_volume_attachment(name, pretty=pretty)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling StorageV1Api->read_volume_attachment: %s\n" % e)
@@ -2026,8 +2012,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| name of the VolumeAttachment | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
- **exact** | **bool**| Should the export be exact.  Exact export maintains cluster-specific fields like &#39;Namespace&#39;. Deprecated. Planned for removal in 1.18. | [optional] 
- **export** | **bool**| Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18. | [optional] 
 
 ### Return type
 
