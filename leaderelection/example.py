@@ -14,9 +14,9 @@
 
 import uuid
 from kubernetes import client, config
-from leaderelection import leaderelection
-from leaderelection.resourcelock.configmaplock import ConfigMapLock
-from leaderelection import electionconfig
+from kubernetes.leaderelection import leaderelection
+from kubernetes.leaderelection.resourcelock.configmaplock import ConfigMapLock
+from kubernetes.leaderelection import electionconfig
 
 
 # Authenticate using config file
