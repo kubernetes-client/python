@@ -90,6 +90,7 @@ supported versions of Kubernetes clusters.
 - [client 18.y.z](https://pypi.org/project/kubernetes/18.20.0/): Kubernetes 1.17 or below (+-), Kubernetes 1.18 (✓), Kubernetes 1.19 or above (+-)
 - [client 19.y.z](https://pypi.org/project/kubernetes/19.15.0/): Kubernetes 1.18 or below (+-), Kubernetes 1.19 (✓), Kubernetes 1.20 or above (+-)
 - [client 20.y.z](https://pypi.org/project/kubernetes/20.13.0/): Kubernetes 1.19 or below (+-), Kubernetes 1.20 (✓), Kubernetes 1.21 or above (+-)
+- [client 21.y.z](https://pypi.org/project/kubernetes/21.7.0a1/): Kubernetes 1.20 or below (+-), Kubernetes 1.21 (✓), Kubernetes 1.22 or above (+-)
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explaination of why there is no v13-v16 release.
 
@@ -125,7 +126,7 @@ between client-python versions.
 | 11.0 Alpha/Beta | Kubernetes main repo, 1.15 branch    | ✗                             |
 | 11.0            | Kubernetes main repo, 1.15 branch    | ✗                             |
 | 12.0 Alpha/Beta | Kubernetes main repo, 1.16 branch    | ✗                             |
-| 12.0            | Kubernetes main repo, 1.16 branch    | ✓                             |
+| 12.0            | Kubernetes main repo, 1.16 branch    | ✗                             |
 | 17.0 Alpha/Beta | Kubernetes main repo, 1.17 branch    | ✗                             |
 | 17.0            | Kubernetes main repo, 1.17 branch    | ✓                             |
 | 18.0 Alpha/Beta | Kubernetes main repo, 1.18 branch    | ✗                             |
@@ -134,6 +135,7 @@ between client-python versions.
 | 19.0            | Kubernetes main repo, 1.19 branch    | ✓                             |
 | 20.0 Alpha/Beta | Kubernetes main repo, 1.20 branch    | ✗                             |
 | 20.0            | Kubernetes main repo, 1.20 branch    | ✓                             |
+| 21.0 Alpha/Beta | Kubernetes main repo, 1.21 branch    | ✓                             |
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explaination of why there is no v13-v16 release.
 
