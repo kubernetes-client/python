@@ -16,9 +16,9 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "21.7.0a1"
+CLIENT_VERSION = "21.7.0b1"
 PACKAGE_NAME = "kubernetes"
-DEVELOPMENT_STATUS = "3 - Alpha"
+DEVELOPMENT_STATUS = "4 - Beta"
 
 # To install the library, run the following
 #
@@ -61,7 +61,8 @@ setup(
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils', 'kubernetes.client.apis',
-              'kubernetes.dynamic', 'kubernetes.leaderelection'],
+              'kubernetes.dynamic', 'kubernetes.leaderelection',
+              'kubernetes.leaderelection.resourcelock'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     python_requires='>=3.6',
