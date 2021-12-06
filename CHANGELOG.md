@@ -1,3 +1,8 @@
+# v21.7.0b1
+
+Kubernetes API Version: v1.21.7
+
+
 # v21.7.0a1
 
 Kubernetes API Version: v1.21.7
