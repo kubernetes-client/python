@@ -1,3 +1,11 @@
+# v21.0.0-snapshot
+
+Kubernetes API Version: To Be Updated
+
+### Bug or Regression
+- Fixed kubernetes-client/python#741, an issue which prevented Kubernetes cluster api-tokens from exec-plugin auth providers from being refreshed after expiry. (#250, @emenendez)
+- Use select.poll() for exec on linux/darwin to improve scalability of WSClient (#268, @jsun-splunk)
+
 # v21.7.0b1
 
 Kubernetes API Version: v1.21.7
