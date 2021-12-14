@@ -221,6 +221,7 @@ class TestClient(unittest.TestCase):
             self.assertIsNone(client.returncode)
             client.run_forever(timeout=10)
             self.assertEqual(client.returncode, value)
+            self.assertEqual(client.returncode, value)
 
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
