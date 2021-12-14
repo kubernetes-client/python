@@ -63,6 +63,7 @@ class WSClient:
             self._all = _IgnoredIO()
         self.sock = create_websocket(configuration, url, headers)
         self._connected = True
+        self._returncode = None
 
     def peek_channel(self, channel, timeout=0):
         """Peek a channel and return part of the input,
@@ -210,12 +211,14 @@ class WSClient:
         if self.is_open():
             return None
         else:
-            err = self.read_channel(ERROR_CHANNEL)
-            err = yaml.safe_load(err)
-            if err['status'] == "Success":
-                return 0
-            return int(err['details']['causes'][0]['message'])
-
+            if self._returncode is None:
+                err = self.read_channel(ERROR_CHANNEL)
+                err = yaml.safe_load(err)
+                if err['status'] == "Success":
+                    self._returncode = 0
+                else:
+                    self._returncode = int(err['details']['causes'][0]['message'])
+            return self._returncode
 
     def close(self, **kwargs):
         """
