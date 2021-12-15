@@ -1,6 +1,6 @@
-# v21.0.0-snapshot
+# v21.7.0
 
-Kubernetes API Version: To Be Updated
+Kubernetes API Version: v1.21.7
 
 ### Bug or Regression
 - Fixed kubernetes-client/python#741, an issue which prevented Kubernetes cluster api-tokens from exec-plugin auth providers from being refreshed after expiry. (#250, @emenendez)
