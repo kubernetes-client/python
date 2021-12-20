@@ -31,7 +31,7 @@ fi
 git cherry-pick -n 88397bcc5b3b348a41dbf641367756b86552d362
 if [ $? -eq 0 ]
 then
-    echo Succesfully patched changes for custom client behavior
+    echo Successfully patched changes for custom client behavior
 else
     echo Failed to patch changes for custom client behavior
     git restore --staged .
@@ -44,7 +44,7 @@ fi
 git cherry-pick -n 56ab983036bcb5c78eee91483c1e610da69216d1
 if [ $? -eq 0 ]
 then
-    echo Succesfully patched changes for enabling from kubernetes import apis
+    echo Successfully patched changes for enabling from kubernetes import apis
 else
     echo Failed to patch changes for enabling from kubernetes import apis
     git restore --staged .
@@ -57,7 +57,7 @@ fi;
 git cherry-pick -n 13dffb897617f87aaaee247095107d7011e002d5
 if [ $? -eq 0 ]
 then
-    echo Succesfully patched changes for Client Context Manager
+    echo Successfully patched changes for Client Context Manager
 else
     echo Failed to patch changes for Client Context Manager
     git restore --staged .
@@ -70,7 +70,7 @@ fi;
 git cherry-pick -n 95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc
 if [ $? -eq 0 ]
 then
-    echo Succesfully patched changes for no_proxy support
+    echo Successfully patched changes for no_proxy support
 else
     echo Failed to patch changes for no_proxy support
     git restore --staged .

@@ -17,7 +17,7 @@ This example demonstrates the following:
     - Creation of a custom resource definition (CRD) using dynamic-client
     - Creation of namespaced custom resources (CR) using the above CRD
     - List, patch (update), delete the custom resources
-    - Delete the custom resource defintion (CRD)
+    - Delete the custom resource definition (CRD)
 """
 
 from kubernetes import config, dynamic
@@ -125,14 +125,14 @@ def main():
         },
     }
 
-    crd_creation_respone = crd_api.create(crd_manifest)
+    crd_creation_response = crd_api.create(crd_manifest)
     print(
         "\n[INFO] custom resource definition `ingressroutes.apps.example.com` created\n"
     )
     print("%s\t\t%s" % ("SCOPE", "NAME"))
     print(
         "%s\t%s\n"
-        % (crd_creation_respone.spec.scope, crd_creation_respone.metadata.name)
+        % (crd_creation_response.spec.scope, crd_creation_response.metadata.name)
     )
 
     # Fetching the "ingressroutes" CRD api

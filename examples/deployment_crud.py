@@ -40,7 +40,7 @@ def create_deployment_object():
         ),
     )
 
-    # Create and configurate a spec section
+    # Create and configure a spec section
     template = client.V1PodTemplateSpec(
         metadata=client.V1ObjectMeta(labels={"app": "nginx"}),
         spec=client.V1PodSpec(containers=[container]),
