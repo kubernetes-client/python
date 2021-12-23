@@ -31,7 +31,7 @@ class ExecProvider(object):
     * caching
     """
 
-    def __init__(self, exec_config):
+    def __init__(self, exec_config, cwd):
         """
         exec_config must be of type ConfigNode because we depend on
         safe_get(self, key) to correctly handle optional exec provider
@@ -53,6 +53,7 @@ class ExecProvider(object):
                 value = item['value']
                 additional_vars[name] = value
             self.env.update(additional_vars)
+        self.cwd = cwd
 
     def run(self, previous_response=None):
         kubernetes_exec_info = {
@@ -69,6 +70,7 @@ class ExecProvider(object):
             self.args,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            cwd=self.cwd,
             env=self.env,
             universal_newlines=True)
         (stdout, stderr) = process.communicate()
