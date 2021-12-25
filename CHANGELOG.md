@@ -439,7 +439,7 @@ Kubernetes API Version: v1.19.15
 - CustomResourceDefinition schemas that use `x-kubernetes-list-map-keys` to specify properties that uniquely identify list items must make those properties required or have a default value, to ensure those properties are present for all list items. See https://kubernetes.io/docs/reference/using-api/api-concepts/#merge-strategy for details. ([kubernetes/kubernetes#88076](https://github.com/kubernetes/kubernetes/pull/88076), [@eloyekunle](https://github.com/eloyekunle)) [SIG API Machinery and Testing]
 - Fixed missing validation of uniqueness of list items in lists with `x-kubernetes-list-type: map` or `x-kubernetes-list-type: set` in CustomResources. ([kubernetes/kubernetes#84920](https://github.com/kubernetes/kubernetes/pull/84920), [@sttts](https://github.com/sttts)) [SIG API Machinery]
 - Fixes a regression with clients prior to 1.15 not being able to update podIP in pod status, or podCIDR in node spec, against >= 1.16 API servers ([kubernetes/kubernetes#88505](https://github.com/kubernetes/kubernetes/pull/88505), [@liggitt](https://github.com/liggitt)) [SIG Apps and Network]
-- Ingress: Add Exact and Prefix maching to Ingress PathTypes ([kubernetes/kubernetes#88587](https://github.com/kubernetes/kubernetes/pull/88587), [@cmluciano](https://github.com/cmluciano)) [SIG Apps, Cluster Lifecycle and Network]
+- Ingress: Add Exact and Prefix matching to Ingress PathTypes ([kubernetes/kubernetes#88587](https://github.com/kubernetes/kubernetes/pull/88587), [@cmluciano](https://github.com/cmluciano)) [SIG Apps, Cluster Lifecycle and Network]
 - Ingress: Add alternate backends via TypedLocalObjectReference ([kubernetes/kubernetes#88775](https://github.com/kubernetes/kubernetes/pull/88775), [@cmluciano](https://github.com/cmluciano)) [SIG Apps and Network]
 - Ingress: allow wildcard hosts in IngressRule ([kubernetes/kubernetes#88858](https://github.com/kubernetes/kubernetes/pull/88858), [@cmluciano](https://github.com/cmluciano)) [SIG Network]
 - Introduces optional --detect-local flag to kube-proxy. 
@@ -804,7 +804,7 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 
 # v9.0.0b1
 **Breaking Change:**
-- Move dependancy adal under extra require [kubernetes-client/python-base#108](https://github.com/kubernetes-client/python-base/pull/108)
+- Move dependency adal under extra require [kubernetes-client/python-base#108](https://github.com/kubernetes-client/python-base/pull/108)
 
 **Bug Fix:**
 - Honor the specified resource version in stream request when watch restarts [kubernetes-client/python-base#109](https://github.com/kubernetes-client/python-base/pull/109)
@@ -981,7 +981,7 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 - IntOrString is now object thus it can be int or string. #18 #359
 - Adding stream package to support calls like exec. The old way of calling them is deprecated. See [Troubleshooting](README.md#why-execattach-calls-doesnt-work)).
 - config.http_proxy_url is deprecated. use configuration.proxy instead.
-- Configuration is not a singleton object anymore. Please use Configuraion.set_default to change default configuration.
+- Configuration is not a singleton object anymore. Please use Configuration.set_default to change default configuration.
 - Configuration class does not support `ws_streaming_protocol` anymore. In ApiClient.set_default_header set `sec-websocket-protocol` to the preferred websocket protocol.
 
 # v3.0.0
@@ -1052,7 +1052,7 @@ be deprecated as and when Kubernetes version v1.15 gets deprecated.
 
 - Add context switch to kube config loader #46
 - Add default kube config location #64
-- Add suport for accessing multiple clusters #7
+- Add support for accessing multiple clusters #7
 - Bugfix: Python client does not resolve relative paths in kubeconfig #68
 - Bugfix: `read_namespaced_pod_log` get None response #57
 - Improved test coverage #54
