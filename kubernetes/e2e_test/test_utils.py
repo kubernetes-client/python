@@ -207,7 +207,7 @@ class TestUtils(unittest.TestCase):
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         utils.create_from_yaml(
             k8s_client, self.path_prefix + "api-service.yaml")
-        reg_api = client.ApiregistrationV1beta1Api(k8s_client)
+        reg_api = client.ApiregistrationV1Api(k8s_client)
         svc = reg_api.read_api_service(
             name="v1alpha1.wardle.k8s.io")
         self.assertIsNotNone(svc)
