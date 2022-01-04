@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_modes** | **list[str]** | AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 | [optional] 
 **data_source** | [**V1TypedLocalObjectReference**](V1TypedLocalObjectReference.md) |  | [optional] 
+**data_source_ref** | [**V1TypedLocalObjectReference**](V1TypedLocalObjectReference.md) |  | [optional] 
 **resources** | [**V1ResourceRequirements**](V1ResourceRequirements.md) |  | [optional] 
 **selector** | [**V1LabelSelector**](V1LabelSelector.md) |  | [optional] 
 **storage_class_name** | **str** | Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1 | [optional] 
