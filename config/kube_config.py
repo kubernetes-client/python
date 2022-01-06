@@ -483,7 +483,8 @@ class KubeConfigLoader(object):
         if 'exec' not in self._user:
             return
         try:
-            status = ExecProvider(self._user['exec']).run()
+            base_path = self._get_base_path(self._cluster.path)
+            status = ExecProvider(self._user['exec'], base_path).run()
             if 'token' in status:
                 self.token = "Bearer %s" % status['token']
             elif 'clientCertificateData' in status:
@@ -493,7 +494,6 @@ class KubeConfigLoader(object):
                     logging.error('exec: missing clientKeyData field in '
                                   'plugin output')
                     return None
-                base_path = self._get_base_path(self._cluster.path)
                 self.cert_file = FileOrData(
                     status, None,
                     data_key_name='clientCertificateData',

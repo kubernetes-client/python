@@ -47,7 +47,7 @@ class ExecProviderTest(unittest.TestCase):
                         ConfigNode('test3', {'apiVersion': ''})]
         for exec_config in exec_configs:
             with self.assertRaises(ConfigException) as context:
-                ExecProvider(exec_config)
+                ExecProvider(exec_config, None)
             self.assertIn('exec: malformed request. missing key',
                           context.exception.args[0])
 
@@ -57,7 +57,7 @@ class ExecProviderTest(unittest.TestCase):
         instance.wait.return_value = 1
         instance.communicate.return_value = ('', '')
         with self.assertRaises(ConfigException) as context:
-            ep = ExecProvider(self.input_ok)
+            ep = ExecProvider(self.input_ok, None)
             ep.run()
         self.assertIn('exec: process returned %d' %
                       instance.wait.return_value, context.exception.args[0])
@@ -68,7 +68,7 @@ class ExecProviderTest(unittest.TestCase):
         instance.wait.return_value = 0
         instance.communicate.return_value = ('', '')
         with self.assertRaises(ConfigException) as context:
-            ep = ExecProvider(self.input_ok)
+            ep = ExecProvider(self.input_ok, None)
             ep.run()
         self.assertIn('exec: failed to decode process output',
                       context.exception.args[0])
@@ -102,7 +102,7 @@ class ExecProviderTest(unittest.TestCase):
         for output in outputs:
             instance.communicate.return_value = (output, '')
             with self.assertRaises(ConfigException) as context:
-                ep = ExecProvider(self.input_ok)
+                ep = ExecProvider(self.input_ok, None)
                 ep.run()
             self.assertIn('exec: malformed response. missing key',
                           context.exception.args[0])
@@ -123,7 +123,7 @@ class ExecProviderTest(unittest.TestCase):
         """ % wrong_api_version
         instance.communicate.return_value = (output, '')
         with self.assertRaises(ConfigException) as context:
-            ep = ExecProvider(self.input_ok)
+            ep = ExecProvider(self.input_ok, None)
             ep.run()
         self.assertIn(
             'exec: plugin api version %s does not match' %
@@ -135,10 +135,19 @@ class ExecProviderTest(unittest.TestCase):
         instance = mock.return_value
         instance.wait.return_value = 0
         instance.communicate.return_value = (self.output_ok, '')
-        ep = ExecProvider(self.input_ok)
+        ep = ExecProvider(self.input_ok, None)
         result = ep.run()
         self.assertTrue(isinstance(result, dict))
         self.assertTrue('token' in result)
+
+    @mock.patch('subprocess.Popen')
+    def test_run_in_dir(self, mock):
+        instance = mock.return_value
+        instance.wait.return_value = 0
+        instance.communicate.return_value = (self.output_ok, '')
+        ep = ExecProvider(self.input_ok, '/some/directory')
+        ep.run()
+        self.assertEqual(mock.call_args.kwargs['cwd'], '/some/directory')
 
 
 if __name__ == '__main__':
