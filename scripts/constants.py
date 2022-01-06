@@ -18,7 +18,7 @@ import sys
 KUBERNETES_BRANCH = "release-1.22"
 
 # client version for packaging and releasing.
-CLIENT_VERSION = "22.0.0-snapshot"
+CLIENT_VERSION = "22.5.0a1"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
