@@ -144,7 +144,11 @@ class TestClient(unittest.TestCase):
         self.assertEqual("test string 2", line)
         resp.write_stdin("exit\n")
         resp.update(timeout=5)
-        line = resp.read_channel(ERROR_CHANNEL)
+        while True:
+            line = resp.read_channel(ERROR_CHANNEL)
+            if line != '':
+                break
+            time.sleep(1)
         status = json.loads(line)
         self.assertEqual(status['status'], 'Success')
         resp.update(timeout=5)

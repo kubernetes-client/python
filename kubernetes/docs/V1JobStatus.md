@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **failed** | **int** | The number of pods which reached phase Failed. | [optional] 
 **start_time** | **datetime** | Represents time when the job controller started processing a job. When a Job is created in the suspended state, this field is not set until the first time it is resumed. This field is reset every time a Job is resumed from suspension. It is represented in RFC3339 form and is in UTC. | [optional] 
 **succeeded** | **int** | The number of pods which reached phase Succeeded. | [optional] 
+**uncounted_terminated_pods** | [**V1UncountedTerminatedPods**](V1UncountedTerminatedPods.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
