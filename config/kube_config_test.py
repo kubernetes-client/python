@@ -1441,6 +1441,20 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="exec_cred_user_certificate").load_and_set(actual)
         self.assertEqual(expected, actual)
 
+    @mock.patch('kubernetes.config.kube_config.ExecProvider.run', autospec=True)
+    def test_user_exec_cwd(self, mock):
+        capture = {}
+        def capture_cwd(exec_provider):
+            capture['cwd'] = exec_provider.cwd
+        mock.side_effect = capture_cwd
+
+        expected = "/some/random/path"
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="exec_cred_user",
+            config_base_path=expected).load_and_set(FakeConfig())
+        self.assertEqual(expected, capture['cwd'])
+
     def test_user_cmd_path(self):
         A = namedtuple('A', ['token', 'expiry'])
         token = "dummy"
