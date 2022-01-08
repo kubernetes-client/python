@@ -1,0 +1,46 @@
+# ref: https://docs.travis-ci.com/user/languages/python
+language: python
+dist: xenial
+
+stages:
+  - verify boilerplate
+  - test
+
+install:
+  - pip install tox
+
+script:
+  - ./run_tox.sh tox
+
+jobs:
+  include:
+    - stage: verify boilerplate
+      script: ./hack/verify-boilerplate.sh
+      python: 3.7
+    - stage: test
+      python: 3.9
+      env: TOXENV=update-pycodestyle
+    - python: 3.9
+      env: TOXENV=coverage,codecov
+    - python: 3.7
+      env: TOXENV=docs
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.5
+      env: TOXENV=py35-functional
+    - python: 3.6
+      env: TOXENV=py36
+    - python: 3.6
+      env: TOXENV=py36-functional
+    - python: 3.7
+      env: TOXENV=py37
+    - python: 3.7
+      env: TOXENV=py37-functional
+    - python: 3.8
+      env: TOXENV=py38
+    - python: 3.8
+      env: TOXENV=py38-functional
+    - python: 3.9
+      env: TOXENV=py39
+    - python: 3.9
+      env: TOXENV=py39-functional
