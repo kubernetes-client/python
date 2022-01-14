@@ -19,6 +19,18 @@ import sys
 
 from recommonmark.transform import AutoStructify
 
+GITHUB_MASTER = "https://raw.githubusercontent.com/kubernetes-client/python/master/"
+
+def repl(mobj):
+    """replace relative markdown links"""
+    if mobj.group(2):
+        return mobj.group(1)+f"({GITHUB_MASTER}"+mobj.group(2)+")"
+
+
+def replwithgroups(matchobj):
+    if matchobj.groupdict():
+         return matchobj.groupdict()["name"] + f"({GITHUB_MASTER}" + matchobj.groupdict()["location"] + ")"
+
 # Work around https://github.com/readthedocs/recommonmark/issues/152
 new_readme = []
 
@@ -33,6 +45,32 @@ with open("README.md", "w") as n:
 
 # apparently index.rst can't search for markdown not in the same directory
 shutil.copy("../../CONTRIBUTING.md", ".")
+
+regex = r"(?P<name>\[[\w\.\-\'\ ]*\])\((?P<location>(?!https://)[\w\-/\.]* ?)\)"
+
+def fix_links(content):
+    for ln, line in enumerate(content):
+        if "swagger.json" in line:
+            content[ln] = re.sub("scripts/swagger.json", f"{GITHUB_MASTER}scripts/swagger.json", line)
+        elif  "OWNERS" in line:
+            content[ln] = re.sub("OWNERS", f"{GITHUB_MASTER}OWNERS", line)
+        elif re.match("- (\[.*\])\((.*)\)", line):
+            content[ln] = re.sub("(\[.*\])\(((?!https).*)\)", repl, line)
+        elif re.search("(\[.*\])\((.*)\)", line):
+            content[ln], _ = re.subn(regex, replwithgroups, line, 9)
+    return content
+
+# replace all relative links to abosolute links
+for mdfile in ["CONTRIBUTING", "README"]:
+
+    with open(f"{mdfile}.md", "r") as cont:
+        content = fix_links(cont.readlines())
+
+        with open(f"{mdfile}.new", "w") as new:
+            new.writelines(content)
+
+        shutil.move(f"{mdfile}.new", f"{mdfile}.md")
+
 
 sys.path.insert(0, os.path.abspath('../..'))
 # -- General configuration ----------------------------------------------------
