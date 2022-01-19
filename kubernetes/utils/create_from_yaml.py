@@ -14,7 +14,7 @@
 
 
 import re
-from os import path
+import os
 
 import yaml
 
@@ -22,6 +22,76 @@ from kubernetes import client
 
 UPPER_FOLLOWED_BY_LOWER_RE = re.compile('(.)([A-Z][a-z]+)')
 LOWER_OR_NUM_FOLLOWED_BY_UPPER_RE = re.compile('([a-z0-9])([A-Z])')
+
+
+def create_from_directory(
+        k8s_client,
+        yaml_dir=None,
+        verbose=False,
+        namespace="default",
+        **kwargs):
+    """
+    Perform an action from files from a directory. Pass True for verbose to
+    print confirmation information.
+
+    Input:
+    k8s_client: an ApiClient object, initialized with the client args.
+    yaml_dir: string. Contains the path to directory.
+    verbose: If True, print confirmation from the create action.
+        Default is False.
+    namespace: string. Contains the namespace to create all
+        resources inside. The namespace must preexist otherwise
+        the resource creation will fail. If the API object in
+        the yaml file already contains a namespace definition
+        this parameter has no effect.
+
+    Available parameters for creating <kind>:
+    :param async_req bool
+    :param bool include_uninitialized: If true, partially initialized
+        resources are included in the response.
+    :param str pretty: If 'true', then the output is pretty printed.
+    :param str dry_run: When present, indicates that modifications
+        should not be persisted. An invalid or unrecognized dryRun
+        directive will result in an error response and no further
+        processing of the request.
+        Valid values are: - All: all dry run stages will be processed
+
+    Returns:
+        The list containing the created kubernetes API objects.
+
+    Raises:
+        FailToCreateError which holds list of `client.rest.ApiException`
+        instances for each object that failed to create.
+    """
+
+    if not yaml_dir:
+        raise ValueError(
+            '`yaml_dir` argument must be provided')
+    elif not os.path.isdir(yaml_dir):
+        raise ValueError(
+            '`yaml_dir` argument must be a path to directory')
+
+    files = [os.path.join(yaml_dir, i) for i in os.listdir(yaml_dir)
+             if os.path.isfile(os.path.join(yaml_dir, i))]
+    if not files:
+        raise ValueError(
+            '`yaml_dir` contains no files')
+
+    failures = []
+    k8s_objects_all = []
+
+    for file in files:
+        try:
+            k8s_objects = create_from_yaml(k8s_client, file,
+                                           verbose=verbose,
+                                           namespace=namespace,
+                                           **kwargs)
+            k8s_objects_all.append(k8s_objects)
+        except FailToCreateError as failure:
+            failures.extend(failure.api_exceptions)
+    if failures:
+        raise FailToCreateError(failures)
+    return k8s_objects_all
 
 
 def create_from_yaml(
@@ -87,7 +157,7 @@ def create_from_yaml(
         yml_document_all = yaml_objects
         return create_with(yml_document_all)
     elif yaml_file:
-        with open(path.abspath(yaml_file)) as f:
+        with open(os.path.abspath(yaml_file)) as f:
             yml_document_all = yaml.safe_load_all(f)
             return create_with(yml_document_all)
     else:
