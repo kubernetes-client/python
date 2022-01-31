@@ -1,6 +1,6 @@
-# v22.0.0-snapshot
+# v22.6.0a1
 
-Kubernetes API Version: v1.22.5
+Kubernetes API Version: v1.22.6
 
 ### API Change
 - Kube-apiserver: Fixes handling of CRD schemas containing literal null values in enums (#104988, @liggitt) [SIG API Machinery, Apps and Network]
