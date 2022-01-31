@@ -1,3 +1,0 @@
-[submodule "kubernetes/base"]
-	path = kubernetes/base
-	url = https://github.com/kubernetes-client/python-base
