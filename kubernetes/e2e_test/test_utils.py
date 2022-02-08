@@ -288,6 +288,28 @@ class TestUtils(unittest.TestCase):
         core_api.delete_namespaced_service(name="mock-4",
                                            namespace="default", body={})
 
+    # Tests for creating multi-resource from directory
+
+    def test_create_multi_resource_from_directory(self):
+        """
+        Should be able to create a service and a replication controller
+        from a directory
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_directory(
+            k8s_client, self.path_prefix + "multi-resource/")
+        core_api = client.CoreV1Api(k8s_client)
+        svc = core_api.read_namespaced_service(name="mock",
+                                               namespace="default")
+        self.assertIsNotNone(svc)
+        ctr = core_api.read_namespaced_replication_controller(
+            name="mock", namespace="default")
+        self.assertIsNotNone(ctr)
+        core_api.delete_namespaced_replication_controller(
+            name="mock", namespace="default", propagation_policy="Background")
+        core_api.delete_namespaced_service(name="mock",
+                                           namespace="default", body={})
+
     # Tests for multi-resource yaml objects
 
     def test_create_from_multi_resource_yaml(self):
