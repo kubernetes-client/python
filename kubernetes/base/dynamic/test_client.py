@@ -135,6 +135,121 @@ class TestDynamicClient(unittest.TestCase):
             changeme_api = client.resources.get(
                 api_version='apps.example.com/v1', kind='ClusterChangeMe')
 
+    def test_async_namespaced_custom_resources(self):
+        client = DynamicClient(api_client.ApiClient(configuration=self.config))
+
+        with self.assertRaises(ResourceNotFoundError):
+            changeme_api = client.resources.get(
+                api_version='apps.example.com/v1', kind='ChangeMe')
+
+        crd_api = client.resources.get(
+            api_version='apiextensions.k8s.io/v1beta1',
+            kind='CustomResourceDefinition')
+
+        name = 'changemes.apps.example.com'
+
+        crd_manifest = {
+            'apiVersion': 'apiextensions.k8s.io/v1beta1',
+            'kind': 'CustomResourceDefinition',
+            'metadata': {
+                'name': name,
+            },
+            'spec': {
+                'group': 'apps.example.com',
+                'names': {
+                    'kind': 'ChangeMe',
+                    'listKind': 'ChangeMeList',
+                    'plural': 'changemes',
+                    'singular': 'changeme',
+                },
+                'scope': 'Namespaced',
+                'version': 'v1',
+                'subresources': {
+                    'status': {}
+                }
+            }
+        }
+        async_resp = crd_api.create(crd_manifest, async_req=True)
+
+        self.assertEqual(name, async_resp.metadata.name)
+        self.assertTrue(async_resp.status)
+
+        async_resp = crd_api.get(
+            name=name,
+            async_req=True
+        )
+        self.assertEqual(name, async_resp.metadata.name)
+        self.assertTrue(async_resp.status)
+
+        try:
+            changeme_api = client.resources.get(
+                api_version='apps.example.com/v1', kind='ChangeMe')
+        except ResourceNotFoundError:
+            # Need to wait a sec for the discovery layer to get updated
+            time.sleep(2)
+            changeme_api = client.resources.get(
+                api_version='apps.example.com/v1', kind='ChangeMe')
+
+        async_resp = changeme_api.get(async_req=True)
+        self.assertEqual(async_resp.items, [])
+
+        changeme_name = 'custom-resource' + short_uuid()
+        changeme_manifest = {
+            'apiVersion': 'apps.example.com/v1',
+            'kind': 'ChangeMe',
+            'metadata': {
+                'name': changeme_name,
+            },
+            'spec': {}
+        }
+
+        async_resp = changeme_api.create(body=changeme_manifest, namespace='default', async_req=True)
+        self.assertEqual(async_resp.metadata.name, changeme_name)
+
+        async_resp = changeme_api.get(name=changeme_name, namespace='default', async_req=True)
+        self.assertEqual(async_resp.metadata.name, changeme_name)
+
+        changeme_manifest['spec']['size'] = 3
+        async_resp = changeme_api.patch(
+            body=changeme_manifest,
+            namespace='default',
+            content_type='application/merge-patch+json',
+            async_req=True
+        )
+        self.assertEqual(async_resp.spec.size, 3)
+
+        async_resp = changeme_api.get(name=changeme_name, namespace='default', async_req=True)
+        self.assertEqual(async_resp.spec.size, 3)
+
+        async_resp = changeme_api.get(namespace='default', async_req=True)
+        self.assertEqual(len(async_resp.items), 1)
+
+        async_resp = changeme_api.get(async_req=True)
+        self.assertEqual(len(async_resp.items), 1)
+
+        async_resp = changeme_api.delete(
+            name=changeme_name,
+            namespace='default',
+            async_req=True
+        )
+
+        async_resp = changeme_api.get(namespace='default', async_req=True)
+        self.assertEqual(len(async_resp.items), 0)
+
+        async_resp = changeme_api.get(async_req=True)
+        self.assertEqual(len(async_resp.items), 0)
+
+        async_resp = crd_api.delete(
+            name=name,
+            async_req=True
+        )
+
+        time.sleep(2)
+        client.resources.invalidate_cache()
+        with self.assertRaises(ResourceNotFoundError):
+            changeme_api = client.resources.get(
+                api_version='apps.example.com/v1', kind='ChangeMe')
+
     def test_namespaced_custom_resources(self):
         client = DynamicClient(api_client.ApiClient(configuration=self.config))
 
