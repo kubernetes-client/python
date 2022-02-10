@@ -9,7 +9,6 @@ mock>=2.0.0
 sphinx>=1.4 # BSD
 recommonmark
 sphinx_markdown_tables
-codecov>=1.4.0
 pycodestyle
 autopep8
 isort
