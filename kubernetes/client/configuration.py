@@ -171,6 +171,10 @@ class Configuration(object):
         # Disable client side validation
         self.client_side_validation = True
 
+        self.request_timeout = None
+        """Request timeout
+        """
+
     def __deepcopy__(self, memo):
         cls = self.__class__
         result = cls.__new__(cls)

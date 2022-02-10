@@ -176,6 +176,9 @@ class ApiClient(object):
             # use server/host defined in path or operation instead
             url = _host + resource_path
 
+        if _request_timeout is None:
+            _request_timeout = self.configuration.request_timeout
+
         # perform request and return response
         response_data = self.request(
             method, url, query_params=query_params, headers=header_params,
