@@ -74,6 +74,8 @@ python -m examples.example1
 
 All APIs and Models' documentation can be found at the [Generated client's README file](kubernetes/README.md)
 
+Pagination information can be found here: [Best of 2018: Introduction to Using the Kubernetes REST API](https://containerjournal.com/topics/container-management/introduction-to-using-the-kubernetes-rest-api/)
+
 ## Compatibility
 
 `client-python` follows [semver](http://semver.org/), so until the major version of
