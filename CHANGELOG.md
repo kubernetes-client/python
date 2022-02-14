@@ -1,3 +1,10 @@
+# v22.6.0b1
+
+Kubernetes API Version: v1.22.6
+
+### Feature
+- Add `utils.create_from_directory` for creating all yaml files in a directory (#1683, @dingyiyi0226)
+
 # v22.6.0a1
 
 Kubernetes API Version: v1.22.6
