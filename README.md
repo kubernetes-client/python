@@ -138,7 +138,8 @@ between client-python versions.
 | 20.0            | Kubernetes main repo, 1.20 branch    | ✓                             |
 | 21.0 Alpha/Beta | Kubernetes main repo, 1.21 branch    | ✗                             |
 | 21.0            | Kubernetes main repo, 1.21 branch    | ✓                             |
-| 22.0 Alpha/Beta | Kubernetes main repo, 1.22 branch    | ✓                             |
+| 22.0 Alpha/Beta | Kubernetes main repo, 1.22 branch    | ✗                             |
+| 22.0            | Kubernetes main repo, 1.22 branch    | ✓                             |
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explanation of why there is no v13-v16 release.
 
