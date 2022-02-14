@@ -19,6 +19,7 @@ from kubernetes.client.api.authorization_api import AuthorizationApi
 from kubernetes.client.api.authorization_v1_api import AuthorizationV1Api
 from kubernetes.client.api.autoscaling_api import AutoscalingApi
 from kubernetes.client.api.autoscaling_v1_api import AutoscalingV1Api
+from kubernetes.client.api.autoscaling_v2_api import AutoscalingV2Api
 from kubernetes.client.api.autoscaling_v2beta1_api import AutoscalingV2beta1Api
 from kubernetes.client.api.autoscaling_v2beta2_api import AutoscalingV2beta2Api
 from kubernetes.client.api.batch_api import BatchApi
@@ -39,6 +40,7 @@ from kubernetes.client.api.events_v1_api import EventsV1Api
 from kubernetes.client.api.events_v1beta1_api import EventsV1beta1Api
 from kubernetes.client.api.flowcontrol_apiserver_api import FlowcontrolApiserverApi
 from kubernetes.client.api.flowcontrol_apiserver_v1beta1_api import FlowcontrolApiserverV1beta1Api
+from kubernetes.client.api.flowcontrol_apiserver_v1beta2_api import FlowcontrolApiserverV1beta2Api
 from kubernetes.client.api.internal_apiserver_api import InternalApiserverApi
 from kubernetes.client.api.internal_apiserver_v1alpha1_api import InternalApiserverV1alpha1Api
 from kubernetes.client.api.logs_api import LogsApi
@@ -54,10 +56,8 @@ from kubernetes.client.api.policy_v1_api import PolicyV1Api
 from kubernetes.client.api.policy_v1beta1_api import PolicyV1beta1Api
 from kubernetes.client.api.rbac_authorization_api import RbacAuthorizationApi
 from kubernetes.client.api.rbac_authorization_v1_api import RbacAuthorizationV1Api
-from kubernetes.client.api.rbac_authorization_v1alpha1_api import RbacAuthorizationV1alpha1Api
 from kubernetes.client.api.scheduling_api import SchedulingApi
 from kubernetes.client.api.scheduling_v1_api import SchedulingV1Api
-from kubernetes.client.api.scheduling_v1alpha1_api import SchedulingV1alpha1Api
 from kubernetes.client.api.storage_api import StorageApi
 from kubernetes.client.api.storage_v1_api import StorageV1Api
 from kubernetes.client.api.storage_v1alpha1_api import StorageV1alpha1Api

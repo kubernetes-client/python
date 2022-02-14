@@ -4,8 +4,8 @@ Lifecycle describes actions that the management system should take in response t
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**post_start** | [**V1Handler**](V1Handler.md) |  | [optional] 
-**pre_stop** | [**V1Handler**](V1Handler.md) |  | [optional] 
+**post_start** | [**V1LifecycleHandler**](V1LifecycleHandler.md) |  | [optional] 
+**pre_stop** | [**V1LifecycleHandler**](V1LifecycleHandler.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

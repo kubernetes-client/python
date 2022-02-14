@@ -4,7 +4,7 @@ HorizontalPodAutoscalerStatus describes the current status of a horizontal pod a
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conditions** | [**list[V2beta1HorizontalPodAutoscalerCondition]**](V2beta1HorizontalPodAutoscalerCondition.md) | conditions is the set of conditions required for this autoscaler to scale its target, and indicates whether or not those conditions are met. | 
+**conditions** | [**list[V2beta1HorizontalPodAutoscalerCondition]**](V2beta1HorizontalPodAutoscalerCondition.md) | conditions is the set of conditions required for this autoscaler to scale its target, and indicates whether or not those conditions are met. | [optional] 
 **current_metrics** | [**list[V2beta1MetricStatus]**](V2beta1MetricStatus.md) | currentMetrics is the last read state of the metrics used by this autoscaler. | [optional] 
 **current_replicas** | **int** | currentReplicas is current number of replicas of pods managed by this autoscaler, as last seen by the autoscaler. | 
 **desired_replicas** | **int** | desiredReplicas is the desired number of replicas of pods managed by this autoscaler, as last calculated by the autoscaler. | 
