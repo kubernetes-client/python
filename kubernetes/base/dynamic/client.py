@@ -267,7 +267,7 @@ class DynamicClient(object):
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        return self.client.call_api(
+        api_response = self.client.call_api(
             path,
             method.upper(),
             path_params,
@@ -281,6 +281,10 @@ class DynamicClient(object):
             _preload_content=False,
             _return_http_data_only=params.get('_return_http_data_only', True)
         )
+        if params.get('async_req'):
+            return api_response.get()
+        else:
+            return api_response
 
     def validate(self, definition, version=None, strict=False):
         """validate checks a kubernetes resource definition
