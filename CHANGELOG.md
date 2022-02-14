@@ -1,3 +1,13 @@
+# v22.6.0
+
+Kubernetes API Version: v1.22.6
+
+### Bug or Regression
+- Notable feature additions for async creation of Custom resources using dynamic Client (#1697, @venukarnati92)
+
+### Feature
+- Add `utils.create_from_directory` for creating all yaml files in a directory (#1683, @dingyiyi0226)
+
 # v22.6.0b1
 
 Kubernetes API Version: v1.22.6
