@@ -1,3 +1,144 @@
+# v23.0.0-snapshot
+
+Kubernetes API Version: v1.23.3
+
+### API Change
+- A new field `omitManagedFields` has been added to both `audit.Policy` and `audit.PolicyRule` 
+  so cluster operators can opt in to omit managed fields of the request and response bodies from 
+  being written to the API audit log. ([kubernetes/kubernetes#94986](https://github.com/kubernetes/kubernetes/pull/94986), [@tkashem](https://github.com/tkashem)) [SIG API Machinery, Auth, Cloud Provider and Testing]
+- A small regression in Service updates was fixed. The circumstances are so unlikely that probably nobody would ever hit it. ([kubernetes/kubernetes#104601](https://github.com/kubernetes/kubernetes/pull/104601), [@thockin](https://github.com/thockin))
+- Added a feature gate `StatefulSetAutoDeletePVC`, which allows PVCs automatically created for StatefulSet pods to be automatically deleted. ([kubernetes/kubernetes#99728](https://github.com/kubernetes/kubernetes/pull/99728), [@mattcary](https://github.com/mattcary))
+- Client-go impersonation config can specify a UID to pass impersonated uid information through in requests. ([kubernetes/kubernetes#104483](https://github.com/kubernetes/kubernetes/pull/104483), [@margocrawf](https://github.com/margocrawf))
+- Create HPA v2 from v2beta2 with some fields changed. ([kubernetes/kubernetes#102534](https://github.com/kubernetes/kubernetes/pull/102534), [@wangyysde](https://github.com/wangyysde)) [SIG API Machinery, Apps, Auth, Autoscaling and Testing]
+- Ephemeral containers graduated to beta and are now available by default. ([kubernetes/kubernetes#105405](https://github.com/kubernetes/kubernetes/pull/105405), [@verb](https://github.com/verb))
+- Fix kube-proxy regression on UDP services because the logic to detect stale connections was not considering if the endpoint was ready. ([kubernetes/kubernetes#106163](https://github.com/kubernetes/kubernetes/pull/106163), [@aojea](https://github.com/aojea)) [SIG API Machinery, Apps, Architecture, Auth, Autoscaling, CLI, Cloud Provider, Contributor Experience, Instrumentation, Network, Node, Release, Scalability, Scheduling, Storage, Testing and Windows]
+- If a conflict occurs when creating an object with `generateName`, the server now returns an "AlreadyExists" error with a retry option. ([kubernetes/kubernetes#104699](https://github.com/kubernetes/kubernetes/pull/104699), [@vincepri](https://github.com/vincepri))
+- Implement support for recovering from volume expansion failures ([kubernetes/kubernetes#106154](https://github.com/kubernetes/kubernetes/pull/106154), [@gnufied](https://github.com/gnufied)) [SIG API Machinery, Apps and Storage]
+- In kubelet, log verbosity and flush frequency can also be configured via the configuration file and not just via command line flags. In other commands (kube-apiserver, kube-controller-manager), the flags are listed in the "Logs flags" group and not under "Global" or "Misc". The type for `-vmodule` was made a bit more descriptive (`pattern=N,...` instead of `moduleSpec`). ([kubernetes/kubernetes#106090](https://github.com/kubernetes/kubernetes/pull/106090), [@pohly](https://github.com/pohly)) [SIG API Machinery, Architecture, CLI, Cluster Lifecycle, Instrumentation, Node and Scheduling]
+- Introduce `OS` field in the PodSpec ([kubernetes/kubernetes#104693](https://github.com/kubernetes/kubernetes/pull/104693), [@ravisantoshgudimetla](https://github.com/ravisantoshgudimetla))
+- Introduce `v1beta3` API for scheduler. This version 
+  - increases the weight of user specifiable priorities.
+  The weights of following priority plugins are increased
+    - `TaintTolerations` to 3 - as leveraging node tainting to group nodes in the cluster is becoming a widely-adopted practice
+    - `NodeAffinity` to 2
+    - `InterPodAffinity` to 2
+  
+  - Won't have `HealthzBindAddress`, `MetricsBindAddress` fields ([kubernetes/kubernetes#104251](https://github.com/kubernetes/kubernetes/pull/104251), [@ravisantoshgudimetla](https://github.com/ravisantoshgudimetla))
+- Introduce v1beta2 for Priority and Fairness with no changes in API spec. ([kubernetes/kubernetes#104399](https://github.com/kubernetes/kubernetes/pull/104399), [@tkashem](https://github.com/tkashem))
+- JSON log output is configurable and now supports writing info messages to stdout and error messages to stderr. Info messages can be buffered in memory. The default is to write both to stdout without buffering, as before. ([kubernetes/kubernetes#104873](https://github.com/kubernetes/kubernetes/pull/104873), [@pohly](https://github.com/pohly))
+- JobTrackingWithFinalizers graduates to beta. Feature is enabled by default. ([kubernetes/kubernetes#105687](https://github.com/kubernetes/kubernetes/pull/105687), [@alculquicondor](https://github.com/alculquicondor))
+- Kube-apiserver: Fixes handling of CRD schemas containing literal null values in enums. ([kubernetes/kubernetes#104969](https://github.com/kubernetes/kubernetes/pull/104969), [@liggitt](https://github.com/liggitt))
+- Kube-apiserver: The `rbac.authorization.k8s.io/v1alpha1` API version is removed; use the `rbac.authorization.k8s.io/v1` API, available since v1.8. The `scheduling.k8s.io/v1alpha1` API version is removed; use the `scheduling.k8s.io/v1` API, available since v1.14. ([kubernetes/kubernetes#104248](https://github.com/kubernetes/kubernetes/pull/104248), [@liggitt](https://github.com/liggitt))
+- Kube-scheduler: support for configuration file version `v1beta1` is removed. Update configuration files to v1beta2(xref: https://github.com/kubernetes/enhancements/issues/2901) or v1beta3 before upgrading to 1.23. ([kubernetes/kubernetes#104782](https://github.com/kubernetes/kubernetes/pull/104782), [@kerthcet](https://github.com/kerthcet))
+- KubeSchedulerConfiguration provides a new field `MultiPoint` which will register a plugin for all valid extension points ([kubernetes/kubernetes#105611](https://github.com/kubernetes/kubernetes/pull/105611), [@damemi](https://github.com/damemi)) [SIG Scheduling and Testing]
+- Kubelet should reject pods whose OS doesn't match the node's OS label. ([kubernetes/kubernetes#105292](https://github.com/kubernetes/kubernetes/pull/105292), [@ravisantoshgudimetla](https://github.com/ravisantoshgudimetla)) [SIG Apps and Node]
+- Kubelet: turn the KubeletConfiguration v1beta1 `ResolverConfig` field from a `string` to `*string`. ([kubernetes/kubernetes#104624](https://github.com/kubernetes/kubernetes/pull/104624), [@Haleygo](https://github.com/Haleygo))
+- Kubernetes is now built using go 1.17. ([kubernetes/kubernetes#103692](https://github.com/kubernetes/kubernetes/pull/103692), [@justaugustus](https://github.com/justaugustus))
+- Performs strict server side schema validation requests via the `fieldValidation=[Strict,Warn,Ignore]`. ([kubernetes/kubernetes#105916](https://github.com/kubernetes/kubernetes/pull/105916), [@kevindelgado](https://github.com/kevindelgado))
+- Promote `IPv6DualStack` feature to stable.
+  Controller Manager flags for the node IPAM controller have slightly changed:
+  1. When configuring a dual-stack cluster, the user must specify both `--node-cidr-mask-size-ipv4` and `--node-cidr-mask-size-ipv6` to set the per-node IP mask sizes, instead of the previous `--node-cidr-mask-size` flag.
+  2. The `--node-cidr-mask-size` flag is mutually exclusive with `--node-cidr-mask-size-ipv4` and `--node-cidr-mask-size-ipv6`.
+  3. Single-stack clusters do not need to change, but may choose to use the more specific flags.  Users can use either the older `--node-cidr-mask-size` flag or one of the newer `--node-cidr-mask-size-ipv4` or `--node-cidr-mask-size-ipv6` flags to configure the per-node IP mask size, provided that the flag's IP family matches the cluster's IP family (--cluster-cidr). ([kubernetes/kubernetes#104691](https://github.com/kubernetes/kubernetes/pull/104691), [@khenidak](https://github.com/khenidak))
+- Remove `NodeLease` feature gate that was graduated and locked to stable in 1.17 release. ([kubernetes/kubernetes#105222](https://github.com/kubernetes/kubernetes/pull/105222), [@cyclinder](https://github.com/cyclinder))
+- Removed deprecated `--seccomp-profile-root`/`seccompProfileRoot` config. ([kubernetes/kubernetes#103941](https://github.com/kubernetes/kubernetes/pull/103941), [@saschagrunert](https://github.com/saschagrunert))
+- Since golang 1.17 both net.ParseIP and net.ParseCIDR rejects leading zeros in the dot-decimal notation of IPv4 addresses,
+  Kubernetes will keep allowing leading zeros on IPv4 address to not break the compatibility.
+  IMPORTANT: Kubernetes interprets leading zeros on IPv4 addresses as decimal, users must not rely on parser alignment to not being impacted by the associated security advisory:
+  CVE-2021-29923 golang standard library "net" - Improper Input Validation of octal literals in golang 1.16.2 and below standard library "net" results in indeterminate SSRF & RFI vulnerabilities.
+  Reference: https://nvd.nist.gov/vuln/detail/CVE-2021-29923 ([kubernetes/kubernetes#104368](https://github.com/kubernetes/kubernetes/pull/104368), [@aojea](https://github.com/aojea))
+- StatefulSet `minReadySeconds` is promoted to beta. ([kubernetes/kubernetes#104045](https://github.com/kubernetes/kubernetes/pull/104045), [@ravisantoshgudimetla](https://github.com/ravisantoshgudimetla))
+- Support pod priority based node graceful shutdown. ([kubernetes/kubernetes#102915](https://github.com/kubernetes/kubernetes/pull/102915), [@wzshiming](https://github.com/wzshiming))
+- The "Generic Ephemeral Volume" feature graduates to GA. It is now enabled unconditionally. ([kubernetes/kubernetes#105609](https://github.com/kubernetes/kubernetes/pull/105609), [@pohly](https://github.com/pohly))
+- The Kubelet's `--register-with-taints` option is now available via the Kubelet config file field registerWithTaints ([kubernetes/kubernetes#105437](https://github.com/kubernetes/kubernetes/pull/105437), [@cmssczy](https://github.com/cmssczy)) [SIG Node and Scalability]
+- The `CSIDriver.Spec.StorageCapacity` can now be modified. ([kubernetes/kubernetes#101789](https://github.com/kubernetes/kubernetes/pull/101789), [@pohly](https://github.com/pohly))
+- The `CSIVolumeFSGroupPolicy` feature has moved from beta to GA. ([kubernetes/kubernetes#105940](https://github.com/kubernetes/kubernetes/pull/105940), [@dobsonj](https://github.com/dobsonj))
+- The `IngressClass.Spec.Parameters.Namespace` field is now GA. ([kubernetes/kubernetes#104636](https://github.com/kubernetes/kubernetes/pull/104636), [@hbagdi](https://github.com/hbagdi))
+- The `Service.spec.ipFamilyPolicy` field is now *required* in order to create or update a Service as dual-stack.  This is a breaking change from the beta behavior.  Previously the server would try to infer the value of that field from either `ipFamilies` or `clusterIPs`, but that caused ambiguity on updates.  Users who want a dual-stack Service MUST specify `ipFamilyPolicy` as either "PreferDualStack" or "RequireDualStack". ([kubernetes/kubernetes#96684](https://github.com/kubernetes/kubernetes/pull/96684), [@thockin](https://github.com/thockin))
+- The `TTLAfterFinished` feature gate is now GA and enabled by default. ([kubernetes/kubernetes#105219](https://github.com/kubernetes/kubernetes/pull/105219), [@sahilvv](https://github.com/sahilvv))
+- The `kube-controller-manager` supports `--concurrent-ephemeralvolume-syncs` flag to set the number of ephemeral volume controller workers. ([kubernetes/kubernetes#102981](https://github.com/kubernetes/kubernetes/pull/102981), [@SataQiu](https://github.com/SataQiu))
+- The legacy scheduler policy config is removed in v1.23, the associated flags `policy-config-file`, `policy-configmap`, `policy-configmap-namespace` and `use-legacy-policy-config` are also removed. Migrate to Component Config instead, see https://kubernetes.io/docs/reference/scheduling/config/ for details. ([kubernetes/kubernetes#105424](https://github.com/kubernetes/kubernetes/pull/105424), [@kerthcet](https://github.com/kerthcet))
+- Track the number of Pods with a Ready condition in Job status. The feature is alpha and needs the feature gate JobReadyPods to be enabled. ([kubernetes/kubernetes#104915](https://github.com/kubernetes/kubernetes/pull/104915), [@alculquicondor](https://github.com/alculquicondor))
+- Users of `LogFormatRegistry` in component-base must update their code to use the logr v1.0.0 API. The JSON log output now uses the format from go-logr/zapr (no `v` field for error messages, additional information for invalid calls) and has some fixes (correct source code location for warnings about invalid log calls). ([kubernetes/kubernetes#104103](https://github.com/kubernetes/kubernetes/pull/104103), [@pohly](https://github.com/pohly))
+- Validation rules for Custom Resource Definitions can be written in the [CEL expression language](https://github.com/google/cel-spec) using the `x-kubernetes-validations` extension in OpenAPIv3 schemas (alpha). This is gated by the alpha "CustomResourceValidationExpressions" feature gate. ([kubernetes/kubernetes#106051](https://github.com/kubernetes/kubernetes/pull/106051), [@jpbetz](https://github.com/jpbetz)) [SIG API Machinery, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Node, Storage and Testing]
+- Add gRPC probe to Pod.Spec.Container.{Liveness,Readiness,Startup}Probe (#106463, @SergeyKanzhelev) [SIG API Machinery, Apps, CLI, Node and Testing]
+- Adds a feature gate StatefulSetAutoDeletePVC, which allows PVCs automatically created for StatefulSet pods to be automatically deleted. (#99728, @mattcary) [SIG API Machinery, Apps, Auth and Testing]
+- Performs strict server side schema validation requests via the `fieldValidation=[Strict,Warn,Ignore]` query parameter. (#105916, @kevindelgado) [SIG API Machinery, Apps, Auth, Cloud Provider and Testing]
+- Support pod priority based node graceful shutdown (#102915, @wzshiming) [SIG Node and Testing]
+- A new field `omitManagedFields` has been added to both `audit.Policy` and `audit.PolicyRule` 
+  so cluster operators can opt in to omit managed fields of the request and response bodies from 
+  being written to the API audit log. (#94986, @tkashem) [SIG API Machinery, Auth, Cloud Provider and Testing]
+- Create HPA v2 from v2beta2 with some fields changed. (#102534, @wangyysde) [SIG API Machinery, Apps, Auth, Autoscaling and Testing]
+- Fix kube-proxy regression on UDP services because the logic to detect stale connections was not considering if the endpoint was ready. (#106163, @aojea) [SIG API Machinery, Apps, Architecture, Auth, Autoscaling, CLI, Cloud Provider, Contributor Experience, Instrumentation, Network, Node, Release, Scalability, Scheduling, Storage, Testing and Windows]
+- Implement support for recovering from volume expansion failures (#106154, @gnufied) [SIG API Machinery, Apps and Storage]
+- In kubelet, log verbosity and flush frequency can also be configured via the configuration file and not just via command line flags. In other commands (kube-apiserver, kube-controller-manager), the flags are listed in the "Logs flags" group and not under "Global" or "Misc". The type for `-vmodule` was made a bit more descriptive (`pattern=N,...` instead of `moduleSpec`). (#106090, @pohly) [SIG API Machinery, Architecture, CLI, Cluster Lifecycle, Instrumentation, Node and Scheduling]
+- IngressClass.Spec.Parameters.Namespace field is now GA. (#104636, @hbagdi) [SIG Network and Testing]
+- KubeSchedulerConfiguration provides a new field `MultiPoint` which will register a plugin for all valid extension points (#105611, @damemi) [SIG Scheduling and Testing]
+- Kubelet should reject pods whose OS doesn't match the node's OS label. (#105292, @ravisantoshgudimetla) [SIG Apps and Node]
+- The CSIVolumeFSGroupPolicy feature has moved from beta to GA. (#105940, @dobsonj) [SIG Storage]
+- The Kubelet's `--register-with-taints` option is now available via the Kubelet config file field registerWithTaints (#105437, @cmssczy) [SIG Node and Scalability]
+- Validation rules for Custom Resource Definitions can be written in the [CEL expression language](https://github.com/google/cel-spec) using the `x-kubernetes-validations` extension in OpenAPIv3 schemas (alpha). This is gated by the alpha "CustomResourceValidationExpressions" feature gate. (#106051, @jpbetz) [SIG API Machinery, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Node, Storage and Testing]
+- #### Additional documentation e.g., KEPs (Kubernetes Enhancement Proposals), usage docs, etc.:
+  
+  <!--
+  This section can be blank if this pull request does not require a release note.
+  
+  When adding links which point to resources within git repositories, like
+  KEPs or supporting documentation, please reference a specific commit and avoid
+  linking directly to the master branch. This ensures that links reference a
+  specific point in time, rather than a document that may change over time.
+  
+  See here for guidance on getting permanent links to files: https://help.github.com/en/articles/getting-permanent-links-to-files
+  
+  Please use the following format for linking documentation:
+  - [KEP]: <link>
+  - [Usage]: <link>
+  - [Other doc]: <link>
+  --> (#104782, @kerthcet) [SIG Scheduling and Testing]
+- Ephemeral containers have reached beta maturity and are now available by default. (#105405, @verb) [SIG API Machinery, Apps, Node and Testing]
+- Introduce OS field in the Pod Spec (#104693, @ravisantoshgudimetla) [SIG API Machinery and Apps]
+- Introduce v1beta3 api for scheduler. This version 
+  - increases the weight of user specifiable priorities.
+  The weights of following priority plugins are increased
+    - TaintTolerations to 3 - as leveraging node tainting to group nodes in the cluster is becoming a widely-adopted practice
+    - NodeAffinity to 2
+    - InterPodAffinity to 2
+  
+  - Won't have HealthzBindAddress, MetricsBindAddress fields (#104251, @ravisantoshgudimetla) [SIG Scheduling and Testing]
+- JSON log output is configurable and now supports writing info messages to stdout and error messages to stderr. Info messages can be buffered in memory. The default is to write both to stdout without buffering, as before. (#104873, @pohly) [SIG API Machinery, Architecture, CLI, Cluster Lifecycle, Instrumentation, Node and Scheduling]
+- JobTrackingWithFinalizers graduates to beta. Feature is enabled by default. (#105687, @alculquicondor) [SIG Apps and Testing]
+- Remove NodeLease feature gate that was graduated and locked to stable in 1.17 release. (#105222, @cyclinder) [SIG Apps, Node and Testing]
+- TTLAfterFinished is now GA and enabled by default (#105219, @sahilvv) [SIG API Machinery, Apps, Auth and Testing]
+- The "Generic Ephemeral Volume" feature graduates to GA. It is now enabled unconditionally. (#105609, @pohly) [SIG API Machinery, Apps, Auth, Node, Scheduling, Storage and Testing]
+- The legacy scheduler policy config is removed in v1.23, the associated flags policy-config-file, policy-configmap, policy-configmap-namespace and use-legacy-policy-config are also removed. Migrate to Component Config instead, see https://kubernetes.io/docs/reference/scheduling/config/ for details. (#105424, @kerthcet) [SIG Scheduling and Testing]
+- Track the number of Pods with a Ready condition in Job status. The feature is alpha and needs the feature gate JobReadyPods to be enabled. (#104915, @alculquicondor) [SIG API Machinery, Apps, CLI and Testing]
+- Client-go impersonation config can specify a UID to pass impersonated uid information through in requests. ([kubernetes/kubernetes#104483](https://github.com/kubernetes/kubernetes/pull/104483), [@margocrawf](https://github.com/margocrawf)) [SIG API Machinery, Auth and Testing]
+- IPv6DualStack feature moved to stable.
+  Controller Manager flags for the node IPAM controller have slightly changed:
+  1. When configuring a dual-stack cluster, the user must specify both --node-cidr-mask-size-ipv4 and --node-cidr-mask-size-ipv6 to set the per-node IP mask sizes, instead of the previous --node-cidr-mask-size flag.
+  2. The --node-cidr-mask-size flag is mutually exclusive with --node-cidr-mask-size-ipv4 and --node-cidr-mask-size-ipv6.
+  3. Single-stack clusters do not need to change, but may choose to use the more specific flags.  Users can use either the older --node-cidr-mask-size flag or one of the newer --node-cidr-mask-size-ipv4 or --node-cidr-mask-size-ipv6 flags to configure the per-node IP mask size, provided that the flag's IP family matches the cluster's IP family (--cluster-cidr). ([kubernetes/kubernetes#104691](https://github.com/kubernetes/kubernetes/pull/104691), [@khenidak](https://github.com/khenidak)) [SIG API Machinery, Apps, Auth, Cloud Provider, Cluster Lifecycle, Network, Node and Testing]
+- Kubelet: turn the KubeletConfiguration v1beta1 `ResolverConfig` field from a `string` to `*string`. ([kubernetes/kubernetes#104624](https://github.com/kubernetes/kubernetes/pull/104624), [@Haleygo](https://github.com/Haleygo)) [SIG Cluster Lifecycle and Node]
+- A small regression in Service updates was fixed.  The circumstances are so unlikely that probably nobody would ever hit it. ([kubernetes/kubernetes#104601](https://github.com/kubernetes/kubernetes/pull/104601), [@thockin](https://github.com/thockin)) [SIG Network]
+- Introduce v1beta2 for Priority and Fairness with no changes in API spec ([kubernetes/kubernetes#104399](https://github.com/kubernetes/kubernetes/pull/104399), [@tkashem](https://github.com/tkashem)) [SIG API Machinery and Testing]
+- Kube-apiserver: Fixes handling of CRD schemas containing literal null values in enums. ([kubernetes/kubernetes#104969](https://github.com/kubernetes/kubernetes/pull/104969), [@liggitt](https://github.com/liggitt)) [SIG API Machinery, Apps and Network]
+- Kubelet: turn the KubeletConfiguration v1beta1 `ResolverConfig` field from a `string` to `*string`. ([kubernetes/kubernetes#104624](https://github.com/kubernetes/kubernetes/pull/104624), [@Haleygo](https://github.com/Haleygo)) [SIG Cluster Lifecycle and Node]
+- Kubernetes is now built using go1.17 ([kubernetes/kubernetes#103692](https://github.com/kubernetes/kubernetes/pull/103692), [@justaugustus](https://github.com/justaugustus)) [SIG API Machinery, Apps, Architecture, Auth, Autoscaling, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Network, Node, Release, Scheduling, Storage and Testing]
+- Removed deprecated `--seccomp-profile-root`/`seccompProfileRoot` config ([kubernetes/kubernetes#103941](https://github.com/kubernetes/kubernetes/pull/103941), [@saschagrunert](https://github.com/saschagrunert)) [SIG Node]
+- Since golang 1.17 both net.ParseIP and net.ParseCIDR rejects leading zeros in the dot-decimal notation of IPv4 addresses.
+  Kubernetes will keep allowing leading zeros on IPv4 address to not break the compatibility.
+  IMPORTANT: Kubernetes interprets leading zeros on IPv4 addresses as decimal, users must not rely on parser alignment to not being impacted by the associated security advisory:
+  CVE-2021-29923 golang standard library "net" - Improper Input Validation of octal literals in golang 1.16.2 and below standard library "net" results in indeterminate SSRF & RFI vulnerabilities.
+  Reference: https://nvd.nist.gov/vuln/detail/CVE-2021-29923 ([kubernetes/kubernetes#104368](https://github.com/kubernetes/kubernetes/pull/104368), [@aojea](https://github.com/aojea)) [SIG API Machinery, Apps, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Network, Node, Release, Scalability, Scheduling, Storage and Testing]
+- StatefulSet minReadySeconds is promoted to beta ([kubernetes/kubernetes#104045](https://github.com/kubernetes/kubernetes/pull/104045), [@ravisantoshgudimetla](https://github.com/ravisantoshgudimetla)) [SIG Apps and Testing]
+- The `Service.spec.ipFamilyPolicy` field is now *required* in order to create or update a Service as dual-stack.  This is a breaking change from the beta behavior.  Previously the server would try to infer the value of that field from either `ipFamilies` or `clusterIPs`, but that caused ambiguity on updates.  Users who want a dual-stack Service MUST specify `ipFamilyPolicy` as either "PreferDualStack" or "RequireDualStack". ([kubernetes/kubernetes#96684](https://github.com/kubernetes/kubernetes/pull/96684), [@thockin](https://github.com/thockin)) [SIG API Machinery, Apps, Network and Testing]
+- Users of LogFormatRegistry in component-base must update their code to use the logr v1.0.0 API. The JSON log output now uses the format from go-logr/zapr (no `v` field for error messages, additional information for invalid calls) and has some fixes (correct source code location for warnings about invalid log calls). ([kubernetes/kubernetes#104103](https://github.com/kubernetes/kubernetes/pull/104103), [@pohly](https://github.com/pohly)) [SIG API Machinery, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation and Storage]
+- When creating an object with generateName, if a conflict occurs the server now returns an AlreadyExists error with a retry option. ([kubernetes/kubernetes#104699](https://github.com/kubernetes/kubernetes/pull/104699), [@vincepri](https://github.com/vincepri)) [SIG API Machinery]
+- CSIDriver.Spec.StorageCapacity can now be modified. ([kubernetes/kubernetes#101789](https://github.com/kubernetes/kubernetes/pull/101789), [@pohly](https://github.com/pohly)) [SIG Storage]
+- Kube-apiserver: The `rbac.authorization.k8s.io/v1alpha1` API version is removed; use the `rbac.authorization.k8s.io/v1` API, available since v1.8. The `scheduling.k8s.io/v1alpha1` API version is removed; use the `scheduling.k8s.io/v1` API, available since v1.14. ([kubernetes/kubernetes#104248](https://github.com/kubernetes/kubernetes/pull/104248), [@liggitt](https://github.com/liggitt)) [SIG API Machinery, Auth, Network and Testing]
+- Kube-controller-manager supports '--concurrent-ephemeralvolume-syncs' flag to set the number of ephemeral volume controller workers. ([kubernetes/kubernetes#102981](https://github.com/kubernetes/kubernetes/pull/102981), [@SataQiu](https://github.com/SataQiu)) [SIG API Machinery and Apps]
+
+
 # v22.6.0
 
 Kubernetes API Version: v1.22.6
