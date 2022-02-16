@@ -81,7 +81,7 @@ def update_stateful_set(apps_v1_api, statefulset):
 
 
 def list_controller_revision(apps_v1_api, namespace, stateful_set_name):
-    # Get all controller revision in specified namespace
+    # Get all controller revisions in specified namespace
     controller_revision_list = apps_v1_api.list_namespaced_controller_revision(
         namespace)
     # Get all controller revisions which belong to specified statefulset.
@@ -101,7 +101,7 @@ def rollout_namespaced_stateful_set(
         namespace,
         controller_revision_name):
 
-    # Get the specified controller revision
+    # Get the specified controller revision object
     _controller_revision = apps_v1_api.read_namespaced_controller_revision(
         controller_revision_name, namespace)
     # Roll out statefulset to the specified revision
