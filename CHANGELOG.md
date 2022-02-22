@@ -1,3 +1,11 @@
+# v23.3.0b1
+
+Kubernetes API Version: v1.23.4
+
+### API Change
+- Fix OpenAPI serialization of the x-kubernetes-validations field ([kubernetes/kubernetes#108030](https://github.com/kubernetes/kubernetes/pull/108030), [@liggitt](https://github.com/liggitt)) [SIG API Machinery]
+
+
 # v23.3.0a1
 
 Kubernetes API Version: v1.23.3
