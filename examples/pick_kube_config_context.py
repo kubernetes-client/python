@@ -37,7 +37,7 @@ def main():
     # utility
     config.load_kube_config(context=option)
 
-    print("Active host is %s" % configuration.Configuration().host)
+    print("Active host is %s" % configuration.Configuration.get_default_copy().host)
 
     v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")
