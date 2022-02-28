@@ -256,7 +256,7 @@ the target branch to "release-x.y". If the release is a pre-release, check the
 
 ## Announcement
 
-Send an announcement email to kubernetes-dev@googlegroups.com with the subject: [ANNOUNCE] kubernetes python-client $VERSION is released
+Send an announcement email to dev@kubernetes.io with the subject: [ANNOUNCE] kubernetes python-client $VERSION is released
 
 ## Cleanup
 
