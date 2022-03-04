@@ -558,6 +558,12 @@ class TestDynamicClientSerialization(unittest.TestCase):
         """`ResourceField` is a special type which overwrites `__getattr__` method to return `None`
         when a non-existent attribute was accessed. which means it can pass any `hasattr(...)` tests.
         """
-        res = ResourceField(foo='bar')
+        params = {
+            "foo": "bar",
+            "self": True
+        }
+        res = ResourceField(params=params)
+        self.assertEqual(res["foo"], params["foo"])
+        self.assertEqual(res["self"], params["self"])
         # method will return original object when it doesn't know how to proceed
         self.assertEqual(self.client.serialize_body(res), res)
