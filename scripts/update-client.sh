@@ -22,7 +22,7 @@ set -o nounset
 set -o pipefail
 
 # The openapi-generator version used by this client
-export OPENAPI_GENERATOR_COMMIT="v4.3.0"
+export OPENAPI_GENERATOR_COMMIT="v5.4.0"
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
