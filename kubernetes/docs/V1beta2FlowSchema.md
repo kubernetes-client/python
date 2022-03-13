@@ -1,6 +1,7 @@
 # V1beta2FlowSchema
 
 FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema and a \"flow distinguisher\".
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +10,7 @@ Name | Type | Description | Notes
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **spec** | [**V1beta2FlowSchemaSpec**](V1beta2FlowSchemaSpec.md) |  | [optional] 
 **status** | [**V1beta2FlowSchemaStatus**](V1beta2FlowSchemaStatus.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

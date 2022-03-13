@@ -1,6 +1,7 @@
 # V1Ingress
 
 Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +10,7 @@ Name | Type | Description | Notes
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **spec** | [**V1IngressSpec**](V1IngressSpec.md) |  | [optional] 
 **status** | [**V1IngressStatus**](V1IngressStatus.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

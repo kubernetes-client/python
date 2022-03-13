@@ -1,6 +1,7 @@
 # V1Taint
 
 The node this Taint is attached to has the \"effect\" on any pod that does not tolerate the Taint.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,6 +9,7 @@ Name | Type | Description | Notes
 **key** | **str** | Required. The taint key to be applied to a node. | 
 **time_added** | **datetime** | TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints. | [optional] 
 **value** | **str** | The taint value corresponding to the taint key. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,6 +1,7 @@
 # V1LeaseSpec
 
 LeaseSpec is a specification of a Lease.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +10,7 @@ Name | Type | Description | Notes
 **lease_duration_seconds** | **int** | leaseDurationSeconds is a duration that candidates for a lease need to wait to force acquire it. This is measure against time of last observed RenewTime. | [optional] 
 **lease_transitions** | **int** | leaseTransitions is the number of transitions of a lease between holders. | [optional] 
 **renew_time** | **datetime** | renewTime is a time when the current holder of a lease has last updated the lease. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

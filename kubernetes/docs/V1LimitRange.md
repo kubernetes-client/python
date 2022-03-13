@@ -1,6 +1,7 @@
 # V1LimitRange
 
 LimitRange sets resource usage limits for each kind of resource in a Namespace.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,6 +9,7 @@ Name | Type | Description | Notes
 **kind** | **str** | Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the kubernetes.client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds | [optional] 
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **spec** | [**V1LimitRangeSpec**](V1LimitRangeSpec.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

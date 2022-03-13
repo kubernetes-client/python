@@ -1,6 +1,7 @@
 # V1beta1FlowSchemaCondition
 
 FlowSchemaCondition describes conditions for a FlowSchema.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +10,7 @@ Name | Type | Description | Notes
 **reason** | **str** | &#x60;reason&#x60; is a unique, one-word, CamelCase reason for the condition&#39;s last transition. | [optional] 
 **status** | **str** | &#x60;status&#x60; is the status of the condition. Can be True, False, Unknown. Required. | [optional] 
 **type** | **str** | &#x60;type&#x60; is the type of the condition. Required. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

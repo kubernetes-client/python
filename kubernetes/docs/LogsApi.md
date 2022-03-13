@@ -16,38 +16,48 @@ Method | HTTP request | Description
 ### Example
 
 * Api Key Authentication (BearerToken):
+
 ```python
-from __future__ import print_function
 import time
 import kubernetes.client
-from kubernetes.client.rest import ApiException
+from kubernetes.client.api import logs_api
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.LogsApi(api_client)
-    logpath = 'logpath_example' # str | path to the log
+    api_instance = logs_api.LogsApi(api_client)
+    logpath = "logpath_example" # str | path to the log
 
+    # example passing only required values which don't have defaults set
     try:
         api_instance.log_file_handler(logpath)
-    except ApiException as e:
+    except kubernetes.client.ApiException as e:
         print("Exception when calling LogsApi->log_file_handler: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **logpath** | **str**| path to the log | 
+ **logpath** | **str**| path to the log |
 
 ### Return type
 
@@ -62,7 +72,9 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **401** | Unauthorized |  -  |
@@ -77,31 +89,41 @@ void (empty response body)
 ### Example
 
 * Api Key Authentication (BearerToken):
+
 ```python
-from __future__ import print_function
 import time
 import kubernetes.client
-from kubernetes.client.rest import ApiException
+from kubernetes.client.api import logs_api
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.LogsApi(api_client)
-    
+    api_instance = logs_api.LogsApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         api_instance.log_file_list_handler()
-    except ApiException as e:
+    except kubernetes.client.ApiException as e:
         print("Exception when calling LogsApi->log_file_list_handler: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -119,7 +141,9 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **401** | Unauthorized |  -  |

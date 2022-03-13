@@ -1,6 +1,7 @@
 # V1SecurityContext
 
 SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 **se_linux_options** | [**V1SELinuxOptions**](V1SELinuxOptions.md) |  | [optional] 
 **seccomp_profile** | [**V1SeccompProfile**](V1SeccompProfile.md) |  | [optional] 
 **windows_options** | [**V1WindowsSecurityContextOptions**](V1WindowsSecurityContextOptions.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

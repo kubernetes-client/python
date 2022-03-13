@@ -1,6 +1,7 @@
 # V1DaemonSet
 
 DaemonSet represents the configuration of a daemon set.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +10,7 @@ Name | Type | Description | Notes
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **spec** | [**V1DaemonSetSpec**](V1DaemonSetSpec.md) |  | [optional] 
 **status** | [**V1DaemonSetStatus**](V1DaemonSetStatus.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

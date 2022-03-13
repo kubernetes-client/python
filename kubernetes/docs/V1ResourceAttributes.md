@@ -1,6 +1,7 @@
 # V1ResourceAttributes
 
 ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,6 +12,7 @@ Name | Type | Description | Notes
 **subresource** | **str** | Subresource is one of the existing resource types.  \&quot;\&quot; means none. | [optional] 
 **verb** | **str** | Verb is a kubernetes resource API verb, like: get, list, watch, create, update, delete, proxy.  \&quot;*\&quot; means all. | [optional] 
 **version** | **str** | Version is the API Version of the Resource.  \&quot;*\&quot; means all. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

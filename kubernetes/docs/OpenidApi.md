@@ -17,32 +17,42 @@ get service account issuer OpenID JSON Web Key Set (contains public token verifi
 ### Example
 
 * Api Key Authentication (BearerToken):
+
 ```python
-from __future__ import print_function
 import time
 import kubernetes.client
-from kubernetes.client.rest import ApiException
+from kubernetes.client.api import openid_api
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = kubernetes.client.OpenidApi(api_client)
-    
+    api_instance = openid_api.OpenidApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_service_account_issuer_open_id_keyset()
         pprint(api_response)
-    except ApiException as e:
+    except kubernetes.client.ApiException as e:
         print("Exception when calling OpenidApi->get_service_account_issuer_open_id_keyset: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -60,7 +70,9 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/jwk-set+json
 
+
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
