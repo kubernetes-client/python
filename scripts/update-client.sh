@@ -71,5 +71,5 @@ sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STAT
 # first, this must be in gen repo not here
 # second, this should be ported to swagger-codegen
 echo ">>> patching client..."
-git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
+git apply "${SCRIPT_ROOT}/patches/rest_client_patch.diff"
 echo ">>> Done."
