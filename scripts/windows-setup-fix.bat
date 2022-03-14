@@ -6,5 +6,5 @@ REM This batch script provides a workaround for symbolic link by copying the fol
 	echo "Python environment found."
 	)
 	python --version
-	copy ..\kubernetes\base\* ..\kubernetes\
+	xcopy /s /e /y ..\kubernetes\base\* ..\kubernetes\
 	cd .. && python setup.py install )
