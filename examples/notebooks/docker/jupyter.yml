@@ -20,6 +20,18 @@ metadata:
   labels:
     app: jupyter
 spec:
+  initContainers:
+    - name: git-clone
+      image: alpine/git
+      args:
+          - clone
+          - --single-branch
+          - --
+          - https://github.com/kubernetes-client/python.git
+          - /data
+      volumeMounts:
+      - mountPath: /data
+        name: notebook-volume
   containers:
     - name: jupyter
       image: skippbox/jupyter:0.0.3
@@ -32,5 +44,4 @@ spec:
           name: notebook-volume
   volumes:
   - name: notebook-volume
-    gitRepo:
-      repository: "https://github.com/kubernetes-client/python.git"
+    emptyDir: {}
