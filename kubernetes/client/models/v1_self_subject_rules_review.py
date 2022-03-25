@@ -67,7 +67,8 @@ class V1SelfSubjectRulesReview(object):
             self.kind = kind
         if metadata is not None:
             self.metadata = metadata
-        self.spec = spec
+        if spec is not None:
+            self.spec = spec
         if status is not None:
             self.status = status
 
