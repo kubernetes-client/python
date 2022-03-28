@@ -298,7 +298,7 @@ class ResourceInstance(object):
 
     def __deserialize(self, field):
         if isinstance(field, dict):
-            return ResourceField(**{
+            return ResourceField(params={
                 k: self.__deserialize(v) for k, v in field.items()
             })
         elif isinstance(field, (list, tuple)):
@@ -359,8 +359,8 @@ class ResourceField(object):
         attributes to be accessed with '.' notation
     """
 
-    def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
+    def __init__(self, params):
+        self.__dict__.update(**params)
 
     def __repr__(self):
         return pformat(self.__dict__)
