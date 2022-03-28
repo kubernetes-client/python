@@ -37,7 +37,7 @@ cd "${TMP_DIR}"
 git clone https://github.com/kubernetes-client/python.git
 cd python
 git config user.email "kubernetes-client@k8s.com"
-git config user.name "kubenetes client"
+git config user.name "kubernetes client"
 git rm -rf kubernetes/base
 git commit -m "DO NOT MERGE, removing submodule for testing only"
 mkdir kubernetes/base
