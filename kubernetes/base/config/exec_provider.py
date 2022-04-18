@@ -53,7 +53,8 @@ class ExecProvider(object):
                 value = item['value']
                 additional_vars[name] = value
             self.env.update(additional_vars)
-        self.cwd = cwd
+        
+        self.cwd = cwd if cwd else None
 
     def run(self, previous_response=None):
         kubernetes_exec_info = {
