@@ -353,69 +353,76 @@ class PortForward:
             local_all_closed = True
             for port in self.local_ports.values():
                 if port.python.fileno() != -1:
-                    if port.error or not self.websocket.connected:
+                    if self.websocket.connected:
+                        rlist.append(port.python)
+                        if port.data:
+                            wlist.append(port.python)
+                        local_all_closed = False
+                    else:
                         if port.data:
                             wlist.append(port.python)
                             local_all_closed = False
                         else:
                             port.python.close()
-                    else:
-                        rlist.append(port.python)
-                        if port.data:
-                            wlist.append(port.python)
-                        local_all_closed = False
             if local_all_closed and not (self.websocket.connected and kubernetes_data):
                 self.websocket.close()
                 return
             r, w, _ = select.select(rlist, wlist, [])
             for sock in r:
                 if sock == self.websocket:
-                    opcode, frame = self.websocket.recv_data_frame(True)
-                    if opcode == ABNF.OPCODE_BINARY:
-                        if not frame.data:
-                            raise RuntimeError("Unexpected frame data size")
-                        channel = six.byte2int(frame.data)
-                        if channel >= len(channel_ports):
-                            raise RuntimeError("Unexpected channel number: %s" % channel)
-                        port = channel_ports[channel]
-                        if channel_initialized[channel]:
-                            if channel % 2:
-                                if port.error is None:
-                                    port.error = ''
-                                port.error += frame.data[1:].decode()
+                    pending = True
+                    while pending:
+                        opcode, frame = self.websocket.recv_data_frame(True)
+                        if opcode == ABNF.OPCODE_BINARY:
+                            if not frame.data:
+                                raise RuntimeError("Unexpected frame data size")
+                            channel = six.byte2int(frame.data)
+                            if channel >= len(channel_ports):
+                                raise RuntimeError("Unexpected channel number: %s" % channel)
+                            port = channel_ports[channel]
+                            if channel_initialized[channel]:
+                                if channel % 2:
+                                    if port.error is None:
+                                        port.error = ''
+                                    port.error += frame.data[1:].decode()
+                                    port.python.close()
+                                else:
+                                    port.data += frame.data[1:]
                             else:
-                                port.data += frame.data[1:]
-                        else:
-                            if len(frame.data) != 3:
-                                raise RuntimeError(
-                                    "Unexpected initial channel frame data size"
-                                )
-                            port_number = six.byte2int(frame.data[1:2]) + (six.byte2int(frame.data[2:3]) * 256)
-                            if port_number != port.port_number:
-                                raise RuntimeError(
-                                    "Unexpected port number in initial channel frame: %s" % port_number
-                                )
-                            channel_initialized[channel] = True
-                    elif opcode not in (ABNF.OPCODE_PING, ABNF.OPCODE_PONG, ABNF.OPCODE_CLOSE):
-                        raise RuntimeError("Unexpected websocket opcode: %s" % opcode)
+                                if len(frame.data) != 3:
+                                    raise RuntimeError(
+                                        "Unexpected initial channel frame data size"
+                                    )
+                                port_number = six.byte2int(frame.data[1:2]) + (six.byte2int(frame.data[2:3]) * 256)
+                                if port_number != port.port_number:
+                                    raise RuntimeError(
+                                        "Unexpected port number in initial channel frame: %s" % port_number
+                                    )
+                                channel_initialized[channel] = True
+                        elif opcode not in (ABNF.OPCODE_PING, ABNF.OPCODE_PONG, ABNF.OPCODE_CLOSE):
+                            raise RuntimeError("Unexpected websocket opcode: %s" % opcode)
+                        if not (isinstance(self.websocket.sock, ssl.SSLSocket) and self.websocket.sock.pending()):
+                            pending = False
                 else:
                     port = local_ports[sock]
-                    data = port.python.recv(1024 * 1024)
-                    if data:
-                        kubernetes_data += ABNF.create_frame(
-                            port.channel + data,
-                            ABNF.OPCODE_BINARY,
-                        ).format()
-                    else:
-                        port.python.close()
+                    if port.python.fileno() != -1:
+                        data = port.python.recv(1024 * 1024)
+                        if data:
+                            kubernetes_data += ABNF.create_frame(
+                                port.channel + data,
+                                ABNF.OPCODE_BINARY,
+                            ).format()
+                        else:
+                            port.python.close()
             for sock in w:
                 if sock == self.websocket:
                     sent = self.websocket.sock.send(kubernetes_data)
                     kubernetes_data = kubernetes_data[sent:]
                 else:
                     port = local_ports[sock]
-                    sent = port.python.send(port.data)
-                    port.data = port.data[sent:]
+                    if port.python.fileno() != -1:
+                        sent = port.python.send(port.data)
+                        port.data = port.data[sent:]
 
 
 def get_websocket_url(url, query_params=None):
