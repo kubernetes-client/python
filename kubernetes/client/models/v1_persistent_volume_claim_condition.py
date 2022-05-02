@@ -194,7 +194,6 @@ class V1PersistentVolumeClaimCondition(object):
     def type(self):
         """Gets the type of this V1PersistentVolumeClaimCondition.  # noqa: E501
 
-           Possible enum values:  - `\"FileSystemResizePending\"` - controller resize is finished and a file system resize is pending on node  - `\"Resizing\"` - a user trigger resize of pvc has been started  # noqa: E501
 
         :return: The type of this V1PersistentVolumeClaimCondition.  # noqa: E501
         :rtype: str
@@ -205,19 +204,12 @@ class V1PersistentVolumeClaimCondition(object):
     def type(self, type):
         """Sets the type of this V1PersistentVolumeClaimCondition.
 
-           Possible enum values:  - `\"FileSystemResizePending\"` - controller resize is finished and a file system resize is pending on node  - `\"Resizing\"` - a user trigger resize of pvc has been started  # noqa: E501
 
         :param type: The type of this V1PersistentVolumeClaimCondition.  # noqa: E501
         :type: str
         """
         if self.local_vars_configuration.client_side_validation and type is None:  # noqa: E501
             raise ValueError("Invalid value for `type`, must not be `None`")  # noqa: E501
-        allowed_values = ["FileSystemResizePending", "Resizing"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
-                .format(type, allowed_values)
-            )
 
         self._type = type
 

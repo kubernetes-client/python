@@ -89,7 +89,7 @@ class V1NodeSelectorRequirement(object):
     def operator(self):
         """Gets the operator of this V1NodeSelectorRequirement.  # noqa: E501
 
-        Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.  Possible enum values:  - `\"DoesNotExist\"`  - `\"Exists\"`  - `\"Gt\"`  - `\"In\"`  - `\"Lt\"`  - `\"NotIn\"`  # noqa: E501
+        Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.    # noqa: E501
 
         :return: The operator of this V1NodeSelectorRequirement.  # noqa: E501
         :rtype: str
@@ -100,19 +100,13 @@ class V1NodeSelectorRequirement(object):
     def operator(self, operator):
         """Sets the operator of this V1NodeSelectorRequirement.
 
-        Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.  Possible enum values:  - `\"DoesNotExist\"`  - `\"Exists\"`  - `\"Gt\"`  - `\"In\"`  - `\"Lt\"`  - `\"NotIn\"`  # noqa: E501
+        Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.    # noqa: E501
 
         :param operator: The operator of this V1NodeSelectorRequirement.  # noqa: E501
         :type: str
         """
         if self.local_vars_configuration.client_side_validation and operator is None:  # noqa: E501
             raise ValueError("Invalid value for `operator`, must not be `None`")  # noqa: E501
-        allowed_values = ["DoesNotExist", "Exists", "Gt", "In", "Lt", "NotIn"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and operator not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `operator` ({0}), must be one of {1}"  # noqa: E501
-                .format(operator, allowed_values)
-            )
 
         self._operator = operator
 

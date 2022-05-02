@@ -84,7 +84,7 @@ class V1NamespaceStatus(object):
     def phase(self):
         """Gets the phase of this V1NamespaceStatus.  # noqa: E501
 
-        Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/  Possible enum values:  - `\"Active\"` means the namespace is available for use in the system  - `\"Terminating\"` means the namespace is undergoing graceful termination  # noqa: E501
+        Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/    # noqa: E501
 
         :return: The phase of this V1NamespaceStatus.  # noqa: E501
         :rtype: str
@@ -95,17 +95,11 @@ class V1NamespaceStatus(object):
     def phase(self, phase):
         """Sets the phase of this V1NamespaceStatus.
 
-        Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/  Possible enum values:  - `\"Active\"` means the namespace is available for use in the system  - `\"Terminating\"` means the namespace is undergoing graceful termination  # noqa: E501
+        Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/    # noqa: E501
 
         :param phase: The phase of this V1NamespaceStatus.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Active", "Terminating"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and phase not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `phase` ({0}), must be one of {1}"  # noqa: E501
-                .format(phase, allowed_values)
-            )
 
         self._phase = phase
 

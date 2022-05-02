@@ -627,7 +627,7 @@ class V1PersistentVolumeSpec(object):
     def persistent_volume_reclaim_policy(self):
         """Gets the persistent_volume_reclaim_policy of this V1PersistentVolumeSpec.  # noqa: E501
 
-        What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming  Possible enum values:  - `\"Delete\"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.  - `\"Recycle\"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.  - `\"Retain\"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.  # noqa: E501
+        What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming    # noqa: E501
 
         :return: The persistent_volume_reclaim_policy of this V1PersistentVolumeSpec.  # noqa: E501
         :rtype: str
@@ -638,17 +638,11 @@ class V1PersistentVolumeSpec(object):
     def persistent_volume_reclaim_policy(self, persistent_volume_reclaim_policy):
         """Sets the persistent_volume_reclaim_policy of this V1PersistentVolumeSpec.
 
-        What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming  Possible enum values:  - `\"Delete\"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.  - `\"Recycle\"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.  - `\"Retain\"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.  # noqa: E501
+        What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming    # noqa: E501
 
         :param persistent_volume_reclaim_policy: The persistent_volume_reclaim_policy of this V1PersistentVolumeSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Delete", "Recycle", "Retain"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and persistent_volume_reclaim_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `persistent_volume_reclaim_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(persistent_volume_reclaim_policy, allowed_values)
-            )
 
         self._persistent_volume_reclaim_policy = persistent_volume_reclaim_policy
 
