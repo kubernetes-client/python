@@ -1,3 +1,12 @@
+# v23.0.1-snapshot
+
+Kubernetes API Version: v1.23.6
+
+### API Change
+- Omits alpha-level enums from the static openapi file captured in api/openapi-spec ([kubernetes/kubernetes#109179](https://github.com/kubernetes/kubernetes/pull/109179), [@liggitt](https://github.com/liggitt)) [SIG Apps and Auth]
+- Fixes a regression in v1beta1 PodDisruptionBudget handling of "strategic merge patch"-type API requests for the `selector` field. Prior to 1.21, these requests would merge `matchLabels` content and replace `matchExpressions` content. In 1.21, patch requests touching the `selector` field started replacing the entire selector. This is consistent with server-side apply and the v1 PodDisruptionBudget behavior, but should not have been changed for v1beta1. ([kubernetes/kubernetes#108139](https://github.com/kubernetes/kubernetes/pull/108139), [@liggitt](https://github.com/liggitt)) [SIG Auth and Testing]
+
+
 # v23.3.0
 
 Kubernetes API Version: v1.23.4
