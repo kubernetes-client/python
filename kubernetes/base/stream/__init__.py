@@ -13,3 +13,10 @@
 # limitations under the License.
 
 from .stream import stream, portforward
+
+from .pod_exec import (
+    PIPE,
+    STDOUT,
+    DEVNULL,
+    Popen,
+)

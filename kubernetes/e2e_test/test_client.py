@@ -24,7 +24,7 @@ import six
 from kubernetes.client import api_client
 from kubernetes.client.api import core_v1_api
 from kubernetes.e2e_test import base
-from kubernetes.stream import stream, portforward
+from kubernetes.stream import stream, portforward, Popen
 from kubernetes.stream.ws_client import ERROR_CHANNEL
 from kubernetes.client.rest import ApiException
 
@@ -34,7 +34,6 @@ if six.PY3:
     from http import HTTPStatus
 else:
     import httplib
-
 
 def short_uuid():
     id = str(uuid.uuid4())
@@ -121,11 +120,29 @@ class TestClient(unittest.TestCase):
         print('EXEC response : %s' % resp)
         self.assertEqual(3, len(resp.splitlines()))
 
+        popen = Popen(api.connect_get_namespaced_pod_exec, name, 'default',
+                      command=exec_command,
+                      stderr=False, stdin=False,
+                      stdout=True, tty=False,
+                      text=True)
+        resp, _ = popen.communicate()
+        print('EXEC response : %s' % resp)
+        self.assertEqual(3, len(resp.splitlines()))
+
         exec_command = 'uptime'
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
                       command=exec_command,
                       stderr=False, stdin=False,
                       stdout=True, tty=False)
+        print('EXEC response : %s' % resp)
+        self.assertEqual(1, len(resp.splitlines()))
+
+        popen = Popen(api.connect_post_namespaced_pod_exec, name, 'default',
+                      command=exec_command,
+                      stderr=False, stdin=False,
+                      stdout=True, tty=False,
+                      text=True)
+        resp, _ = popen.communicate()
         print('EXEC response : %s' % resp)
         self.assertEqual(1, len(resp.splitlines()))
 
@@ -153,6 +170,29 @@ class TestClient(unittest.TestCase):
         self.assertEqual(status['status'], 'Success')
         resp.update(timeout=5)
         self.assertFalse(resp.is_open())
+
+        popen = Popen(api.connect_post_namespaced_pod_exec, name, 'default',
+                      command='/bin/sh',
+                      stderr=True, stdin=True,
+                      stdout=True, tty=False,
+                      text=True, bufsize=1)
+        popen.stdin.write("echo test string 1\n")
+        popen.timeout = 5
+        line = popen.stdout.readline()
+        popen.timeout = 0
+        self.assertRaises(TimeoutError, popen.stderr.read, 1)
+        self.assertEqual("test string 1\n", line)
+        popen.stdin.write("echo test string 2 >&2\n")
+        popen.timeout = 5
+        line = popen.stderr.readline()
+        popen.timeout = 0
+        self.assertRaises(TimeoutError, popen.stdout.read, 1)
+        self.assertEqual("test string 2\n", line)
+        popen.stdin.write("exit\n")
+        popen.wait(5)
+        self.assertEqual(popen.result['status'], 'Success')
+        self.assertEqual(popen.returncode, 0)
+        self.assertFalse(popen._websocket.connected)
 
         number_of_pods = len(api.list_pod_for_all_namespaces().items)
         self.assertTrue(number_of_pods > 0)
@@ -221,11 +261,24 @@ class TestClient(unittest.TestCase):
                 stdout=True,
                 tty=False,
                 _preload_content=False)
-
             self.assertIsNone(client.returncode)
             client.run_forever(timeout=10)
             self.assertEqual(client.returncode, value)
             self.assertEqual(client.returncode, value)  # check idempotence
+
+            popen = Popen(
+                api.connect_get_namespaced_pod_exec,
+                name,
+                'default',
+                command=command,
+                stderr=True,
+                stdin=False,
+                stdout=True,
+                tty=False)
+            self.assertIsNone(popen.returncode)
+            popen.wait(10)
+            self.assertEqual(popen.returncode, value)
+            self.assertEqual(popen.returncode, value)  # check idempotence
 
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
