@@ -343,7 +343,7 @@ class V1PodSpec(object):
     def dns_policy(self):
         """Gets the dns_policy of this V1PodSpec.  # noqa: E501
 
-        Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.  Possible enum values:  - `\"ClusterFirst\"` indicates that the pod should use cluster DNS first unless hostNetwork is true, if it is available, then fall back on the default (as determined by kubelet) DNS settings.  - `\"ClusterFirstWithHostNet\"` indicates that the pod should use cluster DNS first, if it is available, then fall back on the default (as determined by kubelet) DNS settings.  - `\"Default\"` indicates that the pod should use the default (as determined by kubelet) DNS settings.  - `\"None\"` indicates that the pod should use empty DNS settings. DNS parameters such as nameservers and search paths should be defined via DNSConfig.  # noqa: E501
+        Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.    # noqa: E501
 
         :return: The dns_policy of this V1PodSpec.  # noqa: E501
         :rtype: str
@@ -354,17 +354,11 @@ class V1PodSpec(object):
     def dns_policy(self, dns_policy):
         """Sets the dns_policy of this V1PodSpec.
 
-        Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.  Possible enum values:  - `\"ClusterFirst\"` indicates that the pod should use cluster DNS first unless hostNetwork is true, if it is available, then fall back on the default (as determined by kubelet) DNS settings.  - `\"ClusterFirstWithHostNet\"` indicates that the pod should use cluster DNS first, if it is available, then fall back on the default (as determined by kubelet) DNS settings.  - `\"Default\"` indicates that the pod should use the default (as determined by kubelet) DNS settings.  - `\"None\"` indicates that the pod should use empty DNS settings. DNS parameters such as nameservers and search paths should be defined via DNSConfig.  # noqa: E501
+        Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.    # noqa: E501
 
         :param dns_policy: The dns_policy of this V1PodSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["ClusterFirst", "ClusterFirstWithHostNet", "Default", "None"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and dns_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `dns_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(dns_policy, allowed_values)
-            )
 
         self._dns_policy = dns_policy
 
@@ -761,7 +755,7 @@ class V1PodSpec(object):
     def restart_policy(self):
         """Gets the restart_policy of this V1PodSpec.  # noqa: E501
 
-        Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy  Possible enum values:  - `\"Always\"`  - `\"Never\"`  - `\"OnFailure\"`  # noqa: E501
+        Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy    # noqa: E501
 
         :return: The restart_policy of this V1PodSpec.  # noqa: E501
         :rtype: str
@@ -772,17 +766,11 @@ class V1PodSpec(object):
     def restart_policy(self, restart_policy):
         """Sets the restart_policy of this V1PodSpec.
 
-        Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy  Possible enum values:  - `\"Always\"`  - `\"Never\"`  - `\"OnFailure\"`  # noqa: E501
+        Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy    # noqa: E501
 
         :param restart_policy: The restart_policy of this V1PodSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Always", "Never", "OnFailure"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and restart_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `restart_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(restart_policy, allowed_values)
-            )
 
         self._restart_policy = restart_policy
 

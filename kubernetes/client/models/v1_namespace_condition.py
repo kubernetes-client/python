@@ -164,7 +164,7 @@ class V1NamespaceCondition(object):
     def type(self):
         """Gets the type of this V1NamespaceCondition.  # noqa: E501
 
-        Type of namespace controller condition.  Possible enum values:  - `\"NamespaceContentRemaining\"` contains information about resources remaining in a namespace.  - `\"NamespaceDeletionContentFailure\"` contains information about namespace deleter errors during deletion of resources.  - `\"NamespaceDeletionDiscoveryFailure\"` contains information about namespace deleter errors during resource discovery.  - `\"NamespaceDeletionGroupVersionParsingFailure\"` contains information about namespace deleter errors parsing GV for legacy types.  - `\"NamespaceFinalizersRemaining\"` contains information about which finalizers are on resources remaining in a namespace.  # noqa: E501
+        Type of namespace controller condition.  # noqa: E501
 
         :return: The type of this V1NamespaceCondition.  # noqa: E501
         :rtype: str
@@ -175,19 +175,13 @@ class V1NamespaceCondition(object):
     def type(self, type):
         """Sets the type of this V1NamespaceCondition.
 
-        Type of namespace controller condition.  Possible enum values:  - `\"NamespaceContentRemaining\"` contains information about resources remaining in a namespace.  - `\"NamespaceDeletionContentFailure\"` contains information about namespace deleter errors during deletion of resources.  - `\"NamespaceDeletionDiscoveryFailure\"` contains information about namespace deleter errors during resource discovery.  - `\"NamespaceDeletionGroupVersionParsingFailure\"` contains information about namespace deleter errors parsing GV for legacy types.  - `\"NamespaceFinalizersRemaining\"` contains information about which finalizers are on resources remaining in a namespace.  # noqa: E501
+        Type of namespace controller condition.  # noqa: E501
 
         :param type: The type of this V1NamespaceCondition.  # noqa: E501
         :type: str
         """
         if self.local_vars_configuration.client_side_validation and type is None:  # noqa: E501
             raise ValueError("Invalid value for `type`, must not be `None`")  # noqa: E501
-        allowed_values = ["NamespaceContentRemaining", "NamespaceDeletionContentFailure", "NamespaceDeletionDiscoveryFailure", "NamespaceDeletionGroupVersionParsingFailure", "NamespaceFinalizersRemaining"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
-                .format(type, allowed_values)
-            )
 
         self._type = type
 

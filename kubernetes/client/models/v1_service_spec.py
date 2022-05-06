@@ -261,7 +261,7 @@ class V1ServiceSpec(object):
     def external_traffic_policy(self):
         """Gets the external_traffic_policy of this V1ServiceSpec.  # noqa: E501
 
-        externalTrafficPolicy denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints. \"Local\" preserves the client source IP and avoids a second hop for LoadBalancer and Nodeport type services, but risks potentially imbalanced traffic spreading. \"Cluster\" obscures the client source IP and may cause a second hop to another node, but should have good overall load-spreading.  Possible enum values:  - `\"Cluster\"` specifies node-global (legacy) behavior.  - `\"Local\"` specifies node-local endpoints behavior.  # noqa: E501
+        externalTrafficPolicy denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints. \"Local\" preserves the client source IP and avoids a second hop for LoadBalancer and Nodeport type services, but risks potentially imbalanced traffic spreading. \"Cluster\" obscures the client source IP and may cause a second hop to another node, but should have good overall load-spreading.    # noqa: E501
 
         :return: The external_traffic_policy of this V1ServiceSpec.  # noqa: E501
         :rtype: str
@@ -272,17 +272,11 @@ class V1ServiceSpec(object):
     def external_traffic_policy(self, external_traffic_policy):
         """Sets the external_traffic_policy of this V1ServiceSpec.
 
-        externalTrafficPolicy denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints. \"Local\" preserves the client source IP and avoids a second hop for LoadBalancer and Nodeport type services, but risks potentially imbalanced traffic spreading. \"Cluster\" obscures the client source IP and may cause a second hop to another node, but should have good overall load-spreading.  Possible enum values:  - `\"Cluster\"` specifies node-global (legacy) behavior.  - `\"Local\"` specifies node-local endpoints behavior.  # noqa: E501
+        externalTrafficPolicy denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints. \"Local\" preserves the client source IP and avoids a second hop for LoadBalancer and Nodeport type services, but risks potentially imbalanced traffic spreading. \"Cluster\" obscures the client source IP and may cause a second hop to another node, but should have good overall load-spreading.    # noqa: E501
 
         :param external_traffic_policy: The external_traffic_policy of this V1ServiceSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Cluster", "Local"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and external_traffic_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `external_traffic_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(external_traffic_policy, allowed_values)
-            )
 
         self._external_traffic_policy = external_traffic_policy
 
@@ -520,7 +514,7 @@ class V1ServiceSpec(object):
     def session_affinity(self):
         """Gets the session_affinity of this V1ServiceSpec.  # noqa: E501
 
-        Supports \"ClientIP\" and \"None\". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  Possible enum values:  - `\"ClientIP\"` is the Client IP based.  - `\"None\"` - no session affinity.  # noqa: E501
+        Supports \"ClientIP\" and \"None\". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies    # noqa: E501
 
         :return: The session_affinity of this V1ServiceSpec.  # noqa: E501
         :rtype: str
@@ -531,17 +525,11 @@ class V1ServiceSpec(object):
     def session_affinity(self, session_affinity):
         """Sets the session_affinity of this V1ServiceSpec.
 
-        Supports \"ClientIP\" and \"None\". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  Possible enum values:  - `\"ClientIP\"` is the Client IP based.  - `\"None\"` - no session affinity.  # noqa: E501
+        Supports \"ClientIP\" and \"None\". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies    # noqa: E501
 
         :param session_affinity: The session_affinity of this V1ServiceSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["ClientIP", "None"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and session_affinity not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `session_affinity` ({0}), must be one of {1}"  # noqa: E501
-                .format(session_affinity, allowed_values)
-            )
 
         self._session_affinity = session_affinity
 
@@ -570,7 +558,7 @@ class V1ServiceSpec(object):
     def type(self):
         """Gets the type of this V1ServiceSpec.  # noqa: E501
 
-        type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types  Possible enum values:  - `\"ClusterIP\"` means a service will only be accessible inside the cluster, via the cluster IP.  - `\"ExternalName\"` means a service consists of only a reference to an external name that kubedns or equivalent will return as a CNAME record, with no exposing or proxying of any pods involved.  - `\"LoadBalancer\"` means a service will be exposed via an external load balancer (if the cloud provider supports it), in addition to 'NodePort' type.  - `\"NodePort\"` means a service will be exposed on one port of every node, in addition to 'ClusterIP' type.  # noqa: E501
+        type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types    # noqa: E501
 
         :return: The type of this V1ServiceSpec.  # noqa: E501
         :rtype: str
@@ -581,17 +569,11 @@ class V1ServiceSpec(object):
     def type(self, type):
         """Sets the type of this V1ServiceSpec.
 
-        type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types  Possible enum values:  - `\"ClusterIP\"` means a service will only be accessible inside the cluster, via the cluster IP.  - `\"ExternalName\"` means a service consists of only a reference to an external name that kubedns or equivalent will return as a CNAME record, with no exposing or proxying of any pods involved.  - `\"LoadBalancer\"` means a service will be exposed via an external load balancer (if the cloud provider supports it), in addition to 'NodePort' type.  - `\"NodePort\"` means a service will be exposed on one port of every node, in addition to 'ClusterIP' type.  # noqa: E501
+        type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types    # noqa: E501
 
         :param type: The type of this V1ServiceSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["ClusterIP", "ExternalName", "LoadBalancer", "NodePort"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
-                .format(type, allowed_values)
-            )
 
         self._type = type
 
