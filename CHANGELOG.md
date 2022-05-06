@@ -1,4 +1,4 @@
-# v23.0.1-snapshot
+# v23.6.0
 
 Kubernetes API Version: v1.23.6
 
