@@ -284,7 +284,7 @@ class V1NodeStatus(object):
     def phase(self):
         """Gets the phase of this V1NodeStatus.  # noqa: E501
 
-        NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.  Possible enum values:  - `\"Pending\"` means the node has been created/added by the system, but not configured.  - `\"Running\"` means the node has been configured and has Kubernetes components running.  - `\"Terminated\"` means the node has been removed from the cluster.  # noqa: E501
+        NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.    # noqa: E501
 
         :return: The phase of this V1NodeStatus.  # noqa: E501
         :rtype: str
@@ -295,17 +295,11 @@ class V1NodeStatus(object):
     def phase(self, phase):
         """Sets the phase of this V1NodeStatus.
 
-        NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.  Possible enum values:  - `\"Pending\"` means the node has been created/added by the system, but not configured.  - `\"Running\"` means the node has been configured and has Kubernetes components running.  - `\"Terminated\"` means the node has been removed from the cluster.  # noqa: E501
+        NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.    # noqa: E501
 
         :param phase: The phase of this V1NodeStatus.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Pending", "Running", "Terminated"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and phase not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `phase` ({0}), must be one of {1}"  # noqa: E501
-                .format(phase, allowed_values)
-            )
 
         self._phase = phase
 

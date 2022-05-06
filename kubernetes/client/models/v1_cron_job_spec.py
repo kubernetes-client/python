@@ -84,7 +84,7 @@ class V1CronJobSpec(object):
     def concurrency_policy(self):
         """Gets the concurrency_policy of this V1CronJobSpec.  # noqa: E501
 
-        Specifies how to treat concurrent executions of a Job. Valid values are: - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one  Possible enum values:  - `\"Allow\"` allows CronJobs to run concurrently.  - `\"Forbid\"` forbids concurrent runs, skipping next run if previous hasn't finished yet.  - `\"Replace\"` cancels currently running job and replaces it with a new one.  # noqa: E501
+        Specifies how to treat concurrent executions of a Job. Valid values are: - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one    # noqa: E501
 
         :return: The concurrency_policy of this V1CronJobSpec.  # noqa: E501
         :rtype: str
@@ -95,17 +95,11 @@ class V1CronJobSpec(object):
     def concurrency_policy(self, concurrency_policy):
         """Sets the concurrency_policy of this V1CronJobSpec.
 
-        Specifies how to treat concurrent executions of a Job. Valid values are: - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one  Possible enum values:  - `\"Allow\"` allows CronJobs to run concurrently.  - `\"Forbid\"` forbids concurrent runs, skipping next run if previous hasn't finished yet.  - `\"Replace\"` cancels currently running job and replaces it with a new one.  # noqa: E501
+        Specifies how to treat concurrent executions of a Job. Valid values are: - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one    # noqa: E501
 
         :param concurrency_policy: The concurrency_policy of this V1CronJobSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Allow", "Forbid", "Replace"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and concurrency_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `concurrency_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(concurrency_policy, allowed_values)
-            )
 
         self._concurrency_policy = concurrency_policy
 

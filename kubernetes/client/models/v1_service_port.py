@@ -174,7 +174,7 @@ class V1ServicePort(object):
     def protocol(self):
         """Gets the protocol of this V1ServicePort.  # noqa: E501
 
-        The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP.  Possible enum values:  - `\"SCTP\"` is the SCTP protocol.  - `\"TCP\"` is the TCP protocol.  - `\"UDP\"` is the UDP protocol.  # noqa: E501
+        The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP.    # noqa: E501
 
         :return: The protocol of this V1ServicePort.  # noqa: E501
         :rtype: str
@@ -185,17 +185,11 @@ class V1ServicePort(object):
     def protocol(self, protocol):
         """Sets the protocol of this V1ServicePort.
 
-        The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP.  Possible enum values:  - `\"SCTP\"` is the SCTP protocol.  - `\"TCP\"` is the TCP protocol.  - `\"UDP\"` is the UDP protocol.  # noqa: E501
+        The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP.    # noqa: E501
 
         :param protocol: The protocol of this V1ServicePort.  # noqa: E501
         :type: str
         """
-        allowed_values = ["SCTP", "TCP", "UDP"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and protocol not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `protocol` ({0}), must be one of {1}"  # noqa: E501
-                .format(protocol, allowed_values)
-            )
 
         self._protocol = protocol
 

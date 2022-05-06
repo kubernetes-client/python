@@ -275,7 +275,7 @@ class V1Container(object):
     def image_pull_policy(self):
         """Gets the image_pull_policy of this V1Container.  # noqa: E501
 
-        Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images  Possible enum values:  - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.  - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.  - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present  # noqa: E501
+        Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images    # noqa: E501
 
         :return: The image_pull_policy of this V1Container.  # noqa: E501
         :rtype: str
@@ -286,17 +286,11 @@ class V1Container(object):
     def image_pull_policy(self, image_pull_policy):
         """Sets the image_pull_policy of this V1Container.
 
-        Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images  Possible enum values:  - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.  - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.  - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present  # noqa: E501
+        Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images    # noqa: E501
 
         :param image_pull_policy: The image_pull_policy of this V1Container.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Always", "IfNotPresent", "Never"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and image_pull_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `image_pull_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(image_pull_policy, allowed_values)
-            )
 
         self._image_pull_policy = image_pull_policy
 
@@ -547,7 +541,7 @@ class V1Container(object):
     def termination_message_policy(self):
         """Gets the termination_message_policy of this V1Container.  # noqa: E501
 
-        Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.  Possible enum values:  - `\"FallbackToLogsOnError\"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.  - `\"File\"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.  # noqa: E501
+        Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.    # noqa: E501
 
         :return: The termination_message_policy of this V1Container.  # noqa: E501
         :rtype: str
@@ -558,17 +552,11 @@ class V1Container(object):
     def termination_message_policy(self, termination_message_policy):
         """Sets the termination_message_policy of this V1Container.
 
-        Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.  Possible enum values:  - `\"FallbackToLogsOnError\"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.  - `\"File\"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.  # noqa: E501
+        Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.    # noqa: E501
 
         :param termination_message_policy: The termination_message_policy of this V1Container.  # noqa: E501
         :type: str
         """
-        allowed_values = ["FallbackToLogsOnError", "File"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and termination_message_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `termination_message_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(termination_message_policy, allowed_values)
-            )
 
         self._termination_message_policy = termination_message_policy
 

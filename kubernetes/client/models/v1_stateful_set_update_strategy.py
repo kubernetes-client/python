@@ -82,7 +82,7 @@ class V1StatefulSetUpdateStrategy(object):
     def type(self):
         """Gets the type of this V1StatefulSetUpdateStrategy.  # noqa: E501
 
-        Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.  Possible enum values:  - `\"OnDelete\"` triggers the legacy behavior. Version tracking and ordered rolling restarts are disabled. Pods are recreated from the StatefulSetSpec when they are manually deleted. When a scale operation is performed with this strategy,specification version indicated by the StatefulSet's currentRevision.  - `\"RollingUpdate\"` indicates that update will be applied to all Pods in the StatefulSet with respect to the StatefulSet ordering constraints. When a scale operation is performed with this strategy, new Pods will be created from the specification version indicated by the StatefulSet's updateRevision.  # noqa: E501
+        Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.    # noqa: E501
 
         :return: The type of this V1StatefulSetUpdateStrategy.  # noqa: E501
         :rtype: str
@@ -93,17 +93,11 @@ class V1StatefulSetUpdateStrategy(object):
     def type(self, type):
         """Sets the type of this V1StatefulSetUpdateStrategy.
 
-        Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.  Possible enum values:  - `\"OnDelete\"` triggers the legacy behavior. Version tracking and ordered rolling restarts are disabled. Pods are recreated from the StatefulSetSpec when they are manually deleted. When a scale operation is performed with this strategy,specification version indicated by the StatefulSet's currentRevision.  - `\"RollingUpdate\"` indicates that update will be applied to all Pods in the StatefulSet with respect to the StatefulSet ordering constraints. When a scale operation is performed with this strategy, new Pods will be created from the specification version indicated by the StatefulSet's updateRevision.  # noqa: E501
+        Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.    # noqa: E501
 
         :param type: The type of this V1StatefulSetUpdateStrategy.  # noqa: E501
         :type: str
         """
-        allowed_values = ["OnDelete", "RollingUpdate"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
-                .format(type, allowed_values)
-            )
 
         self._type = type
 
