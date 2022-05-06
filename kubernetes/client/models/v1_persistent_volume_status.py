@@ -89,7 +89,7 @@ class V1PersistentVolumeStatus(object):
     def phase(self):
         """Gets the phase of this V1PersistentVolumeStatus.  # noqa: E501
 
-        Phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase  Possible enum values:  - `\"Available\"` used for PersistentVolumes that are not yet bound Available volumes are held by the binder and matched to PersistentVolumeClaims  - `\"Bound\"` used for PersistentVolumes that are bound  - `\"Failed\"` used for PersistentVolumes that failed to be correctly recycled or deleted after being released from a claim  - `\"Pending\"` used for PersistentVolumes that are not available  - `\"Released\"` used for PersistentVolumes where the bound PersistentVolumeClaim was deleted released volumes must be recycled before becoming available again this phase is used by the persistent volume claim binder to signal to another process to reclaim the resource  # noqa: E501
+        Phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase    # noqa: E501
 
         :return: The phase of this V1PersistentVolumeStatus.  # noqa: E501
         :rtype: str
@@ -100,17 +100,11 @@ class V1PersistentVolumeStatus(object):
     def phase(self, phase):
         """Sets the phase of this V1PersistentVolumeStatus.
 
-        Phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase  Possible enum values:  - `\"Available\"` used for PersistentVolumes that are not yet bound Available volumes are held by the binder and matched to PersistentVolumeClaims  - `\"Bound\"` used for PersistentVolumes that are bound  - `\"Failed\"` used for PersistentVolumes that failed to be correctly recycled or deleted after being released from a claim  - `\"Pending\"` used for PersistentVolumes that are not available  - `\"Released\"` used for PersistentVolumes where the bound PersistentVolumeClaim was deleted released volumes must be recycled before becoming available again this phase is used by the persistent volume claim binder to signal to another process to reclaim the resource  # noqa: E501
+        Phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase    # noqa: E501
 
         :param phase: The phase of this V1PersistentVolumeStatus.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Available", "Bound", "Failed", "Pending", "Released"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and phase not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `phase` ({0}), must be one of {1}"  # noqa: E501
-                .format(phase, allowed_values)
-            )
 
         self._phase = phase
 

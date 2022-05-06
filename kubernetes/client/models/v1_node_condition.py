@@ -196,7 +196,7 @@ class V1NodeCondition(object):
     def type(self):
         """Gets the type of this V1NodeCondition.  # noqa: E501
 
-        Type of node condition.  Possible enum values:  - `\"DiskPressure\"` means the kubelet is under pressure due to insufficient available disk.  - `\"MemoryPressure\"` means the kubelet is under pressure due to insufficient available memory.  - `\"NetworkUnavailable\"` means that network for the node is not correctly configured.  - `\"PIDPressure\"` means the kubelet is under pressure due to insufficient available PID.  - `\"Ready\"` means kubelet is healthy and ready to accept pods.  # noqa: E501
+        Type of node condition.  # noqa: E501
 
         :return: The type of this V1NodeCondition.  # noqa: E501
         :rtype: str
@@ -207,19 +207,13 @@ class V1NodeCondition(object):
     def type(self, type):
         """Sets the type of this V1NodeCondition.
 
-        Type of node condition.  Possible enum values:  - `\"DiskPressure\"` means the kubelet is under pressure due to insufficient available disk.  - `\"MemoryPressure\"` means the kubelet is under pressure due to insufficient available memory.  - `\"NetworkUnavailable\"` means that network for the node is not correctly configured.  - `\"PIDPressure\"` means the kubelet is under pressure due to insufficient available PID.  - `\"Ready\"` means kubelet is healthy and ready to accept pods.  # noqa: E501
+        Type of node condition.  # noqa: E501
 
         :param type: The type of this V1NodeCondition.  # noqa: E501
         :type: str
         """
         if self.local_vars_configuration.client_side_validation and type is None:  # noqa: E501
             raise ValueError("Invalid value for `type`, must not be `None`")  # noqa: E501
-        allowed_values = ["DiskPressure", "MemoryPressure", "NetworkUnavailable", "PIDPressure", "Ready"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
-                .format(type, allowed_values)
-            )
 
         self._type = type
 

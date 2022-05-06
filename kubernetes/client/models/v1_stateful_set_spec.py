@@ -142,7 +142,7 @@ class V1StatefulSetSpec(object):
     def pod_management_policy(self):
         """Gets the pod_management_policy of this V1StatefulSetSpec.  # noqa: E501
 
-        podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.  Possible enum values:  - `\"OrderedReady\"` will create pods in strictly increasing order on scale up and strictly decreasing order on scale down, progressing only when the previous pod is ready or terminated. At most one pod will be changed at any time.  - `\"Parallel\"` will create and delete pods as soon as the stateful set replica count is changed, and will not wait for pods to be ready or complete termination.  # noqa: E501
+        podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.    # noqa: E501
 
         :return: The pod_management_policy of this V1StatefulSetSpec.  # noqa: E501
         :rtype: str
@@ -153,17 +153,11 @@ class V1StatefulSetSpec(object):
     def pod_management_policy(self, pod_management_policy):
         """Sets the pod_management_policy of this V1StatefulSetSpec.
 
-        podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.  Possible enum values:  - `\"OrderedReady\"` will create pods in strictly increasing order on scale up and strictly decreasing order on scale down, progressing only when the previous pod is ready or terminated. At most one pod will be changed at any time.  - `\"Parallel\"` will create and delete pods as soon as the stateful set replica count is changed, and will not wait for pods to be ready or complete termination.  # noqa: E501
+        podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.    # noqa: E501
 
         :param pod_management_policy: The pod_management_policy of this V1StatefulSetSpec.  # noqa: E501
         :type: str
         """
-        allowed_values = ["OrderedReady", "Parallel"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and pod_management_policy not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `pod_management_policy` ({0}), must be one of {1}"  # noqa: E501
-                .format(pod_management_policy, allowed_values)
-            )
 
         self._pod_management_policy = pod_management_policy
 

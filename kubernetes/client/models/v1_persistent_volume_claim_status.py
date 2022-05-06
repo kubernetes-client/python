@@ -173,7 +173,7 @@ class V1PersistentVolumeClaimStatus(object):
     def phase(self):
         """Gets the phase of this V1PersistentVolumeClaimStatus.  # noqa: E501
 
-        Phase represents the current phase of PersistentVolumeClaim.  Possible enum values:  - `\"Bound\"` used for PersistentVolumeClaims that are bound  - `\"Lost\"` used for PersistentVolumeClaims that lost their underlying PersistentVolume. The claim was bound to a PersistentVolume and this volume does not exist any longer and all data on it was lost.  - `\"Pending\"` used for PersistentVolumeClaims that are not yet bound  # noqa: E501
+        Phase represents the current phase of PersistentVolumeClaim.    # noqa: E501
 
         :return: The phase of this V1PersistentVolumeClaimStatus.  # noqa: E501
         :rtype: str
@@ -184,17 +184,11 @@ class V1PersistentVolumeClaimStatus(object):
     def phase(self, phase):
         """Sets the phase of this V1PersistentVolumeClaimStatus.
 
-        Phase represents the current phase of PersistentVolumeClaim.  Possible enum values:  - `\"Bound\"` used for PersistentVolumeClaims that are bound  - `\"Lost\"` used for PersistentVolumeClaims that lost their underlying PersistentVolume. The claim was bound to a PersistentVolume and this volume does not exist any longer and all data on it was lost.  - `\"Pending\"` used for PersistentVolumeClaims that are not yet bound  # noqa: E501
+        Phase represents the current phase of PersistentVolumeClaim.    # noqa: E501
 
         :param phase: The phase of this V1PersistentVolumeClaimStatus.  # noqa: E501
         :type: str
         """
-        allowed_values = ["Bound", "Lost", "Pending"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and phase not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `phase` ({0}), must be one of {1}"  # noqa: E501
-                .format(phase, allowed_values)
-            )
 
         self._phase = phase
 
