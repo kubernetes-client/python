@@ -96,11 +96,11 @@ class Watch(object):
     def unmarshal_event(self, data, return_type):
         js = json.loads(data)
         js['raw_object'] = js['object']
-        # BOOKMARK event is treated the same as ERROR for a quick fix of
-        # decoding exception
-        # TODO: make use of the resource_version in BOOKMARK event for more
-        # efficient WATCH
-        if return_type and js['type'] != 'ERROR' and js['type'] != 'BOOKMARK':
+        if return_type and js['type'] != 'ERROR':
+            if js['type'] == 'BOOKMARK':
+                # treat BOOKMARK as a custom object, so that resource_version
+                # is updated
+                return_type = object
             obj = SimpleNamespace(data=json.dumps(js['raw_object']))
             js['object'] = self._api_client.deserialize(obj, return_type)
             if hasattr(js['object'], 'metadata'):

@@ -167,6 +167,42 @@ class WatchTests(unittest.TestCase):
         # more strict test with worse error message
         self.assertEqual(fake_api.get_namespaces.mock_calls, calls)
 
+    def test_watch_resource_version_with_bookmark(self):
+        """
+        test the resource_version get updated for bookmark events
+
+        """
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        values = [
+            '{"type": "ADDED", "object": {"metadata": {"name": "test1",'
+            '"resourceVersion": "1"}, "spec": {}, "status": {}}}\n',
+            '{ "type": "BOOKMARK", "object": {"kind": "Pod", "apiVersion": "v1",'
+            '"metadata": {"resourceVersion": "3"} }}\n',
+            '{"type": "ADDED", "object": {"metadata": {"name": "test3",'
+            '"resourceVersion": "4"}, "spec": {}, "status": {}}}\n']
+
+        def get_values(*args, **kwargs):
+            return values
+
+        fake_resp.stream = Mock(
+            side_effect=get_values)
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        iterations = 3
+
+        for c, e in enumerate(w.stream(fake_api.get_namespaces,
+                                       resource_version="0")):
+            self.assertEqual(w.resource_version,
+                             e['raw_object']['metadata']['resourceVersion'])
+            if c == len(values) * iterations:
+                w.stop()
+
     def test_watch_stream_twice(self):
         w = Watch(float)
         for step in ['first', 'second']:
@@ -263,10 +299,8 @@ class WatchTests(unittest.TestCase):
             '"metadata":{},"spec":{"containers":null}}},"status":{}}}',
             'V1Job')
         self.assertEqual("BOOKMARK", event['type'])
-        # Watch.resource_version is *not* updated, as BOOKMARK is treated the
-        # same as ERROR for a quick fix of decoding exception,
-        # resource_version in BOOKMARK is *not* used at all.
-        self.assertEqual(None, w.resource_version)
+
+        self.assertEqual("1", w.resource_version)
 
     def test_watch_with_exception(self):
         fake_resp = Mock()
