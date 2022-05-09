@@ -279,7 +279,8 @@ class DynamicClient(object):
             files=local_var_files,
             auth_settings=auth_settings,
             _preload_content=False,
-            _return_http_data_only=params.get('_return_http_data_only', True)
+            _return_http_data_only=params.get('_return_http_data_only', True),
+            _request_timeout=params.get('_request_timeout')
         )
         if params.get('async_req'):
             return api_response.get()
