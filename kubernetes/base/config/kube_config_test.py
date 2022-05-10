@@ -22,7 +22,7 @@ import tempfile
 import unittest
 from collections import namedtuple
 
-import mock
+from unittest import mock
 import yaml
 from six import PY3, next
 

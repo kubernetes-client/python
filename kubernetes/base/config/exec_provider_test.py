@@ -15,7 +15,7 @@
 import os
 import unittest
 
-import mock
+from unittest import mock
 
 from .config_exception import ConfigException
 from .exec_provider import ExecProvider
