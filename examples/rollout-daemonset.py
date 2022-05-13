@@ -88,7 +88,6 @@ def main():
     # Loading the local kubeconfig
     config.load_kube_config()
     apps_v1_api = client.AppsV1Api()
-    core_v1_api = client.CoreV1Api()
     daemon_set_obj = create_daemon_set_object()
 
     create_daemon_set(apps_v1_api, daemon_set_obj)
