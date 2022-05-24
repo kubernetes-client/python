@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import time
 import unittest
 from os import path
 
@@ -460,3 +461,48 @@ class TestUtils(unittest.TestCase):
             name="mock-pod-1", namespace=self.test_namespace, body={})
         app_api.delete_namespaced_deployment(
             name="mock", namespace=self.test_namespace, body={})
+
+    # Tests for custom resource
+
+    def test_create_custom_resource_definition(self):
+        """
+        Should be able to create custom resource definition
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "crd/crontab-crd.yml",
+            namespace=self.test_namespace)
+        extensions_api = client.ApiextensionsV1Api(k8s_client)
+        crd = extensions_api.read_custom_resource_definition("crontabs.example.com")
+        self.assertIsNotNone(crd)
+        extensions_api.delete_custom_resource_definition("crontabs.example.com")
+
+    def test_create_custom_resource_object(self):
+        """
+        Should be able to create custom resource object
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "crd/controller-crd.yml",
+            namespace=self.test_namespace)
+        time.sleep(1)
+        utils.create_from_yaml(
+            k8s_client, self.path_prefix + "crd/controller-example.yml",
+            namespace=self.test_namespace)
+
+        custom_object_api = client.CustomObjectsApi(k8s_client)
+        obj = custom_object_api.get_namespaced_custom_object(
+            group="samplecontroller.x-k8s.io",
+            version="v1alpha1",
+            namespace=self.test_namespace,
+            plural="foos",
+            name="example-foo")
+        self.assertIsNotNone(obj)
+        extensions_api = client.ApiextensionsV1Api(k8s_client)
+        extensions_api.delete_custom_resource_definition("foos.samplecontroller.x-k8s.io")
+        custom_object_api.delete_namespaced_custom_object(
+            group="samplecontroller.x-k8s.io",
+            version="v1alpha1",
+            namespace=self.test_namespace,
+            plural="foos",
+            name="example-foo")
