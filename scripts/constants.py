@@ -15,16 +15,16 @@
 import sys
 
 # Kubernetes branch to get the OpenAPI spec from.
-KUBERNETES_BRANCH = "release-1.23"
+KUBERNETES_BRANCH = "release-1.24"
 
 # client version for packaging and releasing.
-CLIENT_VERSION = "23.0.1-snapshot"
+CLIENT_VERSION = "24.1.0"
 
 # Name of the release package
 PACKAGE_NAME = "kubernetes"
 
 # Stage of development, mainly used in setup.py's classifiers.
-DEVELOPMENT_STATUS = "3 - Alpha"
+DEVELOPMENT_STATUS = "5 - Production/Stable"
 
 
 # If called directly, return the constant value given
