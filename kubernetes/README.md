@@ -69,7 +69,7 @@ with kubernetes.client.ApiClient(configuration) as api_client:
     
     try:
         api_response = api_instance.get_service_account_issuer_open_id_configuration()
-        pprint(api_response)
+        print(api_response)
     except ApiException as e:
         print("Exception when calling WellKnownApi->get_service_account_issuer_open_id_configuration: %s\n" % e)
     
