@@ -287,9 +287,6 @@ class V1beta1Event(object):
         :param event_time: The event_time of this V1beta1Event.  # noqa: E501
         :type: datetime
         """
-        if self.local_vars_configuration.client_side_validation and event_time is None:  # noqa: E501
-            raise ValueError("Invalid value for `event_time`, must not be `None`")  # noqa: E501
-
         self._event_time = event_time
 
     @property
