@@ -57,11 +57,12 @@ class ExecProvider(object):
         self.cwd = cwd or None
 
     def run(self, previous_response=None):
+        is_interactive = sys.stdout.isatty()
         kubernetes_exec_info = {
             'apiVersion': self.api_version,
             'kind': 'ExecCredential',
             'spec': {
-                'interactive': sys.stdout.isatty()
+                'interactive': is_interactive
             }
         }
         if previous_response:
@@ -70,7 +71,8 @@ class ExecProvider(object):
         process = subprocess.Popen(
             self.args,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stderr=sys.stderr when is_interactive else subprocess.PIPE,
+            stdin=sys.stdin when is_interactive else None,
             cwd=self.cwd,
             env=self.env,
             universal_newlines=True)
