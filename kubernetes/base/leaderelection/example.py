@@ -43,9 +43,17 @@ def example_func():
 # In that case, a default callback function will be used
 
 # Create config
-config = electionconfig.Config(ConfigMapLock(lock_name, lock_namespace, candidate_id), lease_duration=17,
-                               renew_deadline=15, retry_period=5, onstarted_leading=example_func,
-                               onstopped_leading=None)
+config = electionconfig.Config(
+    ConfigMapLock(
+        lock_name,
+        lock_namespace,
+        candidate_id),
+    lease_duration=17,
+    renew_deadline=15,
+    retry_period=5,
+    onstarted_leading=example_func,
+    onstopped_leading=None,
+    release_on_stop=True)
 
 # Enter leader election
 leaderelection.LeaderElection(config).run()

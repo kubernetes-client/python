@@ -58,13 +58,17 @@ class LeaderElection:
             logging.info("{} successfully acquired lease".format(self.election_config.lock.identity))
 
             # Start leading and call OnStartedLeading()
-            threading.daemon = True
-            threading.Thread(target=self.election_config.onstarted_leading).start()
+            try:
+                threading.daemon = True
+                threading.Thread(target=self.election_config.onstarted_leading).start()
 
-            self.renew_loop()
+                self.renew_loop()
+            finally:
+                if self.election_config.release_on_stop:
+                    self.release()
+                # Failed to update lease, run OnStoppedLeading callback
+                self.election_config.onstopped_leading()
 
-            # Failed to update lease, run OnStoppedLeading callback
-            self.election_config.onstopped_leading()
 
     def acquire(self):
         # Follower
@@ -103,6 +107,22 @@ class LeaderElection:
 
             # failed to renew, return
             return
+    
+    def release(self):
+        lock_status, old_election_record = self.election_config.lock.get(self.election_config.lock.name,
+                                                                        self.election_config.lock.namespace)
+        if self.observed_record and self.observed_record.holder_identity != old_election_record.holder_identity:
+            return
+        
+        if lock_status:
+            logging.info("release lock: {}".format(old_election_record.holder_identity))
+            now_timestamp = time.time()
+            now = datetime.datetime.fromtimestamp(now_timestamp)
+            old_election_record.lease_duration = 1
+            old_election_record.holder_identity = None
+            old_election_record.renew_time = str(now)
+            old_election_record.acquire_time = str(now)
+            self.update_lock(old_election_record)
 
     def try_acquire_or_renew(self):
         now_timestamp = time.time()
@@ -187,5 +207,6 @@ class LeaderElection:
 
         self.observed_record = leader_election_record
         self.observed_time_milliseconds = int(time.time() * 1000)
-        logging.info("leader {} has successfully acquired lease".format(leader_election_record.holder_identity))
+        if leader_election_record.holder_identity:
+            logging.info("leader {} has successfully acquired lease".format(leader_election_record.holder_identity))
         return True
