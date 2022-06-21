@@ -1,3 +1,10 @@
+# v24.2.0
+
+Kubernetes API Version: v1.24.2
+
+### Uncategorized
+- The dynamic client now support the `_request_timeout` parameter to configure connection and request timeouts. (#1732, @philipp-sontag-by)
+
 # v24.1.0b1
 
 Kubernetes API Version: v1.24.1
