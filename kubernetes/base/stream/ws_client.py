@@ -179,7 +179,7 @@ class WSClient:
         #                   efficient as epoll. Will work for fd numbers above 1024.
         # select.epoll()  - newest and most efficient way of polling.
         #                   However, only works on linux.
-        if sys.platform.startswith('linux') or sys.platform in ['darwin']:
+        if hasattr(select, "poll"):
             poll = select.poll()
             poll.register(self.sock.sock, select.POLLIN)
             r = poll.poll(timeout)
