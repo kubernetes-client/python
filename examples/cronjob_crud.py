@@ -59,8 +59,6 @@ def get_cronjob_list(namespace='default'):
     ret = v1.list_namespaced_cron_job(namespace=namespace, pretty=True, _preload_content=False)
     cron_job_list = json.loads(ret.data)
     print(f'cronjob number={len(cron_job_list["items"])}')
-    # for cron in cron_job_list['items']:
-    #     print(json.dumps(cron))
     return cron_job_list["items"]
 
 
