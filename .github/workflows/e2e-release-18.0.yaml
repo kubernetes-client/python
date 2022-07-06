@@ -19,7 +19,7 @@ jobs:
       with:
         submodules: true
     - name: Create Kind Cluster
-      uses: helm/kind-action@v1.2.0
+      uses: helm/kind-action@v1.3.0
       with:
         cluster_name: kubernetes-python-e2e-release-18.0-${{ matrix.python-version }}
         # The kind version to be used to spin the cluster up
@@ -30,7 +30,7 @@ jobs:
         # as we sync with Kubernetes upstream
         config: .github/workflows/kind-configs/cluster-1.18.yaml
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies

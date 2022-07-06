@@ -4,7 +4,7 @@ ContainerStatus contains details for the current status of this container.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**container_id** | **str** | Container&#39;s ID in the format &#39;docker://&lt;container_id&gt;&#39;. | [optional] 
+**container_id** | **str** | Container&#39;s ID in the format &#39;&lt;type&gt;://&lt;container_id&gt;&#39;. | [optional] 
 **image** | **str** | The image the container is running. More info: https://kubernetes.io/docs/concepts/containers/images. | 
 **image_id** | **str** | ImageID of the container&#39;s image. | 
 **last_state** | [**V1ContainerState**](V1ContainerState.md) |  | [optional] 

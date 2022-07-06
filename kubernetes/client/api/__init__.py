@@ -48,7 +48,6 @@ from kubernetes.client.api.networking_api import NetworkingApi
 from kubernetes.client.api.networking_v1_api import NetworkingV1Api
 from kubernetes.client.api.node_api import NodeApi
 from kubernetes.client.api.node_v1_api import NodeV1Api
-from kubernetes.client.api.node_v1alpha1_api import NodeV1alpha1Api
 from kubernetes.client.api.node_v1beta1_api import NodeV1beta1Api
 from kubernetes.client.api.openid_api import OpenidApi
 from kubernetes.client.api.policy_api import PolicyApi
@@ -60,6 +59,5 @@ from kubernetes.client.api.scheduling_api import SchedulingApi
 from kubernetes.client.api.scheduling_v1_api import SchedulingV1Api
 from kubernetes.client.api.storage_api import StorageApi
 from kubernetes.client.api.storage_v1_api import StorageV1Api
-from kubernetes.client.api.storage_v1alpha1_api import StorageV1alpha1Api
 from kubernetes.client.api.storage_v1beta1_api import StorageV1beta1Api
 from kubernetes.client.api.version_api import VersionApi

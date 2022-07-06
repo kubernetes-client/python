@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import select
 import socketserver
 import sys
@@ -28,6 +26,7 @@ class PortServer:
                 data = request.recv(1024)
                 if not data:
                     break
+                print(f"{self.port}: {data}\n", end='', flush=True)
                 echo += data
             if w:
                 echo = echo[request.send(echo):]
@@ -38,4 +37,3 @@ if __name__ == '__main__':
     for port in sys.argv[1:]:
         ports.append(PortServer(int(port)))
     time.sleep(10 * 60)
-

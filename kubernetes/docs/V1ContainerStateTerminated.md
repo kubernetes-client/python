@@ -4,7 +4,7 @@ ContainerStateTerminated is a terminated state of a container.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**container_id** | **str** | Container&#39;s ID in the format &#39;docker://&lt;container_id&gt;&#39; | [optional] 
+**container_id** | **str** | Container&#39;s ID in the format &#39;&lt;type&gt;://&lt;container_id&gt;&#39; | [optional] 
 **exit_code** | **int** | Exit status from the last termination of the container | 
 **finished_at** | **datetime** | Time at which the container last terminated | [optional] 
 **message** | **str** | Message regarding the last termination of the container | [optional] 
