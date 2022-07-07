@@ -15,7 +15,6 @@
 import time
 import unittest
 import uuid
-import json
 
 from kubernetes.e2e_test import base
 from kubernetes.client import api_client
@@ -527,9 +526,8 @@ class TestDynamicClient(unittest.TestCase):
                             'ports': [{'containerPort': 80,
                                             'protocol': 'TCP'}]}]}}
 
-        body = json.dumps(pod_manifest).encode()
         resp = api.server_side_apply(
-            name=name, namespace='default', body=body,
+            namespace='default', body=pod_manifest,
             field_manager='kubernetes-unittests', dry_run="All")
         self.assertEqual('kubernetes-unittests', resp.metadata.managedFields[0].manager)
 
