@@ -1,0 +1,37 @@
+name: Deploy Wiki
+
+on:
+  push:
+    paths:
+      - 'kubernetes/docs/**'
+    branches:
+      - master
+
+jobs:
+  deploy-wiki:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: Install rsync
+      run: |
+        sudo apt install rsync grsync
+    - name: Clone Wiki
+      run: |
+        git config --global --add safe.directory "/github/workspace"
+        git config --global --add safe.directory "/github/workspace/wiki"
+        git clone https://github.com/kubernetes-client/python.wiki.git wiki
+        message=$(git log -1 --format=%B)
+    - name: Copy to wiki repository
+      run: |
+        rsync -av --delete kubernetes/docs/ wiki/ --exclude .git
+    - name: Push wiki
+      run: |
+        cd wiki
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "$message"
+        git push
+        
