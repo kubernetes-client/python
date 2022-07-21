@@ -789,7 +789,8 @@ def list_kube_config_contexts(config_file=None):
 
 def load_kube_config(config_file=None, context=None,
                      client_configuration=None,
-                     persist_config=True):
+                     persist_config=True,
+                     temp_file_path=None):
     """Loads authentication and cluster information from kube-config file
     and stores them in kubernetes.client.configuration.
 
@@ -800,6 +801,7 @@ def load_kube_config(config_file=None, context=None,
         set configs to.
     :param persist_config: If True, config file will be updated when changed
         (e.g GCP token refresh).
+    :param temp_file_path: store temp files path.
     """
 
     if config_file is None:
@@ -807,7 +809,8 @@ def load_kube_config(config_file=None, context=None,
 
     loader = _get_kube_config_loader(
         filename=config_file, active_context=context,
-        persist_config=persist_config)
+        persist_config=persist_config,
+        temp_file_path=temp_file_path)
 
     if client_configuration is None:
         config = type.__call__(Configuration)
