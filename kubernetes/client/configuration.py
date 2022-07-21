@@ -75,7 +75,7 @@ class Configuration(object):
     def __init__(self, host="http://localhost",
                  api_key=None, api_key_prefix=None,
                  username=None, password=None,
-                 discard_unknown_keys=False,
+                 proxy=None, discard_unknown_keys=False,
                  ):
         """Constructor
         """
@@ -153,7 +153,7 @@ class Configuration(object):
            cpu_count * 5 is used as default value to increase performance.
         """
 
-        self.proxy = None
+        self.proxy = proxy
         """Proxy URL
         """
         self.no_proxy = None
