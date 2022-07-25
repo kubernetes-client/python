@@ -1,0 +1,17 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: non-existent-namespace
+  name: test-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: test-job
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: test-job
+          image: some-image:latest
+          imagePullPolicy: IfNotPresent

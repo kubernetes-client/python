@@ -257,6 +257,10 @@ def create_from_yaml_single_item(
         kwargs.pop('namespace', None)
         resp = getattr(k8s_api, "create_{0}".format(kind))(
             body=yml_object, **kwargs)
+
+    if kwargs.get('async_req'):
+        resp = resp.get()
+
     if verbose:
         msg = "{0} created.".format(kind)
         if hasattr(resp, 'status'):

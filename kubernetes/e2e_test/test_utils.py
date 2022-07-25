@@ -460,3 +460,24 @@ class TestUtils(unittest.TestCase):
             name="mock-pod-1", namespace=self.test_namespace, body={})
         app_api.delete_namespaced_deployment(
             name="mock", namespace=self.test_namespace, body={})
+
+    # Error test case scenarios
+
+    # Issue #1864.
+    def test_error_creating_resource_in_non_existent_namespace(self):
+        """
+        Should return a valid error when trying to create a resource
+        in non-existent namespace.
+        """
+        resource = self.path_prefix + "job-non-existent-namespace.yaml"
+        k8s_client = client.ApiClient(configuration=self.config)
+        with self.assertRaises(utils.FailToCreateError):
+            utils.create_from_yaml(k8s_client, resource, async_req=False)
+
+        with self.assertRaises(utils.FailToCreateError):
+            utils.create_from_yaml(k8s_client, resource, async_req=True)
+
+        core_api = client.CoreV1Api(k8s_client)
+        nmsps = core_api.list_namespace()
+        nmsps = [nmsp.metadata.name for nmsp in nmsps.items]
+        self.assertNotIn("non-existent-namespace", nmsps)
