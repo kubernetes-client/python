@@ -563,5 +563,4 @@ class TestDynamicClientSerialization(unittest.TestCase):
         res = ResourceField(params=params)
         self.assertEqual(res["foo"], params["foo"])
         self.assertEqual(res["self"], params["self"])
-        # method will return original object when it doesn't know how to proceed
-        self.assertEqual(self.client.serialize_body(res), res)
+        self.assertEqual(self.client.serialize_body(res), params)
