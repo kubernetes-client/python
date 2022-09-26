@@ -536,6 +536,24 @@ class TestClient(unittest.TestCase):
         resp = api.patch_namespaced_config_map(
             name=name, namespace='default', body=test_configmap)
 
+        json_patch_name = "json_patch_name"
+        json_patch_body = [
+                {
+                    "op": "replace",
+                    "path": "/metadata/name",
+                    "value": json_patch_name
+                    }
+                ]
+        resp = api.patch_namespaced_config_map(
+            name=name, namespace='default', body=json_patch_body)
+        self.assertEqual(json_patch_name, resp.metadata.name)
+
+        merge_patch_name = "merge_patch_name"
+        merge_patch_body = [{"metadata": {"merge_patch_name": merge_patch_name}}]
+        resp = api.patch_namespaced_config_map(
+            name=name, namespace='default', body=merge_patch_body)
+        self.assertEqual(merge_patch_name, resp.metadata.name)
+
         resp = api.delete_namespaced_config_map(
             name=name, body={}, namespace='default')
 
