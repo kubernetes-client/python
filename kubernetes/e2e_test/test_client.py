@@ -538,12 +538,12 @@ class TestClient(unittest.TestCase):
 
         json_patch_name = "json_patch_name"
         json_patch_body = [
-                {
-                    "op": "add",
-                    "path": "/metadata/json_patch_name",
-                    "value": json_patch_name
-                    }
-                ]
+            {
+                "op": "add",
+                "path": "/metadata/json_patch_name",
+                "value": json_patch_name
+            }
+        ]
         resp = api.patch_namespaced_config_map(
             name=name, namespace='default', body=json_patch_body)
         self.assertEqual(json_patch_name, resp.metadata.json_patch_name)
