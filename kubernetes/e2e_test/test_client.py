@@ -532,35 +532,22 @@ class TestClient(unittest.TestCase):
             name=name, namespace='default')
         self.assertEqual(name, resp.metadata.name)
 
-        test_configmap['data']['config.json'] = "{}"
-        resp = api.patch_namespaced_config_map(
-            name=name, namespace='default', body=test_configmap)
-
         json_patch_name = "json_patch_name"
-        json_patch_body = [
-            {
-                "op": "replace",
-                "path": "/data",
-                "value": {
-                    "new_value": json_patch_name,
-                    "config.json": "{\"command\":\"/usr/bin/mysqld_safe\"}",
-                    "frontend.cnf": "[mysqld]\nbind-address = 10.0.0.3\nport = 3306\n"
-                }
-            }
-        ]
+        json_patch_body = [{"op": "replace", "path": "/data",
+                            "value": {"new_value": json_patch_name}}]
         resp = api.patch_namespaced_config_map(
             name=name, namespace='default', body=json_patch_body)
         self.assertEqual(json_patch_name, resp.data["new_value"])
+        self.assertEqual(None, resp.data.get("config.json"))
+        self.assertEqual(None, resp.data.get("frontend.cnf"))
 
         merge_patch_name = "merge_patch_name"
-        merge_patch_body = {"data": {
-            "new_value": merge_patch_name,
-            "config.json": "{\"command\":\"/usr/bin/mysqld_safe\"}",
-            "frontend.cnf": "[mysqld]\nbind-address = 10.0.0.3\nport = 3306\n"
-        }}
+        merge_patch_body = {"data": {"new_value": merge_patch_name}}
         resp = api.patch_namespaced_config_map(
             name=name, namespace='default', body=merge_patch_body)
         self.assertEqual(merge_patch_name, resp.data["new_value"])
+        self.assertEqual(None, resp.data.get("config.json"))
+        self.assertEqual(None, resp.data.get("frontend.cnf"))
 
         resp = api.delete_namespaced_config_map(
             name=name, body={}, namespace='default')
