@@ -398,7 +398,7 @@ class KubeConfigLoader(object):
 
         if PY3:
             jwt_attributes = json.loads(
-                base64.b64decode(parts[1] + padding).decode('utf-8')
+                base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
             )
         else:
             jwt_attributes = json.loads(
