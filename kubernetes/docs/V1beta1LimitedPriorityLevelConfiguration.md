@@ -1,6 +1,6 @@
 # V1beta1LimitedPriorityLevelConfiguration
 
-LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits. It addresses two issues:  * How are requests for this priority level limited?  * What should be done with requests that exceed the limit?
+LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits. It addresses two issues:   - How are requests for this priority level limited?   - What should be done with requests that exceed the limit?
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
