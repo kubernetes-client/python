@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **conditions** | [**list[V1PodCondition]**](V1PodCondition.md) | Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions | [optional] 
 **container_statuses** | [**list[V1ContainerStatus]**](V1ContainerStatus.md) | The list has one entry per container in the manifest. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status | [optional] 
-**ephemeral_container_statuses** | [**list[V1ContainerStatus]**](V1ContainerStatus.md) | Status for any ephemeral containers that have run in this pod. This field is beta-level and available on clusters that haven&#39;t disabled the EphemeralContainers feature gate. | [optional] 
+**ephemeral_container_statuses** | [**list[V1ContainerStatus]**](V1ContainerStatus.md) | Status for any ephemeral containers that have run in this pod. | [optional] 
 **host_ip** | **str** | IP address of the host to which the pod is assigned. Empty if not yet scheduled. | [optional] 
 **init_container_statuses** | [**list[V1ContainerStatus]**](V1ContainerStatus.md) | The list has one entry per init container in the manifest. The most recent successful init container will have ready &#x3D; true, the most recently started container will have startTime set. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status | [optional] 
 **message** | **str** | A human readable message indicating details about why the pod is in this condition. | [optional] 
