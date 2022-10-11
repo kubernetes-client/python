@@ -14,7 +14,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "25.0.0-snapshot"
+__version__ = "25.2.0a1"
 
 # import apis into sdk package
 from kubernetes.client.api.well_known_api import WellKnownApi
