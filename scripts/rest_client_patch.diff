@@ -1,8 +1,9 @@
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
-index 65fbe95..e174317 100644
+index 5716565df..b788bf7d2 100644
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
-@@ -152,6 +152,10 @@ class RESTClientObject(object):
+@@ -151,7 +151,12 @@ class RESTClientObject(object):
+             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
                  if query_params:
                      url += '?' + urlencode(query_params)
 -                if re.search('json', headers['Content-Type'], re.IGNORECASE):
