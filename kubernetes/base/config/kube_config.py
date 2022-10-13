@@ -439,6 +439,9 @@ class KubeConfigLoader(object):
 
             config.ssl_ca_cert = ca_cert.name
 
+        elif 'idp-certificate-authority' in provider['config']:
+            config.ssl_ca_cert = provider['config']['idp-certificate-authority']
+
         else:
             config.verify_ssl = False
 
