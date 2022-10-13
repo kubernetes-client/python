@@ -16,7 +16,7 @@
 This example demonstrates the following:
     - Get a list of all the cluster nodes
     - Iterate through each node list item
-        - Add or overwirite label "foo" with the value "bar"
+        - Add or overwrite label "foo" with the value "bar"
         - Remove the label "baz"
     - Return the list of node with updated labels
 """
