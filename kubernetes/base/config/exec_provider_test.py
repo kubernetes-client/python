@@ -147,7 +147,7 @@ class ExecProviderTest(unittest.TestCase):
         instance.communicate.return_value = (self.output_ok, '')
         ep = ExecProvider(self.input_ok, '/some/directory')
         ep.run()
-        self.assertEqual(mock.call_args.kwargs['cwd'], '/some/directory')
+        self.assertEqual(mock.call_args[1]['cwd'], '/some/directory')
 
 
 if __name__ == '__main__':
