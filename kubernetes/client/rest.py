@@ -15,6 +15,7 @@ from __future__ import absolute_import
 import io
 import json
 import logging
+import os
 import re
 import ssl
 
@@ -76,6 +77,13 @@ class RESTClientObject(object):
 
         if configuration.retries is not None:
             addition_pool_args['retries'] = configuration.retries
+
+        # HACK: The k8s client doesn't support the tls-server-name field in kubeconfigs. Piping it through all the auto
+        # generated OpenAPI configs and code is a PITA. So just hack it in here.
+        # https://github.com/kubernetes-client/python/issues/1889
+        server_name = os.environ.get('KUBE_TLS_SERVER_NAME')
+        if server_name:
+            addition_pool_args['server_hostname'] = server_name
 
         if maxsize is None:
             if configuration.connection_pool_maxsize is not None:
