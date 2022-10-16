@@ -2,7 +2,7 @@
 This example covers the following:
     - Create daemonset
     - Update daemonset
-    - List contoller revisions which belong to specified daemonset
+    - List controller revisions which belong to specified daemonset
     - Roll out daemonset
 """
 
