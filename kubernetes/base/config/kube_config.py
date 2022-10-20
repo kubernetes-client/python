@@ -398,7 +398,7 @@ class KubeConfigLoader(object):
 
         if PY3:
             jwt_attributes = json.loads(
-                base64.b64decode(parts[1] + padding).decode('utf-8')
+                base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
             )
         else:
             jwt_attributes = json.loads(
@@ -438,6 +438,9 @@ class KubeConfigLoader(object):
                 fh.write(cert)
 
             config.ssl_ca_cert = ca_cert.name
+
+        elif 'idp-certificate-authority' in provider['config']:
+            config.ssl_ca_cert = provider['config']['idp-certificate-authority']
 
         else:
             config.verify_ssl = False
