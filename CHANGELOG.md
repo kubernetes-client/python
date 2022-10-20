@@ -1,3 +1,17 @@
+# v25.3.0b1
+
+Kubernetes API Version: v1.25.3
+
+### Feature
+- Adds support for loading CA certificates from a file using the `idp-certificate-authority` key for the oidc plugin. (#1916, @vgupta3)
+
+# v25.2.0b1
+
+Kubernetes API Version: v1.25.3
+
+### Feature
+- Adds support for loading CA certificates from a file using the `idp-certificate-authority` key for the oidc plugin. (#1916, @vgupta3)
+
 # v25.2.0a1
 
 Kubernetes API Version: v1.25.2
