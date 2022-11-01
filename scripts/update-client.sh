@@ -22,7 +22,7 @@ set -o nounset
 set -o pipefail
 
 # The openapi-generator version used by this client
-export OPENAPI_GENERATOR_COMMIT="v4.3.0"
+export OPENAPI_GENERATOR_COMMIT="v6.2.1"
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
@@ -52,7 +52,7 @@ echo "export PACKAGE_NAME=\"client\"" >> $SETTING_FILE
 if [[ -z ${GEN_ROOT:-} ]]; then
     GEN_ROOT="${TEMP_FOLDER}/gen"
     echo ">>> Cloning gen repo"
-    git clone --recursive https://github.com/kubernetes-client/gen.git "${GEN_ROOT}"
+    git clone --recursive https://github.com/spacether/gen_kube_client.git "${GEN_ROOT}"
 else
     echo ">>> Reusing gen repo at ${GEN_ROOT}"
 fi
