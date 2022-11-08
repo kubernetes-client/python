@@ -575,7 +575,7 @@ class KubeConfigLoader(object):
             def _refresh_api_key(client_configuration):
                 if ('expiry' in self.__dict__ and _is_expired(self.expiry)):
                     self._load_authentication()
-                    self._set_config(client_configuration)
+                self._set_config(client_configuration)
             client_configuration.refresh_api_key_hook = _refresh_api_key
         # copy these keys directly from self to configuration object
         keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl']
