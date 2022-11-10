@@ -92,12 +92,12 @@ class InClusterConfigLoader(object):
         if not self._try_refresh_token:
             return
 
-        def load_token_from_file(*args):
+        def _refresh_api_key(client_configuration):
             if self.token_expires_at <= datetime.datetime.now():
                 self._read_token_file()
-            return self.token
+            self._set_config(client_configuration)
 
-        client_configuration.get_api_key_with_prefix = load_token_from_file
+        client_configuration.refresh_api_key_hook = _refresh_api_key
 
     def _read_token_file(self):
         with open(self._token_filename) as f:
