@@ -1,0 +1,2877 @@
+From 6588d20ff7e1033c85df41fa85ac2392135a617a Mon Sep 17 00:00:00 2001
+From: Justin Black <justin.a.black@gmail.com>
+Date: Mon, 14 Nov 2022 10:02:23 -0800
+Subject: [PATCH] Adds api module
+
+---
+ kubernetes/client/api/__init__.py             |   0
+ .../client/api/admissionregistration_api.py   |  23 +
+ .../api/admissionregistration_v1_api.py       |  51 +++
+ kubernetes/client/api/apiextensions_api.py    |  23 +
+ kubernetes/client/api/apiextensions_v1_api.py |  43 ++
+ kubernetes/client/api/apiregistration_api.py  |  23 +
+ .../client/api/apiregistration_v1_api.py      |  43 ++
+ kubernetes/client/api/apis_api.py             |  23 +
+ kubernetes/client/api/apps_api.py             |  23 +
+ kubernetes/client/api/apps_v1_api.py          | 145 ++++++
+ kubernetes/client/api/authentication_api.py   |  23 +
+ .../client/api/authentication_v1_api.py       |  25 +
+ kubernetes/client/api/authorization_api.py    |  23 +
+ kubernetes/client/api/authorization_v1_api.py |  31 ++
+ kubernetes/client/api/autoscaling_api.py      |  23 +
+ kubernetes/client/api/autoscaling_v1_api.py   |  45 ++
+ kubernetes/client/api/autoscaling_v2_api.py   |  45 ++
+ .../client/api/autoscaling_v2beta2_api.py     |  45 ++
+ kubernetes/client/api/batch_api.py            |  23 +
+ kubernetes/client/api/batch_v1_api.py         |  67 +++
+ kubernetes/client/api/certificates_api.py     |  23 +
+ kubernetes/client/api/certificates_v1_api.py  |  49 ++
+ kubernetes/client/api/coordination_api.py     |  23 +
+ kubernetes/client/api/coordination_v1_api.py  |  39 ++
+ kubernetes/client/api/core_api.py             |  23 +
+ kubernetes/client/api/core_v1_api.py          | 427 ++++++++++++++++++
+ kubernetes/client/api/custom_objects_api.py   |  75 +++
+ kubernetes/client/api/discovery_api.py        |  23 +
+ kubernetes/client/api/discovery_v1_api.py     |  39 ++
+ kubernetes/client/api/events_api.py           |  23 +
+ kubernetes/client/api/events_v1_api.py        |  39 ++
+ .../client/api/flowcontrol_apiserver_api.py   |  23 +
+ .../api/flowcontrol_apiserver_v1beta1_api.py  |  63 +++
+ .../api/flowcontrol_apiserver_v1beta2_api.py  |  63 +++
+ .../client/api/internal_apiserver_api.py      |  23 +
+ .../api/internal_apiserver_v1alpha1_api.py    |  43 ++
+ kubernetes/client/api/logs_api.py             |  25 +
+ kubernetes/client/api/networking_api.py       |  23 +
+ kubernetes/client/api/networking_v1_api.py    |  81 ++++
+ .../client/api/networking_v1alpha1_api.py     |  37 ++
+ kubernetes/client/api/node_api.py             |  23 +
+ kubernetes/client/api/node_v1_api.py          |  37 ++
+ kubernetes/client/api/openid_api.py           |  23 +
+ kubernetes/client/api/policy_api.py           |  23 +
+ kubernetes/client/api/policy_v1_api.py        |  45 ++
+ .../client/api/rbac_authorization_api.py      |  23 +
+ .../client/api/rbac_authorization_v1_api.py   |  83 ++++
+ kubernetes/client/api/scheduling_api.py       |  23 +
+ kubernetes/client/api/scheduling_v1_api.py    |  37 ++
+ kubernetes/client/api/storage_api.py          |  23 +
+ kubernetes/client/api/storage_v1_api.py       | 101 +++++
+ kubernetes/client/api/storage_v1beta1_api.py  |  39 ++
+ kubernetes/client/api/version_api.py          |  23 +
+ kubernetes/client/api/well_known_api.py       |  23 +
+ 54 files changed, 2437 insertions(+)
+ create mode 100644 kubernetes/client/api/__init__.py
+ create mode 100644 kubernetes/client/api/admissionregistration_api.py
+ create mode 100644 kubernetes/client/api/admissionregistration_v1_api.py
+ create mode 100644 kubernetes/client/api/apiextensions_api.py
+ create mode 100644 kubernetes/client/api/apiextensions_v1_api.py
+ create mode 100644 kubernetes/client/api/apiregistration_api.py
+ create mode 100644 kubernetes/client/api/apiregistration_v1_api.py
+ create mode 100644 kubernetes/client/api/apis_api.py
+ create mode 100644 kubernetes/client/api/apps_api.py
+ create mode 100644 kubernetes/client/api/apps_v1_api.py
+ create mode 100644 kubernetes/client/api/authentication_api.py
+ create mode 100644 kubernetes/client/api/authentication_v1_api.py
+ create mode 100644 kubernetes/client/api/authorization_api.py
+ create mode 100644 kubernetes/client/api/authorization_v1_api.py
+ create mode 100644 kubernetes/client/api/autoscaling_api.py
+ create mode 100644 kubernetes/client/api/autoscaling_v1_api.py
+ create mode 100644 kubernetes/client/api/autoscaling_v2_api.py
+ create mode 100644 kubernetes/client/api/autoscaling_v2beta2_api.py
+ create mode 100644 kubernetes/client/api/batch_api.py
+ create mode 100644 kubernetes/client/api/batch_v1_api.py
+ create mode 100644 kubernetes/client/api/certificates_api.py
+ create mode 100644 kubernetes/client/api/certificates_v1_api.py
+ create mode 100644 kubernetes/client/api/coordination_api.py
+ create mode 100644 kubernetes/client/api/coordination_v1_api.py
+ create mode 100644 kubernetes/client/api/core_api.py
+ create mode 100644 kubernetes/client/api/core_v1_api.py
+ create mode 100644 kubernetes/client/api/custom_objects_api.py
+ create mode 100644 kubernetes/client/api/discovery_api.py
+ create mode 100644 kubernetes/client/api/discovery_v1_api.py
+ create mode 100644 kubernetes/client/api/events_api.py
+ create mode 100644 kubernetes/client/api/events_v1_api.py
+ create mode 100644 kubernetes/client/api/flowcontrol_apiserver_api.py
+ create mode 100644 kubernetes/client/api/flowcontrol_apiserver_v1beta1_api.py
+ create mode 100644 kubernetes/client/api/flowcontrol_apiserver_v1beta2_api.py
+ create mode 100644 kubernetes/client/api/internal_apiserver_api.py
+ create mode 100644 kubernetes/client/api/internal_apiserver_v1alpha1_api.py
+ create mode 100644 kubernetes/client/api/logs_api.py
+ create mode 100644 kubernetes/client/api/networking_api.py
+ create mode 100644 kubernetes/client/api/networking_v1_api.py
+ create mode 100644 kubernetes/client/api/networking_v1alpha1_api.py
+ create mode 100644 kubernetes/client/api/node_api.py
+ create mode 100644 kubernetes/client/api/node_v1_api.py
+ create mode 100644 kubernetes/client/api/openid_api.py
+ create mode 100644 kubernetes/client/api/policy_api.py
+ create mode 100644 kubernetes/client/api/policy_v1_api.py
+ create mode 100644 kubernetes/client/api/rbac_authorization_api.py
+ create mode 100644 kubernetes/client/api/rbac_authorization_v1_api.py
+ create mode 100644 kubernetes/client/api/scheduling_api.py
+ create mode 100644 kubernetes/client/api/scheduling_v1_api.py
+ create mode 100644 kubernetes/client/api/storage_api.py
+ create mode 100644 kubernetes/client/api/storage_v1_api.py
+ create mode 100644 kubernetes/client/api/storage_v1beta1_api.py
+ create mode 100644 kubernetes/client/api/version_api.py
+ create mode 100644 kubernetes/client/api/well_known_api.py
+
+diff --git a/kubernetes/client/api/__init__.py b/kubernetes/client/api/__init__.py
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/kubernetes/client/api/admissionregistration_api.py b/kubernetes/client/api/admissionregistration_api.py
+new file mode 100644
+index 00000000..4eb6eab6
+--- /dev/null
++++ b/kubernetes/client/api/admissionregistration_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_.get import GetApiGroup
++
++
++class AdmissionregistrationApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/admissionregistration_v1_api.py b/kubernetes/client/api/admissionregistration_v1_api.py
+new file mode 100644
+index 00000000..bc3bb61c
+--- /dev/null
++++ b/kubernetes/client/api/admissionregistration_v1_api.py
+@@ -0,0 +1,51 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations.post import CreateMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations.post import CreateValidatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations.delete import DeleteCollectionMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations.delete import DeleteCollectionValidatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations_name.delete import DeleteMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations_name.delete import DeleteValidatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations.get import ListMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations.get import ListValidatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations_name.patch import PatchMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations_name.patch import PatchValidatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations_name.get import ReadMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations_name.get import ReadValidatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_mutatingwebhookconfigurations_name.put import ReplaceMutatingWebhookConfiguration
++from kubernetes.client.paths.apis_admissionregistration_k8s_io_v1_validatingwebhookconfigurations_name.put import ReplaceValidatingWebhookConfiguration
++
++
++class AdmissionregistrationV1Api(
++    CreateMutatingWebhookConfiguration,
++    CreateValidatingWebhookConfiguration,
++    DeleteCollectionMutatingWebhookConfiguration,
++    DeleteCollectionValidatingWebhookConfiguration,
++    DeleteMutatingWebhookConfiguration,
++    DeleteValidatingWebhookConfiguration,
++    GetApiResources,
++    ListMutatingWebhookConfiguration,
++    ListValidatingWebhookConfiguration,
++    PatchMutatingWebhookConfiguration,
++    PatchValidatingWebhookConfiguration,
++    ReadMutatingWebhookConfiguration,
++    ReadValidatingWebhookConfiguration,
++    ReplaceMutatingWebhookConfiguration,
++    ReplaceValidatingWebhookConfiguration,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apiextensions_api.py b/kubernetes/client/api/apiextensions_api.py
+new file mode 100644
+index 00000000..478ce1fb
+--- /dev/null
++++ b/kubernetes/client/api/apiextensions_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_apiextensions_k8s_io_.get import GetApiGroup
++
++
++class ApiextensionsApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apiextensions_v1_api.py b/kubernetes/client/api/apiextensions_v1_api.py
+new file mode 100644
+index 00000000..d2e6cd87
+--- /dev/null
++++ b/kubernetes/client/api/apiextensions_v1_api.py
+@@ -0,0 +1,43 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions.post import CreateCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions.delete import DeleteCollectionCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name.delete import DeleteCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions.get import ListCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name.patch import PatchCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name_status.patch import PatchCustomResourceDefinitionStatus
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name.get import ReadCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name_status.get import ReadCustomResourceDefinitionStatus
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name.put import ReplaceCustomResourceDefinition
++from kubernetes.client.paths.apis_apiextensions_k8s_io_v1_customresourcedefinitions_name_status.put import ReplaceCustomResourceDefinitionStatus
++
++
++class ApiextensionsV1Api(
++    CreateCustomResourceDefinition,
++    DeleteCollectionCustomResourceDefinition,
++    DeleteCustomResourceDefinition,
++    GetApiResources,
++    ListCustomResourceDefinition,
++    PatchCustomResourceDefinition,
++    PatchCustomResourceDefinitionStatus,
++    ReadCustomResourceDefinition,
++    ReadCustomResourceDefinitionStatus,
++    ReplaceCustomResourceDefinition,
++    ReplaceCustomResourceDefinitionStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apiregistration_api.py b/kubernetes/client/api/apiregistration_api.py
+new file mode 100644
+index 00000000..c1c8312c
+--- /dev/null
++++ b/kubernetes/client/api/apiregistration_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_apiregistration_k8s_io_.get import GetApiGroup
++
++
++class ApiregistrationApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apiregistration_v1_api.py b/kubernetes/client/api/apiregistration_v1_api.py
+new file mode 100644
+index 00000000..d3a41c59
+--- /dev/null
++++ b/kubernetes/client/api/apiregistration_v1_api.py
+@@ -0,0 +1,43 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices.post import CreateApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name.delete import DeleteApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices.delete import DeleteCollectionApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices.get import ListApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name.patch import PatchApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name_status.patch import PatchApiServiceStatus
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name.get import ReadApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name_status.get import ReadApiServiceStatus
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name.put import ReplaceApiService
++from kubernetes.client.paths.apis_apiregistration_k8s_io_v1_apiservices_name_status.put import ReplaceApiServiceStatus
++
++
++class ApiregistrationV1Api(
++    CreateApiService,
++    DeleteApiService,
++    DeleteCollectionApiService,
++    GetApiResources,
++    ListApiService,
++    PatchApiService,
++    PatchApiServiceStatus,
++    ReadApiService,
++    ReadApiServiceStatus,
++    ReplaceApiService,
++    ReplaceApiServiceStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apis_api.py b/kubernetes/client/api/apis_api.py
+new file mode 100644
+index 00000000..e471887c
+--- /dev/null
++++ b/kubernetes/client/api/apis_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_.get import GetApiVersions
++
++
++class ApisApi(
++    GetApiVersions,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apps_api.py b/kubernetes/client/api/apps_api.py
+new file mode 100644
+index 00000000..aec18d13
+--- /dev/null
++++ b/kubernetes/client/api/apps_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_apps_.get import GetApiGroup
++
++
++class AppsApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/apps_v1_api.py b/kubernetes/client/api/apps_v1_api.py
+new file mode 100644
+index 00000000..294fd80b
+--- /dev/null
++++ b/kubernetes/client/api/apps_v1_api.py
+@@ -0,0 +1,145 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions.post import CreateNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets.post import CreateNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments.post import CreateNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets.post import CreateNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets.post import CreateNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions.delete import DeleteCollectionNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets.delete import DeleteCollectionNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments.delete import DeleteCollectionNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets.delete import DeleteCollectionNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets.delete import DeleteCollectionNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions_name.delete import DeleteNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name.delete import DeleteNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name.delete import DeleteNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name.delete import DeleteNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name.delete import DeleteNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_apps_v1_controllerrevisions.get import ListControllerRevisionForAllNamespaces
++from kubernetes.client.paths.apis_apps_v1_daemonsets.get import ListDaemonSetForAllNamespaces
++from kubernetes.client.paths.apis_apps_v1_deployments.get import ListDeploymentForAllNamespaces
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions.get import ListNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets.get import ListNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments.get import ListNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets.get import ListNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets.get import ListNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_replicasets.get import ListReplicaSetForAllNamespaces
++from kubernetes.client.paths.apis_apps_v1_statefulsets.get import ListStatefulSetForAllNamespaces
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions_name.patch import PatchNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name.patch import PatchNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name_status.patch import PatchNamespacedDaemonSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name.patch import PatchNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name_scale.patch import PatchNamespacedDeploymentScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name_status.patch import PatchNamespacedDeploymentStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name.patch import PatchNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name_scale.patch import PatchNamespacedReplicaSetScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name_status.patch import PatchNamespacedReplicaSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name.patch import PatchNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name_scale.patch import PatchNamespacedStatefulSetScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name_status.patch import PatchNamespacedStatefulSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions_name.get import ReadNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name.get import ReadNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name_status.get import ReadNamespacedDaemonSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name.get import ReadNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name_scale.get import ReadNamespacedDeploymentScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name_status.get import ReadNamespacedDeploymentStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name.get import ReadNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name_scale.get import ReadNamespacedReplicaSetScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name_status.get import ReadNamespacedReplicaSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name.get import ReadNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name_scale.get import ReadNamespacedStatefulSetScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name_status.get import ReadNamespacedStatefulSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_controllerrevisions_name.put import ReplaceNamespacedControllerRevision
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name.put import ReplaceNamespacedDaemonSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_daemonsets_name_status.put import ReplaceNamespacedDaemonSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name.put import ReplaceNamespacedDeployment
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name_scale.put import ReplaceNamespacedDeploymentScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_deployments_name_status.put import ReplaceNamespacedDeploymentStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name.put import ReplaceNamespacedReplicaSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name_scale.put import ReplaceNamespacedReplicaSetScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_replicasets_name_status.put import ReplaceNamespacedReplicaSetStatus
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name.put import ReplaceNamespacedStatefulSet
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name_scale.put import ReplaceNamespacedStatefulSetScale
++from kubernetes.client.paths.apis_apps_v1_namespaces_namespace_statefulsets_name_status.put import ReplaceNamespacedStatefulSetStatus
++
++
++class AppsV1Api(
++    CreateNamespacedControllerRevision,
++    CreateNamespacedDaemonSet,
++    CreateNamespacedDeployment,
++    CreateNamespacedReplicaSet,
++    CreateNamespacedStatefulSet,
++    DeleteCollectionNamespacedControllerRevision,
++    DeleteCollectionNamespacedDaemonSet,
++    DeleteCollectionNamespacedDeployment,
++    DeleteCollectionNamespacedReplicaSet,
++    DeleteCollectionNamespacedStatefulSet,
++    DeleteNamespacedControllerRevision,
++    DeleteNamespacedDaemonSet,
++    DeleteNamespacedDeployment,
++    DeleteNamespacedReplicaSet,
++    DeleteNamespacedStatefulSet,
++    GetApiResources,
++    ListControllerRevisionForAllNamespaces,
++    ListDaemonSetForAllNamespaces,
++    ListDeploymentForAllNamespaces,
++    ListNamespacedControllerRevision,
++    ListNamespacedDaemonSet,
++    ListNamespacedDeployment,
++    ListNamespacedReplicaSet,
++    ListNamespacedStatefulSet,
++    ListReplicaSetForAllNamespaces,
++    ListStatefulSetForAllNamespaces,
++    PatchNamespacedControllerRevision,
++    PatchNamespacedDaemonSet,
++    PatchNamespacedDaemonSetStatus,
++    PatchNamespacedDeployment,
++    PatchNamespacedDeploymentScale,
++    PatchNamespacedDeploymentStatus,
++    PatchNamespacedReplicaSet,
++    PatchNamespacedReplicaSetScale,
++    PatchNamespacedReplicaSetStatus,
++    PatchNamespacedStatefulSet,
++    PatchNamespacedStatefulSetScale,
++    PatchNamespacedStatefulSetStatus,
++    ReadNamespacedControllerRevision,
++    ReadNamespacedDaemonSet,
++    ReadNamespacedDaemonSetStatus,
++    ReadNamespacedDeployment,
++    ReadNamespacedDeploymentScale,
++    ReadNamespacedDeploymentStatus,
++    ReadNamespacedReplicaSet,
++    ReadNamespacedReplicaSetScale,
++    ReadNamespacedReplicaSetStatus,
++    ReadNamespacedStatefulSet,
++    ReadNamespacedStatefulSetScale,
++    ReadNamespacedStatefulSetStatus,
++    ReplaceNamespacedControllerRevision,
++    ReplaceNamespacedDaemonSet,
++    ReplaceNamespacedDaemonSetStatus,
++    ReplaceNamespacedDeployment,
++    ReplaceNamespacedDeploymentScale,
++    ReplaceNamespacedDeploymentStatus,
++    ReplaceNamespacedReplicaSet,
++    ReplaceNamespacedReplicaSetScale,
++    ReplaceNamespacedReplicaSetStatus,
++    ReplaceNamespacedStatefulSet,
++    ReplaceNamespacedStatefulSetScale,
++    ReplaceNamespacedStatefulSetStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/authentication_api.py b/kubernetes/client/api/authentication_api.py
+new file mode 100644
+index 00000000..97488bc1
+--- /dev/null
++++ b/kubernetes/client/api/authentication_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_authentication_k8s_io_.get import GetApiGroup
++
++
++class AuthenticationApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/authentication_v1_api.py b/kubernetes/client/api/authentication_v1_api.py
+new file mode 100644
+index 00000000..4b7dd8ff
+--- /dev/null
++++ b/kubernetes/client/api/authentication_v1_api.py
+@@ -0,0 +1,25 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_authentication_k8s_io_v1_tokenreviews.post import CreateTokenReview
++from kubernetes.client.paths.apis_authentication_k8s_io_v1_.get import GetApiResources
++
++
++class AuthenticationV1Api(
++    CreateTokenReview,
++    GetApiResources,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/authorization_api.py b/kubernetes/client/api/authorization_api.py
+new file mode 100644
+index 00000000..647fc21d
+--- /dev/null
++++ b/kubernetes/client/api/authorization_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_authorization_k8s_io_.get import GetApiGroup
++
++
++class AuthorizationApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/authorization_v1_api.py b/kubernetes/client/api/authorization_v1_api.py
+new file mode 100644
+index 00000000..35e73709
+--- /dev/null
++++ b/kubernetes/client/api/authorization_v1_api.py
+@@ -0,0 +1,31 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_authorization_k8s_io_v1_namespaces_namespace_localsubjectaccessreviews.post import CreateNamespacedLocalSubjectAccessReview
++from kubernetes.client.paths.apis_authorization_k8s_io_v1_selfsubjectaccessreviews.post import CreateSelfSubjectAccessReview
++from kubernetes.client.paths.apis_authorization_k8s_io_v1_selfsubjectrulesreviews.post import CreateSelfSubjectRulesReview
++from kubernetes.client.paths.apis_authorization_k8s_io_v1_subjectaccessreviews.post import CreateSubjectAccessReview
++from kubernetes.client.paths.apis_authorization_k8s_io_v1_.get import GetApiResources
++
++
++class AuthorizationV1Api(
++    CreateNamespacedLocalSubjectAccessReview,
++    CreateSelfSubjectAccessReview,
++    CreateSelfSubjectRulesReview,
++    CreateSubjectAccessReview,
++    GetApiResources,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/autoscaling_api.py b/kubernetes/client/api/autoscaling_api.py
+new file mode 100644
+index 00000000..2b6022cd
+--- /dev/null
++++ b/kubernetes/client/api/autoscaling_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_autoscaling_.get import GetApiGroup
++
++
++class AutoscalingApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/autoscaling_v1_api.py b/kubernetes/client/api/autoscaling_v1_api.py
+new file mode 100644
+index 00000000..38f057c4
+--- /dev/null
++++ b/kubernetes/client/api/autoscaling_v1_api.py
+@@ -0,0 +1,45 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers.post import CreateNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers.delete import DeleteCollectionNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name.delete import DeleteNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_autoscaling_v1_horizontalpodautoscalers.get import ListHorizontalPodAutoscalerForAllNamespaces
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers.get import ListNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name.patch import PatchNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name_status.patch import PatchNamespacedHorizontalPodAutoscalerStatus
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name.get import ReadNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name_status.get import ReadNamespacedHorizontalPodAutoscalerStatus
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name.put import ReplaceNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v1_namespaces_namespace_horizontalpodautoscalers_name_status.put import ReplaceNamespacedHorizontalPodAutoscalerStatus
++
++
++class AutoscalingV1Api(
++    CreateNamespacedHorizontalPodAutoscaler,
++    DeleteCollectionNamespacedHorizontalPodAutoscaler,
++    DeleteNamespacedHorizontalPodAutoscaler,
++    GetApiResources,
++    ListHorizontalPodAutoscalerForAllNamespaces,
++    ListNamespacedHorizontalPodAutoscaler,
++    PatchNamespacedHorizontalPodAutoscaler,
++    PatchNamespacedHorizontalPodAutoscalerStatus,
++    ReadNamespacedHorizontalPodAutoscaler,
++    ReadNamespacedHorizontalPodAutoscalerStatus,
++    ReplaceNamespacedHorizontalPodAutoscaler,
++    ReplaceNamespacedHorizontalPodAutoscalerStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/autoscaling_v2_api.py b/kubernetes/client/api/autoscaling_v2_api.py
+new file mode 100644
+index 00000000..2be87005
+--- /dev/null
++++ b/kubernetes/client/api/autoscaling_v2_api.py
+@@ -0,0 +1,45 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers.post import CreateNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers.delete import DeleteCollectionNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name.delete import DeleteNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_.get import GetApiResources
++from kubernetes.client.paths.apis_autoscaling_v2_horizontalpodautoscalers.get import ListHorizontalPodAutoscalerForAllNamespaces
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers.get import ListNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name.patch import PatchNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name_status.patch import PatchNamespacedHorizontalPodAutoscalerStatus
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name.get import ReadNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name_status.get import ReadNamespacedHorizontalPodAutoscalerStatus
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name.put import ReplaceNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2_namespaces_namespace_horizontalpodautoscalers_name_status.put import ReplaceNamespacedHorizontalPodAutoscalerStatus
++
++
++class AutoscalingV2Api(
++    CreateNamespacedHorizontalPodAutoscaler,
++    DeleteCollectionNamespacedHorizontalPodAutoscaler,
++    DeleteNamespacedHorizontalPodAutoscaler,
++    GetApiResources,
++    ListHorizontalPodAutoscalerForAllNamespaces,
++    ListNamespacedHorizontalPodAutoscaler,
++    PatchNamespacedHorizontalPodAutoscaler,
++    PatchNamespacedHorizontalPodAutoscalerStatus,
++    ReadNamespacedHorizontalPodAutoscaler,
++    ReadNamespacedHorizontalPodAutoscalerStatus,
++    ReplaceNamespacedHorizontalPodAutoscaler,
++    ReplaceNamespacedHorizontalPodAutoscalerStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/autoscaling_v2beta2_api.py b/kubernetes/client/api/autoscaling_v2beta2_api.py
+new file mode 100644
+index 00000000..fa155bde
+--- /dev/null
++++ b/kubernetes/client/api/autoscaling_v2beta2_api.py
+@@ -0,0 +1,45 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers.post import CreateNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers.delete import DeleteCollectionNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name.delete import DeleteNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_.get import GetApiResources
++from kubernetes.client.paths.apis_autoscaling_v2beta2_horizontalpodautoscalers.get import ListHorizontalPodAutoscalerForAllNamespaces
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers.get import ListNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name.patch import PatchNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name_status.patch import PatchNamespacedHorizontalPodAutoscalerStatus
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name.get import ReadNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name_status.get import ReadNamespacedHorizontalPodAutoscalerStatus
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name.put import ReplaceNamespacedHorizontalPodAutoscaler
++from kubernetes.client.paths.apis_autoscaling_v2beta2_namespaces_namespace_horizontalpodautoscalers_name_status.put import ReplaceNamespacedHorizontalPodAutoscalerStatus
++
++
++class AutoscalingV2beta2Api(
++    CreateNamespacedHorizontalPodAutoscaler,
++    DeleteCollectionNamespacedHorizontalPodAutoscaler,
++    DeleteNamespacedHorizontalPodAutoscaler,
++    GetApiResources,
++    ListHorizontalPodAutoscalerForAllNamespaces,
++    ListNamespacedHorizontalPodAutoscaler,
++    PatchNamespacedHorizontalPodAutoscaler,
++    PatchNamespacedHorizontalPodAutoscalerStatus,
++    ReadNamespacedHorizontalPodAutoscaler,
++    ReadNamespacedHorizontalPodAutoscalerStatus,
++    ReplaceNamespacedHorizontalPodAutoscaler,
++    ReplaceNamespacedHorizontalPodAutoscalerStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/batch_api.py b/kubernetes/client/api/batch_api.py
+new file mode 100644
+index 00000000..1fd40a71
+--- /dev/null
++++ b/kubernetes/client/api/batch_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_batch_.get import GetApiGroup
++
++
++class BatchApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/batch_v1_api.py b/kubernetes/client/api/batch_v1_api.py
+new file mode 100644
+index 00000000..199a3967
+--- /dev/null
++++ b/kubernetes/client/api/batch_v1_api.py
+@@ -0,0 +1,67 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs.post import CreateNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs.post import CreateNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs.delete import DeleteCollectionNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs.delete import DeleteCollectionNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name.delete import DeleteNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name.delete import DeleteNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_batch_v1_cronjobs.get import ListCronJobForAllNamespaces
++from kubernetes.client.paths.apis_batch_v1_jobs.get import ListJobForAllNamespaces
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs.get import ListNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs.get import ListNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name.patch import PatchNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name_status.patch import PatchNamespacedCronJobStatus
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name.patch import PatchNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name_status.patch import PatchNamespacedJobStatus
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name.get import ReadNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name_status.get import ReadNamespacedCronJobStatus
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name.get import ReadNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name_status.get import ReadNamespacedJobStatus
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name.put import ReplaceNamespacedCronJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_cronjobs_name_status.put import ReplaceNamespacedCronJobStatus
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name.put import ReplaceNamespacedJob
++from kubernetes.client.paths.apis_batch_v1_namespaces_namespace_jobs_name_status.put import ReplaceNamespacedJobStatus
++
++
++class BatchV1Api(
++    CreateNamespacedCronJob,
++    CreateNamespacedJob,
++    DeleteCollectionNamespacedCronJob,
++    DeleteCollectionNamespacedJob,
++    DeleteNamespacedCronJob,
++    DeleteNamespacedJob,
++    GetApiResources,
++    ListCronJobForAllNamespaces,
++    ListJobForAllNamespaces,
++    ListNamespacedCronJob,
++    ListNamespacedJob,
++    PatchNamespacedCronJob,
++    PatchNamespacedCronJobStatus,
++    PatchNamespacedJob,
++    PatchNamespacedJobStatus,
++    ReadNamespacedCronJob,
++    ReadNamespacedCronJobStatus,
++    ReadNamespacedJob,
++    ReadNamespacedJobStatus,
++    ReplaceNamespacedCronJob,
++    ReplaceNamespacedCronJobStatus,
++    ReplaceNamespacedJob,
++    ReplaceNamespacedJobStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/certificates_api.py b/kubernetes/client/api/certificates_api.py
+new file mode 100644
+index 00000000..fd826f8a
+--- /dev/null
++++ b/kubernetes/client/api/certificates_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_certificates_k8s_io_.get import GetApiGroup
++
++
++class CertificatesApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/certificates_v1_api.py b/kubernetes/client/api/certificates_v1_api.py
+new file mode 100644
+index 00000000..dbce041f
+--- /dev/null
++++ b/kubernetes/client/api/certificates_v1_api.py
+@@ -0,0 +1,49 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests.post import CreateCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name.delete import DeleteCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests.delete import DeleteCollectionCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests.get import ListCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name.patch import PatchCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name_approval.patch import PatchCertificateSigningRequestApproval
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name_status.patch import PatchCertificateSigningRequestStatus
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name.get import ReadCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name_approval.get import ReadCertificateSigningRequestApproval
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name_status.get import ReadCertificateSigningRequestStatus
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name.put import ReplaceCertificateSigningRequest
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name_approval.put import ReplaceCertificateSigningRequestApproval
++from kubernetes.client.paths.apis_certificates_k8s_io_v1_certificatesigningrequests_name_status.put import ReplaceCertificateSigningRequestStatus
++
++
++class CertificatesV1Api(
++    CreateCertificateSigningRequest,
++    DeleteCertificateSigningRequest,
++    DeleteCollectionCertificateSigningRequest,
++    GetApiResources,
++    ListCertificateSigningRequest,
++    PatchCertificateSigningRequest,
++    PatchCertificateSigningRequestApproval,
++    PatchCertificateSigningRequestStatus,
++    ReadCertificateSigningRequest,
++    ReadCertificateSigningRequestApproval,
++    ReadCertificateSigningRequestStatus,
++    ReplaceCertificateSigningRequest,
++    ReplaceCertificateSigningRequestApproval,
++    ReplaceCertificateSigningRequestStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/coordination_api.py b/kubernetes/client/api/coordination_api.py
+new file mode 100644
+index 00000000..0358e63b
+--- /dev/null
++++ b/kubernetes/client/api/coordination_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_coordination_k8s_io_.get import GetApiGroup
++
++
++class CoordinationApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/coordination_v1_api.py b/kubernetes/client/api/coordination_v1_api.py
+new file mode 100644
+index 00000000..518844c3
+--- /dev/null
++++ b/kubernetes/client/api/coordination_v1_api.py
+@@ -0,0 +1,39 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases.post import CreateNamespacedLease
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases.delete import DeleteCollectionNamespacedLease
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases_name.delete import DeleteNamespacedLease
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_leases.get import ListLeaseForAllNamespaces
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases.get import ListNamespacedLease
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases_name.patch import PatchNamespacedLease
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases_name.get import ReadNamespacedLease
++from kubernetes.client.paths.apis_coordination_k8s_io_v1_namespaces_namespace_leases_name.put import ReplaceNamespacedLease
++
++
++class CoordinationV1Api(
++    CreateNamespacedLease,
++    DeleteCollectionNamespacedLease,
++    DeleteNamespacedLease,
++    GetApiResources,
++    ListLeaseForAllNamespaces,
++    ListNamespacedLease,
++    PatchNamespacedLease,
++    ReadNamespacedLease,
++    ReplaceNamespacedLease,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/core_api.py b/kubernetes/client/api/core_api.py
+new file mode 100644
+index 00000000..c0daff04
+--- /dev/null
++++ b/kubernetes/client/api/core_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.api_.get import GetApiVersions
++
++
++class CoreApi(
++    GetApiVersions,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/core_v1_api.py b/kubernetes/client/api/core_v1_api.py
+new file mode 100644
+index 00000000..6553ffc3
+--- /dev/null
++++ b/kubernetes/client/api/core_v1_api.py
+@@ -0,0 +1,427 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.delete import ConnectDeleteNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.delete import ConnectDeleteNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.delete import ConnectDeleteNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.delete import ConnectDeleteNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.delete import ConnectDeleteNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.delete import ConnectDeleteNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_attach.get import ConnectGetNamespacedPodAttach
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_exec.get import ConnectGetNamespacedPodExec
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_portforward.get import ConnectGetNamespacedPodPortforward
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.get import ConnectGetNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.get import ConnectGetNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.get import ConnectGetNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.get import ConnectGetNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.get import ConnectGetNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.get import ConnectGetNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.head import ConnectHeadNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.head import ConnectHeadNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.head import ConnectHeadNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.head import ConnectHeadNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.head import ConnectHeadNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.head import ConnectHeadNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.options import ConnectOptionsNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.options import ConnectOptionsNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.options import ConnectOptionsNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.options import ConnectOptionsNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.options import ConnectOptionsNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.options import ConnectOptionsNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.patch import ConnectPatchNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.patch import ConnectPatchNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.patch import ConnectPatchNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.patch import ConnectPatchNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.patch import ConnectPatchNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.patch import ConnectPatchNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_attach.post import ConnectPostNamespacedPodAttach
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_exec.post import ConnectPostNamespacedPodExec
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_portforward.post import ConnectPostNamespacedPodPortforward
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.post import ConnectPostNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.post import ConnectPostNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.post import ConnectPostNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.post import ConnectPostNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.post import ConnectPostNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.post import ConnectPostNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy.put import ConnectPutNamespacedPodProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_proxy_path.put import ConnectPutNamespacedPodProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy.put import ConnectPutNamespacedServiceProxy
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_proxy_path.put import ConnectPutNamespacedServiceProxyWithPath
++from kubernetes.client.paths.api_v1_nodes_name_proxy.put import ConnectPutNodeProxy
++from kubernetes.client.paths.api_v1_nodes_name_proxy_path.put import ConnectPutNodeProxyWithPath
++from kubernetes.client.paths.api_v1_namespaces.post import CreateNamespace
++from kubernetes.client.paths.api_v1_namespaces_namespace_bindings.post import CreateNamespacedBinding
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps.post import CreateNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints.post import CreateNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events.post import CreateNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges.post import CreateNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims.post import CreateNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods.post import CreateNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_binding.post import CreateNamespacedPodBinding
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_eviction.post import CreateNamespacedPodEviction
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates.post import CreateNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers.post import CreateNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas.post import CreateNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets.post import CreateNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services.post import CreateNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts.post import CreateNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts_name_token.post import CreateNamespacedServiceAccountToken
++from kubernetes.client.paths.api_v1_nodes.post import CreateNode
++from kubernetes.client.paths.api_v1_persistentvolumes.post import CreatePersistentVolume
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps.delete import DeleteCollectionNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints.delete import DeleteCollectionNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events.delete import DeleteCollectionNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges.delete import DeleteCollectionNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims.delete import DeleteCollectionNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods.delete import DeleteCollectionNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates.delete import DeleteCollectionNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers.delete import DeleteCollectionNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas.delete import DeleteCollectionNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets.delete import DeleteCollectionNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services.delete import DeleteCollectionNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts.delete import DeleteCollectionNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_nodes.delete import DeleteCollectionNode
++from kubernetes.client.paths.api_v1_persistentvolumes.delete import DeleteCollectionPersistentVolume
++from kubernetes.client.paths.api_v1_namespaces_name.delete import DeleteNamespace
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps_name.delete import DeleteNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints_name.delete import DeleteNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events_name.delete import DeleteNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges_name.delete import DeleteNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name.delete import DeleteNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name.delete import DeleteNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates_name.delete import DeleteNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name.delete import DeleteNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name.delete import DeleteNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets_name.delete import DeleteNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name.delete import DeleteNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts_name.delete import DeleteNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_nodes_name.delete import DeleteNode
++from kubernetes.client.paths.api_v1_persistentvolumes_name.delete import DeletePersistentVolume
++from kubernetes.client.paths.api_v1_.get import GetApiResources
++from kubernetes.client.paths.api_v1_componentstatuses.get import ListComponentStatus
++from kubernetes.client.paths.api_v1_configmaps.get import ListConfigMapForAllNamespaces
++from kubernetes.client.paths.api_v1_endpoints.get import ListEndpointsForAllNamespaces
++from kubernetes.client.paths.api_v1_events.get import ListEventForAllNamespaces
++from kubernetes.client.paths.api_v1_limitranges.get import ListLimitRangeForAllNamespaces
++from kubernetes.client.paths.api_v1_namespaces.get import ListNamespace
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps.get import ListNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints.get import ListNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events.get import ListNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges.get import ListNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims.get import ListNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods.get import ListNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates.get import ListNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers.get import ListNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas.get import ListNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets.get import ListNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services.get import ListNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts.get import ListNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_nodes.get import ListNode
++from kubernetes.client.paths.api_v1_persistentvolumes.get import ListPersistentVolume
++from kubernetes.client.paths.api_v1_persistentvolumeclaims.get import ListPersistentVolumeClaimForAllNamespaces
++from kubernetes.client.paths.api_v1_pods.get import ListPodForAllNamespaces
++from kubernetes.client.paths.api_v1_podtemplates.get import ListPodTemplateForAllNamespaces
++from kubernetes.client.paths.api_v1_replicationcontrollers.get import ListReplicationControllerForAllNamespaces
++from kubernetes.client.paths.api_v1_resourcequotas.get import ListResourceQuotaForAllNamespaces
++from kubernetes.client.paths.api_v1_secrets.get import ListSecretForAllNamespaces
++from kubernetes.client.paths.api_v1_serviceaccounts.get import ListServiceAccountForAllNamespaces
++from kubernetes.client.paths.api_v1_services.get import ListServiceForAllNamespaces
++from kubernetes.client.paths.api_v1_namespaces_name.patch import PatchNamespace
++from kubernetes.client.paths.api_v1_namespaces_name_status.patch import PatchNamespaceStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps_name.patch import PatchNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints_name.patch import PatchNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events_name.patch import PatchNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges_name.patch import PatchNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name.patch import PatchNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name_status.patch import PatchNamespacedPersistentVolumeClaimStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name.patch import PatchNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_ephemeralcontainers.patch import PatchNamespacedPodEphemeralcontainers
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_status.patch import PatchNamespacedPodStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates_name.patch import PatchNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name.patch import PatchNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name_scale.patch import PatchNamespacedReplicationControllerScale
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name_status.patch import PatchNamespacedReplicationControllerStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name.patch import PatchNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name_status.patch import PatchNamespacedResourceQuotaStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets_name.patch import PatchNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name.patch import PatchNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts_name.patch import PatchNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_status.patch import PatchNamespacedServiceStatus
++from kubernetes.client.paths.api_v1_nodes_name.patch import PatchNode
++from kubernetes.client.paths.api_v1_nodes_name_status.patch import PatchNodeStatus
++from kubernetes.client.paths.api_v1_persistentvolumes_name.patch import PatchPersistentVolume
++from kubernetes.client.paths.api_v1_persistentvolumes_name_status.patch import PatchPersistentVolumeStatus
++from kubernetes.client.paths.api_v1_componentstatuses_name.get import ReadComponentStatus
++from kubernetes.client.paths.api_v1_namespaces_name.get import ReadNamespace
++from kubernetes.client.paths.api_v1_namespaces_name_status.get import ReadNamespaceStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps_name.get import ReadNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints_name.get import ReadNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events_name.get import ReadNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges_name.get import ReadNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name.get import ReadNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name_status.get import ReadNamespacedPersistentVolumeClaimStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name.get import ReadNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_ephemeralcontainers.get import ReadNamespacedPodEphemeralcontainers
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_log.get import ReadNamespacedPodLog
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_status.get import ReadNamespacedPodStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates_name.get import ReadNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name.get import ReadNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name_scale.get import ReadNamespacedReplicationControllerScale
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name_status.get import ReadNamespacedReplicationControllerStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name.get import ReadNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name_status.get import ReadNamespacedResourceQuotaStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets_name.get import ReadNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name.get import ReadNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts_name.get import ReadNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_status.get import ReadNamespacedServiceStatus
++from kubernetes.client.paths.api_v1_nodes_name.get import ReadNode
++from kubernetes.client.paths.api_v1_nodes_name_status.get import ReadNodeStatus
++from kubernetes.client.paths.api_v1_persistentvolumes_name.get import ReadPersistentVolume
++from kubernetes.client.paths.api_v1_persistentvolumes_name_status.get import ReadPersistentVolumeStatus
++from kubernetes.client.paths.api_v1_namespaces_name.put import ReplaceNamespace
++from kubernetes.client.paths.api_v1_namespaces_name_finalize.put import ReplaceNamespaceFinalize
++from kubernetes.client.paths.api_v1_namespaces_name_status.put import ReplaceNamespaceStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_configmaps_name.put import ReplaceNamespacedConfigMap
++from kubernetes.client.paths.api_v1_namespaces_namespace_endpoints_name.put import ReplaceNamespacedEndpoints
++from kubernetes.client.paths.api_v1_namespaces_namespace_events_name.put import ReplaceNamespacedEvent
++from kubernetes.client.paths.api_v1_namespaces_namespace_limitranges_name.put import ReplaceNamespacedLimitRange
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name.put import ReplaceNamespacedPersistentVolumeClaim
++from kubernetes.client.paths.api_v1_namespaces_namespace_persistentvolumeclaims_name_status.put import ReplaceNamespacedPersistentVolumeClaimStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name.put import ReplaceNamespacedPod
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_ephemeralcontainers.put import ReplaceNamespacedPodEphemeralcontainers
++from kubernetes.client.paths.api_v1_namespaces_namespace_pods_name_status.put import ReplaceNamespacedPodStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_podtemplates_name.put import ReplaceNamespacedPodTemplate
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name.put import ReplaceNamespacedReplicationController
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name_scale.put import ReplaceNamespacedReplicationControllerScale
++from kubernetes.client.paths.api_v1_namespaces_namespace_replicationcontrollers_name_status.put import ReplaceNamespacedReplicationControllerStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name.put import ReplaceNamespacedResourceQuota
++from kubernetes.client.paths.api_v1_namespaces_namespace_resourcequotas_name_status.put import ReplaceNamespacedResourceQuotaStatus
++from kubernetes.client.paths.api_v1_namespaces_namespace_secrets_name.put import ReplaceNamespacedSecret
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name.put import ReplaceNamespacedService
++from kubernetes.client.paths.api_v1_namespaces_namespace_serviceaccounts_name.put import ReplaceNamespacedServiceAccount
++from kubernetes.client.paths.api_v1_namespaces_namespace_services_name_status.put import ReplaceNamespacedServiceStatus
++from kubernetes.client.paths.api_v1_nodes_name.put import ReplaceNode
++from kubernetes.client.paths.api_v1_nodes_name_status.put import ReplaceNodeStatus
++from kubernetes.client.paths.api_v1_persistentvolumes_name.put import ReplacePersistentVolume
++from kubernetes.client.paths.api_v1_persistentvolumes_name_status.put import ReplacePersistentVolumeStatus
++
++
++class CoreV1Api(
++    ConnectDeleteNamespacedPodProxy,
++    ConnectDeleteNamespacedPodProxyWithPath,
++    ConnectDeleteNamespacedServiceProxy,
++    ConnectDeleteNamespacedServiceProxyWithPath,
++    ConnectDeleteNodeProxy,
++    ConnectDeleteNodeProxyWithPath,
++    ConnectGetNamespacedPodAttach,
++    ConnectGetNamespacedPodExec,
++    ConnectGetNamespacedPodPortforward,
++    ConnectGetNamespacedPodProxy,
++    ConnectGetNamespacedPodProxyWithPath,
++    ConnectGetNamespacedServiceProxy,
++    ConnectGetNamespacedServiceProxyWithPath,
++    ConnectGetNodeProxy,
++    ConnectGetNodeProxyWithPath,
++    ConnectHeadNamespacedPodProxy,
++    ConnectHeadNamespacedPodProxyWithPath,
++    ConnectHeadNamespacedServiceProxy,
++    ConnectHeadNamespacedServiceProxyWithPath,
++    ConnectHeadNodeProxy,
++    ConnectHeadNodeProxyWithPath,
++    ConnectOptionsNamespacedPodProxy,
++    ConnectOptionsNamespacedPodProxyWithPath,
++    ConnectOptionsNamespacedServiceProxy,
++    ConnectOptionsNamespacedServiceProxyWithPath,
++    ConnectOptionsNodeProxy,
++    ConnectOptionsNodeProxyWithPath,
++    ConnectPatchNamespacedPodProxy,
++    ConnectPatchNamespacedPodProxyWithPath,
++    ConnectPatchNamespacedServiceProxy,
++    ConnectPatchNamespacedServiceProxyWithPath,
++    ConnectPatchNodeProxy,
++    ConnectPatchNodeProxyWithPath,
++    ConnectPostNamespacedPodAttach,
++    ConnectPostNamespacedPodExec,
++    ConnectPostNamespacedPodPortforward,
++    ConnectPostNamespacedPodProxy,
++    ConnectPostNamespacedPodProxyWithPath,
++    ConnectPostNamespacedServiceProxy,
++    ConnectPostNamespacedServiceProxyWithPath,
++    ConnectPostNodeProxy,
++    ConnectPostNodeProxyWithPath,
++    ConnectPutNamespacedPodProxy,
++    ConnectPutNamespacedPodProxyWithPath,
++    ConnectPutNamespacedServiceProxy,
++    ConnectPutNamespacedServiceProxyWithPath,
++    ConnectPutNodeProxy,
++    ConnectPutNodeProxyWithPath,
++    CreateNamespace,
++    CreateNamespacedBinding,
++    CreateNamespacedConfigMap,
++    CreateNamespacedEndpoints,
++    CreateNamespacedEvent,
++    CreateNamespacedLimitRange,
++    CreateNamespacedPersistentVolumeClaim,
++    CreateNamespacedPod,
++    CreateNamespacedPodBinding,
++    CreateNamespacedPodEviction,
++    CreateNamespacedPodTemplate,
++    CreateNamespacedReplicationController,
++    CreateNamespacedResourceQuota,
++    CreateNamespacedSecret,
++    CreateNamespacedService,
++    CreateNamespacedServiceAccount,
++    CreateNamespacedServiceAccountToken,
++    CreateNode,
++    CreatePersistentVolume,
++    DeleteCollectionNamespacedConfigMap,
++    DeleteCollectionNamespacedEndpoints,
++    DeleteCollectionNamespacedEvent,
++    DeleteCollectionNamespacedLimitRange,
++    DeleteCollectionNamespacedPersistentVolumeClaim,
++    DeleteCollectionNamespacedPod,
++    DeleteCollectionNamespacedPodTemplate,
++    DeleteCollectionNamespacedReplicationController,
++    DeleteCollectionNamespacedResourceQuota,
++    DeleteCollectionNamespacedSecret,
++    DeleteCollectionNamespacedService,
++    DeleteCollectionNamespacedServiceAccount,
++    DeleteCollectionNode,
++    DeleteCollectionPersistentVolume,
++    DeleteNamespace,
++    DeleteNamespacedConfigMap,
++    DeleteNamespacedEndpoints,
++    DeleteNamespacedEvent,
++    DeleteNamespacedLimitRange,
++    DeleteNamespacedPersistentVolumeClaim,
++    DeleteNamespacedPod,
++    DeleteNamespacedPodTemplate,
++    DeleteNamespacedReplicationController,
++    DeleteNamespacedResourceQuota,
++    DeleteNamespacedSecret,
++    DeleteNamespacedService,
++    DeleteNamespacedServiceAccount,
++    DeleteNode,
++    DeletePersistentVolume,
++    GetApiResources,
++    ListComponentStatus,
++    ListConfigMapForAllNamespaces,
++    ListEndpointsForAllNamespaces,
++    ListEventForAllNamespaces,
++    ListLimitRangeForAllNamespaces,
++    ListNamespace,
++    ListNamespacedConfigMap,
++    ListNamespacedEndpoints,
++    ListNamespacedEvent,
++    ListNamespacedLimitRange,
++    ListNamespacedPersistentVolumeClaim,
++    ListNamespacedPod,
++    ListNamespacedPodTemplate,
++    ListNamespacedReplicationController,
++    ListNamespacedResourceQuota,
++    ListNamespacedSecret,
++    ListNamespacedService,
++    ListNamespacedServiceAccount,
++    ListNode,
++    ListPersistentVolume,
++    ListPersistentVolumeClaimForAllNamespaces,
++    ListPodForAllNamespaces,
++    ListPodTemplateForAllNamespaces,
++    ListReplicationControllerForAllNamespaces,
++    ListResourceQuotaForAllNamespaces,
++    ListSecretForAllNamespaces,
++    ListServiceAccountForAllNamespaces,
++    ListServiceForAllNamespaces,
++    PatchNamespace,
++    PatchNamespaceStatus,
++    PatchNamespacedConfigMap,
++    PatchNamespacedEndpoints,
++    PatchNamespacedEvent,
++    PatchNamespacedLimitRange,
++    PatchNamespacedPersistentVolumeClaim,
++    PatchNamespacedPersistentVolumeClaimStatus,
++    PatchNamespacedPod,
++    PatchNamespacedPodEphemeralcontainers,
++    PatchNamespacedPodStatus,
++    PatchNamespacedPodTemplate,
++    PatchNamespacedReplicationController,
++    PatchNamespacedReplicationControllerScale,
++    PatchNamespacedReplicationControllerStatus,
++    PatchNamespacedResourceQuota,
++    PatchNamespacedResourceQuotaStatus,
++    PatchNamespacedSecret,
++    PatchNamespacedService,
++    PatchNamespacedServiceAccount,
++    PatchNamespacedServiceStatus,
++    PatchNode,
++    PatchNodeStatus,
++    PatchPersistentVolume,
++    PatchPersistentVolumeStatus,
++    ReadComponentStatus,
++    ReadNamespace,
++    ReadNamespaceStatus,
++    ReadNamespacedConfigMap,
++    ReadNamespacedEndpoints,
++    ReadNamespacedEvent,
++    ReadNamespacedLimitRange,
++    ReadNamespacedPersistentVolumeClaim,
++    ReadNamespacedPersistentVolumeClaimStatus,
++    ReadNamespacedPod,
++    ReadNamespacedPodEphemeralcontainers,
++    ReadNamespacedPodLog,
++    ReadNamespacedPodStatus,
++    ReadNamespacedPodTemplate,
++    ReadNamespacedReplicationController,
++    ReadNamespacedReplicationControllerScale,
++    ReadNamespacedReplicationControllerStatus,
++    ReadNamespacedResourceQuota,
++    ReadNamespacedResourceQuotaStatus,
++    ReadNamespacedSecret,
++    ReadNamespacedService,
++    ReadNamespacedServiceAccount,
++    ReadNamespacedServiceStatus,
++    ReadNode,
++    ReadNodeStatus,
++    ReadPersistentVolume,
++    ReadPersistentVolumeStatus,
++    ReplaceNamespace,
++    ReplaceNamespaceFinalize,
++    ReplaceNamespaceStatus,
++    ReplaceNamespacedConfigMap,
++    ReplaceNamespacedEndpoints,
++    ReplaceNamespacedEvent,
++    ReplaceNamespacedLimitRange,
++    ReplaceNamespacedPersistentVolumeClaim,
++    ReplaceNamespacedPersistentVolumeClaimStatus,
++    ReplaceNamespacedPod,
++    ReplaceNamespacedPodEphemeralcontainers,
++    ReplaceNamespacedPodStatus,
++    ReplaceNamespacedPodTemplate,
++    ReplaceNamespacedReplicationController,
++    ReplaceNamespacedReplicationControllerScale,
++    ReplaceNamespacedReplicationControllerStatus,
++    ReplaceNamespacedResourceQuota,
++    ReplaceNamespacedResourceQuotaStatus,
++    ReplaceNamespacedSecret,
++    ReplaceNamespacedService,
++    ReplaceNamespacedServiceAccount,
++    ReplaceNamespacedServiceStatus,
++    ReplaceNode,
++    ReplaceNodeStatus,
++    ReplacePersistentVolume,
++    ReplacePersistentVolumeStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/custom_objects_api.py b/kubernetes/client/api/custom_objects_api.py
+new file mode 100644
+index 00000000..b8305c0a
+--- /dev/null
++++ b/kubernetes/client/api/custom_objects_api.py
+@@ -0,0 +1,75 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_group_version_plural.post import CreateClusterCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural.post import CreateNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version_plural_name.delete import DeleteClusterCustomObject
++from kubernetes.client.paths.apis_group_version_plural.delete import DeleteCollectionClusterCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural.delete import DeleteCollectionNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name.delete import DeleteNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version.get import GetApiResources
++from kubernetes.client.paths.apis_group_version_plural_name.get import GetClusterCustomObject
++from kubernetes.client.paths.apis_group_version_plural_name_scale.get import GetClusterCustomObjectScale
++from kubernetes.client.paths.apis_group_version_plural_name_status.get import GetClusterCustomObjectStatus
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name.get import GetNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name_scale.get import GetNamespacedCustomObjectScale
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name_status.get import GetNamespacedCustomObjectStatus
++from kubernetes.client.paths.apis_group_version_plural.get import ListClusterCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural.get import ListNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version_plural_name.patch import PatchClusterCustomObject
++from kubernetes.client.paths.apis_group_version_plural_name_scale.patch import PatchClusterCustomObjectScale
++from kubernetes.client.paths.apis_group_version_plural_name_status.patch import PatchClusterCustomObjectStatus
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name.patch import PatchNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name_scale.patch import PatchNamespacedCustomObjectScale
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name_status.patch import PatchNamespacedCustomObjectStatus
++from kubernetes.client.paths.apis_group_version_plural_name.put import ReplaceClusterCustomObject
++from kubernetes.client.paths.apis_group_version_plural_name_scale.put import ReplaceClusterCustomObjectScale
++from kubernetes.client.paths.apis_group_version_plural_name_status.put import ReplaceClusterCustomObjectStatus
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name.put import ReplaceNamespacedCustomObject
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name_scale.put import ReplaceNamespacedCustomObjectScale
++from kubernetes.client.paths.apis_group_version_namespaces_namespace_plural_name_status.put import ReplaceNamespacedCustomObjectStatus
++
++
++class CustomObjectsApi(
++    CreateClusterCustomObject,
++    CreateNamespacedCustomObject,
++    DeleteClusterCustomObject,
++    DeleteCollectionClusterCustomObject,
++    DeleteCollectionNamespacedCustomObject,
++    DeleteNamespacedCustomObject,
++    GetApiResources,
++    GetClusterCustomObject,
++    GetClusterCustomObjectScale,
++    GetClusterCustomObjectStatus,
++    GetNamespacedCustomObject,
++    GetNamespacedCustomObjectScale,
++    GetNamespacedCustomObjectStatus,
++    ListClusterCustomObject,
++    ListNamespacedCustomObject,
++    PatchClusterCustomObject,
++    PatchClusterCustomObjectScale,
++    PatchClusterCustomObjectStatus,
++    PatchNamespacedCustomObject,
++    PatchNamespacedCustomObjectScale,
++    PatchNamespacedCustomObjectStatus,
++    ReplaceClusterCustomObject,
++    ReplaceClusterCustomObjectScale,
++    ReplaceClusterCustomObjectStatus,
++    ReplaceNamespacedCustomObject,
++    ReplaceNamespacedCustomObjectScale,
++    ReplaceNamespacedCustomObjectStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/discovery_api.py b/kubernetes/client/api/discovery_api.py
+new file mode 100644
+index 00000000..c797f86c
+--- /dev/null
++++ b/kubernetes/client/api/discovery_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_discovery_k8s_io_.get import GetApiGroup
++
++
++class DiscoveryApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/discovery_v1_api.py b/kubernetes/client/api/discovery_v1_api.py
+new file mode 100644
+index 00000000..8a71d88d
+--- /dev/null
++++ b/kubernetes/client/api/discovery_v1_api.py
+@@ -0,0 +1,39 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices.post import CreateNamespacedEndpointSlice
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices.delete import DeleteCollectionNamespacedEndpointSlice
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices_name.delete import DeleteNamespacedEndpointSlice
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_endpointslices.get import ListEndpointSliceForAllNamespaces
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices.get import ListNamespacedEndpointSlice
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices_name.patch import PatchNamespacedEndpointSlice
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices_name.get import ReadNamespacedEndpointSlice
++from kubernetes.client.paths.apis_discovery_k8s_io_v1_namespaces_namespace_endpointslices_name.put import ReplaceNamespacedEndpointSlice
++
++
++class DiscoveryV1Api(
++    CreateNamespacedEndpointSlice,
++    DeleteCollectionNamespacedEndpointSlice,
++    DeleteNamespacedEndpointSlice,
++    GetApiResources,
++    ListEndpointSliceForAllNamespaces,
++    ListNamespacedEndpointSlice,
++    PatchNamespacedEndpointSlice,
++    ReadNamespacedEndpointSlice,
++    ReplaceNamespacedEndpointSlice,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/events_api.py b/kubernetes/client/api/events_api.py
+new file mode 100644
+index 00000000..fa6e14f6
+--- /dev/null
++++ b/kubernetes/client/api/events_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_events_k8s_io_.get import GetApiGroup
++
++
++class EventsApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/events_v1_api.py b/kubernetes/client/api/events_v1_api.py
+new file mode 100644
+index 00000000..d262e16a
+--- /dev/null
++++ b/kubernetes/client/api/events_v1_api.py
+@@ -0,0 +1,39 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events.post import CreateNamespacedEvent
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events.delete import DeleteCollectionNamespacedEvent
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events_name.delete import DeleteNamespacedEvent
++from kubernetes.client.paths.apis_events_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_events_k8s_io_v1_events.get import ListEventForAllNamespaces
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events.get import ListNamespacedEvent
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events_name.patch import PatchNamespacedEvent
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events_name.get import ReadNamespacedEvent
++from kubernetes.client.paths.apis_events_k8s_io_v1_namespaces_namespace_events_name.put import ReplaceNamespacedEvent
++
++
++class EventsV1Api(
++    CreateNamespacedEvent,
++    DeleteCollectionNamespacedEvent,
++    DeleteNamespacedEvent,
++    GetApiResources,
++    ListEventForAllNamespaces,
++    ListNamespacedEvent,
++    PatchNamespacedEvent,
++    ReadNamespacedEvent,
++    ReplaceNamespacedEvent,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/flowcontrol_apiserver_api.py b/kubernetes/client/api/flowcontrol_apiserver_api.py
+new file mode 100644
+index 00000000..bf26fbd9
+--- /dev/null
++++ b/kubernetes/client/api/flowcontrol_apiserver_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_.get import GetApiGroup
++
++
++class FlowcontrolApiserverApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/flowcontrol_apiserver_v1beta1_api.py b/kubernetes/client/api/flowcontrol_apiserver_v1beta1_api.py
+new file mode 100644
+index 00000000..ef89fbe3
+--- /dev/null
++++ b/kubernetes/client/api/flowcontrol_apiserver_v1beta1_api.py
+@@ -0,0 +1,63 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas.post import CreateFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations.post import CreatePriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas.delete import DeleteCollectionFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations.delete import DeleteCollectionPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name.delete import DeleteFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name.delete import DeletePriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_.get import GetApiResources
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas.get import ListFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations.get import ListPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name.patch import PatchFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name_status.patch import PatchFlowSchemaStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name.patch import PatchPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name_status.patch import PatchPriorityLevelConfigurationStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name.get import ReadFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name_status.get import ReadFlowSchemaStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name.get import ReadPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name_status.get import ReadPriorityLevelConfigurationStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name.put import ReplaceFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_flowschemas_name_status.put import ReplaceFlowSchemaStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name.put import ReplacePriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta1_prioritylevelconfigurations_name_status.put import ReplacePriorityLevelConfigurationStatus
++
++
++class FlowcontrolApiserverV1beta1Api(
++    CreateFlowSchema,
++    CreatePriorityLevelConfiguration,
++    DeleteCollectionFlowSchema,
++    DeleteCollectionPriorityLevelConfiguration,
++    DeleteFlowSchema,
++    DeletePriorityLevelConfiguration,
++    GetApiResources,
++    ListFlowSchema,
++    ListPriorityLevelConfiguration,
++    PatchFlowSchema,
++    PatchFlowSchemaStatus,
++    PatchPriorityLevelConfiguration,
++    PatchPriorityLevelConfigurationStatus,
++    ReadFlowSchema,
++    ReadFlowSchemaStatus,
++    ReadPriorityLevelConfiguration,
++    ReadPriorityLevelConfigurationStatus,
++    ReplaceFlowSchema,
++    ReplaceFlowSchemaStatus,
++    ReplacePriorityLevelConfiguration,
++    ReplacePriorityLevelConfigurationStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/flowcontrol_apiserver_v1beta2_api.py b/kubernetes/client/api/flowcontrol_apiserver_v1beta2_api.py
+new file mode 100644
+index 00000000..e03ce1d8
+--- /dev/null
++++ b/kubernetes/client/api/flowcontrol_apiserver_v1beta2_api.py
+@@ -0,0 +1,63 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas.post import CreateFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations.post import CreatePriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas.delete import DeleteCollectionFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations.delete import DeleteCollectionPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name.delete import DeleteFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name.delete import DeletePriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_.get import GetApiResources
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas.get import ListFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations.get import ListPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name.patch import PatchFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name_status.patch import PatchFlowSchemaStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name.patch import PatchPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name_status.patch import PatchPriorityLevelConfigurationStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name.get import ReadFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name_status.get import ReadFlowSchemaStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name.get import ReadPriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name_status.get import ReadPriorityLevelConfigurationStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name.put import ReplaceFlowSchema
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_flowschemas_name_status.put import ReplaceFlowSchemaStatus
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name.put import ReplacePriorityLevelConfiguration
++from kubernetes.client.paths.apis_flowcontrol_apiserver_k8s_io_v1beta2_prioritylevelconfigurations_name_status.put import ReplacePriorityLevelConfigurationStatus
++
++
++class FlowcontrolApiserverV1beta2Api(
++    CreateFlowSchema,
++    CreatePriorityLevelConfiguration,
++    DeleteCollectionFlowSchema,
++    DeleteCollectionPriorityLevelConfiguration,
++    DeleteFlowSchema,
++    DeletePriorityLevelConfiguration,
++    GetApiResources,
++    ListFlowSchema,
++    ListPriorityLevelConfiguration,
++    PatchFlowSchema,
++    PatchFlowSchemaStatus,
++    PatchPriorityLevelConfiguration,
++    PatchPriorityLevelConfigurationStatus,
++    ReadFlowSchema,
++    ReadFlowSchemaStatus,
++    ReadPriorityLevelConfiguration,
++    ReadPriorityLevelConfigurationStatus,
++    ReplaceFlowSchema,
++    ReplaceFlowSchemaStatus,
++    ReplacePriorityLevelConfiguration,
++    ReplacePriorityLevelConfigurationStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/internal_apiserver_api.py b/kubernetes/client/api/internal_apiserver_api.py
+new file mode 100644
+index 00000000..94d11009
+--- /dev/null
++++ b/kubernetes/client/api/internal_apiserver_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_.get import GetApiGroup
++
++
++class InternalApiserverApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/internal_apiserver_v1alpha1_api.py b/kubernetes/client/api/internal_apiserver_v1alpha1_api.py
+new file mode 100644
+index 00000000..b94741df
+--- /dev/null
++++ b/kubernetes/client/api/internal_apiserver_v1alpha1_api.py
+@@ -0,0 +1,43 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions.post import CreateStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions.delete import DeleteCollectionStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name.delete import DeleteStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_.get import GetApiResources
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions.get import ListStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name.patch import PatchStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name_status.patch import PatchStorageVersionStatus
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name.get import ReadStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name_status.get import ReadStorageVersionStatus
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name.put import ReplaceStorageVersion
++from kubernetes.client.paths.apis_internal_apiserver_k8s_io_v1alpha1_storageversions_name_status.put import ReplaceStorageVersionStatus
++
++
++class InternalApiserverV1alpha1Api(
++    CreateStorageVersion,
++    DeleteCollectionStorageVersion,
++    DeleteStorageVersion,
++    GetApiResources,
++    ListStorageVersion,
++    PatchStorageVersion,
++    PatchStorageVersionStatus,
++    ReadStorageVersion,
++    ReadStorageVersionStatus,
++    ReplaceStorageVersion,
++    ReplaceStorageVersionStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/logs_api.py b/kubernetes/client/api/logs_api.py
+new file mode 100644
+index 00000000..24f58541
+--- /dev/null
++++ b/kubernetes/client/api/logs_api.py
+@@ -0,0 +1,25 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.logs_logpath.get import LogFileHandler
++from kubernetes.client.paths.logs_.get import LogFileListHandler
++
++
++class LogsApi(
++    LogFileHandler,
++    LogFileListHandler,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/networking_api.py b/kubernetes/client/api/networking_api.py
+new file mode 100644
+index 00000000..42d96bf5
+--- /dev/null
++++ b/kubernetes/client/api/networking_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_networking_k8s_io_.get import GetApiGroup
++
++
++class NetworkingApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/networking_v1_api.py b/kubernetes/client/api/networking_v1_api.py
+new file mode 100644
+index 00000000..6c042483
+--- /dev/null
++++ b/kubernetes/client/api/networking_v1_api.py
+@@ -0,0 +1,81 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses.post import CreateIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses.post import CreateNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies.post import CreateNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses.delete import DeleteCollectionIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses.delete import DeleteCollectionNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies.delete import DeleteCollectionNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses_name.delete import DeleteIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name.delete import DeleteNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name.delete import DeleteNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses.get import ListIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingresses.get import ListIngressForAllNamespaces
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses.get import ListNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies.get import ListNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_networkpolicies.get import ListNetworkPolicyForAllNamespaces
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses_name.patch import PatchIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name.patch import PatchNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name_status.patch import PatchNamespacedIngressStatus
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name.patch import PatchNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name_status.patch import PatchNamespacedNetworkPolicyStatus
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses_name.get import ReadIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name.get import ReadNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name_status.get import ReadNamespacedIngressStatus
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name.get import ReadNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name_status.get import ReadNamespacedNetworkPolicyStatus
++from kubernetes.client.paths.apis_networking_k8s_io_v1_ingressclasses_name.put import ReplaceIngressClass
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name.put import ReplaceNamespacedIngress
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_ingresses_name_status.put import ReplaceNamespacedIngressStatus
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name.put import ReplaceNamespacedNetworkPolicy
++from kubernetes.client.paths.apis_networking_k8s_io_v1_namespaces_namespace_networkpolicies_name_status.put import ReplaceNamespacedNetworkPolicyStatus
++
++
++class NetworkingV1Api(
++    CreateIngressClass,
++    CreateNamespacedIngress,
++    CreateNamespacedNetworkPolicy,
++    DeleteCollectionIngressClass,
++    DeleteCollectionNamespacedIngress,
++    DeleteCollectionNamespacedNetworkPolicy,
++    DeleteIngressClass,
++    DeleteNamespacedIngress,
++    DeleteNamespacedNetworkPolicy,
++    GetApiResources,
++    ListIngressClass,
++    ListIngressForAllNamespaces,
++    ListNamespacedIngress,
++    ListNamespacedNetworkPolicy,
++    ListNetworkPolicyForAllNamespaces,
++    PatchIngressClass,
++    PatchNamespacedIngress,
++    PatchNamespacedIngressStatus,
++    PatchNamespacedNetworkPolicy,
++    PatchNamespacedNetworkPolicyStatus,
++    ReadIngressClass,
++    ReadNamespacedIngress,
++    ReadNamespacedIngressStatus,
++    ReadNamespacedNetworkPolicy,
++    ReadNamespacedNetworkPolicyStatus,
++    ReplaceIngressClass,
++    ReplaceNamespacedIngress,
++    ReplaceNamespacedIngressStatus,
++    ReplaceNamespacedNetworkPolicy,
++    ReplaceNamespacedNetworkPolicyStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/networking_v1alpha1_api.py b/kubernetes/client/api/networking_v1alpha1_api.py
+new file mode 100644
+index 00000000..197b83a8
+--- /dev/null
++++ b/kubernetes/client/api/networking_v1alpha1_api.py
+@@ -0,0 +1,37 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs.post import CreateClusterCidr
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs_name.delete import DeleteClusterCidr
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs.delete import DeleteCollectionClusterCidr
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_.get import GetApiResources
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs.get import ListClusterCidr
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs_name.patch import PatchClusterCidr
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs_name.get import ReadClusterCidr
++from kubernetes.client.paths.apis_networking_k8s_io_v1alpha1_clustercidrs_name.put import ReplaceClusterCidr
++
++
++class NetworkingV1alpha1Api(
++    CreateClusterCidr,
++    DeleteClusterCidr,
++    DeleteCollectionClusterCidr,
++    GetApiResources,
++    ListClusterCidr,
++    PatchClusterCidr,
++    ReadClusterCidr,
++    ReplaceClusterCidr,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/node_api.py b/kubernetes/client/api/node_api.py
+new file mode 100644
+index 00000000..0d9a8cc0
+--- /dev/null
++++ b/kubernetes/client/api/node_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_node_k8s_io_.get import GetApiGroup
++
++
++class NodeApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/node_v1_api.py b/kubernetes/client/api/node_v1_api.py
+new file mode 100644
+index 00000000..f5371a82
+--- /dev/null
++++ b/kubernetes/client/api/node_v1_api.py
+@@ -0,0 +1,37 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses.post import CreateRuntimeClass
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses.delete import DeleteCollectionRuntimeClass
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses_name.delete import DeleteRuntimeClass
++from kubernetes.client.paths.apis_node_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses.get import ListRuntimeClass
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses_name.patch import PatchRuntimeClass
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses_name.get import ReadRuntimeClass
++from kubernetes.client.paths.apis_node_k8s_io_v1_runtimeclasses_name.put import ReplaceRuntimeClass
++
++
++class NodeV1Api(
++    CreateRuntimeClass,
++    DeleteCollectionRuntimeClass,
++    DeleteRuntimeClass,
++    GetApiResources,
++    ListRuntimeClass,
++    PatchRuntimeClass,
++    ReadRuntimeClass,
++    ReplaceRuntimeClass,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/openid_api.py b/kubernetes/client/api/openid_api.py
+new file mode 100644
+index 00000000..4e5265d6
+--- /dev/null
++++ b/kubernetes/client/api/openid_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.openid_v1_jwks_.get import GetServiceAccountIssuerOpenIdKeyset
++
++
++class OpenidApi(
++    GetServiceAccountIssuerOpenIdKeyset,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/policy_api.py b/kubernetes/client/api/policy_api.py
+new file mode 100644
+index 00000000..72941f6e
+--- /dev/null
++++ b/kubernetes/client/api/policy_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_policy_.get import GetApiGroup
++
++
++class PolicyApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/policy_v1_api.py b/kubernetes/client/api/policy_v1_api.py
+new file mode 100644
+index 00000000..da547928
+--- /dev/null
++++ b/kubernetes/client/api/policy_v1_api.py
+@@ -0,0 +1,45 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets.post import CreateNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets.delete import DeleteCollectionNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name.delete import DeleteNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets.get import ListNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_poddisruptionbudgets.get import ListPodDisruptionBudgetForAllNamespaces
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name.patch import PatchNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name_status.patch import PatchNamespacedPodDisruptionBudgetStatus
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name.get import ReadNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name_status.get import ReadNamespacedPodDisruptionBudgetStatus
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name.put import ReplaceNamespacedPodDisruptionBudget
++from kubernetes.client.paths.apis_policy_v1_namespaces_namespace_poddisruptionbudgets_name_status.put import ReplaceNamespacedPodDisruptionBudgetStatus
++
++
++class PolicyV1Api(
++    CreateNamespacedPodDisruptionBudget,
++    DeleteCollectionNamespacedPodDisruptionBudget,
++    DeleteNamespacedPodDisruptionBudget,
++    GetApiResources,
++    ListNamespacedPodDisruptionBudget,
++    ListPodDisruptionBudgetForAllNamespaces,
++    PatchNamespacedPodDisruptionBudget,
++    PatchNamespacedPodDisruptionBudgetStatus,
++    ReadNamespacedPodDisruptionBudget,
++    ReadNamespacedPodDisruptionBudgetStatus,
++    ReplaceNamespacedPodDisruptionBudget,
++    ReplaceNamespacedPodDisruptionBudgetStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/rbac_authorization_api.py b/kubernetes/client/api/rbac_authorization_api.py
+new file mode 100644
+index 00000000..58f5b294
+--- /dev/null
++++ b/kubernetes/client/api/rbac_authorization_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_.get import GetApiGroup
++
++
++class RbacAuthorizationApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/rbac_authorization_v1_api.py b/kubernetes/client/api/rbac_authorization_v1_api.py
+new file mode 100644
+index 00000000..809482f4
+--- /dev/null
++++ b/kubernetes/client/api/rbac_authorization_v1_api.py
+@@ -0,0 +1,83 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles.post import CreateClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings.post import CreateClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles.post import CreateNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings.post import CreateNamespacedRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles_name.delete import DeleteClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings_name.delete import DeleteClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles.delete import DeleteCollectionClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings.delete import DeleteCollectionClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles.delete import DeleteCollectionNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings.delete import DeleteCollectionNamespacedRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles_name.delete import DeleteNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings_name.delete import DeleteNamespacedRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles.get import ListClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings.get import ListClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles.get import ListNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings.get import ListNamespacedRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_rolebindings.get import ListRoleBindingForAllNamespaces
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_roles.get import ListRoleForAllNamespaces
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles_name.patch import PatchClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings_name.patch import PatchClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles_name.patch import PatchNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings_name.patch import PatchNamespacedRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles_name.get import ReadClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings_name.get import ReadClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles_name.get import ReadNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings_name.get import ReadNamespacedRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterroles_name.put import ReplaceClusterRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_clusterrolebindings_name.put import ReplaceClusterRoleBinding
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_roles_name.put import ReplaceNamespacedRole
++from kubernetes.client.paths.apis_rbac_authorization_k8s_io_v1_namespaces_namespace_rolebindings_name.put import ReplaceNamespacedRoleBinding
++
++
++class RbacAuthorizationV1Api(
++    CreateClusterRole,
++    CreateClusterRoleBinding,
++    CreateNamespacedRole,
++    CreateNamespacedRoleBinding,
++    DeleteClusterRole,
++    DeleteClusterRoleBinding,
++    DeleteCollectionClusterRole,
++    DeleteCollectionClusterRoleBinding,
++    DeleteCollectionNamespacedRole,
++    DeleteCollectionNamespacedRoleBinding,
++    DeleteNamespacedRole,
++    DeleteNamespacedRoleBinding,
++    GetApiResources,
++    ListClusterRole,
++    ListClusterRoleBinding,
++    ListNamespacedRole,
++    ListNamespacedRoleBinding,
++    ListRoleBindingForAllNamespaces,
++    ListRoleForAllNamespaces,
++    PatchClusterRole,
++    PatchClusterRoleBinding,
++    PatchNamespacedRole,
++    PatchNamespacedRoleBinding,
++    ReadClusterRole,
++    ReadClusterRoleBinding,
++    ReadNamespacedRole,
++    ReadNamespacedRoleBinding,
++    ReplaceClusterRole,
++    ReplaceClusterRoleBinding,
++    ReplaceNamespacedRole,
++    ReplaceNamespacedRoleBinding,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/scheduling_api.py b/kubernetes/client/api/scheduling_api.py
+new file mode 100644
+index 00000000..31a5cd23
+--- /dev/null
++++ b/kubernetes/client/api/scheduling_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_scheduling_k8s_io_.get import GetApiGroup
++
++
++class SchedulingApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/scheduling_v1_api.py b/kubernetes/client/api/scheduling_v1_api.py
+new file mode 100644
+index 00000000..a7d30321
+--- /dev/null
++++ b/kubernetes/client/api/scheduling_v1_api.py
+@@ -0,0 +1,37 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses.post import CreatePriorityClass
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses.delete import DeleteCollectionPriorityClass
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses_name.delete import DeletePriorityClass
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses.get import ListPriorityClass
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses_name.patch import PatchPriorityClass
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses_name.get import ReadPriorityClass
++from kubernetes.client.paths.apis_scheduling_k8s_io_v1_priorityclasses_name.put import ReplacePriorityClass
++
++
++class SchedulingV1Api(
++    CreatePriorityClass,
++    DeleteCollectionPriorityClass,
++    DeletePriorityClass,
++    GetApiResources,
++    ListPriorityClass,
++    PatchPriorityClass,
++    ReadPriorityClass,
++    ReplacePriorityClass,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/storage_api.py b/kubernetes/client/api/storage_api.py
+new file mode 100644
+index 00000000..b958efd7
+--- /dev/null
++++ b/kubernetes/client/api/storage_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_storage_k8s_io_.get import GetApiGroup
++
++
++class StorageApi(
++    GetApiGroup,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/storage_v1_api.py b/kubernetes/client/api/storage_v1_api.py
+new file mode 100644
+index 00000000..69071acc
+--- /dev/null
++++ b/kubernetes/client/api/storage_v1_api.py
+@@ -0,0 +1,101 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers.post import CreateCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes.post import CreateCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities.post import CreateNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses.post import CreateStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments.post import CreateVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers.delete import DeleteCollectionCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes.delete import DeleteCollectionCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities.delete import DeleteCollectionNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses.delete import DeleteCollectionStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments.delete import DeleteCollectionVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers_name.delete import DeleteCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes_name.delete import DeleteCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities_name.delete import DeleteNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses_name.delete import DeleteStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name.delete import DeleteVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_.get import GetApiResources
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers.get import ListCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes.get import ListCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csistoragecapacities.get import ListCsiStorageCapacityForAllNamespaces
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities.get import ListNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses.get import ListStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments.get import ListVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers_name.patch import PatchCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes_name.patch import PatchCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities_name.patch import PatchNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses_name.patch import PatchStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name.patch import PatchVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name_status.patch import PatchVolumeAttachmentStatus
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers_name.get import ReadCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes_name.get import ReadCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities_name.get import ReadNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses_name.get import ReadStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name.get import ReadVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name_status.get import ReadVolumeAttachmentStatus
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csidrivers_name.put import ReplaceCsiDriver
++from kubernetes.client.paths.apis_storage_k8s_io_v1_csinodes_name.put import ReplaceCsiNode
++from kubernetes.client.paths.apis_storage_k8s_io_v1_namespaces_namespace_csistoragecapacities_name.put import ReplaceNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1_storageclasses_name.put import ReplaceStorageClass
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name.put import ReplaceVolumeAttachment
++from kubernetes.client.paths.apis_storage_k8s_io_v1_volumeattachments_name_status.put import ReplaceVolumeAttachmentStatus
++
++
++class StorageV1Api(
++    CreateCsiDriver,
++    CreateCsiNode,
++    CreateNamespacedCsiStorageCapacity,
++    CreateStorageClass,
++    CreateVolumeAttachment,
++    DeleteCollectionCsiDriver,
++    DeleteCollectionCsiNode,
++    DeleteCollectionNamespacedCsiStorageCapacity,
++    DeleteCollectionStorageClass,
++    DeleteCollectionVolumeAttachment,
++    DeleteCsiDriver,
++    DeleteCsiNode,
++    DeleteNamespacedCsiStorageCapacity,
++    DeleteStorageClass,
++    DeleteVolumeAttachment,
++    GetApiResources,
++    ListCsiDriver,
++    ListCsiNode,
++    ListCsiStorageCapacityForAllNamespaces,
++    ListNamespacedCsiStorageCapacity,
++    ListStorageClass,
++    ListVolumeAttachment,
++    PatchCsiDriver,
++    PatchCsiNode,
++    PatchNamespacedCsiStorageCapacity,
++    PatchStorageClass,
++    PatchVolumeAttachment,
++    PatchVolumeAttachmentStatus,
++    ReadCsiDriver,
++    ReadCsiNode,
++    ReadNamespacedCsiStorageCapacity,
++    ReadStorageClass,
++    ReadVolumeAttachment,
++    ReadVolumeAttachmentStatus,
++    ReplaceCsiDriver,
++    ReplaceCsiNode,
++    ReplaceNamespacedCsiStorageCapacity,
++    ReplaceStorageClass,
++    ReplaceVolumeAttachment,
++    ReplaceVolumeAttachmentStatus,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/storage_v1beta1_api.py b/kubernetes/client/api/storage_v1beta1_api.py
+new file mode 100644
+index 00000000..8402cc5c
+--- /dev/null
++++ b/kubernetes/client/api/storage_v1beta1_api.py
+@@ -0,0 +1,39 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities.post import CreateNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities.delete import DeleteCollectionNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities_name.delete import DeleteNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_.get import GetApiResources
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_csistoragecapacities.get import ListCsiStorageCapacityForAllNamespaces
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities.get import ListNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities_name.patch import PatchNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities_name.get import ReadNamespacedCsiStorageCapacity
++from kubernetes.client.paths.apis_storage_k8s_io_v1beta1_namespaces_namespace_csistoragecapacities_name.put import ReplaceNamespacedCsiStorageCapacity
++
++
++class StorageV1beta1Api(
++    CreateNamespacedCsiStorageCapacity,
++    DeleteCollectionNamespacedCsiStorageCapacity,
++    DeleteNamespacedCsiStorageCapacity,
++    GetApiResources,
++    ListCsiStorageCapacityForAllNamespaces,
++    ListNamespacedCsiStorageCapacity,
++    PatchNamespacedCsiStorageCapacity,
++    ReadNamespacedCsiStorageCapacity,
++    ReplaceNamespacedCsiStorageCapacity,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/version_api.py b/kubernetes/client/api/version_api.py
+new file mode 100644
+index 00000000..998994d7
+--- /dev/null
++++ b/kubernetes/client/api/version_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.version_.get import GetCode
++
++
++class VersionApi(
++    GetCode,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+diff --git a/kubernetes/client/api/well_known_api.py b/kubernetes/client/api/well_known_api.py
+new file mode 100644
+index 00000000..bb72f2cd
+--- /dev/null
++++ b/kubernetes/client/api/well_known_api.py
+@@ -0,0 +1,23 @@
++# coding: utf-8
++
++"""
++    Kubernetes
++
++    No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)  # noqa: E501
++
++    The version of the OpenAPI document: release-1.25
++    Generated by: https://openapi-generator.tech
++"""
++
++from kubernetes.client.paths.well_known_openid_configuration_.get import GetServiceAccountIssuerOpenIdConfiguration
++
++
++class WellKnownApi(
++    GetServiceAccountIssuerOpenIdConfiguration,
++):
++    """NOTE: This class is auto generated by OpenAPI Generator
++    Ref: https://openapi-generator.tech
++
++    Do not edit the class manually.
++    """
++    pass
+-- 
+2.20.1 (Apple Git-117)
+
