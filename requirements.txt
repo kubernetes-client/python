@@ -9,7 +9,7 @@ websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
 urllib3>=1.26.7  # MIT
-frozendict ~= 2.3.4  # LGPLv3+
-pem >= 19.3.0  # MIT
-pycryptodome >= 3.9.0  # BSD-2
-typing_extensions ~= 4.3.0  # PSFv2
+frozendict~=2.3.4  # LGPLv3+
+pem>=19.3.0  # MIT
+pycryptodome>=3.9.0  # BSD-2
+typing_extensions~=4.3.0  # PSFv2
