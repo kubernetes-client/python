@@ -1,6 +1,6 @@
 certifi>=14.05.14 # MPL
 six>=1.9.0  # MIT
-python-dateutil>=2.5.3  # BSD
+python-dateutil>=2.7.0  # BSD
 setuptools>=21.0.0  # PSF/ZPL
 pyyaml>=5.4.1  # MIT
 google-auth>=1.0.1  # Apache-2.0
@@ -8,4 +8,8 @@ ipaddress>=1.0.17;python_version=="2.7"  # PSF
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
-urllib3>=1.24.2  # MIT
+urllib3>=1.26.7  # MIT
+frozendict ~= 2.3.4  # LGPLv3+
+pem >= 19.3.0  # MIT
+pycryptodome >= 3.9.0  # BSD-2
+typing_extensions ~= 4.3.0  # PSFv2
