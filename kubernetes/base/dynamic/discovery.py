@@ -45,7 +45,11 @@ class Discoverer(object):
         default_cache_id = self.client.configuration.host
         if six.PY3:
             default_cache_id = default_cache_id.encode('utf-8')
-        default_cachefile_name = 'osrcp-{0}.json'.format(hashlib.md5(default_cache_id, usedforsecurity=False).hexdigest())
+        try:
+            default_cachefile_name = 'osrcp-{0}.json'.format(hashlib.md5(default_cache_id, usedforsecurity=False).hexdigest())
+        except TypeError:
+            # usedforsecurity is only supported in 3.9+
+            default_cachefile_name = 'osrcp-{0}.json'.format(hashlib.md5(default_cache_id).hexdigest())
         self.__cache_file = cache_file or os.path.join(tempfile.gettempdir(), default_cachefile_name)
         self.__init_cache()
 
