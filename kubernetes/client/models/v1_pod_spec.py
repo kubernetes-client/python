@@ -60,6 +60,7 @@ class V1PodSpec(object):
         'subdomain': 'str',
         'termination_grace_period_seconds': 'int',
         'tolerations': 'list[V1Toleration]',
+        'topology_spread_constraints': 'list[V1TopologySpreadConstraint]',
         'volumes': 'list[V1Volume]'
     }
 
@@ -96,7 +97,7 @@ class V1PodSpec(object):
         'volumes': 'volumes'
     }
 
-    def __init__(self, active_deadline_seconds=None, affinity=None, automount_service_account_token=None, containers=None, dns_config=None, dns_policy=None, enable_service_links=None, host_aliases=None, host_ipc=None, host_network=None, host_pid=None, hostname=None, image_pull_secrets=None, init_containers=None, node_name=None, node_selector=None, priority=None, priority_class_name=None, readiness_gates=None, restart_policy=None, runtime_class_name=None, scheduler_name=None, security_context=None, service_account=None, service_account_name=None, share_process_namespace=None, subdomain=None, termination_grace_period_seconds=None, tolerations=None, volumes=None):
+    def __init__(self, active_deadline_seconds=None, affinity=None, automount_service_account_token=None, containers=None, dns_config=None, dns_policy=None, enable_service_links=None, host_aliases=None, host_ipc=None, host_network=None, host_pid=None, hostname=None, image_pull_secrets=None, init_containers=None, node_name=None, node_selector=None, priority=None, priority_class_name=None, readiness_gates=None, restart_policy=None, runtime_class_name=None, scheduler_name=None, security_context=None, service_account=None, service_account_name=None, share_process_namespace=None, subdomain=None, termination_grace_period_seconds=None, tolerations=None, topology_spread_constraints=None, volumes=None):
         """
         V1PodSpec - a model defined in Swagger
         """
@@ -130,6 +131,7 @@ class V1PodSpec(object):
         self._subdomain = None
         self._termination_grace_period_seconds = None
         self._tolerations = None
+        self._topology_spread_constraints = None
         self._volumes = None
         self.discriminator = None
 
@@ -190,6 +192,8 @@ class V1PodSpec(object):
           self.termination_grace_period_seconds = termination_grace_period_seconds
         if tolerations is not None:
           self.tolerations = tolerations
+        if topology_spread_constraints is not None:
+            self.topology_spread_constraints = topology_spread_constraints
         if volumes is not None:
           self.volumes = volumes
 
@@ -861,6 +865,25 @@ class V1PodSpec(object):
         """
 
         self._tolerations = tolerations
+
+    @property
+    def topology_spread_constraints(self):
+        """Gets the topology_spread_constraints of this V1PodSpec.  # noqa: E501
+        TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. Scheduler will schedule pods in a way which abides by the constraints. All topologySpreadConstraints are ANDed.  # noqa: E501
+        :return: The topology_spread_constraints of this V1PodSpec.  # noqa: E501
+        :rtype: list[V1TopologySpreadConstraint]
+        """
+        return self._topology_spread_constraints
+
+    @topology_spread_constraints.setter
+    def topology_spread_constraints(self, topology_spread_constraints):
+        """Sets the topology_spread_constraints of this V1PodSpec.
+        TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. Scheduler will schedule pods in a way which abides by the constraints. All topologySpreadConstraints are ANDed.  # noqa: E501
+        :param topology_spread_constraints: The topology_spread_constraints of this V1PodSpec.  # noqa: E501
+        :type: list[V1TopologySpreadConstraint]
+        """
+
+        self._topology_spread_constraints = topology_spread_constraints
 
     @property
     def volumes(self):
