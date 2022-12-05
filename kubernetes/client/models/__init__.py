@@ -369,6 +369,7 @@ from .v1_token_review_status import V1TokenReviewStatus
 from .v1_toleration import V1Toleration
 from .v1_topology_selector_label_requirement import V1TopologySelectorLabelRequirement
 from .v1_topology_selector_term import V1TopologySelectorTerm
+from .v1_topology_spread_constraint import V1TopologySpreadConstraint
 from .v1_typed_local_object_reference import V1TypedLocalObjectReference
 from .v1_user_info import V1UserInfo
 from .v1_volume import V1Volume
