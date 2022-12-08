@@ -4,6 +4,7 @@ python-dateutil>=2.5.3  # BSD
 setuptools>=21.0.0  # PSF/ZPL
 urllib3>=1.23  # MIT
 pyyaml>=3.12  # MIT
+pyasn1>=0.4.1
 google-auth>=1.0.1  # Apache-2.0
 ipaddress>=1.0.17;python_version=="2.7"  # PSF
 websocket-client==0.56.0
