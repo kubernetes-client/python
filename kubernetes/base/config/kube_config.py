@@ -860,32 +860,36 @@ def load_kube_config_from_dict(config_dict, context=None,
 def new_client_from_config(
         config_file=None,
         context=None,
-        persist_config=True):
+        persist_config=True,
+        client_configuration=None):
     """
     Loads configuration the same as load_kube_config but returns an ApiClient
     to be used with any API object. This will allow the caller to concurrently
     talk with multiple clusters.
     """
-    client_config = type.__call__(Configuration)
+    if client_configuration is None:
+        client_configuration = type.__call__(Configuration)
     load_kube_config(config_file=config_file, context=context,
-                     client_configuration=client_config,
+                     client_configuration=client_configuration,
                      persist_config=persist_config)
-    return ApiClient(configuration=client_config)
+    return ApiClient(configuration=client_configuration)
 
 
 def new_client_from_config_dict(
         config_dict=None,
         context=None,
         persist_config=True,
-        temp_file_path=None):
+        temp_file_path=None,
+        client_configuration=None):
     """
     Loads configuration the same as load_kube_config_from_dict but returns an ApiClient
     to be used with any API object. This will allow the caller to concurrently
     talk with multiple clusters.
     """
-    client_config = type.__call__(Configuration)
+    if client_configuration is None:
+        client_configuration = type.__call__(Configuration)
     load_kube_config_from_dict(config_dict=config_dict, context=context,
-                               client_configuration=client_config,
+                               client_configuration=client_configuration,
                                persist_config=persist_config,
                                temp_file_path=temp_file_path)
-    return ApiClient(configuration=client_config)
+    return ApiClient(configuration=client_configuration)
