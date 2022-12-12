@@ -33,8 +33,12 @@ def load_config(**kwargs):
     can be passed to either load_kube_config or
     load_incluster_config functions.
     """
-    if "kube_config_path" in kwargs.keys() or exists(expanduser(KUBE_CONFIG_DEFAULT_LOCATION)):
-        kwargs["config_file"] = kwargs.pop("kube_config_path", None)
+    if "kube_config_path" in kwargs.keys():
+        kube_config_path = kwargs.pop("kube_config_path", None)
+        if "config_file" not in kwargs.keys():
+            kwargs["config_file"] = kube_config_path
+        load_kube_config(**kwargs)
+    elif exists(expanduser(KUBE_CONFIG_DEFAULT_LOCATION)):
         load_kube_config(**kwargs)
     else:
         print(
