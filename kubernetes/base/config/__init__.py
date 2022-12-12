@@ -34,6 +34,7 @@ def load_config(**kwargs):
     load_incluster_config functions.
     """
     if "kube_config_path" in kwargs.keys() or exists(expanduser(KUBE_CONFIG_DEFAULT_LOCATION)):
+        kwargs["config_file"] = kwargs.pop("kube_config_path", None)
         load_kube_config(**kwargs)
     else:
         print(
