@@ -94,6 +94,7 @@ class V1PodSpec(object):
         'subdomain': 'subdomain',
         'termination_grace_period_seconds': 'terminationGracePeriodSeconds',
         'tolerations': 'tolerations',
+        'topology_spread_constraints': 'topologySpreadConstraints',
         'volumes': 'volumes'
     }
 
