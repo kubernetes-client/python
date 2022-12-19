@@ -16,10 +16,11 @@ __project__ = 'kubernetes'
 # The version is auto-updated. Please do not edit.
 __version__ = "25.0.0-snapshot"
 
-import kubernetes.client
-import kubernetes.config
-import kubernetes.dynamic
-import kubernetes.watch
-import kubernetes.stream
-import kubernetes.utils
-import kubernetes.leaderelection
+# Redundant aliasing marks submodules as "exported" symbols for static analyzers.
+import kubernetes.client as client
+import kubernetes.config as config
+import kubernetes.dynamic as dynamic
+import kubernetes.watch as watch
+import kubernetes.stream as stream
+import kubernetes.utils as utils
+import kubernetes.leaderelection as leaderelection
