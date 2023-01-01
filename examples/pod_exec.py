@@ -71,6 +71,8 @@ def exec_commands(api_instance):
         '/bin/sh',
         '-c',
         'echo This message goes to stderr; echo This message goes to stdout']
+    # When calling a pod with multiple containers running the target container
+    # has to be specified with a keyword argument container=<name>.
     resp = stream(api_instance.connect_get_namespaced_pod_exec,
                   name,
                   'default',
