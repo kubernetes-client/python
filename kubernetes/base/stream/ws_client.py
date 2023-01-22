@@ -89,10 +89,10 @@ class WSClient:
 
     def readline_channel(self, channel, timeout=None):
         """Read a line from a channel."""
-        if timeout is None:
-            timeout = float("inf")
+        if timeout is not None and timeout < 0:
+            timeout = None
         start = time.time()
-        while self.is_open() and time.time() - start < timeout:
+        while timeout is None or time.time() - start < timeout:
             if channel in self._channels:
                 data = self._channels[channel]
                 if self.newline in data:
@@ -104,7 +104,15 @@ class WSClient:
                     else:
                         del self._channels[channel]
                     return ret
-            self.update(timeout=(timeout - time.time() + start))
+
+            if not self.is_open():
+                return
+
+            if timeout is not None:
+                # the timeout here should never be negative, because otherwise this method could block indefinitly
+                self.update(timeout=max(timeout - time.time() + start, 0))
+            else:
+                self.update(timeout=None)
 
     def write_channel(self, channel, data):
         """Write data to a channel."""
@@ -190,6 +198,13 @@ class WSClient:
             r = poll.poll(timeout)
             poll.unregister(self.sock.sock)
         else:
+            # select.select() does not work with negative timeouts, when a negative value is
+            # given select.epoll() and select.poll() are blocking until there is an event for
+            # the poll object, therefore set the timeout to None in order to have the same
+            # behaviour when select.select() is used
+            if timeout is not None and timeout < 0:
+                timeout = None
+
             r, _, _ = select.select(
                 (self.sock.sock, ), (), (), timeout)
 
@@ -220,10 +235,11 @@ class WSClient:
     def run_forever(self, timeout=None):
         """Wait till connection is closed or timeout reached. Buffer any input
         received during this time."""
-        if timeout:
+        if timeout is not None:
             start = time.time()
             while self.is_open() and time.time() - start < timeout:
-                self.update(timeout=(timeout - time.time() + start))
+                # the timeout here should never be negative, because otherwise this method could block indefinitly
+                self.update(timeout=max(timeout - time.time() + start, 0))
         else:
             while self.is_open():
                 self.update(timeout=None)
