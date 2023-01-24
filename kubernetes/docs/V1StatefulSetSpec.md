@@ -5,6 +5,7 @@ A StatefulSetSpec is the specification of a StatefulSet.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **min_ready_seconds** | **int** | Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready) | [optional] 
+**ordinals** | [**V1StatefulSetOrdinals**](V1StatefulSetOrdinals.md) |  | [optional] 
 **persistent_volume_claim_retention_policy** | [**V1StatefulSetPersistentVolumeClaimRetentionPolicy**](V1StatefulSetPersistentVolumeClaimRetentionPolicy.md) |  | [optional] 
 **pod_management_policy** | **str** | podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is &#x60;OrderedReady&#x60;, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is &#x60;Parallel&#x60; which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.   | [optional] 
 **replicas** | **int** | replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template, but individual replicas also have a consistent identity. If unspecified, defaults to 1. | [optional] 
