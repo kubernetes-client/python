@@ -64,7 +64,7 @@ def create_deployment_object():
 
 
 def create_deployment(api, deployment):
-    # Create deployement
+    # Create deployment
     resp = api.create_namespaced_deployment(
         body=deployment, namespace="default"
     )

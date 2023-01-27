@@ -94,7 +94,7 @@ class ConfigMapLock:
         :param name: name of the lock to be updated
         :param namespace: namespace the lock is in
         :param updated_record: the updated election record
-        :return: True if update is succesful False if it fails
+        :return: True if update is successful False if it fails
         """
         try:
             # Set the updated record

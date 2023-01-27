@@ -150,7 +150,7 @@ class ResourceList(Resource):
             raise ValueError('The `items` field in the body must be populated when calling methods on a ResourceList')
 
         if self.kind != kind:
-            raise ValueError('Methods on a {} must be called with a body containing the same kind. Receieved {} instead'.format(self.kind, kind))
+            raise ValueError('Methods on a {} must be called with a body containing the same kind. Received {} instead'.format(self.kind, kind))
 
         return {
             'api_version': api_version,

@@ -94,7 +94,7 @@ class DiscoveryV1EndpointPort(object):
     def name(self):
         """Gets the name of this DiscoveryV1EndpointPort.  # noqa: E501
 
-        The name of this port. All ports in an EndpointSlice must have a unique name. If the EndpointSlice is dervied from a Kubernetes service, this corresponds to the Service.ports[].name. Name must either be an empty string or pass DNS_LABEL validation: * must be no more than 63 characters long. * must consist of lower case alphanumeric characters or '-'. * must start and end with an alphanumeric character. Default is empty string.  # noqa: E501
+        The name of this port. All ports in an EndpointSlice must have a unique name. If the EndpointSlice is derived from a Kubernetes service, this corresponds to the Service.ports[].name. Name must either be an empty string or pass DNS_LABEL validation: * must be no more than 63 characters long. * must consist of lower case alphanumeric characters or '-'. * must start and end with an alphanumeric character. Default is empty string.  # noqa: E501
 
         :return: The name of this DiscoveryV1EndpointPort.  # noqa: E501
         :rtype: str
@@ -105,7 +105,7 @@ class DiscoveryV1EndpointPort(object):
     def name(self, name):
         """Sets the name of this DiscoveryV1EndpointPort.
 
-        The name of this port. All ports in an EndpointSlice must have a unique name. If the EndpointSlice is dervied from a Kubernetes service, this corresponds to the Service.ports[].name. Name must either be an empty string or pass DNS_LABEL validation: * must be no more than 63 characters long. * must consist of lower case alphanumeric characters or '-'. * must start and end with an alphanumeric character. Default is empty string.  # noqa: E501
+        The name of this port. All ports in an EndpointSlice must have a unique name. If the EndpointSlice is derived from a Kubernetes service, this corresponds to the Service.ports[].name. Name must either be an empty string or pass DNS_LABEL validation: * must be no more than 63 characters long. * must consist of lower case alphanumeric characters or '-'. * must start and end with an alphanumeric character. Default is empty string.  # noqa: E501
 
         :param name: The name of this DiscoveryV1EndpointPort.  # noqa: E501
         :type: str

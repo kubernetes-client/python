@@ -1,6 +1,6 @@
 # V1PersistentVolumeClaimCondition
 
-PersistentVolumeClaimCondition contails details about state of pvc
+PersistentVolumeClaimCondition contains details about state of pvc
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

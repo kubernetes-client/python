@@ -665,7 +665,7 @@ class ConfigNode(object):
 class KubeConfigMerger:
 
     """Reads and merges configuration from one or more kube-config's.
-    The propery `config` can be passed to the KubeConfigLoader as config_dict.
+    The property `config` can be passed to the KubeConfigLoader as config_dict.
 
     It uses a path attribute from ConfigNode to store the path to kubeconfig.
     This path is required to load certs from relative paths.

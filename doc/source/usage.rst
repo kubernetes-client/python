@@ -14,7 +14,7 @@ Here is a simple usage of creating a deployment from a yaml file:
 .. literalinclude:: ../../examples/create_deployment.py
 
 
-The following example demostrates how to create, update and delete deployments
+The following example demonstrates how to create, update and delete deployments
 without the need to read a file from the disk:
 
 .. literalinclude:: ../../examples/deployment_examples.py
