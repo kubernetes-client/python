@@ -56,6 +56,9 @@ There are two inputs available in the client, that could be used to set connecti
   ***Refer***
   - *[https://github.com/kubernetes-client/python/blob/v17.17.0/kubernetes/client/api_client.py#L336-L339](https://github.com/kubernetes-client/python/blob/v17.17.0/kubernetes/client/api_client.py#L336-L339)*
 
+  ***Example***
+  - *[request_timeout.py](../dynamic-client/request_timeout.py)*
+ 
 - In case of network outage, leading to dropping all packets with no RST/FIN, the timeout value (in seconds) determined by the `request_timeout` argument, would be the time duration for how long the client will wait before dropping the connection.
 
 - When the timeout happens, an exception will be raised, for eg. ~

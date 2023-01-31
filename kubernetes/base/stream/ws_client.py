@@ -182,6 +182,8 @@ class WSClient:
         if hasattr(select, "poll"):
             poll = select.poll()
             poll.register(self.sock.sock, select.POLLIN)
+            if timeout is not None:
+                timeout *= 1_000  # poll method uses milliseconds as the time unit
             r = poll.poll(timeout)
             poll.unregister(self.sock.sock)
         else:
