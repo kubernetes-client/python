@@ -64,7 +64,7 @@ def parse_quantity(quantity):
     else:
         raise ValueError("{} has unknown suffix".format(quantity))
 
-    # handly SI inconsistency
+    # handle SI inconsistency
     if suffix == "ki":
         raise ValueError("{} has unknown suffix".format(quantity))
 
