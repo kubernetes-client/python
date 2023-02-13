@@ -1,3 +1,13 @@
+# v26.1.0b1
+
+Kubernetes API Version: v1.26.1
+
+### Bug or Regression
+- The timeout unit of the WSClient update method is now always seconds for both poll and select functions. (#1976, @t-yrka)
+
+### Feature
+- Adds support for loading CA certificates from a file using the `idp-certificate-authority` key for the oidc plugin. (#1916, @vgupta3)
+
 # v26.1.0a1
 
 Kubernetes API Version: v1.26.1
