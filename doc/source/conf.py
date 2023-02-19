@@ -14,25 +14,31 @@
 
 import os
 import re
-import shutil
 import sys
 
 from recommonmark.transform import AutoStructify
 
-# Work around https://github.com/readthedocs/recommonmark/issues/152
-new_readme = []
+# --
+# Copy README.md, CONTRIBUTING.md to source/ directory and replace
+# all paths to point github files.
+def _copy_with_converting_link_to_repo(filename, new_filename):
+    base_url = 'https://github.com/kubernetes-client/python/blob/master/'
 
-with open("../../README.md", "r") as r:
-    lines = r.readlines()
-    for l in lines:
-        nl = re.sub("\[!\[[\w\s]+\]\(", "[![](", l)
-        new_readme.append(nl)
+    def subf(subs):
+        label, url = subs.groups()
+        if not url.startswith('http://') and not url.startswith('https://'):
+            url = base_url + url
+        return label + '(' + url + ')'
 
-with open("README.md", "w") as n:
-    n.writelines(new_readme)
+    with open(filename, "r") as r:
+        data = re.sub("(\[[^\]]+\])\(([^\)]+)\)", subf, r.read())
 
-# apparently index.rst can't search for markdown not in the same directory
-shutil.copy("../../CONTRIBUTING.md", ".")
+    with open(new_filename, "w") as w:
+        w.write(data)
+
+_copy_with_converting_link_to_repo("../../README.md", "README.md")
+_copy_with_converting_link_to_repo("../../CONTRIBUTING.md", "CONTRIBUTING.md")
+# --
 
 sys.path.insert(0, os.path.abspath('../..'))
 # -- General configuration ----------------------------------------------------
