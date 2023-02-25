@@ -258,7 +258,7 @@ class PortForward:
 
         Port Forward command sends on 2 channels per port, a read/write
         data channel and a read only error channel. Both channels are sent an
-        initial frame contaning the port number that channel is associated with.
+        initial frame containing the port number that channel is associated with.
         """
 
         self.websocket = websocket

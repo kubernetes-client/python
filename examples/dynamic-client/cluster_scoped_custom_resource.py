@@ -17,7 +17,7 @@ This example demonstrates the following:
     - Creation of a custom resource definition (CRD) using dynamic-client
     - Creation of cluster scoped custom resources (CR) using the above created CRD
     - List, patch (update), delete the custom resources
-    - Delete the custom resource defintion (CRD)
+    - Delete the custom resource definition (CRD)
 """
 
 from kubernetes import config, dynamic

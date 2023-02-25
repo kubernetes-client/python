@@ -98,7 +98,7 @@ def main():
     # Wait for finishing creation of controller revision
     import time
     time.sleep(15)
-    # List the controller revison
+    # List the controller revision
     controller_revisions = list_controller_revision(
         apps_v1_api, "default", "daemonset-redis")
     rollout_namespaced_daemon_set(

@@ -20,7 +20,7 @@
 # find_latest_patch_version finds the latest released patch version for the
 # given branch.
 # We use the version to track what API surface the generated Python client
-# cooresponds to, and collect all API change release notes up to that version.
+# corresponds to, and collect all API change release notes up to that version.
 # There is one tricky point: the code generator we use pulls the latest OpenAPI
 # spec from the given branch. The spec may contain API changes that aren't
 # documented in the Kubernetes release notes. Until the code generator pulls

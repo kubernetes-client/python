@@ -2,7 +2,7 @@
 
 This directory contains various examples of how to use the Python client.
 Please read the description at the top of each example for more information
-about what the script does and any prequisites. Most scripts also include
+about what the script does and any prerequisites. Most scripts also include
 comments throughout the code.
 
 ## Setup

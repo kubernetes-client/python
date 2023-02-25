@@ -3,11 +3,11 @@ This example covers the following:
     - Create headless server
     - Create statefulset
     - Update statefulset
-    - List contoller revisions which belong to specified statefulset
+    - List controller revisions which belong to specified statefulset
     - Roll out statefulset
 Note:
-    If your kubernetes version is lower than 1.22(exclude 1.22), the kubernetes-client version must be lower than 1.22(alse exclude 1.22).
-    Because new feature 'AvailableReplicas' for StatefulSetStatus is supported in native kubernetes since version 1.22, mismatch version between kubernetes and kubernetes-client will raise execption ValueError
+    If your kubernetes version is lower than 1.22(exclude 1.22), the kubernetes-client version must be lower than 1.22(also exclude 1.22).
+    Because new feature 'AvailableReplicas' for StatefulSetStatus is supported in native kubernetes since version 1.22, mismatch version between kubernetes and kubernetes-client will raise exception ValueError
 """
 
 
@@ -128,7 +128,7 @@ def main():
     # Wait for finishing creation of controller revision
     import time
     time.sleep(15)
-    # List the controller revison
+    # List the controller revision
     controller_revisions = list_controller_revision(
         apps_v1_api, "default", "statefulset-redis")
     rollout_namespaced_stateful_set(
