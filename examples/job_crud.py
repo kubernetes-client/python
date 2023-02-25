@@ -15,11 +15,7 @@
 """
 Creates, updates, and deletes a job object.
 """
-
-from os import path
 from time import sleep
-
-import yaml
 
 from kubernetes import client, config
 

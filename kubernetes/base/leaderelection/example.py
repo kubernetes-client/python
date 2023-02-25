@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import uuid
-from kubernetes import client, config
+from kubernetes import config
 from kubernetes.leaderelection import leaderelection
 from kubernetes.leaderelection.resourcelock.configmaplock import ConfigMapLock
 from kubernetes.leaderelection import electionconfig

@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import sys
 
 from kubernetes.client.rest import ApiException, ApiValueError
 
@@ -31,7 +30,6 @@ from six import StringIO
 
 from websocket import WebSocket, ABNF, enableTrace
 from base64 import urlsafe_b64decode
-from requests.utils import should_bypass_proxies
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
