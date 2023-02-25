@@ -14,14 +14,12 @@
 
 
 from . import leaderelection
-from .leaderelectionrecord import LeaderElectionRecord
 from kubernetes.client.rest import ApiException
 from . import electionconfig
 import unittest
 import threading
 import json
 import time
-import pytest
 
 thread_lock = threading.RLock()
 

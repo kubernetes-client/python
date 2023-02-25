@@ -25,7 +25,7 @@ from abc import abstractmethod, abstractproperty
 from urllib3.exceptions import ProtocolError, MaxRetryError
 
 from kubernetes import __version__
-from .exceptions import NotFoundError, ResourceNotFoundError, ResourceNotUniqueError, ApiException, ServiceUnavailableError
+from .exceptions import NotFoundError, ResourceNotFoundError, ResourceNotUniqueError, ServiceUnavailableError
 from .resource import Resource, ResourceList
 
 

@@ -15,11 +15,3 @@
 __project__ = 'kubernetes'
 # The version is auto-updated. Please do not edit.
 __version__ = "26.0.0-snapshot"
-
-from . import client
-from . import config
-from . import dynamic
-from . import watch
-from . import stream
-from . import utils
-from . import leaderelection

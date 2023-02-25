@@ -18,7 +18,7 @@ server outside the cluster without kube client installed on it.
 The communication is secured with the use of Bearer token.
 """
 
-from kubernetes import client, config
+from kubernetes import client
 
 
 def main():

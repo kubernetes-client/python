@@ -51,8 +51,6 @@ spec:
     - ct
 """
 
-from pprint import pprint
-
 from kubernetes import client, config
 
 
