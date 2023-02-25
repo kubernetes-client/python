@@ -389,3 +389,15 @@ class ResourceField(object):
     def __iter__(self):
         for k, v in self.__dict__.items():
             yield (k, v)
+
+    def to_dict(self):
+        return self.__serialize(self)
+
+    def __serialize(self, field):
+        if isinstance(field, ResourceField):
+            return {
+                k: self.__serialize(v) for k, v in field.__dict__.items()
+            }
+        if isinstance(field, (list, tuple)):
+            return [self.__serialize(item) for item in field]
+        return field
