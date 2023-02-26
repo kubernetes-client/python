@@ -61,7 +61,7 @@
 #   branch
 #
 # Usage:
-#   $ KUBERNETES_BRANCH=release-1.19 CLIENT_VERSION=19.0.0-snapshot DEVELOPMENT_STATUS="3 - Alpha" scripts/release.sh
+#   $ KUBERNETES_BRANCH=release-1.19 CLIENT_VERSION=19.0.0+snapshot DEVELOPMENT_STATUS="3 - Alpha" scripts/release.sh
 
 set -o errexit
 set -o nounset
@@ -93,6 +93,12 @@ source scripts/util/kube_changelog.sh
 KUBERNETES_BRANCH=${KUBERNETES_BRANCH:-$(python3 "scripts/constants.py" KUBERNETES_BRANCH)}
 CLIENT_VERSION=${CLIENT_VERSION:-$(python3 "scripts/constants.py" CLIENT_VERSION)}
 DEVELOPMENT_STATUS=${DEVELOPMENT_STATUS:-$(python3 "scripts/constants.py" DEVELOPMENT_STATUS)}
+
+# Simple check if version is compliant with https://peps.python.org/pep-0440/
+if [[ ! "$CLIENT_VERSION" =~ ^[0-9A-Za-z+.]+$ ]]; then
+    echo "!!! Invalid client version $CLIENT_VERSION"
+    exit 1
+fi
 
 # Create a local branch
 STARTINGBRANCH=$(git symbolic-ref --short HEAD)
