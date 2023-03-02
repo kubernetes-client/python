@@ -35,7 +35,9 @@ with open('requirements.txt') as f:
     for line in f:
         line, _, _ = line.partition('#')
         line = line.strip()
-        if ';' in line:
+        if not line or line.startswith('setuptools'):
+            continue
+        elif ';' in line:
             requirement, _, specifier = line.partition(';')
             for_specifier = EXTRAS.setdefault(':{}'.format(specifier), [])
             for_specifier.append(requirement)
