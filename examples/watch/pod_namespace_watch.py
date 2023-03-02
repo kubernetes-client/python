@@ -44,6 +44,7 @@ def main():
             w.stop()
     print("Finished namespace stream.")
 
+    count = 10
     for event in w.stream(v1.list_pod_for_all_namespaces, timeout_seconds=10):
         print("Event: %s %s %s" % (
             event['type'],
