@@ -153,12 +153,17 @@ def create_from_yaml(
             raise FailToCreateError(failures)
         return k8s_objects
 
+    class Loader(yaml.loader.SafeLoader):
+        yaml_implicit_resolvers = yaml.loader.SafeLoader.yaml_implicit_resolvers.copy()
+        if "=" in yaml_implicit_resolvers:
+            yaml_implicit_resolvers.pop("=")
+
     if yaml_objects:
         yml_document_all = yaml_objects
         return create_with(yml_document_all)
     elif yaml_file:
         with open(os.path.abspath(yaml_file)) as f:
-            yml_document_all = yaml.safe_load_all(f)
+            yml_document_all = yaml.load_all(f, Loader=Loader)
             return create_with(yml_document_all)
     else:
         raise ValueError(
