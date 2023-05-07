@@ -53,11 +53,11 @@ class ExecProvider(object):
                 value = item['value']
                 additional_vars[name] = value
             self.env.update(additional_vars)
-        
+
         self.cwd = cwd or None
 
     def run(self, previous_response=None):
-        is_interactive = sys.stdout.isatty()
+        is_interactive = hasattr(sys.stdout, 'isatty') and sys.stdout.isatty()
         kubernetes_exec_info = {
             'apiVersion': self.api_version,
             'kind': 'ExecCredential',

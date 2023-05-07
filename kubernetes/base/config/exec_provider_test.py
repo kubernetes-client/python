@@ -149,6 +149,19 @@ class ExecProviderTest(unittest.TestCase):
         ep.run()
         self.assertEqual(mock.call_args[1]['cwd'], '/some/directory')
 
+    @mock.patch('subprocess.Popen')
+    def test_ok_no_console_attached(self, mock):
+        instance = mock.return_value
+        instance.wait.return_value = 0
+        instance.communicate.return_value = (self.output_ok, '')
+        mock_stdout = unittest.mock.patch(
+            'sys.stdout', new=None)  # Simulate detached console
+        with mock_stdout:
+            ep = ExecProvider(self.input_ok, None)
+            result = ep.run()
+            self.assertTrue(isinstance(result, dict))
+            self.assertTrue('token' in result)
+
 
 if __name__ == '__main__':
     unittest.main()
