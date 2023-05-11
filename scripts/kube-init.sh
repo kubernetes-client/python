@@ -54,7 +54,7 @@ docker --version
 # installs per default
 # See:
 # https://github.com/kubernetes/minikube/blob/master/pkg/minikube/constants/constants.go
-K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+K8S_VERSION=$(curl -sS https://dl.k8s.io/release/stable.txt)
 echo "K8S_VERSION : ${K8S_VERSION}"
 
 # You can pass variables to minikube using MINIKUBE_ARGS
