@@ -1,0 +1,29 @@
+diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
+index 2b9dd96a50..ac5a18bf8a 100644
+--- a/kubernetes/client/configuration.py
++++ b/kubernetes/client/configuration.py
+@@ -144,6 +144,10 @@ def __init__(self, host="http://localhost",
+         self.assert_hostname = None
+         """Set this to True/False to enable/disable SSL hostname verification.
+         """
++        self.tls_server_name = None
++        """SSL/TLS Server Name Indication (SNI)
++           Set this to the SNI value expected by the server.
++        """
+
+         self.connection_pool_maxsize = multiprocessing.cpu_count() * 5
+         """urllib3 connection pool's maximum number of connections saved
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+index 48cd2b7752..4f04251bbf 100644
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -77,6 +77,9 @@ def __init__(self, configuration, pools_size=4, maxsize=None):
+         if configuration.retries is not None:
+             addition_pool_args['retries'] = configuration.retries
+
++        if configuration.tls_server_name:
++            addition_pool_args['server_hostname'] = configuration.tls_server_name
++
+         if maxsize is None:
+             if configuration.connection_pool_maxsize is not None:
+                 maxsize = configuration.connection_pool_maxsize
