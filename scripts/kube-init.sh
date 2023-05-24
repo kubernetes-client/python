@@ -71,7 +71,7 @@ echo "Checking docker service"
 sudo docker ps
 
 echo "Download Kubernetes CLI"
-wget -q -O kubectl "http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
+wget -q -O kubectl "http://dl.k8s.io/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 
