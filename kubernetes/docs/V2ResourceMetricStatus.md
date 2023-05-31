@@ -5,7 +5,7 @@ ResourceMetricStatus indicates the current value of a resource metric known to K
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **current** | [**V2MetricValueStatus**](V2MetricValueStatus.md) |  | 
-**name** | **str** | Name is the name of the resource in question. | 
+**name** | **str** | name is the name of the resource in question. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
