@@ -16,7 +16,7 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "26.0.0+snapshot"
+CLIENT_VERSION = "27.0.0+snapshot"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
