@@ -68,8 +68,11 @@ def create_deployment(api, deployment):
     resp = api.create_namespaced_deployment(
         body=deployment, namespace="default"
     )
-
     print("\n[INFO] deployment `nginx-deployment` created.\n")
+    print_response(resp)
+
+
+def print_response(resp):
     print("%s\t%s\t\t\t%s\t%s" % ("NAMESPACE", "NAME", "REVISION", "IMAGE"))
     print(
         "%s\t\t%s\t%s\t\t%s\n"
@@ -92,16 +95,7 @@ def update_deployment(api, deployment):
     )
 
     print("\n[INFO] deployment's container image updated.\n")
-    print("%s\t%s\t\t\t%s\t%s" % ("NAMESPACE", "NAME", "REVISION", "IMAGE"))
-    print(
-        "%s\t\t%s\t%s\t\t%s\n"
-        % (
-            resp.metadata.namespace,
-            resp.metadata.name,
-            resp.metadata.generation,
-            resp.spec.template.spec.containers[0].image,
-        )
-    )
+    print_response(resp)
 
 
 def restart_deployment(api, deployment):
