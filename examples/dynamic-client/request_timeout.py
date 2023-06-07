@@ -51,7 +51,7 @@ def main():
     # Creating configmap `request-timeout-test-configmap` in the `default` namespace
     # Client-side timeout to 60 seconds
 
-    configmap = api.create(body=configmap_manifest, namespace="default", _request_time=60)
+    configmap = api.create(body=configmap_manifest, namespace="default", _request_timeout=60)
 
     print("\n[INFO] configmap `request-timeout-test-configmap` created\n")
 
@@ -59,7 +59,7 @@ def main():
     # Client-side timeout to 60 seconds
 
     configmap_list = api.get(
-        name=configmap_name, namespace="default", label_selector="foo=bar", _request_time=60
+        name=configmap_name, namespace="default", label_selector="foo=bar", _request_timeout=60
     )
 
     print("NAME:\n%s\n" % (configmap_list.metadata.name))
