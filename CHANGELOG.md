@@ -1,3 +1,10 @@
+# v27.2.0
+
+Kubernetes API Version: v1.27.3
+
+### Documentation
+- Fix request_timeout example and doc. Arg name should be _request_timeout. Single value type should be int or long. (#2071, @hemslo)
+
 # v27.2.0b1
 
 Kubernetes API Version: v1.27.2
