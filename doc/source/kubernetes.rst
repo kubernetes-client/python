@@ -13,6 +13,7 @@ Subpackages
    kubernetes.e2e_test
    kubernetes.leaderelection
    kubernetes.stream
+   kubernetes.test
    kubernetes.utils
    kubernetes.watch
 
