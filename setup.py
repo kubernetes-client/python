@@ -16,9 +16,9 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "27.2.0b1"
+CLIENT_VERSION = "27.2.0"
 PACKAGE_NAME = "kubernetes"
-DEVELOPMENT_STATUS = "4 - Beta"
+DEVELOPMENT_STATUS = "5 - Production/Stable"
 
 # To install the library, run the following
 #
@@ -35,7 +35,9 @@ with open('requirements.txt') as f:
     for line in f:
         line, _, _ = line.partition('#')
         line = line.strip()
-        if ';' in line:
+        if not line or line.startswith('setuptools'):
+            continue
+        elif ';' in line:
             requirement, _, specifier = line.partition(';')
             for_specifier = EXTRAS.setdefault(':{}'.format(specifier), [])
             for_specifier.append(requirement)

@@ -50,7 +50,7 @@ There are two inputs available in the client, that could be used to set connecti
 - The value of the argument `_request_timeout`, **n** (which is time duration in seconds) is set to the socket used for the connection.
 
 - In case, if the `_request_timeout` value is set, this argument can accept 2 types of input values ~
-    - float, 
+    - int/long
     - a tuple (with a length of 2)
     
   ***Refer***
