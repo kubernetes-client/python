@@ -19,13 +19,21 @@ import re
 import ssl
 
 import certifi
+
 # python 2 and python 3 compatibility library
 import six
-from six.moves.urllib.parse import urlencode
 import urllib3
+from requests.utils import should_bypass_proxies
+from six.moves.urllib.parse import urlencode
 
 from kubernetes.client.exceptions import ApiException, ApiValueError
-from requests.utils import should_bypass_proxies
+
+try:
+    from urllib3.contrib.socks import SOCKSProxyManager
+except ImportError:
+
+    def SOCKSProxyManager(*args, **kwargs):
+        raise RuntimeError("Missing dependencies for SOCKS support.")
 
 
 logger = logging.getLogger(__name__)
@@ -85,17 +93,29 @@ class RESTClientObject(object):
 
         # https pool manager
         if configuration.proxy and not should_bypass_proxies(configuration.host, no_proxy=configuration.no_proxy or ''):
-            self.pool_manager = urllib3.ProxyManager(
-                num_pools=pools_size,
-                maxsize=maxsize,
-                cert_reqs=cert_reqs,
-                ca_certs=ca_certs,
-                cert_file=configuration.cert_file,
-                key_file=configuration.key_file,
-                proxy_url=configuration.proxy,
-                proxy_headers=configuration.proxy_headers,
-                **addition_pool_args
-            )
+            if configuration.proxy.lower().startswith("socks"):
+                self.pool_manager = SOCKSProxyManager(
+                    num_pools=pools_size,
+                    maxsize=maxsize,
+                    cert_reqs=cert_reqs,
+                    ca_certs=ca_certs,
+                    cert_file=configuration.cert_file,
+                    key_file=configuration.key_file,
+                    proxy_url=configuration.proxy,
+                    **addition_pool_args
+                )
+            else:
+                self.pool_manager = urllib3.ProxyManager(
+                    num_pools=pools_size,
+                    maxsize=maxsize,
+                    cert_reqs=cert_reqs,
+                    ca_certs=ca_certs,
+                    cert_file=configuration.cert_file,
+                    key_file=configuration.key_file,
+                    proxy_url=configuration.proxy,
+                    proxy_headers=configuration.proxy_headers,
+                    **addition_pool_args
+                )
         else:
             self.pool_manager = urllib3.PoolManager(
                 num_pools=pools_size,
