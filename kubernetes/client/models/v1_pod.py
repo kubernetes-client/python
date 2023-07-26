@@ -12,6 +12,7 @@
 
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 
 import six
 
@@ -200,6 +201,8 @@ class V1Pod(object):
                     if hasattr(item[1], "to_dict") else item,
                     value.items()
                 ))
+            elif isinstance(value, datetime):
+                result[attr] = value.isoformat()
             else:
                 result[attr] = value
 
