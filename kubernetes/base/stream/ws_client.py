@@ -475,6 +475,8 @@ def create_websocket(configuration, url, headers=None):
         ssl_opts['certfile'] = configuration.cert_file
     if configuration.key_file:
         ssl_opts['keyfile'] = configuration.key_file
+    if configuration.tls_server_name:
+        ssl_opts['server_hostname'] = configuration.tls_server_name
 
     websocket = WebSocket(sslopt=ssl_opts, skip_utf8_validation=False)
     connect_opt = {

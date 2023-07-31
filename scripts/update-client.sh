@@ -59,7 +59,7 @@ else
 fi
 
 echo ">>> Running python generator from the gen repo"
-"${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}" 
+"${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}"
 mv "${CLIENT_ROOT}/swagger.json" "${SCRIPT_ROOT}/swagger.json"
 
 echo ">>> updating version information..."
@@ -73,6 +73,11 @@ sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STAT
 # second, this should be ported to swagger-codegen
 echo ">>> patching client..."
 git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
+# The fix this patch is trying to make is already in the upstream swagger-codegen
+# repo but it's not in the version we're using. We can remove this patch
+# once we upgrade to a version of swagger-codegen that includes it (version>= 6.6.0).
+# See https://github.com/OpenAPITools/openapi-generator/pull/15283
+git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
 
 echo ">>> generating docs..."
 pushd "${DOC_ROOT}" > /dev/null
