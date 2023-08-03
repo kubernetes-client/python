@@ -25,6 +25,7 @@ import time
 
 import six
 import yaml
+import base64
 
 from six.moves.urllib.parse import urlencode, urlparse, urlunparse
 from six import StringIO
@@ -38,6 +39,20 @@ STDOUT_CHANNEL = 1
 STDERR_CHANNEL = 2
 ERROR_CHANNEL = 3
 RESIZE_CHANNEL = 4
+
+
+class _Base64Codec:
+    def encode(self, data, charset="utf-8"):
+        if data is None:
+            return None
+        b = base64.b64encode(data.encode(charset))
+        return b.decode(charset)
+
+    def decode(self, data):
+        if data is None:
+            return None
+        return base64.b64decode(data).decode()
+
 
 class _IgnoredIO:
     def write(self, _x):
@@ -65,6 +80,9 @@ class WSClient:
         self.sock = create_websocket(configuration, url, headers)
         self._connected = True
         self._returncode = None
+        self._base64_codec = None
+        if headers and headers.get("sec-websocket-protocol") in ["base64.channel.k8s.io", "v4.base64.channel.k8s.io"]:
+            self._base64_codec = _Base64Codec()
 
     def peek_channel(self, channel, timeout=0):
         """Peek a channel and return part of the input,
@@ -109,10 +127,14 @@ class WSClient:
         binary = six.PY3 and type(data) == six.binary_type
         opcode = ABNF.OPCODE_BINARY if binary else ABNF.OPCODE_TEXT
 
-        channel_prefix = chr(channel)
-        if binary:
-            channel_prefix = six.binary_type(channel_prefix, "ascii")
-
+        if self._base64_codec:
+            channel_prefix = str(channel)
+            data = self._base64_codec.encode(data)
+        else:
+            channel_prefix = chr(channel)
+            if binary:
+                channel_prefix = six.binary_type(channel_prefix, "ascii")
+    
         payload = channel_prefix + data
         self.sock.send(payload, opcode=opcode)
 
@@ -200,8 +222,13 @@ class WSClient:
                 if six.PY3:
                     data = data.decode("utf-8", "replace")
                 if len(data) > 1:
-                    channel = ord(data[0])
+                    channel = data[0]
                     data = data[1:]
+                    if self._base64_codec:
+                        channel = int(channel)
+                        data = self._base64_codec.decode(data)
+                    else:
+                        channel = ord(channel)
                     if data:
                         if channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
                             # keeping all messages in the order they received
@@ -508,13 +535,15 @@ def websocket_proxycare(connect_opt, configuration, url, headers):
     return(connect_opt)
 
 
-def websocket_call(configuration, _method, url, **kwargs):
+def websocket_call(configuration, websocket_headers, _method, url, **kwargs):
     """An internal function to be called in api-client when a websocket
     connection is required. method, url, and kwargs are the parameters of
     apiClient.request method."""
 
     url = get_websocket_url(url, kwargs.get("query_params"))
-    headers = kwargs.get("headers")
+    headers = kwargs.get("headers", {})
+    if websocket_headers:
+        headers.update(websocket_headers)
     _request_timeout = kwargs.get("_request_timeout", 60)
     _preload_content = kwargs.get("_preload_content", True)
     capture_all = kwargs.get("capture_all", True)
@@ -529,7 +558,7 @@ def websocket_call(configuration, _method, url, **kwargs):
         raise ApiException(status=0, reason=str(e))
 
 
-def portforward_call(configuration, _method, url, **kwargs):
+def portforward_call(configuration, websocket_headers, _method, url, **kwargs):
     """An internal function to be called in api-client when a websocket
     connection is required for port forwarding. args and kwargs are the
     parameters of apiClient.request method."""
@@ -553,7 +582,9 @@ def portforward_call(configuration, _method, url, **kwargs):
         raise ApiValueError("Missing required parameter `ports`")
 
     url = get_websocket_url(url, query_params)
-    headers = kwargs.get("headers")
+    headers = kwargs.get("headers", {})
+    if websocket_headers:
+        headers.update(websocket_headers)
 
     try:
         websocket = create_websocket(configuration, url, headers)

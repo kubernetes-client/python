@@ -25,6 +25,7 @@ from kubernetes.client import api_client
 from kubernetes.client.api import core_v1_api
 from kubernetes.e2e_test import base
 from kubernetes.stream import stream, portforward
+from kubernetes.stream.stream import wsstream
 from kubernetes.stream.ws_client import ERROR_CHANNEL
 from kubernetes.client.rest import ApiException
 
@@ -51,6 +52,7 @@ def manifest_with_command(name, command):
         'spec': {
             'containers': [{
                 'image': 'busybox',
+                'imagePullPolicy': 'IfNotPresent',
                 'name': 'sleep',
                 "args": [
                     "/bin/sh",
@@ -134,6 +136,103 @@ class TestClient(unittest.TestCase):
                       stderr=True, stdin=True,
                       stdout=True, tty=False,
                       _preload_content=False)
+        resp.write_stdin("echo test string 1\n")
+        line = resp.readline_stdout(timeout=5)
+        self.assertFalse(resp.peek_stderr())
+        self.assertEqual("test string 1", line)
+        resp.write_stdin("echo test string 2 >&2\n")
+        line = resp.readline_stderr(timeout=5)
+        self.assertFalse(resp.peek_stdout())
+        self.assertEqual("test string 2", line)
+        resp.write_stdin("exit\n")
+        resp.update(timeout=5)
+        while True:
+            line = resp.read_channel(ERROR_CHANNEL)
+            if line != '':
+                break
+            time.sleep(1)
+        status = json.loads(line)
+        self.assertEqual(status['status'], 'Success')
+        resp.update(timeout=5)
+        self.assertFalse(resp.is_open())
+
+        number_of_pods = len(api.list_pod_for_all_namespaces().items)
+        self.assertTrue(number_of_pods > 0)
+
+        resp = api.delete_namespaced_pod(name=name, body={},
+                                         namespace='default')
+
+    def test_pod_apis_with_selected_websocket_protocol(self):
+        client = api_client.ApiClient(configuration=self.config)
+        api = core_v1_api.CoreV1Api(client)
+
+        name = 'busybox-test-' + short_uuid()
+        pod_manifest = manifest_with_command(
+            name, "while true;do date;sleep 5; done")
+
+        # wait for the default service account to be created
+        timeout = time.time() + 30
+        while True:
+            if time.time() > timeout:
+                print('timeout waiting for default service account creation')
+                break
+            try:
+                resp = api.read_namespaced_service_account(name='default',
+                                                           namespace='default')
+            except ApiException as e:
+                if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
+                        six.PY3 is False and e.status != httplib.NOT_FOUND):
+                    print('error: %s' % e)
+                    self.fail(
+                        msg="unexpected error getting default service account")
+                print('default service not found yet: %s' % e)
+                time.sleep(1)
+                continue
+            self.assertEqual('default', resp.metadata.name)
+            break
+
+        resp = api.create_namespaced_pod(body=pod_manifest,
+                                         namespace='default')
+        self.assertEqual(name, resp.metadata.name)
+        self.assertTrue(resp.status.phase)
+
+        while True:
+            resp = api.read_namespaced_pod(name=name,
+                                           namespace='default')
+            self.assertEqual(name, resp.metadata.name)
+            self.assertTrue(resp.status.phase)
+            if resp.status.phase != 'Pending':
+                break
+            time.sleep(1)
+
+        exec_command = ['/bin/sh',
+                        '-c',
+                        'for i in $(seq 1 3); do date; done']
+        ws_header = {'sec-websocket-protocol': 'v4.base64.channel.k8s.io'}
+        resp = wsstream(ws_header, api.connect_get_namespaced_pod_exec,
+                        name, 'default',
+                        command=exec_command,
+                        stderr=False, stdin=False,
+                        stdout=True, tty=False)
+        print('EXEC response : %s' % resp)
+        self.assertEqual(3, len(resp.splitlines()))
+
+        exec_command = 'uptime'
+        resp = wsstream(ws_header, api.connect_post_namespaced_pod_exec,
+                        name, 'default',
+                        command=exec_command,
+                        stderr=False, stdin=False,
+                        stdout=True, tty=False)
+        print('EXEC response : %s' % resp)
+        self.assertEqual(1, len(resp.splitlines()))
+
+        resp = wsstream(ws_header, api.connect_post_namespaced_pod_exec,
+                        name, 'default',
+                        command='/bin/sh',
+                        stderr=True, stdin=True,
+                        stdout=True, tty=False,
+                        _preload_content=False)
+
         resp.write_stdin("echo test string 1\n")
         line = resp.readline_stdout(timeout=5)
         self.assertFalse(resp.peek_stderr())
