@@ -27,12 +27,12 @@ class V1APIGroupList(object):
 
     """
     Attributes:
-      openapi_types (dict): The key is attribute name
+      openapi_api_group_list_types (dict): The key is attribute name
                             and the value is attribute type.
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
+    openapi_api_group_list_types = {
         'api_version': 'str',
         'groups': 'list[V1APIGroup]',
         'kind': 'str'
@@ -136,7 +136,7 @@ class V1APIGroupList(object):
         """Returns the model properties as a dict"""
         result = {}
 
-        for attr, _ in six.iteritems(self.openapi_types):
+        for attr, _ in six.iteritems(self.openapi_api_group_list_types):
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(

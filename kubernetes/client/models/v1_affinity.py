@@ -27,12 +27,12 @@ class V1Affinity(object):
 
     """
     Attributes:
-      openapi_types (dict): The key is attribute name
+      openapi_affinity_types (dict): The key is attribute name
                             and the value is attribute type.
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
+    openapi_affinity_types = {
         'node_affinity': 'V1NodeAffinity',
         'pod_affinity': 'V1PodAffinity',
         'pod_anti_affinity': 'V1PodAntiAffinity'
@@ -129,7 +129,7 @@ class V1Affinity(object):
         """Returns the model properties as a dict"""
         result = {}
 
-        for attr, _ in six.iteritems(self.openapi_types):
+        for attr, _ in six.iteritems(self.openapi_affinity_types):
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(

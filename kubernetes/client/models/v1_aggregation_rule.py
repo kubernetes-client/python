@@ -27,12 +27,12 @@ class V1AggregationRule(object):
 
     """
     Attributes:
-      openapi_types (dict): The key is attribute name
+      openapi_role_selectors_types (dict): The key is attribute name
                             and the value is attribute type.
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
+    openapi_role_selectors_types = {
         'cluster_role_selectors': 'list[V1LabelSelector]'
     }
 
@@ -79,7 +79,7 @@ class V1AggregationRule(object):
         """Returns the model properties as a dict"""
         result = {}
 
-        for attr, _ in six.iteritems(self.openapi_types):
+        for attr, _ in six.iteritems(self.openapi_role_selectors_types):
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(
