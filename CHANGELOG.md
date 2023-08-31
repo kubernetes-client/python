@@ -108,6 +108,16 @@ Kubernetes API Version: v1.28.1
 - Revised the comment about the feature-gate level for PodFailurePolicy from alpha to beta ([kubernetes/kubernetes#117802](https://github.com/kubernetes/kubernetes/pull/117802), [@kerthcet](https://github.com/kerthcet)) [SIG API Machinery and Apps]
 - The `SelfSubjectReview` API is promoted to `authentication.k8s.io/v1` and the `kubectl auth whoami` command is GA. ([kubernetes/kubernetes#117713](https://github.com/kubernetes/kubernetes/pull/117713), [@nabokihms](https://github.com/nabokihms)) [SIG API Machinery, Architecture, Auth, CLI and Testing]
 
+# v27.2.0
+
+Kubernetes API Version: v1.27.3
+
+### Documentation
+- Fix request_timeout example and doc. Arg name should be _request_timeout. Single value type should be int or long. (#2071, @hemslo)
+
+# v27.2.0b1
+
+Kubernetes API Version: v1.27.2
 
 # v27.2.0a1
 
