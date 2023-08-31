@@ -7,6 +7,7 @@ from kubernetes.client.api.well_known_api import WellKnownApi
 from kubernetes.client.api.admissionregistration_api import AdmissionregistrationApi
 from kubernetes.client.api.admissionregistration_v1_api import AdmissionregistrationV1Api
 from kubernetes.client.api.admissionregistration_v1alpha1_api import AdmissionregistrationV1alpha1Api
+from kubernetes.client.api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api
 from kubernetes.client.api.apiextensions_api import ApiextensionsApi
 from kubernetes.client.api.apiextensions_v1_api import ApiextensionsV1Api
 from kubernetes.client.api.apiregistration_api import ApiregistrationApi

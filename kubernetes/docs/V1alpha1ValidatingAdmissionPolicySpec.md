@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **match_constraints** | [**V1alpha1MatchResources**](V1alpha1MatchResources.md) |  | [optional] 
 **param_kind** | [**V1alpha1ParamKind**](V1alpha1ParamKind.md) |  | [optional] 
 **validations** | [**list[V1alpha1Validation]**](V1alpha1Validation.md) | Validations contain CEL expressions which is used to apply the validation. Validations and AuditAnnotations may not both be empty; a minimum of one Validations or AuditAnnotations is required. | [optional] 
+**variables** | [**list[V1alpha1Variable]**](V1alpha1Variable.md) | Variables contain definitions of variables that can be used in composition of other expressions. Each variable is defined as a named CEL expression. The variables defined here will be available under &#x60;variables&#x60; in other expressions of the policy except MatchConditions because MatchConditions are evaluated before the rest of the policy.  The expression of a variable can refer to other variables defined earlier in the list but not those after. Thus, Variables must be sorted by the order of first appearance and acyclic. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
