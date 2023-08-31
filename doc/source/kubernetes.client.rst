@@ -8,7 +8,6 @@ Subpackages
    :maxdepth: 4
 
    kubernetes.client.api
-   kubernetes.client.apis
    kubernetes.client.models
 
 Submodules
