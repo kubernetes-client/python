@@ -29,7 +29,7 @@ def main():
     # default location.
     config.load_kube_config()
 
-    with open(path.join(path.dirname(__file__), "nginx-deployment.yaml")) as f:
+    with open(path.join(path.dirname(__file__), "yaml_dir/nginx-deployment.yaml")) as f:
         dep = yaml.safe_load(f)
         k8s_apps_v1 = client.AppsV1Api()
         resp = k8s_apps_v1.create_namespaced_deployment(
