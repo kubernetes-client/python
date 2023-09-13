@@ -52,8 +52,7 @@ def main():
     print("Listing pods with their IPs:")
     ret = v1.list_pod_for_all_namespaces(watch=False)
     for i in ret.items:
-        print("%s\t%s\t%s" %
-              (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
+        print(f"{i.status.pod_ip}\t{i.metadata.namespace}\t{i.metadata.name}")
 
 
 if __name__ == '__main__':

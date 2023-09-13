@@ -100,10 +100,7 @@ def main():
         plural="crontabs",
     )
     print("%s\t\t%s" % ("NAME", "CRON-SPEC"))
-    print(
-        "%s\t%s\n" %
-        (resource["metadata"]["name"],
-         resource["spec"]["cronSpec"]))
+    print(f"{resource['metadata']['name']}\t{resource['spec']['cronSpec']}\n")
 
     # patch the `spec.cronSpec` field of the custom resource
     patched_resource = api.patch_cluster_custom_object(
@@ -115,10 +112,7 @@ def main():
     )
     print("[INFO] Custom resource `test-crontab` patched to update the cronSpec schedule!\n")
     print("%s\t\t%s" % ("NAME", "PATCHED-CRON-SPEC"))
-    print(
-        "%s\t%s\n" %
-        (patched_resource["metadata"]["name"],
-         patched_resource["spec"]["cronSpec"]))
+    print(f"{patched_resource['metadata']['name']}\t{patched_resource['spec']['cronSpec']}\n")
 
     # patch the `metadata.labels` field of the custom resource
     patched_resource = api.patch_cluster_custom_object(
@@ -130,10 +124,7 @@ def main():
     )
     print("[INFO] Custom resource `test-crontab` patched to apply new metadata labels!\n")
     print("%s\t\t%s" % ("NAME", "PATCHED_LABELS"))
-    print(
-        "%s\t%s\n" %
-        (patched_resource["metadata"]["name"],
-         patched_resource["metadata"]["labels"]))
+    print(f"{patched_resource['metadata']['name']}\t{patched_resource['metadata']['labels']}\n")
 
     # delete the custom resource "test-crontab"
     api.delete_cluster_custom_object(

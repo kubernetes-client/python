@@ -62,8 +62,7 @@ def main():
     time.sleep(1)
     before_annotating = apps_v1_api.read_namespaced_deployment(
         'deploy-nginx', 'default')
-    print('Before annotating, annotations: %s' %
-          before_annotating.metadata.annotations)
+    print(f"Before annotating, annotations: {before_annotating.metadata.annotations}")
 
     annotations = [
         {
@@ -80,8 +79,7 @@ def main():
     time.sleep(1)
     after_annotating = apps_v1_api.read_namespaced_deployment(
         name='deploy-nginx', namespace='default')
-    print('After annotating, annotations: %s' %
-          after_annotating.metadata.annotations)
+    print(f"After annotating, annotations: {after_annotating.metadata.annotations}")
 
 
 if __name__ == "__main__":
