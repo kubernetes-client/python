@@ -44,7 +44,7 @@ def main():
     # Patching the node labels
     for node in node_list.items:
         api_response = api_instance.patch_node(node.metadata.name, body)
-        print("%s\t%s" % (node.metadata.name, node.metadata.labels))
+        print(f"{node.metadata.name}\t{node.metadata.labels}")
 
 
 if __name__ == '__main__':

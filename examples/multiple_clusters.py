@@ -43,13 +43,11 @@ def main():
 
     print("\nList of pods on %s:" % cluster1)
     for i in client1.list_pod_for_all_namespaces().items:
-        print("%s\t%s\t%s" %
-              (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
+        print(f"{i.status.pod_ip}\t{i.metadata.namespace}\t{i.metadata.name}")
 
-    print("\n\nList of pods on %s:" % cluster2)
+    print(f"\n\nList of pods on {cluster2}:")
     for i in client2.list_pod_for_all_namespaces().items:
-        print("%s\t%s\t%s" %
-              (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
+        print(f"{i.status.pod_ip}\t{i.metadata.namespace}\t{i.metadata.name}")
 
 
 if __name__ == '__main__':
