@@ -34,7 +34,7 @@ def main():
         k8s_apps_v1 = client.AppsV1Api()
         resp = k8s_apps_v1.create_namespaced_deployment(
             body=dep, namespace="default")
-        print("Deployment created. status='%s'" % resp.metadata.name)
+        print(f"Deployment created. Status='{resp.metadata.name}'")
 
 
 if __name__ == '__main__':

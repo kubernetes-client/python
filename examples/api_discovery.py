@@ -27,8 +27,7 @@ def main():
     config.load_kube_config()
 
     print("Supported APIs (* is preferred version):")
-    print("%-40s %s" %
-          ("core", ",".join(client.CoreApi().get_api_versions().versions)))
+    print(f"{'core':<40} {','.join(client.CoreApi().get_api_versions().versions)}")
     for api in client.ApisApi().get_api_versions().groups:
         versions = []
         for v in api.versions:
@@ -38,7 +37,7 @@ def main():
                 name += "*"
             name += v.version
             versions.append(name)
-        print("%-40s %s" % (api.name, ",".join(versions)))
+        print(f"{api.name:<40} {','.join(versions)}")
 
 
 if __name__ == '__main__':
