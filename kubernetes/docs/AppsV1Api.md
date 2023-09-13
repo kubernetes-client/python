@@ -106,7 +106,7 @@ field_validation = 'field_validation_example' # str | fieldValidation instructs 
 
     try:
         api_response = api_instance.create_namespaced_controller_revision(namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
-        pprint(api_response)
+        print(api_response)
     except ApiException as e:
         print("Exception when calling AppsV1Api->create_namespaced_controller_revision: %s\n" % e)
 ```
