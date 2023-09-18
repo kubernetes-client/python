@@ -1,3 +1,13 @@
+# v28.1.0
+
+Kubernetes API Version: v1.28.2
+
+### API Change
+- Fixed a bug where CEL expressions in CRD validation rules would incorrectly compute a high estimated cost for functions that return strings, lists or maps.
+  The incorrect cost was evident when the result of a function was used in subsequent operations. ([kubernetes/kubernetes#119807](https://github.com/kubernetes/kubernetes/pull/119807), [@jpbetz](https://github.com/jpbetz)) [SIG API Machinery, Auth and Cloud Provider]
+- Mark Job onPodConditions as optional in pod failure policy ([kubernetes/kubernetes#120208](https://github.com/kubernetes/kubernetes/pull/120208), [@mimowo](https://github.com/mimowo)) [SIG API Machinery and Apps]
+
+
 # v28.1.0b1
 
 Kubernetes API Version: v1.28.1
