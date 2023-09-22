@@ -52,14 +52,21 @@ spec:
         ports:
         - containerPort: 80
 '''
-        resp = api.create_namespaced_deployment(
+        api.create_namespaced_deployment(
             body=yaml.safe_load(deployment % name),
             namespace="default")
         resp = api.read_namespaced_deployment(name, 'default')
         self.assertIsNotNone(resp)
+        self.assertEqual(resp.metadata.name, name)
+        self.assertEqual(resp.spec.replicas, 3)
+        self.assertEqual(resp.spec.selector.match_labels['app'], 'nginx')
+        self.assertEqual(resp.spec.template.metadata.labels['app'], 'nginx')
+        self.assertEqual(resp.spec.template.spec.containers[0].name, 'nginx')
+        self.assertEqual(resp.spec.template.spec.containers[0].image, 'nginx:1.15.4')
+        self.assertEqual(resp.spec.template.spec.containers[0].ports[0].container_port, 80)
 
         options = v1_delete_options.V1DeleteOptions()
-        resp = api.delete_namespaced_deployment(name, 'default', body=options)
+        api.delete_namespaced_deployment(name, 'default', body=options)
 
     def test_create_daemonset(self):
         client = api_client.ApiClient(configuration=self.config)
@@ -92,9 +99,14 @@ spec:
                 },
             }
         }
-        resp = api.create_namespaced_daemon_set('default', body=daemonset)
+        api.create_namespaced_daemon_set('default', body=daemonset)
         resp = api.read_namespaced_daemon_set(name, 'default')
         self.assertIsNotNone(resp)
+        self.assertEqual(resp.metadata.name, name)
+        self.assertEqual(resp.spec.selector.match_labels['app'], 'nginx')
+        self.assertEqual(resp.spec.template.metadata.labels['app'], 'nginx')
+        self.assertEqual(resp.spec.template.spec.containers[0].name, 'nginx-app')
+        self.assertEqual(resp.spec.template.spec.containers[0].image, 'nginx:1.15.4')
 
         options = v1_delete_options.V1DeleteOptions()
-        resp = api.delete_namespaced_daemon_set(name, 'default', body=options)
+        api.delete_namespaced_daemon_set(name, 'default', body=options)

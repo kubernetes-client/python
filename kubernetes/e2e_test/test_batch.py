@@ -46,13 +46,19 @@ class TestClientBatch(unittest.TestCase):
             'apiVersion': 'batch/v1',
             'metadata': {'name': name}}
 
-        resp = api.create_namespaced_job(
+        create_job_resp = api.create_namespaced_job(
             body=job_manifest, namespace='default')
-        self.assertEqual(name, resp.metadata.name)
+        self.assertEqual(name, create_job_resp.metadata.name)
 
         resp = api.read_namespaced_job(
             name=name, namespace='default')
         self.assertEqual(name, resp.metadata.name)
+        self.assertEqual(name, resp.spec.template.spec.containers[0].name)
+        self.assertEqual('busybox', resp.spec.template.spec.containers[0].image)
+        self.assertEqual('sh', resp.spec.template.spec.containers[0].command[0])
+        self.assertEqual('-c', resp.spec.template.spec.containers[0].command[1])
+        self.assertEqual('sleep 5', resp.spec.template.spec.containers[0].command[2])
+        self.assertEqual('Never', resp.spec.template.spec.restart_policy)
 
-        resp = api.delete_namespaced_job(
+        api.delete_namespaced_job(
             name=name, namespace='default', propagation_policy='Background')
