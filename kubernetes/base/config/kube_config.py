@@ -569,6 +569,8 @@ class KubeConfigLoader(object):
             self.verify_ssl = not self._cluster['insecure-skip-tls-verify']
         if 'tls-server-name' in self._cluster:
             self.tls_server_name = self._cluster['tls-server-name']
+        if "proxy-url" in self._cluster:
+            self.proxy = self._cluster["proxy-url"]
 
     def _set_config(self, client_configuration):
         if 'token' in self.__dict__:
@@ -580,7 +582,7 @@ class KubeConfigLoader(object):
                 self._set_config(client_configuration)
             client_configuration.refresh_api_key_hook = _refresh_api_key
         # copy these keys directly from self to configuration object
-        keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl','tls_server_name']
+        keys = ['host', 'ssl_ca_cert', 'cert_file', 'key_file', 'verify_ssl','tls_server_name', 'proxy']
         for key in keys:
             if key in self.__dict__:
                 setattr(client_configuration, key, getattr(self, key))
