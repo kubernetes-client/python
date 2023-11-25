@@ -574,7 +574,7 @@ class KubeConfigLoader(object):
 
     def _set_config(self, client_configuration):
         if 'token' in self.__dict__:
-            client_configuration.api_key['authorization'] = self.token
+            client_configuration.api_key['BearerToken'] = self.token
 
             def _refresh_api_key(client_configuration):
                 if ('expiry' in self.__dict__ and _is_expired(self.expiry)):

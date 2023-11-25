@@ -1469,7 +1469,7 @@ class TestKubeConfigLoader(BaseTestCase):
             "token": token
         }
         expected = FakeConfig(host=TEST_HOST, api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token})
+                              "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -1499,13 +1499,13 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="exec_cred_user").load_and_set(fake_config)
         # The kube config should use the first token returned from the
         # exec provider.
-        self.assertEqual(fake_config.api_key["authorization"],
+        self.assertEqual(fake_config.api_key["BearerToken"],
                          BEARER_TOKEN_FORMAT % expired_token)
         # Should now be populated with a method to refresh expired tokens.
         self.assertIsNotNone(fake_config.refresh_api_key_hook)
         # Refresh the token; the kube config should be updated.
         fake_config.refresh_api_key_hook(fake_config)
-        self.assertEqual(fake_config.api_key["authorization"],
+        self.assertEqual(fake_config.api_key["BearerToken"],
                          BEARER_TOKEN_FORMAT % current_token)
 
     @mock.patch('kubernetes.config.kube_config.ExecProvider.run')
@@ -1546,7 +1546,7 @@ class TestKubeConfigLoader(BaseTestCase):
         return_value = A(token, parse_rfc3339(datetime.datetime.now()))
         CommandTokenSource.token = mock.Mock(return_value=return_value)
         expected = FakeConfig(api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token})
+                              "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -1559,7 +1559,7 @@ class TestKubeConfigLoader(BaseTestCase):
         return_value = A(token, parse_rfc3339(datetime.datetime.now()))
         CommandTokenSource.token = mock.Mock(return_value=return_value)
         expected = FakeConfig(api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token})
+                              "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         self.expect_exception(lambda: KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -1573,7 +1573,7 @@ class TestKubeConfigLoader(BaseTestCase):
         return_value = A(token, parse_rfc3339(datetime.datetime.now()))
         CommandTokenSource.token = mock.Mock(return_value=return_value)
         expected = FakeConfig(api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token})
+                              "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         self.expect_exception(lambda: KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
