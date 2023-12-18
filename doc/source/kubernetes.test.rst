@@ -56,8 +56,9 @@ Submodules
    kubernetes.test.test_events_v1_event_list
    kubernetes.test.test_events_v1_event_series
    kubernetes.test.test_flowcontrol_apiserver_api
-   kubernetes.test.test_flowcontrol_apiserver_v1beta2_api
+   kubernetes.test.test_flowcontrol_apiserver_v1_api
    kubernetes.test.test_flowcontrol_apiserver_v1beta3_api
+   kubernetes.test.test_flowcontrol_v1_subject
    kubernetes.test.test_internal_apiserver_api
    kubernetes.test.test_internal_apiserver_v1alpha1_api
    kubernetes.test.test_logs_api
@@ -71,6 +72,7 @@ Submodules
    kubernetes.test.test_policy_v1_api
    kubernetes.test.test_rbac_authorization_api
    kubernetes.test.test_rbac_authorization_v1_api
+   kubernetes.test.test_rbac_v1_subject
    kubernetes.test.test_resource_api
    kubernetes.test.test_resource_v1alpha2_api
    kubernetes.test.test_scheduling_api
@@ -78,6 +80,7 @@ Submodules
    kubernetes.test.test_storage_api
    kubernetes.test.test_storage_v1_api
    kubernetes.test.test_storage_v1_token_request
+   kubernetes.test.test_storage_v1alpha1_api
    kubernetes.test.test_v1_affinity
    kubernetes.test.test_v1_aggregation_rule
    kubernetes.test.test_v1_api_group
@@ -113,6 +116,7 @@ Submodules
    kubernetes.test.test_v1_cluster_role_binding
    kubernetes.test.test_v1_cluster_role_binding_list
    kubernetes.test.test_v1_cluster_role_list
+   kubernetes.test.test_v1_cluster_trust_bundle_projection
    kubernetes.test.test_v1_component_condition
    kubernetes.test.test_v1_component_status
    kubernetes.test.test_v1_component_status_list
@@ -198,16 +202,24 @@ Submodules
    kubernetes.test.test_v1_event_source
    kubernetes.test.test_v1_eviction
    kubernetes.test.test_v1_exec_action
+   kubernetes.test.test_v1_exempt_priority_level_configuration
    kubernetes.test.test_v1_external_documentation
    kubernetes.test.test_v1_fc_volume_source
    kubernetes.test.test_v1_flex_persistent_volume_source
    kubernetes.test.test_v1_flex_volume_source
    kubernetes.test.test_v1_flocker_volume_source
+   kubernetes.test.test_v1_flow_distinguisher_method
+   kubernetes.test.test_v1_flow_schema
+   kubernetes.test.test_v1_flow_schema_condition
+   kubernetes.test.test_v1_flow_schema_list
+   kubernetes.test.test_v1_flow_schema_spec
+   kubernetes.test.test_v1_flow_schema_status
    kubernetes.test.test_v1_for_zone
    kubernetes.test.test_v1_gce_persistent_disk_volume_source
    kubernetes.test.test_v1_git_repo_volume_source
    kubernetes.test.test_v1_glusterfs_persistent_volume_source
    kubernetes.test.test_v1_glusterfs_volume_source
+   kubernetes.test.test_v1_group_subject
    kubernetes.test.test_v1_group_version_for_discovery
    kubernetes.test.test_v1_grpc_action
    kubernetes.test.test_v1_horizontal_pod_autoscaler
@@ -258,6 +270,8 @@ Submodules
    kubernetes.test.test_v1_limit_range_item
    kubernetes.test.test_v1_limit_range_list
    kubernetes.test.test_v1_limit_range_spec
+   kubernetes.test.test_v1_limit_response
+   kubernetes.test.test_v1_limited_priority_level_configuration
    kubernetes.test.test_v1_list_meta
    kubernetes.test.test_v1_load_balancer_ingress
    kubernetes.test.test_v1_load_balancer_status
@@ -266,6 +280,7 @@ Submodules
    kubernetes.test.test_v1_local_volume_source
    kubernetes.test.test_v1_managed_fields_entry
    kubernetes.test.test_v1_match_condition
+   kubernetes.test.test_v1_modify_volume_status
    kubernetes.test.test_v1_mutating_webhook
    kubernetes.test.test_v1_mutating_webhook_configuration
    kubernetes.test.test_v1_mutating_webhook_configuration_list
@@ -297,6 +312,7 @@ Submodules
    kubernetes.test.test_v1_node_status
    kubernetes.test.test_v1_node_system_info
    kubernetes.test.test_v1_non_resource_attributes
+   kubernetes.test.test_v1_non_resource_policy_rule
    kubernetes.test.test_v1_non_resource_rule
    kubernetes.test.test_v1_object_field_selector
    kubernetes.test.test_v1_object_meta
@@ -344,14 +360,22 @@ Submodules
    kubernetes.test.test_v1_pod_template_list
    kubernetes.test.test_v1_pod_template_spec
    kubernetes.test.test_v1_policy_rule
+   kubernetes.test.test_v1_policy_rules_with_subjects
    kubernetes.test.test_v1_port_status
    kubernetes.test.test_v1_portworx_volume_source
    kubernetes.test.test_v1_preconditions
    kubernetes.test.test_v1_preferred_scheduling_term
    kubernetes.test.test_v1_priority_class
    kubernetes.test.test_v1_priority_class_list
+   kubernetes.test.test_v1_priority_level_configuration
+   kubernetes.test.test_v1_priority_level_configuration_condition
+   kubernetes.test.test_v1_priority_level_configuration_list
+   kubernetes.test.test_v1_priority_level_configuration_reference
+   kubernetes.test.test_v1_priority_level_configuration_spec
+   kubernetes.test.test_v1_priority_level_configuration_status
    kubernetes.test.test_v1_probe
    kubernetes.test.test_v1_projected_volume_source
+   kubernetes.test.test_v1_queuing_configuration
    kubernetes.test.test_v1_quobyte_volume_source
    kubernetes.test.test_v1_rbd_persistent_volume_source
    kubernetes.test.test_v1_rbd_volume_source
@@ -368,6 +392,7 @@ Submodules
    kubernetes.test.test_v1_resource_attributes
    kubernetes.test.test_v1_resource_claim
    kubernetes.test.test_v1_resource_field_selector
+   kubernetes.test.test_v1_resource_policy_rule
    kubernetes.test.test_v1_resource_quota
    kubernetes.test.test_v1_resource_quota_list
    kubernetes.test.test_v1_resource_quota_spec
@@ -413,6 +438,7 @@ Submodules
    kubernetes.test.test_v1_service
    kubernetes.test.test_v1_service_account
    kubernetes.test.test_v1_service_account_list
+   kubernetes.test.test_v1_service_account_subject
    kubernetes.test.test_v1_service_account_token_projection
    kubernetes.test.test_v1_service_backend_port
    kubernetes.test.test_v1_service_list
@@ -420,6 +446,7 @@ Submodules
    kubernetes.test.test_v1_service_spec
    kubernetes.test.test_v1_service_status
    kubernetes.test.test_v1_session_affinity_config
+   kubernetes.test.test_v1_sleep_action
    kubernetes.test.test_v1_stateful_set
    kubernetes.test.test_v1_stateful_set_condition
    kubernetes.test.test_v1_stateful_set_list
@@ -435,7 +462,6 @@ Submodules
    kubernetes.test.test_v1_storage_class_list
    kubernetes.test.test_v1_storage_os_persistent_volume_source
    kubernetes.test.test_v1_storage_os_volume_source
-   kubernetes.test.test_v1_subject
    kubernetes.test.test_v1_subject_access_review
    kubernetes.test.test_v1_subject_access_review_spec
    kubernetes.test.test_v1_subject_access_review_status
@@ -456,6 +482,7 @@ Submodules
    kubernetes.test.test_v1_typed_object_reference
    kubernetes.test.test_v1_uncounted_terminated_pods
    kubernetes.test.test_v1_user_info
+   kubernetes.test.test_v1_user_subject
    kubernetes.test.test_v1_validating_webhook
    kubernetes.test.test_v1_validating_webhook_configuration
    kubernetes.test.test_v1_validating_webhook_configuration_list
@@ -472,15 +499,13 @@ Submodules
    kubernetes.test.test_v1_volume_node_affinity
    kubernetes.test.test_v1_volume_node_resources
    kubernetes.test.test_v1_volume_projection
+   kubernetes.test.test_v1_volume_resource_requirements
    kubernetes.test.test_v1_vsphere_virtual_disk_volume_source
    kubernetes.test.test_v1_watch_event
    kubernetes.test.test_v1_webhook_conversion
    kubernetes.test.test_v1_weighted_pod_affinity_term
    kubernetes.test.test_v1_windows_security_context_options
    kubernetes.test.test_v1alpha1_audit_annotation
-   kubernetes.test.test_v1alpha1_cluster_cidr
-   kubernetes.test.test_v1alpha1_cluster_cidr_list
-   kubernetes.test.test_v1alpha1_cluster_cidr_spec
    kubernetes.test.test_v1alpha1_cluster_trust_bundle
    kubernetes.test.test_v1alpha1_cluster_trust_bundle_list
    kubernetes.test.test_v1alpha1_cluster_trust_bundle_spec
@@ -497,6 +522,10 @@ Submodules
    kubernetes.test.test_v1alpha1_self_subject_review
    kubernetes.test.test_v1alpha1_self_subject_review_status
    kubernetes.test.test_v1alpha1_server_storage_version
+   kubernetes.test.test_v1alpha1_service_cidr
+   kubernetes.test.test_v1alpha1_service_cidr_list
+   kubernetes.test.test_v1alpha1_service_cidr_spec
+   kubernetes.test.test_v1alpha1_service_cidr_status
    kubernetes.test.test_v1alpha1_storage_version
    kubernetes.test.test_v1alpha1_storage_version_condition
    kubernetes.test.test_v1alpha1_storage_version_list
@@ -511,6 +540,8 @@ Submodules
    kubernetes.test.test_v1alpha1_validating_admission_policy_status
    kubernetes.test.test_v1alpha1_validation
    kubernetes.test.test_v1alpha1_variable
+   kubernetes.test.test_v1alpha1_volume_attributes_class
+   kubernetes.test.test_v1alpha1_volume_attributes_class_list
    kubernetes.test.test_v1alpha2_allocation_result
    kubernetes.test.test_v1alpha2_pod_scheduling_context
    kubernetes.test.test_v1alpha2_pod_scheduling_context_list
@@ -549,29 +580,6 @@ Submodules
    kubernetes.test.test_v1beta1_validating_admission_policy_status
    kubernetes.test.test_v1beta1_validation
    kubernetes.test.test_v1beta1_variable
-   kubernetes.test.test_v1beta2_exempt_priority_level_configuration
-   kubernetes.test.test_v1beta2_flow_distinguisher_method
-   kubernetes.test.test_v1beta2_flow_schema
-   kubernetes.test.test_v1beta2_flow_schema_condition
-   kubernetes.test.test_v1beta2_flow_schema_list
-   kubernetes.test.test_v1beta2_flow_schema_spec
-   kubernetes.test.test_v1beta2_flow_schema_status
-   kubernetes.test.test_v1beta2_group_subject
-   kubernetes.test.test_v1beta2_limit_response
-   kubernetes.test.test_v1beta2_limited_priority_level_configuration
-   kubernetes.test.test_v1beta2_non_resource_policy_rule
-   kubernetes.test.test_v1beta2_policy_rules_with_subjects
-   kubernetes.test.test_v1beta2_priority_level_configuration
-   kubernetes.test.test_v1beta2_priority_level_configuration_condition
-   kubernetes.test.test_v1beta2_priority_level_configuration_list
-   kubernetes.test.test_v1beta2_priority_level_configuration_reference
-   kubernetes.test.test_v1beta2_priority_level_configuration_spec
-   kubernetes.test.test_v1beta2_priority_level_configuration_status
-   kubernetes.test.test_v1beta2_queuing_configuration
-   kubernetes.test.test_v1beta2_resource_policy_rule
-   kubernetes.test.test_v1beta2_service_account_subject
-   kubernetes.test.test_v1beta2_subject
-   kubernetes.test.test_v1beta2_user_subject
    kubernetes.test.test_v1beta3_exempt_priority_level_configuration
    kubernetes.test.test_v1beta3_flow_distinguisher_method
    kubernetes.test.test_v1beta3_flow_schema
