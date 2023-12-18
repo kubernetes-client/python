@@ -42,7 +42,7 @@ Submodules
    kubernetes.client.api.events_api
    kubernetes.client.api.events_v1_api
    kubernetes.client.api.flowcontrol_apiserver_api
-   kubernetes.client.api.flowcontrol_apiserver_v1beta2_api
+   kubernetes.client.api.flowcontrol_apiserver_v1_api
    kubernetes.client.api.flowcontrol_apiserver_v1beta3_api
    kubernetes.client.api.internal_apiserver_api
    kubernetes.client.api.internal_apiserver_v1alpha1_api
@@ -63,6 +63,7 @@ Submodules
    kubernetes.client.api.scheduling_v1_api
    kubernetes.client.api.storage_api
    kubernetes.client.api.storage_v1_api
+   kubernetes.client.api.storage_v1alpha1_api
    kubernetes.client.api.version_api
    kubernetes.client.api.well_known_api
 
