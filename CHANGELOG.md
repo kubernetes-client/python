@@ -1,3 +1,11 @@
+# v29.0.0b1
+
+Kubernetes API Version: v1.29.0
+
+### Bug or Regression
+- Fix UTF-8 failures in Watch (#2100, @davidopic)
+- Fix upper version boundary of urllib3, since other dependencies don't support urllib3 in version 2 (#2105, @jsaalfeld)
+
 # v29.0.0a1
 
 Kubernetes API Version: v1.29.0
