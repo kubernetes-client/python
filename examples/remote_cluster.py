@@ -42,7 +42,7 @@ def main():
     # ssl_ca_cert is the filepath to the file that contains the certificate.
     # configuration.ssl_ca_cert="certificate"
 
-    aConfiguration.api_key = {"authorization": "Bearer " + aToken}
+    aConfiguration.api_key = {"BearerToken": "Bearer " + aToken}
 
     # Create a ApiClient with our config
     aApiClient = client.ApiClient(aConfiguration)
