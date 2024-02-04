@@ -104,6 +104,8 @@ TEST_CLIENT_CERT = "client-cert"
 TEST_CLIENT_CERT_BASE64 = _base64(TEST_CLIENT_CERT)
 TEST_TLS_SERVER_NAME = "kubernetes.io"
 
+TEST_PROXY_URL = "http://localhost:8888"
+
 TEST_OIDC_TOKEN = "test-oidc-token"
 TEST_OIDC_INFO = "{\"name\": \"test\"}"
 TEST_OIDC_BASE = ".".join([
@@ -552,6 +554,12 @@ class TestKubeConfigLoader(BaseTestCase):
                 }
             },
             {
+                "name": "proxy",
+                "context": {
+                    "cluster": "proxy",
+                }
+            },
+            {
                 "name": "non_existing_user",
                 "context": {
                     "cluster": "default",
@@ -650,6 +658,12 @@ class TestKubeConfigLoader(BaseTestCase):
                         TEST_CERTIFICATE_AUTH_BASE64,
                     "insecure-skip-tls-verify": False,
                     "tls-server-name": TEST_TLS_SERVER_NAME,
+                }
+            },
+            {
+                "name": "proxy",
+                "cluster": {
+                    "proxy-url": TEST_PROXY_URL,
                 }
             },
         ],
@@ -1282,6 +1296,16 @@ class TestKubeConfigLoader(BaseTestCase):
         KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="tls-server-name").load_and_set(actual)
+        self.assertEqual(expected, actual)
+
+    def test_proxy_server(self):
+        expected = FakeConfig(
+            proxy=TEST_PROXY_URL
+        )
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="proxy").load_and_set(actual)
         self.assertEqual(expected, actual)
 
     def test_list_contexts(self):
