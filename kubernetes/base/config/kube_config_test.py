@@ -1615,7 +1615,7 @@ class TestKubeConfigLoader(BaseTestCase):
         actual = _get_kube_config_loader(filename=config_file,
                                          persist_config=True)
         self.assertTrue(callable(actual._config_persister))
-        self.assertEquals(actual._config_persister.__name__, "save_changes")
+        self.assertEqual(actual._config_persister.__name__, "save_changes")
 
     def test__get_kube_config_loader_dict_no_persist(self):
         expected = FakeConfig(host=TEST_HOST,
