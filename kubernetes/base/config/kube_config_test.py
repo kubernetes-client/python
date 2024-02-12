@@ -372,7 +372,7 @@ class FakeConfig:
                         with open(v) as f1, open(other.__dict__[k]) as f2:
                             if f1.read() != f2.read():
                                 return
-                    except IOError:
+                    except OSError:
                         # fall back to only compare filenames in case we are
                         # testing the passing of filenames to the config
                         if other.__dict__[k] != v:
@@ -393,7 +393,7 @@ class FakeConfig:
                 try:
                     with open(v) as f:
                         val = "FILE: %s" % str.decode(f.read())
-                except IOError as e:
+                except OSError as e:
                     val = "ERROR: %s" % str(e)
             rep += "\t%s: %s\n" % (k, val)
         return "Config(%s\n)" % rep
