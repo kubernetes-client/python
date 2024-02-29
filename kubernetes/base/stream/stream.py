@@ -30,9 +30,18 @@ def _websocket_request(websocket_request, force_kwargs, api_method, *args, **kwa
     except AttributeError:
         configuration = api_client.config
     prev_request = api_client.request
+    binary = kwargs.pop('binary', False)
     try:
-        api_client.request = functools.partial(websocket_request, configuration)
-        return api_method(*args, **kwargs)
+        api_client.request = functools.partial(websocket_request, configuration, binary=binary)
+        out = api_method(*args, **kwargs)
+        # The api_client insists on converting this to a string using its representation, so we have
+        # to do this dance to strip it of the b' prefix and ' suffix, encode it byte-per-byte (latin1),
+        # escape all of the unicode \x*'s, then encode it back byte-by-byte
+        # However, if _preload_content=False is passed, then the entire WSClient is returned instead
+        # of a response, and we want to leave it alone
+        if binary and kwargs.get('_preload_content', True):
+            out = out[2:-1].encode('latin1').decode('unicode_escape').encode('latin1')
+        return out
     finally:
         api_client.request = prev_request
 
