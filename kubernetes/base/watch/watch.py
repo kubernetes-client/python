@@ -152,8 +152,8 @@ class Watch(object):
             v1 = kubernetes.client.CoreV1Api()
             watch = kubernetes.watch.Watch()
             for e in watch.stream(v1.list_namespace, resource_version=1127):
-                type = e['type']
-                object = e['object']  # object is one of type return_type
+                type_ = e['type']
+                object_ = e['object']  # object is one of type return_type
                 raw_object = e['raw_object']  # raw_object is a dict
                 ...
                 if should_stop:
