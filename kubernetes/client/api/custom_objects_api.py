@@ -2558,7 +2558,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+            ['application/json-patch+json' if isinstance(body, list) else 'application/merge-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2727,7 +2727,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+            ['application/json-patch+json' if isinstance(body, list) else 'application/merge-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2896,7 +2896,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+            ['application/json-patch+json' if isinstance(body, list) else 'application/merge-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3074,7 +3074,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+            ['application/json-patch+json' if isinstance(body, list) else 'application/merge-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3252,7 +3252,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+            ['application/json-patch+json' if isinstance(body, list) else 'application/merge-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3430,7 +3430,7 @@ class CustomObjectsApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/merge-patch+json'])  # noqa: E501
+            ['application/json-patch+json' if isinstance(body, list) else 'application/merge-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
