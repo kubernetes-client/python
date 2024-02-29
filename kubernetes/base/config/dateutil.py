@@ -18,7 +18,7 @@ import re
 
 
 class TimezoneInfo(datetime.tzinfo):
-    def __init__(self, h, m):
+    def __init__(self, h=0, m=0):
         self._name = "UTC"
         if h != 0 and m != 0:
             self._name += "%+03d:%2d" % (h, m)
