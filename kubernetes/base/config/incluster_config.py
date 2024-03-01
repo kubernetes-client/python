@@ -117,7 +117,7 @@ def load_incluster_config(client_configuration=None, try_refresh_token=True, **k
     not running in a kubernetes environment."""
     for val in kds.values():
         if val is not None:
-            raise ConfigException(f"Unimplemented named-argument {val} for incluster config")
+            raise ConfigException(f"Unimplemented named-argument {val} for incluster config.")
     InClusterConfigLoader(
         token_filename=SERVICE_TOKEN_FILENAME,
         cert_filename=SERVICE_CERT_FILENAME,
