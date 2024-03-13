@@ -115,7 +115,7 @@ def load_incluster_config(client_configuration=None, try_refresh_token=True, **k
     cluster. It's intended for clients that expect to be running inside a pod
     running on kubernetes. It will raise an exception if called from a process
     not running in a kubernetes environment."""
-    for val in kds.values():
+    for val in kwds.values():
         if val is not None:
             raise ConfigException(f"Unimplemented named-argument {val} for incluster config.")
     InClusterConfigLoader(
