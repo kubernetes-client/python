@@ -80,6 +80,8 @@ git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
 # OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
 git apply "${SCRIPT_ROOT}/rest_urllib_headers.diff"
+# Delete Node fix for empty string
+git apply "${SCRIPT_ROOT}/core_v1_api.diff"
 
 echo ">>> generating docs..."
 pushd "${DOC_ROOT}" > /dev/null
