@@ -1,0 +1,16 @@
+diff --git a/kubernetes/client/api/core_v1_api.py b/kubernetes/client/api/core_v1_api.py
+index 282d9b88..8de09a11 100644
+--- a/kubernetes/client/api/core_v1_api.py
++++ b/kubernetes/client/api/core_v1_api.py
+@@ -13680,7 +13680,10 @@ class CoreV1Api(object):
+         del local_var_params['kwargs']
+         # verify the required parameter 'name' is set
+         if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
+-                                                        local_var_params['name'] is None):  # noqa: E501
++                                                        local_var_params['name'] is None or  # noqa: E501
++                                                        not len(local_var_params['name'].strip())):  # noqa: E501
++            raise ApiValueError("Missing the required parameter `name` when calling `delete_node`")  # noqa: E501
++        if not len(name):
+             raise ApiValueError("Missing the required parameter `name` when calling `delete_node`")  # noqa: E501
+ 
+         collection_formats = {}
