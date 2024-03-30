@@ -1028,7 +1028,7 @@ class TestKubeConfigLoader(BaseTestCase):
     def test_load_gcp_token_with_refresh(self):
         def cred(): return None
         cred.token = TEST_ANOTHER_DATA_BASE64
-        cred.expiry = datetime.datetime.now(tz=UTC)
+        cred.expiry = datetime.datetime.now(tz=UTC).replace(tzinfo=None)
 
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
