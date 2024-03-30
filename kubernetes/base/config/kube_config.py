@@ -80,7 +80,7 @@ def _create_temp_file_with_content(content, temp_file_path=None):
 
 def _is_expired(expiry):
     return ((parse_rfc3339(expiry) - EXPIRY_SKEW_PREVENTION_DELAY) <=
-            datetime.datetime.utcnow().replace(tzinfo=UTC))
+            datetime.datetime.now(tz=UTC))
 
 
 class FileOrData(object):

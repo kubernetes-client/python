@@ -108,8 +108,7 @@ def restart_deployment(api, deployment):
     # update `spec.template.metadata` section
     # to add `kubectl.kubernetes.io/restartedAt` annotation
     deployment.spec.template.metadata.annotations = {
-        "kubectl.kubernetes.io/restartedAt": datetime.datetime.utcnow()
-        .replace(tzinfo=pytz.UTC)
+        "kubectl.kubernetes.io/restartedAt": datetime.datetime.now(tz=pytz.UTC)
         .isoformat()
     }
 
