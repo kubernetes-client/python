@@ -30,7 +30,7 @@ from six import PY3, next
 from kubernetes.client import Configuration
 
 from .config_exception import ConfigException
-from .dateutil import format_rfc3339, parse_rfc3339
+from .dateutil import UTC, format_rfc3339, parse_rfc3339
 from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, CommandTokenSource,
                           ConfigNode, FileOrData, KubeConfigLoader,
                           KubeConfigMerger, _cleanup_temp_files,
@@ -89,10 +89,10 @@ TEST_USERNAME = "me"
 TEST_PASSWORD = "pass"
 # token for me:pass
 TEST_BASIC_TOKEN = "Basic bWU6cGFzcw=="
-DATETIME_EXPIRY_PAST = datetime.datetime.utcnow(
-) - datetime.timedelta(minutes=PAST_EXPIRY_TIMEDELTA)
-DATETIME_EXPIRY_FUTURE = datetime.datetime.utcnow(
-) + datetime.timedelta(minutes=FUTURE_EXPIRY_TIMEDELTA)
+DATETIME_EXPIRY_PAST = datetime.datetime.now(tz=UTC
+                                             ).replace(tzinfo=None) - datetime.timedelta(minutes=PAST_EXPIRY_TIMEDELTA)
+DATETIME_EXPIRY_FUTURE = datetime.datetime.now(tz=UTC
+                                               ).replace(tzinfo=None) + datetime.timedelta(minutes=FUTURE_EXPIRY_TIMEDELTA)
 TEST_TOKEN_EXPIRY_PAST = _format_expiry_datetime(DATETIME_EXPIRY_PAST)
 
 TEST_SSL_HOST = "https://test-host"
@@ -1028,7 +1028,7 @@ class TestKubeConfigLoader(BaseTestCase):
     def test_load_gcp_token_with_refresh(self):
         def cred(): return None
         cred.token = TEST_ANOTHER_DATA_BASE64
-        cred.expiry = datetime.datetime.utcnow()
+        cred.expiry = datetime.datetime.now(tz=UTC).replace(tzinfo=None)
 
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -1123,7 +1123,6 @@ class TestKubeConfigLoader(BaseTestCase):
             config_dict=self.TEST_KUBE_CONFIG,
             active_context="expired_oidc_with_idp_ca_file",
         )
-
 
         self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual("Bearer abc123", loader.token)
@@ -1529,6 +1528,7 @@ class TestKubeConfigLoader(BaseTestCase):
     @mock.patch('kubernetes.config.kube_config.ExecProvider.run', autospec=True)
     def test_user_exec_cwd(self, mock):
         capture = {}
+
         def capture_cwd(exec_provider):
             capture['cwd'] = exec_provider.cwd
         mock.side_effect = capture_cwd

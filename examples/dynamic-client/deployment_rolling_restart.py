@@ -84,8 +84,7 @@ def main():
 
     deployment_manifest["spec"]["template"]["metadata"] = {
         "annotations": {
-            "kubectl.kubernetes.io/restartedAt": datetime.datetime.utcnow()
-            .replace(tzinfo=pytz.UTC)
+            "kubectl.kubernetes.io/restartedAt": datetime.datetime.now(tz=pytz.UTC)
             .isoformat()
         }
     }
