@@ -611,6 +611,49 @@ class TestUtils(unittest.TestCase):
 
 class TestUtilsUnitTests(unittest.TestCase):
 
+    def test_parse_quantity(self):
+        # == trivial returns ==
+        self.assertEqual(quantity.parse_quantity(Decimal(1)), Decimal(1))
+        self.assertEqual(quantity.parse_quantity(float(1)), Decimal(1))
+        self.assertEqual(quantity.parse_quantity(1), Decimal(1))
+
+        # == exceptions ==
+        self.assertRaises(
+            ValueError, lambda: quantity.parse_quantity("1000kb")
+        )
+        self.assertRaises(
+            ValueError, lambda: quantity.parse_quantity("1000ki")
+        )
+        self.assertRaises(ValueError, lambda: quantity.parse_quantity("1000foo"))
+        self.assertRaises(ValueError, lambda: quantity.parse_quantity("foo"))
+
+        # == no suffix ==
+        self.assertEqual(quantity.parse_quantity("1000"), Decimal(1000))
+
+        # == base 1024 ==
+        self.assertEqual(quantity.parse_quantity("1Ki"), Decimal(1024))
+        self.assertEqual(quantity.parse_quantity("1Mi"), Decimal(1024**2))
+        self.assertEqual(quantity.parse_quantity("1Gi"), Decimal(1024**3))
+        self.assertEqual(quantity.parse_quantity("1Ti"), Decimal(1024**4))
+        self.assertEqual(quantity.parse_quantity("1Pi"), Decimal(1024**5))
+        self.assertEqual(quantity.parse_quantity("1Ei"), Decimal(1024**6))
+        self.assertEqual(quantity.parse_quantity("1024Ki"), Decimal(1024**2))
+        self.assertEqual(quantity.parse_quantity("0.5Ki"), Decimal(512))
+
+        # == base 1000 ==
+        self.assertAlmostEqual(quantity.parse_quantity("1n"), Decimal(0.000_000_001))
+        self.assertAlmostEqual(quantity.parse_quantity("1u"), Decimal(0.000_001))
+        self.assertAlmostEqual(quantity.parse_quantity("1m"), Decimal(0.001))
+        self.assertEqual(quantity.parse_quantity("1k"), Decimal(1_000))
+        self.assertEqual(quantity.parse_quantity("1M"), Decimal(1_000_000))
+        self.assertEqual(quantity.parse_quantity("1G"), Decimal(1_000_000_000))
+        self.assertEqual(quantity.parse_quantity("1T"), Decimal(1_000_000_000_000))
+        self.assertEqual(quantity.parse_quantity("1P"), Decimal(1_000_000_000_000_000))
+        self.assertEqual(
+            quantity.parse_quantity("1E"), Decimal(1_000_000_000_000_000_000))
+        self.assertEqual(quantity.parse_quantity("1000k"), Decimal(1_000_000))
+        self.assertEqual(quantity.parse_quantity("500k"), Decimal(500_000))
+
     def test_format_quantity(self):
         """Unit test for quantity.format_quantity. Testing the different SI suffixes and
         function should return the expected string"""
