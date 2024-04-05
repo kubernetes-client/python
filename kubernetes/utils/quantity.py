@@ -120,6 +120,9 @@ def format_quantity(quantity_value, suffix, quantize=None) -> str:
     ValueError if the SI suffix is not supported.
     """
 
+    if not suffix:
+        return str(quantity_value)
+
     if suffix.endswith("i"):
         base = 1024
     elif len(suffix) == 1:
