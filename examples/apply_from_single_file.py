@@ -6,6 +6,7 @@ def main():
     yaml_file = 'examples/yaml_dir/configmap-demo-pod.yml'
     utils.create_from_yaml(k8s_client,yaml_file,verbose=True)
     print("testpassword")
+    print("testusername")
 
 if __name__ == "__main__":
     main()
