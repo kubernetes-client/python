@@ -78,8 +78,10 @@ git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 # once we upgrade to a version of swagger-codegen that includes it (version>= 6.6.0).
 # See https://github.com/OpenAPITools/openapi-generator/pull/15283
 git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
+# The following is commented out due to:
+# AttributeError: 'RESTResponse' object has no attribute 'headers'
 # OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
-git apply "${SCRIPT_ROOT}/rest_urllib_headers.diff"
+# git apply "${SCRIPT_ROOT}/rest_urllib_headers.diff"
 
 echo ">>> generating docs..."
 pushd "${DOC_ROOT}" > /dev/null
