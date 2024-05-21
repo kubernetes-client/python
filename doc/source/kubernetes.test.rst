@@ -81,6 +81,8 @@ Submodules
    kubernetes.test.test_storage_v1_api
    kubernetes.test.test_storage_v1_token_request
    kubernetes.test.test_storage_v1alpha1_api
+   kubernetes.test.test_storagemigration_api
+   kubernetes.test.test_storagemigration_v1alpha1_api
    kubernetes.test.test_v1_affinity
    kubernetes.test.test_v1_aggregation_rule
    kubernetes.test.test_v1_api_group
@@ -93,7 +95,9 @@ Submodules
    kubernetes.test.test_v1_api_service_spec
    kubernetes.test.test_v1_api_service_status
    kubernetes.test.test_v1_api_versions
+   kubernetes.test.test_v1_app_armor_profile
    kubernetes.test.test_v1_attached_volume
+   kubernetes.test.test_v1_audit_annotation
    kubernetes.test.test_v1_aws_elastic_block_store_volume_source
    kubernetes.test.test_v1_azure_disk_volume_source
    kubernetes.test.test_v1_azure_file_persistent_volume_source
@@ -203,6 +207,7 @@ Submodules
    kubernetes.test.test_v1_eviction
    kubernetes.test.test_v1_exec_action
    kubernetes.test.test_v1_exempt_priority_level_configuration
+   kubernetes.test.test_v1_expression_warning
    kubernetes.test.test_v1_external_documentation
    kubernetes.test.test_v1_fc_volume_source
    kubernetes.test.test_v1_flex_persistent_volume_source
@@ -280,10 +285,12 @@ Submodules
    kubernetes.test.test_v1_local_volume_source
    kubernetes.test.test_v1_managed_fields_entry
    kubernetes.test.test_v1_match_condition
+   kubernetes.test.test_v1_match_resources
    kubernetes.test.test_v1_modify_volume_status
    kubernetes.test.test_v1_mutating_webhook
    kubernetes.test.test_v1_mutating_webhook_configuration
    kubernetes.test.test_v1_mutating_webhook_configuration_list
+   kubernetes.test.test_v1_named_rule_with_operations
    kubernetes.test.test_v1_namespace
    kubernetes.test.test_v1_namespace_condition
    kubernetes.test.test_v1_namespace_list
@@ -305,6 +312,8 @@ Submodules
    kubernetes.test.test_v1_node_config_status
    kubernetes.test.test_v1_node_daemon_endpoints
    kubernetes.test.test_v1_node_list
+   kubernetes.test.test_v1_node_runtime_handler
+   kubernetes.test.test_v1_node_runtime_handler_features
    kubernetes.test.test_v1_node_selector
    kubernetes.test.test_v1_node_selector_requirement
    kubernetes.test.test_v1_node_selector_term
@@ -319,6 +328,8 @@ Submodules
    kubernetes.test.test_v1_object_reference
    kubernetes.test.test_v1_overhead
    kubernetes.test.test_v1_owner_reference
+   kubernetes.test.test_v1_param_kind
+   kubernetes.test.test_v1_param_ref
    kubernetes.test.test_v1_persistent_volume
    kubernetes.test.test_v1_persistent_volume_claim
    kubernetes.test.test_v1_persistent_volume_claim_condition
@@ -428,6 +439,7 @@ Submodules
    kubernetes.test.test_v1_secret_reference
    kubernetes.test.test_v1_secret_volume_source
    kubernetes.test.test_v1_security_context
+   kubernetes.test.test_v1_selectable_field
    kubernetes.test.test_v1_self_subject_access_review
    kubernetes.test.test_v1_self_subject_access_review_spec
    kubernetes.test.test_v1_self_subject_review
@@ -466,6 +478,8 @@ Submodules
    kubernetes.test.test_v1_subject_access_review_spec
    kubernetes.test.test_v1_subject_access_review_status
    kubernetes.test.test_v1_subject_rules_review_status
+   kubernetes.test.test_v1_success_policy
+   kubernetes.test.test_v1_success_policy_rule
    kubernetes.test.test_v1_sysctl
    kubernetes.test.test_v1_taint
    kubernetes.test.test_v1_tcp_socket_action
@@ -478,15 +492,25 @@ Submodules
    kubernetes.test.test_v1_topology_selector_label_requirement
    kubernetes.test.test_v1_topology_selector_term
    kubernetes.test.test_v1_topology_spread_constraint
+   kubernetes.test.test_v1_type_checking
    kubernetes.test.test_v1_typed_local_object_reference
    kubernetes.test.test_v1_typed_object_reference
    kubernetes.test.test_v1_uncounted_terminated_pods
    kubernetes.test.test_v1_user_info
    kubernetes.test.test_v1_user_subject
+   kubernetes.test.test_v1_validating_admission_policy
+   kubernetes.test.test_v1_validating_admission_policy_binding
+   kubernetes.test.test_v1_validating_admission_policy_binding_list
+   kubernetes.test.test_v1_validating_admission_policy_binding_spec
+   kubernetes.test.test_v1_validating_admission_policy_list
+   kubernetes.test.test_v1_validating_admission_policy_spec
+   kubernetes.test.test_v1_validating_admission_policy_status
    kubernetes.test.test_v1_validating_webhook
    kubernetes.test.test_v1_validating_webhook_configuration
    kubernetes.test.test_v1_validating_webhook_configuration_list
+   kubernetes.test.test_v1_validation
    kubernetes.test.test_v1_validation_rule
+   kubernetes.test.test_v1_variable
    kubernetes.test.test_v1_volume
    kubernetes.test.test_v1_volume_attachment
    kubernetes.test.test_v1_volume_attachment_list
@@ -496,6 +520,7 @@ Submodules
    kubernetes.test.test_v1_volume_device
    kubernetes.test.test_v1_volume_error
    kubernetes.test.test_v1_volume_mount
+   kubernetes.test.test_v1_volume_mount_status
    kubernetes.test.test_v1_volume_node_affinity
    kubernetes.test.test_v1_volume_node_resources
    kubernetes.test.test_v1_volume_projection
@@ -510,11 +535,13 @@ Submodules
    kubernetes.test.test_v1alpha1_cluster_trust_bundle_list
    kubernetes.test.test_v1alpha1_cluster_trust_bundle_spec
    kubernetes.test.test_v1alpha1_expression_warning
+   kubernetes.test.test_v1alpha1_group_version_resource
    kubernetes.test.test_v1alpha1_ip_address
    kubernetes.test.test_v1alpha1_ip_address_list
    kubernetes.test.test_v1alpha1_ip_address_spec
    kubernetes.test.test_v1alpha1_match_condition
    kubernetes.test.test_v1alpha1_match_resources
+   kubernetes.test.test_v1alpha1_migration_condition
    kubernetes.test.test_v1alpha1_named_rule_with_operations
    kubernetes.test.test_v1alpha1_param_kind
    kubernetes.test.test_v1alpha1_param_ref
@@ -529,6 +556,10 @@ Submodules
    kubernetes.test.test_v1alpha1_storage_version
    kubernetes.test.test_v1alpha1_storage_version_condition
    kubernetes.test.test_v1alpha1_storage_version_list
+   kubernetes.test.test_v1alpha1_storage_version_migration
+   kubernetes.test.test_v1alpha1_storage_version_migration_list
+   kubernetes.test.test_v1alpha1_storage_version_migration_spec
+   kubernetes.test.test_v1alpha1_storage_version_migration_status
    kubernetes.test.test_v1alpha1_storage_version_status
    kubernetes.test.test_v1alpha1_type_checking
    kubernetes.test.test_v1alpha1_validating_admission_policy
@@ -543,6 +574,16 @@ Submodules
    kubernetes.test.test_v1alpha1_volume_attributes_class
    kubernetes.test.test_v1alpha1_volume_attributes_class_list
    kubernetes.test.test_v1alpha2_allocation_result
+   kubernetes.test.test_v1alpha2_driver_allocation_result
+   kubernetes.test.test_v1alpha2_driver_requests
+   kubernetes.test.test_v1alpha2_named_resources_allocation_result
+   kubernetes.test.test_v1alpha2_named_resources_attribute
+   kubernetes.test.test_v1alpha2_named_resources_filter
+   kubernetes.test.test_v1alpha2_named_resources_instance
+   kubernetes.test.test_v1alpha2_named_resources_int_slice
+   kubernetes.test.test_v1alpha2_named_resources_request
+   kubernetes.test.test_v1alpha2_named_resources_resources
+   kubernetes.test.test_v1alpha2_named_resources_string_slice
    kubernetes.test.test_v1alpha2_pod_scheduling_context
    kubernetes.test.test_v1alpha2_pod_scheduling_context_list
    kubernetes.test.test_v1alpha2_pod_scheduling_context_spec
@@ -550,6 +591,8 @@ Submodules
    kubernetes.test.test_v1alpha2_resource_claim
    kubernetes.test.test_v1alpha2_resource_claim_consumer_reference
    kubernetes.test.test_v1alpha2_resource_claim_list
+   kubernetes.test.test_v1alpha2_resource_claim_parameters
+   kubernetes.test.test_v1alpha2_resource_claim_parameters_list
    kubernetes.test.test_v1alpha2_resource_claim_parameters_reference
    kubernetes.test.test_v1alpha2_resource_claim_scheduling_status
    kubernetes.test.test_v1alpha2_resource_claim_spec
@@ -559,8 +602,16 @@ Submodules
    kubernetes.test.test_v1alpha2_resource_claim_template_spec
    kubernetes.test.test_v1alpha2_resource_class
    kubernetes.test.test_v1alpha2_resource_class_list
+   kubernetes.test.test_v1alpha2_resource_class_parameters
+   kubernetes.test.test_v1alpha2_resource_class_parameters_list
    kubernetes.test.test_v1alpha2_resource_class_parameters_reference
+   kubernetes.test.test_v1alpha2_resource_filter
    kubernetes.test.test_v1alpha2_resource_handle
+   kubernetes.test.test_v1alpha2_resource_request
+   kubernetes.test.test_v1alpha2_resource_slice
+   kubernetes.test.test_v1alpha2_resource_slice_list
+   kubernetes.test.test_v1alpha2_structured_resource_handle
+   kubernetes.test.test_v1alpha2_vendor_parameters
    kubernetes.test.test_v1beta1_audit_annotation
    kubernetes.test.test_v1beta1_expression_warning
    kubernetes.test.test_v1beta1_match_condition

@@ -64,6 +64,8 @@ Submodules
    kubernetes.client.api.storage_api
    kubernetes.client.api.storage_v1_api
    kubernetes.client.api.storage_v1alpha1_api
+   kubernetes.client.api.storagemigration_api
+   kubernetes.client.api.storagemigration_v1alpha1_api
    kubernetes.client.api.version_api
    kubernetes.client.api.well_known_api
 
