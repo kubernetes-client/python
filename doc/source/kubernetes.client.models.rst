@@ -36,7 +36,9 @@ Submodules
    kubernetes.client.models.v1_api_service_spec
    kubernetes.client.models.v1_api_service_status
    kubernetes.client.models.v1_api_versions
+   kubernetes.client.models.v1_app_armor_profile
    kubernetes.client.models.v1_attached_volume
+   kubernetes.client.models.v1_audit_annotation
    kubernetes.client.models.v1_aws_elastic_block_store_volume_source
    kubernetes.client.models.v1_azure_disk_volume_source
    kubernetes.client.models.v1_azure_file_persistent_volume_source
@@ -146,6 +148,7 @@ Submodules
    kubernetes.client.models.v1_eviction
    kubernetes.client.models.v1_exec_action
    kubernetes.client.models.v1_exempt_priority_level_configuration
+   kubernetes.client.models.v1_expression_warning
    kubernetes.client.models.v1_external_documentation
    kubernetes.client.models.v1_fc_volume_source
    kubernetes.client.models.v1_flex_persistent_volume_source
@@ -223,10 +226,12 @@ Submodules
    kubernetes.client.models.v1_local_volume_source
    kubernetes.client.models.v1_managed_fields_entry
    kubernetes.client.models.v1_match_condition
+   kubernetes.client.models.v1_match_resources
    kubernetes.client.models.v1_modify_volume_status
    kubernetes.client.models.v1_mutating_webhook
    kubernetes.client.models.v1_mutating_webhook_configuration
    kubernetes.client.models.v1_mutating_webhook_configuration_list
+   kubernetes.client.models.v1_named_rule_with_operations
    kubernetes.client.models.v1_namespace
    kubernetes.client.models.v1_namespace_condition
    kubernetes.client.models.v1_namespace_list
@@ -248,6 +253,8 @@ Submodules
    kubernetes.client.models.v1_node_config_status
    kubernetes.client.models.v1_node_daemon_endpoints
    kubernetes.client.models.v1_node_list
+   kubernetes.client.models.v1_node_runtime_handler
+   kubernetes.client.models.v1_node_runtime_handler_features
    kubernetes.client.models.v1_node_selector
    kubernetes.client.models.v1_node_selector_requirement
    kubernetes.client.models.v1_node_selector_term
@@ -262,6 +269,8 @@ Submodules
    kubernetes.client.models.v1_object_reference
    kubernetes.client.models.v1_overhead
    kubernetes.client.models.v1_owner_reference
+   kubernetes.client.models.v1_param_kind
+   kubernetes.client.models.v1_param_ref
    kubernetes.client.models.v1_persistent_volume
    kubernetes.client.models.v1_persistent_volume_claim
    kubernetes.client.models.v1_persistent_volume_claim_condition
@@ -371,6 +380,7 @@ Submodules
    kubernetes.client.models.v1_secret_reference
    kubernetes.client.models.v1_secret_volume_source
    kubernetes.client.models.v1_security_context
+   kubernetes.client.models.v1_selectable_field
    kubernetes.client.models.v1_self_subject_access_review
    kubernetes.client.models.v1_self_subject_access_review_spec
    kubernetes.client.models.v1_self_subject_review
@@ -409,6 +419,8 @@ Submodules
    kubernetes.client.models.v1_subject_access_review_spec
    kubernetes.client.models.v1_subject_access_review_status
    kubernetes.client.models.v1_subject_rules_review_status
+   kubernetes.client.models.v1_success_policy
+   kubernetes.client.models.v1_success_policy_rule
    kubernetes.client.models.v1_sysctl
    kubernetes.client.models.v1_taint
    kubernetes.client.models.v1_tcp_socket_action
@@ -421,15 +433,25 @@ Submodules
    kubernetes.client.models.v1_topology_selector_label_requirement
    kubernetes.client.models.v1_topology_selector_term
    kubernetes.client.models.v1_topology_spread_constraint
+   kubernetes.client.models.v1_type_checking
    kubernetes.client.models.v1_typed_local_object_reference
    kubernetes.client.models.v1_typed_object_reference
    kubernetes.client.models.v1_uncounted_terminated_pods
    kubernetes.client.models.v1_user_info
    kubernetes.client.models.v1_user_subject
+   kubernetes.client.models.v1_validating_admission_policy
+   kubernetes.client.models.v1_validating_admission_policy_binding
+   kubernetes.client.models.v1_validating_admission_policy_binding_list
+   kubernetes.client.models.v1_validating_admission_policy_binding_spec
+   kubernetes.client.models.v1_validating_admission_policy_list
+   kubernetes.client.models.v1_validating_admission_policy_spec
+   kubernetes.client.models.v1_validating_admission_policy_status
    kubernetes.client.models.v1_validating_webhook
    kubernetes.client.models.v1_validating_webhook_configuration
    kubernetes.client.models.v1_validating_webhook_configuration_list
+   kubernetes.client.models.v1_validation
    kubernetes.client.models.v1_validation_rule
+   kubernetes.client.models.v1_variable
    kubernetes.client.models.v1_volume
    kubernetes.client.models.v1_volume_attachment
    kubernetes.client.models.v1_volume_attachment_list
@@ -439,6 +461,7 @@ Submodules
    kubernetes.client.models.v1_volume_device
    kubernetes.client.models.v1_volume_error
    kubernetes.client.models.v1_volume_mount
+   kubernetes.client.models.v1_volume_mount_status
    kubernetes.client.models.v1_volume_node_affinity
    kubernetes.client.models.v1_volume_node_resources
    kubernetes.client.models.v1_volume_projection
@@ -453,11 +476,13 @@ Submodules
    kubernetes.client.models.v1alpha1_cluster_trust_bundle_list
    kubernetes.client.models.v1alpha1_cluster_trust_bundle_spec
    kubernetes.client.models.v1alpha1_expression_warning
+   kubernetes.client.models.v1alpha1_group_version_resource
    kubernetes.client.models.v1alpha1_ip_address
    kubernetes.client.models.v1alpha1_ip_address_list
    kubernetes.client.models.v1alpha1_ip_address_spec
    kubernetes.client.models.v1alpha1_match_condition
    kubernetes.client.models.v1alpha1_match_resources
+   kubernetes.client.models.v1alpha1_migration_condition
    kubernetes.client.models.v1alpha1_named_rule_with_operations
    kubernetes.client.models.v1alpha1_param_kind
    kubernetes.client.models.v1alpha1_param_ref
@@ -472,6 +497,10 @@ Submodules
    kubernetes.client.models.v1alpha1_storage_version
    kubernetes.client.models.v1alpha1_storage_version_condition
    kubernetes.client.models.v1alpha1_storage_version_list
+   kubernetes.client.models.v1alpha1_storage_version_migration
+   kubernetes.client.models.v1alpha1_storage_version_migration_list
+   kubernetes.client.models.v1alpha1_storage_version_migration_spec
+   kubernetes.client.models.v1alpha1_storage_version_migration_status
    kubernetes.client.models.v1alpha1_storage_version_status
    kubernetes.client.models.v1alpha1_type_checking
    kubernetes.client.models.v1alpha1_validating_admission_policy
@@ -486,6 +515,16 @@ Submodules
    kubernetes.client.models.v1alpha1_volume_attributes_class
    kubernetes.client.models.v1alpha1_volume_attributes_class_list
    kubernetes.client.models.v1alpha2_allocation_result
+   kubernetes.client.models.v1alpha2_driver_allocation_result
+   kubernetes.client.models.v1alpha2_driver_requests
+   kubernetes.client.models.v1alpha2_named_resources_allocation_result
+   kubernetes.client.models.v1alpha2_named_resources_attribute
+   kubernetes.client.models.v1alpha2_named_resources_filter
+   kubernetes.client.models.v1alpha2_named_resources_instance
+   kubernetes.client.models.v1alpha2_named_resources_int_slice
+   kubernetes.client.models.v1alpha2_named_resources_request
+   kubernetes.client.models.v1alpha2_named_resources_resources
+   kubernetes.client.models.v1alpha2_named_resources_string_slice
    kubernetes.client.models.v1alpha2_pod_scheduling_context
    kubernetes.client.models.v1alpha2_pod_scheduling_context_list
    kubernetes.client.models.v1alpha2_pod_scheduling_context_spec
@@ -493,6 +532,8 @@ Submodules
    kubernetes.client.models.v1alpha2_resource_claim
    kubernetes.client.models.v1alpha2_resource_claim_consumer_reference
    kubernetes.client.models.v1alpha2_resource_claim_list
+   kubernetes.client.models.v1alpha2_resource_claim_parameters
+   kubernetes.client.models.v1alpha2_resource_claim_parameters_list
    kubernetes.client.models.v1alpha2_resource_claim_parameters_reference
    kubernetes.client.models.v1alpha2_resource_claim_scheduling_status
    kubernetes.client.models.v1alpha2_resource_claim_spec
@@ -502,8 +543,16 @@ Submodules
    kubernetes.client.models.v1alpha2_resource_claim_template_spec
    kubernetes.client.models.v1alpha2_resource_class
    kubernetes.client.models.v1alpha2_resource_class_list
+   kubernetes.client.models.v1alpha2_resource_class_parameters
+   kubernetes.client.models.v1alpha2_resource_class_parameters_list
    kubernetes.client.models.v1alpha2_resource_class_parameters_reference
+   kubernetes.client.models.v1alpha2_resource_filter
    kubernetes.client.models.v1alpha2_resource_handle
+   kubernetes.client.models.v1alpha2_resource_request
+   kubernetes.client.models.v1alpha2_resource_slice
+   kubernetes.client.models.v1alpha2_resource_slice_list
+   kubernetes.client.models.v1alpha2_structured_resource_handle
+   kubernetes.client.models.v1alpha2_vendor_parameters
    kubernetes.client.models.v1beta1_audit_annotation
    kubernetes.client.models.v1beta1_expression_warning
    kubernetes.client.models.v1beta1_match_condition
