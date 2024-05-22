@@ -99,6 +99,8 @@ supported versions of Kubernetes clusters.
 - [client 27.y.z](https://pypi.org/project/kubernetes/27.2.0/): Kubernetes 1.26 or below (+-), Kubernetes 1.27 (✓), Kubernetes 1.28 or above (+-)
 - [client 28.y.z](https://pypi.org/project/kubernetes/28.1.0/): Kubernetes 1.27 or below (+-), Kubernetes 1.28 (✓), Kubernetes 1.29 or above (+-)
 - [client 29.y.z](https://pypi.org/project/kubernetes/29.0.0/): Kubernetes 1.28 or below (+-), Kubernetes 1.29 (✓), Kubernetes 1.30 or above (+-)
+- [client 30.y.z](https://pypi.org/project/kubernetes/30.1.0a1/): Kubernetes 1.29 or below (+-), Kubernetes 1.30 (✓), Kubernetes 1.31 or above (+-)
+
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explanation of why there is no v13-v16 release.
 
@@ -161,6 +163,7 @@ between client-python versions.
 | 28.0            | Kubernetes main repo, 1.28 branch    | ✓                             |
 | 29.0 Alpha/Beta | Kubernetes main repo, 1.29 branch    | ✗                             |
 | 29.0            | Kubernetes main repo, 1.29 branch    | ✓                             |
+| 30.0 Alpha/Beta | Kubernetes main repo, 1.30 branch    | ✓                             |
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explanation of why there is no v13-v16 release.
 
