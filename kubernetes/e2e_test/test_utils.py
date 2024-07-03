@@ -71,6 +71,48 @@ class TestUtils(unittest.TestCase):
             except ApiException:
                 continue
 
+    def test_create_apps_deployment_from_yaml_with_apply_is_idempotent(self):
+        """
+        Should be able to create an apps/v1 deployment.
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        try:
+            utils.create_from_yaml(
+                k8s_client, self.path_prefix + "apps-deployment.yaml")
+            app_api = client.AppsV1Api(k8s_client)
+            dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                    namespace="default")
+            self.assertIsNotNone(dep)
+            self.assertEqual("nginx-app", dep.metadata.name)
+            self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+            self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
+            self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
+            self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
+            self.assertEqual(3, dep.spec.replicas)
+
+            utils.create_from_yaml(
+                k8s_client, self.path_prefix + "apps-deployment.yaml", apply=True)
+            dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                    namespace="default")
+            self.assertIsNotNone(dep)
+            self.assertEqual("nginx-app", dep.metadata.name)
+            self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+            self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
+            self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
+            self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
+            self.assertEqual(3, dep.spec.replicas)
+        except Exception as e:
+            self.fail(e)
+        finally:
+            while True:
+                try:
+                    app_api.delete_namespaced_deployment(
+                        name="nginx-app", namespace="default",
+                        body={})
+                    break
+                except ApiException:
+                    continue
+
     def test_create_apps_deployment_from_yaml_object(self):
         """
         Should be able to pass YAML objects directly to helper function.
