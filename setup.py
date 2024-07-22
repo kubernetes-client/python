@@ -62,7 +62,7 @@ setup(
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
-              'kubernetes.utils', 'kubernetes.client.apis',
+              'kubernetes.utils', 'kubernetes.client.api',
               'kubernetes.dynamic', 'kubernetes.leaderelection',
               'kubernetes.leaderelection.resourcelock'],
     include_package_data=True,
