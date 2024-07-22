@@ -1,7 +1,9 @@
 # V1Volume
 
 Volume represents a named volume in a pod that may be accessed by any container in the pod.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aws_elastic_block_store** | [**V1AWSElasticBlockStoreVolumeSource**](V1AWSElasticBlockStoreVolumeSource.md) |  | [optional] 
@@ -35,6 +37,23 @@ Name | Type | Description | Notes
 **storageos** | [**V1StorageOSVolumeSource**](V1StorageOSVolumeSource.md) |  | [optional] 
 **vsphere_volume** | [**V1VsphereVirtualDiskVolumeSource**](V1VsphereVirtualDiskVolumeSource.md) |  | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_volume import V1Volume
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1Volume from a JSON string
+v1_volume_instance = V1Volume.from_json(json)
+# print the JSON string representation of the object
+print V1Volume.to_json()
+
+# convert the object into a dict
+v1_volume_dict = v1_volume_instance.to_dict()
+# create an instance of V1Volume from a dict
+v1_volume_form_dict = v1_volume.from_dict(v1_volume_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

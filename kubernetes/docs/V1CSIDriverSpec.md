@@ -1,7 +1,9 @@
 # V1CSIDriverSpec
 
 CSIDriverSpec is the specification of a CSIDriver.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attach_required** | **bool** | attachRequired indicates this CSI volume driver requires an attach operation (because it implements the CSI ControllerPublishVolume() method), and that the Kubernetes attach detach controller should call the attach volume interface which checks the volumeattachment status and waits until the volume is attached before proceeding to mounting. The CSI external-attacher coordinates with CSI volume driver and updates the volumeattachment status when the attach operation is complete. If the CSIDriverRegistry feature gate is enabled and the value is specified to false, the attach operation will be skipped. Otherwise the attach operation will be called.  This field is immutable. | [optional] 
@@ -10,9 +12,26 @@ Name | Type | Description | Notes
 **requires_republish** | **bool** | requiresRepublish indicates the CSI driver wants &#x60;NodePublishVolume&#x60; being periodically called to reflect any possible change in the mounted volume. This field defaults to false.  Note: After a successful initial NodePublishVolume call, subsequent calls to NodePublishVolume should only update the contents of the volume. New mount points will not be seen by a running container. | [optional] 
 **se_linux_mount** | **bool** | seLinuxMount specifies if the CSI driver supports \&quot;-o context\&quot; mount option.  When \&quot;true\&quot;, the CSI driver must ensure that all volumes provided by this CSI driver can be mounted separately with different &#x60;-o context&#x60; options. This is typical for storage backends that provide volumes as filesystems on block devices or as independent shared volumes. Kubernetes will call NodeStage / NodePublish with \&quot;-o context&#x3D;xyz\&quot; mount option when mounting a ReadWriteOncePod volume used in Pod that has explicitly set SELinux context. In the future, it may be expanded to other volume AccessModes. In any case, Kubernetes will ensure that the volume is mounted only with a single SELinux context.  When \&quot;false\&quot;, Kubernetes won&#39;t pass any special SELinux mount options to the driver. This is typical for volumes that represent subdirectories of a bigger shared filesystem.  Default is \&quot;false\&quot;. | [optional] 
 **storage_capacity** | **bool** | storageCapacity indicates that the CSI volume driver wants pod scheduling to consider the storage capacity that the driver deployment will report by creating CSIStorageCapacity objects with capacity information, if set to true.  The check can be enabled immediately when deploying a driver. In that case, provisioning new volumes with late binding will pause until the driver deployment has published some suitable CSIStorageCapacity object.  Alternatively, the driver can be deployed with the field unset or false and it can be flipped later when storage capacity information has been published.  This field was immutable in Kubernetes &lt;&#x3D; 1.22 and now is mutable. | [optional] 
-**token_requests** | [**list[StorageV1TokenRequest]**](StorageV1TokenRequest.md) | tokenRequests indicates the CSI driver needs pods&#39; service account tokens it is mounting volume for to do necessary authentication. Kubelet will pass the tokens in VolumeContext in the CSI NodePublishVolume calls. The CSI driver should parse and validate the following VolumeContext: \&quot;csi.storage.k8s.io/serviceAccount.tokens\&quot;: {   \&quot;&lt;audience&gt;\&quot;: {     \&quot;token\&quot;: &lt;token&gt;,     \&quot;expirationTimestamp\&quot;: &lt;expiration timestamp in RFC3339&gt;,   },   ... }  Note: Audience in each TokenRequest should be different and at most one token is empty string. To receive a new token after expiry, RequiresRepublish can be used to trigger NodePublishVolume periodically. | [optional] 
-**volume_lifecycle_modes** | **list[str]** | volumeLifecycleModes defines what kind of volumes this CSI volume driver supports. The default if the list is empty is \&quot;Persistent\&quot;, which is the usage defined by the CSI specification and implemented in Kubernetes via the usual PV/PVC mechanism.  The other mode is \&quot;Ephemeral\&quot;. In this mode, volumes are defined inline inside the pod spec with CSIVolumeSource and their lifecycle is tied to the lifecycle of that pod. A driver has to be aware of this because it is only going to get a NodePublishVolume call for such a volume.  For more information about implementing this mode, see https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html A driver can support one or more of these modes and more modes may be added in the future.  This field is beta. This field is immutable. | [optional] 
+**token_requests** | [**List[StorageV1TokenRequest]**](StorageV1TokenRequest.md) | tokenRequests indicates the CSI driver needs pods&#39; service account tokens it is mounting volume for to do necessary authentication. Kubelet will pass the tokens in VolumeContext in the CSI NodePublishVolume calls. The CSI driver should parse and validate the following VolumeContext: \&quot;csi.storage.k8s.io/serviceAccount.tokens\&quot;: {   \&quot;&lt;audience&gt;\&quot;: {     \&quot;token\&quot;: &lt;token&gt;,     \&quot;expirationTimestamp\&quot;: &lt;expiration timestamp in RFC3339&gt;,   },   ... }  Note: Audience in each TokenRequest should be different and at most one token is empty string. To receive a new token after expiry, RequiresRepublish can be used to trigger NodePublishVolume periodically. | [optional] 
+**volume_lifecycle_modes** | **List[str]** | volumeLifecycleModes defines what kind of volumes this CSI volume driver supports. The default if the list is empty is \&quot;Persistent\&quot;, which is the usage defined by the CSI specification and implemented in Kubernetes via the usual PV/PVC mechanism.  The other mode is \&quot;Ephemeral\&quot;. In this mode, volumes are defined inline inside the pod spec with CSIVolumeSource and their lifecycle is tied to the lifecycle of that pod. A driver has to be aware of this because it is only going to get a NodePublishVolume call for such a volume.  For more information about implementing this mode, see https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html A driver can support one or more of these modes and more modes may be added in the future.  This field is beta. This field is immutable. | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_csi_driver_spec import V1CSIDriverSpec
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1CSIDriverSpec from a JSON string
+v1_csi_driver_spec_instance = V1CSIDriverSpec.from_json(json)
+# print the JSON string representation of the object
+print V1CSIDriverSpec.to_json()
+
+# convert the object into a dict
+v1_csi_driver_spec_dict = v1_csi_driver_spec_instance.to_dict()
+# create an instance of V1CSIDriverSpec from a dict
+v1_csi_driver_spec_form_dict = v1_csi_driver_spec.from_dict(v1_csi_driver_spec_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

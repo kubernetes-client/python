@@ -1,21 +1,23 @@
 # V1EphemeralContainer
 
 An EphemeralContainer is a temporary container that you may add to an existing Pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a Pod is removed or restarted. The kubelet may evict a Pod if an ephemeral container causes the Pod to exceed its resource allocation.  To add an ephemeral container, use the ephemeralcontainers subresource of an existing Pod. Ephemeral containers may not be removed or restarted.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**args** | **list[str]** | Arguments to the entrypoint. The image&#39;s CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \&quot;$$(VAR_NAME)\&quot; will produce the string literal \&quot;$(VAR_NAME)\&quot;. Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell | [optional] 
-**command** | **list[str]** | Entrypoint array. Not executed within a shell. The image&#39;s ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \&quot;$$(VAR_NAME)\&quot; will produce the string literal \&quot;$(VAR_NAME)\&quot;. Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell | [optional] 
-**env** | [**list[V1EnvVar]**](V1EnvVar.md) | List of environment variables to set in the container. Cannot be updated. | [optional] 
-**env_from** | [**list[V1EnvFromSource]**](V1EnvFromSource.md) | List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated. | [optional] 
+**args** | **List[str]** | Arguments to the entrypoint. The image&#39;s CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \&quot;$$(VAR_NAME)\&quot; will produce the string literal \&quot;$(VAR_NAME)\&quot;. Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell | [optional] 
+**command** | **List[str]** | Entrypoint array. Not executed within a shell. The image&#39;s ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \&quot;$$(VAR_NAME)\&quot; will produce the string literal \&quot;$(VAR_NAME)\&quot;. Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell | [optional] 
+**env** | [**List[V1EnvVar]**](V1EnvVar.md) | List of environment variables to set in the container. Cannot be updated. | [optional] 
+**env_from** | [**List[V1EnvFromSource]**](V1EnvFromSource.md) | List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated. | [optional] 
 **image** | **str** | Container image name. More info: https://kubernetes.io/docs/concepts/containers/images | [optional] 
 **image_pull_policy** | **str** | Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images | [optional] 
 **lifecycle** | [**V1Lifecycle**](V1Lifecycle.md) |  | [optional] 
 **liveness_probe** | [**V1Probe**](V1Probe.md) |  | [optional] 
 **name** | **str** | Name of the ephemeral container specified as a DNS_LABEL. This name must be unique among all containers, init containers and ephemeral containers. | 
-**ports** | [**list[V1ContainerPort]**](V1ContainerPort.md) | Ports are not allowed for ephemeral containers. | [optional] 
+**ports** | [**List[V1ContainerPort]**](V1ContainerPort.md) | Ports are not allowed for ephemeral containers. | [optional] 
 **readiness_probe** | [**V1Probe**](V1Probe.md) |  | [optional] 
-**resize_policy** | [**list[V1ContainerResizePolicy]**](V1ContainerResizePolicy.md) | Resources resize policy for the container. | [optional] 
+**resize_policy** | [**List[V1ContainerResizePolicy]**](V1ContainerResizePolicy.md) | Resources resize policy for the container. | [optional] 
 **resources** | [**V1ResourceRequirements**](V1ResourceRequirements.md) |  | [optional] 
 **restart_policy** | **str** | Restart policy for the container to manage the restart behavior of each container within a pod. This may only be set for init containers. You cannot set this field on ephemeral containers. | [optional] 
 **security_context** | [**V1SecurityContext**](V1SecurityContext.md) |  | [optional] 
@@ -26,10 +28,27 @@ Name | Type | Description | Notes
 **termination_message_path** | **str** | Optional: Path at which the file to which the container&#39;s termination message will be written is mounted into the container&#39;s filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated. | [optional] 
 **termination_message_policy** | **str** | Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated. | [optional] 
 **tty** | **bool** | Whether this container should allocate a TTY for itself, also requires &#39;stdin&#39; to be true. Default is false. | [optional] 
-**volume_devices** | [**list[V1VolumeDevice]**](V1VolumeDevice.md) | volumeDevices is the list of block devices to be used by the container. | [optional] 
-**volume_mounts** | [**list[V1VolumeMount]**](V1VolumeMount.md) | Pod volumes to mount into the container&#39;s filesystem. Subpath mounts are not allowed for ephemeral containers. Cannot be updated. | [optional] 
+**volume_devices** | [**List[V1VolumeDevice]**](V1VolumeDevice.md) | volumeDevices is the list of block devices to be used by the container. | [optional] 
+**volume_mounts** | [**List[V1VolumeMount]**](V1VolumeMount.md) | Pod volumes to mount into the container&#39;s filesystem. Subpath mounts are not allowed for ephemeral containers. Cannot be updated. | [optional] 
 **working_dir** | **str** | Container&#39;s working directory. If not specified, the container runtime&#39;s default will be used, which might be configured in the container image. Cannot be updated. | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_ephemeral_container import V1EphemeralContainer
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1EphemeralContainer from a JSON string
+v1_ephemeral_container_instance = V1EphemeralContainer.from_json(json)
+# print the JSON string representation of the object
+print V1EphemeralContainer.to_json()
+
+# convert the object into a dict
+v1_ephemeral_container_dict = v1_ephemeral_container_instance.to_dict()
+# create an instance of V1EphemeralContainer from a dict
+v1_ephemeral_container_form_dict = v1_ephemeral_container.from_dict(v1_ephemeral_container_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

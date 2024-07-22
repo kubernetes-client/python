@@ -1,7 +1,9 @@
 # V1beta1SelfSubjectReview
 
 SelfSubjectReview contains the user information that the kube-apiserver has about the user making this request. When using impersonation, users will receive the user info of the user being impersonated.  If impersonation or request header authentication is used, any extra keys will have their case ignored and returned as lowercase.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **api_version** | **str** | APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources | [optional] 
@@ -9,6 +11,23 @@ Name | Type | Description | Notes
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **status** | [**V1beta1SelfSubjectReviewStatus**](V1beta1SelfSubjectReviewStatus.md) |  | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1beta1_self_subject_review import V1beta1SelfSubjectReview
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1beta1SelfSubjectReview from a JSON string
+v1beta1_self_subject_review_instance = V1beta1SelfSubjectReview.from_json(json)
+# print the JSON string representation of the object
+print V1beta1SelfSubjectReview.to_json()
+
+# convert the object into a dict
+v1beta1_self_subject_review_dict = v1beta1_self_subject_review_instance.to_dict()
+# create an instance of V1beta1SelfSubjectReview from a dict
+v1beta1_self_subject_review_form_dict = v1beta1_self_subject_review.from_dict(v1beta1_self_subject_review_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

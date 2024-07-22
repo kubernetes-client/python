@@ -1,14 +1,16 @@
 # V1PersistentVolumeSpec
 
 PersistentVolumeSpec is the specification of a persistent volume.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_modes** | **list[str]** | accessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes | [optional] 
+**access_modes** | **List[str]** | accessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes | [optional] 
 **aws_elastic_block_store** | [**V1AWSElasticBlockStoreVolumeSource**](V1AWSElasticBlockStoreVolumeSource.md) |  | [optional] 
 **azure_disk** | [**V1AzureDiskVolumeSource**](V1AzureDiskVolumeSource.md) |  | [optional] 
 **azure_file** | [**V1AzureFilePersistentVolumeSource**](V1AzureFilePersistentVolumeSource.md) |  | [optional] 
-**capacity** | **dict(str, str)** | capacity is the description of the persistent volume&#39;s resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity | [optional] 
+**capacity** | **Dict[str, str]** | capacity is the description of the persistent volume&#39;s resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity | [optional] 
 **cephfs** | [**V1CephFSPersistentVolumeSource**](V1CephFSPersistentVolumeSource.md) |  | [optional] 
 **cinder** | [**V1CinderPersistentVolumeSource**](V1CinderPersistentVolumeSource.md) |  | [optional] 
 **claim_ref** | [**V1ObjectReference**](V1ObjectReference.md) |  | [optional] 
@@ -21,7 +23,7 @@ Name | Type | Description | Notes
 **host_path** | [**V1HostPathVolumeSource**](V1HostPathVolumeSource.md) |  | [optional] 
 **iscsi** | [**V1ISCSIPersistentVolumeSource**](V1ISCSIPersistentVolumeSource.md) |  | [optional] 
 **local** | [**V1LocalVolumeSource**](V1LocalVolumeSource.md) |  | [optional] 
-**mount_options** | **list[str]** | mountOptions is the list of mount options, e.g. [\&quot;ro\&quot;, \&quot;soft\&quot;]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options | [optional] 
+**mount_options** | **List[str]** | mountOptions is the list of mount options, e.g. [\&quot;ro\&quot;, \&quot;soft\&quot;]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options | [optional] 
 **nfs** | [**V1NFSVolumeSource**](V1NFSVolumeSource.md) |  | [optional] 
 **node_affinity** | [**V1VolumeNodeAffinity**](V1VolumeNodeAffinity.md) |  | [optional] 
 **persistent_volume_reclaim_policy** | **str** | persistentVolumeReclaimPolicy defines what happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming | [optional] 
@@ -36,6 +38,23 @@ Name | Type | Description | Notes
 **volume_mode** | **str** | volumeMode defines if a volume is intended to be used with a formatted filesystem or to remain in raw block state. Value of Filesystem is implied when not included in spec. | [optional] 
 **vsphere_volume** | [**V1VsphereVirtualDiskVolumeSource**](V1VsphereVirtualDiskVolumeSource.md) |  | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_persistent_volume_spec import V1PersistentVolumeSpec
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1PersistentVolumeSpec from a JSON string
+v1_persistent_volume_spec_instance = V1PersistentVolumeSpec.from_json(json)
+# print the JSON string representation of the object
+print V1PersistentVolumeSpec.to_json()
+
+# convert the object into a dict
+v1_persistent_volume_spec_dict = v1_persistent_volume_spec_instance.to_dict()
+# create an instance of V1PersistentVolumeSpec from a dict
+v1_persistent_volume_spec_form_dict = v1_persistent_volume_spec.from_dict(v1_persistent_volume_spec_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

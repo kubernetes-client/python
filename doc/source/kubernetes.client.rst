@@ -17,6 +17,7 @@ Submodules
    :maxdepth: 4
 
    kubernetes.client.api_client
+   kubernetes.client.api_response
    kubernetes.client.configuration
    kubernetes.client.exceptions
    kubernetes.client.rest

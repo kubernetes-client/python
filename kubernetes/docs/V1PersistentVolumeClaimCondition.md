@@ -1,7 +1,9 @@
 # V1PersistentVolumeClaimCondition
 
 PersistentVolumeClaimCondition contains details about state of pvc
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **last_probe_time** | **datetime** | lastProbeTime is the time we probed the condition. | [optional] 
@@ -11,6 +13,23 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **type** | **str** |  | 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_persistent_volume_claim_condition import V1PersistentVolumeClaimCondition
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1PersistentVolumeClaimCondition from a JSON string
+v1_persistent_volume_claim_condition_instance = V1PersistentVolumeClaimCondition.from_json(json)
+# print the JSON string representation of the object
+print V1PersistentVolumeClaimCondition.to_json()
+
+# convert the object into a dict
+v1_persistent_volume_claim_condition_dict = v1_persistent_volume_claim_condition_instance.to_dict()
+# create an instance of V1PersistentVolumeClaimCondition from a dict
+v1_persistent_volume_claim_condition_form_dict = v1_persistent_volume_claim_condition.from_dict(v1_persistent_volume_claim_condition_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

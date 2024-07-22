@@ -1,7 +1,9 @@
 # V1ISCSIVolumeSource
 
 Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chap_auth_discovery** | **bool** | chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication | [optional] 
@@ -11,11 +13,28 @@ Name | Type | Description | Notes
 **iqn** | **str** | iqn is the target iSCSI Qualified Name. | 
 **iscsi_interface** | **str** | iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to &#39;default&#39; (tcp). | [optional] 
 **lun** | **int** | lun represents iSCSI Target Lun number. | 
-**portals** | **list[str]** | portals is the iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | [optional] 
+**portals** | **List[str]** | portals is the iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | [optional] 
 **read_only** | **bool** | readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. | [optional] 
 **secret_ref** | [**V1LocalObjectReference**](V1LocalObjectReference.md) |  | [optional] 
 **target_portal** | **str** | targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). | 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_iscsi_volume_source import V1ISCSIVolumeSource
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1ISCSIVolumeSource from a JSON string
+v1_iscsi_volume_source_instance = V1ISCSIVolumeSource.from_json(json)
+# print the JSON string representation of the object
+print V1ISCSIVolumeSource.to_json()
+
+# convert the object into a dict
+v1_iscsi_volume_source_dict = v1_iscsi_volume_source_instance.to_dict()
+# create an instance of V1ISCSIVolumeSource from a dict
+v1_iscsi_volume_source_form_dict = v1_iscsi_volume_source.from_dict(v1_iscsi_volume_source_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

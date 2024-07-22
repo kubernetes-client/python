@@ -1,7 +1,9 @@
 # V1JobSpec
 
 JobSpec describes how the job execution will look like.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active_deadline_seconds** | **int** | Specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it; value must be positive integer. If a Job is suspended (at creation or through an update), this timer will effectively be stopped and reset when the Job is resumed again. | [optional] 
@@ -21,6 +23,23 @@ Name | Type | Description | Notes
 **template** | [**V1PodTemplateSpec**](V1PodTemplateSpec.md) |  | 
 **ttl_seconds_after_finished** | **int** | ttlSecondsAfterFinished limits the lifetime of a Job that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle guarantees (e.g. finalizers) will be honored. If this field is unset, the Job won&#39;t be automatically deleted. If this field is set to zero, the Job becomes eligible to be deleted immediately after it finishes. | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_job_spec import V1JobSpec
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1JobSpec from a JSON string
+v1_job_spec_instance = V1JobSpec.from_json(json)
+# print the JSON string representation of the object
+print V1JobSpec.to_json()
+
+# convert the object into a dict
+v1_job_spec_dict = v1_job_spec_instance.to_dict()
+# create an instance of V1JobSpec from a dict
+v1_job_spec_form_dict = v1_job_spec.from_dict(v1_job_spec_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

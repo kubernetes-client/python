@@ -1,7 +1,9 @@
 # V1PodSecurityContext
 
 PodSecurityContext holds pod-level security attributes and common container settings. Some fields are also present in container.securityContext.  Field values of container.securityContext take precedence over field values of PodSecurityContext.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app_armor_profile** | [**V1AppArmorProfile**](V1AppArmorProfile.md) |  | [optional] 
@@ -12,10 +14,27 @@ Name | Type | Description | Notes
 **run_as_user** | **int** | The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows. | [optional] 
 **se_linux_options** | [**V1SELinuxOptions**](V1SELinuxOptions.md) |  | [optional] 
 **seccomp_profile** | [**V1SeccompProfile**](V1SeccompProfile.md) |  | [optional] 
-**supplemental_groups** | **list[int]** | A list of groups applied to the first process run in each container, in addition to the container&#39;s primary GID, the fsGroup (if specified), and group memberships defined in the container image for the uid of the container process. If unspecified, no additional groups are added to any container. Note that group memberships defined in the container image for the uid of the container process are still effective, even if they are not included in this list. Note that this field cannot be set when spec.os.name is windows. | [optional] 
-**sysctls** | [**list[V1Sysctl]**](V1Sysctl.md) | Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. Note that this field cannot be set when spec.os.name is windows. | [optional] 
+**supplemental_groups** | **List[int]** | A list of groups applied to the first process run in each container, in addition to the container&#39;s primary GID, the fsGroup (if specified), and group memberships defined in the container image for the uid of the container process. If unspecified, no additional groups are added to any container. Note that group memberships defined in the container image for the uid of the container process are still effective, even if they are not included in this list. Note that this field cannot be set when spec.os.name is windows. | [optional] 
+**sysctls** | [**List[V1Sysctl]**](V1Sysctl.md) | Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. Note that this field cannot be set when spec.os.name is windows. | [optional] 
 **windows_options** | [**V1WindowsSecurityContextOptions**](V1WindowsSecurityContextOptions.md) |  | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_pod_security_context import V1PodSecurityContext
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1PodSecurityContext from a JSON string
+v1_pod_security_context_instance = V1PodSecurityContext.from_json(json)
+# print the JSON string representation of the object
+print V1PodSecurityContext.to_json()
+
+# convert the object into a dict
+v1_pod_security_context_dict = v1_pod_security_context_instance.to_dict()
+# create an instance of V1PodSecurityContext from a dict
+v1_pod_security_context_form_dict = v1_pod_security_context.from_dict(v1_pod_security_context_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

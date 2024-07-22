@@ -1,7 +1,9 @@
 # V1RuntimeClass
 
 RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used to determine which container runtime is used to run all containers in a pod. RuntimeClasses are manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is responsible for resolving the RuntimeClassName reference before running the pod.  For more details, see https://kubernetes.io/docs/concepts/containers/runtime-class/
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **api_version** | **str** | APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources | [optional] 
@@ -11,6 +13,23 @@ Name | Type | Description | Notes
 **overhead** | [**V1Overhead**](V1Overhead.md) |  | [optional] 
 **scheduling** | [**V1Scheduling**](V1Scheduling.md) |  | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_runtime_class import V1RuntimeClass
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1RuntimeClass from a JSON string
+v1_runtime_class_instance = V1RuntimeClass.from_json(json)
+# print the JSON string representation of the object
+print V1RuntimeClass.to_json()
+
+# convert the object into a dict
+v1_runtime_class_dict = v1_runtime_class_instance.to_dict()
+# create an instance of V1RuntimeClass from a dict
+v1_runtime_class_form_dict = v1_runtime_class.from_dict(v1_runtime_class_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

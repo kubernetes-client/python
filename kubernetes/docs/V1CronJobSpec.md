@@ -1,7 +1,9 @@
 # V1CronJobSpec
 
 CronJobSpec describes how the job execution will look like and when it will actually run.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **concurrency_policy** | **str** | Specifies how to treat concurrent executions of a Job. Valid values are:  - \&quot;Allow\&quot; (default): allows CronJobs to run concurrently; - \&quot;Forbid\&quot;: forbids concurrent runs, skipping next run if previous run hasn&#39;t finished yet; - \&quot;Replace\&quot;: cancels currently running job and replaces it with a new one | [optional] 
@@ -13,6 +15,23 @@ Name | Type | Description | Notes
 **suspend** | **bool** | This flag tells the controller to suspend subsequent executions, it does not apply to already started executions.  Defaults to false. | [optional] 
 **time_zone** | **str** | The time zone name for the given schedule, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. If not specified, this will default to the time zone of the kube-controller-manager process. The set of valid time zone names and the time zone offset is loaded from the system-wide time zone database by the API server during CronJob validation and the controller manager during execution. If no system-wide time zone database can be found a bundled version of the database is used instead. If the time zone name becomes invalid during the lifetime of a CronJob or due to a change in host configuration, the controller will stop creating new new Jobs and will create a system event with the reason UnknownTimeZone. More information can be found in https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_cron_job_spec import V1CronJobSpec
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1CronJobSpec from a JSON string
+v1_cron_job_spec_instance = V1CronJobSpec.from_json(json)
+# print the JSON string representation of the object
+print V1CronJobSpec.to_json()
+
+# convert the object into a dict
+v1_cron_job_spec_dict = v1_cron_job_spec_instance.to_dict()
+# create an instance of V1CronJobSpec from a dict
+v1_cron_job_spec_form_dict = v1_cron_job_spec.from_dict(v1_cron_job_spec_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

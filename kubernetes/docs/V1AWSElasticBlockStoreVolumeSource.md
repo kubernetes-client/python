@@ -1,7 +1,9 @@
 # V1AWSElasticBlockStoreVolumeSource
 
 Represents a Persistent Disk resource in AWS.  An AWS EBS disk must exist before mounting to a container. The disk must also be in the same AWS zone as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS EBS volumes support ownership management and SELinux relabeling.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fs_type** | **str** | fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: \&quot;ext4\&quot;, \&quot;xfs\&quot;, \&quot;ntfs\&quot;. Implicitly inferred to be \&quot;ext4\&quot; if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore | [optional] 
@@ -9,6 +11,23 @@ Name | Type | Description | Notes
 **read_only** | **bool** | readOnly value true will force the readOnly setting in VolumeMounts. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore | [optional] 
 **volume_id** | **str** | volumeID is unique ID of the persistent disk resource in AWS (Amazon EBS volume). More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore | 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_aws_elastic_block_store_volume_source import V1AWSElasticBlockStoreVolumeSource
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1AWSElasticBlockStoreVolumeSource from a JSON string
+v1_aws_elastic_block_store_volume_source_instance = V1AWSElasticBlockStoreVolumeSource.from_json(json)
+# print the JSON string representation of the object
+print V1AWSElasticBlockStoreVolumeSource.to_json()
+
+# convert the object into a dict
+v1_aws_elastic_block_store_volume_source_dict = v1_aws_elastic_block_store_volume_source_instance.to_dict()
+# create an instance of V1AWSElasticBlockStoreVolumeSource from a dict
+v1_aws_elastic_block_store_volume_source_form_dict = v1_aws_elastic_block_store_volume_source.from_dict(v1_aws_elastic_block_store_volume_source_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

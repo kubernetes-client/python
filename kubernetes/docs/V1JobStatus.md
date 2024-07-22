@@ -1,13 +1,15 @@
 # V1JobStatus
 
 JobStatus represents the current state of a Job.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active** | **int** | The number of pending and running pods which are not terminating (without a deletionTimestamp). The value is zero for finished jobs. | [optional] 
 **completed_indexes** | **str** | completedIndexes holds the completed indexes when .spec.completionMode &#x3D; \&quot;Indexed\&quot; in a text format. The indexes are represented as decimal integers separated by commas. The numbers are listed in increasing order. Three or more consecutive numbers are compressed and represented by the first and last element of the series, separated by a hyphen. For example, if the completed indexes are 1, 3, 4, 5 and 7, they are represented as \&quot;1,3-5,7\&quot;. | [optional] 
 **completion_time** | **datetime** | Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. The completion time is set when the job finishes successfully, and only then. The value cannot be updated or removed. The value indicates the same or later point in time as the startTime field. | [optional] 
-**conditions** | [**list[V1JobCondition]**](V1JobCondition.md) | The latest available observations of an object&#39;s current state. When a Job fails, one of the conditions will have type \&quot;Failed\&quot; and status true. When a Job is suspended, one of the conditions will have type \&quot;Suspended\&quot; and status true; when the Job is resumed, the status of this condition will become false. When a Job is completed, one of the conditions will have type \&quot;Complete\&quot; and status true.  A job is considered finished when it is in a terminal condition, either \&quot;Complete\&quot; or \&quot;Failed\&quot;. A Job cannot have both the \&quot;Complete\&quot; and \&quot;Failed\&quot; conditions. Additionally, it cannot be in the \&quot;Complete\&quot; and \&quot;FailureTarget\&quot; conditions. The \&quot;Complete\&quot;, \&quot;Failed\&quot; and \&quot;FailureTarget\&quot; conditions cannot be disabled.  More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/ | [optional] 
+**conditions** | [**List[V1JobCondition]**](V1JobCondition.md) | The latest available observations of an object&#39;s current state. When a Job fails, one of the conditions will have type \&quot;Failed\&quot; and status true. When a Job is suspended, one of the conditions will have type \&quot;Suspended\&quot; and status true; when the Job is resumed, the status of this condition will become false. When a Job is completed, one of the conditions will have type \&quot;Complete\&quot; and status true.  A job is considered finished when it is in a terminal condition, either \&quot;Complete\&quot; or \&quot;Failed\&quot;. A Job cannot have both the \&quot;Complete\&quot; and \&quot;Failed\&quot; conditions. Additionally, it cannot be in the \&quot;Complete\&quot; and \&quot;FailureTarget\&quot; conditions. The \&quot;Complete\&quot;, \&quot;Failed\&quot; and \&quot;FailureTarget\&quot; conditions cannot be disabled.  More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/ | [optional] 
 **failed** | **int** | The number of pods which reached phase Failed. The value increases monotonically. | [optional] 
 **failed_indexes** | **str** | FailedIndexes holds the failed indexes when spec.backoffLimitPerIndex is set. The indexes are represented in the text format analogous as for the &#x60;completedIndexes&#x60; field, ie. they are kept as decimal integers separated by commas. The numbers are listed in increasing order. Three or more consecutive numbers are compressed and represented by the first and last element of the series, separated by a hyphen. For example, if the failed indexes are 1, 3, 4, 5 and 7, they are represented as \&quot;1,3-5,7\&quot;. The set of failed indexes cannot overlap with the set of completed indexes.  This field is beta-level. It can be used when the &#x60;JobBackoffLimitPerIndex&#x60; feature gate is enabled (enabled by default). | [optional] 
 **ready** | **int** | The number of pods which have a Ready condition. | [optional] 
@@ -16,6 +18,23 @@ Name | Type | Description | Notes
 **terminating** | **int** | The number of pods which are terminating (in phase Pending or Running and have a deletionTimestamp).  This field is beta-level. The job controller populates the field when the feature gate JobPodReplacementPolicy is enabled (enabled by default). | [optional] 
 **uncounted_terminated_pods** | [**V1UncountedTerminatedPods**](V1UncountedTerminatedPods.md) |  | [optional] 
 
+## Example
+
+```python
+from kubernetes.client.models.v1_job_status import V1JobStatus
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of V1JobStatus from a JSON string
+v1_job_status_instance = V1JobStatus.from_json(json)
+# print the JSON string representation of the object
+print V1JobStatus.to_json()
+
+# convert the object into a dict
+v1_job_status_dict = v1_job_status_instance.to_dict()
+# create an instance of V1JobStatus from a dict
+v1_job_status_form_dict = v1_job_status.from_dict(v1_job_status_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
