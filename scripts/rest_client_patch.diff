@@ -1,18 +1,17 @@
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
-index 5716565df..b788bf7d2 100644
+index 70c57e462..624d26115 100644
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
-@@ -151,7 +151,12 @@ class RESTClientObject(object):
-             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
-                 if query_params:
-                     url += '?' + urlencode(query_params)
--                if re.search('json', headers['Content-Type'], re.IGNORECASE):
-+                if (re.search('json', headers['Content-Type'], re.IGNORECASE) or
-+                        headers['Content-Type'] == 'application/apply-patch+yaml'):
+@@ -159,7 +159,12 @@ class RESTClientObject:
+                 if (
+                     not content_type
+                     or re.search('json', content_type, re.IGNORECASE)
++                    or content_type == 'application/apply-patch+yaml'
+                 ):
 +                    if headers['Content-Type'] == 'application/json-patch+json':
 +                        if not isinstance(body, list):
-+                            headers['Content-Type'] = \
-+                                'application/strategic-merge-patch+json'
++                               headers['Content-Type'] = 'application/strategic-merge-patch+json'
++                    request_body = None
                      request_body = None
                      if body is not None:
                          request_body = json.dumps(body)
