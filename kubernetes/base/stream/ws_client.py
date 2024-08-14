@@ -87,10 +87,8 @@ class WSClient:
             del self._channels[channel]
         return ret
 
-    def readline_channel(self, channel, timeout=None):
+    def readline_channel(self, channel, timeout=0):
         """Read a line from a channel."""
-        if timeout is None:
-            timeout = float("inf")
         start = time.time()
         while self.is_open() and time.time() - start < timeout:
             if channel in self._channels:
@@ -165,7 +163,7 @@ class WSClient:
         """The same as write_channel with channel=0."""
         self.write_channel(STDIN_CHANNEL, data)
 
-    def update(self, timeout=0):
+    def update(self, timeout: float = 0):
         """Update channel buffers with at most one complete frame of input."""
         if not self.is_open():
             return
