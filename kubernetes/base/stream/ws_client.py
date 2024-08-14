@@ -87,7 +87,7 @@ class WSClient:
             del self._channels[channel]
         return ret
 
-    def readline_channel(self, channel, timeout=0):
+    def readline_channel(self, channel, timeout=1):
         """Read a line from a channel."""
         start = time.time()
         while self.is_open() and time.time() - start < timeout:
