@@ -21,6 +21,9 @@ import durationpy
 # really be a big deal.
 reDuration = re.compile(r'^([0-9]{1,5}(h|m|s|ms)){1,4}$')
 
+# maxDuration_ms is the maximum duration that GEP-2257 can support, in milliseconds.
+maxDuration_ms = (((99999 * 3600) + (59 * 60) + 59) * 1_000) + 999
+
 def parse_duration(duration) -> datetime.timedelta:
     """
     Parse GEP-2257 Duration format to a datetime.timedelta object.
@@ -65,6 +68,13 @@ def format_duration(delta: datetime.timedelta) -> str:
     if delta == datetime.timedelta(0):
         return "0s"
 
+    # Check range early.
+    if delta < datetime.timedelta(0):
+        raise ValueError("Cannot express negative durations in GEP-2257: {}".format(delta))
+
+    if delta > datetime.timedelta(milliseconds=maxDuration_ms):
+        raise ValueError("Cannot express durations longer than 99999h59m59s999ms in GEP-2257: {}".format(delta))
+
     # durationpy.to_str() is happy to use floating-point seconds, which
     # GEP-2257 is _not_ happy with. So start by peeling off any microseconds
     # from our delta.
@@ -89,9 +99,6 @@ def format_duration(delta: datetime.timedelta) -> str:
             delta_str = ""
 
         delta_str += f"{delta_ms}ms"
-
-    if not reDuration.match(delta_str):
-        raise ValueError("Invalid duration format: {}".format(durationpy.to_str(delta)))
 
     return delta_str
 
