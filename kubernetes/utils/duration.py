@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from typing import List
+
 import datetime
 import re
 
@@ -147,18 +149,26 @@ def format_duration(delta: datetime.timedelta) -> str:
             .format(delta)
         )
 
-    # Second short-circuit.
+    # After that, do the usual div & mod tree to take seconds and get hours,
+    # minutes, and seconds from it.
+    secs = int(delta.total_seconds())
 
-    delta -= datetime.timedelta(microseconds=delta_us)
-    delta_ms = delta_us // 1000
-    delta_str = durationpy.to_str(delta)
+    output: List[str] = []
 
-    if delta_ms > 0:
-        # We have milliseconds to add back in. Make sure to not have a leading
-        # "0" if we have no other duration components.
-        if delta == datetime.timedelta(0):
-            delta_str = ""
+    hours = secs // 3600
+    if hours > 0:
+        output.append(f"{hours}h")
+        secs -= hours * 3600
 
-        delta_str += f"{delta_ms}ms"
+    minutes = secs // 60
+    if minutes > 0:
+        output.append(f"{minutes}m")
+        secs -= minutes * 60
 
-    return delta_str
+    if secs > 0:
+        output.append(f"{secs}s")
+
+    if delta_us > 0:
+        output.append(f"{delta_us // 1000}ms")
+
+    return "".join(output)
