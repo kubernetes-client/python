@@ -1,0 +1,13 @@
+diff --git a/kubernetes/client/exceptions.py b/kubernetes/client/exceptions.py
+index c7c152b5..1e23d80a 100644
+--- a/kubernetes/client/exceptions.py
++++ b/kubernetes/client/exceptions.py
+@@ -88,7 +88,7 @@ class ApiException(OpenApiException):
+             self.status = http_resp.status
+             self.reason = http_resp.reason
+             self.body = http_resp.data
+-            self.headers = http_resp.getheaders()
++            self.headers = http_resp.headers
+         else:
+             self.status = status
+             self.reason = reason

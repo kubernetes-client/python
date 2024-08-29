@@ -34,7 +34,7 @@ Method | HTTP request | Description
 
 
 # **create_cluster_custom_object**
-> object create_cluster_custom_object(group, version, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+> object create_cluster_custom_object(group, version, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -69,9 +69,10 @@ body = None # object | The JSON schema of the Resource to create.
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.create_cluster_custom_object(group, version, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.create_cluster_custom_object(group, version, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->create_cluster_custom_object: %s\n" % e)
@@ -88,6 +89,7 @@ Name | Type | Description  | Notes
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -111,7 +113,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_namespaced_custom_object**
-> object create_namespaced_custom_object(group, version, namespace, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+> object create_namespaced_custom_object(group, version, namespace, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -147,9 +149,10 @@ body = None # object | The JSON schema of the Resource to create.
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.create_namespaced_custom_object(group, version, namespace, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.create_namespaced_custom_object(group, version, namespace, plural, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->create_namespaced_custom_object: %s\n" % e)
@@ -167,6 +170,7 @@ Name | Type | Description  | Notes
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -271,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_cluster_custom_object**
-> object delete_collection_cluster_custom_object(group, version, plural, pretty=pretty, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
+> object delete_collection_cluster_custom_object(group, version, plural, pretty=pretty, label_selector=label_selector, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
 
 
 
@@ -303,6 +307,7 @@ with kubernetes.client.ApiClient(configuration) as api_client:
 version = 'version_example' # str | The custom resource's version
 plural = 'plural_example' # str | The custom resource's plural name. For TPRs this would be lowercase plural kind.
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
 orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. (optional)
@@ -310,7 +315,7 @@ dry_run = 'dry_run_example' # str | When present, indicates that modifications s
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
     try:
-        api_response = api_instance.delete_collection_cluster_custom_object(group, version, plural, pretty=pretty, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
+        api_response = api_instance.delete_collection_cluster_custom_object(group, version, plural, pretty=pretty, label_selector=label_selector, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->delete_collection_cluster_custom_object: %s\n" % e)
@@ -324,6 +329,7 @@ Name | Type | Description  | Notes
  **version** | **str**| The custom resource&#39;s version | 
  **plural** | **str**| The custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. | [optional] 
@@ -352,7 +358,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection_namespaced_custom_object**
-> object delete_collection_namespaced_custom_object(group, version, namespace, plural, pretty=pretty, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
+> object delete_collection_namespaced_custom_object(group, version, namespace, plural, pretty=pretty, label_selector=label_selector, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
 
 
 
@@ -385,6 +391,7 @@ version = 'version_example' # str | The custom resource's version
 namespace = 'namespace_example' # str | The custom resource's namespace
 plural = 'plural_example' # str | The custom resource's plural name. For TPRs this would be lowercase plural kind.
 pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. (optional)
+label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
 grace_period_seconds = 56 # int | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. (optional)
 orphan_dependents = True # bool | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both. (optional)
 propagation_policy = 'propagation_policy_example' # str | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. (optional)
@@ -392,7 +399,7 @@ dry_run = 'dry_run_example' # str | When present, indicates that modifications s
 body = kubernetes.client.V1DeleteOptions() # V1DeleteOptions |  (optional)
 
     try:
-        api_response = api_instance.delete_collection_namespaced_custom_object(group, version, namespace, plural, pretty=pretty, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
+        api_response = api_instance.delete_collection_namespaced_custom_object(group, version, namespace, plural, pretty=pretty, label_selector=label_selector, grace_period_seconds=grace_period_seconds, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, dry_run=dry_run, body=body)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->delete_collection_namespaced_custom_object: %s\n" % e)
@@ -407,6 +414,7 @@ Name | Type | Description  | Notes
  **namespace** | **str**| The custom resource&#39;s namespace | 
  **plural** | **str**| The custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. | 
  **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. | [optional] 
+ **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
  **grace_period_seconds** | **int**| The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] 
  **orphan_dependents** | **bool**| Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] 
  **propagation_policy** | **str**| Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. | [optional] 
@@ -1197,7 +1205,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_cluster_custom_object**
-> object patch_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+> object patch_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
 
 
@@ -1232,10 +1240,11 @@ name = 'name_example' # str | the custom object's name
 body = None # object | The JSON schema of the Resource to patch.
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
     try:
-        api_response = api_instance.patch_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+        api_response = api_instance.patch_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->patch_cluster_custom_object: %s\n" % e)
@@ -1252,6 +1261,7 @@ Name | Type | Description  | Notes
  **body** | **object**| The JSON schema of the Resource to patch. | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
  **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
 
 ### Return type
@@ -1276,7 +1286,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_cluster_custom_object_scale**
-> object patch_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+> object patch_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
 
 
@@ -1311,10 +1321,11 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
     try:
-        api_response = api_instance.patch_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+        api_response = api_instance.patch_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->patch_cluster_custom_object_scale: %s\n" % e)
@@ -1331,6 +1342,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
  **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
 
 ### Return type
@@ -1355,7 +1367,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_cluster_custom_object_status**
-> object patch_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+> object patch_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
 
 
@@ -1390,10 +1402,11 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
     try:
-        api_response = api_instance.patch_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+        api_response = api_instance.patch_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->patch_cluster_custom_object_status: %s\n" % e)
@@ -1410,6 +1423,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
  **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
 
 ### Return type
@@ -1434,7 +1448,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_custom_object**
-> object patch_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+> object patch_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
 
 
@@ -1470,10 +1484,11 @@ name = 'name_example' # str | the custom object's name
 body = None # object | The JSON schema of the Resource to patch.
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
     try:
-        api_response = api_instance.patch_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+        api_response = api_instance.patch_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->patch_namespaced_custom_object: %s\n" % e)
@@ -1491,6 +1506,7 @@ Name | Type | Description  | Notes
  **body** | **object**| The JSON schema of the Resource to patch. | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
  **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
 
 ### Return type
@@ -1515,7 +1531,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_custom_object_scale**
-> object patch_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+> object patch_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
 
 
@@ -1551,10 +1567,11 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
     try:
-        api_response = api_instance.patch_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+        api_response = api_instance.patch_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->patch_namespaced_custom_object_scale: %s\n" % e)
@@ -1572,6 +1589,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
  **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
 
 ### Return type
@@ -1596,7 +1614,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_namespaced_custom_object_status**
-> object patch_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+> object patch_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
 
 
@@ -1632,10 +1650,11 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
 
     try:
-        api_response = api_instance.patch_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, force=force)
+        api_response = api_instance.patch_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->patch_namespaced_custom_object_status: %s\n" % e)
@@ -1653,6 +1672,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
  **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
 
 ### Return type
@@ -1677,7 +1697,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_cluster_custom_object**
-> object replace_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+> object replace_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -1712,9 +1732,10 @@ name = 'name_example' # str | the custom object's name
 body = None # object | The JSON schema of the Resource to replace.
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.replace_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.replace_cluster_custom_object(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->replace_cluster_custom_object: %s\n" % e)
@@ -1731,6 +1752,7 @@ Name | Type | Description  | Notes
  **body** | **object**| The JSON schema of the Resource to replace. | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -1754,7 +1776,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_cluster_custom_object_scale**
-> object replace_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+> object replace_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -1789,9 +1811,10 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.replace_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.replace_cluster_custom_object_scale(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->replace_cluster_custom_object_scale: %s\n" % e)
@@ -1808,6 +1831,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -1832,7 +1856,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_cluster_custom_object_status**
-> object replace_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+> object replace_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -1867,9 +1891,10 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.replace_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.replace_cluster_custom_object_status(group, version, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->replace_cluster_custom_object_status: %s\n" % e)
@@ -1886,6 +1911,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -1910,7 +1936,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_custom_object**
-> object replace_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+> object replace_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -1946,9 +1972,10 @@ name = 'name_example' # str | the custom object's name
 body = None # object | The JSON schema of the Resource to replace.
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.replace_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.replace_namespaced_custom_object(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->replace_namespaced_custom_object: %s\n" % e)
@@ -1966,6 +1993,7 @@ Name | Type | Description  | Notes
  **body** | **object**| The JSON schema of the Resource to replace. | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -1989,7 +2017,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_custom_object_scale**
-> object replace_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+> object replace_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -2025,9 +2053,10 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.replace_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.replace_namespaced_custom_object_scale(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->replace_namespaced_custom_object_scale: %s\n" % e)
@@ -2045,6 +2074,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 
@@ -2069,7 +2099,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_namespaced_custom_object_status**
-> object replace_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+> object replace_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
 
 
 
@@ -2105,9 +2135,10 @@ name = 'name_example' # str | the custom object's name
 body = None # object | 
 dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
 field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) (optional)
 
     try:
-        api_response = api_instance.replace_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager)
+        api_response = api_instance.replace_namespaced_custom_object_status(group, version, namespace, plural, name, body, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CustomObjectsApi->replace_namespaced_custom_object_status: %s\n" % e)
@@ -2125,6 +2156,7 @@ Name | Type | Description  | Notes
  **body** | **object**|  | 
  **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
  **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional) | [optional] 
 
 ### Return type
 

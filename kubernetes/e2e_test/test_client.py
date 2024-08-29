@@ -20,6 +20,8 @@ import time
 import unittest
 import uuid
 import six
+import io
+import gzip
 
 from kubernetes.client import api_client
 from kubernetes.client.api import core_v1_api
@@ -118,15 +120,28 @@ class TestClient(unittest.TestCase):
                       command=exec_command,
                       stderr=False, stdin=False,
                       stdout=True, tty=False)
-        print('EXEC response : %s' % resp)
+        print('EXEC response : %s (%s)' % (repr(resp), type(resp)))
+        self.assertIsInstance(resp, str)
         self.assertEqual(3, len(resp.splitlines()))
+
+        exec_command = ['/bin/sh',
+                        '-c',
+                        'echo -n "This is a test string" | gzip']
+        resp = stream(api.connect_get_namespaced_pod_exec, name, 'default',
+                      command=exec_command,
+                      stderr=False, stdin=False,
+                      stdout=True, tty=False,
+                      binary=True)
+        print('EXEC response : %s (%s)' % (repr(resp), type(resp)))
+        self.assertIsInstance(resp, bytes)
+        self.assertEqual("This is a test string", gzip.decompress(resp).decode('utf-8'))
 
         exec_command = 'uptime'
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
                       command=exec_command,
                       stderr=False, stdin=False,
                       stdout=True, tty=False)
-        print('EXEC response : %s' % resp)
+        print('EXEC response : %s' % repr(resp))
         self.assertEqual(1, len(resp.splitlines()))
 
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
@@ -147,6 +162,32 @@ class TestClient(unittest.TestCase):
         while True:
             line = resp.read_channel(ERROR_CHANNEL)
             if line != '':
+                break
+            time.sleep(1)
+        status = json.loads(line)
+        self.assertEqual(status['status'], 'Success')
+        resp.update(timeout=5)
+        self.assertFalse(resp.is_open())
+
+        resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
+                      command='/bin/sh',
+                      stderr=True, stdin=True,
+                      stdout=True, tty=False,
+                      binary=True,
+                      _preload_content=False)
+        resp.write_stdin(b"echo test string 1\n")
+        line = resp.readline_stdout(timeout=5)
+        self.assertFalse(resp.peek_stderr())
+        self.assertEqual(b"test string 1", line)
+        resp.write_stdin(b"echo test string 2 >&2\n")
+        line = resp.readline_stderr(timeout=5)
+        self.assertFalse(resp.peek_stdout())
+        self.assertEqual(b"test string 2", line)
+        resp.write_stdin(b"exit\n")
+        resp.update(timeout=5)
+        while True:
+            line = resp.read_channel(ERROR_CHANNEL)
+            if len(line) != 0:
                 break
             time.sleep(1)
         status = json.loads(line)
