@@ -8,6 +8,7 @@ Submodules
    :maxdepth: 4
 
    kubernetes.utils.create_from_yaml
+   kubernetes.utils.duration
    kubernetes.utils.quantity
 
 Module contents

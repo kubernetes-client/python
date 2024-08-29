@@ -55,7 +55,6 @@ Submodules
    kubernetes.client.models.v1_certificate_signing_request_status
    kubernetes.client.models.v1_cinder_persistent_volume_source
    kubernetes.client.models.v1_cinder_volume_source
-   kubernetes.client.models.v1_claim_source
    kubernetes.client.models.v1_client_ip_config
    kubernetes.client.models.v1_cluster_role
    kubernetes.client.models.v1_cluster_role_binding
@@ -82,6 +81,7 @@ Submodules
    kubernetes.client.models.v1_container_state_terminated
    kubernetes.client.models.v1_container_state_waiting
    kubernetes.client.models.v1_container_status
+   kubernetes.client.models.v1_container_user
    kubernetes.client.models.v1_controller_revision
    kubernetes.client.models.v1_controller_revision_list
    kubernetes.client.models.v1_cron_job
@@ -151,6 +151,8 @@ Submodules
    kubernetes.client.models.v1_expression_warning
    kubernetes.client.models.v1_external_documentation
    kubernetes.client.models.v1_fc_volume_source
+   kubernetes.client.models.v1_field_selector_attributes
+   kubernetes.client.models.v1_field_selector_requirement
    kubernetes.client.models.v1_flex_persistent_volume_source
    kubernetes.client.models.v1_flex_volume_source
    kubernetes.client.models.v1_flocker_volume_source
@@ -179,6 +181,7 @@ Submodules
    kubernetes.client.models.v1_http_header
    kubernetes.client.models.v1_http_ingress_path
    kubernetes.client.models.v1_http_ingress_rule_value
+   kubernetes.client.models.v1_image_volume_source
    kubernetes.client.models.v1_ingress
    kubernetes.client.models.v1_ingress_backend
    kubernetes.client.models.v1_ingress_class
@@ -206,6 +209,7 @@ Submodules
    kubernetes.client.models.v1_json_schema_props
    kubernetes.client.models.v1_key_to_path
    kubernetes.client.models.v1_label_selector
+   kubernetes.client.models.v1_label_selector_attributes
    kubernetes.client.models.v1_label_selector_requirement
    kubernetes.client.models.v1_lease
    kubernetes.client.models.v1_lease_list
@@ -218,6 +222,7 @@ Submodules
    kubernetes.client.models.v1_limit_range_spec
    kubernetes.client.models.v1_limit_response
    kubernetes.client.models.v1_limited_priority_level_configuration
+   kubernetes.client.models.v1_linux_container_user
    kubernetes.client.models.v1_list_meta
    kubernetes.client.models.v1_load_balancer_ingress
    kubernetes.client.models.v1_load_balancer_status
@@ -252,6 +257,7 @@ Submodules
    kubernetes.client.models.v1_node_config_source
    kubernetes.client.models.v1_node_config_status
    kubernetes.client.models.v1_node_daemon_endpoints
+   kubernetes.client.models.v1_node_features
    kubernetes.client.models.v1_node_list
    kubernetes.client.models.v1_node_runtime_handler
    kubernetes.client.models.v1_node_runtime_handler_features
@@ -344,6 +350,7 @@ Submodules
    kubernetes.client.models.v1_resource_attributes
    kubernetes.client.models.v1_resource_claim
    kubernetes.client.models.v1_resource_field_selector
+   kubernetes.client.models.v1_resource_health
    kubernetes.client.models.v1_resource_policy_rule
    kubernetes.client.models.v1_resource_quota
    kubernetes.client.models.v1_resource_quota_list
@@ -351,6 +358,7 @@ Submodules
    kubernetes.client.models.v1_resource_quota_status
    kubernetes.client.models.v1_resource_requirements
    kubernetes.client.models.v1_resource_rule
+   kubernetes.client.models.v1_resource_status
    kubernetes.client.models.v1_role
    kubernetes.client.models.v1_role_binding
    kubernetes.client.models.v1_role_binding_list
@@ -477,23 +485,18 @@ Submodules
    kubernetes.client.models.v1alpha1_cluster_trust_bundle_spec
    kubernetes.client.models.v1alpha1_expression_warning
    kubernetes.client.models.v1alpha1_group_version_resource
-   kubernetes.client.models.v1alpha1_ip_address
-   kubernetes.client.models.v1alpha1_ip_address_list
-   kubernetes.client.models.v1alpha1_ip_address_spec
+   kubernetes.client.models.v1alpha1_lease_candidate
+   kubernetes.client.models.v1alpha1_lease_candidate_list
+   kubernetes.client.models.v1alpha1_lease_candidate_spec
    kubernetes.client.models.v1alpha1_match_condition
    kubernetes.client.models.v1alpha1_match_resources
    kubernetes.client.models.v1alpha1_migration_condition
    kubernetes.client.models.v1alpha1_named_rule_with_operations
    kubernetes.client.models.v1alpha1_param_kind
    kubernetes.client.models.v1alpha1_param_ref
-   kubernetes.client.models.v1alpha1_parent_reference
    kubernetes.client.models.v1alpha1_self_subject_review
    kubernetes.client.models.v1alpha1_self_subject_review_status
    kubernetes.client.models.v1alpha1_server_storage_version
-   kubernetes.client.models.v1alpha1_service_cidr
-   kubernetes.client.models.v1alpha1_service_cidr_list
-   kubernetes.client.models.v1alpha1_service_cidr_spec
-   kubernetes.client.models.v1alpha1_service_cidr_status
    kubernetes.client.models.v1alpha1_storage_version
    kubernetes.client.models.v1alpha1_storage_version_condition
    kubernetes.client.models.v1alpha1_storage_version_list
@@ -514,54 +517,58 @@ Submodules
    kubernetes.client.models.v1alpha1_variable
    kubernetes.client.models.v1alpha1_volume_attributes_class
    kubernetes.client.models.v1alpha1_volume_attributes_class_list
-   kubernetes.client.models.v1alpha2_allocation_result
-   kubernetes.client.models.v1alpha2_driver_allocation_result
-   kubernetes.client.models.v1alpha2_driver_requests
-   kubernetes.client.models.v1alpha2_named_resources_allocation_result
-   kubernetes.client.models.v1alpha2_named_resources_attribute
-   kubernetes.client.models.v1alpha2_named_resources_filter
-   kubernetes.client.models.v1alpha2_named_resources_instance
-   kubernetes.client.models.v1alpha2_named_resources_int_slice
-   kubernetes.client.models.v1alpha2_named_resources_request
-   kubernetes.client.models.v1alpha2_named_resources_resources
-   kubernetes.client.models.v1alpha2_named_resources_string_slice
-   kubernetes.client.models.v1alpha2_pod_scheduling_context
-   kubernetes.client.models.v1alpha2_pod_scheduling_context_list
-   kubernetes.client.models.v1alpha2_pod_scheduling_context_spec
-   kubernetes.client.models.v1alpha2_pod_scheduling_context_status
-   kubernetes.client.models.v1alpha2_resource_claim
-   kubernetes.client.models.v1alpha2_resource_claim_consumer_reference
-   kubernetes.client.models.v1alpha2_resource_claim_list
-   kubernetes.client.models.v1alpha2_resource_claim_parameters
-   kubernetes.client.models.v1alpha2_resource_claim_parameters_list
-   kubernetes.client.models.v1alpha2_resource_claim_parameters_reference
-   kubernetes.client.models.v1alpha2_resource_claim_scheduling_status
-   kubernetes.client.models.v1alpha2_resource_claim_spec
-   kubernetes.client.models.v1alpha2_resource_claim_status
-   kubernetes.client.models.v1alpha2_resource_claim_template
-   kubernetes.client.models.v1alpha2_resource_claim_template_list
-   kubernetes.client.models.v1alpha2_resource_claim_template_spec
-   kubernetes.client.models.v1alpha2_resource_class
-   kubernetes.client.models.v1alpha2_resource_class_list
-   kubernetes.client.models.v1alpha2_resource_class_parameters
-   kubernetes.client.models.v1alpha2_resource_class_parameters_list
-   kubernetes.client.models.v1alpha2_resource_class_parameters_reference
-   kubernetes.client.models.v1alpha2_resource_filter
-   kubernetes.client.models.v1alpha2_resource_handle
-   kubernetes.client.models.v1alpha2_resource_request
-   kubernetes.client.models.v1alpha2_resource_slice
-   kubernetes.client.models.v1alpha2_resource_slice_list
-   kubernetes.client.models.v1alpha2_structured_resource_handle
-   kubernetes.client.models.v1alpha2_vendor_parameters
+   kubernetes.client.models.v1alpha3_allocation_result
+   kubernetes.client.models.v1alpha3_basic_device
+   kubernetes.client.models.v1alpha3_cel_device_selector
+   kubernetes.client.models.v1alpha3_device
+   kubernetes.client.models.v1alpha3_device_allocation_configuration
+   kubernetes.client.models.v1alpha3_device_allocation_result
+   kubernetes.client.models.v1alpha3_device_attribute
+   kubernetes.client.models.v1alpha3_device_claim
+   kubernetes.client.models.v1alpha3_device_claim_configuration
+   kubernetes.client.models.v1alpha3_device_class
+   kubernetes.client.models.v1alpha3_device_class_configuration
+   kubernetes.client.models.v1alpha3_device_class_list
+   kubernetes.client.models.v1alpha3_device_class_spec
+   kubernetes.client.models.v1alpha3_device_constraint
+   kubernetes.client.models.v1alpha3_device_request
+   kubernetes.client.models.v1alpha3_device_request_allocation_result
+   kubernetes.client.models.v1alpha3_device_selector
+   kubernetes.client.models.v1alpha3_opaque_device_configuration
+   kubernetes.client.models.v1alpha3_pod_scheduling_context
+   kubernetes.client.models.v1alpha3_pod_scheduling_context_list
+   kubernetes.client.models.v1alpha3_pod_scheduling_context_spec
+   kubernetes.client.models.v1alpha3_pod_scheduling_context_status
+   kubernetes.client.models.v1alpha3_resource_claim
+   kubernetes.client.models.v1alpha3_resource_claim_consumer_reference
+   kubernetes.client.models.v1alpha3_resource_claim_list
+   kubernetes.client.models.v1alpha3_resource_claim_scheduling_status
+   kubernetes.client.models.v1alpha3_resource_claim_spec
+   kubernetes.client.models.v1alpha3_resource_claim_status
+   kubernetes.client.models.v1alpha3_resource_claim_template
+   kubernetes.client.models.v1alpha3_resource_claim_template_list
+   kubernetes.client.models.v1alpha3_resource_claim_template_spec
+   kubernetes.client.models.v1alpha3_resource_pool
+   kubernetes.client.models.v1alpha3_resource_slice
+   kubernetes.client.models.v1alpha3_resource_slice_list
+   kubernetes.client.models.v1alpha3_resource_slice_spec
    kubernetes.client.models.v1beta1_audit_annotation
    kubernetes.client.models.v1beta1_expression_warning
+   kubernetes.client.models.v1beta1_ip_address
+   kubernetes.client.models.v1beta1_ip_address_list
+   kubernetes.client.models.v1beta1_ip_address_spec
    kubernetes.client.models.v1beta1_match_condition
    kubernetes.client.models.v1beta1_match_resources
    kubernetes.client.models.v1beta1_named_rule_with_operations
    kubernetes.client.models.v1beta1_param_kind
    kubernetes.client.models.v1beta1_param_ref
+   kubernetes.client.models.v1beta1_parent_reference
    kubernetes.client.models.v1beta1_self_subject_review
    kubernetes.client.models.v1beta1_self_subject_review_status
+   kubernetes.client.models.v1beta1_service_cidr
+   kubernetes.client.models.v1beta1_service_cidr_list
+   kubernetes.client.models.v1beta1_service_cidr_spec
+   kubernetes.client.models.v1beta1_service_cidr_status
    kubernetes.client.models.v1beta1_type_checking
    kubernetes.client.models.v1beta1_validating_admission_policy
    kubernetes.client.models.v1beta1_validating_admission_policy_binding
@@ -572,6 +579,8 @@ Submodules
    kubernetes.client.models.v1beta1_validating_admission_policy_status
    kubernetes.client.models.v1beta1_validation
    kubernetes.client.models.v1beta1_variable
+   kubernetes.client.models.v1beta1_volume_attributes_class
+   kubernetes.client.models.v1beta1_volume_attributes_class_list
    kubernetes.client.models.v1beta3_exempt_priority_level_configuration
    kubernetes.client.models.v1beta3_flow_distinguisher_method
    kubernetes.client.models.v1beta3_flow_schema
