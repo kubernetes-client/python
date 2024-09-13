@@ -1,3 +1,11 @@
+# v31.0.0
+
+Kubernetes API Version: v1.31.1
+
+### API Change
+- The resource/v1alpha3.ResourceSliceList filed which should have been named "metadata" but was instead named "listMeta" is now properly "metadata". ([kubernetes/kubernetes#126761](https://github.com/kubernetes/kubernetes/pull/126761), [@thockin](https://github.com/thockin)) [SIG API Machinery]
+
+
 # v31.0.0b1
 
 Kubernetes API Version: v1.31.0
