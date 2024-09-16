@@ -27,12 +27,13 @@ import pytz
 
 def main():
     # Creating a dynamic client
-    client = dynamic.DynamicClient(
-        api_client.ApiClient(configuration=config.load_kube_config())
-    )
+    configuration = api_client.Configuration()
+    config.load_kube_config()
+    client = api_client.ApiClient(configuration=configuration)
+    dynamic_client = dynamic.DynamicClient(client)
 
     # fetching the deployment api
-    api = client.resources.get(api_version="apps/v1", kind="Deployment")
+    api = dynamic_client.resources.get(api_version="apps/v1", kind="Deployment")
 
     name = "nginx-deployment"
 

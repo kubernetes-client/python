@@ -24,12 +24,13 @@ from kubernetes.client import api_client
 
 def main():
     # Creating a dynamic client
-    client = dynamic.DynamicClient(
-        api_client.ApiClient(configuration=config.load_kube_config())
-    )
+    configuration = api_client.Configuration()
+    config.load_kube_config()
+    client = api_client.ApiClient(configuration=configuration)
+    dynamic_client = dynamic.DynamicClient(client)
 
     # fetching the service api
-    api = client.resources.get(api_version="v1", kind="Service")
+    api = dynamic_client.resources.get(api_version="v1", kind="Service")
 
     name = "frontend-service"
 

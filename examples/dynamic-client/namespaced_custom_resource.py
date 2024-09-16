@@ -62,12 +62,13 @@ def delete_namespace(namespace_api, name):
 
 def main():
     # Creating a dynamic client
-    client = dynamic.DynamicClient(
-        api_client.ApiClient(configuration=config.load_kube_config())
-    )
+    configuration = api_client.Configuration()
+    config.load_kube_config()
+    client = api_client.ApiClient(configuration=configuration)
+    dynamic_client = dynamic.DynamicClient(client)
 
     # fetching the custom resource definition (CRD) api
-    crd_api = client.resources.get(
+    crd_api = dynamic_client.resources.get(
         api_version="apiextensions.k8s.io/v1", kind="CustomResourceDefinition"
     )
 
