@@ -75,7 +75,8 @@ class ExecProvider(object):
             stdin=sys.stdin if is_interactive else None,
             cwd=self.cwd,
             env=self.env,
-            universal_newlines=True)
+            universal_newlines=True,
+            shell=True)
         (stdout, stderr) = process.communicate()
         exit_code = process.wait()
         if exit_code != 0:
