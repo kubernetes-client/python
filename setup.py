@@ -29,7 +29,7 @@ DEVELOPMENT_STATUS = "3 - Alpha"
 
 EXTRAS = {
     'adal': ['adal>=1.0.2'],
-    'google-auth': ['google-auth>=1.0.0']
+    'google-auth': ['google-auth>=1.0.1']
 }
 REQUIRES = []
 with open('requirements.txt') as f:
