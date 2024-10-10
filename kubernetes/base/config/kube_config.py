@@ -420,7 +420,7 @@ class KubeConfigLoader(object):
         return self.token
 
     def _refresh_oidc(self, provider):
-        config = Configuration()
+        config = Configuration().get_default_copy()
 
         if 'idp-certificate-authority-data' in provider['config']:
             ca_cert = tempfile.NamedTemporaryFile(delete=True)
