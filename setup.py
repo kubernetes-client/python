@@ -60,9 +60,9 @@ setup(
     tests_require=TESTS_REQUIRES,
     extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
-              'kubernetes.watch', 'kubernetes.client.api',
-              'kubernetes.stream', 'kubernetes.client.models',
-              'kubernetes.utils', 'kubernetes.client.apis',
+              'kubernetes.watch', 'kubernetes.client.api', 'kubernetes.client.api_client'
+              'kubernetes.client.rest', 'kubernetes.stream', 'kubernetes.client.models',
+              'kubernetes_asyncio', 'kubernetes.utils', 'kubernetes.client.apis',
               'kubernetes.dynamic', 'kubernetes.leaderelection',
               'kubernetes.leaderelection.resourcelock'],
     include_package_data=True,
@@ -83,5 +83,6 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
 )
