@@ -1,0 +1,53 @@
+# Read the Docs configuration file for Sphinx projects
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# Required
+version: 2
+
+# Set the OS, Python version and other tools you might need
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.12"
+    # You can also specify other tool versions:
+    # nodejs: "20"
+    # rust: "1.70"
+    # golang: "1.20"
+
+# Build documentation in the "docs/" directory with Sphinx
+sphinx:
+  configuration: doc/source/conf.py
+  # You can configure Sphinx to use a different builder, for instance use the dirhtml builder for simpler URLs
+  # builder: "dirhtml"
+  # Fail on all warnings to avoid broken references
+  # fail_on_warning: true
+
+# Optionally build your docs in additional formats such as PDF and ePub
+# formats:
+#   - pdf
+#   - epub
+
+# Optional but recommended, declare the Python requirements required
+# to build your documentation
+# See https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
+python:
+  install:
+    - requirements: doc/requirements-docs.txt
+    - requirements: test-requirements.txt
+
+
+# git clone --depth 1 https://github.com/kubernetes-client/python .
+# git fetch origin --force --prune --prune-tags --depth 50 refs/heads/master:refs/remotes/origin/master
+# git checkout --force origin/master
+# git clean -d -f -f
+# python3.7 -mvirtualenv $READTHEDOCS_VIRTUALENV_PATH
+# python -m pip install --upgrade --no-cache-dir pip setuptools
+# python -m pip install --upgrade --no-cache-dir pillow mock==1.0.1 alabaster>=0.7,<0.8,!=0.7.5 commonmark==0.9.1 recommonmark==0.5.0 sphinx<2 sphinx-rtd-theme<0.5 readthedocs-sphinx-ext<2.3 jinja2<3.1.0
+
+# cat doc/source/conf.py
+# python -m sphinx -T -E -b html -d _build/doctrees -D language=en . $READTHEDOCS_OUTPUT/html
+# python -m sphinx -T -E -b readthedocssinglehtmllocalmedia -d _build/doctrees -D language=en . $READTHEDOCS_OUTPUT/htmlzip
+# python -m sphinx -T -E -b latex -d _build/doctrees -D language=en . $READTHEDOCS_OUTPUT/pdf
+# cat latexmkrc
+# latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=kubernetes -interaction=nonstopmode
+# python -m sphinx -T -E -b epub -d _build/doctrees -D language=en . $READTHEDOCS_OUTPUT/epub
