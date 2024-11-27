@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import unittest
 
@@ -29,6 +30,13 @@ class ExecProviderTest(unittest.TestCase):
             'command': 'aws-iam-authenticator',
             'args': ['token', '-i', 'dummy'],
             'apiVersion': 'client.authentication.k8s.io/v1beta1',
+            'env': None
+        })
+        self.input_with_cluster = ConfigNode('test', {
+            'command': 'aws-iam-authenticator',
+            'args': ['token', '-i', 'dummy'],
+            'apiVersion': 'client.authentication.k8s.io/v1beta1',
+            'provideClusterInfo': True,
             'env': None
         })
         self.output_ok = """
@@ -161,6 +169,19 @@ class ExecProviderTest(unittest.TestCase):
             result = ep.run()
             self.assertTrue(isinstance(result, dict))
             self.assertTrue('token' in result)
+
+    @mock.patch('subprocess.Popen')
+    def test_with_cluster_info(self, mock):
+        instance = mock.return_value
+        instance.wait.return_value = 0
+        instance.communicate.return_value = (self.output_ok, '')
+        ep = ExecProvider(self.input_with_cluster, None, {'server': 'name.company.com'})
+        result = ep.run()
+        self.assertTrue(isinstance(result, dict))
+        self.assertTrue('token' in result)
+
+        obj = json.loads(mock.call_args.kwargs['env']['KUBERNETES_EXEC_INFO'])
+        self.assertEqual(obj['spec']['cluster']['server'], 'name.company.com')
 
 
 if __name__ == '__main__':

@@ -4,7 +4,9 @@ ResourceAttributes includes the authorization attributes available for resource 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**field_selector** | [**V1FieldSelectorAttributes**](V1FieldSelectorAttributes.md) |  | [optional] 
 **group** | **str** | Group is the API Group of the Resource.  \&quot;*\&quot; means all. | [optional] 
+**label_selector** | [**V1LabelSelectorAttributes**](V1LabelSelectorAttributes.md) |  | [optional] 
 **name** | **str** | Name is the name of the resource being requested for a \&quot;get\&quot; or deleted for a \&quot;delete\&quot;. \&quot;\&quot; (empty) means all. | [optional] 
 **namespace** | **str** | Namespace is the namespace of the action being requested.  Currently, there is no distinction between no namespace and all namespaces \&quot;\&quot; (empty) is defaulted for LocalSubjectAccessReviews \&quot;\&quot; (empty) is empty for cluster-scoped resources \&quot;\&quot; (empty) means \&quot;all\&quot; for namespace scoped resources from a SubjectAccessReview or SelfSubjectAccessReview | [optional] 
 **resource** | **str** | Resource is one of the existing resource types.  \&quot;*\&quot; means all. | [optional] 

@@ -487,7 +487,7 @@ class KubeConfigLoader(object):
             return
         try:
             base_path = self._get_base_path(self._cluster.path)
-            status = ExecProvider(self._user['exec'], base_path).run()
+            status = ExecProvider(self._user['exec'], base_path, self._cluster).run()
             if 'token' in status:
                 self.token = "Bearer %s" % status['token']
             elif 'clientCertificateData' in status:
