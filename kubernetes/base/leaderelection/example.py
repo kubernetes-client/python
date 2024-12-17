@@ -16,6 +16,7 @@ import uuid
 from kubernetes import client, config
 from kubernetes.leaderelection import leaderelection
 from kubernetes.leaderelection.resourcelock.configmaplock import ConfigMapLock
+from kubernetes.leaderelection.resourcelock.leaselock import LeaseLock
 from kubernetes.leaderelection import electionconfig
 
 
@@ -42,10 +43,13 @@ def example_func():
 # A user can choose not to provide any callbacks for what to do when a candidate fails to lead - onStoppedLeading()
 # In that case, a default callback function will be used
 
+# Choose the type of lock mechanism to use
+lock_object = LeaseLock(lock_name, lock_namespace, candidate_id)
+#lock_object = ConfigMapLock(lock_name, lock_namespace, candidate_id)
+
 # Create config
-config = electionconfig.Config(ConfigMapLock(lock_name, lock_namespace, candidate_id), lease_duration=17,
-                               renew_deadline=15, retry_period=5, onstarted_leading=example_func,
-                               onstopped_leading=None)
+config = electionconfig.Config(lock_object, lease_duration=17, renew_deadline=15, retry_period=5,
+                               onstarted_leading=example_func, onstopped_leading=None)
 
 # Enter leader election
 leaderelection.LeaderElection(config).run()
