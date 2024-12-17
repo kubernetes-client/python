@@ -4,9 +4,9 @@ NamespaceCondition contains details about state of namespace.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**last_transition_time** | **datetime** | Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers. | [optional] 
-**message** | **str** |  | [optional] 
-**reason** | **str** |  | [optional] 
+**last_transition_time** | **datetime** | Last time the condition transitioned from one status to another. | [optional] 
+**message** | **str** | Human-readable message indicating details about last transition. | [optional] 
+**reason** | **str** | Unique, one-word, CamelCase reason for the condition&#39;s last transition. | [optional] 
 **status** | **str** | Status of the condition, one of True, False, Unknown. | 
 **type** | **str** | Type of namespace controller condition. | 
 

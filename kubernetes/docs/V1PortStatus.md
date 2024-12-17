@@ -1,5 +1,6 @@
 # V1PortStatus
 
+PortStatus represents the error condition of a service port
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
