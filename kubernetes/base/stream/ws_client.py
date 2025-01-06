@@ -30,7 +30,7 @@ import yaml
 from six.moves.urllib.parse import urlencode, urlparse, urlunparse
 from six import StringIO, BytesIO
 
-from websocket import WebSocket, ABNF, enableTrace
+from websocket import WebSocket, ABNF, enableTrace, WebSocketConnectionClosedException
 from base64 import urlsafe_b64decode
 from requests.utils import should_bypass_proxies
 
@@ -379,7 +379,12 @@ class PortForward:
                 if sock == self.websocket:
                     pending = True
                     while pending:
-                        opcode, frame = self.websocket.recv_data_frame(True)
+                        try:
+                            opcode, frame = self.websocket.recv_data_frame(True)
+                        except WebSocketConnectionClosedException:
+                            for port in self.local_ports.values():
+                                port.python.close()
+                            return
                         if opcode == ABNF.OPCODE_BINARY:
                             if not frame.data:
                                 raise RuntimeError("Unexpected frame data size")
