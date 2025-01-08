@@ -31,6 +31,7 @@ from kubernetes.client.api.certificates_v1_api import CertificatesV1Api
 from kubernetes.client.api.certificates_v1alpha1_api import CertificatesV1alpha1Api
 from kubernetes.client.api.coordination_api import CoordinationApi
 from kubernetes.client.api.coordination_v1_api import CoordinationV1Api
+from kubernetes.client.api.coordination_v1alpha1_api import CoordinationV1alpha1Api
 from kubernetes.client.api.core_api import CoreApi
 from kubernetes.client.api.core_v1_api import CoreV1Api
 from kubernetes.client.api.custom_objects_api import CustomObjectsApi
@@ -46,7 +47,7 @@ from kubernetes.client.api.internal_apiserver_v1alpha1_api import InternalApiser
 from kubernetes.client.api.logs_api import LogsApi
 from kubernetes.client.api.networking_api import NetworkingApi
 from kubernetes.client.api.networking_v1_api import NetworkingV1Api
-from kubernetes.client.api.networking_v1alpha1_api import NetworkingV1alpha1Api
+from kubernetes.client.api.networking_v1beta1_api import NetworkingV1beta1Api
 from kubernetes.client.api.node_api import NodeApi
 from kubernetes.client.api.node_v1_api import NodeV1Api
 from kubernetes.client.api.openid_api import OpenidApi
@@ -55,12 +56,13 @@ from kubernetes.client.api.policy_v1_api import PolicyV1Api
 from kubernetes.client.api.rbac_authorization_api import RbacAuthorizationApi
 from kubernetes.client.api.rbac_authorization_v1_api import RbacAuthorizationV1Api
 from kubernetes.client.api.resource_api import ResourceApi
-from kubernetes.client.api.resource_v1alpha2_api import ResourceV1alpha2Api
+from kubernetes.client.api.resource_v1alpha3_api import ResourceV1alpha3Api
 from kubernetes.client.api.scheduling_api import SchedulingApi
 from kubernetes.client.api.scheduling_v1_api import SchedulingV1Api
 from kubernetes.client.api.storage_api import StorageApi
 from kubernetes.client.api.storage_v1_api import StorageV1Api
 from kubernetes.client.api.storage_v1alpha1_api import StorageV1alpha1Api
+from kubernetes.client.api.storage_v1beta1_api import StorageV1beta1Api
 from kubernetes.client.api.storagemigration_api import StoragemigrationApi
 from kubernetes.client.api.storagemigration_v1alpha1_api import StoragemigrationV1alpha1Api
 from kubernetes.client.api.version_api import VersionApi
