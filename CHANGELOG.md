@@ -1,4 +1,4 @@
-# v32.0.0+snapshot
+# v32.0.0a1
 
 Kubernetes API Version: v1.32.0
 
