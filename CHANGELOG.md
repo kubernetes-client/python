@@ -1,3 +1,12 @@
+# v32.0.0b1
+
+Kubernetes API Version: v1.32.1
+
+### API Change
+- DRA API: the maximum number of pods which can use the same ResourceClaim is now 256 instead of 32. Beware that downgrading a cluster where this relaxed limit is in use to Kubernetes 1.32.0 is not supported because 1.32.0 would refuse to update ResourceClaims with more than 32 entries in the status.reservedFor field. ([kubernetes/kubernetes#129544](https://github.com/kubernetes/kubernetes/pull/129544), [@pohly](https://github.com/pohly)) [SIG API Machinery, Node and Testing]
+- NONE ([kubernetes/kubernetes#129598](https://github.com/kubernetes/kubernetes/pull/129598), [@aravindhp](https://github.com/aravindhp)) [SIG API Machinery and Node]
+
+
 # v32.0.0a1
 
 Kubernetes API Version: v1.32.0
