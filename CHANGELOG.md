@@ -1,3 +1,10 @@
+# v32.0.0
+
+Kubernetes API Version: v1.32.1
+
+### Bug or Regression
+- Fixed PortForward proxy to close local Python sockets when the WebSocket closes. (#2316, @anvilpete)
+
 # v32.0.0b1
 
 Kubernetes API Version: v1.32.1
