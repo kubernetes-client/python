@@ -82,6 +82,7 @@ git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
 # AttributeError: 'RESTResponse' object has no attribute 'headers'
 # OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
 # git apply "${SCRIPT_ROOT}/rest_urllib_headers.diff"
+git apply "${SCRIPT_ROOT}/rest_pool_manager.diff"
 
 echo ">>> generating docs..."
 pushd "${DOC_ROOT}" > /dev/null
