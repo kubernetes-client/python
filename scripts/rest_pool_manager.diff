@@ -1,3 +1,23 @@
+diff --git a/kubernetes/client/api_client.py b/kubernetes/client/api_client.py
+index 53d94ce40..9db3eafad 100644
+--- a/kubernetes/client/api_client.py
++++ b/kubernetes/client/api_client.py
+@@ -66,13 +66,13 @@ class ApiClient(object):
+     _pool = None
+ 
+     def __init__(self, configuration=None, header_name=None, header_value=None,
+-                 cookie=None, pool_threads=1):
++                 cookie=None, pool_threads=1, pool_manager=None):
+         if configuration is None:
+             configuration = Configuration.get_default_copy()
+         self.configuration = configuration
+         self.pool_threads = pool_threads
+ 
+-        self.rest_client = rest.RESTClientObject(configuration)
++        self.rest_client = rest.RESTClientObject(configuration, pool_manager=pool_manager)
+         self.default_headers = {}
+         if header_name is not None:
+             self.default_headers[header_name] = header_value
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
 index 3e3b8b273..a5cee8d64 100644
 --- a/kubernetes/client/rest.py
