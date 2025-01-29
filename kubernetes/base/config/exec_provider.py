@@ -58,6 +58,15 @@ class ExecProvider(object):
         else:
             self.cluster = None
         self.cwd = cwd or None
+    
+    @property
+    def shell(self):
+        # for windows systems `shell` should be `True`
+        # for other systems like linux or darwin `shell` should be `False`
+        # referenes:
+        # https://github.com/kubernetes-client/python/pull/2289
+        # https://docs.python.org/3/library/sys.html#sys.platform
+        return sys.platform in ("win32", "cygwin")
 
     def run(self, previous_response=None):
         is_interactive = hasattr(sys.stdout, 'isatty') and sys.stdout.isatty()
@@ -82,7 +91,7 @@ class ExecProvider(object):
             cwd=self.cwd,
             env=self.env,
             universal_newlines=True,
-            shell=True)
+            shell=self.shell)
         (stdout, stderr) = process.communicate()
         exit_code = process.wait()
         if exit_code != 0:
