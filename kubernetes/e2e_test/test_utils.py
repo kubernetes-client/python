@@ -13,13 +13,15 @@
 # under the License.
 
 import unittest
+from decimal import Decimal
 from os import path
 
 import yaml
 
-from kubernetes import utils, client
+from kubernetes import client, utils
 from kubernetes.client.rest import ApiException
 from kubernetes.e2e_test import base
+from kubernetes.utils import quantity
 
 
 class TestUtils(unittest.TestCase):
@@ -605,3 +607,113 @@ class TestUtils(unittest.TestCase):
             name="mock-pod-1", namespace=self.test_namespace, body={})
         app_api.delete_namespaced_deployment(
             name="mock", namespace=self.test_namespace, body={})
+
+
+class TestUtilsUnitTests(unittest.TestCase):
+
+    def test_parse_quantity(self):
+        # == trivial returns ==
+        self.assertEqual(quantity.parse_quantity(Decimal(1)), Decimal(1))
+        self.assertEqual(quantity.parse_quantity(float(1)), Decimal(1))
+        self.assertEqual(quantity.parse_quantity(1), Decimal(1))
+
+        # == exceptions ==
+        self.assertRaises(
+            ValueError, lambda: quantity.parse_quantity("1000kb")
+        )
+        self.assertRaises(
+            ValueError, lambda: quantity.parse_quantity("1000ki")
+        )
+        self.assertRaises(ValueError, lambda: quantity.parse_quantity("1000foo"))
+        self.assertRaises(ValueError, lambda: quantity.parse_quantity("foo"))
+
+        # == no suffix ==
+        self.assertEqual(quantity.parse_quantity("1000"), Decimal(1000))
+
+        # == base 1024 ==
+        self.assertEqual(quantity.parse_quantity("1Ki"), Decimal(1024))
+        self.assertEqual(quantity.parse_quantity("1Mi"), Decimal(1024**2))
+        self.assertEqual(quantity.parse_quantity("1Gi"), Decimal(1024**3))
+        self.assertEqual(quantity.parse_quantity("1Ti"), Decimal(1024**4))
+        self.assertEqual(quantity.parse_quantity("1Pi"), Decimal(1024**5))
+        self.assertEqual(quantity.parse_quantity("1Ei"), Decimal(1024**6))
+        self.assertEqual(quantity.parse_quantity("1024Ki"), Decimal(1024**2))
+        self.assertEqual(quantity.parse_quantity("0.5Ki"), Decimal(512))
+
+        # == base 1000 ==
+        self.assertAlmostEqual(quantity.parse_quantity("1n"), Decimal(0.000_000_001))
+        self.assertAlmostEqual(quantity.parse_quantity("1u"), Decimal(0.000_001))
+        self.assertAlmostEqual(quantity.parse_quantity("1m"), Decimal(0.001))
+        self.assertEqual(quantity.parse_quantity("1k"), Decimal(1_000))
+        self.assertEqual(quantity.parse_quantity("1M"), Decimal(1_000_000))
+        self.assertEqual(quantity.parse_quantity("1G"), Decimal(1_000_000_000))
+        self.assertEqual(quantity.parse_quantity("1T"), Decimal(1_000_000_000_000))
+        self.assertEqual(quantity.parse_quantity("1P"), Decimal(1_000_000_000_000_000))
+        self.assertEqual(
+            quantity.parse_quantity("1E"), Decimal(1_000_000_000_000_000_000))
+        self.assertEqual(quantity.parse_quantity("1000k"), Decimal(1_000_000))
+        self.assertEqual(quantity.parse_quantity("500k"), Decimal(500_000))
+
+    def test_format_quantity(self):
+        """Unit test for quantity.format_quantity. Testing the different SI suffixes and
+        function should return the expected string"""
+
+        # == unknown suffixes ==
+        self.assertRaises(
+            ValueError, lambda: quantity.format_quantity(Decimal(1_000), "kb")
+        )
+        self.assertRaises(
+            ValueError, lambda: quantity.format_quantity(Decimal(1_000), "ki")
+        )
+        self.assertRaises(
+            ValueError, lambda: quantity.format_quantity(Decimal(1_000), "foo")
+        )
+
+        # == no suffix ==
+        self.assertEqual(quantity.format_quantity(Decimal(1_000), ""), "1000")
+        self.assertEqual(quantity.format_quantity(Decimal(1_000), None), "1000")
+
+        # == base 1024 ==
+        self.assertEqual(quantity.format_quantity(Decimal(1024), "Ki"), "1Ki")
+        self.assertEqual(quantity.format_quantity(Decimal(1024**2), "Mi"), "1Mi")
+        self.assertEqual(quantity.format_quantity(Decimal(1024**3), "Gi"), "1Gi")
+        self.assertEqual(quantity.format_quantity(Decimal(1024**4), "Ti"), "1Ti")
+        self.assertEqual(quantity.format_quantity(Decimal(1024**5), "Pi"), "1Pi")
+        self.assertEqual(quantity.format_quantity(Decimal(1024**6), "Ei"), "1Ei")
+        self.assertEqual(quantity.format_quantity(Decimal(1024**2), "Ki"), "1024Ki")
+        self.assertEqual(quantity.format_quantity(Decimal((1024**3) / 2), "Gi"), "0.5Gi")
+        # Decimal((1024**3)/3) are 0.3333333333333333148296162562Gi; expecting to
+        # be quantized to 0.3Gi
+        self.assertEqual(
+            quantity.format_quantity(
+                Decimal(
+                    (1024**3) / 3),
+                "Gi",
+                quantize=Decimal(.5)),
+            "0.3Gi")
+
+        # == base 1000 ==
+        self.assertEqual(quantity.format_quantity(Decimal(0.000_000_001), "n"), "1n")
+        self.assertEqual(quantity.format_quantity(Decimal(0.000_001), "u"), "1u")
+        self.assertEqual(quantity.format_quantity(Decimal(0.001), "m"), "1m")
+        self.assertEqual(quantity.format_quantity(Decimal(1_000), "k"), "1k")
+        self.assertEqual(quantity.format_quantity(Decimal(1_000_000), "M"), "1M")
+        self.assertEqual(quantity.format_quantity(Decimal(1_000_000_000), "G"), "1G")
+        self.assertEqual(
+            quantity.format_quantity(Decimal(1_000_000_000_000), "T"), "1T"
+        )
+        self.assertEqual(
+            quantity.format_quantity(Decimal(1_000_000_000_000_000), "P"), "1P"
+        )
+        self.assertEqual(
+            quantity.format_quantity(Decimal(1_000_000_000_000_000_000), "E"), "1E"
+        )
+        self.assertEqual(quantity.format_quantity(Decimal(1_000_000), "k"), "1000k")
+        # Decimal(1_000_000/3) are 333.3333333333333139307796955k; expecting to
+        # be quantized to 333k
+        self.assertEqual(
+            quantity.format_quantity(
+                Decimal(1_000_000 / 3), "k", quantize=Decimal(1000)
+            ),
+            "333k",
+        )
