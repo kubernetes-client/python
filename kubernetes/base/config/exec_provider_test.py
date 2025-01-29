@@ -175,7 +175,7 @@ class ExecProviderTest(unittest.TestCase):
         instance = mock.return_value
         instance.wait.return_value = 0
         instance.communicate.return_value = (self.output_ok, '')
-        ep = ExecProvider(self.input_with_cluster, None, {'server': 'name.company.com'})
+        ep = ExecProvider(self.input_with_cluster, None, ConfigNode("cluster", {'server': 'name.company.com'}))
         result = ep.run()
         self.assertTrue(isinstance(result, dict))
         self.assertTrue('token' in result)
