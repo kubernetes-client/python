@@ -54,7 +54,7 @@ class ExecProvider(object):
                 additional_vars[name] = value
             self.env.update(additional_vars)
         if exec_config.safe_get('provideClusterInfo'):
-            self.cluster = cluster.value
+            self.cluster = cluster
         else:
             self.cluster = None
         self.cwd = cwd or None
@@ -71,7 +71,7 @@ class ExecProvider(object):
         if previous_response:
             kubernetes_exec_info['spec']['response'] = previous_response
         if self.cluster:
-            kubernetes_exec_info['spec']['cluster'] = self.cluster
+            kubernetes_exec_info['spec']['cluster'] = self.cluster.value
 
         self.env['KUBERNETES_EXEC_INFO'] = json.dumps(kubernetes_exec_info)
         process = subprocess.Popen(
