@@ -2234,19 +2234,19 @@ class CustomObjectsApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def list_custom_object_for_all_namespaces(self, group, version, plural, **kwargs):  # noqa: E501
+    def list_custom_object_for_all_namespaces(self, group, version, resource_plural, **kwargs):  # noqa: E501
         """list_custom_object_for_all_namespaces  # noqa: E501
 
         list or watch namespace scoped custom objects  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_custom_object_for_all_namespaces(group, version, plural, async_req=True)
+        >>> thread = api.list_custom_object_for_all_namespaces(group, version, resource_plural, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
-        :param str plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str resource_plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -2269,21 +2269,21 @@ class CustomObjectsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.list_custom_object_for_all_namespaces_with_http_info(group, version, plural, **kwargs)  # noqa: E501
+        return self.list_custom_object_for_all_namespaces_with_http_info(group, version, resource_plural, **kwargs)  # noqa: E501
 
-    def list_custom_object_for_all_namespaces_with_http_info(self, group, version, plural, **kwargs):  # noqa: E501
+    def list_custom_object_for_all_namespaces_with_http_info(self, group, version, resource_plural, **kwargs):  # noqa: E501
         """list_custom_object_for_all_namespaces  # noqa: E501
 
         list or watch namespace scoped custom objects  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_custom_object_for_all_namespaces_with_http_info(group, version, plural, async_req=True)
+        >>> thread = api.list_custom_object_for_all_namespaces_with_http_info(group, version, resource_plural, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
         :param str group: The custom resource's group name (required)
         :param str version: The custom resource's version (required)
-        :param str plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str resource_plural: The custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
         :param str pretty: If 'true', then the output is pretty printed.
         :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
         :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
@@ -2313,7 +2313,7 @@ class CustomObjectsApi(object):
         all_params = [
             'group',
             'version',
-            'plural',
+            'resource_plural',
             'pretty',
             'allow_watch_bookmarks',
             '_continue',
@@ -2350,10 +2350,10 @@ class CustomObjectsApi(object):
         if self.api_client.client_side_validation and ('version' not in local_var_params or  # noqa: E501
                                                         local_var_params['version'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `version` when calling `list_custom_object_for_all_namespaces`")  # noqa: E501
-        # verify the required parameter 'plural' is set
-        if self.api_client.client_side_validation and ('plural' not in local_var_params or  # noqa: E501
-                                                        local_var_params['plural'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `plural` when calling `list_custom_object_for_all_namespaces`")  # noqa: E501
+        # verify the required parameter 'resource_plural' is set
+        if self.api_client.client_side_validation and ('resource_plural' not in local_var_params or  # noqa: E501
+                                                        local_var_params['resource_plural'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `resource_plural` when calling `list_custom_object_for_all_namespaces`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2362,8 +2362,8 @@ class CustomObjectsApi(object):
             path_params['group'] = local_var_params['group']  # noqa: E501
         if 'version' in local_var_params:
             path_params['version'] = local_var_params['version']  # noqa: E501
-        if 'plural' in local_var_params:
-            path_params['plural'] = local_var_params['plural']  # noqa: E501
+        if 'resource_plural' in local_var_params:
+            path_params['resource_plural'] = local_var_params['resource_plural']  # noqa: E501
 
         query_params = []
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
@@ -2401,7 +2401,7 @@ class CustomObjectsApi(object):
         auth_settings = ['BearerToken']  # noqa: E501
 
         return self.api_client.call_api(
-            '/apis/{group}/{version}/{plural}#‎', 'GET',
+            '/apis/{group}/{version}/{resource_plural}', 'GET',
             path_params,
             query_params,
             header_params,
