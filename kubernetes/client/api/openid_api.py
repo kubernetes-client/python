@@ -53,7 +53,7 @@ class OpenidApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: str
+        :return: dict
                  If the method is called asynchronously,
                  returns the request thread.
         """
