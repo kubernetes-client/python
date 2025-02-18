@@ -1,3 +1,21 @@
+# v32.0.1
+
+Kubernetes API Version: v1.32.2
+
+### Uncategorized
+- Adds support for providing cluster information to the exec credential provider if requested. (#2303, @brendandburns)
+- Remove py from test dependencies (#2288, @jelly)
+
+### Bug or Regression
+- Fix dynamic client watch of named resource (#2076, @bobh66)
+- Fixed PortForward proxy to close local Python sockets when the WebSocket closes. (#2316, @anvilpete)
+- Fixes bug that would fail authentication when using the exec-provider with a specific cluster selected (#2340, @tomasaschan)
+
+### Feature
+- Add utility functions kubernetes.utils.duration.parse_duration and kubernetes.utils.duration.format_duration to manage Gateway API Duration strings as specified by GEP-2257. (#2261, @kflynn)
+- Added the ability to use the optional `apply` parameter for functions within the `utils.create_from_yaml` submodule. This allows these functions to optionally use the `DynamicClient.server_side_apply` function to apply yaml manifests. (#2252, @dcmcand)
+- Adding `utils.format_quantity` to convert decimal numbers into a canonical Kubernetes quantity. (#2216, @rkschamer)
+
 # v32.0.0
 
 Kubernetes API Version: v1.32.1
