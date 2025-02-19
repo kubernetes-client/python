@@ -51,8 +51,7 @@ def create_deployment(apps_v1_api):
     )
 
 
-def create_service():
-    core_v1_api = client.CoreV1Api()
+def create_service(core_v1_api):
     body = client.V1Service(
         api_version="v1",
         kind="Service",
@@ -111,10 +110,11 @@ def main():
     # Fetching and loading local Kubernetes Information
     config.load_kube_config()
     apps_v1_api = client.AppsV1Api()
+    core_v1_api = client.CoreV1Api()
     networking_v1_api = client.NetworkingV1Api()
 
     create_deployment(apps_v1_api)
-    create_service()
+    create_service(core_v1_api)
     create_ingress(networking_v1_api)
 
 
