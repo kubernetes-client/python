@@ -76,8 +76,7 @@ def iter_resp_lines(resp):
             line = buffer[:next_newline].decode(
                 "utf-8", errors="replace")
             buffer = buffer[next_newline+1:]
-            if line:
-                yield line
+            yield line
             next_newline = buffer.find(b'\n')
 
 
