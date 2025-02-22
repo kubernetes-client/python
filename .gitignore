@@ -67,3 +67,4 @@ target/
 .idea/*
 *.iml
 .vscode
+test-requirements.txt
