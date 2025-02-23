@@ -15,6 +15,7 @@ import json
 import os
 import subprocess
 import sys
+import platform
 
 from .config_exception import ConfigException
 
@@ -83,15 +84,17 @@ class ExecProvider(object):
             kubernetes_exec_info['spec']['cluster'] = self.cluster.value
 
         self.env['KUBERNETES_EXEC_INFO'] = json.dumps(kubernetes_exec_info)
+        is_windows = platform.system() == "Windows"
         process = subprocess.Popen(
-            self.args,
-            stdout=subprocess.PIPE,
-            stderr=sys.stderr if is_interactive else subprocess.PIPE,
-            stdin=sys.stdin if is_interactive else None,
-            cwd=self.cwd,
-            env=self.env,
-            universal_newlines=True,
-            shell=self.shell)
+          self.args,
+          stdout=subprocess.PIPE,
+          stderr=sys.stderr if is_interactive else subprocess.PIPE,
+          stdin=sys.stdin if is_interactive else None,
+          cwd=self.cwd,
+          env=self.env,
+          universal_newlines=True,
+          shell=is_windows  # Only use shell=True on Windows
+        )
         (stdout, stderr) = process.communicate()
         exit_code = process.wait()
         if exit_code != 0:
