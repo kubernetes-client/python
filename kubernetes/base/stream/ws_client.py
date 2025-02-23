@@ -469,7 +469,7 @@ def create_websocket(configuration, url, headers=None):
         header.append("sec-websocket-protocol: %s" %
                       headers['sec-websocket-protocol'])
     else:
-        header.append("sec-websocket-protocol: v4.channel.k8s.io")
+        header.append("sec-websocket-protocol: v5.channel.k8s.io")
 
     if url.startswith('wss://') and configuration.verify_ssl:
         ssl_opts = {
