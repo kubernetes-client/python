@@ -543,20 +543,7 @@ class WatchTests(unittest.TestCase):
         ])
     def test_pod_log_empty_lines(self):
         pod_name = "demo-bug"
-        # Manifest with busybax to keep pod engaged for sometiem
-        pod_manifest = {
-            "apiVersion": "v1",
-            "kind": "Pod",
-            "metadata": {"name": pod_name},
-            "spec": {
-                "containers": [{
-                    "image": "busybox",
-                    "name": "my-container",
-                    "command": ["sh", "-c", "while true; do echo Hello from Docker ; sleep 10; done"]
-                }]
-            },
-        }
-
+        
         try:
             self.api.create_namespaced_pod = Mock()
             self.api.read_namespaced_pod = Mock()
