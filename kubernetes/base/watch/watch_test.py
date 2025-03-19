@@ -540,9 +540,9 @@ class WatchTests(unittest.TestCase):
             #Mock logs used for this test
             w.stream = Mock(return_value=[
                         "Hello from Docker",
-                        "\n",  # Empty line
+                        "",  # Empty line
                         "Another log line",
-                        "\n",  # Another empty line
+                        "",  # Another empty line
                         "Final log"
                     ])
             for event in w.stream(self.api.read_namespaced_pod_log, name=pod_name, namespace=self.namespace, follow=True):
@@ -552,7 +552,16 @@ class WatchTests(unittest.TestCase):
             # Print outputs
             print(f"Captured logs: {log_output}") 
             # self.assertTrue(any("Hello from Docker" in line for line in log_output))
-            self.assertTrue(any(line.strip() == "" for line in log_output), "No empty lines found in logs")
+            # self.assertTrue(any(line.strip() == "" for line in log_output), "No empty lines found in logs")
+            expected_log = [
+                "Hello from Docker",
+                "",
+                "Another log line",
+                "",
+                "Final log"
+            ]
+            
+            self.assertEqual(log_output, expected_log, "Captured logs do not match expected logs")
 
         except ApiException as e:
             self.fail(f"Kubernetes API exception: {e}")
