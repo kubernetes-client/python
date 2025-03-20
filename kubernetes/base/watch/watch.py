@@ -71,7 +71,6 @@ def iter_resp_lines(resp):
 
         # Split by newline (safe for utf-8 because multi-byte sequences cannot contain the newline byte)
         next_newline = buffer.find(b'\n')
-        last_was_empty = False  # Set empty-line flag
         while next_newline != -1:
             # Convert bytes to a valid utf-8 string, replacing any invalid utf-8 with the '�' character
             line = buffer[:next_newline].decode(
@@ -79,11 +78,8 @@ def iter_resp_lines(resp):
             buffer = buffer[next_newline+1:]
             if line:
                 yield line
-                last_was_empty = False  # Reset empty-line flag
             else:
-                if not last_was_empty:
-                    yield ''  # Only print one empty line
-                last_was_empty = True  # Mark that we handled an empty line
+                yield ''  # Only print one empty line
             next_newline = buffer.find(b'\n')
 
 
@@ -186,7 +182,6 @@ class Watch(object):
         while True:
             resp = func(*args, **kwargs)
             try:
-                last_was_empty = False # Set empty line false
                 for line in iter_resp_lines(resp):
                     # unmarshal when we are receiving events from watch,
                     # return raw string when we are streaming log
@@ -212,10 +207,8 @@ class Watch(object):
                     else:
                         if line:  
                             yield line  # Normal non-empty line
-                            last_was_empty = False  
-                        elif not last_was_empty:  
+                        else:  
                             yield ''  # Only yield one empty line  
-                            last_was_empty = True
                     if self._stop:
                         break
             finally:
