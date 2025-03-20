@@ -578,9 +578,12 @@ class WatchTests(unittest.TestCase):
             #Mock logs used for this test
             w.stream = Mock(return_value=[
                         "Hello from Docker",
-                        "",  # Empty line
+                        "",
+                        "",
+                        "\n\n",
                         "Another log line",
-                        "",  # Another empty line
+                        "",
+                        "\n",
                         "Final log"
                     ])
             for event in w.stream(self.api.read_namespaced_pod_log, name=pod_name, namespace=self.namespace, follow=True):
@@ -594,8 +597,11 @@ class WatchTests(unittest.TestCase):
             expected_log = [
                 "Hello from Docker",
                 "",
+                "",
+                "\n\n",
                 "Another log line",
                 "",
+                "\n",
                 "Final log"
             ]
             
