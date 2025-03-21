@@ -740,7 +740,7 @@ class KubeConfigMerger:
                     break
             else:
                 self.config_merged.value[item].append(ConfigNode(
-                    '{}/{}'.format(path, new_item), new_item, path))
+                    '{}/{}'.format(path, new_item['name']), new_item, path))
 
     def save_changes(self):
         for path in self.paths:
