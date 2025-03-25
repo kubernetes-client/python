@@ -17,6 +17,7 @@ from decimal import Decimal
 from os import path
 
 import yaml
+import time
 
 from kubernetes import client, utils
 from kubernetes.client.rest import ApiException
@@ -36,6 +37,15 @@ class TestUtils(unittest.TestCase):
         body = client.V1Namespace(
             metadata=client.V1ObjectMeta(
                 name=cls.test_namespace))
+
+        # Delete the namespace if it already exists
+        try:
+            core_v1.delete_namespace(name=cls.test_namespace)
+            time.sleep(10)  # Wait for the namespace to be deleted
+        except ApiException as e:
+            if e.status != 404:
+                raise
+
         core_v1.create_namespace(body=body)
 
     @classmethod
@@ -51,15 +61,17 @@ class TestUtils(unittest.TestCase):
         Should be able to create an apps/v1 deployment.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml")
         app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app",
                                                  namespace="default")
         self.assertIsNotNone(dep)
         self.assertEqual("nginx-app", dep.metadata.name)
-        self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
-        self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
+        self.assertEqual(
+            "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+        self.assertEqual(
+            80, dep.spec.template.spec.containers[0].ports[0].container_port)
         self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
         self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
         self.assertEqual(3, dep.spec.replicas)
@@ -79,28 +91,34 @@ class TestUtils(unittest.TestCase):
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
         try:
-            utils.create_from_yaml(
+            utils.process_from_yaml(
                 k8s_client, self.path_prefix + "apps-deployment.yaml")
             app_api = client.AppsV1Api(k8s_client)
             dep = app_api.read_namespaced_deployment(name="nginx-app",
-                                                    namespace="default")
+                                                     namespace="default")
             self.assertIsNotNone(dep)
             self.assertEqual("nginx-app", dep.metadata.name)
-            self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
-            self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
-            self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
+            self.assertEqual(
+                "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+            self.assertEqual(
+                80, dep.spec.template.spec.containers[0].ports[0].container_port)
+            self.assertEqual(
+                "nginx", dep.spec.template.spec.containers[0].name)
             self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
             self.assertEqual(3, dep.spec.replicas)
 
-            utils.create_from_yaml(
+            utils.process_from_yaml(
                 k8s_client, self.path_prefix + "apps-deployment.yaml", apply=True)
             dep = app_api.read_namespaced_deployment(name="nginx-app",
-                                                    namespace="default")
+                                                     namespace="default")
             self.assertIsNotNone(dep)
             self.assertEqual("nginx-app", dep.metadata.name)
-            self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
-            self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
-            self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
+            self.assertEqual(
+                "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+            self.assertEqual(
+                80, dep.spec.template.spec.containers[0].ports[0].container_port)
+            self.assertEqual(
+                "nginx", dep.spec.template.spec.containers[0].name)
             self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
             self.assertEqual(3, dep.spec.replicas)
         except Exception as e:
@@ -123,7 +141,7 @@ class TestUtils(unittest.TestCase):
         _path = self.path_prefix + "apps-deployment.yaml"
         with open(path.abspath(_path)) as f:
             yaml_objects = yaml.safe_load_all(f)
-            utils.create_from_yaml(
+            utils.process_from_yaml(
                 k8s_client,
                 yaml_objects=yaml_objects,
             )
@@ -132,8 +150,10 @@ class TestUtils(unittest.TestCase):
                                                  namespace="default")
         self.assertIsNotNone(dep)
         self.assertEqual("nginx-app", dep.metadata.name)
-        self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
-        self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
+        self.assertEqual(
+            "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+        self.assertEqual(
+            80, dep.spec.template.spec.containers[0].ports[0].container_port)
         self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
         self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
         self.assertEqual(3, dep.spec.replicas)
@@ -154,15 +174,17 @@ class TestUtils(unittest.TestCase):
 
         yml_obj["metadata"]["name"] = "nginx-app-3"
 
-        utils.create_from_dict(k8s_client, yml_obj)
+        utils.process_from_dict(k8s_client, yml_obj)
 
         app_api = client.AppsV1Api(k8s_client)
         dep = app_api.read_namespaced_deployment(name="nginx-app-3",
                                                  namespace="default")
         self.assertIsNotNone(dep)
         self.assertEqual("nginx-app-3", dep.metadata.name)
-        self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
-        self.assertEqual(80, dep.spec.template.spec.containers[0].ports[0].container_port)
+        self.assertEqual(
+            "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+        self.assertEqual(
+            80, dep.spec.template.spec.containers[0].ports[0].container_port)
         self.assertEqual("nginx", dep.spec.template.spec.containers[0].name)
         self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
         self.assertEqual(3, dep.spec.replicas)
@@ -176,7 +198,7 @@ class TestUtils(unittest.TestCase):
         Should be able to create a pod.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "core-pod.yaml")
         core_api = client.CoreV1Api(k8s_client)
         pod = core_api.read_namespaced_pod(name="myapp-pod",
@@ -195,7 +217,7 @@ class TestUtils(unittest.TestCase):
         Should be able to create a service.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "core-service.yaml")
         core_api = client.CoreV1Api(k8s_client)
         svc = core_api.read_namespaced_service(name="my-service",
@@ -213,7 +235,7 @@ class TestUtils(unittest.TestCase):
         Should be able to create a namespace.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "core-namespace.yaml")
         core_api = client.CoreV1Api(k8s_client)
         nmsp = core_api.read_namespace(name="development")
@@ -228,7 +250,7 @@ class TestUtils(unittest.TestCase):
         Should be able to create a rbac role.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "rbac-role.yaml")
         rbac_api = client.RbacAuthorizationV1Api(k8s_client)
         rbac_role = rbac_api.read_namespaced_role(
@@ -245,7 +267,7 @@ class TestUtils(unittest.TestCase):
         Should be able to create a rbac role with verbose enabled.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
         rbac_api = client.RbacAuthorizationV1Api(k8s_client)
         rbac_role = rbac_api.read_namespaced_role(
@@ -263,9 +285,9 @@ class TestUtils(unittest.TestCase):
         and then create a deployment in the just-created namespace.
         """
         k8s_client = client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "dep-namespace.yaml")
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "dep-deployment.yaml")
         core_api = client.CoreV1Api(k8s_client)
         ext_api = client.AppsV1Api(k8s_client)
@@ -288,7 +310,7 @@ class TestUtils(unittest.TestCase):
         fail due to conflict.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "api-service.yaml")
         reg_api = client.ApiregistrationV1Api(k8s_client)
         svc = reg_api.read_api_service(
@@ -298,8 +320,8 @@ class TestUtils(unittest.TestCase):
         self.assertEqual("wardle.k8s.io", svc.spec.group)
         self.assertEqual("v1alpha1", svc.spec.version)
 
-        with self.assertRaises(utils.FailToCreateError) as cm:
-            utils.create_from_yaml(
+        with self.assertRaises(utils.FailToProcessError) as cm:
+            utils.process_from_yaml(
                 k8s_client, "kubernetes/e2e_test/test_yaml/api-service.yaml")
         exp_error = ('Error from server (Conflict): '
                      '{"kind":"Status","apiVersion":"v1","metadata":{},'
@@ -323,7 +345,7 @@ class TestUtils(unittest.TestCase):
         from a kind: List yaml file
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "list.yaml")
         core_api = client.CoreV1Api(k8s_client)
         ext_api = client.AppsV1Api(k8s_client)
@@ -337,7 +359,8 @@ class TestUtils(unittest.TestCase):
                                                  namespace="default")
         self.assertIsNotNone(dep)
         self.assertEqual("list-deployment-test", dep.metadata.name)
-        self.assertEqual("nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+        self.assertEqual(
+            "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
         self.assertEqual(1, dep.spec.replicas)
 
         core_api.delete_namespaced_service(name="list-service-test",
@@ -351,7 +374,7 @@ class TestUtils(unittest.TestCase):
         from a kind: NamespaceList yaml file
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "namespace-list.yaml")
         core_api = client.CoreV1Api(k8s_client)
         nmsp_1 = core_api.read_namespace(name="mock-1")
@@ -373,8 +396,8 @@ class TestUtils(unittest.TestCase):
         json file that implicitly indicates the kind of individual objects
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        with self.assertRaises(utils.FailToCreateError):
-            utils.create_from_yaml(
+        with self.assertRaises(utils.FailToProcessError):
+            utils.process_from_yaml(
                 k8s_client, self.path_prefix + "implicit-svclist.json")
         core_api = client.CoreV1Api(k8s_client)
         svc_3 = core_api.read_namespaced_service(name="mock-3",
@@ -402,7 +425,7 @@ class TestUtils(unittest.TestCase):
         from a directory
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_directory(
+        utils.process_from_directory(
             k8s_client, self.path_prefix + "multi-resource/")
         core_api = client.CoreV1Api(k8s_client)
         svc = core_api.read_namespaced_service(name="mock",
@@ -419,8 +442,10 @@ class TestUtils(unittest.TestCase):
         self.assertEqual("mock", ctr.spec.template.metadata.labels["app"])
         self.assertEqual("mock", ctr.spec.selector["app"])
         self.assertEqual(1, ctr.spec.replicas)
-        self.assertEqual("k8s.gcr.io/pause:2.0", ctr.spec.template.spec.containers[0].image)
-        self.assertEqual("mock-container", ctr.spec.template.spec.containers[0].name)
+        self.assertEqual("k8s.gcr.io/pause:2.0",
+                         ctr.spec.template.spec.containers[0].image)
+        self.assertEqual("mock-container",
+                         ctr.spec.template.spec.containers[0].name)
 
         core_api.delete_namespaced_replication_controller(
             name="mock", namespace="default", propagation_policy="Background")
@@ -435,7 +460,7 @@ class TestUtils(unittest.TestCase):
         from a multi-resource yaml file
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "multi-resource.yaml")
         core_api = client.CoreV1Api(k8s_client)
         svc = core_api.read_namespaced_service(name="mock",
@@ -452,8 +477,10 @@ class TestUtils(unittest.TestCase):
         self.assertEqual("mock", ctr.spec.template.metadata.labels["app"])
         self.assertEqual("mock", ctr.spec.selector["app"])
         self.assertEqual(1, ctr.spec.replicas)
-        self.assertEqual("k8s.gcr.io/pause:2.0", ctr.spec.template.spec.containers[0].image)
-        self.assertEqual("mock-container", ctr.spec.template.spec.containers[0].name)
+        self.assertEqual("k8s.gcr.io/pause:2.0",
+                         ctr.spec.template.spec.containers[0].image)
+        self.assertEqual("mock-container",
+                         ctr.spec.template.spec.containers[0].name)
 
         core_api.delete_namespaced_replication_controller(
             name="mock", namespace="default", propagation_policy="Background")
@@ -466,7 +493,7 @@ class TestUtils(unittest.TestCase):
         specified in the multi-resource file
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
         core_api = client.CoreV1Api(k8s_client)
         app_api = client.AppsV1Api(k8s_client)
@@ -508,7 +535,7 @@ class TestUtils(unittest.TestCase):
         Should raise an exception for failure to create the same service twice.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "yaml-conflict-first.yaml")
         core_api = client.CoreV1Api(k8s_client)
         svc = core_api.read_namespaced_service(name="mock-2",
@@ -519,8 +546,8 @@ class TestUtils(unittest.TestCase):
         self.assertEqual("mock-2", svc.spec.selector["app"])
         self.assertEqual(99, svc.spec.ports[0].port)
 
-        with self.assertRaises(utils.FailToCreateError) as cm:
-            utils.create_from_yaml(
+        with self.assertRaises(utils.FailToProcessError) as cm:
+            utils.process_from_yaml(
                 k8s_client, self.path_prefix + "yaml-conflict-multi.yaml")
         exp_error = ('Error from server (Conflict): {"kind":"Status",'
                      '"apiVersion":"v1","metadata":{},"status":"Failure",'
@@ -544,8 +571,8 @@ class TestUtils(unittest.TestCase):
         Should raise an exception that contains two error messages.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        with self.assertRaises(utils.FailToCreateError) as cm:
-            utils.create_from_yaml(
+        with self.assertRaises(utils.FailToProcessError) as cm:
+            utils.process_from_yaml(
                 k8s_client, self.path_prefix + "triple-nginx.yaml")
         exp_error = ('Error from server (Conflict): {"kind":"Status",'
                      '"apiVersion":"v1","metadata":{},"status":"Failure",'
@@ -570,7 +597,7 @@ class TestUtils(unittest.TestCase):
                 in a test namespace.
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "apps-deployment.yaml",
             namespace=self.test_namespace)
         app_api = client.AppsV1Api(k8s_client)
@@ -587,7 +614,7 @@ class TestUtils(unittest.TestCase):
         specified in the multi-resource file in a test namespace
         """
         k8s_client = client.api_client.ApiClient(configuration=self.config)
-        utils.create_from_yaml(
+        utils.process_from_yaml(
             k8s_client, self.path_prefix + "multi-resource-with-list.yaml",
             namespace=self.test_namespace)
         core_api = client.CoreV1Api(k8s_client)
@@ -608,6 +635,254 @@ class TestUtils(unittest.TestCase):
         app_api.delete_namespaced_deployment(
             name="mock", namespace=self.test_namespace, body={})
 
+    def test_delete_namespace_from_yaml(self):
+        """
+        Should be able to delete a namespace
+        Create namespace from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "core-namespace.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        nmsp = core_api.read_namespace(name="development")
+        self.assertIsNotNone(nmsp)
+        """
+        Delete namespace from yaml
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "core-namespace.yaml", action="delete")
+        time.sleep(10)
+        namespace_status = False
+        try:
+            nmsp = core_api.read_namespace(name="development")
+            namespace_status = True
+        except Exception as e:
+            self.assertFalse(namespace_status)
+        self.assertFalse(namespace_status)
+
+    def test_delete_apps_deployment_from_yaml(self):
+        """
+        Should delete a deployment
+        First create deployment from file and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "apps-deployment.yaml")
+        app_api = client.AppsV1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                 namespace="default")
+        self.assertIsNotNone(dep)
+        """
+        Deployment should be created
+        Now delete deployment using delete_from_yaml method
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "apps-deployment.yaml", action="delete")
+        deployment_status = False
+        time.sleep(10)
+        try:
+            response = app_api.read_namespaced_deployment(
+                name="nginx-app", namespace="default")
+            deployment_status = True
+        except Exception as e:
+            self.assertFalse(deployment_status)
+
+        self.assertFalse(deployment_status)
+
+    def test_delete_service_from_yaml(self):
+        """
+        Should be able to delete a service
+        Create service from yaml first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "core-service.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        svc = core_api.read_namespaced_service(name="my-service",
+                                               namespace="default")
+        self.assertIsNotNone(svc)
+        """
+        Delete service from yaml
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "core-service.yaml", action="delete")
+        service_status = False
+        time.sleep(10)
+        try:
+            response = core_api.read_namespaced_service(
+                name="my-service", namespace="default")
+            service_status = True
+        except Exception as e:
+            self.assertFalse(service_status)
+        self.assertFalse(service_status)
+
+    def test_delete_pod_from_yaml(self):
+        """
+        Should be able to delete pod
+        Create pod from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "core-pod.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        pod = core_api.read_namespaced_pod(name="myapp-pod",
+                                           namespace="default")
+        self.assertIsNotNone(pod)
+        """
+        Delete pod using delete_from_yaml
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "core-pod.yaml", action="delete")
+        time.sleep(10)
+        pod_status = False
+        try:
+            response = core_api.read_namespaced_pod(name="myapp-pod",
+                                                    namespace="default")
+            pod_status = True
+        except Exception as e:
+            self.assertFalse(pod_status)
+        self.assertFalse(pod_status)
+
+    def test_delete_rbac_role_from_yaml(self):
+        """
+        Should be able to delete rbac role
+        Create rbac role from file first and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml")
+        rbac_api = client.RbacAuthorizationV1Api(k8s_client)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNotNone(rbac_role)
+        """
+        Delete rbac role from yaml
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml", action="delete")
+        rbac_role_status = False
+        time.sleep(10)
+        try:
+            response = rbac_api.read_namespaced_role(
+                name="pod-reader", namespace="default")
+            rbac_role_status = True
+        except Exception as e:
+            self.assertFalse(rbac_role_status)
+        self.assertFalse(rbac_role_status)
+
+    def test_delete_rbac_role_from_yaml_with_verbose_enabled(self):
+        """
+        Should delete a rbac role with verbose enabled
+        Create rbac role with verbose enabled and ensure it is created
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True)
+        rbac_api = client.RbacAuthorizationV1Api(k8s_client)
+        rbac_role = rbac_api.read_namespaced_role(
+            name="pod-reader", namespace="default")
+        self.assertIsNotNone(rbac_role)
+        """
+        Delete the rbac role from yaml
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "rbac-role.yaml", verbose=True, action="delete")
+
+        rbac_role_status = False
+        time.sleep(10)
+        try:
+            response = rbac_api.read_namespaced_role(
+                name="pod-reader", namespace="default")
+            rbac_role_status = True
+        except Exception as e:
+            self.assertFalse(rbac_role_status)
+        self.assertFalse(rbac_role_status)
+
+    # Deletion Tests for multi resource objects in yaml files
+
+    def test_delete_from_multi_resource_yaml(self):
+        """
+        Should be able to delete service and replication controller
+        from the multi resource yaml files
+        Create the resources first and ensure they exist
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        svc = core_api.read_namespaced_service(name="mock",
+                                               namespace="default")
+        self.assertIsNotNone(svc)
+        ctr = core_api.read_namespaced_replication_controller(
+            name="mock", namespace="default")
+        self.assertIsNotNone(ctr)
+        """
+        Delete service and replication controller using yaml file
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource.yaml", action="delete")
+        svc_status = False
+        replication_status = False
+        time.sleep(10)
+        try:
+            resp_svc = core_api.read_namespaced_service(name="mock",
+                                                        namespace="default")
+            svc_status = True
+            resp_repl = core_api.read_namespaced_replication_controller(
+                name="mock", namespace="default")
+            repl_status = True
+        except Exception as e:
+            self.assertFalse(svc_status)
+            self.assertFalse(replication_status)
+        self.assertFalse(svc_status)
+        self.assertFalse(replication_status)
+
+    def test_delete_from_list_in_multi_resource_yaml(self):
+        """
+        Should delete the items in PodList and the deployment in the yaml file
+        Create the items first and ensure they exist
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource-with-list.yaml")
+        core_api = client.CoreV1Api(k8s_client)
+        app_api = client.AppsV1Api(k8s_client)
+        pod_0 = core_api.read_namespaced_pod(
+            name="mock-pod-0", namespace="default")
+        self.assertIsNotNone(pod_0)
+        pod_1 = core_api.read_namespaced_pod(
+            name="mock-pod-1", namespace="default")
+        self.assertIsNotNone(pod_1)
+        dep = app_api.read_namespaced_deployment(
+            name="mock", namespace="default")
+        self.assertIsNotNone(dep)
+        """
+        Delete the PodList and Deployment using the yaml file
+        """
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "multi-resource-with-list.yaml", action="delete")
+        time.sleep(10)
+        pod0_status = False
+        pod1_status = False
+        deploy_status = False
+        try:
+            core_api.read_namespaced_pod(
+                name="mock-pod-0", namespace="default")
+            core_api.read_namespaced_pod(
+                name="mock-pod-1", namespace="default")
+            app_api.read_namespaced_deployment(
+                name="mock", namespace="default")
+            pod0_status = True
+            pod1_status = True
+            deploy_status = True
+        except Exception as e:
+            self.assertFalse(pod0_status)
+            self.assertFalse(pod1_status)
+            self.assertFalse(deploy_status)
+        self.assertFalse(pod0_status)
+        self.assertFalse(pod1_status)
+        self.assertFalse(deploy_status)
+
 
 class TestUtilsUnitTests(unittest.TestCase):
 
@@ -624,7 +899,8 @@ class TestUtilsUnitTests(unittest.TestCase):
         self.assertRaises(
             ValueError, lambda: quantity.parse_quantity("1000ki")
         )
-        self.assertRaises(ValueError, lambda: quantity.parse_quantity("1000foo"))
+        self.assertRaises(
+            ValueError, lambda: quantity.parse_quantity("1000foo"))
         self.assertRaises(ValueError, lambda: quantity.parse_quantity("foo"))
 
         # == no suffix ==
@@ -641,14 +917,18 @@ class TestUtilsUnitTests(unittest.TestCase):
         self.assertEqual(quantity.parse_quantity("0.5Ki"), Decimal(512))
 
         # == base 1000 ==
-        self.assertAlmostEqual(quantity.parse_quantity("1n"), Decimal(0.000_000_001))
-        self.assertAlmostEqual(quantity.parse_quantity("1u"), Decimal(0.000_001))
+        self.assertAlmostEqual(quantity.parse_quantity(
+            "1n"), Decimal(0.000_000_001))
+        self.assertAlmostEqual(
+            quantity.parse_quantity("1u"), Decimal(0.000_001))
         self.assertAlmostEqual(quantity.parse_quantity("1m"), Decimal(0.001))
         self.assertEqual(quantity.parse_quantity("1k"), Decimal(1_000))
         self.assertEqual(quantity.parse_quantity("1M"), Decimal(1_000_000))
         self.assertEqual(quantity.parse_quantity("1G"), Decimal(1_000_000_000))
-        self.assertEqual(quantity.parse_quantity("1T"), Decimal(1_000_000_000_000))
-        self.assertEqual(quantity.parse_quantity("1P"), Decimal(1_000_000_000_000_000))
+        self.assertEqual(quantity.parse_quantity(
+            "1T"), Decimal(1_000_000_000_000))
+        self.assertEqual(quantity.parse_quantity(
+            "1P"), Decimal(1_000_000_000_000_000))
         self.assertEqual(
             quantity.parse_quantity("1E"), Decimal(1_000_000_000_000_000_000))
         self.assertEqual(quantity.parse_quantity("1000k"), Decimal(1_000_000))
@@ -671,17 +951,25 @@ class TestUtilsUnitTests(unittest.TestCase):
 
         # == no suffix ==
         self.assertEqual(quantity.format_quantity(Decimal(1_000), ""), "1000")
-        self.assertEqual(quantity.format_quantity(Decimal(1_000), None), "1000")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1_000), None), "1000")
 
         # == base 1024 ==
         self.assertEqual(quantity.format_quantity(Decimal(1024), "Ki"), "1Ki")
-        self.assertEqual(quantity.format_quantity(Decimal(1024**2), "Mi"), "1Mi")
-        self.assertEqual(quantity.format_quantity(Decimal(1024**3), "Gi"), "1Gi")
-        self.assertEqual(quantity.format_quantity(Decimal(1024**4), "Ti"), "1Ti")
-        self.assertEqual(quantity.format_quantity(Decimal(1024**5), "Pi"), "1Pi")
-        self.assertEqual(quantity.format_quantity(Decimal(1024**6), "Ei"), "1Ei")
-        self.assertEqual(quantity.format_quantity(Decimal(1024**2), "Ki"), "1024Ki")
-        self.assertEqual(quantity.format_quantity(Decimal((1024**3) / 2), "Gi"), "0.5Gi")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1024**2), "Mi"), "1Mi")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1024**3), "Gi"), "1Gi")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1024**4), "Ti"), "1Ti")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1024**5), "Pi"), "1Pi")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1024**6), "Ei"), "1Ei")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1024**2), "Ki"), "1024Ki")
+        self.assertEqual(quantity.format_quantity(
+            Decimal((1024**3) / 2), "Gi"), "0.5Gi")
         # Decimal((1024**3)/3) are 0.3333333333333333148296162562Gi; expecting to
         # be quantized to 0.3Gi
         self.assertEqual(
@@ -693,12 +981,16 @@ class TestUtilsUnitTests(unittest.TestCase):
             "0.3Gi")
 
         # == base 1000 ==
-        self.assertEqual(quantity.format_quantity(Decimal(0.000_000_001), "n"), "1n")
-        self.assertEqual(quantity.format_quantity(Decimal(0.000_001), "u"), "1u")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(0.000_000_001), "n"), "1n")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(0.000_001), "u"), "1u")
         self.assertEqual(quantity.format_quantity(Decimal(0.001), "m"), "1m")
         self.assertEqual(quantity.format_quantity(Decimal(1_000), "k"), "1k")
-        self.assertEqual(quantity.format_quantity(Decimal(1_000_000), "M"), "1M")
-        self.assertEqual(quantity.format_quantity(Decimal(1_000_000_000), "G"), "1G")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1_000_000), "M"), "1M")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1_000_000_000), "G"), "1G")
         self.assertEqual(
             quantity.format_quantity(Decimal(1_000_000_000_000), "T"), "1T"
         )
@@ -706,9 +998,11 @@ class TestUtilsUnitTests(unittest.TestCase):
             quantity.format_quantity(Decimal(1_000_000_000_000_000), "P"), "1P"
         )
         self.assertEqual(
-            quantity.format_quantity(Decimal(1_000_000_000_000_000_000), "E"), "1E"
+            quantity.format_quantity(
+                Decimal(1_000_000_000_000_000_000), "E"), "1E"
         )
-        self.assertEqual(quantity.format_quantity(Decimal(1_000_000), "k"), "1000k")
+        self.assertEqual(quantity.format_quantity(
+            Decimal(1_000_000), "k"), "1000k")
         # Decimal(1_000_000/3) are 333.3333333333333139307796955k; expecting to
         # be quantized to 333k
         self.assertEqual(
