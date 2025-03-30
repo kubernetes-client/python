@@ -16,10 +16,10 @@ import sys
 import logging
 logging.basicConfig(level=logging.INFO)
 
-
 class Config:
+
     # Validate config, exit if an error is detected
-    def __init__(self, lock, lease_duration, renew_deadline, retry_period, onstarted_leading, onstopped_leading):
+    def __init__(self, lock, lease_duration, renew_deadline, retry_period, onstarted_leading, onstopped_leading, context):
         self.jitter_factor = 1.2
 
         if lock is None:
@@ -53,6 +53,7 @@ class Config:
             self.onstopped_leading = self.on_stoppedleading_callback
         else:
             self.onstopped_leading = onstopped_leading
+        self.context = context
 
     # Default callback for when the current candidate if a leader, stops leading
     def on_stoppedleading_callback(self):
