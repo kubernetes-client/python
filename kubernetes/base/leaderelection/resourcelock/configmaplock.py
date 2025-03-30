@@ -11,11 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import sys
+sys.path.append("..")
 from kubernetes.client.rest import ApiException
 from kubernetes import client, config
 from kubernetes.client.api_client import ApiClient
-from ..leaderelectionrecord import LeaderElectionRecord
+from leaderelectionrecord import LeaderElectionRecord
 import json
 import logging
 logging.basicConfig(level=logging.INFO)

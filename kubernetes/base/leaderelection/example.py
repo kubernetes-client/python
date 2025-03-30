@@ -14,10 +14,9 @@
 
 import uuid
 from kubernetes import client, config
-from kubernetes.leaderelection import leaderelection
-from kubernetes.leaderelection.resourcelock.configmaplock import ConfigMapLock
-from kubernetes.leaderelection import electionconfig
-
+import leaderelection
+from resourcelock.configmaplock import ConfigMapLock
+import electionconfig
 
 # Authenticate using config file
 config.load_kube_config(config_file=r"")
@@ -33,6 +32,8 @@ lock_name = "examplepython"
 # Kubernetes namespace
 lock_namespace = "default"
 
+context = leaderelection.Context()
+
 
 # The function that a user wants to run once a candidate is elected as a leader
 def example_func():
@@ -45,7 +46,7 @@ def example_func():
 # Create config
 config = electionconfig.Config(ConfigMapLock(lock_name, lock_namespace, candidate_id), lease_duration=17,
                                renew_deadline=15, retry_period=5, onstarted_leading=example_func,
-                               onstopped_leading=None)
+                               onstopped_leading=None, context=context)
 
 # Enter leader election
 leaderelection.LeaderElection(config).run()

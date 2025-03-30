@@ -17,8 +17,9 @@ import sys
 import time
 import json
 import threading
-from .leaderelectionrecord import LeaderElectionRecord
+from leaderelectionrecord import LeaderElectionRecord
 import logging
+import signal
 # if condition to be removed when support for python2 will be removed
 if sys.version_info > (3, 0):
     from http import HTTPStatus
@@ -36,8 +37,21 @@ an existing lock first becomes the leader and remains so until it keeps renewing
 lease.
 """
 
+class Context:
+    def __init__(self):
+        self.cancelled = False
+
+    def cancel(self):
+        self.cancelled = True
+
+# This currently only handles Ctrl+C on a leader, which is not the only way a leader may exit
+def handle_sigint(signal_received, frame):
+    print("\nSIGINT received! Cancelling election...")
+    if LeaderElection.global_context:
+        LeaderElection.global_context.cancel()
 
 class LeaderElection:
+    global_context = None
     def __init__(self, election_config):
         if election_config is None:
             sys.exit("argument config not passed")
@@ -51,13 +65,18 @@ class LeaderElection:
         # Latest update time of the lock
         self.observed_time_milliseconds = 0
 
+        LeaderElection.global_context = self.election_config.context
+
+        # Attach signal handler to Ctrl+C (SIGINT)
+        signal.signal(signal.SIGINT, handle_sigint)
+
     # Point of entry to Leader election
     def run(self):
         # Try to create/ acquire a lock
         if self.acquire():
             logging.info("{} successfully acquired lease".format(self.election_config.lock.identity))
 
-            # Start leading and call OnStartedLeading()
+            # Start the leader callback in a new daemon thread.
             threading.daemon = True
             threading.Thread(target=self.election_config.onstarted_leading).start()
 
@@ -72,12 +91,14 @@ class LeaderElection:
         retry_period = self.election_config.retry_period
 
         while True:
+
             succeeded = self.try_acquire_or_renew()
 
             if succeeded:
                 return True
 
             time.sleep(retry_period)
+
 
     def renew_loop(self):
         # Leader
@@ -87,10 +108,20 @@ class LeaderElection:
         renew_deadline = self.election_config.renew_deadline * 1000
 
         while True:
+            # Check for context cancellation
+            if self.election_config.context.cancelled:
+                self.force_expire_lease()
+                return
+
             timeout = int(time.time() * 1000) + renew_deadline
             succeeded = False
 
             while int(time.time() * 1000) < timeout:
+                if self.election_config.context.cancelled:
+                    logging.info(f"Context cancelled during renew loop. Reason: {self.election_config.context.cancel_reason}")
+                    self.force_expire_lease()
+                    return
+
                 succeeded = self.try_acquire_or_renew()
 
                 if succeeded:
@@ -103,6 +134,41 @@ class LeaderElection:
 
             # failed to renew, return
             return
+
+    def force_expire_lease(self, max_retries=3):
+        """
+        Force the lease to be considered expired by updating the leader election record's renewTime
+        to a value in the past. Retries the update if a conflict (HTTP 409) is encountered.
+        """
+        expired_time = time.time() - self.election_config.lease_duration - 1  # Expired timestamp
+        retries = 0
+        while retries < max_retries:
+            # Re-read the current state of the lock to get the latest version.
+            lock_status, current_record = self.election_config.lock.get(
+                self.election_config.lock.name,
+                self.election_config.lock.namespace
+            )
+            # Create a new record using the current record's acquireTime if available.
+            new_record = LeaderElectionRecord(
+                self.election_config.lock.identity,
+                str(self.election_config.lease_duration),
+                None,
+                str(expired_time)
+            )
+            update_status = self.election_config.lock.update(
+                self.election_config.lock.name,
+                self.election_config.lock.namespace,
+                new_record
+            )
+            if update_status:
+                logging.info("Lease forcibly expired.")
+                return True
+            else:
+                logging.info(f"Conflict encountered, retrying update... (attempt {retries+1})")
+                retries += 1
+                time.sleep(0.5)  # wait a bit before retrying, this is very hacky
+        logging.info("Failed to force lease expiration after retries.")
+        return False
 
     def try_acquire_or_renew(self):
         now_timestamp = time.time()
