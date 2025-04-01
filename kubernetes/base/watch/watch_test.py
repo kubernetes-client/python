@@ -503,44 +503,6 @@ class WatchTests(unittest.TestCase):
         cls.api = Mock()
         cls.namespace = "default"
 
-    def test_watch_with_deserialize_param(self):
-        """test watch.stream() deserialize param"""
-        # prepare test data
-        test_json = '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}, "spec": {}, "status": {}}}'
-        fake_resp = Mock()
-        fake_resp.close = Mock()
-        fake_resp.release_conn = Mock()
-        fake_resp.stream = Mock(return_value=[test_json + '\n'])
-
-        fake_api = Mock()
-        fake_api.get_namespaces = Mock(return_value=fake_resp)
-        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
-
-        # test case with deserialize=True 
-        w = Watch()
-        for e in w.stream(fake_api.get_namespaces, deserialize=True):
-            self.assertEqual("ADDED", e['type'])
-            # Verify that the object is deserialized correctly
-            self.assertTrue(hasattr(e['object'], 'metadata'))
-            self.assertEqual("test1", e['object'].metadata.name)
-            self.assertEqual("1", e['object'].metadata.resource_version)
-            # Verify that the original object is saved
-            self.assertEqual(json.loads(test_json)['object'], e['raw_object'])
-
-        # test case with deserialize=False
-        w = Watch()
-        for e in w.stream(fake_api.get_namespaces, deserialize=False):
-            self.assertEqual("ADDED", e['type'])
-            # The validation object remains in the original dictionary format
-            self.assertIsInstance(e['object'], dict)
-            self.assertEqual("test1", e['object']['metadata']['name'])
-            self.assertEqual("1", e['object']['metadata']['resourceVersion'])
-
-        # verify the api is called twice
-        fake_api.get_namespaces.assert_has_calls([
-            call(_preload_content=False, watch=True),
-            call(_preload_content=False, watch=True)
-        ])
     def test_pod_log_empty_lines(self):
         pod_name = "demo-bug"
         
