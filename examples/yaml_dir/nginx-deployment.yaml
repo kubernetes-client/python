@@ -4,11 +4,13 @@ metadata:
   name: nginx-deployment
   labels:
     app: nginx
+
 spec:
-  replicas: 3
+  replicas: 5 
   selector:
     matchLabels:
       app: nginx
+
   template:
     metadata:
       labels:
@@ -16,6 +18,35 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.15.4
+        image: nginx:1.23.3  
         ports:
         - containerPort: 80
+
+        
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+       
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 5
+
+      
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+
+        env:
+        - name: WELCOME_MESSAGE
+          value: "Hello from Kubernetes!"
