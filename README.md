@@ -236,4 +236,20 @@ recreate it between api calls that use _stream_ and other api calls.
 
 See more at [exec example](examples/pod_exec.py).
 
+## Enabling Debug Logging
+
+To enable debug logging in the Kubernetes Python client, follow these steps:
+
+### 1. Import the `logging` module
+
+```python
+import logging
+
+# Set the logging level to DEBUG
+logging.basicConfig(level=logging.DEBUG)
+
+# To see the HTTP requests and responses sent to the Kubernetes API (for debugging network-related issues), configure the urllib3 logger:
+logging.getLogger("urllib3").setLevel(logging.DEBUG)
+```
+
 **[⬆ back to top](#Installation)**
