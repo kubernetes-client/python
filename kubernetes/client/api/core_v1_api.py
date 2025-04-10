@@ -18866,6 +18866,158 @@ class CoreV1Api(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def patch_namespaced_cnpg_cluster_status(self, name, cluster_name, body, **kwargs): # noqa: E501
+        """patch_namespace_status # noqa: E501
+        partially update status of the specified Namespace # noqa: E501
+        # Not allowed!
+        # This method makes a synchronous HTTP request by default. To make an
+        # asynchronous HTTP request, please pass async_req=True
+        # >>> thread = api.patch_namespace_status(name, body, async_req=True)
+        # >>> result = thread.get()  
+
+        :param async_req bool: execute request asynchronously
+        :param str name: name of the Namespace (required)
+        :param str cluster_name: name of the Cluster (required)
+        :param object body: (required)
+        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param _preload_content: if False, the urllib3.HTTPResponse object will be returned without reading/decoding response data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one number provided, it will be total request timeout. It can also be a pair (tuple) of (connection, read) timeouts.
+
+        :return: V1Namespace
+
+        If the method is called asynchronously, returns the request thread.
+        """
+
+        kwargs['_return_http_data_only'] = True
+
+        return self.patch_namespaced_cnpg_cluster_status_with_http_info(name, cluster_name, body, **kwargs) # noqa: E501
+
+    def patch_namespaced_cnpg_cluster_status_with_http_info(self, name, cluster_name, body, **kwargs):
+        """patch_namespace_status # noqa: E501
+        partially update status of the specified Namespace # noqa: E501
+        # Not allowed!
+        # This method makes a synchronous HTTP request by default. To make an
+        # asynchronous HTTP request, please pass async_req=True
+        # >>> thread = api.patch_namespace_status(name, body, async_req=True)
+        # >>> result = thread.get()  
+
+        :param async_req bool: execute request asynchronously
+        :param str name: name of the Namespace (required)
+        :param str cluster_name: name of the Cluster (required)
+        :param object body: (required)
+        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param _preload_content: if False, the urllib3.HTTPResponse object will be returned without reading/decoding response data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one number provided, it will be total request timeout. It can also be a pair (tuple) of (connection, read) timeouts.
+
+        :return: V1Namespace
+
+        If the method is called asynchronously, returns the request thread.
+        """
+        
+        local_var_params = locals()
+        all_params = [ 
+            'name',
+            'cluster_name',
+            'body',
+            'pretty',
+            'dry_run',
+            'field_manager',
+            'field_validation',
+            'force'
+        ]
+
+        all_params.extend([
+            'async_req',
+            '_return_http_data_only',
+            '_preload_content',
+            '_request_timeout'
+            ])
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_namespace_status" % key)
+
+        local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        # verify the required parameter 'name' is set
+        if self.api_client.client_side_validation and ('name' not in local_var_params or # noqa: E501
+                                                    local_var_params['name'] is None): # noqa: E501
+            raise ApiValueError("Missing the required parameter `name` when calling `patch_namespace_status`")
+
+        if self.api_client.client_side_validation and ('cluster_name' not in local_var_params or # noqa: E501
+                                                    local_var_params['cluster_name'] is None): # noqa: E501
+            raise ApiValueError("Missing the required parameter `cluster_name` when calling `patch_namespace_status`") # noqa: E501
+
+        # verify the required parameter 'body' is set
+        if self.api_client.client_side_validation and ('body' not in local_var_params or # noqa: E501
+                                                    local_var_params['body'] is None): # noqa: E501
+            raise ApiValueError("Missing the required parameter `body` when calling `patch_namespace_status`") # noqa: E501
+
+        collection_formats = {}
+        path_params = {}
+
+        if 'name' in local_var_params:
+            path_params['name'] = local_var_params['name']
+        if 'cluster_name' in local_var_params:
+            path_params['cluster_name'] = local_var_params['cluster_name'] # noqa: E501
+
+        query_params = []
+        if 'pretty' in local_var_params and local_var_params['pretty'] is not None: # noqa: E501
+            query_params.append(('pretty', local_var_params['pretty'])) # noqa: E501
+        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None: # noqa: E501
+            query_params.append(('dryRun', local_var_params['dry_run'])) # noqa: E501
+        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None: # noqa: E501
+            query_params.append(('fieldManager', local_var_params['field_manager'])) # noqa: E501
+        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None: # noqa: E501
+            query_params.append(('fieldValidation', local_var_params['field_validation'])) # noqa: E501
+        if 'force' in local_var_params and local_var_params['force'] is not None: # noqa: E501
+            query_params.append(('force', local_var_params['force'])) # noqa: E501
+
+        header_params = {}
+        form_params = []
+        local_var_files = {}
+        body_params = None
+
+        if 'body' in local_var_params:
+            body_params = local_var_params['body']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor']) # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = 'application/merge-patch+json'
+
+        # Authentication setting
+        auth_settings = ['BearerToken'] # noqa: E501
+
+        return self.api_client.call_api(
+            '/apis/postgresql.cnpg.io/v1/namespaces/{name}/clusters/{cluster_name}/status', 'PATCH',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='object', # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'), # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def patch_namespace_status(self, name, body, **kwargs):  # noqa: E501
         """patch_namespace_status  # noqa: E501
 
