@@ -1,0 +1,19 @@
+name: PR Summarizer
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  pull-requests: write
+  issues: write
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run PR Summarizer
+        uses: bansikah22/pr-summarizer@v1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
