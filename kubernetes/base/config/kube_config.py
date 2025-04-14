@@ -728,7 +728,7 @@ class KubeConfigMerger:
         for item in ('clusters', 'contexts', 'users'):
             self._merge(item, config.get(item, []) or [], path)
 
-        if 'current-context' in config:
+        if 'current-context' in config and ('current-context' not in self.config_merged or self.config_merged.value['current-context'] == ""):
             self.config_merged.value['current-context'] = config['current-context']
 
         self.config_files[path] = config
