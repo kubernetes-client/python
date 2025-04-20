@@ -883,6 +883,39 @@ class TestUtils(unittest.TestCase):
         self.assertFalse(pod1_status)
         self.assertFalse(deploy_status)
 
+    def test_delete_apps_deployment_from_yaml_with_apply(self):
+        """
+        Should be able to create and delete an apps/v1 deployment using apply.
+        """
+        k8s_client = client.api_client.ApiClient(configuration=self.config)
+        # Create the deployment
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "apps-deployment.yaml", apply=True)
+        app_api = client.AppsV1Api(k8s_client)
+        dep = app_api.read_namespaced_deployment(name="nginx-app",
+                                                    namespace="default")
+        self.assertIsNotNone(dep)
+        self.assertEqual("nginx-app", dep.metadata.name)
+        self.assertEqual(
+            "nginx:1.15.4", dep.spec.template.spec.containers[0].image)
+        self.assertEqual(
+            80, dep.spec.template.spec.containers[0].ports[0].container_port)
+        self.assertEqual(
+            "nginx", dep.spec.template.spec.containers[0].name)
+        self.assertEqual("nginx", dep.spec.template.metadata.labels["app"])
+        self.assertEqual(3, dep.spec.replicas)
+
+        # Delete the deployment using apply
+        utils.process_from_yaml(
+            k8s_client, self.path_prefix + "apps-deployment.yaml", apply=True, action="delete")
+        time.sleep(10)  # Wait for the deletion to propagate
+
+        # Verify the deployment is deleted
+        with self.assertRaises(ApiException) as cm:
+            app_api.read_namespaced_deployment(name="nginx-app",
+                                                namespace="default")
+        self.assertEqual(cm.exception.status, 404)
+
 
 class TestUtilsUnitTests(unittest.TestCase):
 

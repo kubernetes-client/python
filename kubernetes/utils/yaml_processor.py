@@ -280,8 +280,9 @@ def process_from_yaml_single_item(
                 body=yml_object, field_manager="python-client", **kwargs
             )
         elif action == "delete":
+            name = yml_object["metadata"]["name"]
             resp = apply_client.delete(
-                body=yml_object, field_manager="python-client", **kwargs
+                name=name, **kwargs
             )
         if verbose:
             msg = "{0} {1}d.".format(kind, action)
@@ -482,6 +483,7 @@ def create_from_dict(k8s_client, data, verbose=False, namespace='default',
         instances for each object that failed to create.
     """
     return process_from_dict(k8s_client, data, verbose, namespace, action="create", **kwargs)
+
 
 class FailToCreateError(FailToProcessError):
     """
