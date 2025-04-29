@@ -508,7 +508,7 @@ def websocket_proxycare(connect_opt, configuration, url, headers):
 
     if configuration.proxy:
         proxy_url = urlparse(configuration.proxy)
-        connect_opt.update({'http_proxy_host': proxy_url.hostname, 'http_proxy_port': proxy_url.port})
+        connect_opt.update({'http_proxy_host': proxy_url.hostname, 'http_proxy_port': proxy_url.port, 'proxy_type': proxy_url.scheme})
     if configuration.proxy_headers:
         for key,value in configuration.proxy_headers.items():
             if key == 'proxy-authorization' and value.startswith('Basic'):

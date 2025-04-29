@@ -88,17 +88,31 @@ class RESTClientObject(object):
 
         # https pool manager
         if configuration.proxy and not should_bypass_proxies(configuration.host, no_proxy=configuration.no_proxy or ''):
-            self.pool_manager = urllib3.ProxyManager(
-                num_pools=pools_size,
-                maxsize=maxsize,
-                cert_reqs=cert_reqs,
-                ca_certs=ca_certs,
-                cert_file=configuration.cert_file,
-                key_file=configuration.key_file,
-                proxy_url=configuration.proxy,
-                proxy_headers=configuration.proxy_headers,
-                **addition_pool_args
-            )
+            if configuration.proxy.startswith('sock'):
+                from urllib3.contrib.socks import SOCKSProxyManager
+                self.pool_manager = SOCKSProxyManager(
+                    num_pools=pools_size,
+                    maxsize=maxsize,
+                    cert_reqs=cert_reqs,
+                    ca_certs=ca_certs,
+                    cert_file=configuration.cert_file,
+                    key_file=configuration.key_file,
+                    proxy_url=configuration.proxy,
+                    headers=configuration.proxy_headers,
+                    **addition_pool_args
+                )
+            else:
+                self.pool_manager = urllib3.ProxyManager(
+                    num_pools=pools_size,
+                    maxsize=maxsize,
+                    cert_reqs=cert_reqs,
+                    ca_certs=ca_certs,
+                    cert_file=configuration.cert_file,
+                    key_file=configuration.key_file,
+                    proxy_url=configuration.proxy,
+                    proxy_headers=configuration.proxy_headers,
+                    **addition_pool_args
+                )
         else:
             self.pool_manager = urllib3.PoolManager(
                 num_pools=pools_size,
