@@ -24049,14 +24049,17 @@ class CoreV1Api(object):
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']
-        # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod`")  # noqa: E501
-        # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod`")  # noqa: E501
+        # Verify the required parameter 'name' is set
+        if self.api_client.client_side_validation and ('name' not in local_var_params or local_var_params['name'] is None):
+            raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod`")
+
+        # Additional check to prevent empty string for 'name'
+        if self.api_client.client_side_validation and local_var_params.get('name') == "":
+            raise ApiValueError("Invalid value for parameter `name`: empty string is not allowed in read_namespaced_pod")
+
+        # Verify the required parameter 'namespace' is set
+        if self.api_client.client_side_validation and ('namespace' not in local_var_params or local_var_params['namespace'] is None):
+            raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod`")
 
         collection_formats = {}
 
