@@ -96,8 +96,8 @@ class ExecProvider(object):
         exit_code = process.wait()
         if exit_code != 0:
             msg = 'exec: process returned %d' % exit_code
-            stderr = stderr.strip()
             if stderr:
+                stderr = stderr.strip()
                 msg += '. %s' % stderr
             raise ConfigException(msg)
         try:
