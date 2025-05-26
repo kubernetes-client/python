@@ -1,3 +1,255 @@
+# v33.0.0+snapshot
+
+Kubernetes API Version: v1.33.1
+
+### API Change
+- A new alpha feature gate, `MutableCSINodeAllocatableCount`, has been introduced.
+  
+  When this feature gate is enabled, the `CSINode.Spec.Drivers[*].Allocatable.Count` field becomes mutable, and a new field, `NodeAllocatableUpdatePeriodSeconds`, is available in the `CSIDriver` object. This allows periodic updates to a node's reported allocatable volume capacity, preventing stateful pods from becoming stuck due to outdated information that kube-scheduler relies on. ([kubernetes/kubernetes#130007](https://github.com/kubernetes/kubernetes/pull/130007), [@torredil](https://github.com/torredil)) [SIG Apps, Node, Scheduling and Storage]
+- Added feature gate `DRAPartitionableDevices`, when enabled, Dynamic Resource Allocation support partitionable devices allocation. ([kubernetes/kubernetes#130764](https://github.com/kubernetes/kubernetes/pull/130764), [@cici37](https://github.com/cici37)) [SIG API Machinery, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Network, Node, Scheduling, Storage and Testing]
+- Added DRA support for a "one-of" prioritized list of selection criteria to satisfy a device request in a resource claim. ([kubernetes/kubernetes#128586](https://github.com/kubernetes/kubernetes/pull/128586), [@mortent](https://github.com/mortent)) [SIG API Machinery, Apps, Etcd, Node, Scheduling and Testing]
+- Added a `/flagz` endpoint for kubelet endpoint ([kubernetes/kubernetes#128857](https://github.com/kubernetes/kubernetes/pull/128857), [@zhifei92](https://github.com/zhifei92)) [SIG Architecture, Instrumentation and Node]
+- Added a new `tolerance` field to HorizontalPodAutoscaler, overriding the cluster-wide default. Enabled via the HPAConfigurableTolerance alpha feature gate. ([kubernetes/kubernetes#130797](https://github.com/kubernetes/kubernetes/pull/130797), [@jm-franc](https://github.com/jm-franc)) [SIG API Machinery, Apps, Autoscaling, Etcd, Node, Scheduling and Testing]
+- Added support for configuring custom stop signals with a new StopSignal container lifecycle ([kubernetes/kubernetes#130556](https://github.com/kubernetes/kubernetes/pull/130556), [@sreeram-venkitesh](https://github.com/sreeram-venkitesh)) [SIG API Machinery, Apps, Node and Testing]
+- Added support for in-place vertical scaling of Pods with sidecars (containers defined within `initContainers` where the `restartPolicy` is set to `Always`). ([kubernetes/kubernetes#128367](https://github.com/kubernetes/kubernetes/pull/128367), [@vivzbansal](https://github.com/vivzbansal)) [SIG API Machinery, Apps, CLI, Node, Scheduling and Testing]
+- CPUManager Policy Options support is GA ([kubernetes/kubernetes#130535](https://github.com/kubernetes/kubernetes/pull/130535), [@ffromani](https://github.com/ffromani)) [SIG API Machinery, Node and Testing]
+- Changed the Pod API to support `hugepage resources` at `spec` level for pod-level resources. ([kubernetes/kubernetes#130577](https://github.com/kubernetes/kubernetes/pull/130577), [@KevinTMtz](https://github.com/KevinTMtz)) [SIG Apps, CLI, Node, Scheduling, Storage and Testing]
+- DRA API: The maximum number of pods that can use the same ResourceClaim is now 256 instead of 32. Downgrading a cluster where this relaxed limit is in use to Kubernetes 1.32.0 is not supported, as version 1.32.0 would refuse to update ResourceClaims with more than 32 entries in the `status.reservedFor` field. ([kubernetes/kubernetes#129543](https://github.com/kubernetes/kubernetes/pull/129543), [@pohly](https://github.com/pohly)) [SIG API Machinery, Node and Testing]
+- DRA: CEL expressions using attribute strings exceeded the cost limit because their cost estimation was incomplete. ([kubernetes/kubernetes#129661](https://github.com/kubernetes/kubernetes/pull/129661), [@pohly](https://github.com/pohly)) [SIG Node]
+- DRA: Device taints enable DRA drivers or admins to mark device as unusable, which prevents allocating them. Pods may also get evicted at runtime if a device becomes unusable, depending on the severity of the taint and whether the claim tolerates the taint. ([kubernetes/kubernetes#130447](https://github.com/kubernetes/kubernetes/pull/130447), [@pohly](https://github.com/pohly)) [SIG API Machinery, Apps, Architecture, Auth, Etcd, Instrumentation, Node, Scheduling and Testing]
+- DRA: Starting Kubernetes 1.33, only users with access to an admin namespace with the `kubernetes.io/dra-admin-access` label are authorized to create ResourceClaim or ResourceClaimTemplate objects with the `adminAccess` field in this admin namespace if they want to and only they can reference these ResourceClaims or ResourceClaimTemplates in their pod or deployment specs. ([kubernetes/kubernetes#130225](https://github.com/kubernetes/kubernetes/pull/130225), [@ritazh](https://github.com/ritazh)) [SIG API Machinery, Apps, Auth, Node and Testing]
+- DRA: when asking for "All" devices on a node, Kubernetes <= 1.32 proceeded to schedule pods onto nodes with no devices by not allocating any devices for those pods. Kubernetes 1.33 changes that to only picking nodes which have at least one device. Users who want the "proceed with scheduling also without devices" semantic can use the upcoming prioritized list feature with one sub-request for "all" devices and a second alternative with "count: 0". ([kubernetes/kubernetes#129560](https://github.com/kubernetes/kubernetes/pull/129560), [@bart0sh](https://github.com/bart0sh)) [SIG API Machinery and Node]
+- Expanded the on-disk kubelet credential provider configuration to allow an optional `tokenAttribute` field to be configured. When it is set, the kubelet will provision a token with the given audience bound to the current pod and its service account. This KSA token along with required annotations on the KSA defined in configuration will be sent to the credential provider plugin via its standard input (along with the image information that is already sent today). The KSA annotations to be sent are configurable in the kubelet credential provider configuration. ([kubernetes/kubernetes#128372](https://github.com/kubernetes/kubernetes/pull/128372), [@aramase](https://github.com/aramase)) [SIG API Machinery, Auth, Node and Testing]
+- Fixed the example validation rule in godoc:
+  
+  When configuring a JWT authenticator:
+  
+  If username.expression uses 'claims.email', then 'claims.email_verified' must be used in
+  username.expression or extra[*].valueExpression or claimValidationRules[*].expression.
+  An example claim validation rule expression that matches the validation automatically
+  applied when username.claim is set to 'email' is 'claims.?email_verified.orValue(true) == true'. 
+  By explicitly comparing the value to true, we let type-checking see the result will be a boolean, 
+  and to make sure a non-boolean `email_verified` claim will be caught at runtime. ([kubernetes/kubernetes#130875](https://github.com/kubernetes/kubernetes/pull/130875), [@aramase](https://github.com/aramase)) [SIG Auth and Release]
+- For the `InPlacePodVerticalScaling` feature, the API server will no longer set the resize status to `Proposed` upon receiving a resize request. ([kubernetes/kubernetes#130574](https://github.com/kubernetes/kubernetes/pull/130574), [@natasha41575](https://github.com/natasha41575)) [SIG Apps, Node and Testing]
+- Graduate the `MatchLabelKeys` (MismatchLabelKeys) feature in PodAffinity (PodAntiAffinity) to GA ([kubernetes/kubernetes#130463](https://github.com/kubernetes/kubernetes/pull/130463), [@sanposhiho](https://github.com/sanposhiho)) [SIG API Machinery, Apps, Node, Scheduling and Testing]
+- Graduated image volume sources to beta:
+    - Allowed `subPath`/`subPathExpr` for image volumes
+    - Added kubelet metrics `kubelet_image_volume_requested_total`, `kubelet_image_volume_mounted_succeed_total` and `kubelet_image_volume_mounted_errors_total` ([kubernetes/kubernetes#130135](https://github.com/kubernetes/kubernetes/pull/130135), [@saschagrunert](https://github.com/saschagrunert)) [SIG API Machinery, Apps, Node and Testing]
+- Implemented a new status field, `.status.terminatingReplicas`, for Deployments and ReplicaSets to track terminating pods. The new field is present when the `DeploymentPodReplacementPolicy` feature gate is enabled. ([kubernetes/kubernetes#128546](https://github.com/kubernetes/kubernetes/pull/128546), [@atiratree](https://github.com/atiratree)) [SIG API Machinery, Apps and Testing]
+- Implemented validation for `NodeSelectorRequirement` values in Kubernetes when creating pods. ([kubernetes/kubernetes#128212](https://github.com/kubernetes/kubernetes/pull/128212), [@AxeZhan](https://github.com/AxeZhan)) [SIG Apps and Scheduling]
+- Improved how the API server responds to **list** requests where the response format negotiates to Protobuf. List responses in Protobuf are marshalled one element at the time, drastically reducing memory needed to serve large collections. Streaming list responses can be disabled via the `StreamingCollectionEncodingToProtobuf` feature gate. ([kubernetes/kubernetes#129407](https://github.com/kubernetes/kubernetes/pull/129407), [@serathius](https://github.com/serathius)) [SIG API Machinery, Apps, Architecture, Auth, CLI, Cloud Provider, Network, Node, Release, Scheduling, Storage and Testing]
+- InPlacePodVerticalScaling: Memory limits cannot be decreased unless the memory resize restart policy is set to `RestartContainer`. Container resizePolicy is no longer mutable. ([kubernetes/kubernetes#130183](https://github.com/kubernetes/kubernetes/pull/130183), [@tallclair](https://github.com/tallclair)) [SIG Apps and Node]
+- Introduced API type `coordination.k8s.io/v1beta1/LeaseCandidate`
+  `CoordinatedLeaderElection` feature moves to Beta ([kubernetes/kubernetes#130751](https://github.com/kubernetes/kubernetes/pull/130751), [@Jefftree](https://github.com/Jefftree)) [SIG API Machinery, Etcd and Testing]
+- Introduced API type `coordination.k8s.io/v1beta1/LeaseCandidate` ([kubernetes/kubernetes#130291](https://github.com/kubernetes/kubernetes/pull/130291), [@Jefftree](https://github.com/Jefftree)) [SIG API Machinery, Etcd and Testing]
+- It introduces a new scope name `VolumeAttributesClass`. 
+  
+  It matches all PVC objects that have the volume attributes class mentioned. 
+  
+  If you want to limit the count of PVCs that have a specific volume attributes class. In that case, you can create a quota object with the scope name `VolumeAttributesClass` and a `matchExpressions` that match the volume attributes class. ([kubernetes/kubernetes#124360](https://github.com/kubernetes/kubernetes/pull/124360), [@carlory](https://github.com/carlory)) [SIG API Machinery, Apps and Testing]
+- KEP-3857: Recursive Read-only (RRO) mounts: promote to GA ([kubernetes/kubernetes#130116](https://github.com/kubernetes/kubernetes/pull/130116), [@AkihiroSuda](https://github.com/AkihiroSuda)) [SIG Apps, Node and Testing]
+- kubectl: Added alpha support for customizing kubectl behavior using preferences from a `kuberc` file, separate from `kubeconfig`. ([kubernetes/kubernetes#125230](https://github.com/kubernetes/kubernetes/pull/125230), [@ardaguclu](https://github.com/ardaguclu)) [SIG API Machinery, CLI and Testing]
+- kubelet: added `KubeletConfiguration.subidsPerPod`. ([kubernetes/kubernetes#130028](https://github.com/kubernetes/kubernetes/pull/130028), [@AkihiroSuda](https://github.com/AkihiroSuda)) [SIG API Machinery and Node]
+- Kubernetes components that accepted X.509 client certificate authentication now read the user UID from a certificate subject name RDN with object ID `1.3.6.1.4.1.57683.2`. An RDN with this object ID had to contain a string value and appear no more than once in the certificate subject. Reading the user UID from this RDN could be disabled by setting the beta feature gate `AllowParsingUserUIDFromCertAuth` to `false`(until the feature gate graduated to GA). ([kubernetes/kubernetes#127897](https://github.com/kubernetes/kubernetes/pull/127897), [@modulitos](https://github.com/modulitos)) [SIG API Machinery, Auth and Testing]
+- `MergeDefaultEvictionSettings` indicates that defaults for the evictionHard, evictionSoft, evictionSoftGracePeriod, and evictionMinimumReclaim fields should be merged into values specified for those fields in this configuration. Signals specified in this configuration take precedence. Signals not specified in this configuration inherit their defaults. ([kubernetes/kubernetes#127577](https://github.com/kubernetes/kubernetes/pull/127577), [@vaibhav2107](https://github.com/vaibhav2107)) [SIG API Machinery and Node]
+- New configuration is introduced to the kubelet that allows it to track container images and the list of authentication information that leads to their successful pulls. This data is persisted across reboots of the host and restarts of the kubelet.
+  
+  The kubelet ensures any image requiring credential verification is always pulled if authentication information from an image pull is not yet present, thus enforcing authentication / re-authentication. This means an image pull might be attempted even in cases where a pod requests the `IfNotPresent` image pull policy, and might lead to the pod not starting if its pull policy is `Never` and is unable to present authentication information that led to a previous successful pull of the image it is requesting. ([kubernetes/kubernetes#128152](https://github.com/kubernetes/kubernetes/pull/128152), [@stlaz](https://github.com/stlaz)) [SIG API Machinery, Architecture, Auth, Node and Testing]
+- Promoted JobSuccessPolicy E2E to Conformance ([kubernetes/kubernetes#130658](https://github.com/kubernetes/kubernetes/pull/130658), [@tenzen-y](https://github.com/tenzen-y)) [SIG API Machinery, Apps, Architecture and Testing]
+- Promoted `NodeInclusionPolicyInPodTopologySpread` to Stable in v1.33 ([kubernetes/kubernetes#130920](https://github.com/kubernetes/kubernetes/pull/130920), [@kerthcet](https://github.com/kerthcet)) [SIG Apps, Node, Scheduling and Testing]
+- Promoted the `JobSuccessPolicy` to Stable. ([kubernetes/kubernetes#130536](https://github.com/kubernetes/kubernetes/pull/130536), [@tenzen-y](https://github.com/tenzen-y)) [SIG API Machinery, Apps, Architecture and Testing]
+- Promoted the Job's `JobBackoffLimitPerIndex` feature-gate to stable. ([kubernetes/kubernetes#130061](https://github.com/kubernetes/kubernetes/pull/130061), [@mimowo](https://github.com/mimowo)) [SIG API Machinery, Apps, Architecture and Testing]
+- Promoted the feature gate `AnyVolumeDataSource` to GA. ([kubernetes/kubernetes#129770](https://github.com/kubernetes/kubernetes/pull/129770), [@sunnylovestiramisu](https://github.com/sunnylovestiramisu)) [SIG Apps, Storage and Testing]
+- Removed general available feature gate `CPUManager`. ([kubernetes/kubernetes#129296](https://github.com/kubernetes/kubernetes/pull/129296), [@carlory](https://github.com/carlory)) [SIG API Machinery, Node and Testing]
+- Removed general available feature-gate `PDBUnhealthyPodEvictionPolicy`. ([kubernetes/kubernetes#129500](https://github.com/kubernetes/kubernetes/pull/129500), [@carlory](https://github.com/carlory)) [SIG API Machinery, Apps and Auth]
+- Start reporting swap capacity as part of `node.status.nodeSystemInfo`. ([kubernetes/kubernetes#129954](https://github.com/kubernetes/kubernetes/pull/129954), [@iholder101](https://github.com/iholder101)) [SIG API Machinery, Apps and Node]
+- Graduated the `MultiCIDRServiceAllocator` feature gate to stable, and the `DisableAllocatorDualWrite` feature gate to beta (disabled by default).
+**Action required** for Kubernetes cluster administrators and for distributions that manage the cluster Service CIDR.
+Kubernetes now allows users to define the cluster Service CIDR via an API object: ServiceCIDR.
+Distributions or administrators of Kubernetes may want to control that new Service CIDRs added to the cluster do not overlap with other networks on the cluster, that only belong to a specific range of IPs. Administrators may also prefer to retain the existing behavior of only having one ServiceCIDR per cluster. You can use `ValidatingAdmissionPolicy` to achieve this. ([kubernetes/kubernetes#128971](https://github.com/kubernetes/kubernetes/pull/128971), [@aojea](https://github.com/aojea)) [SIG Apps, Architecture, Auth, CLI, Etcd, Network, Release and Testing]
+- The `ClusterTrustBundle` API is moving to `v1beta1`.
+  In order for the `ClusterTrustBundleProjection` feature to work on the kubelet side, the `ClusterTrustBundle` API must be available at `v1beta1` version and the `ClusterTrustBundleProjection` feature gate must be enabled. If the API becomes later after kubelet started running, restart the kubelet to enable the feature. ([kubernetes/kubernetes#128499](https://github.com/kubernetes/kubernetes/pull/128499), [@stlaz](https://github.com/stlaz)) [SIG API Machinery, Apps, Auth, Etcd, Node, Storage and Testing]
+- The Service trafficDistribution field, including the PreferClose option, has graduated
+  to GA. Services that do not have the field configured will continue to operate
+  with their existing behavior. Refer to the documentation
+  https://kubernetes.io/docs/concepts/services-networking/service/#traffic-distribution
+  for more details. ([kubernetes/kubernetes#130673](https://github.com/kubernetes/kubernetes/pull/130673), [@gauravkghildiyal](https://github.com/gauravkghildiyal)) [SIG Apps, Network and Testing]
+- The feature gate `InPlacePodVerticalScalingAllocatedStatus` is deprecated and no longer used. The `AllocatedResources` field in `ContainerStatus` is now guarded by the `InPlacePodVerticalScaling` feature gate. ([kubernetes/kubernetes#130880](https://github.com/kubernetes/kubernetes/pull/130880), [@tallclair](https://github.com/tallclair)) [SIG CLI, Node and Scheduling]
+- The kube-controller-manager will set the `observedGeneration` field on pod conditions when the `PodObservedGenerationTracking` feature gate is set. ([kubernetes/kubernetes#130650](https://github.com/kubernetes/kubernetes/pull/130650), [@natasha41575](https://github.com/natasha41575)) [SIG API Machinery, Apps, Node, Scheduling, Storage, Testing and Windows]
+- The kube-scheduler will set the `observedGeneration` field on pod conditions when the `PodObservedGenerationTracking` feature gate is set. ([kubernetes/kubernetes#130649](https://github.com/kubernetes/kubernetes/pull/130649), [@natasha41575](https://github.com/natasha41575)) [SIG Node, Scheduling and Testing]
+- The kubelet will set the `observedGeneration` field on pod conditions when the `PodObservedGenerationTracking` feature gate is set. ([kubernetes/kubernetes#130573](https://github.com/kubernetes/kubernetes/pull/130573), [@natasha41575](https://github.com/natasha41575)) [SIG Apps, Node, Scheduling, Storage, Testing and Windows]
+- The minimum value validation of ReplicationController's `replicas` and `minReadySeconds` fields have been migrated to declarative validation. The requiredness of both fields is also declaratively validated.
+  If the `DeclarativeValidation` feature gate is enabled, mismatches with existing validation are reported via metrics.
+  If the `DeclarativeValidationTakeover` feature gate is enabled, declarative validation is the primary source of errors for migrated fields. ([kubernetes/kubernetes#130725](https://github.com/kubernetes/kubernetes/pull/130725), [@jpbetz](https://github.com/jpbetz)) [SIG API Machinery, Apps, Architecture, CLI, Cluster Lifecycle, Instrumentation, Network, Node and Storage]
+- The `resource.k8s.io/v1beta1` API is deprecated and will be removed in 1.36. Use `v1beta2` instead. ([kubernetes/kubernetes#129970](https://github.com/kubernetes/kubernetes/pull/129970), [@mortent](https://github.com/mortent)) [SIG API Machinery, Apps, Auth, Etcd, Node, Scheduling and Testing]
+- Validation now requires new StatefulSets with a `.spec.serviceName` field value to pass DNS1123 validation. Previously created StatefulSets with an invalid `.spec.serviceName` field value could not create any pods, and should be deleted.
+  - Published OpenAPI for the StatefulSet schema is corrected to indicate the `.spec.serviceName` is optional. ([kubernetes/kubernetes#130233](https://github.com/kubernetes/kubernetes/pull/130233), [@soltysh](https://github.com/soltysh)) [SIG API Machinery, Apps and Testing]
+- When the `PreferSameTrafficDistribution` feature gate is enabled, a new `trafficDistribution` value `PreferSameNode` is available, which attempts to always route Service connections to an endpoint on the same node as the client. Additionally, `PreferSameZone` is introduced as an alias for `PreferClose`. ([kubernetes/kubernetes#130844](https://github.com/kubernetes/kubernetes/pull/130844), [@danwinship](https://github.com/danwinship)) [SIG API Machinery, Apps, Network and Windows]
+- When the `PodObservedGenerationTracking` feature gate was set, the kubelet populated `status.observedGeneration` to reflect the latest `metadata.generation` it observed for the pod. ([kubernetes/kubernetes#130352](https://github.com/kubernetes/kubernetes/pull/130352), [@natasha41575](https://github.com/natasha41575)) [SIG API Machinery, Apps, CLI, Node, Release, Scheduling, Storage, Testing and Windows]
+- When the `StrictIPCIDRValidation` feature gate is enabled, Kubernetes will be
+  slightly stricter about what values will be accepted as IP addresses and network
+  address ranges (“CIDR blocks”).
+  
+  In particular, octets within IPv4 addresses are not allowed to have any leading
+  `0`s, and IPv4-mapped IPv6 values (e.g. `::ffff:192.168.0.1`) are forbidden.
+  These sorts of values can potentially cause security problems when different
+  components interpret the same string as referring to different IP addresses
+  (as in CVE-2021-29923).
+  
+  This tightening applies only to fields in built-in API kinds, and not to
+  custom resource kinds, values in Kubernetes configuration files, or
+  command-line arguments.
+  
+  (When the feature gate is disabled, creating an object with such an invalid
+  IP or CIDR value will result in a warning from the API server about the fact
+  that it will be rejected in the future.) ([kubernetes/kubernetes#122550](https://github.com/kubernetes/kubernetes/pull/122550), [#128786](https://github.com/kubernetes/kubernetes/pull/128786), [@danwinship](https://github.com/danwinship)) [SIG API Machinery, Apps, Network, Node, Scheduling and Testing]
+- `apidiscovery.k8s.io/v2beta1` API group is disabled by default ([kubernetes/kubernetes#130347](https://github.com/kubernetes/kubernetes/pull/130347), [@Jefftree](https://github.com/Jefftree)) [SIG API Machinery and Testing]
+- `kubectl apply` now coerces `null` values for labels and annotations in manifests to empty string values, 
+consistent with typed JSON metadata decoding, rather than dropping all labels and annotations ([kubernetes/kubernetes#129257](https://github.com/kubernetes/kubernetes/pull/129257), [@liggitt](https://github.com/liggitt)) [SIG API Machinery]
+- A new alpha feature gate, `MutableCSINodeAllocatableCount`, has been introduced.
+  
+  When this feature gate is enabled, the `CSINode.Spec.Drivers[*].Allocatable.Count` field becomes mutable, and a new field, `NodeAllocatableUpdatePeriodSeconds`, is available in the `CSIDriver` object. This allows periodic updates to a node's reported allocatable volume capacity, preventing stateful pods from becoming stuck due to outdated information that kube-scheduler relies on. ([kubernetes/kubernetes#130007](https://github.com/kubernetes/kubernetes/pull/130007), [@torredil](https://github.com/torredil)) [SIG Apps, Node, Scheduling and Storage]
+- Add feature gate `DRAPartitionableDevices`, when enabled, Dynamic Resource Allocation support partitionable devices allocation. ([kubernetes/kubernetes#130764](https://github.com/kubernetes/kubernetes/pull/130764), [@cici37](https://github.com/cici37)) [SIG API Machinery, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Network, Node, Scheduling, Storage and Testing]
+- Added a /flagz endpoint for kubelet endpoint ([kubernetes/kubernetes#128857](https://github.com/kubernetes/kubernetes/pull/128857), [@zhifei92](https://github.com/zhifei92)) [SIG Architecture, Instrumentation and Node]
+- Added a new 'tolerance' field to HorizontalPodAutoscaler, overriding the cluster-wide default. Enabled via the HPAConfigurableTolerance alpha feature gate. ([kubernetes/kubernetes#130797](https://github.com/kubernetes/kubernetes/pull/130797), [@jm-franc](https://github.com/jm-franc)) [SIG API Machinery, Apps, Autoscaling, Etcd, Node, Scheduling and Testing]
+- Added support for configuring custom stop signals with a new StopSignal container lifecycle ([kubernetes/kubernetes#130556](https://github.com/kubernetes/kubernetes/pull/130556), [@sreeram-venkitesh](https://github.com/sreeram-venkitesh)) [SIG API Machinery, Apps, Node and Testing]
+- CPUManager Policy Options support is GA ([kubernetes/kubernetes#130535](https://github.com/kubernetes/kubernetes/pull/130535), [@ffromani](https://github.com/ffromani)) [SIG API Machinery, Node and Testing]
+- Changed the Pod API to support `hugepage resources` at `spec` level for pod-level resources. ([kubernetes/kubernetes#130577](https://github.com/kubernetes/kubernetes/pull/130577), [@KevinTMtz](https://github.com/KevinTMtz)) [SIG Apps, CLI, Node, Scheduling, Storage and Testing]
+- DRA: Device taints enable DRA drivers or admins to mark device as unusable, which prevents allocating them. Pods may also get evicted at runtime if a device becomes unusable, depending on the severity of the taint and whether the claim tolerates the taint. ([kubernetes/kubernetes#130447](https://github.com/kubernetes/kubernetes/pull/130447), [@pohly](https://github.com/pohly)) [SIG API Machinery, Apps, Architecture, Auth, Etcd, Instrumentation, Node, Scheduling and Testing]
+- DRA: Starting Kubernetes 1.33, only users with access to an admin namespace with the `kubernetes.io/dra-admin-access` label are authorized to create ResourceClaim or ResourceClaimTemplate objects with the `adminAccess` field in this admin namespace if they want to and only they can reference these ResourceClaims or ResourceClaimTemplates in their pod or deployment specs. ([kubernetes/kubernetes#130225](https://github.com/kubernetes/kubernetes/pull/130225), [@ritazh](https://github.com/ritazh)) [SIG API Machinery, Apps, Auth, Node and Testing]
+- Expanded the on-disk kubelet credential provider configuration to allow an optional `tokenAttribute` field to be configured. When it is set, the Kubelet will provision a token with the given audience bound to the current pod and its service account. This KSA token along with required annotations on the KSA defined in configuration will be sent to the credential provider plugin via its standard input (along with the image information that is already sent today). The KSA annotations to be sent are configurable in the kubelet credential provider configuration. ([kubernetes/kubernetes#128372](https://github.com/kubernetes/kubernetes/pull/128372), [@aramase](https://github.com/aramase)) [SIG API Machinery, Auth, Node and Testing]
+- Fixed the example validation rule in godoc:
+  
+  When configuring a JWT authenticator:
+  
+  If username.expression uses 'claims.email', then 'claims.email_verified' must be used in
+  username.expression or extra[*].valueExpression or claimValidationRules[*].expression.
+  An example claim validation rule expression that matches the validation automatically
+  applied when username.claim is set to 'email' is 'claims.?email_verified.orValue(true) == true'. 
+  By explicitly comparing the value to true, we let type-checking see the result will be a boolean, 
+  and to make sure a non-boolean `email_verified` claim will be caught at runtime. ([kubernetes/kubernetes#130875](https://github.com/kubernetes/kubernetes/pull/130875), [@aramase](https://github.com/aramase)) [SIG Auth and Release]
+- For the InPlacePodVerticalScaling feature, the API server will no longer set the resize status to `Proposed` upon receiving a resize request. ([kubernetes/kubernetes#130574](https://github.com/kubernetes/kubernetes/pull/130574), [@natasha41575](https://github.com/natasha41575)) [SIG Apps, Node and Testing]
+- Graduate the MatchLabelKeys (MismatchLabelKeys) feature in PodAffinity (PodAntiAffinity) to GA ([kubernetes/kubernetes#130463](https://github.com/kubernetes/kubernetes/pull/130463), [@sanposhiho](https://github.com/sanposhiho)) [SIG API Machinery, Apps, Node, Scheduling and Testing]
+- Graduated image volume sources to beta:
+    - Allowed `subPath`/`subPathExpr` for image volumes
+    - Added kubelet metrics `kubelet_image_volume_requested_total`, `kubelet_image_volume_mounted_succeed_total` and `kubelet_image_volume_mounted_errors_total` ([kubernetes/kubernetes#130135](https://github.com/kubernetes/kubernetes/pull/130135), [@saschagrunert](https://github.com/saschagrunert)) [SIG API Machinery, Apps, Node and Testing]
+- Improved how the API server responds to **list** requests where the response format negotiates to Protobuf. List responses in Protobuf are marshalled one element at the time, drastically reducing memory needed to serve large collections. Streaming list responses can be disabled via the `StreamingCollectionEncodingToProtobuf` feature gate. ([kubernetes/kubernetes#129407](https://github.com/kubernetes/kubernetes/pull/129407), [@serathius](https://github.com/serathius)) [SIG API Machinery, Apps, Architecture, Auth, CLI, Cloud Provider, Network, Node, Release, Scheduling, Storage and Testing]
+- Introduced API type coordination.k8s.io/v1beta1/LeaseCandidate
+  CoordinatedLeaderElection feature is Beta ([kubernetes/kubernetes#130751](https://github.com/kubernetes/kubernetes/pull/130751), [@Jefftree](https://github.com/Jefftree)) [SIG API Machinery, Etcd and Testing]
+- It introduces a new scope name `VolumeAttributesClass`. 
+  
+  It matches all PVC objects that have the volume attributes class mentioned. 
+  
+  If you want to limit the count of PVCs that have a specific volume attributes class. In that case, you can create a quota object with the scope name `VolumeAttributesClass` and a matchExpressions that match the volume attributes class. ([kubernetes/kubernetes#124360](https://github.com/kubernetes/kubernetes/pull/124360), [@carlory](https://github.com/carlory)) [SIG API Machinery, Apps and Testing]
+- Kubelet: add KubeletConfiguration.subidsPerPod ([kubernetes/kubernetes#130028](https://github.com/kubernetes/kubernetes/pull/130028), [@AkihiroSuda](https://github.com/AkihiroSuda)) [SIG API Machinery and Node]
+- New configuration is introduced to the kubelet that allows it to track container images and the list of authentication information that lead to their successful pulls . This data is persisted across reboots of the host and restarts of the kubelet.
+  
+  The kubelet ensures any image requiring credential verification is always pulled if authentication information from an image pull is not yet present, thus enforcing authentication / re-authentication. This means an image pull might be attempted even in cases where a pod requests the `IfNotPresent` image pull policy, and might lead to the pod not starting if its pull policy is `Never` and is unable to present authentication information that lead to a previous successful pull of the image it is requesting. ([kubernetes/kubernetes#128152](https://github.com/kubernetes/kubernetes/pull/128152), [@stlaz](https://github.com/stlaz)) [SIG API Machinery, Architecture, Auth, Node and Testing]
+- Promote JobSuccessPolicy E2E to Conformance ([kubernetes/kubernetes#130658](https://github.com/kubernetes/kubernetes/pull/130658), [@tenzen-y](https://github.com/tenzen-y)) [SIG API Machinery, Apps, Architecture and Testing]
+- Promote NodeInclusionPolicyInPodTopologySpread to Stable in v1.33 ([kubernetes/kubernetes#130920](https://github.com/kubernetes/kubernetes/pull/130920), [@kerthcet](https://github.com/kerthcet)) [SIG Apps, Node, Scheduling and Testing]
+- Promote the JobSuccessPolicy to Stable. ([kubernetes/kubernetes#130536](https://github.com/kubernetes/kubernetes/pull/130536), [@tenzen-y](https://github.com/tenzen-y)) [SIG API Machinery, Apps, Architecture and Testing]
+- Removed general available feature gate `CPUManager`. ([kubernetes/kubernetes#129296](https://github.com/kubernetes/kubernetes/pull/129296), [@carlory](https://github.com/carlory)) [SIG API Machinery, Node and Testing]
+- Start reporting swap capacity as part of node.status.nodeSystemInfo. ([kubernetes/kubernetes#129954](https://github.com/kubernetes/kubernetes/pull/129954), [@iholder101](https://github.com/iholder101)) [SIG API Machinery, Apps and Node]
+- The ClusterTrustBundle API is moving to v1beta1.
+  In order for the ClusterTrustBundleProjection feature to work on the kubelet side, the ClusterTrustBundle API must be available at v1beta1 version and the ClusterTrustBundleProjection feature gate must be enabled. If the API becomes later after kubelet started running, restart the kubelet to enable the feature. ([kubernetes/kubernetes#128499](https://github.com/kubernetes/kubernetes/pull/128499), [@stlaz](https://github.com/stlaz)) [SIG API Machinery, Apps, Auth, Etcd, Node, Storage and Testing]
+- The Service trafficDistribution field, including the PreferClose option, has graduated
+  to GA. Services that do not have the field configured will continue to operate
+  with their existing behavior. Refer to the documentation
+  https://kubernetes.io/docs/concepts/services-networking/service/#traffic-distribution
+  for more details. ([kubernetes/kubernetes#130673](https://github.com/kubernetes/kubernetes/pull/130673), [@gauravkghildiyal](https://github.com/gauravkghildiyal)) [SIG Apps, Network and Testing]
+- The feature gate InPlacePodVerticalScalingAllocatedStatus is deprecated and no longer used. The AllocatedResources field in ContainerStatus is now guarded by the InPlacePodVerticalScaling feature gate. ([kubernetes/kubernetes#130880](https://github.com/kubernetes/kubernetes/pull/130880), [@tallclair](https://github.com/tallclair)) [SIG CLI, Node and Scheduling]
+- The kube-controller-manager will set the `observedGeneration` field on pod conditions when the `PodObservedGenerationTracking` feature gate is set. ([kubernetes/kubernetes#130650](https://github.com/kubernetes/kubernetes/pull/130650), [@natasha41575](https://github.com/natasha41575)) [SIG API Machinery, Apps, Node, Scheduling, Storage, Testing and Windows]
+- The kube-scheduler will set the `observedGeneration` field on pod conditions when the `PodObservedGenerationTracking` feature gate is set. ([kubernetes/kubernetes#130649](https://github.com/kubernetes/kubernetes/pull/130649), [@natasha41575](https://github.com/natasha41575)) [SIG Node, Scheduling and Testing]
+- The kubelet will set the `observedGeneration` field on pod conditions when the `PodObservedGenerationTracking` feature gate is set. ([kubernetes/kubernetes#130573](https://github.com/kubernetes/kubernetes/pull/130573), [@natasha41575](https://github.com/natasha41575)) [SIG Apps, Node, Scheduling, Storage, Testing and Windows]
+- The minimum value validation of ReplicationController's `replicas` and `minReadySeconds` fields have been migrated to declarative validation. The requiredness of both fields is also declaratively validated.
+  If the `DeclarativeValidation` feature gate is enabled, mismatches with existing validation are reported via metrics.
+  If the `DeclarativeValidationTakeover` feature gate is enabled, declarative validation is the primary source of errors for migrated fields. ([kubernetes/kubernetes#130725](https://github.com/kubernetes/kubernetes/pull/130725), [@jpbetz](https://github.com/jpbetz)) [SIG API Machinery, Apps, Architecture, CLI, Cluster Lifecycle, Instrumentation, Network, Node and Storage]
+- The resource.k8s.io/v1beta1 API is deprecated and will be removed in 1.36. Use v1beta2 instead. ([kubernetes/kubernetes#129970](https://github.com/kubernetes/kubernetes/pull/129970), [@mortent](https://github.com/mortent)) [SIG API Machinery, Apps, Auth, Etcd, Node, Scheduling and Testing]
+- Validation now requires new StatefulSets with a `.spec.serviceName` field value to pass DNS1123 validation. Previously created StatefulSets with an invalid `.spec.serviceName` field value could not create any pods, and should be deleted.
+  - Published OpenAPI for the StatefulSet schema is corrected to indicate the `.spec.serviceName` is optional. ([kubernetes/kubernetes#130233](https://github.com/kubernetes/kubernetes/pull/130233), [@soltysh](https://github.com/soltysh)) [SIG API Machinery, Apps and Testing]
+- When the `ImprovedTrafficDistribution` feature gate is enabled, a new
+  `trafficDistribution` value `PreferSameNode` is available, which attempts to
+  always route Service connections to an endpoint on the same node as
+  the client. Additionally, `PreferSameZone` is introduced as an alias for
+  `PreferClose`. ([kubernetes/kubernetes#130844](https://github.com/kubernetes/kubernetes/pull/130844), [@danwinship](https://github.com/danwinship)) [SIG API Machinery, Apps, Network and Windows]
+- When the `StrictIPCIDRValidation` feature gate is enabled, Kubernetes will be
+  slightly stricter about what values will be accepted as IP addresses and network
+  address ranges (“CIDR blocks”).
+  
+  In particular, octets within IPv4 addresses are not allowed to have any leading
+  `0`s, and IPv4-mapped IPv6 values (e.g. `::ffff:192.168.0.1`) are forbidden.
+  These sorts of values can potentially cause security problems when different
+  components interpret the same string as referring to different IP addresses
+  (as in CVE-2021-29923).
+  
+  This tightening applies only to fields in build-in API kinds, and not to
+  custom resource kinds, values in Kubernetes configuration files, or
+  command-line arguments.
+  
+  (When the feature gate is disabled, creating an object with such an invalid
+  IP or CIDR value will result in a warning from the API server about the fact
+  that it will be rejected in the future.) ([kubernetes/kubernetes#122550](https://github.com/kubernetes/kubernetes/pull/122550), [@danwinship](https://github.com/danwinship)) [SIG API Machinery, Apps, Network, Node, Scheduling and Testing]
+- `apidiscovery.k8s.io/v2beta1` API group is disabled by default ([kubernetes/kubernetes#130347](https://github.com/kubernetes/kubernetes/pull/130347), [@Jefftree](https://github.com/Jefftree)) [SIG API Machinery and Testing]
+- DRA support for a "one-of" prioritized list of selection criteria to satisfy a device request in a resource claim. ([kubernetes/kubernetes#128586](https://github.com/kubernetes/kubernetes/pull/128586), [@mortent](https://github.com/mortent)) [SIG API Machinery, Apps, Etcd, Node, Scheduling and Testing]
+- For the InPlacePodVerticalScaling feature, the API server will no longer set the resize status to `Proposed` upon receiving a resize request. ([kubernetes/kubernetes#130574](https://github.com/kubernetes/kubernetes/pull/130574), [@natasha41575](https://github.com/natasha41575)) [SIG Apps, Node and Testing]
+- The apiserver will now return warnings if you create objects with "invalid" IP or
+  CIDR values (like "192.168.000.005", which should not have the extra zeros).
+  Values with non-standard formats can introduce security problems, and will
+  likely be forbidden in a future Kubernetes release. ([kubernetes/kubernetes#128786](https://github.com/kubernetes/kubernetes/pull/128786), [@danwinship](https://github.com/danwinship)) [SIG Apps, Network and Node]
+- When the `PodObservedGenerationTracking` feature gate is set, the kubelet will populate `status.observedGeneration` to reflect the pod's latest `metadata.generation` that it has observed. ([kubernetes/kubernetes#130352](https://github.com/kubernetes/kubernetes/pull/130352), [@natasha41575](https://github.com/natasha41575)) [SIG API Machinery, Apps, CLI, Node, Release, Scheduling, Storage, Testing and Windows]
+- InPlacePodVerticalScaling: Memory limits cannot be decreased unless the memory resize restart policy is set to `RestartContainer`. Container resizePolicy is no longer mutable. ([kubernetes/kubernetes#130183](https://github.com/kubernetes/kubernetes/pull/130183), [@tallclair](https://github.com/tallclair)) [SIG Apps and Node]
+- Introduced API type coordination.k8s.io/v1beta1/LeaseCandidate ([kubernetes/kubernetes#130291](https://github.com/kubernetes/kubernetes/pull/130291), [@Jefftree](https://github.com/Jefftree)) [SIG API Machinery, Etcd and Testing]
+- KEP-3857: Recursive Read-only (RRO) mounts: promote to GA ([kubernetes/kubernetes#130116](https://github.com/kubernetes/kubernetes/pull/130116), [@AkihiroSuda](https://github.com/AkihiroSuda)) [SIG Apps, Node and Testing]
+- MergeDefaultEvictionSettings indicates that defaults for the evictionHard, evictionSoft, evictionSoftGracePeriod, and evictionMinimumReclaim fields should be merged into values specified for those fields in this configuration. Signals specified in this configuration take precedence. Signals not specified in this configuration inherit their defaults. ([kubernetes/kubernetes#127577](https://github.com/kubernetes/kubernetes/pull/127577), [@vaibhav2107](https://github.com/vaibhav2107)) [SIG API Machinery and Node]
+- Promote the Job's JobBackoffLimitPerIndex feature-gate to stable. ([kubernetes/kubernetes#130061](https://github.com/kubernetes/kubernetes/pull/130061), [@mimowo](https://github.com/mimowo)) [SIG API Machinery, Apps, Architecture and Testing]
+- Promoted the feature gate `AnyVolumeDataSource` to GA. ([kubernetes/kubernetes#129770](https://github.com/kubernetes/kubernetes/pull/129770), [@sunnylovestiramisu](https://github.com/sunnylovestiramisu)) [SIG Apps, Storage and Testing]
+- Added support for in-place vertical scaling of Pods with sidecars (containers defined within `initContainers` where the `restartPolicy` is Always). ([kubernetes/kubernetes#128367](https://github.com/kubernetes/kubernetes/pull/128367), [@vivzbansal](https://github.com/vivzbansal)) [SIG API Machinery, Apps, CLI, Node, Scheduling and Testing]
+- Kubectl: added alpha support for customizing kubectl behavior using preferences from a `kuberc` file (separate from kubeconfig). ([kubernetes/kubernetes#125230](https://github.com/kubernetes/kubernetes/pull/125230), [@ardaguclu](https://github.com/ardaguclu)) [SIG API Machinery, CLI and Testing]
+- A new status field `.status.terminatingReplicas` is added to Deployments and ReplicaSets to allow tracking of terminating pods when the DeploymentReplicaSetTerminatingReplicas feature-gate is enabled. ([kubernetes/kubernetes#128546](https://github.com/kubernetes/kubernetes/pull/128546), [@atiratree](https://github.com/atiratree)) [SIG API Machinery, Apps and Testing]
+- DRA API: the maximum number of pods which can use the same ResourceClaim is now 256 instead of 32. Beware that downgrading a cluster where this relaxed limit is in use to Kubernetes 1.32.0 is not supported because 1.32.0 would refuse to update ResourceClaims with more than 32 entries in the status.reservedFor field. ([kubernetes/kubernetes#129543](https://github.com/kubernetes/kubernetes/pull/129543), [@pohly](https://github.com/pohly)) [SIG API Machinery, Node and Testing]
+- DRA: CEL expressions using attribute strings exceeded the cost limit because their cost estimation was incomplete. ([kubernetes/kubernetes#129661](https://github.com/kubernetes/kubernetes/pull/129661), [@pohly](https://github.com/pohly)) [SIG Node]
+- DRA: when asking for "All" devices on a node, Kubernetes <= 1.32 proceeded to schedule pods onto nodes with no devices by not allocating any devices for those pods. Kubernetes 1.33 changes that to only picking nodes which have at least one device. Users who want the "proceed with scheduling also without devices" semantic can use the upcoming prioritized list feature with one sub-request for "all" devices and a second alternative with "count: 0". ([kubernetes/kubernetes#129560](https://github.com/kubernetes/kubernetes/pull/129560), [@bart0sh](https://github.com/bart0sh)) [SIG API Machinery and Node]
+- Graduate MultiCIDRServiceAllocator to stable and DisableAllocatorDualWrite to beta (disabled by default).
+  Action required for Kubernetes distributions that manage the cluster Service CIDR.
+  This feature allows users to define the cluster Service CIDR via a new API object: ServiceCIDR.
+  Distributions or administrators of Kubernetes may want to control that new Service CIDRs added to the cluster does not overlap with other networks on the cluster, that only belong to a specific range of IPs or just simple retain the existing behavior of only having one ServiceCIDR per cluster.  An example of a Validation Admission Policy to achieve this is:
+  
+  ---
+  apiVersion: admissionregistration.k8s.io/v1
+  kind: ValidatingAdmissionPolicy
+  metadata:
+    name: "servicecidrs.default"
+  spec:
+    failurePolicy: Fail
+    matchConstraints:
+      resourceRules:
+      - apiGroups:   ["networking.k8s.io"]
+        apiVersions: ["v1","v1beta1"]
+        operations:  ["CREATE", "UPDATE"]
+        resources:   ["servicecidrs"]
+    matchConditions:
+    - name: 'exclude-default-servicecidr'
+      expression: "object.metadata.name != 'kubernetes'"
+    variables:
+    - name: allowed
+      expression: "['10.96.0.0/16','2001:db8::/64']"
+    validations:
+    - expression: "object.spec.cidrs.all(i , variables.allowed.exists(j , cidr(j).containsCIDR(i)))"
+  ---
+  apiVersion: admissionregistration.k8s.io/v1
+  kind: ValidatingAdmissionPolicyBinding
+  metadata:
+    name: "servicecidrs-binding"
+  spec:
+    policyName: "servicecidrs.default"
+    validationActions: [Deny,Audit]
+  --- ([kubernetes/kubernetes#128971](https://github.com/kubernetes/kubernetes/pull/128971), [@aojea](https://github.com/aojea)) [SIG Apps, Architecture, Auth, CLI, Etcd, Network, Release and Testing]
+- Kubenetes starts validating NodeSelectorRequirement's values when creating pods. ([kubernetes/kubernetes#128212](https://github.com/kubernetes/kubernetes/pull/128212), [@AxeZhan](https://github.com/AxeZhan)) [SIG Apps and Scheduling]
+- Kubernetes components that accept x509 client certificate authentication now read the user UID from a certificate subject name RDN with object id 1.3.6.1.4.1.57683.2. An RDN with this object id must contain a string value, and appear no more than once in the certificate subject. Reading the user UID from this RDN can be disabled by setting the beta feature gate `AllowParsingUserUIDFromCertAuth` to false (until the feature gate graduates to GA). ([kubernetes/kubernetes#127897](https://github.com/kubernetes/kubernetes/pull/127897), [@modulitos](https://github.com/modulitos)) [SIG API Machinery, Auth and Testing]
+- Removed general available feature-gate `PDBUnhealthyPodEvictionPolicy`. ([kubernetes/kubernetes#129500](https://github.com/kubernetes/kubernetes/pull/129500), [@carlory](https://github.com/carlory)) [SIG API Machinery, Apps and Auth]
+- `kubectl apply` now coerces `null` values for labels and annotations in manifests to empty string values, consistent with typed JSON metadata decoding, rather than dropping all labels and annotations ([kubernetes/kubernetes#129257](https://github.com/kubernetes/kubernetes/pull/129257), [@liggitt](https://github.com/liggitt)) [SIG API Machinery]
+
+
 # v32.0.1
 
 Kubernetes API Version: v1.32.2
