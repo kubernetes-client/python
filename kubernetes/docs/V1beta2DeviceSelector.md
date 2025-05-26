@@ -1,10 +1,10 @@
-# V1beta1SelfSubjectReviewStatus
+# V1beta2DeviceSelector
 
-SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
+DeviceSelector must have exactly one field set.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_info** | [**V1UserInfo**](V1UserInfo.md) |  | [optional] 
+**cel** | [**V1beta2CELDeviceSelector**](V1beta2CELDeviceSelector.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
