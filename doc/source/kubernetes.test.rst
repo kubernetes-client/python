@@ -26,7 +26,6 @@ Submodules
    kubernetes.test.test_authentication_api
    kubernetes.test.test_authentication_v1_api
    kubernetes.test.test_authentication_v1_token_request
-   kubernetes.test.test_authentication_v1beta1_api
    kubernetes.test.test_authorization_api
    kubernetes.test.test_authorization_v1_api
    kubernetes.test.test_autoscaling_api
@@ -37,9 +36,11 @@ Submodules
    kubernetes.test.test_certificates_api
    kubernetes.test.test_certificates_v1_api
    kubernetes.test.test_certificates_v1alpha1_api
+   kubernetes.test.test_certificates_v1beta1_api
    kubernetes.test.test_coordination_api
    kubernetes.test.test_coordination_v1_api
    kubernetes.test.test_coordination_v1alpha2_api
+   kubernetes.test.test_coordination_v1beta1_api
    kubernetes.test.test_core_api
    kubernetes.test.test_core_v1_api
    kubernetes.test.test_core_v1_endpoint_port
@@ -75,6 +76,7 @@ Submodules
    kubernetes.test.test_resource_api
    kubernetes.test.test_resource_v1alpha3_api
    kubernetes.test.test_resource_v1beta1_api
+   kubernetes.test.test_resource_v1beta2_api
    kubernetes.test.test_scheduling_api
    kubernetes.test.test_scheduling_v1_api
    kubernetes.test.test_storage_api
@@ -222,6 +224,7 @@ Submodules
    kubernetes.test.test_v1_flow_schema_list
    kubernetes.test.test_v1_flow_schema_spec
    kubernetes.test.test_v1_flow_schema_status
+   kubernetes.test.test_v1_for_node
    kubernetes.test.test_v1_for_zone
    kubernetes.test.test_v1_gce_persistent_disk_volume_source
    kubernetes.test.test_v1_git_repo_volume_source
@@ -257,6 +260,9 @@ Submodules
    kubernetes.test.test_v1_ingress_spec
    kubernetes.test.test_v1_ingress_status
    kubernetes.test.test_v1_ingress_tls
+   kubernetes.test.test_v1_ip_address
+   kubernetes.test.test_v1_ip_address_list
+   kubernetes.test.test_v1_ip_address_spec
    kubernetes.test.test_v1_ip_block
    kubernetes.test.test_v1_iscsi_persistent_volume_source
    kubernetes.test.test_v1_iscsi_volume_source
@@ -326,6 +332,7 @@ Submodules
    kubernetes.test.test_v1_node_selector_term
    kubernetes.test.test_v1_node_spec
    kubernetes.test.test_v1_node_status
+   kubernetes.test.test_v1_node_swap_status
    kubernetes.test.test_v1_node_system_info
    kubernetes.test.test_v1_non_resource_attributes
    kubernetes.test.test_v1_non_resource_policy_rule
@@ -337,6 +344,7 @@ Submodules
    kubernetes.test.test_v1_owner_reference
    kubernetes.test.test_v1_param_kind
    kubernetes.test.test_v1_param_ref
+   kubernetes.test.test_v1_parent_reference
    kubernetes.test.test_v1_persistent_volume
    kubernetes.test.test_v1_persistent_volume_claim
    kubernetes.test.test_v1_persistent_volume_claim_condition
@@ -462,6 +470,10 @@ Submodules
    kubernetes.test.test_v1_service_account_subject
    kubernetes.test.test_v1_service_account_token_projection
    kubernetes.test.test_v1_service_backend_port
+   kubernetes.test.test_v1_service_cidr
+   kubernetes.test.test_v1_service_cidr_list
+   kubernetes.test.test_v1_service_cidr_spec
+   kubernetes.test.test_v1_service_cidr_status
    kubernetes.test.test_v1_service_list
    kubernetes.test.test_v1_service_port
    kubernetes.test.test_v1_service_spec
@@ -577,6 +589,8 @@ Submodules
    kubernetes.test.test_v1alpha3_allocation_result
    kubernetes.test.test_v1alpha3_basic_device
    kubernetes.test.test_v1alpha3_cel_device_selector
+   kubernetes.test.test_v1alpha3_counter
+   kubernetes.test.test_v1alpha3_counter_set
    kubernetes.test.test_v1alpha3_device
    kubernetes.test.test_v1alpha3_device_allocation_configuration
    kubernetes.test.test_v1alpha3_device_allocation_result
@@ -588,9 +602,17 @@ Submodules
    kubernetes.test.test_v1alpha3_device_class_list
    kubernetes.test.test_v1alpha3_device_class_spec
    kubernetes.test.test_v1alpha3_device_constraint
+   kubernetes.test.test_v1alpha3_device_counter_consumption
    kubernetes.test.test_v1alpha3_device_request
    kubernetes.test.test_v1alpha3_device_request_allocation_result
    kubernetes.test.test_v1alpha3_device_selector
+   kubernetes.test.test_v1alpha3_device_sub_request
+   kubernetes.test.test_v1alpha3_device_taint
+   kubernetes.test.test_v1alpha3_device_taint_rule
+   kubernetes.test.test_v1alpha3_device_taint_rule_list
+   kubernetes.test.test_v1alpha3_device_taint_rule_spec
+   kubernetes.test.test_v1alpha3_device_taint_selector
+   kubernetes.test.test_v1alpha3_device_toleration
    kubernetes.test.test_v1alpha3_network_device_data
    kubernetes.test.test_v1alpha3_opaque_device_configuration
    kubernetes.test.test_v1alpha3_resource_claim
@@ -610,6 +632,11 @@ Submodules
    kubernetes.test.test_v1beta1_audit_annotation
    kubernetes.test.test_v1beta1_basic_device
    kubernetes.test.test_v1beta1_cel_device_selector
+   kubernetes.test.test_v1beta1_cluster_trust_bundle
+   kubernetes.test.test_v1beta1_cluster_trust_bundle_list
+   kubernetes.test.test_v1beta1_cluster_trust_bundle_spec
+   kubernetes.test.test_v1beta1_counter
+   kubernetes.test.test_v1beta1_counter_set
    kubernetes.test.test_v1beta1_device
    kubernetes.test.test_v1beta1_device_allocation_configuration
    kubernetes.test.test_v1beta1_device_allocation_result
@@ -622,13 +649,20 @@ Submodules
    kubernetes.test.test_v1beta1_device_class_list
    kubernetes.test.test_v1beta1_device_class_spec
    kubernetes.test.test_v1beta1_device_constraint
+   kubernetes.test.test_v1beta1_device_counter_consumption
    kubernetes.test.test_v1beta1_device_request
    kubernetes.test.test_v1beta1_device_request_allocation_result
    kubernetes.test.test_v1beta1_device_selector
+   kubernetes.test.test_v1beta1_device_sub_request
+   kubernetes.test.test_v1beta1_device_taint
+   kubernetes.test.test_v1beta1_device_toleration
    kubernetes.test.test_v1beta1_expression_warning
    kubernetes.test.test_v1beta1_ip_address
    kubernetes.test.test_v1beta1_ip_address_list
    kubernetes.test.test_v1beta1_ip_address_spec
+   kubernetes.test.test_v1beta1_lease_candidate
+   kubernetes.test.test_v1beta1_lease_candidate_list
+   kubernetes.test.test_v1beta1_lease_candidate_spec
    kubernetes.test.test_v1beta1_match_condition
    kubernetes.test.test_v1beta1_match_resources
    kubernetes.test.test_v1beta1_named_rule_with_operations
@@ -649,8 +683,6 @@ Submodules
    kubernetes.test.test_v1beta1_resource_slice
    kubernetes.test.test_v1beta1_resource_slice_list
    kubernetes.test.test_v1beta1_resource_slice_spec
-   kubernetes.test.test_v1beta1_self_subject_review
-   kubernetes.test.test_v1beta1_self_subject_review_status
    kubernetes.test.test_v1beta1_service_cidr
    kubernetes.test.test_v1beta1_service_cidr_list
    kubernetes.test.test_v1beta1_service_cidr_spec
@@ -667,6 +699,45 @@ Submodules
    kubernetes.test.test_v1beta1_variable
    kubernetes.test.test_v1beta1_volume_attributes_class
    kubernetes.test.test_v1beta1_volume_attributes_class_list
+   kubernetes.test.test_v1beta2_allocated_device_status
+   kubernetes.test.test_v1beta2_allocation_result
+   kubernetes.test.test_v1beta2_cel_device_selector
+   kubernetes.test.test_v1beta2_counter
+   kubernetes.test.test_v1beta2_counter_set
+   kubernetes.test.test_v1beta2_device
+   kubernetes.test.test_v1beta2_device_allocation_configuration
+   kubernetes.test.test_v1beta2_device_allocation_result
+   kubernetes.test.test_v1beta2_device_attribute
+   kubernetes.test.test_v1beta2_device_capacity
+   kubernetes.test.test_v1beta2_device_claim
+   kubernetes.test.test_v1beta2_device_claim_configuration
+   kubernetes.test.test_v1beta2_device_class
+   kubernetes.test.test_v1beta2_device_class_configuration
+   kubernetes.test.test_v1beta2_device_class_list
+   kubernetes.test.test_v1beta2_device_class_spec
+   kubernetes.test.test_v1beta2_device_constraint
+   kubernetes.test.test_v1beta2_device_counter_consumption
+   kubernetes.test.test_v1beta2_device_request
+   kubernetes.test.test_v1beta2_device_request_allocation_result
+   kubernetes.test.test_v1beta2_device_selector
+   kubernetes.test.test_v1beta2_device_sub_request
+   kubernetes.test.test_v1beta2_device_taint
+   kubernetes.test.test_v1beta2_device_toleration
+   kubernetes.test.test_v1beta2_exact_device_request
+   kubernetes.test.test_v1beta2_network_device_data
+   kubernetes.test.test_v1beta2_opaque_device_configuration
+   kubernetes.test.test_v1beta2_resource_claim
+   kubernetes.test.test_v1beta2_resource_claim_consumer_reference
+   kubernetes.test.test_v1beta2_resource_claim_list
+   kubernetes.test.test_v1beta2_resource_claim_spec
+   kubernetes.test.test_v1beta2_resource_claim_status
+   kubernetes.test.test_v1beta2_resource_claim_template
+   kubernetes.test.test_v1beta2_resource_claim_template_list
+   kubernetes.test.test_v1beta2_resource_claim_template_spec
+   kubernetes.test.test_v1beta2_resource_pool
+   kubernetes.test.test_v1beta2_resource_slice
+   kubernetes.test.test_v1beta2_resource_slice_list
+   kubernetes.test.test_v1beta2_resource_slice_spec
    kubernetes.test.test_v2_container_resource_metric_source
    kubernetes.test.test_v2_container_resource_metric_status
    kubernetes.test.test_v2_cross_version_object_reference
