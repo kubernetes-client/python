@@ -179,7 +179,7 @@ class Watch(object):
         # We want to ensure we are returning within that timeout.
         disable_retries = ('timeout_seconds' in kwargs)
         retry_after_410 = False
-        deserialize = kwargs.pop('deserialize', False)
+        deserialize = kwargs.pop('deserialize', True)
         while True:
             resp = func(*args, **kwargs)
             try:
