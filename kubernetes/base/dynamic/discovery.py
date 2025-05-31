@@ -195,6 +195,27 @@ class Discoverer(object):
             resources[resource_list.kind].append(resource_list)
         return resources
 
+    def _find_resource_case_insensitive(self, kind, resources_dict):
+        """
+        Find a resource in the resources_dict where the key matches the specified kind,
+        regardless of case.
+        
+        Args:
+            kind: The kind to search for (case-insensitive)
+            resources_dict: The resources dictionary to search in
+            
+        Returns:
+            The actual key if found, None otherwise
+        """
+        if not kind:
+            return None
+            
+        kind_lower = kind.lower()
+        for key in resources_dict.keys():
+            if key.lower() == kind_lower:
+                return key
+        return None
+    
     def get(self, **kwargs):
         """ Same as search, but will throw an error if there are multiple or no
             results. If there are multiple results and only one is an exact match
@@ -241,14 +262,69 @@ class LazyDiscoverer(Discoverer):
         return self.parse_api_groups(request_resources=False, update=True)['apis'].keys()
 
     def search(self, **kwargs):
+        # Save the original kind parameter for case-insensitive lookup if needed
+        original_kind = kwargs.get('kind')
+        
         # In first call, ignore ResourceNotFoundError and set default value for results
         try:
             results = self.__search(self.__build_search(**kwargs), self.__resources, [])
         except ResourceNotFoundError:
             results = []
+            
+        # If no results were found and a kind was specified, try case-insensitive lookup
+        if not results and original_kind and kwargs.get('kind') == original_kind:
+            # Iterate through the resource tree to find a case-insensitive match
+            for prefix, groups in self.__resources.items():
+                for group, versions in groups.items():
+                    for version, rg in versions.items():
+                        if hasattr(rg, "resources") and rg.resources:
+                            # Look for a matching kind (case-insensitive)
+                            matching_kind = self._find_resource_case_insensitive(original_kind, rg.resources)
+                            if matching_kind:
+                                # Try again with the correct case
+                                modified_kwargs = kwargs.copy()
+                                modified_kwargs['kind'] = matching_kind
+                                try:
+                                    results = self.__search(self.__build_search(**modified_kwargs), self.__resources, [])
+                                    if results:
+                                        break
+                                except ResourceNotFoundError:
+                                    continue
+                                    
+        # If still no results, invalidate cache and retry
         if not results:
             self.invalidate_cache()
-            results = self.__search(self.__build_search(**kwargs), self.__resources, [])
+            
+            # Reset kind parameter that might have been modified
+            if original_kind:
+                kwargs['kind'] = original_kind
+                
+            # Try exact match first
+            try:
+                results = self.__search(self.__build_search(**kwargs), self.__resources, [])
+            except ResourceNotFoundError:
+                # If exact match fails, try case-insensitive lookup
+                if original_kind:
+                    # Same case-insensitive lookup logic as above
+                    for prefix, groups in self.__resources.items():
+                        for group, versions in groups.items():
+                            for version, rg in versions.items():
+                                if hasattr(rg, "resources") and rg.resources:
+                                    matching_kind = self._find_resource_case_insensitive(original_kind, rg.resources)
+                                    if matching_kind:
+                                        modified_kwargs = kwargs.copy()
+                                        modified_kwargs['kind'] = matching_kind
+                                        try:
+                                            results = self.__search(self.__build_search(**modified_kwargs), self.__resources, [])
+                                            if results:
+                                                break
+                                        except ResourceNotFoundError:
+                                            continue
+                    
+                # If still no results, set empty list
+                if not results:
+                    results = []
+                    
         self.__maybe_write_cache()
         return results
 
@@ -349,10 +425,54 @@ class EagerDiscoverer(Discoverer):
 
             The arbitrary arguments can be any valid attribute for an Resource object
         """
+        # Save original kind parameter for case-insensitive lookup if needed
+        original_kind = kwargs.get('kind')
+        
+        # Try original search first
         results = self.__search(self.__build_search(**kwargs), self.__resources)
+        
+        # If no results were found and a kind was specified, try case-insensitive lookup
+        if not results and original_kind and kwargs.get('kind') == original_kind:
+            # Iterate through the resource tree to find a case-insensitive match
+            for prefix, groups in self.__resources.items():
+                for group, versions in groups.items():
+                    for version, resource_dict in versions.items():
+                        if isinstance(resource_dict, ResourceGroup) and resource_dict.resources:
+                            # Look for a matching kind (case-insensitive)
+                            matching_kind = self._find_resource_case_insensitive(original_kind, resource_dict.resources)
+                            if matching_kind:
+                                # Try again with the correct case
+                                modified_kwargs = kwargs.copy()
+                                modified_kwargs['kind'] = matching_kind
+                                results = self.__search(self.__build_search(**modified_kwargs), self.__resources)
+                                if results:
+                                    break
+        
+        # If still no results, invalidate cache and retry
         if not results:
             self.invalidate_cache()
+            
+            # Reset kind parameter that might have been modified
+            if original_kind:
+                kwargs['kind'] = original_kind
+            
+            # Try exact match first
             results = self.__search(self.__build_search(**kwargs), self.__resources)
+            
+            # If exact match fails, try case-insensitive lookup
+            if not results and original_kind:
+                for prefix, groups in self.__resources.items():
+                    for group, versions in groups.items():
+                        for version, resource_dict in versions.items():
+                            if isinstance(resource_dict, ResourceGroup) and resource_dict.resources:
+                                matching_kind = self._find_resource_case_insensitive(original_kind, resource_dict.resources)
+                                if matching_kind:
+                                    modified_kwargs = kwargs.copy()
+                                    modified_kwargs['kind'] = matching_kind
+                                    results = self.__search(self.__build_search(**modified_kwargs), self.__resources)
+                                    if results:
+                                        break
+        
         return results
 
     def __build_search(self, prefix=None, group=None, api_version=None, kind=None, **kwargs):
