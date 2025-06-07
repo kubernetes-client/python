@@ -17,6 +17,7 @@ import logging
 import multiprocessing
 import sys
 import urllib3
+import os
 
 import six
 from six.moves import http_client as httplib
@@ -158,9 +159,15 @@ class Configuration(object):
         """
 
         self.proxy = None
+        if(os.getenv("HTTPS_PROXY")):self.proxy=os.getenv("HTTPS_PROXY")
+        if(os.getenv("https_proxy")):self.proxy=os.getenv("https_proxy")
+        if(os.getenv("HTTP_PROXY")):self.proxy=os.getenv("HTTP_PROXY")
+        if(os.getenv("http_proxy")):self.proxy=os.getenv("http_proxy")
         """Proxy URL
         """
         self.no_proxy = None
+        if(os.getenv("NO_PROXY")):self.no_proxy=os.getenv("NO_PROXY")
+        if(os.getenv("no_proxy")):self.no_proxy=os.getenv("no_proxy")
         """bypass proxy for host in the no_proxy list.
         """
         self.proxy_headers = None
