@@ -1842,6 +1842,38 @@ class TestKubeConfigMerger(BaseTestCase):
             },
         ]
     }]
+    TEST_KUBE_CONFIG_SET3 = [{
+        "current-context": "",
+        "contexts": [
+            {
+                "name": "context1",
+                "context": {
+                    "cluster": "cluster1"
+                }
+            },
+            {
+                "name": "context2",
+                "context": {
+                    "cluster": "cluster2"
+                }
+            },
+        ],
+        "clusters": [
+            {
+                "name": "cluster1",
+                "cluster": {
+                    "server": TEST_HOST
+                }
+            },
+            {
+                "name": "cluster2",
+                "cluster": {
+                    "server": TEST_HOST
+                }
+            },
+        ],
+        "users": []
+    }]
 
     def _create_multi_config(self, parts):
         files = []
@@ -1891,6 +1923,19 @@ class TestKubeConfigMerger(BaseTestCase):
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.configuration.api_key['authorization'])
+
+    def test_current_context_in_different_file(self):
+        cases = [
+            ([{"current-context": "context1"}] + self.TEST_KUBE_CONFIG_SET3, 'context1'),
+            (self.TEST_KUBE_CONFIG_SET3 + [{"current-context": "context2"}], 'context2'),
+            ([{}, {"current-context": "context2"}] + self.TEST_KUBE_CONFIG_SET3, 'context2'),
+            ([{"current-context": "context1"}, {"current-context": "context2"}] + self.TEST_KUBE_CONFIG_SET3, 'context1'),
+        ]
+
+        for kube_config_set, expected_current_context_name in cases:
+            kubeconfigs = self._create_multi_config(kube_config_set)
+            _, current_context = list_kube_config_contexts(config_file=kubeconfigs)
+            self.assertEqual(current_context["name"], expected_current_context_name)
 
     def test_save_changes(self):
         kubeconfigs = self._create_multi_config(self.TEST_KUBE_CONFIG_SET1)
