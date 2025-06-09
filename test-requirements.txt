@@ -1,10 +1,10 @@
-coverage>=4.0.3
-nose>=1.3.7
+coverage
+nose
 pytest
 pytest-cov
-pluggy>=0.3.1
-randomize>=0.13
-sphinx>=1.4 # BSD
+pluggy
+randomize
+sphinx# BSD
 recommonmark
 sphinx_markdown_tables
 pycodestyle
