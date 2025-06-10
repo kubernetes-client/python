@@ -1,6 +1,6 @@
 # CoreV1EndpointPort
 
-EndpointPort is a tuple that describes a single port.
+EndpointPort is a tuple that describes a single port. Deprecated: This API is deprecated in v1.33+.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

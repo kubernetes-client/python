@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **restart_count** | **int** | RestartCount holds the number of times the container has been restarted. Kubelet makes an effort to always increment the value, but there are cases when the state may be lost due to node restarts and then the value may be reset to 0. The value is never negative. | 
 **started** | **bool** | Started indicates whether the container has finished its postStart lifecycle hook and passed its startup probe. Initialized as false, becomes true after startupProbe is considered successful. Resets to false when the container is restarted, or if kubelet loses state temporarily. In both cases, startup probes will run again. Is always true when no startupProbe is defined and container is running and has passed the postStart lifecycle hook. The null value must be treated the same as false. | [optional] 
 **state** | [**V1ContainerState**](V1ContainerState.md) |  | [optional] 
+**stop_signal** | **str** | StopSignal reports the effective stop signal for this container | [optional] 
 **user** | [**V1ContainerUser**](V1ContainerUser.md) |  | [optional] 
 **volume_mounts** | [**list[V1VolumeMountStatus]**](V1VolumeMountStatus.md) | Status of volume mounts. | [optional] 
 

@@ -20,7 +20,6 @@ Submodules
    kubernetes.client.api.apps_v1_api
    kubernetes.client.api.authentication_api
    kubernetes.client.api.authentication_v1_api
-   kubernetes.client.api.authentication_v1beta1_api
    kubernetes.client.api.authorization_api
    kubernetes.client.api.authorization_v1_api
    kubernetes.client.api.autoscaling_api
@@ -31,9 +30,11 @@ Submodules
    kubernetes.client.api.certificates_api
    kubernetes.client.api.certificates_v1_api
    kubernetes.client.api.certificates_v1alpha1_api
+   kubernetes.client.api.certificates_v1beta1_api
    kubernetes.client.api.coordination_api
    kubernetes.client.api.coordination_v1_api
    kubernetes.client.api.coordination_v1alpha2_api
+   kubernetes.client.api.coordination_v1beta1_api
    kubernetes.client.api.core_api
    kubernetes.client.api.core_v1_api
    kubernetes.client.api.custom_objects_api
@@ -59,6 +60,7 @@ Submodules
    kubernetes.client.api.resource_api
    kubernetes.client.api.resource_v1alpha3_api
    kubernetes.client.api.resource_v1beta1_api
+   kubernetes.client.api.resource_v1beta2_api
    kubernetes.client.api.scheduling_api
    kubernetes.client.api.scheduling_v1_api
    kubernetes.client.api.storage_api

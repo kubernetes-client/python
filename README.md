@@ -101,7 +101,8 @@ supported versions of Kubernetes clusters.
 - [client 29.y.z](https://pypi.org/project/kubernetes/29.0.0/): Kubernetes 1.28 or below (+-), Kubernetes 1.29 (✓), Kubernetes 1.30 or above (+-)
 - [client 30.y.z](https://pypi.org/project/kubernetes/30.1.0/): Kubernetes 1.29 or below (+-), Kubernetes 1.30 (✓), Kubernetes 1.31 or above (+-)
 - [client 31.y.z](https://pypi.org/project/kubernetes/31.0.0/): Kubernetes 1.30 or below (+-), Kubernetes 1.31 (✓), Kubernetes 1.32 or above (+-)
-- [client 32.y.z](https://pypi.org/project/kubernetes/32.0.0/): Kubernetes 1.31 or below (+-), Kubernetes 1.32 (✓), Kubernetes 1.33 or above (+-)
+- [client 32.y.z](https://pypi.org/project/kubernetes/32.0.1/): Kubernetes 1.31 or below (+-), Kubernetes 1.32 (✓), Kubernetes 1.33 or above (+-)
+- [client 33.y.z](https://pypi.org/project/kubernetes/33.1.0/): Kubernetes 1.32 or below (+-), Kubernetes 1.33 (✓), Kubernetes 1.34 or above (+-)
 
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explanation of why there is no v13-v16 release.
@@ -166,11 +167,13 @@ between client-python versions.
 | 29.0 Alpha/Beta | Kubernetes main repo, 1.29 branch    | ✗                             |
 | 29.0            | Kubernetes main repo, 1.29 branch    | ✗                             |
 | 30.0 Alpha/Beta | Kubernetes main repo, 1.30 branch    | ✗                             |
-| 30.0            | Kubernetes main repo, 1.30 branch    | ✓                             |
+| 30.0            | Kubernetes main repo, 1.30 branch    | ✗                             |
 | 31.0 Alpha/Beta | Kubernetes main repo, 1.31 branch    | ✗                             |
 | 31.0            | Kubernetes main repo, 1.31 branch    | ✓                             |
 | 32.0 Alpha/Beta | Kubernetes main repo, 1.32 branch    | ✗                             |
-| 32.0            | Kubernetes main repo, 1.32 branch    | ✓                             |
+| 32.1            | Kubernetes main repo, 1.32 branch    | ✓                             |
+| 33.1 Alpha/Beta | Kubernetes main repo, 1.33 branch    | ✗                             |
+| 33.1            | Kubernetes main repo, 1.33 branch    | ✓                             |
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explanation of why there is no v13-v16 release.
 
@@ -235,5 +238,21 @@ This will cause a failure in  non-exec/attach calls. If you reuse your api clien
 recreate it between api calls that use _stream_ and other api calls.
 
 See more at [exec example](examples/pod_exec.py).
+
+## Enabling Debug Logging
+
+To enable debug logging in the Kubernetes Python client, follow these steps:
+
+### 1. Import the `logging` module
+
+```python
+import logging
+
+# Set the logging level to DEBUG
+logging.basicConfig(level=logging.DEBUG)
+
+# To see the HTTP requests and responses sent to the Kubernetes API (for debugging network-related issues), configure the urllib3 logger:
+logging.getLogger("urllib3").setLevel(logging.DEBUG)
+```
 
 **[⬆ back to top](#Installation)**
