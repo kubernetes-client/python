@@ -14,7 +14,7 @@
 
 
 class LeaderElectionRecord:
-    # Annotation used in the lock object
+    # Lease configuration from in the lock object.
     def __init__(self, holder_identity, lease_duration, acquire_time, renew_time):
         self.holder_identity = holder_identity
         self.lease_duration = lease_duration
