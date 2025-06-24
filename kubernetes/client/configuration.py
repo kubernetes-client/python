@@ -272,6 +272,8 @@ class Configuration(object):
         if self.__debug:
             # if debug status is True, turn on debug logging
             for _, logger in six.iteritems(self.logger):
+                if logger.level == logging.DEBUG:
+                    continue                
                 logger.setLevel(logging.DEBUG)
             # turn on httplib debug
             httplib.HTTPConnection.debuglevel = 1
@@ -279,6 +281,8 @@ class Configuration(object):
             # if debug status is False, turn off debug logging,
             # setting log level to default `logging.WARNING`
             for _, logger in six.iteritems(self.logger):
+                if logger.level == logging.WARNING:
+                    continue                
                 logger.setLevel(logging.WARNING)
             # turn off httplib debug
             httplib.HTTPConnection.debuglevel = 0
