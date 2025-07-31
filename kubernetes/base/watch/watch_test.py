@@ -18,6 +18,8 @@ import os
 
 import time
 
+import json
+
 from unittest.mock import Mock, call
 
 from kubernetes import client,config
@@ -193,7 +195,7 @@ class WatchTests(unittest.TestCase):
             self.assertEqual("test%d" % count, event['object'].metadata.name)
             self.assertEqual("😄 %d" % count, event['object'].data["utf-8"])
             # expect N replacement characters in test N
-            self.assertEqual("� %d".replace('�', '�'*count) %
+            self.assertEqual("  %d".replace(' ', ' '*count) %
                              count, event['object'].data["invalid"])
         self.assertEqual(3, count)
 
