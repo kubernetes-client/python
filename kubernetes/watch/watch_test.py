@@ -40,14 +40,14 @@ class WatchTests(unittest.TestCase):
         fake_resp.release_conn = Mock()
         fake_resp.stream = Mock(
             return_value=[
-                '{"type": "ADDED", "object": {"metadata": {"name": "test1",'r'"resourceVersion": "1"}, "spec": {}, "status": {}}}
-',
-                '{"type": "ADDED", "object": {"metadata": {"name": "test2",'r'"resourceVersion": "2"}, "spec": {}, "sta',
-                'tus": {}}}
-'r'"{"type": "ADDED", "object": {"metadata": {"name": "test3",'r'"resourceVersion": "3"}, "spec": {}, "status": {}}}
-',
-                'should_not_happened
-'])
+                '{"type": "ADDED", "object": {"metadata": {"name": "test1",'
+                '"resourceVersion": "1"}, "spec": {}, "status": {}}}\n',
+                '{"type": "ADDED", "object": {"metadata": {"name": "test2",'
+                '"resourceVersion": "2"}, "spec": {}, "sta',
+                'tus": {}}}\n'
+                '{"type": "ADDED", "object": {"metadata": {"name": "test3",'
+                '"resourceVersion": "3"}, "spec": {}, "status": {}}}\n',
+                'should_not_happened\n'])
 
         fake_api = Mock()
         fake_api.get_namespaces = Mock(return_value=fake_resp)
@@ -87,14 +87,11 @@ class WatchTests(unittest.TestCase):
             return_value=[
                 '\n',
                 '{"type": "ADDED", "object": {"metadata":',
-                '{"name": "test1","resourceVersion": "1"}}}
-{"type": "ADDED", ',
-                '"object": {"metadata": {"name": "test2", "resourceVersion": "2"}}}
-',
+                '{"name": "test1","resourceVersion": "1"}}}\n{"type": "ADDED", ',
+                '"object": {"metadata": {"name": "test2", "resourceVersion": "2"}}}\n',
                 '\n',
                 '',
-                '{"type": "ADDED", "object": {"metadata": {"name": "test3", "resourceVersion": "3"}}}
-',
+                '{"type": "ADDED", "object": {"metadata": {"name": "test3", "resourceVersion": "3"}}}\n',
                 '\n\n\n',
                 '\n',
             ])
@@ -124,18 +121,16 @@ class WatchTests(unittest.TestCase):
         fake_resp.stream = Mock(
             return_value=[
                 # two-byte utf-8 character
-                '{"type":"MODIFIED","object":{"data":{"utf-8":"© 1"},"metadata":{"name":"test1","resourceVersion":"1"}}}
-',
+                '{"type":"MODIFIED","object":{"data":{"utf-8":"© 1"},"metadata":{"name":"test1","resourceVersion":"1"}}}\n',
                 # same copyright character expressed as bytes
-                b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xC2\xA9 2"},"metadata":{"name":"test2","resourceVersion":"2"}}}
-'
+                b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xC2\xA9 2"},"metadata":{"name":"test2","resourceVersion":"2"}}}\n'
                 # same copyright character with bytes split across two stream chunks
                 b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xC2',
                 b'\xA9 3"},"metadata":{"n',
                 # more chunks of the same event, sent as a mix of bytes and strings
                 'ame":"test3","resourceVersion":"3"',
-                '}}}
-',r'                b'\n'
+                '}}}',
+                b'\n'
             ])
 
         fake_api = Mock()
@@ -170,10 +165,8 @@ class WatchTests(unittest.TestCase):
                 # utf-8 sequence for 😄 is \xF0\x9F\x98\x84
                 # all other sequences below are invalid
                 # ref: https://www.w3.org/2001/06/utf-8-wrong/UTF-8-test.html
-                b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xF0\x9F\x98\x84 1","invalid":"\x80 1"},"metadata":{"name":"test1"}}}
-',
-                b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xF0\x9F\x98\x84 2","invalid":"\xC0\xAF 2"},"metadata":{"name":"test2"}}}
-',
+                b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xF0\x9F\x98\x84 1","invalid":"\x80 1"},"metadata":{"name":"test1"}}}\n',
+                b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xF0\x9F\x98\x84 2","invalid":"\xC0\xAF 2"},"metadata":{"name":"test2"}}}\n',
                 # mix bytes/strings and split byte sequences across chunks
                 b'{"type":"MODIFIED","object":{"data":{"utf-8":"\xF0\x9F\x98',
                 b'\x84 ',
@@ -182,8 +175,8 @@ class WatchTests(unittest.TestCase):
                 b'\xAF ',
                 '3"},"metadata":{"n',
                 'ame":"test3"',
-                '}}}
-',r'                b'\n'
+                '}}}',
+                b'\n'
             ])
 
         fake_api = Mock()
@@ -206,7 +199,7 @@ class WatchTests(unittest.TestCase):
             # spaces case: count spaces then the number
             expected_spaces = ' ' * count + f' {count}'
             # replacement case: count replacement chars then the number
-            expected_replacement = '' * count + f' {count}'
+            expected_replacement = '�' * count + f' {count}'
             self.assertIn(
                 actual,
                 [expected_spaces, expected_replacement],
@@ -252,12 +245,13 @@ class WatchTests(unittest.TestCase):
         fake_resp.close = Mock()
         fake_resp.release_conn = Mock()
         values = [
-            '{"type": "ADDED", "object": {"metadata": {"name": "test1",'r'"resourceVersion": "1"}, "spec": {}, "status": {}}}
-',
-            '{"type": "ADDED", "object": {"metadata": {"name": "test2",'r'"resourceVersion": "2"}, "spec": {}, "sta',
-            'tus": {}}}
-'r'"{"type": "ADDED", "object": {"metadata": {"name": "test3",'r'"resourceVersion": "3"}, "spec": {}, "status": {}}}
-'
+            '{"type": "ADDED", "object": {"metadata": {"name": "test1",'
+            '"resourceVersion": "1"}, "spec": {}, "status": {}}}\n',
+            '{"type": "ADDED", "object": {"metadata": {"name": "test2",'
+            '"resourceVersion": "2"}, "spec": {}, "sta',
+            'tus": {}}}\n'
+            '{"type": "ADDED", "object": {"metadata": {"name": "test3",'
+            '"resourceVersion": "3"}, "spec": {}, "status": {}}}\n'
         ]
 
         # return nothing on the first call and values on the second
@@ -390,7 +384,9 @@ class WatchTests(unittest.TestCase):
     def test_unmarshal_with_custom_object(self):
         w = Watch()
         event = w.unmarshal_event('{"type": "ADDED", "object": {"apiVersion":'
-                                  '"test.com/v1beta1","kind":"foo","metadata":'r'"{"name": "bar", "resourceVersion": "1"}}}', 'object')
+                                  '"test.com/v1beta1","kind":"foo","metadata":'
+                                  '{"name": "bar", "resourceVersion": "1"}}}',
+                                  'object')
         self.assertEqual("ADDED", event['type'])
         # make sure decoder deserialized json into dictionary and updated
         # Watch.resource_version
@@ -401,7 +397,10 @@ class WatchTests(unittest.TestCase):
     def test_unmarshal_with_bookmark(self):
         w = Watch()
         event = w.unmarshal_event(
-            '{"type":"BOOKMARK","object":{"kind":"Job","apiVersion":"batch/v1"'r'"metadata":{"resourceVersion":"1"},"spec":{"template":{'r'"metadata":{},"spec":{"containers":null}}},"status":{}}}', 'V1Job')
+            '{"type":"BOOKMARK","object":{"kind":"Job","apiVersion":"batch/v1"'
+            ',"metadata":{"resourceVersion":"1"},"spec":{"template":{'
+            '"metadata":{},"spec":{"containers":null}}},"status":{}}}',
+            'V1Job')
         self.assertEqual("BOOKMARK", event['type'])
         # Watch.resource_version is *not* updated, as BOOKMARK is treated the
         # same as ERROR for a quick fix of decoding exception,
@@ -439,8 +438,7 @@ class WatchTests(unittest.TestCase):
         fake_resp.stream = Mock(
             return_value=[
                 '{"type": "ERROR", "object": {"code": 410, '
-                '"reason": "Gone", "message": "error message"}}
-'])
+                '"reason": "Gone", "message": "error message"}}\n'])
 
         fake_api = Mock()
         fake_api.get_thing = Mock(return_value=fake_resp)
@@ -464,8 +462,7 @@ class WatchTests(unittest.TestCase):
         fake_resp.stream = Mock(
             return_value=[
                 '{"type": "ERROR", "object": {"code": 410, '
-                '"reason": "Gone", "message": "error message"}}
-'])
+                '"reason": "Gone", "message": "error message"}}\n'])
 
         fake_api = Mock()
         fake_api.get_thing = Mock(return_value=fake_resp)
@@ -492,8 +489,7 @@ class WatchTests(unittest.TestCase):
         fake_resp.stream = Mock(
             return_value=[
                 '{"type": "ERROR", "object": {"code": 410, '
-                '"reason": "Gone", "message": "error message"}}
-'])
+                '"reason": "Gone", "message": "error message"}}\n'])
 
         fake_api = Mock()
         fake_api.get_thing = Mock(return_value=fake_resp)
@@ -594,10 +590,10 @@ class WatchTests(unittest.TestCase):
         """test watch.stream() deserialize param"""
 
         test_json = (
-            '{"type": "ADDED", 'r'
-            '"object": {"metadata": {"name": "test1", "resourceVersion": "1"}, 'r'
-            '"spec": {}, "status": {}}}
-')
+            '{"type": "ADDED", '
+            '"object": {"metadata": {"name": "test1", "resourceVersion": "1"}, '
+            '"spec": {}, "status": {}}}'
+        )
 
         # Mock object for deserialize=True case
         metadata_mock = MagicMock()
