@@ -22,6 +22,7 @@ from functools import partial
 from collections import defaultdict
 from abc import abstractmethod, abstractproperty
 
+from json.decoder import JSONDecodeError
 from urllib3.exceptions import ProtocolError, MaxRetryError
 
 from kubernetes import __version__
@@ -164,7 +165,8 @@ class Discoverer(object):
         path = '/'.join(filter(None, [prefix, group, version]))
         try:
             resources_response = self.client.request('GET', path).resources or []
-        except ServiceUnavailableError:
+        except (ServiceUnavailableError, JSONDecodeError):
+            # Handle both service unavailable errors and JSON decode errors
             resources_response = []
 
         resources_raw = list(filter(lambda resource: '/' not in resource['name'], resources_response))
