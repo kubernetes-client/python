@@ -69,7 +69,7 @@ class DummyProxy(threading.Thread):
         self.received_connect = False
         self._server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self._server_sock.bind((self.host, self.port))
+        self._server_sock.bind((self.host, 0))
         self._server_sock.listen(1)
 
     def run(self):
