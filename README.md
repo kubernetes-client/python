@@ -255,4 +255,15 @@ logging.basicConfig(level=logging.DEBUG)
 logging.getLogger("urllib3").setLevel(logging.DEBUG)
 ```
 
+## Windows Long Path Support
+Due to Windows’ default MAX_PATH limit of 260 characters, deeply nested directories may fail.
+To avoid issues, enable long-path support:
+
+```powershell
+# Run as Administrator
+New-ItemProperty -Path "HKLM:SYSTEMCurrentControlSetControlFileSystem" `
+  -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+```
+After reboot, Windows will allow paths longer than 260 characters.
+
 **[⬆ back to top](#Installation)**

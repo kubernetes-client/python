@@ -80,3 +80,21 @@ If you write a new end to end (e2e) test, or change behaviors that affect e2e te
 2. Run the unit tests. In the root directory of the main repo, run ```python -m unittest discover```.
 
 3. Check the test results and make corresponding fixes.
+
+## Windows Setup Tips
+
+### Enable Long Paths on Windows
+If you’re on Windows and working with deeply nested files or packages:
+
+1. Open PowerShell as Administrator.
+
+2. Run:
+
+```powershell
+New-ItemProperty -Path "HKLM:SYSTEMCurrentControlSetControlFileSystem" `
+  -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+```
+
+3. Reboot your machine.
+
+This ensures tools like `pip install -e .` and tests won’t break on long Windows paths.
