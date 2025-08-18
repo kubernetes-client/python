@@ -7,6 +7,5 @@ google-auth>=1.0.1  # Apache-2.0
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
-oauthlib>=3.2.2 # BSD
 urllib3>=1.24.2  # MIT
 durationpy>=0.7 # MIT
