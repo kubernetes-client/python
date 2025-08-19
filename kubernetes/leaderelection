@@ -1,1 +1,3 @@
-base/leaderelection
+"""Windows-friendly shim for kubernetes.base.leaderelection."""
+
+from kubernetes.base.leaderelection import *  # noqa: F401,F403

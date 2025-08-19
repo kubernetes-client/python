@@ -1,1 +1,6 @@
-base/dynamic
+"""Windows-friendly shim for kubernetes.base.dynamic.
+
+Replaces symlink with explicit import to maintain cross-platform behavior.
+"""
+
+from kubernetes.base.dynamic import *  # noqa: F401,F403

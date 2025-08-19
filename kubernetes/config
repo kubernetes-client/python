@@ -1,1 +1,9 @@
-base/config
+"""Windows-friendly shim: exposes symbols from kubernetes.base.config.
+
+Previously this path used a symlink to base/config which is not portable on
+Windows (especially in workspaces lacking Developer Mode or proper
+permissions). Converting to a simple Python re-export preserves public API
+without requiring filesystem symlinks.
+"""
+
+from kubernetes.base.config import *  # noqa: F401,F403
