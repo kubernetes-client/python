@@ -22,4 +22,7 @@ from . import dynamic
 from . import watch
 from . import stream
 from . import utils
-from . import leaderelection
+import sys
+
+if sys.platform != 'win32':
+    from . import leaderelection

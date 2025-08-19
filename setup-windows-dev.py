@@ -31,6 +31,9 @@ def setup_windows_directories():
             if os.path.isfile(symlink_path):
                 print(f"Removing broken symlink file: {symlink_path}")
                 os.remove(symlink_path)
+            elif os.path.isdir(symlink_path):
+                print(f"Removing directory: {symlink_path}")
+                shutil.rmtree(symlink_path)
             elif os.path.islink(symlink_path):
                 print(f"Removing symlink: {symlink_path}")
                 os.unlink(symlink_path)
@@ -44,7 +47,21 @@ def setup_windows_directories():
 def main():
     print("Setting up Kubernetes Python Client for Windows development...")
     setup_windows_directories()
-    print("Setup complete! You can now run 'pip install -e .' and tests.")
+    
+    print("Installing the package in editable mode...")
+    try:
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "-e", "."],
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        print("Installation complete! You can now run tests.")
+    except subprocess.CalledProcessError as e:
+        print("Error during installation:")
+        print(e.stdout)
+        print(e.stderr)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

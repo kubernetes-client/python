@@ -423,27 +423,21 @@ class KubeConfigLoader(object):
         config = Configuration()
 
         if 'idp-certificate-authority-data' in provider['config']:
-            ca_cert = tempfile.NamedTemporaryFile(delete=True)
-
-            if PY3:
+            ca_cert = tempfile.NamedTemporaryFile(delete=False, mode='w', encoding='utf-8')
+            try:
                 cert = base64.b64decode(
                     provider['config']['idp-certificate-authority-data']
                 ).decode('utf-8')
-            else:
-                cert = base64.b64decode(
-                    provider['config']['idp-certificate-authority-data'] + "=="
-                )
-
-            with open(ca_cert.name, 'w') as fh:
-                fh.write(cert)
-
-            config.ssl_ca_cert = ca_cert.name
-
-        elif 'idp-certificate-authority' in provider['config']:
-            config.ssl_ca_cert = provider['config']['idp-certificate-authority']
-
-        else:
-            config.verify_ssl = False
+                ca_cert.write(cert)
+                ca_cert.close()
+                config.ssl_ca_cert = ca_cert.name
+                if len(_temp_files) == 0:
+                    atexit.register(_cleanup_temp_files)
+                _temp_files[ca_cert.name] = ca_cert.name
+            except Exception:
+                ca_cert.close()
+                os.unlink(ca_cert.name)
+                raise
 
         client = ApiClient(configuration=config)
 

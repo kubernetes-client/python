@@ -12,7 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import shutil
+import sys
+
 from setuptools import setup
+
+def create_symlinks_for_windows():
+    if sys.platform == 'win32':
+        symlinks = {
+            'kubernetes/ws_client.py': 'kubernetes/stream/ws_client.py',
+            'kubernetes/leaderelection.py': 'kubernetes/base/leaderelection/leaderelection.py',
+        }
+        for link, target in symlinks.items():
+            if os.path.exists(link):
+                if os.path.isdir(link):
+                    shutil.rmtree(link)
+                else:
+                    os.remove(link)
+            if os.path.isdir(target):
+                shutil.copytree(target, link)
+            else:
+                shutil.copy(target, link)
+
+create_symlinks_for_windows()
+
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
@@ -63,8 +87,7 @@ setup(
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils', 'kubernetes.client.apis',
-              'kubernetes.dynamic', 'kubernetes.leaderelection',
-              'kubernetes.leaderelection.resourcelock'],
+              'kubernetes.dynamic'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     python_requires='>=3.6',

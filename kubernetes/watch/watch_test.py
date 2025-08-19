@@ -20,7 +20,7 @@ import time
 
 import json
 
-from unittest.mock import Mock, call, patch, MagicMock
+from unittest.mock import Mock, call
 
 from kubernetes import client,config
 
@@ -195,16 +195,8 @@ class WatchTests(unittest.TestCase):
             self.assertEqual("test%d" % count, event['object'].metadata.name)
             self.assertEqual("😄 %d" % count, event['object'].data["utf-8"])
             # expect N replacement characters in test N
-            actual = event['object'].data["invalid"]
-            # spaces case: count spaces then the number
-            expected_spaces = ' ' * count + f' {count}'
-            # replacement case: count replacement chars then the number
-            expected_replacement = '�' * count + f' {count}'
-            self.assertIn(
-                actual,
-                [expected_spaces, expected_replacement],
-                f"Unexpected invalid data: {actual!r}, expected spaces '{expected_spaces!r}' or replacements '{expected_replacement!r}'"
-            )
+            self.assertEqual("  %d".replace(' ', ' '*count) %
+                             count, event['object'].data["invalid"])
         self.assertEqual(3, count)
 
     def test_watch_for_follow(self):
@@ -588,60 +580,43 @@ class WatchTests(unittest.TestCase):
 
     def test_watch_with_deserialize_param(self):
         """test watch.stream() deserialize param"""
+        # prepare test data
+        test_json = '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}, "spec": {}, "status": {}}}'
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.stream = Mock(return_value=[test_json + '\n'])
 
-        test_json = (
-            '{"type": "ADDED", '
-            '"object": {"metadata": {"name": "test1", "resourceVersion": "1"}, '
-            '"spec": {}, "status": {}}}'
-        )
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
 
-        # Mock object for deserialize=True case
-        metadata_mock = MagicMock()
-        metadata_mock.name = 'test1'
-        metadata_mock.resource_version = '1'
+        # test case with deserialize=True
+        w = Watch()
+        for e in w.stream(fake_api.get_namespaces, deserialize=True):
+            self.assertEqual("ADDED", e['type'])
+        # Verify that the object is deserialized correctly
+        self.assertTrue(hasattr(e['object'], 'metadata'))
+        self.assertEqual("test1", e['object'].metadata.name)
+        self.assertEqual("1", e['object'].metadata.resource_version)
+        # Verify that the original object is saved
+        self.assertEqual(json.loads(test_json)['object'], e['raw_object'])
 
-        object_mock = MagicMock()
-        object_mock.metadata = metadata_mock
+        # test case with deserialize=False
+        w = Watch()
+        for e in w.stream(fake_api.get_namespaces, deserialize=False):
+            self.assertEqual("ADDED", e['type'])
+            # The validation object remains in the original dictionary format
+            self.assertIsInstance(e['object'], dict)
+            self.assertEqual("test1", e['object']['metadata']['name'])
+            self.assertEqual("1", e['object']['metadata']['resourceVersion'])
+            w.stop()  # ensure the loop terminates
 
-        event_deserialized = {
-            'type': 'ADDED',
-            'object': object_mock,
-            'raw_object': json.loads(test_json)['object']
-        }
-
-        # Event for deserialize=False case - object is plain dict
-        event_raw = {
-            'type': 'ADDED',
-            'object': json.loads(test_json)['object'],
-            'raw_object': json.loads(test_json)['object']
-        }
-
-        # Patch Watch.stream to return event_deserialized for deserialize=True
-        # and event_raw for deserialize=False - handle both calls with side_effect
-        def stream_side_effect(func, deserialize):
-            if deserialize:
-                return [event_deserialized]
-            else:
-                return [event_raw]
-
-        with patch.object(Watch, 'stream', side_effect=stream_side_effect):
-
-            w = Watch()
-
-            # test case with deserialize=True
-            for e in w.stream(lambda: None, deserialize=True):  # dummy API func
-                self.assertEqual("ADDED", e['type'])
-                self.assertTrue(hasattr(e['object'], 'metadata'))
-                self.assertEqual("test1", e['object'].metadata.name)
-                self.assertEqual("1", e['object'].metadata.resource_version)
-                self.assertEqual(event_deserialized['raw_object'], e['raw_object'])
-
-            # test case with deserialize=False
-            for e in w.stream(lambda: None, deserialize=False):
-                self.assertEqual("ADDED", e['type'])
-                self.assertIsInstance(e['object'], dict)
-                self.assertEqual("test1", e['object']['metadata']['name'])
-                self.assertEqual("1", e['object']['metadata']['resourceVersion'])
+        # verify the api is called twice
+        fake_api.get_namespaces.assert_has_calls([
+            call(_preload_content=False, watch=True),
+            call(_preload_content=False, watch=True)
+        ])
 
 if __name__ == '__main__':
     unittest.main()
