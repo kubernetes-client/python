@@ -59,9 +59,6 @@ foreach($path in $shimMap.Keys){
 }
 
 Write-Step "Smoke import"
-python - <<'PY'
-from kubernetes import config, dynamic, watch, stream, leaderelection
-print('Shim import success')
-PY
+python -c "from kubernetes import config,dynamic,watch,stream,leaderelection;print('Shim import success')"
 
 Write-Step "Done"
