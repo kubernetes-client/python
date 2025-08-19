@@ -39,7 +39,7 @@ try:
     # kubernetes.config shim during Windows dynamic module registration.
     from .exec_provider import ExecProvider  # type: ignore
 except ImportError:  # fallback for legacy absolute path
-    from kubernetes.config.exec_provider import ExecProvider  # noqa: F401
+    from .exec_provider import ExecProvider  # type: ignore
 
 from .config_exception import ConfigException
 from .dateutil import UTC, format_rfc3339, parse_rfc3339
