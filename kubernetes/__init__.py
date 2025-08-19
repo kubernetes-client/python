@@ -17,7 +17,6 @@ __project__ = 'kubernetes'
 __version__ = "33.0.0+snapshot"
 
 from . import client  # keep direct import of generated client package
-from . import utils as utils  # utils is a real directory
 
 # Windows compatibility: historical layout used directory symlinks named
 # config, dynamic, watch, stream, leaderelection pointing to base/*.
@@ -44,3 +43,6 @@ dynamic = _base_dynamic
 watch = _base_watch
 stream = _base_stream
 leaderelection = _base_leaderelection
+
+# Now that dynamic is registered, import utils which depends on dynamic
+from . import utils as utils  # noqa: E402
