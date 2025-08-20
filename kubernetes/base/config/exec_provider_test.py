@@ -183,6 +183,38 @@ class ExecProviderTest(unittest.TestCase):
         obj = json.loads(mock.call_args.kwargs['env']['KUBERNETES_EXEC_INFO'])
         self.assertEqual(obj['spec']['cluster']['server'], 'name.company.com')
 
+    @mock.patch("subprocess.Popen")
+    def test_with_cluster_info_from_exec_extension(self, mock):
+        instance = mock.return_value
+        instance.wait.return_value = 0
+        instance.communicate.return_value = (self.output_ok, "")
+        ep = ExecProvider(
+            self.input_with_cluster,
+            None,
+            ConfigNode(
+                "cluster",
+                {
+                    "server": "name.company.com",
+                    "extensions": [
+                        {
+                            "name": "client.authentication.k8s.io/exec",
+                            "extension": {
+                                "namespace": "myproject",
+                                "name": "mycluster",
+                            },
+                        },
+                    ],
+                },
+            ),
+        )
+        result = ep.run()
+        self.assertTrue(isinstance(result, dict))
+        self.assertTrue("token" in result)
+
+        obj = json.loads(mock.call_args.kwargs["env"]["KUBERNETES_EXEC_INFO"])
+        self.assertEqual(obj["spec"]["cluster"]["server"], "name.company.com")
+        self.assertEqual(obj["spec"]["cluster"]["config"]["namespace"], "myproject")
+        self.assertEqual(obj["spec"]["cluster"]["config"]["name"], "mycluster")
 
 if __name__ == '__main__':
     unittest.main()
