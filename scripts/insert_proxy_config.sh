@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # insert_proxy_config.sh - run this after openapi-generator release.sh
-CONFIG_PATH="../python_kubernetes/kubernetes/client"
+SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
+pushd "${SCRIPT_ROOT}" > /dev/null
+SCRIPT_ROOT=`pwd`
+popd > /dev/null
+CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
+CONFIG_PATH="$CLIENT_ROOT/client"
 
 # Compute the full file path
 CONFIG_FILE="$CONFIG_PATH/configuration.py"
