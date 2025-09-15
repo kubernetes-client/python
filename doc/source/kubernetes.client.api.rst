@@ -58,6 +58,7 @@ Submodules
    kubernetes.client.api.rbac_authorization_api
    kubernetes.client.api.rbac_authorization_v1_api
    kubernetes.client.api.resource_api
+   kubernetes.client.api.resource_v1_api
    kubernetes.client.api.resource_v1alpha3_api
    kubernetes.client.api.resource_v1beta1_api
    kubernetes.client.api.resource_v1beta2_api
