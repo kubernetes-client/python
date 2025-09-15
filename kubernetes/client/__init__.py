@@ -810,3 +810,9 @@ from kubernetes.client.models.v2_resource_metric_source import V2ResourceMetricS
 from kubernetes.client.models.v2_resource_metric_status import V2ResourceMetricStatus
 from kubernetes.client.models.version_info import VersionInfo
 
+
+try:
+    import kubernetes.client.helpers.patch as _patch
+    _patch.apply_patch()
+except ImportError:
+    pass
