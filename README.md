@@ -170,12 +170,13 @@ between client-python versions.
 | 30.0 Alpha/Beta | Kubernetes main repo, 1.30 branch    | ✗                             |
 | 30.0            | Kubernetes main repo, 1.30 branch    | ✗                             |
 | 31.0 Alpha/Beta | Kubernetes main repo, 1.31 branch    | ✗                             |
-| 31.0            | Kubernetes main repo, 1.31 branch    | ✓                             |
+| 31.0            | Kubernetes main repo, 1.31 branch    | ✗                             |
 | 32.0 Alpha/Beta | Kubernetes main repo, 1.32 branch    | ✗                             |
 | 32.1            | Kubernetes main repo, 1.32 branch    | ✓                             |
 | 33.1 Alpha/Beta | Kubernetes main repo, 1.33 branch    | ✗                             |
 | 33.1            | Kubernetes main repo, 1.33 branch    | ✓                             |
-| 34.1 Alpha/Beta | Kubernetes main repo, 1.34 branch    | ✓                             |
+| 34.1 Alpha/Beta | Kubernetes main repo, 1.34 branch    | ✗                             |
+| 34.1            | Kubernetes main repo, 1.34 branch    | ✓                             |
 
 > See [here](#homogenizing-the-kubernetes-python-client-versions) for an explanation of why there is no v13-v16 release.
 
