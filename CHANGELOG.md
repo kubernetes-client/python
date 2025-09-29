@@ -136,6 +136,9 @@ Kubernetes API Version: v1.35.0
 - OpenAPI model packages of API types are generated into `zz_generated.model_name.go` files and are accessible using the `OpenAPIModelName()` function.  This allows API authors to declare the desired OpenAPI model packages instead of using the go package path of API types. ([kubernetes/kubernetes#131755](https://github.com/kubernetes/kubernetes/pull/131755), [@jpbetz](https://github.com/jpbetz)) [SIG API Machinery, Apps, Architecture, Auth, CLI, Cloud Provider, Cluster Lifecycle, Instrumentation, Network, Node, Scheduling, Storage and Testing]
 - Support for `kubectl get -o kyaml` is now on by default.  To disable it, set `KUBECTL_KYAML=false`. ([kubernetes/kubernetes#133327](https://github.com/kubernetes/kubernetes/pull/133327), [@thockin](https://github.com/thockin)) [SIG CLI]
 - The storage version for MutatingAdmissionPolicy is updated to v1beta1. ([kubernetes/kubernetes#133715](https://github.com/kubernetes/kubernetes/pull/133715), [@cici37](https://github.com/cici37)) [SIG API Machinery, Etcd and Testing]
+# v34.1.0
+
+Kubernetes API Version: v1.34.1
 
 
 # v34.1.0b1
