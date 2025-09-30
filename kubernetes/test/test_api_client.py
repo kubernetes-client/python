@@ -8,6 +8,8 @@ import unittest
 import kubernetes
 from kubernetes.client.configuration import Configuration
 import urllib3
+import datetime
+from kubernetes.config import dateutil as kube_dateutil
 
 class TestApiClient(unittest.TestCase):
 
@@ -49,3 +51,30 @@ class TestApiClient(unittest.TestCase):
             # test
             client = kubernetes.client.ApiClient(configuration=config)
             self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )
+    
+    def test_1_parse_rfc3339(self):
+        dt = datetime.datetime(2023, 1, 1, 12, 0, 0)
+        result = kube_dateutil.parse_rfc3339(dt)
+        self.assertIsNotNone(result.tzinfo)
+    
+    def test_2_parse_rfc3339(self):
+        """Test that invalid RFC3339 strings raise ValueError with descriptive message"""
+        invalid_inputs = [
+            "invalid-datetime-string",
+            "",
+            "not-a-date",
+            "2023",  # incomplete
+            "random text",
+            "2023-13-01T12:00:00Z",  # invalid month
+            "not-rfc3339-format"
+        ]
+        
+        for invalid_input in invalid_inputs:
+            with self.subTest(input=invalid_input):
+                with self.assertRaises(ValueError) as context:
+                    kube_dateutil.parse_rfc3339(invalid_input)
+                
+                # Check that the error message includes the invalid input
+                error_message = str(context.exception)
+                self.assertIn("Error in RFC339 Date Formatting", error_message)
+                self.assertIn(invalid_input, error_message)
