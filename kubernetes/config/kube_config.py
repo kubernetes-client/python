@@ -439,12 +439,6 @@ class KubeConfigLoader(object):
                 os.unlink(ca_cert.name)
                 raise
 
-        elif 'idp-certificate-authority' in provider['config']:
-            config.ssl_ca_cert = provider['config']['idp-certificate-authority']
-
-        else:
-            config.verify_ssl = False
-
         client = ApiClient(configuration=config)
 
         response = client.request(
