@@ -170,7 +170,6 @@ class Configuration(object):
         if os.getenv("no_proxy"): self.no_proxy = os.getenv("no_proxy")
         """Proxy URL
         """
-        self.no_proxy = None
         """bypass proxy for host in the no_proxy list.
         """
         self.proxy_headers = None
