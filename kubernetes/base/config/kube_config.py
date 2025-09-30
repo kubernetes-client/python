@@ -510,14 +510,19 @@ class KubeConfigLoader(object):
                     base64_file_content=False,
                     temp_file_path=self._temp_file_path).as_file()
             else:
-                logging.error('exec: missing token or clientCertificateData '
-                              'field in plugin output')
-                return None
+                logging.error("exec: missing token or clientCertificateData "
+                                 " field in plugin output")
+                 return None
+
             if 'expirationTimestamp' in status:
-                self.expiry = parse_rfc3339(status['expirationTimestamp'])
+                 try:
+                    self.expiry = parse_rfc3339(status['expirationTimestamp'])
+                 except Exception as e:
+                    logging.error("Failed to parse expirationTimestamp '%s': %s",
+                                    status['expirationTimestamp'], str(e) )
+                      raise  
             return True
-        except Exception as e:
-            logging.error(str(e))
+
 
     def _load_user_token(self):
         base_path = self._get_base_path(self._user.path)
