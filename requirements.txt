@@ -3,7 +3,6 @@ six>=1.9.0  # MIT
 python-dateutil>=2.5.3  # BSD
 setuptools>=21.0.0  # PSF/ZPL
 pyyaml>=5.4.1  # MIT
-google-auth>=1.0.1  # Apache-2.0
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
