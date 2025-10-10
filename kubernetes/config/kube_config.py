@@ -25,6 +25,8 @@ import tempfile
 import time
 from collections import namedtuple
 
+import google.auth
+import google.auth.transport.requests
 import oauthlib.oauth2
 import urllib3
 import yaml
@@ -41,15 +43,6 @@ try:
     import adal
 except ImportError:
     pass
-
-try:
-    import google.auth
-    import google.auth.transport.requests
-    google_auth_available = True
-except ImportError:
-    google_auth_available = False
-
-
 
 EXPIRY_SKEW_PREVENTION_DELAY = datetime.timedelta(minutes=5)
 KUBE_CONFIG_DEFAULT_LOCATION = os.environ.get('KUBECONFIG', '~/.kube/config')
@@ -246,19 +239,15 @@ class KubeConfigLoader(object):
                 'config' in self._user['auth-provider'] and
                     'cmd-path' in self._user['auth-provider']['config']):
                 return _refresh_credentials_with_cmd_path()
-            
-            # Make the Google auth block optional.
-            if google_auth_available:
-                credentials, project_id = google.auth.default(scopes=[
-                    'https://www.googleapis.com/auth/cloud-platform',
-                    'https://www.googleapis.com/auth/userinfo.email'
-                ])
-                request = google.auth.transport.requests.Request()
-                credentials.refresh(request)
-                return credentials
-            else:
-                return None
-            
+
+            credentials, project_id = google.auth.default(scopes=[
+                'https://www.googleapis.com/auth/cloud-platform',
+                'https://www.googleapis.com/auth/userinfo.email'
+            ])
+            request = google.auth.transport.requests.Request()
+            credentials.refresh(request)
+            return credentials
+
         if get_google_credentials:
             self._get_google_credentials = get_google_credentials
         else:
@@ -449,12 +438,6 @@ class KubeConfigLoader(object):
                 ca_cert.close()
                 os.unlink(ca_cert.name)
                 raise
-
-        elif 'idp-certificate-authority' in provider['config']:
-            config.ssl_ca_cert = provider['config']['idp-certificate-authority']
-
-        else:
-            config.verify_ssl = False
 
         client = ApiClient(configuration=config)
 
