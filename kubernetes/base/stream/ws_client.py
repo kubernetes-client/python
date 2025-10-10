@@ -182,6 +182,10 @@ class WSClient:
         #                   efficient as epoll. Will work for fd numbers above 1024.
         # select.epoll()  - newest and most efficient way of polling.
         #                   However, only works on linux.
+        ssl_pending = 0
+        if self.sock.is_ssl():
+            ssl_pending = self.sock.sock.pending()
+        
         if hasattr(select, "poll"):
             poll = select.poll()
             poll.register(self.sock.sock, select.POLLIN)
@@ -193,7 +197,7 @@ class WSClient:
             r, _, _ = select.select(
                 (self.sock.sock, ), (), (), timeout)
 
-        if r:
+        if r or ssl_pending > 0:
             op_code, frame = self.sock.recv_data_frame(True)
             if op_code == ABNF.OPCODE_CLOSE:
                 self._connected = False
