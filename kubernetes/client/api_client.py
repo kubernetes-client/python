@@ -285,6 +285,25 @@ class ApiClient(object):
                 return {k: self.__deserialize(v, sub_kls)
                         for k, v in six.iteritems(data)}
 
+            if klass.startswith('dict[') and klass.endswith(']'):
+                # Parse dict[key_type, value_type] respecting nested brackets
+                inner = klass[len('dict['):-1]
+                bracket_depth = 0
+                comma_pos = -1
+                for i, char in enumerate(inner):
+                    if char in '([{':
+                        bracket_depth += 1
+                    elif char in ')]}':
+                        bracket_depth -= 1
+                    elif char == ',' and bracket_depth == 0:
+                        comma_pos = i
+                        break
+                
+                if comma_pos != -1:
+                    value_type = inner[comma_pos + 1:].strip()
+                    return {k: self.__deserialize(v, value_type)
+                            for k, v in six.iteritems(data)}
+
             # convert str to class
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
