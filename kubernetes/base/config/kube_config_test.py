@@ -267,6 +267,26 @@ class TestFileOrData(BaseTestCase):
                        data_key_name=TEST_DATA_KEY)
         self.assertEqual(t.as_data(), None)
 
+    def test_file_recreation(self):
+        obj = {TEST_DATA_KEY: TEST_DATA_BASE64}
+        t1 = FileOrData(
+            obj=obj,
+            file_key_name=TEST_FILE_KEY,
+            data_key_name=TEST_DATA_KEY,
+        )
+        first_file_path = t1.as_file()
+        # We manually remove the file from the disk leaving it in the cache
+        os.remove(first_file_path)
+
+        t2 = FileOrData(
+            obj=obj,
+            file_key_name=TEST_FILE_KEY,
+            data_key_name=TEST_DATA_KEY,
+        )
+
+        second_file_path = t2.as_file()
+        self.assertEqual(TEST_DATA, self.get_file_content(second_file_path))
+
 
 class TestConfigNode(BaseTestCase):
 
