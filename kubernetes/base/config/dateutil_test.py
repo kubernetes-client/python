@@ -66,3 +66,39 @@ class DateUtilTest(unittest.TestCase):
             format_rfc3339(datetime(2017, 7, 25, 4, 44, 21, 0,
                                     TimezoneInfo(-2, 30))),
             "2017-07-25T07:14:21Z")
+
+    def test_parse_rfc3339_invalid_formats(self):
+        """Test that invalid RFC3339 formats raise ValueError"""
+        invalid_inputs = [
+            "2025-13-02T13:37:00Z",        # Invalid month
+            "2025-12-32T13:37:00Z",        # Invalid day
+            "2025-12-02T25:00:00Z",        # Invalid hour
+            "2025-12-02T13:60:00Z",        # Invalid minute
+            "2025-12-02T13:37:60Z",        # Invalid second
+            "not-a-valid-date",            # Completely invalid
+            "",                             # Empty string
+            "2025-12-02Z13:37:00",         # Timezone before time
+        ]
+
+        for invalid_input in invalid_inputs:
+            with self.assertRaises(ValueError):
+                parse_rfc3339(invalid_input)
+
+
+
+    def test_parse_rfc3339_with_whitespace(self):
+        """Test that leading/trailing whitespace is handled"""
+        actual = parse_rfc3339("  2017-07-25T04:44:21Z  ")
+        expected = datetime(2017, 7, 25, 4, 44, 21, 0, UTC)
+        self.assertEqual(expected, actual)
+
+    def test_parse_rfc3339_error_message_clarity(self):
+        """Test that error messages are clear and helpful"""
+        try:
+            parse_rfc3339("invalid-date-format")
+        except ValueError as e:
+            error_msg = str(e)
+            # Verify error message contains helpful information
+            self.assertIn("Invalid RFC3339", error_msg)
+            self.assertIn("YYYY-MM-DD", error_msg)
+            self.assertIn("expected", error_msg)
