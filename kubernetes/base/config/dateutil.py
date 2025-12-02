@@ -49,18 +49,27 @@ MICROSEC_PER_SEC = 1000000
 
 def parse_rfc3339(s):
     if isinstance(s, datetime.datetime):
-        # no need to parse it, just make sure it has a timezone.
         if not s.tzinfo:
             return s.replace(tzinfo=UTC)
         return s
-    groups = _re_rfc3339.search(s).groups()
+    
+    m = _re_rfc3339.fullmatch(s.strip())
+    if m is None:
+        raise ValueError(
+            f"Invalid RFC3339 datetime: {s!r} "
+            "(expected YYYY-MM-DDTHH:MM:SS[.frac][Z|±HH:MM])"
+        )
+    
+    groups = m.groups()
     dt = [0] * 7
     for x in range(6):
         dt[x] = int(groups[x])
+    
     us = 0
     if groups[6] is not None:
         partial_sec = float(groups[6].replace(",", "."))
         us = int(MICROSEC_PER_SEC * partial_sec)
+    
     tz = UTC
     if groups[7] is not None and groups[7] != 'Z' and groups[7] != 'z':
         tz_groups = _re_timezone.search(groups[7]).groups()
@@ -71,10 +80,17 @@ def parse_rfc3339(s):
         if tz_groups[2]:
             minute = int(tz_groups[2])
         tz = TimezoneInfo(hour, minute)
-    return datetime.datetime(
-        year=dt[0], month=dt[1], day=dt[2],
-        hour=dt[3], minute=dt[4], second=dt[5],
-        microsecond=us, tzinfo=tz)
+    
+    try:
+        return datetime.datetime(
+            year=dt[0], month=dt[1], day=dt[2],
+            hour=dt[3], minute=dt[4], second=dt[5],
+            microsecond=us, tzinfo=tz)
+    except ValueError as e:
+        raise ValueError(
+            f"Invalid date/time values in RFC3339 string {s!r}: {e}"
+        ) from e
+
 
 
 def format_rfc3339(date_time):
