@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
 import json
 import pydoc
 import sys
@@ -180,10 +181,22 @@ class Watch(object):
         disable_retries = ('timeout_seconds' in kwargs)
         retry_after_410 = False
         deserialize = kwargs.pop('deserialize', True)
+        
+        health_check_interval = kwargs.pop('_health_check_interval', 0)  # 0 = disabled by default
+        last_event_time = time.time() if health_check_interval > 0 else None
+        
         while True:
             resp = func(*args, **kwargs)
             try:
                 for line in iter_resp_lines(resp):
+                    # Health check for silent connection drops
+                    if health_check_interval > 0 and last_event_time is not None:
+                        current_time = time.time()
+                        if current_time - last_event_time > health_check_interval:
+                            # Silent connection detected - break to reconnect
+                            break
+                        last_event_time = current_time
+                    
                     # unmarshal when we are receiving events from watch,
                     # return raw string when we are streaming log
                     if watch_arg == "watch":
