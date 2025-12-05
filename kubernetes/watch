@@ -1,1 +1,3 @@
-base/watch
+"""Windows-friendly shim for kubernetes.base.watch."""
+
+from kubernetes.base.watch import *  # noqa: F401,F403
