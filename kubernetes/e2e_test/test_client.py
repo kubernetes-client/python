@@ -19,7 +19,7 @@ import socket
 import time
 import unittest
 import uuid
-import six
+
 import io
 import gzip
 
@@ -30,12 +30,9 @@ from kubernetes.stream import stream, portforward
 from kubernetes.stream.ws_client import ERROR_CHANNEL
 from kubernetes.client.rest import ApiException
 
-import six.moves.urllib.request as urllib_request
+import urllib.request as urllib_request
 
-if six.PY3:
-    from http import HTTPStatus
-else:
-    import httplib
+from http import HTTPStatus
 
 
 def short_uuid():
@@ -88,8 +85,7 @@ class TestClient(unittest.TestCase):
                 resp = api.read_namespaced_service_account(name='default',
                                                            namespace='default')
             except ApiException as e:
-                if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
-                        six.PY3 is False and e.status != httplib.NOT_FOUND):
+                if e.status != HTTPStatus.NOT_FOUND:
                     print('error: %s' % e)
                     self.fail(
                         msg="unexpected error getting default service account")
@@ -220,8 +216,7 @@ class TestClient(unittest.TestCase):
                 resp = api.read_namespaced_service_account(name='default',
                                                            namespace='default')
             except ApiException as e:
-                if (six.PY3 and e.status != HTTPStatus.NOT_FOUND) or (
-                        six.PY3 is False and e.status != httplib.NOT_FOUND):
+                if e.status != HTTPStatus.NOT_FOUND:
                     print('error: %s' % e)
                     self.fail(
                         msg="unexpected error getting default service account")

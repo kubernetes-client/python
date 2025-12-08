@@ -23,12 +23,11 @@ import ssl
 import threading
 import time
 
-import six
 import yaml
 
 
-from six.moves.urllib.parse import urlencode, urlparse, urlunparse
-from six import StringIO, BytesIO
+from urllib.parse import urlencode, urlparse, urlunparse
+from io import StringIO, BytesIO
 
 from websocket import WebSocket, ABNF, enableTrace, WebSocketConnectionClosedException
 from base64 import urlsafe_b64decode
@@ -39,6 +38,7 @@ STDOUT_CHANNEL = 1
 STDERR_CHANNEL = 2
 ERROR_CHANNEL = 3
 RESIZE_CHANNEL = 4
+
 
 class _IgnoredIO:
     def write(self, _x):
@@ -109,12 +109,12 @@ class WSClient:
     def write_channel(self, channel, data):
         """Write data to a channel."""
         # check if we're writing binary data or not
-        binary = six.PY3 and type(data) == six.binary_type
+        binary = type(data) is bytes
         opcode = ABNF.OPCODE_BINARY if binary else ABNF.OPCODE_TEXT
 
         channel_prefix = chr(channel)
         if binary:
-            channel_prefix = six.binary_type(channel_prefix, "ascii")
+            channel_prefix = channel_prefix.encode("ascii")
 
         payload = channel_prefix + data
         self.sock.send(payload, opcode=opcode)
@@ -200,11 +200,11 @@ class WSClient:
                 return
             elif op_code == ABNF.OPCODE_BINARY or op_code == ABNF.OPCODE_TEXT:
                 data = frame.data
-                if six.PY3 and not self.binary:
+                if not self.binary:
                     data = data.decode("utf-8", "replace")
                 if len(data) > 1:
                     channel = data[0]
-                    if six.PY3 and not self.binary:
+                    if not self.binary:
                         channel = ord(channel)
                     data = data[1:]
                     if data:
@@ -303,7 +303,7 @@ class PortForward:
             # The remote port number
             self.port_number = port_number
             # The websocket channel byte number for this port
-            self.channel = six.int2byte(ix * 2)
+            self.channel = bytes([ix * 2])
             # A socket pair is created to provide a means of translating the data flow
             # between the python application and the kubernetes websocket. The self.python
             # half of the socket pair is used by the _proxy method to receive and send data
@@ -388,7 +388,7 @@ class PortForward:
                         if opcode == ABNF.OPCODE_BINARY:
                             if not frame.data:
                                 raise RuntimeError("Unexpected frame data size")
-                            channel = six.byte2int(frame.data)
+                            channel = frame.data[0] if frame.data else None
                             if channel >= len(channel_ports):
                                 raise RuntimeError("Unexpected channel number: %s" % channel)
                             port = channel_ports[channel]
@@ -405,7 +405,7 @@ class PortForward:
                                     raise RuntimeError(
                                         "Unexpected initial channel frame data size"
                                     )
-                                port_number = six.byte2int(frame.data[1:2]) + (six.byte2int(frame.data[2:3]) * 256)
+                                port_number = frame.data[1] + (frame.data[2] * 256)
                                 if port_number != port.port_number:
                                     raise RuntimeError(
                                         "Unexpected port number in initial channel frame: %s" % port_number

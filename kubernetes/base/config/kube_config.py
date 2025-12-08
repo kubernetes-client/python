@@ -29,7 +29,6 @@ import oauthlib.oauth2
 import urllib3
 import yaml
 from requests_oauthlib import OAuth2Session
-from six import PY3
 
 from kubernetes.client import ApiClient, Configuration
 from kubernetes.config.exec_provider import ExecProvider
@@ -413,14 +412,9 @@ class KubeConfigLoader(object):
             # https://tools.ietf.org/html/rfc7515#appendix-C
             return
 
-        if PY3:
-            jwt_attributes = json.loads(
-                base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
-            )
-        else:
-            jwt_attributes = json.loads(
-                base64.b64decode(parts[1] + padding)
-            )
+        jwt_attributes = json.loads(
+            base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
+        )
 
         expire = jwt_attributes.get('exp')
 
@@ -442,14 +436,9 @@ class KubeConfigLoader(object):
         if 'idp-certificate-authority-data' in provider['config']:
             ca_cert = tempfile.NamedTemporaryFile(delete=True)
 
-            if PY3:
-                cert = base64.b64decode(
-                    provider['config']['idp-certificate-authority-data']
-                ).decode('utf-8')
-            else:
-                cert = base64.b64decode(
-                    provider['config']['idp-certificate-authority-data'] + "=="
-                )
+            cert = base64.b64decode(
+                provider['config']['idp-certificate-authority-data']
+            ).decode('utf-8')
 
             with open(ca_cert.name, 'w') as fh:
                 fh.write(cert)

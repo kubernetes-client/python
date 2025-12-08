@@ -20,7 +20,7 @@ import select
 import socket
 import time
 
-import six.moves.urllib.request as urllib_request
+import urllib.request as urllib_request
 
 from kubernetes import config
 from kubernetes.client import Configuration
