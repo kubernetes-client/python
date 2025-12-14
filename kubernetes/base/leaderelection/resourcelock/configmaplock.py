@@ -20,7 +20,6 @@ import json
 import logging
 
 logger = logging.getLogger("leaderelection")
-logger.setLevel(logging.INFO)
 
 class ConfigMapLock:
     def __init__(self, name, namespace, identity):

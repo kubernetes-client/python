@@ -26,7 +26,6 @@ else:
     import httplib
 
 logger = logging.getLogger("leaderelection")
-logger.setLevel(logging.INFO)
 
 """
 This package implements leader election using an annotation in a Kubernetes object.

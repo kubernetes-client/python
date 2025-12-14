@@ -16,7 +16,6 @@ import sys
 import logging
 
 logger = logging.getLogger("leaderelection")
-logger.setLevel(logging.INFO)
 
 class Config:
     # Validate config, exit if an error is detected
