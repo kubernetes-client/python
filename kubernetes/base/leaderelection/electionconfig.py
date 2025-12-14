@@ -14,7 +14,7 @@
 
 import sys
 import logging
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("leaderelection")
 
 
 class Config:
@@ -56,4 +56,4 @@ class Config:
 
     # Default callback for when the current candidate if a leader, stops leading
     def on_stoppedleading_callback(self):
-        logging.info("stopped leading".format(self.lock.identity))
+        logger.info("stopped leading".format(self.lock.identity))

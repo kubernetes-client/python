@@ -18,7 +18,7 @@ from kubernetes.client.api_client import ApiClient
 from ..leaderelectionrecord import LeaderElectionRecord
 import json
 import logging
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("leaderelection")
 
 
 class ConfigMapLock:
@@ -86,7 +86,7 @@ class ConfigMapLock:
             api_response = self.api_instance.create_namespaced_config_map(namespace, body, pretty=True)
             return True
         except ApiException as e:
-            logging.info("Failed to create lock as {}".format(e))
+            logger.info("Failed to create lock as {}".format(e))
             return False
 
     def update(self, name, namespace, updated_record):
@@ -103,7 +103,7 @@ class ConfigMapLock:
                                                                            body=self.configmap_reference)
             return True
         except ApiException as e:
-            logging.info("Failed to update lock as {}".format(e))
+            logger.info("Failed to update lock as {}".format(e))
             return False
 
     def get_lock_object(self, lock_record):
