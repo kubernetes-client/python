@@ -201,6 +201,63 @@ class TestClient(unittest.TestCase):
         resp = api.delete_namespaced_pod(name=name, body={},
                                          namespace='default')
 
+    def test_pod_exec_close_channel(self):
+        """Test sending CLOSE signal for a channel (v5 protocol)."""
+        client = api_client.ApiClient(configuration=self.config)
+        api = core_v1_api.CoreV1Api(client)
+
+        name = 'busybox-test-' + short_uuid()
+        pod_manifest = manifest_with_command(
+            name, "while true;do date;sleep 5; done")
+
+        resp = api.create_namespaced_pod(body=pod_manifest, namespace='default')
+        self.assertEqual(name, resp.metadata.name)
+
+        # Wait for pod to be running
+        timeout = time.time() + 60
+        while True:
+            resp = api.read_namespaced_pod(name=name, namespace='default')
+            if resp.status.phase == 'Running':
+                break
+            if time.time() > timeout:
+                self.fail("Timeout waiting for pod to be running")
+            time.sleep(1)
+
+        # Use cat to echo stdin to stdout.
+        # When stdin is closed, cat should exit, terminating the command.
+        resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
+                      command=['/bin/sh', '-c', 'cat'],
+                      stderr=True, stdin=True,
+                      stdout=True, tty=False,
+                      _preload_content=False)
+
+        if resp.subprotocol != "v5.channel.k8s.io":
+            resp.close()
+            api.delete_namespaced_pod(name=name, body={}, namespace='default')
+            self.skipTest("Skipping test: v5.channel.k8s.io subprotocol not negotiated")
+
+        try:
+            resp.write_stdin("test-close\n")
+            line = resp.readline_stdout(timeout=5)
+            self.assertEqual("test-close", line)
+
+            # Close stdin (channel 0)
+            # This should send EOF to cat, causing it to exit.
+            resp.close_channel(0)
+
+            # Wait for process to exit
+            resp.update(timeout=5)
+            start = time.time()
+            while resp.is_open() and time.time() - start < 10:
+                resp.update(timeout=1)
+
+            self.assertFalse(resp.is_open(), "Connection should close after cat exits")
+            self.assertEqual(resp.returncode, 0)
+        finally:
+            if resp.is_open():
+                resp.close()
+            api.delete_namespaced_pod(name=name, body={}, namespace='default')
+
     def test_exit_code(self):
         client = api_client.ApiClient(configuration=self.config)
         api = core_v1_api.CoreV1Api(client)
