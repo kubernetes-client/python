@@ -18,8 +18,9 @@ from kubernetes.client.api_client import ApiClient
 from ..leaderelectionrecord import LeaderElectionRecord
 import json
 import logging
-logging.basicConfig(level=logging.INFO)
 
+logger = logging.getLogger("leaderelection")
+logger.setLevel(logging.INFO)
 
 class ConfigMapLock:
     def __init__(self, name, namespace, identity):
