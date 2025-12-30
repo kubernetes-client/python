@@ -82,13 +82,13 @@ Submodules
    kubernetes.test.test_resource_v1beta2_api
    kubernetes.test.test_scheduling_api
    kubernetes.test.test_scheduling_v1_api
+   kubernetes.test.test_scheduling_v1alpha1_api
    kubernetes.test.test_storage_api
    kubernetes.test.test_storage_v1_api
    kubernetes.test.test_storage_v1_token_request
-   kubernetes.test.test_storage_v1alpha1_api
    kubernetes.test.test_storage_v1beta1_api
    kubernetes.test.test_storagemigration_api
-   kubernetes.test.test_storagemigration_v1alpha1_api
+   kubernetes.test.test_storagemigration_v1beta1_api
    kubernetes.test.test_v1_affinity
    kubernetes.test.test_v1_aggregation_rule
    kubernetes.test.test_v1_allocated_device_status
@@ -265,6 +265,7 @@ Submodules
    kubernetes.test.test_v1_git_repo_volume_source
    kubernetes.test.test_v1_glusterfs_persistent_volume_source
    kubernetes.test.test_v1_glusterfs_volume_source
+   kubernetes.test.test_v1_group_resource
    kubernetes.test.test_v1_group_subject
    kubernetes.test.test_v1_group_version_for_discovery
    kubernetes.test.test_v1_grpc_action
@@ -602,15 +603,15 @@ Submodules
    kubernetes.test.test_v1_webhook_conversion
    kubernetes.test.test_v1_weighted_pod_affinity_term
    kubernetes.test.test_v1_windows_security_context_options
+   kubernetes.test.test_v1_workload_reference
    kubernetes.test.test_v1alpha1_apply_configuration
    kubernetes.test.test_v1alpha1_cluster_trust_bundle
    kubernetes.test.test_v1alpha1_cluster_trust_bundle_list
    kubernetes.test.test_v1alpha1_cluster_trust_bundle_spec
-   kubernetes.test.test_v1alpha1_group_version_resource
+   kubernetes.test.test_v1alpha1_gang_scheduling_policy
    kubernetes.test.test_v1alpha1_json_patch
    kubernetes.test.test_v1alpha1_match_condition
    kubernetes.test.test_v1alpha1_match_resources
-   kubernetes.test.test_v1alpha1_migration_condition
    kubernetes.test.test_v1alpha1_mutating_admission_policy
    kubernetes.test.test_v1alpha1_mutating_admission_policy_binding
    kubernetes.test.test_v1alpha1_mutating_admission_policy_binding_list
@@ -621,31 +622,26 @@ Submodules
    kubernetes.test.test_v1alpha1_named_rule_with_operations
    kubernetes.test.test_v1alpha1_param_kind
    kubernetes.test.test_v1alpha1_param_ref
-   kubernetes.test.test_v1alpha1_pod_certificate_request
-   kubernetes.test.test_v1alpha1_pod_certificate_request_list
-   kubernetes.test.test_v1alpha1_pod_certificate_request_spec
-   kubernetes.test.test_v1alpha1_pod_certificate_request_status
+   kubernetes.test.test_v1alpha1_pod_group
+   kubernetes.test.test_v1alpha1_pod_group_policy
    kubernetes.test.test_v1alpha1_server_storage_version
    kubernetes.test.test_v1alpha1_storage_version
    kubernetes.test.test_v1alpha1_storage_version_condition
    kubernetes.test.test_v1alpha1_storage_version_list
-   kubernetes.test.test_v1alpha1_storage_version_migration
-   kubernetes.test.test_v1alpha1_storage_version_migration_list
-   kubernetes.test.test_v1alpha1_storage_version_migration_spec
-   kubernetes.test.test_v1alpha1_storage_version_migration_status
    kubernetes.test.test_v1alpha1_storage_version_status
+   kubernetes.test.test_v1alpha1_typed_local_object_reference
    kubernetes.test.test_v1alpha1_variable
-   kubernetes.test.test_v1alpha1_volume_attributes_class
-   kubernetes.test.test_v1alpha1_volume_attributes_class_list
+   kubernetes.test.test_v1alpha1_workload
+   kubernetes.test.test_v1alpha1_workload_list
+   kubernetes.test.test_v1alpha1_workload_spec
    kubernetes.test.test_v1alpha2_lease_candidate
    kubernetes.test.test_v1alpha2_lease_candidate_list
    kubernetes.test.test_v1alpha2_lease_candidate_spec
-   kubernetes.test.test_v1alpha3_cel_device_selector
-   kubernetes.test.test_v1alpha3_device_selector
    kubernetes.test.test_v1alpha3_device_taint
    kubernetes.test.test_v1alpha3_device_taint_rule
    kubernetes.test.test_v1alpha3_device_taint_rule_list
    kubernetes.test.test_v1alpha3_device_taint_rule_spec
+   kubernetes.test.test_v1alpha3_device_taint_rule_status
    kubernetes.test.test_v1alpha3_device_taint_selector
    kubernetes.test.test_v1beta1_allocated_device_status
    kubernetes.test.test_v1beta1_allocation_result
@@ -701,6 +697,10 @@ Submodules
    kubernetes.test.test_v1beta1_param_kind
    kubernetes.test.test_v1beta1_param_ref
    kubernetes.test.test_v1beta1_parent_reference
+   kubernetes.test.test_v1beta1_pod_certificate_request
+   kubernetes.test.test_v1beta1_pod_certificate_request_list
+   kubernetes.test.test_v1beta1_pod_certificate_request_spec
+   kubernetes.test.test_v1beta1_pod_certificate_request_status
    kubernetes.test.test_v1beta1_resource_claim
    kubernetes.test.test_v1beta1_resource_claim_consumer_reference
    kubernetes.test.test_v1beta1_resource_claim_list
@@ -717,6 +717,10 @@ Submodules
    kubernetes.test.test_v1beta1_service_cidr_list
    kubernetes.test.test_v1beta1_service_cidr_spec
    kubernetes.test.test_v1beta1_service_cidr_status
+   kubernetes.test.test_v1beta1_storage_version_migration
+   kubernetes.test.test_v1beta1_storage_version_migration_list
+   kubernetes.test.test_v1beta1_storage_version_migration_spec
+   kubernetes.test.test_v1beta1_storage_version_migration_status
    kubernetes.test.test_v1beta1_variable
    kubernetes.test.test_v1beta1_volume_attributes_class
    kubernetes.test.test_v1beta1_volume_attributes_class_list
@@ -795,5 +799,5 @@ Module contents
 
 .. automodule:: kubernetes.test
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
