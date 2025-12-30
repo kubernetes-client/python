@@ -5,7 +5,7 @@ DeviceCounterConsumption defines a set of counters that a device will consume fr
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **counter_set** | **str** | CounterSet is the name of the set from which the counters defined will be consumed. | 
-**counters** | [**dict(str, V1beta2Counter)**](V1beta2Counter.md) | Counters defines the counters that will be consumed by the device.  The maximum number counters in a device is 32. In addition, the maximum number of all counters in all devices is 1024 (for example, 64 devices with 16 counters each). | 
+**counters** | [**dict(str, V1beta2Counter)**](V1beta2Counter.md) | Counters defines the counters that will be consumed by the device.  The maximum number of counters is 32. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
