@@ -14,8 +14,6 @@ from __future__ import absolute_import
 
 import re  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
 
 from kubernetes.client.api_client import ApiClient
 from kubernetes.client.exceptions import (  # noqa: F401
@@ -112,7 +110,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -246,7 +244,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -410,7 +408,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -590,7 +588,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -749,7 +747,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -898,7 +896,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1023,7 +1021,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1161,7 +1159,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1321,7 +1319,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1469,7 +1467,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1621,7 +1619,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1773,7 +1771,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -1925,7 +1923,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2062,7 +2060,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2181,7 +2179,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2300,7 +2298,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2419,7 +2417,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2550,7 +2548,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2693,7 +2691,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2836,7 +2834,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
@@ -2979,7 +2977,7 @@ class FlowcontrolApiserverV1Api(object):
             ]
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in local_var_params['kwargs'].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"

@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import six
 import json
 
 from kubernetes import watch
@@ -57,12 +56,8 @@ def meta_request(func):
             raise api_exception(e)
         if serialize_response:
             try:
-                if six.PY2:
-                    return serializer(self, json.loads(resp.data))
                 return serializer(self, json.loads(resp.data.decode('utf8')))
             except ValueError:
-                if six.PY2:
-                    return resp.data
                 return resp.data.decode('utf8')
         return resp
 

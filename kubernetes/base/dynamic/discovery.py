@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-import six
 import json
 import logging
 import hashlib
@@ -44,8 +43,7 @@ class Discoverer(object):
     def __init__(self, client, cache_file):
         self.client = client
         default_cache_id = self.client.configuration.host
-        if six.PY3:
-            default_cache_id = default_cache_id.encode('utf-8')
+        default_cache_id = default_cache_id.encode('utf-8')
         try:
             default_cachefile_name = 'osrcp-{0}.json'.format(hashlib.md5(default_cache_id, usedforsecurity=False).hexdigest())
         except TypeError:
@@ -313,7 +311,7 @@ class LazyDiscoverer(Discoverer):
                             prefix, group, version, rg.preferred)
                         self._cache['resources'][prefix][group][version] = rg
                         self.__update_cache = True
-                    for _, resource in six.iteritems(rg.resources):
+                    for _, resource in rg.resources.items():
                         yield resource
         self.__maybe_write_cache()
 
