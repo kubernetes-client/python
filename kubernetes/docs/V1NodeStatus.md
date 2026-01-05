@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **conditions** | [**list[V1NodeCondition]**](V1NodeCondition.md) | Conditions is an array of current observed node conditions. More info: https://kubernetes.io/docs/reference/node/node-status/#condition | [optional] 
 **config** | [**V1NodeConfigStatus**](V1NodeConfigStatus.md) |  | [optional] 
 **daemon_endpoints** | [**V1NodeDaemonEndpoints**](V1NodeDaemonEndpoints.md) |  | [optional] 
+**declared_features** | **list[str]** | DeclaredFeatures represents the features related to feature gates that are declared by the node. | [optional] 
 **features** | [**V1NodeFeatures**](V1NodeFeatures.md) |  | [optional] 
 **images** | [**list[V1ContainerImage]**](V1ContainerImage.md) | List of container images on this node | [optional] 
 **node_info** | [**V1NodeSystemInfo**](V1NodeSystemInfo.md) |  | [optional] 

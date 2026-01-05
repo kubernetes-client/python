@@ -10,8 +10,11 @@ Method | HTTP request | Description
 [**get_api_resources**](ResourceV1alpha3Api.md#get_api_resources) | **GET** /apis/resource.k8s.io/v1alpha3/ | 
 [**list_device_taint_rule**](ResourceV1alpha3Api.md#list_device_taint_rule) | **GET** /apis/resource.k8s.io/v1alpha3/devicetaintrules | 
 [**patch_device_taint_rule**](ResourceV1alpha3Api.md#patch_device_taint_rule) | **PATCH** /apis/resource.k8s.io/v1alpha3/devicetaintrules/{name} | 
+[**patch_device_taint_rule_status**](ResourceV1alpha3Api.md#patch_device_taint_rule_status) | **PATCH** /apis/resource.k8s.io/v1alpha3/devicetaintrules/{name}/status | 
 [**read_device_taint_rule**](ResourceV1alpha3Api.md#read_device_taint_rule) | **GET** /apis/resource.k8s.io/v1alpha3/devicetaintrules/{name} | 
+[**read_device_taint_rule_status**](ResourceV1alpha3Api.md#read_device_taint_rule_status) | **GET** /apis/resource.k8s.io/v1alpha3/devicetaintrules/{name}/status | 
 [**replace_device_taint_rule**](ResourceV1alpha3Api.md#replace_device_taint_rule) | **PUT** /apis/resource.k8s.io/v1alpha3/devicetaintrules/{name} | 
+[**replace_device_taint_rule_status**](ResourceV1alpha3Api.md#replace_device_taint_rule_status) | **PUT** /apis/resource.k8s.io/v1alpha3/devicetaintrules/{name}/status | 
 
 
 # **create_device_taint_rule**
@@ -486,6 +489,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_device_taint_rule_status**
+> V1alpha3DeviceTaintRule patch_device_taint_rule_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
+
+
+
+partially update status of the specified DeviceTaintRule
+
+### Example
+
+* Api Key Authentication (BearerToken):
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.ResourceV1alpha3Api(api_client)
+    name = 'name_example' # str | name of the DeviceTaintRule
+body = None # object | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). (optional)
+dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
+field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional)
+force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
+
+    try:
+        api_response = api_instance.patch_device_taint_rule_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ResourceV1alpha3Api->patch_device_taint_rule_status: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the DeviceTaintRule | 
+ **body** | **object**|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] 
+ **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
+ **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. | [optional] 
+ **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] 
+
+### Return type
+
+[**V1alpha3DeviceTaintRule**](V1alpha3DeviceTaintRule.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_device_taint_rule**
 > V1alpha3DeviceTaintRule read_device_taint_rule(name, pretty=pretty)
 
@@ -523,6 +604,73 @@ pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. 
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling ResourceV1alpha3Api->read_device_taint_rule: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the DeviceTaintRule | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] 
+
+### Return type
+
+[**V1alpha3DeviceTaintRule**](V1alpha3DeviceTaintRule.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **read_device_taint_rule_status**
+> V1alpha3DeviceTaintRule read_device_taint_rule_status(name, pretty=pretty)
+
+
+
+read status of the specified DeviceTaintRule
+
+### Example
+
+* Api Key Authentication (BearerToken):
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.ResourceV1alpha3Api(api_client)
+    name = 'name_example' # str | name of the DeviceTaintRule
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). (optional)
+
+    try:
+        api_response = api_instance.read_device_taint_rule_status(name, pretty=pretty)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ResourceV1alpha3Api->read_device_taint_rule_status: %s\n" % e)
 ```
 
 ### Parameters
@@ -594,6 +742,82 @@ field_validation = 'field_validation_example' # str | fieldValidation instructs 
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling ResourceV1alpha3Api->replace_device_taint_rule: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the DeviceTaintRule | 
+ **body** | [**V1alpha3DeviceTaintRule**](V1alpha3DeviceTaintRule.md)|  | 
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] 
+ **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] 
+ **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] 
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. | [optional] 
+
+### Return type
+
+[**V1alpha3DeviceTaintRule**](V1alpha3DeviceTaintRule.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_device_taint_rule_status**
+> V1alpha3DeviceTaintRule replace_device_taint_rule_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
+
+
+
+replace status of the specified DeviceTaintRule
+
+### Example
+
+* Api Key Authentication (BearerToken):
+```python
+from __future__ import print_function
+import time
+import kubernetes.client
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+configuration = kubernetes.client.Configuration()
+# Configure API key authorization: BearerToken
+configuration.api_key['authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API kubernetes.client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.ResourceV1alpha3Api(api_client)
+    name = 'name_example' # str | name of the DeviceTaintRule
+body = kubernetes.client.V1alpha3DeviceTaintRule() # V1alpha3DeviceTaintRule | 
+pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). (optional)
+dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
+field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional)
+
+    try:
+        api_response = api_instance.replace_device_taint_rule_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ResourceV1alpha3Api->replace_device_taint_rule_status: %s\n" % e)
 ```
 
 ### Parameters

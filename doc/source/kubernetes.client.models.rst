@@ -202,6 +202,7 @@ Submodules
    kubernetes.client.models.v1_git_repo_volume_source
    kubernetes.client.models.v1_glusterfs_persistent_volume_source
    kubernetes.client.models.v1_glusterfs_volume_source
+   kubernetes.client.models.v1_group_resource
    kubernetes.client.models.v1_group_subject
    kubernetes.client.models.v1_group_version_for_discovery
    kubernetes.client.models.v1_grpc_action
@@ -539,15 +540,15 @@ Submodules
    kubernetes.client.models.v1_webhook_conversion
    kubernetes.client.models.v1_weighted_pod_affinity_term
    kubernetes.client.models.v1_windows_security_context_options
+   kubernetes.client.models.v1_workload_reference
    kubernetes.client.models.v1alpha1_apply_configuration
    kubernetes.client.models.v1alpha1_cluster_trust_bundle
    kubernetes.client.models.v1alpha1_cluster_trust_bundle_list
    kubernetes.client.models.v1alpha1_cluster_trust_bundle_spec
-   kubernetes.client.models.v1alpha1_group_version_resource
+   kubernetes.client.models.v1alpha1_gang_scheduling_policy
    kubernetes.client.models.v1alpha1_json_patch
    kubernetes.client.models.v1alpha1_match_condition
    kubernetes.client.models.v1alpha1_match_resources
-   kubernetes.client.models.v1alpha1_migration_condition
    kubernetes.client.models.v1alpha1_mutating_admission_policy
    kubernetes.client.models.v1alpha1_mutating_admission_policy_binding
    kubernetes.client.models.v1alpha1_mutating_admission_policy_binding_list
@@ -558,31 +559,26 @@ Submodules
    kubernetes.client.models.v1alpha1_named_rule_with_operations
    kubernetes.client.models.v1alpha1_param_kind
    kubernetes.client.models.v1alpha1_param_ref
-   kubernetes.client.models.v1alpha1_pod_certificate_request
-   kubernetes.client.models.v1alpha1_pod_certificate_request_list
-   kubernetes.client.models.v1alpha1_pod_certificate_request_spec
-   kubernetes.client.models.v1alpha1_pod_certificate_request_status
+   kubernetes.client.models.v1alpha1_pod_group
+   kubernetes.client.models.v1alpha1_pod_group_policy
    kubernetes.client.models.v1alpha1_server_storage_version
    kubernetes.client.models.v1alpha1_storage_version
    kubernetes.client.models.v1alpha1_storage_version_condition
    kubernetes.client.models.v1alpha1_storage_version_list
-   kubernetes.client.models.v1alpha1_storage_version_migration
-   kubernetes.client.models.v1alpha1_storage_version_migration_list
-   kubernetes.client.models.v1alpha1_storage_version_migration_spec
-   kubernetes.client.models.v1alpha1_storage_version_migration_status
    kubernetes.client.models.v1alpha1_storage_version_status
+   kubernetes.client.models.v1alpha1_typed_local_object_reference
    kubernetes.client.models.v1alpha1_variable
-   kubernetes.client.models.v1alpha1_volume_attributes_class
-   kubernetes.client.models.v1alpha1_volume_attributes_class_list
+   kubernetes.client.models.v1alpha1_workload
+   kubernetes.client.models.v1alpha1_workload_list
+   kubernetes.client.models.v1alpha1_workload_spec
    kubernetes.client.models.v1alpha2_lease_candidate
    kubernetes.client.models.v1alpha2_lease_candidate_list
    kubernetes.client.models.v1alpha2_lease_candidate_spec
-   kubernetes.client.models.v1alpha3_cel_device_selector
-   kubernetes.client.models.v1alpha3_device_selector
    kubernetes.client.models.v1alpha3_device_taint
    kubernetes.client.models.v1alpha3_device_taint_rule
    kubernetes.client.models.v1alpha3_device_taint_rule_list
    kubernetes.client.models.v1alpha3_device_taint_rule_spec
+   kubernetes.client.models.v1alpha3_device_taint_rule_status
    kubernetes.client.models.v1alpha3_device_taint_selector
    kubernetes.client.models.v1beta1_allocated_device_status
    kubernetes.client.models.v1beta1_allocation_result
@@ -638,6 +634,10 @@ Submodules
    kubernetes.client.models.v1beta1_param_kind
    kubernetes.client.models.v1beta1_param_ref
    kubernetes.client.models.v1beta1_parent_reference
+   kubernetes.client.models.v1beta1_pod_certificate_request
+   kubernetes.client.models.v1beta1_pod_certificate_request_list
+   kubernetes.client.models.v1beta1_pod_certificate_request_spec
+   kubernetes.client.models.v1beta1_pod_certificate_request_status
    kubernetes.client.models.v1beta1_resource_claim
    kubernetes.client.models.v1beta1_resource_claim_consumer_reference
    kubernetes.client.models.v1beta1_resource_claim_list
@@ -654,6 +654,10 @@ Submodules
    kubernetes.client.models.v1beta1_service_cidr_list
    kubernetes.client.models.v1beta1_service_cidr_spec
    kubernetes.client.models.v1beta1_service_cidr_status
+   kubernetes.client.models.v1beta1_storage_version_migration
+   kubernetes.client.models.v1beta1_storage_version_migration_list
+   kubernetes.client.models.v1beta1_storage_version_migration_spec
+   kubernetes.client.models.v1beta1_storage_version_migration_status
    kubernetes.client.models.v1beta1_variable
    kubernetes.client.models.v1beta1_volume_attributes_class
    kubernetes.client.models.v1beta1_volume_attributes_class_list
@@ -730,5 +734,5 @@ Module contents
 
 .. automodule:: kubernetes.client.models
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

@@ -64,12 +64,12 @@ Submodules
    kubernetes.client.api.resource_v1beta2_api
    kubernetes.client.api.scheduling_api
    kubernetes.client.api.scheduling_v1_api
+   kubernetes.client.api.scheduling_v1alpha1_api
    kubernetes.client.api.storage_api
    kubernetes.client.api.storage_v1_api
-   kubernetes.client.api.storage_v1alpha1_api
    kubernetes.client.api.storage_v1beta1_api
    kubernetes.client.api.storagemigration_api
-   kubernetes.client.api.storagemigration_v1alpha1_api
+   kubernetes.client.api.storagemigration_v1beta1_api
    kubernetes.client.api.version_api
    kubernetes.client.api.well_known_api
 
@@ -78,5 +78,5 @@ Module contents
 
 .. automodule:: kubernetes.client.api
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

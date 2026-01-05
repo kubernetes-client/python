@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **last_probe_time** | **datetime** | Last time we probed the condition. | [optional] 
 **last_transition_time** | **datetime** | Last time the condition transitioned from one status to another. | [optional] 
 **message** | **str** | Human-readable message indicating details about last transition. | [optional] 
-**observed_generation** | **int** | If set, this represents the .metadata.generation that the pod condition was set based upon. This is an alpha field. Enable PodObservedGenerationTracking to be able to use this field. | [optional] 
+**observed_generation** | **int** | If set, this represents the .metadata.generation that the pod condition was set based upon. The PodObservedGenerationTracking feature gate must be enabled to use this field. | [optional] 
 **reason** | **str** | Unique, one-word, CamelCase reason for the condition&#39;s last transition. | [optional] 
 **status** | **str** | Status is the status of the condition. Can be True, False, Unknown. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions | 
 **type** | **str** | Type is the type of the condition. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions | 

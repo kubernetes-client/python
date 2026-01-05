@@ -20,5 +20,5 @@ Module contents
 
 .. automodule:: kubernetes.e2e_test
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

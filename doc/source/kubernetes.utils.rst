@@ -16,5 +16,5 @@ Module contents
 
 .. automodule:: kubernetes.utils
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

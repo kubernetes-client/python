@@ -26,5 +26,5 @@ Module contents
 
 .. automodule:: kubernetes.client
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
