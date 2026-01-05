@@ -1,4 +1,4 @@
-# v35.0.0+snapshot
+# v35.0.0a1
 
 Kubernetes API Version: v1.35.0
 
