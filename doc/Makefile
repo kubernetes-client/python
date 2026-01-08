@@ -19,4 +19,4 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 html:
 	$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	@echo "\nDocs rendered successfully, open _/build/html/index.html to view"
+	@echo "Docs rendered successfully, open _/build/html/index.html to view"
