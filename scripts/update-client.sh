@@ -26,7 +26,6 @@ export OPENAPI_GENERATOR_COMMIT="v4.3.0"
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
-DOC_ROOT="${SCRIPT_ROOT}/../doc"
 CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
 PACKAGE_NAME=$(python "${SCRIPT_ROOT}/constants.py" PACKAGE_NAME)
 DEVELOPMENT_STATUS=$(python "${SCRIPT_ROOT}/constants.py" DEVELOPMENT_STATUS)
@@ -82,11 +81,5 @@ git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
 # AttributeError: 'RESTResponse' object has no attribute 'headers'
 # OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
 # git apply "${SCRIPT_ROOT}/rest_urllib_headers.diff"
-
-echo ">>> generating docs..."
-pushd "${DOC_ROOT}" > /dev/null
-make rst
-git add -A .
-popd > /dev/null
 
 echo ">>> Done."
