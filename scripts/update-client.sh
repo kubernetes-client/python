@@ -78,6 +78,9 @@ git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 # once we upgrade to a version of swagger-codegen that includes it (version>= 6.6.0).
 # See https://github.com/OpenAPITools/openapi-generator/pull/15283
 git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
+# This patch removes use of deprecated functionality in urllib 3.x. Once again,
+# this won't be necessary once we bump swagger-codegen.
+git apply "${SCRIPT_ROOT}/rest_urllib_3x.diff"
 
 echo ">>> generating docs..."
 pushd "${DOC_ROOT}" > /dev/null

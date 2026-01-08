@@ -196,8 +196,7 @@ class ApiClient(object):
         if _return_http_data_only:
             return (return_data)
         else:
-            return (return_data, response_data.status,
-                    response_data.getheaders())
+            return (return_data, response_data.status, response_data.headers)
 
     def sanitize_for_serialization(self, obj):
         """Builds a JSON POST object.
@@ -547,7 +546,7 @@ class ApiClient(object):
         os.close(fd)
         os.remove(path)
 
-        content_disposition = response.getheader("Content-Disposition")
+        content_disposition = response.headers.get("Content-Disposition")
         if content_disposition:
             filename = re.search(r'filename=[\'"]?([^\'"\s]+)[\'"]?',
                                  content_disposition).group(1)

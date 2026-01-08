@@ -1,0 +1,70 @@
+diff --git a/kubernetes/client/api_client.py b/kubernetes/client/api_client.py
+index 814ee8be4..1bb97047c 100644
+--- a/kubernetes/client/api_client.py
++++ b/kubernetes/client/api_client.py
+@@ -196,8 +196,7 @@ class ApiClient(object):
+         if _return_http_data_only:
+             return (return_data)
+         else:
+-            return (return_data, response_data.status,
+-                    response_data.getheaders())
++            return (return_data, response_data.status, response_data.headers)
+ 
+     def sanitize_for_serialization(self, obj):
+         """Builds a JSON POST object.
+@@ -547,7 +546,7 @@ class ApiClient(object):
+         os.close(fd)
+         os.remove(path)
+ 
+-        content_disposition = response.getheader("Content-Disposition")
++        content_disposition = response.headers.get("Content-Disposition")
+         if content_disposition:
+             filename = re.search(r'filename=[\'"]?([^\'"\s]+)[\'"]?',
+                                  content_disposition).group(1)
+diff --git a/kubernetes/client/exceptions.py b/kubernetes/client/exceptions.py
+index 51856fac2..398d88a50 100644
+--- a/kubernetes/client/exceptions.py
++++ b/kubernetes/client/exceptions.py
+@@ -88,7 +88,7 @@ class ApiException(OpenApiException):
+             self.status = http_resp.status
+             self.reason = http_resp.reason
+             self.body = http_resp.data
+-            self.headers = http_resp.getheaders()
++            self.headers = http_resp.headers
+         else:
+             self.status = status
+             self.reason = reason
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+index bb97dfe3c..d56c4bf04 100644
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -17,6 +17,7 @@ import json
+ import logging
+ import re
+ import ssl
++import warnings
+ 
+ import certifi
+ # python 2 and python 3 compatibility library
+@@ -39,13 +40,18 @@ class RESTResponse(io.IOBase):
+         self.reason = resp.reason
+         self.data = resp.data
+ 
+-    def getheaders(self):
++    def headers(self):
+         """Returns a dictionary of the response headers."""
+-        return self.urllib3_response.getheaders()
++        return self.urllib3_response.headers
+ 
+     def getheader(self, name, default=None):
+         """Returns a given response header."""
+-        return self.urllib3_response.getheader(name, default)
++        warnings.warn(
++            'RESTResponse.getheader() has been deprecated in favour of '
++            'RESTResponse.headers.get(name, default)',
++            DeprecationWarning,
++        )
++        return self.urllib3_response.headers.get(name, default)
+ 
+ 
+ class RESTClientObject(object):

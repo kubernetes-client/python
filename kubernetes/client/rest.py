@@ -17,6 +17,7 @@ import json
 import logging
 import re
 import ssl
+import warnings
 
 import certifi
 # python 2 and python 3 compatibility library
@@ -39,13 +40,18 @@ class RESTResponse(io.IOBase):
         self.reason = resp.reason
         self.data = resp.data
 
-    def getheaders(self):
+    def headers(self):
         """Returns a dictionary of the response headers."""
-        return self.urllib3_response.getheaders()
+        return self.urllib3_response.headers
 
     def getheader(self, name, default=None):
         """Returns a given response header."""
-        return self.urllib3_response.getheader(name, default)
+        warnings.warn(
+            'RESTResponse.getheader() has been deprecated in favour of '
+            'RESTResponse.headers.get(name, default)',
+            DeprecationWarning,
+        )
+        return self.urllib3_response.headers.get(name, default)
 
 
 class RESTClientObject(object):
