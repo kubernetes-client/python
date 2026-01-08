@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -57,7 +57,7 @@ class V1Status(object):
     def __init__(self, api_version=None, code=None, details=None, kind=None, message=None, metadata=None, reason=None, status=None, local_vars_configuration=None):  # noqa: E501
         """V1Status - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -105,7 +105,7 @@ class V1Status(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1Status.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -128,7 +128,7 @@ class V1Status(object):
         Suggested HTTP return code for this status, 0 if not set.  # noqa: E501
 
         :param code: The code of this V1Status.  # noqa: E501
-        :type: int
+        :type code: int
         """
 
         self._code = code
@@ -149,7 +149,7 @@ class V1Status(object):
 
 
         :param details: The details of this V1Status.  # noqa: E501
-        :type: V1StatusDetails
+        :type details: V1StatusDetails
         """
 
         self._details = details
@@ -172,7 +172,7 @@ class V1Status(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1Status.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -195,7 +195,7 @@ class V1Status(object):
         A human-readable description of the status of this operation.  # noqa: E501
 
         :param message: The message of this V1Status.  # noqa: E501
-        :type: str
+        :type message: str
         """
 
         self._message = message
@@ -216,7 +216,7 @@ class V1Status(object):
 
 
         :param metadata: The metadata of this V1Status.  # noqa: E501
-        :type: V1ListMeta
+        :type metadata: V1ListMeta
         """
 
         self._metadata = metadata
@@ -239,7 +239,7 @@ class V1Status(object):
         A machine-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available. A Reason clarifies an HTTP status code but does not override it.  # noqa: E501
 
         :param reason: The reason of this V1Status.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
@@ -262,32 +262,40 @@ class V1Status(object):
         Status of the operation. One of: \"Success\" or \"Failure\". More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status  # noqa: E501
 
         :param status: The status of this V1Status.  # noqa: E501
-        :type: str
+        :type status: str
         """
 
         self._status = status
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

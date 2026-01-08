@@ -1,61 +1,3 @@
-diff --git a/kubernetes/client/api/custom_objects_api.py b/kubernetes/client/api/custom_objects_api.py
-index 8b7bce096..23de49810 100644
---- a/kubernetes/client/api/custom_objects_api.py
-+++ b/kubernetes/client/api/custom_objects_api.py
-@@ -2760,7 +2760,7 @@ class CustomObjectsApi(object):
- 
-         # HTTP header `Content-Type`
-         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
--            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
-+            ['application/merge-patch+json'])  # noqa: E501
- 
-         # Authentication setting
-         auth_settings = ['BearerToken']  # noqa: E501
-@@ -2934,7 +2934,7 @@ class CustomObjectsApi(object):
- 
-         # HTTP header `Content-Type`
-         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
--            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
-+            ['application/merge-patch+json'])  # noqa: E501
- 
-         # Authentication setting
-         auth_settings = ['BearerToken']  # noqa: E501
-@@ -3108,7 +3108,7 @@ class CustomObjectsApi(object):
- 
-         # HTTP header `Content-Type`
-         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
--            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
-+            ['application/merge-patch+json'])  # noqa: E501
- 
-         # Authentication setting
-         auth_settings = ['BearerToken']  # noqa: E501
-@@ -3291,7 +3291,7 @@ class CustomObjectsApi(object):
- 
-         # HTTP header `Content-Type`
-         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
--            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
-+            ['application/merge-patch+json'])  # noqa: E501
- 
-         # Authentication setting
-         auth_settings = ['BearerToken']  # noqa: E501
-@@ -3474,7 +3474,7 @@ class CustomObjectsApi(object):
- 
-         # HTTP header `Content-Type`
-         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
--            ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-+            ['application/merge-patch+json'])  # noqa: E501
- 
-         # Authentication setting
-         auth_settings = ['BearerToken']  # noqa: E501
-@@ -3657,7 +3657,7 @@ class CustomObjectsApi(object):
- 
-         # HTTP header `Content-Type`
-         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
--            ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
-+            ['application/merge-patch+json'])  # noqa: E501
- 
-         # Authentication setting
-         auth_settings = ['BearerToken']  # noqa: E501
 diff --git a/kubernetes/client/apis/__init__.py b/kubernetes/client/apis/__init__.py
 new file mode 100644
 index 000000000..ca4b321de
@@ -76,51 +18,63 @@ index 000000000..ca4b321de
 +    DeprecationWarning
 +)
 diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
-index ff0d43b60..02d60486b 100644
+index 5a4174d63..e92e0a653 100644
 --- a/kubernetes/client/configuration.py
 +++ b/kubernetes/client/configuration.py
-@@ -20,6 +20,7 @@ import urllib3
- 
- import six
- from six.moves import http_client as httplib
+@@ -15,6 +15,7 @@ from __future__ import absolute_import
+ import copy
+ import logging
+ import multiprocessing
 +import os
+ import sys
+ import urllib3
  
- 
- class Configuration(object):
-@@ -158,8 +159,20 @@ class Configuration(object):
-         """
- 
+@@ -202,6 +203,9 @@ conf = client.Configuration(
          self.proxy = None
-+# Load proxy from environment variables (if set)
-+        if os.getenv("HTTPS_PROXY"): self.proxy = os.getenv("HTTPS_PROXY")
-+        if os.getenv("https_proxy"): self.proxy = os.getenv("https_proxy")
-+        if os.getenv("HTTP_PROXY"): self.proxy = os.getenv("HTTP_PROXY")
-+        if os.getenv("http_proxy"): self.proxy = os.getenv("http_proxy")
-+        self.no_proxy = None
-+        # Load no_proxy from environment variables (if set)
-+        if os.getenv("NO_PROXY"): self.no_proxy = os.getenv("NO_PROXY")
-+        if os.getenv("no_proxy"): self.no_proxy = os.getenv("no_proxy")
          """Proxy URL
          """
 +        self.no_proxy = None
-+        """bypass proxy for host in the no_proxy list.
++        """Whether proxy is disabled or not
 +        """
          self.proxy_headers = None
          """Proxy headers
          """
+@@ -218,6 +222,22 @@ conf = client.Configuration(
+         """Options to pass down to the underlying urllib3 socket
+         """
+ 
++        # Load proxy from environment variables (if set)
++        if os.getenv("HTTPS_PROXY"):
++            self.proxy = os.getenv("HTTPS_PROXY")
++        if os.getenv("https_proxy"):
++            self.proxy = os.getenv("https_proxy")
++        if os.getenv("HTTP_PROXY"):
++            self.proxy = os.getenv("HTTP_PROXY")
++        if os.getenv("http_proxy"):
++            self.proxy = os.getenv("http_proxy")
++
++        # Load no_proxy from environment variables (if set)
++        if os.getenv("NO_PROXY"):
++            self.no_proxy = os.getenv("NO_PROXY")
++        if os.getenv("no_proxy"):
++            self.no_proxy = os.getenv("no_proxy")
++
+     def __deepcopy__(self, memo):
+         cls = self.__class__
+         result = cls.__new__(cls)
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
-index 201dc43ce..43301efc3 100644
+index 464ef77db..664668640 100644
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
-@@ -25,6 +25,7 @@ from six.moves.urllib.parse import urlencode
- import urllib3
+@@ -18,6 +18,7 @@ import logging
+ import re
+ import ssl
  
- from kubernetes.client.exceptions import ApiException, ApiValueError
 +from requests.utils import should_bypass_proxies
- 
- 
- logger = logging.getLogger(__name__)
-@@ -86,7 +87,7 @@ class RESTClientObject(object):
+ # python 2 and python 3 compatibility library
+ import six
+ from six.moves.urllib.parse import urlencode
+@@ -78,7 +79,7 @@ class RESTClientObject(object):
                  maxsize = 4
  
          # https pool manager
@@ -131,13 +85,10 @@ index 201dc43ce..43301efc3 100644
                  maxsize=maxsize,
 diff --git a/kubernetes/test/test_api_client.py b/kubernetes/test/test_api_client.py
 new file mode 100644
-index 000000000..486b4ac5b
+index 000000000..a94721926
 --- /dev/null
 +++ b/kubernetes/test/test_api_client.py
-@@ -0,0 +1,51 @@
-+# coding: utf-8
-+
-+
+@@ -0,0 +1,48 @@
 +import atexit
 +import weakref
 +import unittest

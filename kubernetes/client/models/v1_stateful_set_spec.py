@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -63,7 +63,7 @@ class V1StatefulSetSpec(object):
     def __init__(self, min_ready_seconds=None, ordinals=None, persistent_volume_claim_retention_policy=None, pod_management_policy=None, replicas=None, revision_history_limit=None, selector=None, service_name=None, template=None, update_strategy=None, volume_claim_templates=None, local_vars_configuration=None):  # noqa: E501
         """V1StatefulSetSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._min_ready_seconds = None
@@ -118,7 +118,7 @@ class V1StatefulSetSpec(object):
         Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)  # noqa: E501
 
         :param min_ready_seconds: The min_ready_seconds of this V1StatefulSetSpec.  # noqa: E501
-        :type: int
+        :type min_ready_seconds: int
         """
 
         self._min_ready_seconds = min_ready_seconds
@@ -139,7 +139,7 @@ class V1StatefulSetSpec(object):
 
 
         :param ordinals: The ordinals of this V1StatefulSetSpec.  # noqa: E501
-        :type: V1StatefulSetOrdinals
+        :type ordinals: V1StatefulSetOrdinals
         """
 
         self._ordinals = ordinals
@@ -160,7 +160,7 @@ class V1StatefulSetSpec(object):
 
 
         :param persistent_volume_claim_retention_policy: The persistent_volume_claim_retention_policy of this V1StatefulSetSpec.  # noqa: E501
-        :type: V1StatefulSetPersistentVolumeClaimRetentionPolicy
+        :type persistent_volume_claim_retention_policy: V1StatefulSetPersistentVolumeClaimRetentionPolicy
         """
 
         self._persistent_volume_claim_retention_policy = persistent_volume_claim_retention_policy
@@ -183,7 +183,7 @@ class V1StatefulSetSpec(object):
         podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.  # noqa: E501
 
         :param pod_management_policy: The pod_management_policy of this V1StatefulSetSpec.  # noqa: E501
-        :type: str
+        :type pod_management_policy: str
         """
 
         self._pod_management_policy = pod_management_policy
@@ -206,7 +206,7 @@ class V1StatefulSetSpec(object):
         replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template, but individual replicas also have a consistent identity. If unspecified, defaults to 1.  # noqa: E501
 
         :param replicas: The replicas of this V1StatefulSetSpec.  # noqa: E501
-        :type: int
+        :type replicas: int
         """
 
         self._replicas = replicas
@@ -229,7 +229,7 @@ class V1StatefulSetSpec(object):
         revisionHistoryLimit is the maximum number of revisions that will be maintained in the StatefulSet's revision history. The revision history consists of all revisions not represented by a currently applied StatefulSetSpec version. The default value is 10.  # noqa: E501
 
         :param revision_history_limit: The revision_history_limit of this V1StatefulSetSpec.  # noqa: E501
-        :type: int
+        :type revision_history_limit: int
         """
 
         self._revision_history_limit = revision_history_limit
@@ -250,7 +250,7 @@ class V1StatefulSetSpec(object):
 
 
         :param selector: The selector of this V1StatefulSetSpec.  # noqa: E501
-        :type: V1LabelSelector
+        :type selector: V1LabelSelector
         """
         if self.local_vars_configuration.client_side_validation and selector is None:  # noqa: E501
             raise ValueError("Invalid value for `selector`, must not be `None`")  # noqa: E501
@@ -275,7 +275,7 @@ class V1StatefulSetSpec(object):
         serviceName is the name of the service that governs this StatefulSet. This service must exist before the StatefulSet, and is responsible for the network identity of the set. Pods get DNS/hostnames that follow the pattern: pod-specific-string.serviceName.default.svc.cluster.local where \"pod-specific-string\" is managed by the StatefulSet controller.  # noqa: E501
 
         :param service_name: The service_name of this V1StatefulSetSpec.  # noqa: E501
-        :type: str
+        :type service_name: str
         """
 
         self._service_name = service_name
@@ -296,7 +296,7 @@ class V1StatefulSetSpec(object):
 
 
         :param template: The template of this V1StatefulSetSpec.  # noqa: E501
-        :type: V1PodTemplateSpec
+        :type template: V1PodTemplateSpec
         """
         if self.local_vars_configuration.client_side_validation and template is None:  # noqa: E501
             raise ValueError("Invalid value for `template`, must not be `None`")  # noqa: E501
@@ -319,7 +319,7 @@ class V1StatefulSetSpec(object):
 
 
         :param update_strategy: The update_strategy of this V1StatefulSetSpec.  # noqa: E501
-        :type: V1StatefulSetUpdateStrategy
+        :type update_strategy: V1StatefulSetUpdateStrategy
         """
 
         self._update_strategy = update_strategy
@@ -342,32 +342,40 @@ class V1StatefulSetSpec(object):
         volumeClaimTemplates is a list of claims that pods are allowed to reference. The StatefulSet controller is responsible for mapping network identities to claims in a way that maintains the identity of a pod. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. A claim in this list takes precedence over any volumes in the template, with the same name.  # noqa: E501
 
         :param volume_claim_templates: The volume_claim_templates of this V1StatefulSetSpec.  # noqa: E501
-        :type: list[V1PersistentVolumeClaim]
+        :type volume_claim_templates: list[V1PersistentVolumeClaim]
         """
 
         self._volume_claim_templates = volume_claim_templates
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

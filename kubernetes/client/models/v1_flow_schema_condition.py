@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +51,7 @@ class V1FlowSchemaCondition(object):
     def __init__(self, last_transition_time=None, message=None, reason=None, status=None, type=None, local_vars_configuration=None):  # noqa: E501
         """V1FlowSchemaCondition - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._last_transition_time = None
@@ -90,7 +90,7 @@ class V1FlowSchemaCondition(object):
         `lastTransitionTime` is the last time the condition transitioned from one status to another.  # noqa: E501
 
         :param last_transition_time: The last_transition_time of this V1FlowSchemaCondition.  # noqa: E501
-        :type: datetime
+        :type last_transition_time: datetime
         """
 
         self._last_transition_time = last_transition_time
@@ -113,7 +113,7 @@ class V1FlowSchemaCondition(object):
         `message` is a human-readable message indicating details about last transition.  # noqa: E501
 
         :param message: The message of this V1FlowSchemaCondition.  # noqa: E501
-        :type: str
+        :type message: str
         """
 
         self._message = message
@@ -136,7 +136,7 @@ class V1FlowSchemaCondition(object):
         `reason` is a unique, one-word, CamelCase reason for the condition's last transition.  # noqa: E501
 
         :param reason: The reason of this V1FlowSchemaCondition.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
@@ -159,7 +159,7 @@ class V1FlowSchemaCondition(object):
         `status` is the status of the condition. Can be True, False, Unknown. Required.  # noqa: E501
 
         :param status: The status of this V1FlowSchemaCondition.  # noqa: E501
-        :type: str
+        :type status: str
         """
 
         self._status = status
@@ -182,32 +182,40 @@ class V1FlowSchemaCondition(object):
         `type` is the type of the condition. Required.  # noqa: E501
 
         :param type: The type of this V1FlowSchemaCondition.  # noqa: E501
-        :type: str
+        :type type: str
         """
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

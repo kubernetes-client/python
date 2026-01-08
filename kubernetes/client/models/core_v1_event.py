@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -75,7 +75,7 @@ class CoreV1Event(object):
     def __init__(self, action=None, api_version=None, count=None, event_time=None, first_timestamp=None, involved_object=None, kind=None, last_timestamp=None, message=None, metadata=None, reason=None, related=None, reporting_component=None, reporting_instance=None, series=None, source=None, type=None, local_vars_configuration=None):  # noqa: E501
         """CoreV1Event - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._action = None
@@ -148,7 +148,7 @@ class CoreV1Event(object):
         What action was taken/failed regarding to the Regarding object.  # noqa: E501
 
         :param action: The action of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type action: str
         """
 
         self._action = action
@@ -171,7 +171,7 @@ class CoreV1Event(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -194,7 +194,7 @@ class CoreV1Event(object):
         The number of times this event has occurred.  # noqa: E501
 
         :param count: The count of this CoreV1Event.  # noqa: E501
-        :type: int
+        :type count: int
         """
 
         self._count = count
@@ -217,7 +217,7 @@ class CoreV1Event(object):
         Time when this Event was first observed.  # noqa: E501
 
         :param event_time: The event_time of this CoreV1Event.  # noqa: E501
-        :type: datetime
+        :type event_time: datetime
         """
 
         self._event_time = event_time
@@ -240,7 +240,7 @@ class CoreV1Event(object):
         The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)  # noqa: E501
 
         :param first_timestamp: The first_timestamp of this CoreV1Event.  # noqa: E501
-        :type: datetime
+        :type first_timestamp: datetime
         """
 
         self._first_timestamp = first_timestamp
@@ -261,7 +261,7 @@ class CoreV1Event(object):
 
 
         :param involved_object: The involved_object of this CoreV1Event.  # noqa: E501
-        :type: V1ObjectReference
+        :type involved_object: V1ObjectReference
         """
         if self.local_vars_configuration.client_side_validation and involved_object is None:  # noqa: E501
             raise ValueError("Invalid value for `involved_object`, must not be `None`")  # noqa: E501
@@ -286,7 +286,7 @@ class CoreV1Event(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -309,7 +309,7 @@ class CoreV1Event(object):
         The time at which the most recent occurrence of this event was recorded.  # noqa: E501
 
         :param last_timestamp: The last_timestamp of this CoreV1Event.  # noqa: E501
-        :type: datetime
+        :type last_timestamp: datetime
         """
 
         self._last_timestamp = last_timestamp
@@ -332,7 +332,7 @@ class CoreV1Event(object):
         A human-readable description of the status of this operation.  # noqa: E501
 
         :param message: The message of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type message: str
         """
 
         self._message = message
@@ -353,7 +353,7 @@ class CoreV1Event(object):
 
 
         :param metadata: The metadata of this CoreV1Event.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
         if self.local_vars_configuration.client_side_validation and metadata is None:  # noqa: E501
             raise ValueError("Invalid value for `metadata`, must not be `None`")  # noqa: E501
@@ -378,7 +378,7 @@ class CoreV1Event(object):
         This should be a short, machine understandable string that gives the reason for the transition into the object's current status.  # noqa: E501
 
         :param reason: The reason of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
@@ -399,7 +399,7 @@ class CoreV1Event(object):
 
 
         :param related: The related of this CoreV1Event.  # noqa: E501
-        :type: V1ObjectReference
+        :type related: V1ObjectReference
         """
 
         self._related = related
@@ -422,7 +422,7 @@ class CoreV1Event(object):
         Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.  # noqa: E501
 
         :param reporting_component: The reporting_component of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type reporting_component: str
         """
 
         self._reporting_component = reporting_component
@@ -445,7 +445,7 @@ class CoreV1Event(object):
         ID of the controller instance, e.g. `kubelet-xyzf`.  # noqa: E501
 
         :param reporting_instance: The reporting_instance of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type reporting_instance: str
         """
 
         self._reporting_instance = reporting_instance
@@ -466,7 +466,7 @@ class CoreV1Event(object):
 
 
         :param series: The series of this CoreV1Event.  # noqa: E501
-        :type: CoreV1EventSeries
+        :type series: CoreV1EventSeries
         """
 
         self._series = series
@@ -487,7 +487,7 @@ class CoreV1Event(object):
 
 
         :param source: The source of this CoreV1Event.  # noqa: E501
-        :type: V1EventSource
+        :type source: V1EventSource
         """
 
         self._source = source
@@ -510,32 +510,40 @@ class CoreV1Event(object):
         Type of this event (Normal, Warning), new types could be added in the future  # noqa: E501
 
         :param type: The type of this CoreV1Event.  # noqa: E501
-        :type: str
+        :type type: str
         """
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

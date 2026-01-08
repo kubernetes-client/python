@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +53,7 @@ class V1ServicePort(object):
     def __init__(self, app_protocol=None, name=None, node_port=None, port=None, protocol=None, target_port=None, local_vars_configuration=None):  # noqa: E501
         """V1ServicePort - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._app_protocol = None
@@ -94,7 +94,7 @@ class V1ServicePort(object):
         The application protocol for this port. This is used as a hint for implementations to offer richer behavior for protocols that they understand. This field follows standard Kubernetes label syntax. Valid values are either:  * Un-prefixed protocol names - reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names).  * Kubernetes-defined prefixed names:   * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-   * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455   * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455  * Other protocols should use implementation-defined prefixed names such as mycompany.com/my-custom-protocol.  # noqa: E501
 
         :param app_protocol: The app_protocol of this V1ServicePort.  # noqa: E501
-        :type: str
+        :type app_protocol: str
         """
 
         self._app_protocol = app_protocol
@@ -117,7 +117,7 @@ class V1ServicePort(object):
         The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. When considering the endpoints for a Service, this must match the 'name' field in the EndpointPort. Optional if only one ServicePort is defined on this service.  # noqa: E501
 
         :param name: The name of this V1ServicePort.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -140,7 +140,7 @@ class V1ServicePort(object):
         The port on each node on which this service is exposed when type is NodePort or LoadBalancer.  Usually assigned by the system. If a value is specified, in-range, and not in use it will be used, otherwise the operation will fail.  If not specified, a port will be allocated if this Service requires one.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type from NodePort to ClusterIP). More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport  # noqa: E501
 
         :param node_port: The node_port of this V1ServicePort.  # noqa: E501
-        :type: int
+        :type node_port: int
         """
 
         self._node_port = node_port
@@ -163,7 +163,7 @@ class V1ServicePort(object):
         The port that will be exposed by this service.  # noqa: E501
 
         :param port: The port of this V1ServicePort.  # noqa: E501
-        :type: int
+        :type port: int
         """
         if self.local_vars_configuration.client_side_validation and port is None:  # noqa: E501
             raise ValueError("Invalid value for `port`, must not be `None`")  # noqa: E501
@@ -188,7 +188,7 @@ class V1ServicePort(object):
         The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP.  # noqa: E501
 
         :param protocol: The protocol of this V1ServicePort.  # noqa: E501
-        :type: str
+        :type protocol: str
         """
 
         self._protocol = protocol
@@ -211,32 +211,40 @@ class V1ServicePort(object):
         Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  # noqa: E501
 
         :param target_port: The target_port of this V1ServicePort.  # noqa: E501
-        :type: object
+        :type target_port: object
         """
 
         self._target_port = target_port
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +55,7 @@ class V1beta2AllocatedDeviceStatus(object):
     def __init__(self, conditions=None, data=None, device=None, driver=None, network_data=None, pool=None, share_id=None, local_vars_configuration=None):  # noqa: E501
         """V1beta2AllocatedDeviceStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._conditions = None
@@ -97,7 +97,7 @@ class V1beta2AllocatedDeviceStatus(object):
         Conditions contains the latest observation of the device's state. If the device has been configured according to the class and claim config references, the `Ready` condition should be True.  Must not contain more than 8 entries.  # noqa: E501
 
         :param conditions: The conditions of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: list[V1Condition]
+        :type conditions: list[V1Condition]
         """
 
         self._conditions = conditions
@@ -120,7 +120,7 @@ class V1beta2AllocatedDeviceStatus(object):
         Data contains arbitrary driver-specific data.  The length of the raw data must be smaller or equal to 10 Ki.  # noqa: E501
 
         :param data: The data of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: object
+        :type data: object
         """
 
         self._data = data
@@ -143,7 +143,7 @@ class V1beta2AllocatedDeviceStatus(object):
         Device references one device instance via its name in the driver's resource pool. It must be a DNS label.  # noqa: E501
 
         :param device: The device of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: str
+        :type device: str
         """
         if self.local_vars_configuration.client_side_validation and device is None:  # noqa: E501
             raise ValueError("Invalid value for `device`, must not be `None`")  # noqa: E501
@@ -168,7 +168,7 @@ class V1beta2AllocatedDeviceStatus(object):
         Driver specifies the name of the DRA driver whose kubelet plugin should be invoked to process the allocation once the claim is needed on a node.  Must be a DNS subdomain and should end with a DNS domain owned by the vendor of the driver. It should use only lower case characters.  # noqa: E501
 
         :param driver: The driver of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: str
+        :type driver: str
         """
         if self.local_vars_configuration.client_side_validation and driver is None:  # noqa: E501
             raise ValueError("Invalid value for `driver`, must not be `None`")  # noqa: E501
@@ -191,7 +191,7 @@ class V1beta2AllocatedDeviceStatus(object):
 
 
         :param network_data: The network_data of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: V1beta2NetworkDeviceData
+        :type network_data: V1beta2NetworkDeviceData
         """
 
         self._network_data = network_data
@@ -214,7 +214,7 @@ class V1beta2AllocatedDeviceStatus(object):
         This name together with the driver name and the device name field identify which device was allocated (`<driver name>/<pool name>/<device name>`).  Must not be longer than 253 characters and may contain one or more DNS sub-domains separated by slashes.  # noqa: E501
 
         :param pool: The pool of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: str
+        :type pool: str
         """
         if self.local_vars_configuration.client_side_validation and pool is None:  # noqa: E501
             raise ValueError("Invalid value for `pool`, must not be `None`")  # noqa: E501
@@ -239,32 +239,40 @@ class V1beta2AllocatedDeviceStatus(object):
         ShareID uniquely identifies an individual allocation share of the device.  # noqa: E501
 
         :param share_id: The share_id of this V1beta2AllocatedDeviceStatus.  # noqa: E501
-        :type: str
+        :type share_id: str
         """
 
         self._share_id = share_id
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

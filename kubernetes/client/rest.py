@@ -18,14 +18,13 @@ import logging
 import re
 import ssl
 
-import certifi
+from requests.utils import should_bypass_proxies
 # python 2 and python 3 compatibility library
 import six
 from six.moves.urllib.parse import urlencode
 import urllib3
 
-from kubernetes.client.exceptions import ApiException, ApiValueError
-from requests.utils import should_bypass_proxies
+from kubernetes.client.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
 
 
 logger = logging.getLogger(__name__)
@@ -63,19 +62,15 @@ class RESTClientObject(object):
         else:
             cert_reqs = ssl.CERT_NONE
 
-        # ca_certs
-        if configuration.ssl_ca_cert:
-            ca_certs = configuration.ssl_ca_cert
-        else:
-            # if not set certificate file, use Mozilla's root certificates.
-            ca_certs = certifi.where()
-
         addition_pool_args = {}
         if configuration.assert_hostname is not None:
             addition_pool_args['assert_hostname'] = configuration.assert_hostname  # noqa: E501
 
         if configuration.retries is not None:
             addition_pool_args['retries'] = configuration.retries
+
+        if configuration.socket_options is not None:
+            addition_pool_args['socket_options'] = configuration.socket_options
 
         if configuration.tls_server_name:
             addition_pool_args['server_hostname'] = configuration.tls_server_name
@@ -92,7 +87,7 @@ class RESTClientObject(object):
                 num_pools=pools_size,
                 maxsize=maxsize,
                 cert_reqs=cert_reqs,
-                ca_certs=ca_certs,
+                ca_certs=configuration.ssl_ca_cert,
                 cert_file=configuration.cert_file,
                 key_file=configuration.key_file,
                 proxy_url=configuration.proxy,
@@ -104,7 +99,7 @@ class RESTClientObject(object):
                 num_pools=pools_size,
                 maxsize=maxsize,
                 cert_reqs=cert_reqs,
-                ca_certs=ca_certs,
+                ca_certs=configuration.ssl_ca_cert,
                 cert_file=configuration.cert_file,
                 key_file=configuration.key_file,
                 **addition_pool_args
@@ -145,7 +140,7 @@ class RESTClientObject(object):
 
         timeout = None
         if _request_timeout:
-            if isinstance(_request_timeout, (int, ) if six.PY3 else (int, long)):  # noqa: E501,F821
+            if isinstance(_request_timeout, six.integer_types + (float, )):  # noqa: E501,F821
                 timeout = urllib3.Timeout(total=_request_timeout)
             elif (isinstance(_request_timeout, tuple) and
                   len(_request_timeout) == 2):
@@ -226,15 +221,22 @@ class RESTClientObject(object):
         if _preload_content:
             r = RESTResponse(r)
 
-            # In the python 3, the response.data is bytes.
-            # we need to decode it to string.
-            if six.PY3:
-                r.data = r.data.decode('utf8')
-
             # log response body
             logger.debug("response body: %s", r.data)
 
         if not 200 <= r.status <= 299:
+            if r.status == 401:
+                raise UnauthorizedException(http_resp=r)
+
+            if r.status == 403:
+                raise ForbiddenException(http_resp=r)
+
+            if r.status == 404:
+                raise NotFoundException(http_resp=r)
+
+            if 500 <= r.status <= 599:
+                raise ServiceException(http_resp=r)
+
             raise ApiException(http_resp=r)
 
         return r

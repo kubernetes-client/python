@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1beta1ParamRef(object):
     def __init__(self, name=None, namespace=None, parameter_not_found_action=None, selector=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1ParamRef - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._name = None
@@ -85,7 +85,7 @@ class V1beta1ParamRef(object):
         name is the name of the resource being referenced.  One of `name` or `selector` must be set, but `name` and `selector` are mutually exclusive properties. If one is set, the other must be unset.  A single parameter used for all admission requests can be configured by setting the `name` field, leaving `selector` blank, and setting namespace if `paramKind` is namespace-scoped.  # noqa: E501
 
         :param name: The name of this V1beta1ParamRef.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -108,7 +108,7 @@ class V1beta1ParamRef(object):
         namespace is the namespace of the referenced resource. Allows limiting the search for params to a specific namespace. Applies to both `name` and `selector` fields.  A per-namespace parameter may be used by specifying a namespace-scoped `paramKind` in the policy and leaving this field empty.  - If `paramKind` is cluster-scoped, this field MUST be unset. Setting this field results in a configuration error.  - If `paramKind` is namespace-scoped, the namespace of the object being evaluated for admission will be used when this field is left unset. Take care that if this is left empty the binding must not match any cluster-scoped resources, which will result in an error.  # noqa: E501
 
         :param namespace: The namespace of this V1beta1ParamRef.  # noqa: E501
-        :type: str
+        :type namespace: str
         """
 
         self._namespace = namespace
@@ -131,7 +131,7 @@ class V1beta1ParamRef(object):
         `parameterNotFoundAction` controls the behavior of the binding when the resource exists, and name or selector is valid, but there are no parameters matched by the binding. If the value is set to `Allow`, then no matched parameters will be treated as successful validation by the binding. If set to `Deny`, then no matched parameters will be subject to the `failurePolicy` of the policy.  Allowed values are `Allow` or `Deny`  Required  # noqa: E501
 
         :param parameter_not_found_action: The parameter_not_found_action of this V1beta1ParamRef.  # noqa: E501
-        :type: str
+        :type parameter_not_found_action: str
         """
 
         self._parameter_not_found_action = parameter_not_found_action
@@ -152,32 +152,40 @@ class V1beta1ParamRef(object):
 
 
         :param selector: The selector of this V1beta1ParamRef.  # noqa: E501
-        :type: V1LabelSelector
+        :type selector: V1LabelSelector
         """
 
         self._selector = selector
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

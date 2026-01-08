@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -71,7 +71,7 @@ class V1ContainerStatus(object):
     def __init__(self, allocated_resources=None, allocated_resources_status=None, container_id=None, image=None, image_id=None, last_state=None, name=None, ready=None, resources=None, restart_count=None, started=None, state=None, stop_signal=None, user=None, volume_mounts=None, local_vars_configuration=None):  # noqa: E501
         """V1ContainerStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocated_resources = None
@@ -135,7 +135,7 @@ class V1ContainerStatus(object):
         AllocatedResources represents the compute resources allocated for this container by the node. Kubelet sets this value to Container.Resources.Requests upon successful pod admission and after successfully admitting desired pod resize.  # noqa: E501
 
         :param allocated_resources: The allocated_resources of this V1ContainerStatus.  # noqa: E501
-        :type: dict(str, str)
+        :type allocated_resources: dict(str, str)
         """
 
         self._allocated_resources = allocated_resources
@@ -158,7 +158,7 @@ class V1ContainerStatus(object):
         AllocatedResourcesStatus represents the status of various resources allocated for this Pod.  # noqa: E501
 
         :param allocated_resources_status: The allocated_resources_status of this V1ContainerStatus.  # noqa: E501
-        :type: list[V1ResourceStatus]
+        :type allocated_resources_status: list[V1ResourceStatus]
         """
 
         self._allocated_resources_status = allocated_resources_status
@@ -181,7 +181,7 @@ class V1ContainerStatus(object):
         ContainerID is the ID of the container in the format '<type>://<container_id>'. Where type is a container runtime identifier, returned from Version call of CRI API (for example \"containerd\").  # noqa: E501
 
         :param container_id: The container_id of this V1ContainerStatus.  # noqa: E501
-        :type: str
+        :type container_id: str
         """
 
         self._container_id = container_id
@@ -204,7 +204,7 @@ class V1ContainerStatus(object):
         Image is the name of container image that the container is running. The container image may not match the image used in the PodSpec, as it may have been resolved by the runtime. More info: https://kubernetes.io/docs/concepts/containers/images.  # noqa: E501
 
         :param image: The image of this V1ContainerStatus.  # noqa: E501
-        :type: str
+        :type image: str
         """
         if self.local_vars_configuration.client_side_validation and image is None:  # noqa: E501
             raise ValueError("Invalid value for `image`, must not be `None`")  # noqa: E501
@@ -229,7 +229,7 @@ class V1ContainerStatus(object):
         ImageID is the image ID of the container's image. The image ID may not match the image ID of the image used in the PodSpec, as it may have been resolved by the runtime.  # noqa: E501
 
         :param image_id: The image_id of this V1ContainerStatus.  # noqa: E501
-        :type: str
+        :type image_id: str
         """
         if self.local_vars_configuration.client_side_validation and image_id is None:  # noqa: E501
             raise ValueError("Invalid value for `image_id`, must not be `None`")  # noqa: E501
@@ -252,7 +252,7 @@ class V1ContainerStatus(object):
 
 
         :param last_state: The last_state of this V1ContainerStatus.  # noqa: E501
-        :type: V1ContainerState
+        :type last_state: V1ContainerState
         """
 
         self._last_state = last_state
@@ -275,7 +275,7 @@ class V1ContainerStatus(object):
         Name is a DNS_LABEL representing the unique name of the container. Each container in a pod must have a unique name across all container types. Cannot be updated.  # noqa: E501
 
         :param name: The name of this V1ContainerStatus.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -300,7 +300,7 @@ class V1ContainerStatus(object):
         Ready specifies whether the container is currently passing its readiness check. The value will change as readiness probes keep executing. If no readiness probes are specified, this field defaults to true once the container is fully started (see Started field).  The value is typically used to determine whether a container is ready to accept traffic.  # noqa: E501
 
         :param ready: The ready of this V1ContainerStatus.  # noqa: E501
-        :type: bool
+        :type ready: bool
         """
         if self.local_vars_configuration.client_side_validation and ready is None:  # noqa: E501
             raise ValueError("Invalid value for `ready`, must not be `None`")  # noqa: E501
@@ -323,7 +323,7 @@ class V1ContainerStatus(object):
 
 
         :param resources: The resources of this V1ContainerStatus.  # noqa: E501
-        :type: V1ResourceRequirements
+        :type resources: V1ResourceRequirements
         """
 
         self._resources = resources
@@ -346,7 +346,7 @@ class V1ContainerStatus(object):
         RestartCount holds the number of times the container has been restarted. Kubelet makes an effort to always increment the value, but there are cases when the state may be lost due to node restarts and then the value may be reset to 0. The value is never negative.  # noqa: E501
 
         :param restart_count: The restart_count of this V1ContainerStatus.  # noqa: E501
-        :type: int
+        :type restart_count: int
         """
         if self.local_vars_configuration.client_side_validation and restart_count is None:  # noqa: E501
             raise ValueError("Invalid value for `restart_count`, must not be `None`")  # noqa: E501
@@ -371,7 +371,7 @@ class V1ContainerStatus(object):
         Started indicates whether the container has finished its postStart lifecycle hook and passed its startup probe. Initialized as false, becomes true after startupProbe is considered successful. Resets to false when the container is restarted, or if kubelet loses state temporarily. In both cases, startup probes will run again. Is always true when no startupProbe is defined and container is running and has passed the postStart lifecycle hook. The null value must be treated the same as false.  # noqa: E501
 
         :param started: The started of this V1ContainerStatus.  # noqa: E501
-        :type: bool
+        :type started: bool
         """
 
         self._started = started
@@ -392,7 +392,7 @@ class V1ContainerStatus(object):
 
 
         :param state: The state of this V1ContainerStatus.  # noqa: E501
-        :type: V1ContainerState
+        :type state: V1ContainerState
         """
 
         self._state = state
@@ -415,7 +415,7 @@ class V1ContainerStatus(object):
         StopSignal reports the effective stop signal for this container  # noqa: E501
 
         :param stop_signal: The stop_signal of this V1ContainerStatus.  # noqa: E501
-        :type: str
+        :type stop_signal: str
         """
 
         self._stop_signal = stop_signal
@@ -436,7 +436,7 @@ class V1ContainerStatus(object):
 
 
         :param user: The user of this V1ContainerStatus.  # noqa: E501
-        :type: V1ContainerUser
+        :type user: V1ContainerUser
         """
 
         self._user = user
@@ -459,32 +459,40 @@ class V1ContainerStatus(object):
         Status of volume mounts.  # noqa: E501
 
         :param volume_mounts: The volume_mounts of this V1ContainerStatus.  # noqa: E501
-        :type: list[V1VolumeMountStatus]
+        :type volume_mounts: list[V1VolumeMountStatus]
         """
 
         self._volume_mounts = volume_mounts
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

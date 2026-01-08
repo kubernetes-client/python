@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -45,7 +45,7 @@ class V1PodExtendedResourceClaimStatus(object):
     def __init__(self, request_mappings=None, resource_claim_name=None, local_vars_configuration=None):  # noqa: E501
         """V1PodExtendedResourceClaimStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._request_mappings = None
@@ -73,7 +73,7 @@ class V1PodExtendedResourceClaimStatus(object):
         RequestMappings identifies the mapping of <container, extended resource backed by DRA> to  device request in the generated ResourceClaim.  # noqa: E501
 
         :param request_mappings: The request_mappings of this V1PodExtendedResourceClaimStatus.  # noqa: E501
-        :type: list[V1ContainerExtendedResourceRequest]
+        :type request_mappings: list[V1ContainerExtendedResourceRequest]
         """
         if self.local_vars_configuration.client_side_validation and request_mappings is None:  # noqa: E501
             raise ValueError("Invalid value for `request_mappings`, must not be `None`")  # noqa: E501
@@ -98,34 +98,42 @@ class V1PodExtendedResourceClaimStatus(object):
         ResourceClaimName is the name of the ResourceClaim that was generated for the Pod in the namespace of the Pod.  # noqa: E501
 
         :param resource_claim_name: The resource_claim_name of this V1PodExtendedResourceClaimStatus.  # noqa: E501
-        :type: str
+        :type resource_claim_name: str
         """
         if self.local_vars_configuration.client_side_validation and resource_claim_name is None:  # noqa: E501
             raise ValueError("Invalid value for `resource_claim_name`, must not be `None`")  # noqa: E501
 
         self._resource_claim_name = resource_claim_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

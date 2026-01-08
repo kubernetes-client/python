@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +53,7 @@ class V1CustomResourceColumnDefinition(object):
     def __init__(self, description=None, format=None, json_path=None, name=None, priority=None, type=None, local_vars_configuration=None):  # noqa: E501
         """V1CustomResourceColumnDefinition - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._description = None
@@ -92,7 +92,7 @@ class V1CustomResourceColumnDefinition(object):
         description is a human readable description of this column.  # noqa: E501
 
         :param description: The description of this V1CustomResourceColumnDefinition.  # noqa: E501
-        :type: str
+        :type description: str
         """
 
         self._description = description
@@ -115,7 +115,7 @@ class V1CustomResourceColumnDefinition(object):
         format is an optional OpenAPI type definition for this column. The 'name' format is applied to the primary identifier column to assist in clients identifying column is the resource name. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types for details.  # noqa: E501
 
         :param format: The format of this V1CustomResourceColumnDefinition.  # noqa: E501
-        :type: str
+        :type format: str
         """
 
         self._format = format
@@ -138,7 +138,7 @@ class V1CustomResourceColumnDefinition(object):
         jsonPath is a simple JSON path (i.e. with array notation) which is evaluated against each custom resource to produce the value for this column.  # noqa: E501
 
         :param json_path: The json_path of this V1CustomResourceColumnDefinition.  # noqa: E501
-        :type: str
+        :type json_path: str
         """
         if self.local_vars_configuration.client_side_validation and json_path is None:  # noqa: E501
             raise ValueError("Invalid value for `json_path`, must not be `None`")  # noqa: E501
@@ -163,7 +163,7 @@ class V1CustomResourceColumnDefinition(object):
         name is a human readable name for the column.  # noqa: E501
 
         :param name: The name of this V1CustomResourceColumnDefinition.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -188,7 +188,7 @@ class V1CustomResourceColumnDefinition(object):
         priority is an integer defining the relative importance of this column compared to others. Lower numbers are considered higher priority. Columns that may be omitted in limited space scenarios should be given a priority greater than 0.  # noqa: E501
 
         :param priority: The priority of this V1CustomResourceColumnDefinition.  # noqa: E501
-        :type: int
+        :type priority: int
         """
 
         self._priority = priority
@@ -211,34 +211,42 @@ class V1CustomResourceColumnDefinition(object):
         type is an OpenAPI type definition for this column. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types for details.  # noqa: E501
 
         :param type: The type of this V1CustomResourceColumnDefinition.  # noqa: E501
-        :type: str
+        :type type: str
         """
         if self.local_vars_configuration.client_side_validation and type is None:  # noqa: E501
             raise ValueError("Invalid value for `type`, must not be `None`")  # noqa: E501
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

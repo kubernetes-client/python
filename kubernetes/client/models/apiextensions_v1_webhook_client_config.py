@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class ApiextensionsV1WebhookClientConfig(object):
     def __init__(self, ca_bundle=None, service=None, url=None, local_vars_configuration=None):  # noqa: E501
         """ApiextensionsV1WebhookClientConfig - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._ca_bundle = None
@@ -80,7 +80,7 @@ class ApiextensionsV1WebhookClientConfig(object):
         caBundle is a PEM encoded CA bundle which will be used to validate the webhook's server certificate. If unspecified, system trust roots on the apiserver are used.  # noqa: E501
 
         :param ca_bundle: The ca_bundle of this ApiextensionsV1WebhookClientConfig.  # noqa: E501
-        :type: str
+        :type ca_bundle: str
         """
         if (self.local_vars_configuration.client_side_validation and
                 ca_bundle is not None and not re.search(r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$', ca_bundle)):  # noqa: E501
@@ -104,7 +104,7 @@ class ApiextensionsV1WebhookClientConfig(object):
 
 
         :param service: The service of this ApiextensionsV1WebhookClientConfig.  # noqa: E501
-        :type: ApiextensionsV1ServiceReference
+        :type service: ApiextensionsV1ServiceReference
         """
 
         self._service = service
@@ -127,32 +127,40 @@ class ApiextensionsV1WebhookClientConfig(object):
         url gives the location of the webhook, in standard URL form (`scheme://host:port/path`). Exactly one of `url` or `service` must be specified.  The `host` should not refer to a service running in the cluster; use the `service` field instead. The host might be resolved via external DNS in some apiservers (e.g., `kube-apiserver` cannot resolve in-cluster DNS as that would be a layering violation). `host` may also be an IP address.  Please note that using `localhost` or `127.0.0.1` as a `host` is risky unless you take great care to run this webhook on all hosts which run an apiserver which might need to make calls to this webhook. Such installs are likely to be non-portable, i.e., not easy to turn up in a new cluster.  The scheme must be \"https\"; the URL must begin with \"https://\".  A path is optional, and if present may be any string permissible in a URL. You may use the path to pass an arbitrary string to the webhook, for example, a cluster identifier.  Attempting to use a user or basic auth e.g. \"user:password@\" is not allowed. Fragments (\"#...\") and query parameters (\"?...\") are not allowed, either.  # noqa: E501
 
         :param url: The url of this ApiextensionsV1WebhookClientConfig.  # noqa: E501
-        :type: str
+        :type url: str
         """
 
         self._url = url
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

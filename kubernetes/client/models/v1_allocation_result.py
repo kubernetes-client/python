@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1AllocationResult(object):
     def __init__(self, allocation_timestamp=None, devices=None, node_selector=None, local_vars_configuration=None):  # noqa: E501
         """V1AllocationResult - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocation_timestamp = None
@@ -80,7 +80,7 @@ class V1AllocationResult(object):
         AllocationTimestamp stores the time when the resources were allocated. This field is not guaranteed to be set, in which case that time is unknown.  This is an alpha field and requires enabling the DRADeviceBindingConditions and DRAResourceClaimDeviceStatus feature gate.  # noqa: E501
 
         :param allocation_timestamp: The allocation_timestamp of this V1AllocationResult.  # noqa: E501
-        :type: datetime
+        :type allocation_timestamp: datetime
         """
 
         self._allocation_timestamp = allocation_timestamp
@@ -101,7 +101,7 @@ class V1AllocationResult(object):
 
 
         :param devices: The devices of this V1AllocationResult.  # noqa: E501
-        :type: V1DeviceAllocationResult
+        :type devices: V1DeviceAllocationResult
         """
 
         self._devices = devices
@@ -122,32 +122,40 @@ class V1AllocationResult(object):
 
 
         :param node_selector: The node_selector of this V1AllocationResult.  # noqa: E501
-        :type: V1NodeSelector
+        :type node_selector: V1NodeSelector
         """
 
         self._node_selector = node_selector
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

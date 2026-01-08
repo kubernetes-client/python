@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1ReplicationControllerSpec(object):
     def __init__(self, min_ready_seconds=None, replicas=None, selector=None, template=None, local_vars_configuration=None):  # noqa: E501
         """V1ReplicationControllerSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._min_ready_seconds = None
@@ -85,7 +85,7 @@ class V1ReplicationControllerSpec(object):
         Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)  # noqa: E501
 
         :param min_ready_seconds: The min_ready_seconds of this V1ReplicationControllerSpec.  # noqa: E501
-        :type: int
+        :type min_ready_seconds: int
         """
 
         self._min_ready_seconds = min_ready_seconds
@@ -108,7 +108,7 @@ class V1ReplicationControllerSpec(object):
         Replicas is the number of desired replicas. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller  # noqa: E501
 
         :param replicas: The replicas of this V1ReplicationControllerSpec.  # noqa: E501
-        :type: int
+        :type replicas: int
         """
 
         self._replicas = replicas
@@ -131,7 +131,7 @@ class V1ReplicationControllerSpec(object):
         Selector is a label query over pods that should match the Replicas count. If Selector is empty, it is defaulted to the labels present on the Pod template. Label keys and values that must match in order to be controlled by this replication controller, if empty defaulted to labels on Pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors  # noqa: E501
 
         :param selector: The selector of this V1ReplicationControllerSpec.  # noqa: E501
-        :type: dict(str, str)
+        :type selector: dict(str, str)
         """
 
         self._selector = selector
@@ -152,32 +152,40 @@ class V1ReplicationControllerSpec(object):
 
 
         :param template: The template of this V1ReplicationControllerSpec.  # noqa: E501
-        :type: V1PodTemplateSpec
+        :type template: V1PodTemplateSpec
         """
 
         self._template = template
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

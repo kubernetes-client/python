@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1StatusCause(object):
     def __init__(self, field=None, message=None, reason=None, local_vars_configuration=None):  # noqa: E501
         """V1StatusCause - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._field = None
@@ -80,7 +80,7 @@ class V1StatusCause(object):
         The field of the resource that has caused this error, as named by its JSON serialization. May include dot and postfix notation for nested attributes. Arrays are zero-indexed.  Fields may appear more than once in an array of causes due to fields having multiple errors. Optional.  Examples:   \"name\" - the field \"name\" on the current resource   \"items[0].name\" - the field \"name\" on the first array entry in \"items\"  # noqa: E501
 
         :param field: The field of this V1StatusCause.  # noqa: E501
-        :type: str
+        :type field: str
         """
 
         self._field = field
@@ -103,7 +103,7 @@ class V1StatusCause(object):
         A human-readable description of the cause of the error.  This field may be presented as-is to a reader.  # noqa: E501
 
         :param message: The message of this V1StatusCause.  # noqa: E501
-        :type: str
+        :type message: str
         """
 
         self._message = message
@@ -126,32 +126,40 @@ class V1StatusCause(object):
         A machine-readable description of the cause of the error. If this value is empty there is no information available.  # noqa: E501
 
         :param reason: The reason of this V1StatusCause.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

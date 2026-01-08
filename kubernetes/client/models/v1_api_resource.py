@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -61,7 +61,7 @@ class V1APIResource(object):
     def __init__(self, categories=None, group=None, kind=None, name=None, namespaced=None, short_names=None, singular_name=None, storage_version_hash=None, verbs=None, version=None, local_vars_configuration=None):  # noqa: E501
         """V1APIResource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._categories = None
@@ -110,7 +110,7 @@ class V1APIResource(object):
         categories is a list of the grouped resources this resource belongs to (e.g. 'all')  # noqa: E501
 
         :param categories: The categories of this V1APIResource.  # noqa: E501
-        :type: list[str]
+        :type categories: list[str]
         """
 
         self._categories = categories
@@ -133,7 +133,7 @@ class V1APIResource(object):
         group is the preferred group of the resource.  Empty implies the group of the containing resource list. For subresources, this may have a different value, for example: Scale\".  # noqa: E501
 
         :param group: The group of this V1APIResource.  # noqa: E501
-        :type: str
+        :type group: str
         """
 
         self._group = group
@@ -156,7 +156,7 @@ class V1APIResource(object):
         kind is the kind for the resource (e.g. 'Foo' is the kind for a resource 'foo')  # noqa: E501
 
         :param kind: The kind of this V1APIResource.  # noqa: E501
-        :type: str
+        :type kind: str
         """
         if self.local_vars_configuration.client_side_validation and kind is None:  # noqa: E501
             raise ValueError("Invalid value for `kind`, must not be `None`")  # noqa: E501
@@ -181,7 +181,7 @@ class V1APIResource(object):
         name is the plural name of the resource.  # noqa: E501
 
         :param name: The name of this V1APIResource.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -206,7 +206,7 @@ class V1APIResource(object):
         namespaced indicates if a resource is namespaced or not.  # noqa: E501
 
         :param namespaced: The namespaced of this V1APIResource.  # noqa: E501
-        :type: bool
+        :type namespaced: bool
         """
         if self.local_vars_configuration.client_side_validation and namespaced is None:  # noqa: E501
             raise ValueError("Invalid value for `namespaced`, must not be `None`")  # noqa: E501
@@ -231,7 +231,7 @@ class V1APIResource(object):
         shortNames is a list of suggested short names of the resource.  # noqa: E501
 
         :param short_names: The short_names of this V1APIResource.  # noqa: E501
-        :type: list[str]
+        :type short_names: list[str]
         """
 
         self._short_names = short_names
@@ -254,7 +254,7 @@ class V1APIResource(object):
         singularName is the singular name of the resource.  This allows clients to handle plural and singular opaquely. The singularName is more correct for reporting status on a single item and both singular and plural are allowed from the kubectl CLI interface.  # noqa: E501
 
         :param singular_name: The singular_name of this V1APIResource.  # noqa: E501
-        :type: str
+        :type singular_name: str
         """
         if self.local_vars_configuration.client_side_validation and singular_name is None:  # noqa: E501
             raise ValueError("Invalid value for `singular_name`, must not be `None`")  # noqa: E501
@@ -279,7 +279,7 @@ class V1APIResource(object):
         The hash value of the storage version, the version this resource is converted to when written to the data store. Value must be treated as opaque by clients. Only equality comparison on the value is valid. This is an alpha feature and may change or be removed in the future. The field is populated by the apiserver only if the StorageVersionHash feature gate is enabled. This field will remain optional even if it graduates.  # noqa: E501
 
         :param storage_version_hash: The storage_version_hash of this V1APIResource.  # noqa: E501
-        :type: str
+        :type storage_version_hash: str
         """
 
         self._storage_version_hash = storage_version_hash
@@ -302,7 +302,7 @@ class V1APIResource(object):
         verbs is a list of supported kube verbs (this includes get, list, watch, create, update, patch, delete, deletecollection, and proxy)  # noqa: E501
 
         :param verbs: The verbs of this V1APIResource.  # noqa: E501
-        :type: list[str]
+        :type verbs: list[str]
         """
         if self.local_vars_configuration.client_side_validation and verbs is None:  # noqa: E501
             raise ValueError("Invalid value for `verbs`, must not be `None`")  # noqa: E501
@@ -327,32 +327,40 @@ class V1APIResource(object):
         version is the preferred version of the resource.  Empty implies the version of the containing resource list For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)\".  # noqa: E501
 
         :param version: The version of this V1APIResource.  # noqa: E501
-        :type: str
+        :type version: str
         """
 
         self._version = version
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

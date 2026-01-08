@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +51,7 @@ class V1alpha1MatchResources(object):
     def __init__(self, exclude_resource_rules=None, match_policy=None, namespace_selector=None, object_selector=None, resource_rules=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha1MatchResources - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._exclude_resource_rules = None
@@ -90,7 +90,7 @@ class V1alpha1MatchResources(object):
         ExcludeResourceRules describes what operations on what resources/subresources the policy should not care about. The exclude rules take precedence over include rules (if a resource matches both, it is excluded)  # noqa: E501
 
         :param exclude_resource_rules: The exclude_resource_rules of this V1alpha1MatchResources.  # noqa: E501
-        :type: list[V1alpha1NamedRuleWithOperations]
+        :type exclude_resource_rules: list[V1alpha1NamedRuleWithOperations]
         """
 
         self._exclude_resource_rules = exclude_resource_rules
@@ -113,7 +113,7 @@ class V1alpha1MatchResources(object):
         matchPolicy defines how the \"MatchResources\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".  - Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, the admission policy does not consider requests to apps/v1beta1 or extensions/v1beta1 API groups.  - Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, the admission policy **does** consider requests made to apps/v1beta1 or extensions/v1beta1 API groups. The API server translates the request to a matched resource API if necessary.  Defaults to \"Equivalent\"  # noqa: E501
 
         :param match_policy: The match_policy of this V1alpha1MatchResources.  # noqa: E501
-        :type: str
+        :type match_policy: str
         """
 
         self._match_policy = match_policy
@@ -134,7 +134,7 @@ class V1alpha1MatchResources(object):
 
 
         :param namespace_selector: The namespace_selector of this V1alpha1MatchResources.  # noqa: E501
-        :type: V1LabelSelector
+        :type namespace_selector: V1LabelSelector
         """
 
         self._namespace_selector = namespace_selector
@@ -155,7 +155,7 @@ class V1alpha1MatchResources(object):
 
 
         :param object_selector: The object_selector of this V1alpha1MatchResources.  # noqa: E501
-        :type: V1LabelSelector
+        :type object_selector: V1LabelSelector
         """
 
         self._object_selector = object_selector
@@ -178,32 +178,40 @@ class V1alpha1MatchResources(object):
         ResourceRules describes what operations on what resources/subresources the admission policy matches. The policy cares about an operation if it matches _any_ Rule.  # noqa: E501
 
         :param resource_rules: The resource_rules of this V1alpha1MatchResources.  # noqa: E501
-        :type: list[V1alpha1NamedRuleWithOperations]
+        :type resource_rules: list[V1alpha1NamedRuleWithOperations]
         """
 
         self._resource_rules = resource_rules
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -93,7 +93,7 @@ class V1EphemeralContainer(object):
     def __init__(self, args=None, command=None, env=None, env_from=None, image=None, image_pull_policy=None, lifecycle=None, liveness_probe=None, name=None, ports=None, readiness_probe=None, resize_policy=None, resources=None, restart_policy=None, restart_policy_rules=None, security_context=None, startup_probe=None, stdin=None, stdin_once=None, target_container_name=None, termination_message_path=None, termination_message_policy=None, tty=None, volume_devices=None, volume_mounts=None, working_dir=None, local_vars_configuration=None):  # noqa: E501
         """V1EphemeralContainer - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._args = None
@@ -194,7 +194,7 @@ class V1EphemeralContainer(object):
         Arguments to the entrypoint. The image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell  # noqa: E501
 
         :param args: The args of this V1EphemeralContainer.  # noqa: E501
-        :type: list[str]
+        :type args: list[str]
         """
 
         self._args = args
@@ -217,7 +217,7 @@ class V1EphemeralContainer(object):
         Entrypoint array. Not executed within a shell. The image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell  # noqa: E501
 
         :param command: The command of this V1EphemeralContainer.  # noqa: E501
-        :type: list[str]
+        :type command: list[str]
         """
 
         self._command = command
@@ -240,7 +240,7 @@ class V1EphemeralContainer(object):
         List of environment variables to set in the container. Cannot be updated.  # noqa: E501
 
         :param env: The env of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1EnvVar]
+        :type env: list[V1EnvVar]
         """
 
         self._env = env
@@ -263,7 +263,7 @@ class V1EphemeralContainer(object):
         List of sources to populate environment variables in the container. The keys defined within a source may consist of any printable ASCII characters except '='. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.  # noqa: E501
 
         :param env_from: The env_from of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1EnvFromSource]
+        :type env_from: list[V1EnvFromSource]
         """
 
         self._env_from = env_from
@@ -286,7 +286,7 @@ class V1EphemeralContainer(object):
         Container image name. More info: https://kubernetes.io/docs/concepts/containers/images  # noqa: E501
 
         :param image: The image of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type image: str
         """
 
         self._image = image
@@ -309,7 +309,7 @@ class V1EphemeralContainer(object):
         Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images  # noqa: E501
 
         :param image_pull_policy: The image_pull_policy of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type image_pull_policy: str
         """
 
         self._image_pull_policy = image_pull_policy
@@ -330,7 +330,7 @@ class V1EphemeralContainer(object):
 
 
         :param lifecycle: The lifecycle of this V1EphemeralContainer.  # noqa: E501
-        :type: V1Lifecycle
+        :type lifecycle: V1Lifecycle
         """
 
         self._lifecycle = lifecycle
@@ -351,7 +351,7 @@ class V1EphemeralContainer(object):
 
 
         :param liveness_probe: The liveness_probe of this V1EphemeralContainer.  # noqa: E501
-        :type: V1Probe
+        :type liveness_probe: V1Probe
         """
 
         self._liveness_probe = liveness_probe
@@ -374,7 +374,7 @@ class V1EphemeralContainer(object):
         Name of the ephemeral container specified as a DNS_LABEL. This name must be unique among all containers, init containers and ephemeral containers.  # noqa: E501
 
         :param name: The name of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -399,7 +399,7 @@ class V1EphemeralContainer(object):
         Ports are not allowed for ephemeral containers.  # noqa: E501
 
         :param ports: The ports of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1ContainerPort]
+        :type ports: list[V1ContainerPort]
         """
 
         self._ports = ports
@@ -420,7 +420,7 @@ class V1EphemeralContainer(object):
 
 
         :param readiness_probe: The readiness_probe of this V1EphemeralContainer.  # noqa: E501
-        :type: V1Probe
+        :type readiness_probe: V1Probe
         """
 
         self._readiness_probe = readiness_probe
@@ -443,7 +443,7 @@ class V1EphemeralContainer(object):
         Resources resize policy for the container.  # noqa: E501
 
         :param resize_policy: The resize_policy of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1ContainerResizePolicy]
+        :type resize_policy: list[V1ContainerResizePolicy]
         """
 
         self._resize_policy = resize_policy
@@ -464,7 +464,7 @@ class V1EphemeralContainer(object):
 
 
         :param resources: The resources of this V1EphemeralContainer.  # noqa: E501
-        :type: V1ResourceRequirements
+        :type resources: V1ResourceRequirements
         """
 
         self._resources = resources
@@ -487,7 +487,7 @@ class V1EphemeralContainer(object):
         Restart policy for the container to manage the restart behavior of each container within a pod. You cannot set this field on ephemeral containers.  # noqa: E501
 
         :param restart_policy: The restart_policy of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type restart_policy: str
         """
 
         self._restart_policy = restart_policy
@@ -510,7 +510,7 @@ class V1EphemeralContainer(object):
         Represents a list of rules to be checked to determine if the container should be restarted on exit. You cannot set this field on ephemeral containers.  # noqa: E501
 
         :param restart_policy_rules: The restart_policy_rules of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1ContainerRestartRule]
+        :type restart_policy_rules: list[V1ContainerRestartRule]
         """
 
         self._restart_policy_rules = restart_policy_rules
@@ -531,7 +531,7 @@ class V1EphemeralContainer(object):
 
 
         :param security_context: The security_context of this V1EphemeralContainer.  # noqa: E501
-        :type: V1SecurityContext
+        :type security_context: V1SecurityContext
         """
 
         self._security_context = security_context
@@ -552,7 +552,7 @@ class V1EphemeralContainer(object):
 
 
         :param startup_probe: The startup_probe of this V1EphemeralContainer.  # noqa: E501
-        :type: V1Probe
+        :type startup_probe: V1Probe
         """
 
         self._startup_probe = startup_probe
@@ -575,7 +575,7 @@ class V1EphemeralContainer(object):
         Whether this container should allocate a buffer for stdin in the container runtime. If this is not set, reads from stdin in the container will always result in EOF. Default is false.  # noqa: E501
 
         :param stdin: The stdin of this V1EphemeralContainer.  # noqa: E501
-        :type: bool
+        :type stdin: bool
         """
 
         self._stdin = stdin
@@ -598,7 +598,7 @@ class V1EphemeralContainer(object):
         Whether the container runtime should close the stdin channel after it has been opened by a single attach. When stdin is true the stdin stream will remain open across multiple attach sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the first client attaches to stdin, and then remains open and accepts data until the client disconnects, at which time stdin is closed and remains closed until the container is restarted. If this flag is false, a container processes that reads from stdin will never receive an EOF. Default is false  # noqa: E501
 
         :param stdin_once: The stdin_once of this V1EphemeralContainer.  # noqa: E501
-        :type: bool
+        :type stdin_once: bool
         """
 
         self._stdin_once = stdin_once
@@ -621,7 +621,7 @@ class V1EphemeralContainer(object):
         If set, the name of the container from PodSpec that this ephemeral container targets. The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container. If not set then the ephemeral container uses the namespaces configured in the Pod spec.  The container runtime must implement support for this feature. If the runtime does not support namespace targeting then the result of setting this field is undefined.  # noqa: E501
 
         :param target_container_name: The target_container_name of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type target_container_name: str
         """
 
         self._target_container_name = target_container_name
@@ -644,7 +644,7 @@ class V1EphemeralContainer(object):
         Optional: Path at which the file to which the container's termination message will be written is mounted into the container's filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated.  # noqa: E501
 
         :param termination_message_path: The termination_message_path of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type termination_message_path: str
         """
 
         self._termination_message_path = termination_message_path
@@ -667,7 +667,7 @@ class V1EphemeralContainer(object):
         Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.  # noqa: E501
 
         :param termination_message_policy: The termination_message_policy of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type termination_message_policy: str
         """
 
         self._termination_message_policy = termination_message_policy
@@ -690,7 +690,7 @@ class V1EphemeralContainer(object):
         Whether this container should allocate a TTY for itself, also requires 'stdin' to be true. Default is false.  # noqa: E501
 
         :param tty: The tty of this V1EphemeralContainer.  # noqa: E501
-        :type: bool
+        :type tty: bool
         """
 
         self._tty = tty
@@ -713,7 +713,7 @@ class V1EphemeralContainer(object):
         volumeDevices is the list of block devices to be used by the container.  # noqa: E501
 
         :param volume_devices: The volume_devices of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1VolumeDevice]
+        :type volume_devices: list[V1VolumeDevice]
         """
 
         self._volume_devices = volume_devices
@@ -736,7 +736,7 @@ class V1EphemeralContainer(object):
         Pod volumes to mount into the container's filesystem. Subpath mounts are not allowed for ephemeral containers. Cannot be updated.  # noqa: E501
 
         :param volume_mounts: The volume_mounts of this V1EphemeralContainer.  # noqa: E501
-        :type: list[V1VolumeMount]
+        :type volume_mounts: list[V1VolumeMount]
         """
 
         self._volume_mounts = volume_mounts
@@ -759,32 +759,40 @@ class V1EphemeralContainer(object):
         Container's working directory. If not specified, the container runtime's default will be used, which might be configured in the container image. Cannot be updated.  # noqa: E501
 
         :param working_dir: The working_dir of this V1EphemeralContainer.  # noqa: E501
-        :type: str
+        :type working_dir: str
         """
 
         self._working_dir = working_dir
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

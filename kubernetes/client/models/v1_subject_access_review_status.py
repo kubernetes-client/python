@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1SubjectAccessReviewStatus(object):
     def __init__(self, allowed=None, denied=None, evaluation_error=None, reason=None, local_vars_configuration=None):  # noqa: E501
         """V1SubjectAccessReviewStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allowed = None
@@ -84,7 +84,7 @@ class V1SubjectAccessReviewStatus(object):
         Allowed is required. True if the action would be allowed, false otherwise.  # noqa: E501
 
         :param allowed: The allowed of this V1SubjectAccessReviewStatus.  # noqa: E501
-        :type: bool
+        :type allowed: bool
         """
         if self.local_vars_configuration.client_side_validation and allowed is None:  # noqa: E501
             raise ValueError("Invalid value for `allowed`, must not be `None`")  # noqa: E501
@@ -109,7 +109,7 @@ class V1SubjectAccessReviewStatus(object):
         Denied is optional. True if the action would be denied, otherwise false. If both allowed is false and denied is false, then the authorizer has no opinion on whether to authorize the action. Denied may not be true if Allowed is true.  # noqa: E501
 
         :param denied: The denied of this V1SubjectAccessReviewStatus.  # noqa: E501
-        :type: bool
+        :type denied: bool
         """
 
         self._denied = denied
@@ -132,7 +132,7 @@ class V1SubjectAccessReviewStatus(object):
         EvaluationError is an indication that some error occurred during the authorization check. It is entirely possible to get an error and be able to continue determine authorization status in spite of it. For instance, RBAC can be missing a role, but enough roles are still present and bound to reason about the request.  # noqa: E501
 
         :param evaluation_error: The evaluation_error of this V1SubjectAccessReviewStatus.  # noqa: E501
-        :type: str
+        :type evaluation_error: str
         """
 
         self._evaluation_error = evaluation_error
@@ -155,32 +155,40 @@ class V1SubjectAccessReviewStatus(object):
         Reason is optional.  It indicates why a request was allowed or denied.  # noqa: E501
 
         :param reason: The reason of this V1SubjectAccessReviewStatus.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

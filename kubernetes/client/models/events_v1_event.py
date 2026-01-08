@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -75,7 +75,7 @@ class EventsV1Event(object):
     def __init__(self, action=None, api_version=None, deprecated_count=None, deprecated_first_timestamp=None, deprecated_last_timestamp=None, deprecated_source=None, event_time=None, kind=None, metadata=None, note=None, reason=None, regarding=None, related=None, reporting_controller=None, reporting_instance=None, series=None, type=None, local_vars_configuration=None):  # noqa: E501
         """EventsV1Event - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._action = None
@@ -149,7 +149,7 @@ class EventsV1Event(object):
         action is what action was taken/failed regarding to the regarding object. It is machine-readable. This field cannot be empty for new Events and it can have at most 128 characters.  # noqa: E501
 
         :param action: The action of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type action: str
         """
 
         self._action = action
@@ -172,7 +172,7 @@ class EventsV1Event(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -195,7 +195,7 @@ class EventsV1Event(object):
         deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.  # noqa: E501
 
         :param deprecated_count: The deprecated_count of this EventsV1Event.  # noqa: E501
-        :type: int
+        :type deprecated_count: int
         """
 
         self._deprecated_count = deprecated_count
@@ -218,7 +218,7 @@ class EventsV1Event(object):
         deprecatedFirstTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.  # noqa: E501
 
         :param deprecated_first_timestamp: The deprecated_first_timestamp of this EventsV1Event.  # noqa: E501
-        :type: datetime
+        :type deprecated_first_timestamp: datetime
         """
 
         self._deprecated_first_timestamp = deprecated_first_timestamp
@@ -241,7 +241,7 @@ class EventsV1Event(object):
         deprecatedLastTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.  # noqa: E501
 
         :param deprecated_last_timestamp: The deprecated_last_timestamp of this EventsV1Event.  # noqa: E501
-        :type: datetime
+        :type deprecated_last_timestamp: datetime
         """
 
         self._deprecated_last_timestamp = deprecated_last_timestamp
@@ -262,7 +262,7 @@ class EventsV1Event(object):
 
 
         :param deprecated_source: The deprecated_source of this EventsV1Event.  # noqa: E501
-        :type: V1EventSource
+        :type deprecated_source: V1EventSource
         """
 
         self._deprecated_source = deprecated_source
@@ -285,7 +285,7 @@ class EventsV1Event(object):
         eventTime is the time when this Event was first observed. It is required.  # noqa: E501
 
         :param event_time: The event_time of this EventsV1Event.  # noqa: E501
-        :type: datetime
+        :type event_time: datetime
         """
         if self.local_vars_configuration.client_side_validation and event_time is None:  # noqa: E501
             raise ValueError("Invalid value for `event_time`, must not be `None`")  # noqa: E501
@@ -310,7 +310,7 @@ class EventsV1Event(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -331,7 +331,7 @@ class EventsV1Event(object):
 
 
         :param metadata: The metadata of this EventsV1Event.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
@@ -354,7 +354,7 @@ class EventsV1Event(object):
         note is a human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB.  # noqa: E501
 
         :param note: The note of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type note: str
         """
 
         self._note = note
@@ -377,7 +377,7 @@ class EventsV1Event(object):
         reason is why the action was taken. It is human-readable. This field cannot be empty for new Events and it can have at most 128 characters.  # noqa: E501
 
         :param reason: The reason of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
@@ -398,7 +398,7 @@ class EventsV1Event(object):
 
 
         :param regarding: The regarding of this EventsV1Event.  # noqa: E501
-        :type: V1ObjectReference
+        :type regarding: V1ObjectReference
         """
 
         self._regarding = regarding
@@ -419,7 +419,7 @@ class EventsV1Event(object):
 
 
         :param related: The related of this EventsV1Event.  # noqa: E501
-        :type: V1ObjectReference
+        :type related: V1ObjectReference
         """
 
         self._related = related
@@ -442,7 +442,7 @@ class EventsV1Event(object):
         reportingController is the name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`. This field cannot be empty for new Events.  # noqa: E501
 
         :param reporting_controller: The reporting_controller of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type reporting_controller: str
         """
 
         self._reporting_controller = reporting_controller
@@ -465,7 +465,7 @@ class EventsV1Event(object):
         reportingInstance is the ID of the controller instance, e.g. `kubelet-xyzf`. This field cannot be empty for new Events and it can have at most 128 characters.  # noqa: E501
 
         :param reporting_instance: The reporting_instance of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type reporting_instance: str
         """
 
         self._reporting_instance = reporting_instance
@@ -486,7 +486,7 @@ class EventsV1Event(object):
 
 
         :param series: The series of this EventsV1Event.  # noqa: E501
-        :type: EventsV1EventSeries
+        :type series: EventsV1EventSeries
         """
 
         self._series = series
@@ -509,32 +509,40 @@ class EventsV1Event(object):
         type is the type of this event (Normal, Warning), new types could be added in the future. It is machine-readable. This field cannot be empty for new Events.  # noqa: E501
 
         :param type: The type of this EventsV1Event.  # noqa: E501
-        :type: str
+        :type type: str
         """
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

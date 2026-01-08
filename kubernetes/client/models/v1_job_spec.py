@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -73,7 +73,7 @@ class V1JobSpec(object):
     def __init__(self, active_deadline_seconds=None, backoff_limit=None, backoff_limit_per_index=None, completion_mode=None, completions=None, managed_by=None, manual_selector=None, max_failed_indexes=None, parallelism=None, pod_failure_policy=None, pod_replacement_policy=None, selector=None, success_policy=None, suspend=None, template=None, ttl_seconds_after_finished=None, local_vars_configuration=None):  # noqa: E501
         """V1JobSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._active_deadline_seconds = None
@@ -144,7 +144,7 @@ class V1JobSpec(object):
         Specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it; value must be positive integer. If a Job is suspended (at creation or through an update), this timer will effectively be stopped and reset when the Job is resumed again.  # noqa: E501
 
         :param active_deadline_seconds: The active_deadline_seconds of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type active_deadline_seconds: int
         """
 
         self._active_deadline_seconds = active_deadline_seconds
@@ -167,7 +167,7 @@ class V1JobSpec(object):
         Specifies the number of retries before marking this job failed. Defaults to 6, unless backoffLimitPerIndex (only Indexed Job) is specified. When backoffLimitPerIndex is specified, backoffLimit defaults to 2147483647.  # noqa: E501
 
         :param backoff_limit: The backoff_limit of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type backoff_limit: int
         """
 
         self._backoff_limit = backoff_limit
@@ -190,7 +190,7 @@ class V1JobSpec(object):
         Specifies the limit for the number of retries within an index before marking this index as failed. When enabled the number of failures per index is kept in the pod's batch.kubernetes.io/job-index-failure-count annotation. It can only be set when Job's completionMode=Indexed, and the Pod's restart policy is Never. The field is immutable.  # noqa: E501
 
         :param backoff_limit_per_index: The backoff_limit_per_index of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type backoff_limit_per_index: int
         """
 
         self._backoff_limit_per_index = backoff_limit_per_index
@@ -213,7 +213,7 @@ class V1JobSpec(object):
         completionMode specifies how Pod completions are tracked. It can be `NonIndexed` (default) or `Indexed`.  `NonIndexed` means that the Job is considered complete when there have been .spec.completions successfully completed Pods. Each Pod completion is homologous to each other.  `Indexed` means that the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1), available in the annotation batch.kubernetes.io/job-completion-index. The Job is considered complete when there is one successfully completed Pod for each index. When value is `Indexed`, .spec.completions must be specified and `.spec.parallelism` must be less than or equal to 10^5. In addition, The Pod name takes the form `$(job-name)-$(index)-$(random-string)`, the Pod hostname takes the form `$(job-name)-$(index)`.  More completion modes can be added in the future. If the Job controller observes a mode that it doesn't recognize, which is possible during upgrades due to version skew, the controller skips updates for the Job.  # noqa: E501
 
         :param completion_mode: The completion_mode of this V1JobSpec.  # noqa: E501
-        :type: str
+        :type completion_mode: str
         """
 
         self._completion_mode = completion_mode
@@ -236,7 +236,7 @@ class V1JobSpec(object):
         Specifies the desired number of successfully finished pods the job should be run with.  Setting to null means that the success of any pod signals the success of all pods, and allows parallelism to have any positive value.  Setting to 1 means that parallelism is limited to 1 and the success of that pod signals the success of the job. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/  # noqa: E501
 
         :param completions: The completions of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type completions: int
         """
 
         self._completions = completions
@@ -259,7 +259,7 @@ class V1JobSpec(object):
         ManagedBy field indicates the controller that manages a Job. The k8s Job controller reconciles jobs which don't have this field at all or the field value is the reserved string `kubernetes.io/job-controller`, but skips reconciling Jobs with a custom value for this field. The value must be a valid domain-prefixed path (e.g. acme.io/foo) - all characters before the first \"/\" must be a valid subdomain as defined by RFC 1123. All characters trailing the first \"/\" must be valid HTTP Path characters as defined by RFC 3986. The value cannot exceed 63 characters. This field is immutable.  # noqa: E501
 
         :param managed_by: The managed_by of this V1JobSpec.  # noqa: E501
-        :type: str
+        :type managed_by: str
         """
 
         self._managed_by = managed_by
@@ -282,7 +282,7 @@ class V1JobSpec(object):
         manualSelector controls generation of pod labels and pod selectors. Leave `manualSelector` unset unless you are certain what you are doing. When false or unset, the system pick labels unique to this job and appends those labels to the pod template.  When true, the user is responsible for picking unique labels and specifying the selector.  Failure to pick a unique label may cause this and other jobs to not function correctly.  However, You may see `manualSelector=true` in jobs that were created with the old `extensions/v1beta1` API. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/#specifying-your-own-pod-selector  # noqa: E501
 
         :param manual_selector: The manual_selector of this V1JobSpec.  # noqa: E501
-        :type: bool
+        :type manual_selector: bool
         """
 
         self._manual_selector = manual_selector
@@ -305,7 +305,7 @@ class V1JobSpec(object):
         Specifies the maximal number of failed indexes before marking the Job as failed, when backoffLimitPerIndex is set. Once the number of failed indexes exceeds this number the entire Job is marked as Failed and its execution is terminated. When left as null the job continues execution of all of its indexes and is marked with the `Complete` Job condition. It can only be specified when backoffLimitPerIndex is set. It can be null or up to completions. It is required and must be less than or equal to 10^4 when is completions greater than 10^5.  # noqa: E501
 
         :param max_failed_indexes: The max_failed_indexes of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type max_failed_indexes: int
         """
 
         self._max_failed_indexes = max_failed_indexes
@@ -328,7 +328,7 @@ class V1JobSpec(object):
         Specifies the maximum desired number of pods the job should run at any given time. The actual number of pods running in steady state will be less than this number when ((.spec.completions - .status.successful) < .spec.parallelism), i.e. when the work left to do is less than max parallelism. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/  # noqa: E501
 
         :param parallelism: The parallelism of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type parallelism: int
         """
 
         self._parallelism = parallelism
@@ -349,7 +349,7 @@ class V1JobSpec(object):
 
 
         :param pod_failure_policy: The pod_failure_policy of this V1JobSpec.  # noqa: E501
-        :type: V1PodFailurePolicy
+        :type pod_failure_policy: V1PodFailurePolicy
         """
 
         self._pod_failure_policy = pod_failure_policy
@@ -372,7 +372,7 @@ class V1JobSpec(object):
         podReplacementPolicy specifies when to create replacement Pods. Possible values are: - TerminatingOrFailed means that we recreate pods   when they are terminating (has a metadata.deletionTimestamp) or failed. - Failed means to wait until a previously created Pod is fully terminated (has phase   Failed or Succeeded) before creating a replacement Pod.  When using podFailurePolicy, Failed is the the only allowed value. TerminatingOrFailed and Failed are allowed values when podFailurePolicy is not in use.  # noqa: E501
 
         :param pod_replacement_policy: The pod_replacement_policy of this V1JobSpec.  # noqa: E501
-        :type: str
+        :type pod_replacement_policy: str
         """
 
         self._pod_replacement_policy = pod_replacement_policy
@@ -393,7 +393,7 @@ class V1JobSpec(object):
 
 
         :param selector: The selector of this V1JobSpec.  # noqa: E501
-        :type: V1LabelSelector
+        :type selector: V1LabelSelector
         """
 
         self._selector = selector
@@ -414,7 +414,7 @@ class V1JobSpec(object):
 
 
         :param success_policy: The success_policy of this V1JobSpec.  # noqa: E501
-        :type: V1SuccessPolicy
+        :type success_policy: V1SuccessPolicy
         """
 
         self._success_policy = success_policy
@@ -437,7 +437,7 @@ class V1JobSpec(object):
         suspend specifies whether the Job controller should create Pods or not. If a Job is created with suspend set to true, no Pods are created by the Job controller. If a Job is suspended after creation (i.e. the flag goes from false to true), the Job controller will delete all active Pods associated with this Job. Users must design their workload to gracefully handle this. Suspending a Job will reset the StartTime field of the Job, effectively resetting the ActiveDeadlineSeconds timer too. Defaults to false.  # noqa: E501
 
         :param suspend: The suspend of this V1JobSpec.  # noqa: E501
-        :type: bool
+        :type suspend: bool
         """
 
         self._suspend = suspend
@@ -458,7 +458,7 @@ class V1JobSpec(object):
 
 
         :param template: The template of this V1JobSpec.  # noqa: E501
-        :type: V1PodTemplateSpec
+        :type template: V1PodTemplateSpec
         """
         if self.local_vars_configuration.client_side_validation and template is None:  # noqa: E501
             raise ValueError("Invalid value for `template`, must not be `None`")  # noqa: E501
@@ -483,32 +483,40 @@ class V1JobSpec(object):
         ttlSecondsAfterFinished limits the lifetime of a Job that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle guarantees (e.g. finalizers) will be honored. If this field is unset, the Job won't be automatically deleted. If this field is set to zero, the Job becomes eligible to be deleted immediately after it finishes.  # noqa: E501
 
         :param ttl_seconds_after_finished: The ttl_seconds_after_finished of this V1JobSpec.  # noqa: E501
-        :type: int
+        :type ttl_seconds_after_finished: int
         """
 
         self._ttl_seconds_after_finished = ttl_seconds_after_finished
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1PodFailurePolicyOnExitCodesRequirement(object):
     def __init__(self, container_name=None, operator=None, values=None, local_vars_configuration=None):  # noqa: E501
         """V1PodFailurePolicyOnExitCodesRequirement - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._container_name = None
@@ -78,7 +78,7 @@ class V1PodFailurePolicyOnExitCodesRequirement(object):
         Restricts the check for exit codes to the container with the specified name. When null, the rule applies to all containers. When specified, it should match one the container or initContainer names in the pod template.  # noqa: E501
 
         :param container_name: The container_name of this V1PodFailurePolicyOnExitCodesRequirement.  # noqa: E501
-        :type: str
+        :type container_name: str
         """
 
         self._container_name = container_name
@@ -101,7 +101,7 @@ class V1PodFailurePolicyOnExitCodesRequirement(object):
         Represents the relationship between the container exit code(s) and the specified values. Containers completed with success (exit code 0) are excluded from the requirement check. Possible values are:  - In: the requirement is satisfied if at least one container exit code   (might be multiple if there are multiple containers not restricted   by the 'containerName' field) is in the set of specified values. - NotIn: the requirement is satisfied if at least one container exit code   (might be multiple if there are multiple containers not restricted   by the 'containerName' field) is not in the set of specified values. Additional values are considered to be added in the future. Clients should react to an unknown operator by assuming the requirement is not satisfied.  # noqa: E501
 
         :param operator: The operator of this V1PodFailurePolicyOnExitCodesRequirement.  # noqa: E501
-        :type: str
+        :type operator: str
         """
         if self.local_vars_configuration.client_side_validation and operator is None:  # noqa: E501
             raise ValueError("Invalid value for `operator`, must not be `None`")  # noqa: E501
@@ -126,34 +126,42 @@ class V1PodFailurePolicyOnExitCodesRequirement(object):
         Specifies the set of values. Each returned container exit code (might be multiple in case of multiple containers) is checked against this set of values with respect to the operator. The list of values must be ordered and must not contain duplicates. Value '0' cannot be used for the In operator. At least one element is required. At most 255 elements are allowed.  # noqa: E501
 
         :param values: The values of this V1PodFailurePolicyOnExitCodesRequirement.  # noqa: E501
-        :type: list[int]
+        :type values: list[int]
         """
         if self.local_vars_configuration.client_side_validation and values is None:  # noqa: E501
             raise ValueError("Invalid value for `values`, must not be `None`")  # noqa: E501
 
         self._values = values
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

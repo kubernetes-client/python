@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +53,7 @@ class V1OwnerReference(object):
     def __init__(self, api_version=None, block_owner_deletion=None, controller=None, kind=None, name=None, uid=None, local_vars_configuration=None):  # noqa: E501
         """V1OwnerReference - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -91,7 +91,7 @@ class V1OwnerReference(object):
         API version of the referent.  # noqa: E501
 
         :param api_version: The api_version of this V1OwnerReference.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
         if self.local_vars_configuration.client_side_validation and api_version is None:  # noqa: E501
             raise ValueError("Invalid value for `api_version`, must not be `None`")  # noqa: E501
@@ -116,7 +116,7 @@ class V1OwnerReference(object):
         If true, AND if the owner has the \"foregroundDeletion\" finalizer, then the owner cannot be deleted from the key-value store until this reference is removed. See https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion for how the garbage collector interacts with this field and enforces the foreground deletion. Defaults to false. To set this field, a user needs \"delete\" permission of the owner, otherwise 422 (Unprocessable Entity) will be returned.  # noqa: E501
 
         :param block_owner_deletion: The block_owner_deletion of this V1OwnerReference.  # noqa: E501
-        :type: bool
+        :type block_owner_deletion: bool
         """
 
         self._block_owner_deletion = block_owner_deletion
@@ -139,7 +139,7 @@ class V1OwnerReference(object):
         If true, this reference points to the managing controller.  # noqa: E501
 
         :param controller: The controller of this V1OwnerReference.  # noqa: E501
-        :type: bool
+        :type controller: bool
         """
 
         self._controller = controller
@@ -162,7 +162,7 @@ class V1OwnerReference(object):
         Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1OwnerReference.  # noqa: E501
-        :type: str
+        :type kind: str
         """
         if self.local_vars_configuration.client_side_validation and kind is None:  # noqa: E501
             raise ValueError("Invalid value for `kind`, must not be `None`")  # noqa: E501
@@ -187,7 +187,7 @@ class V1OwnerReference(object):
         Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names  # noqa: E501
 
         :param name: The name of this V1OwnerReference.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -212,34 +212,42 @@ class V1OwnerReference(object):
         UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids  # noqa: E501
 
         :param uid: The uid of this V1OwnerReference.  # noqa: E501
-        :type: str
+        :type uid: str
         """
         if self.local_vars_configuration.client_side_validation and uid is None:  # noqa: E501
             raise ValueError("Invalid value for `uid`, must not be `None`")  # noqa: E501
 
         self._uid = uid
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

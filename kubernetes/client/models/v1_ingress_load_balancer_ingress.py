@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1IngressLoadBalancerIngress(object):
     def __init__(self, hostname=None, ip=None, ports=None, local_vars_configuration=None):  # noqa: E501
         """V1IngressLoadBalancerIngress - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._hostname = None
@@ -80,7 +80,7 @@ class V1IngressLoadBalancerIngress(object):
         hostname is set for load-balancer ingress points that are DNS based.  # noqa: E501
 
         :param hostname: The hostname of this V1IngressLoadBalancerIngress.  # noqa: E501
-        :type: str
+        :type hostname: str
         """
 
         self._hostname = hostname
@@ -103,7 +103,7 @@ class V1IngressLoadBalancerIngress(object):
         ip is set for load-balancer ingress points that are IP based.  # noqa: E501
 
         :param ip: The ip of this V1IngressLoadBalancerIngress.  # noqa: E501
-        :type: str
+        :type ip: str
         """
 
         self._ip = ip
@@ -126,32 +126,40 @@ class V1IngressLoadBalancerIngress(object):
         ports provides information about the ports exposed by this LoadBalancer.  # noqa: E501
 
         :param ports: The ports of this V1IngressLoadBalancerIngress.  # noqa: E501
-        :type: list[V1IngressPortStatus]
+        :type ports: list[V1IngressPortStatus]
         """
 
         self._ports = ports
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -45,7 +45,7 @@ class V1alpha1WorkloadSpec(object):
     def __init__(self, controller_ref=None, pod_groups=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha1WorkloadSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._controller_ref = None
@@ -72,7 +72,7 @@ class V1alpha1WorkloadSpec(object):
 
 
         :param controller_ref: The controller_ref of this V1alpha1WorkloadSpec.  # noqa: E501
-        :type: V1alpha1TypedLocalObjectReference
+        :type controller_ref: V1alpha1TypedLocalObjectReference
         """
 
         self._controller_ref = controller_ref
@@ -95,34 +95,42 @@ class V1alpha1WorkloadSpec(object):
         PodGroups is the list of pod groups that make up the Workload. The maximum number of pod groups is 8. This field is immutable.  # noqa: E501
 
         :param pod_groups: The pod_groups of this V1alpha1WorkloadSpec.  # noqa: E501
-        :type: list[V1alpha1PodGroup]
+        :type pod_groups: list[V1alpha1PodGroup]
         """
         if self.local_vars_configuration.client_side_validation and pod_groups is None:  # noqa: E501
             raise ValueError("Invalid value for `pod_groups`, must not be `None`")  # noqa: E501
 
         self._pod_groups = pod_groups
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

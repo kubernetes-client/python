@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1DeviceAllocationConfiguration(object):
     def __init__(self, opaque=None, requests=None, source=None, local_vars_configuration=None):  # noqa: E501
         """V1DeviceAllocationConfiguration - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._opaque = None
@@ -77,7 +77,7 @@ class V1DeviceAllocationConfiguration(object):
 
 
         :param opaque: The opaque of this V1DeviceAllocationConfiguration.  # noqa: E501
-        :type: V1OpaqueDeviceConfiguration
+        :type opaque: V1OpaqueDeviceConfiguration
         """
 
         self._opaque = opaque
@@ -100,7 +100,7 @@ class V1DeviceAllocationConfiguration(object):
         Requests lists the names of requests where the configuration applies. If empty, its applies to all requests.  References to subrequests must include the name of the main request and may include the subrequest using the format <main request>[/<subrequest>]. If just the main request is given, the configuration applies to all subrequests.  # noqa: E501
 
         :param requests: The requests of this V1DeviceAllocationConfiguration.  # noqa: E501
-        :type: list[str]
+        :type requests: list[str]
         """
 
         self._requests = requests
@@ -123,34 +123,42 @@ class V1DeviceAllocationConfiguration(object):
         Source records whether the configuration comes from a class and thus is not something that a normal user would have been able to set or from a claim.  # noqa: E501
 
         :param source: The source of this V1DeviceAllocationConfiguration.  # noqa: E501
-        :type: str
+        :type source: str
         """
         if self.local_vars_configuration.client_side_validation and source is None:  # noqa: E501
             raise ValueError("Invalid value for `source`, must not be `None`")  # noqa: E501
 
         self._source = source
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

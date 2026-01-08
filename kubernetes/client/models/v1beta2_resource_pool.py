@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1beta2ResourcePool(object):
     def __init__(self, generation=None, name=None, resource_slice_count=None, local_vars_configuration=None):  # noqa: E501
         """V1beta2ResourcePool - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._generation = None
@@ -77,7 +77,7 @@ class V1beta2ResourcePool(object):
         Generation tracks the change in a pool over time. Whenever a driver changes something about one or more of the resources in a pool, it must change the generation in all ResourceSlices which are part of that pool. Consumers of ResourceSlices should only consider resources from the pool with the highest generation number. The generation may be reset by drivers, which should be fine for consumers, assuming that all ResourceSlices in a pool are updated to match or deleted.  Combined with ResourceSliceCount, this mechanism enables consumers to detect pools which are comprised of multiple ResourceSlices and are in an incomplete state.  # noqa: E501
 
         :param generation: The generation of this V1beta2ResourcePool.  # noqa: E501
-        :type: int
+        :type generation: int
         """
         if self.local_vars_configuration.client_side_validation and generation is None:  # noqa: E501
             raise ValueError("Invalid value for `generation`, must not be `None`")  # noqa: E501
@@ -102,7 +102,7 @@ class V1beta2ResourcePool(object):
         Name is used to identify the pool. For node-local devices, this is often the node name, but this is not required.  It must not be longer than 253 characters and must consist of one or more DNS sub-domains separated by slashes. This field is immutable.  # noqa: E501
 
         :param name: The name of this V1beta2ResourcePool.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -127,34 +127,42 @@ class V1beta2ResourcePool(object):
         ResourceSliceCount is the total number of ResourceSlices in the pool at this generation number. Must be greater than zero.  Consumers can use this to check whether they have seen all ResourceSlices belonging to the same pool.  # noqa: E501
 
         :param resource_slice_count: The resource_slice_count of this V1beta2ResourcePool.  # noqa: E501
-        :type: int
+        :type resource_slice_count: int
         """
         if self.local_vars_configuration.client_side_validation and resource_slice_count is None:  # noqa: E501
             raise ValueError("Invalid value for `resource_slice_count`, must not be `None`")  # noqa: E501
 
         self._resource_slice_count = resource_slice_count
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

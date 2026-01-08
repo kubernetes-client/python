@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1EndpointSubset(object):
     def __init__(self, addresses=None, not_ready_addresses=None, ports=None, local_vars_configuration=None):  # noqa: E501
         """V1EndpointSubset - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._addresses = None
@@ -80,7 +80,7 @@ class V1EndpointSubset(object):
         IP addresses which offer the related ports that are marked as ready. These endpoints should be considered safe for load balancers and clients to utilize.  # noqa: E501
 
         :param addresses: The addresses of this V1EndpointSubset.  # noqa: E501
-        :type: list[V1EndpointAddress]
+        :type addresses: list[V1EndpointAddress]
         """
 
         self._addresses = addresses
@@ -103,7 +103,7 @@ class V1EndpointSubset(object):
         IP addresses which offer the related ports but are not currently marked as ready because they have not yet finished starting, have recently failed a readiness check, or have recently failed a liveness check.  # noqa: E501
 
         :param not_ready_addresses: The not_ready_addresses of this V1EndpointSubset.  # noqa: E501
-        :type: list[V1EndpointAddress]
+        :type not_ready_addresses: list[V1EndpointAddress]
         """
 
         self._not_ready_addresses = not_ready_addresses
@@ -126,32 +126,40 @@ class V1EndpointSubset(object):
         Port numbers available on the related IP addresses.  # noqa: E501
 
         :param ports: The ports of this V1EndpointSubset.  # noqa: E501
-        :type: list[CoreV1EndpointPort]
+        :type ports: list[CoreV1EndpointPort]
         """
 
         self._ports = ports
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

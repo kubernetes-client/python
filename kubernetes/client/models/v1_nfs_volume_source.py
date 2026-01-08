@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1NFSVolumeSource(object):
     def __init__(self, path=None, read_only=None, server=None, local_vars_configuration=None):  # noqa: E501
         """V1NFSVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._path = None
@@ -78,7 +78,7 @@ class V1NFSVolumeSource(object):
         path that is exported by the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs  # noqa: E501
 
         :param path: The path of this V1NFSVolumeSource.  # noqa: E501
-        :type: str
+        :type path: str
         """
         if self.local_vars_configuration.client_side_validation and path is None:  # noqa: E501
             raise ValueError("Invalid value for `path`, must not be `None`")  # noqa: E501
@@ -103,7 +103,7 @@ class V1NFSVolumeSource(object):
         readOnly here will force the NFS export to be mounted with read-only permissions. Defaults to false. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs  # noqa: E501
 
         :param read_only: The read_only of this V1NFSVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -126,34 +126,42 @@ class V1NFSVolumeSource(object):
         server is the hostname or IP address of the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs  # noqa: E501
 
         :param server: The server of this V1NFSVolumeSource.  # noqa: E501
-        :type: str
+        :type server: str
         """
         if self.local_vars_configuration.client_side_validation and server is None:  # noqa: E501
             raise ValueError("Invalid value for `server`, must not be `None`")  # noqa: E501
 
         self._server = server
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

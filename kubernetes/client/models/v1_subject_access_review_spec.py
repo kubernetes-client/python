@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +53,7 @@ class V1SubjectAccessReviewSpec(object):
     def __init__(self, extra=None, groups=None, non_resource_attributes=None, resource_attributes=None, uid=None, user=None, local_vars_configuration=None):  # noqa: E501
         """V1SubjectAccessReviewSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._extra = None
@@ -95,7 +95,7 @@ class V1SubjectAccessReviewSpec(object):
         Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here.  # noqa: E501
 
         :param extra: The extra of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type: dict(str, list[str])
+        :type extra: dict(str, list[str])
         """
 
         self._extra = extra
@@ -118,7 +118,7 @@ class V1SubjectAccessReviewSpec(object):
         Groups is the groups you're testing for.  # noqa: E501
 
         :param groups: The groups of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type: list[str]
+        :type groups: list[str]
         """
 
         self._groups = groups
@@ -139,7 +139,7 @@ class V1SubjectAccessReviewSpec(object):
 
 
         :param non_resource_attributes: The non_resource_attributes of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type: V1NonResourceAttributes
+        :type non_resource_attributes: V1NonResourceAttributes
         """
 
         self._non_resource_attributes = non_resource_attributes
@@ -160,7 +160,7 @@ class V1SubjectAccessReviewSpec(object):
 
 
         :param resource_attributes: The resource_attributes of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type: V1ResourceAttributes
+        :type resource_attributes: V1ResourceAttributes
         """
 
         self._resource_attributes = resource_attributes
@@ -183,7 +183,7 @@ class V1SubjectAccessReviewSpec(object):
         UID information about the requesting user.  # noqa: E501
 
         :param uid: The uid of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type: str
+        :type uid: str
         """
 
         self._uid = uid
@@ -206,32 +206,40 @@ class V1SubjectAccessReviewSpec(object):
         User is the user you're testing for. If you specify \"User\" but not \"Groups\", then is it interpreted as \"What if User were not a member of any groups  # noqa: E501
 
         :param user: The user of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type: str
+        :type user: str
         """
 
         self._user = user
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

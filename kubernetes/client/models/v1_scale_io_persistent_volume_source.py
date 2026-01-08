@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -61,7 +61,7 @@ class V1ScaleIOPersistentVolumeSource(object):
     def __init__(self, fs_type=None, gateway=None, protection_domain=None, read_only=None, secret_ref=None, ssl_enabled=None, storage_mode=None, storage_pool=None, system=None, volume_name=None, local_vars_configuration=None):  # noqa: E501
         """V1ScaleIOPersistentVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._fs_type = None
@@ -112,7 +112,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Default is \"xfs\"  # noqa: E501
 
         :param fs_type: The fs_type of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -135,7 +135,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         gateway is the host address of the ScaleIO API Gateway.  # noqa: E501
 
         :param gateway: The gateway of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type gateway: str
         """
         if self.local_vars_configuration.client_side_validation and gateway is None:  # noqa: E501
             raise ValueError("Invalid value for `gateway`, must not be `None`")  # noqa: E501
@@ -160,7 +160,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         protectionDomain is the name of the ScaleIO Protection Domain for the configured storage.  # noqa: E501
 
         :param protection_domain: The protection_domain of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type protection_domain: str
         """
 
         self._protection_domain = protection_domain
@@ -183,7 +183,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.  # noqa: E501
 
         :param read_only: The read_only of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -204,7 +204,7 @@ class V1ScaleIOPersistentVolumeSource(object):
 
 
         :param secret_ref: The secret_ref of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: V1SecretReference
+        :type secret_ref: V1SecretReference
         """
         if self.local_vars_configuration.client_side_validation and secret_ref is None:  # noqa: E501
             raise ValueError("Invalid value for `secret_ref`, must not be `None`")  # noqa: E501
@@ -229,7 +229,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         sslEnabled is the flag to enable/disable SSL communication with Gateway, default false  # noqa: E501
 
         :param ssl_enabled: The ssl_enabled of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type ssl_enabled: bool
         """
 
         self._ssl_enabled = ssl_enabled
@@ -252,7 +252,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned.  # noqa: E501
 
         :param storage_mode: The storage_mode of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type storage_mode: str
         """
 
         self._storage_mode = storage_mode
@@ -275,7 +275,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         storagePool is the ScaleIO Storage Pool associated with the protection domain.  # noqa: E501
 
         :param storage_pool: The storage_pool of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type storage_pool: str
         """
 
         self._storage_pool = storage_pool
@@ -298,7 +298,7 @@ class V1ScaleIOPersistentVolumeSource(object):
         system is the name of the storage system as configured in ScaleIO.  # noqa: E501
 
         :param system: The system of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type system: str
         """
         if self.local_vars_configuration.client_side_validation and system is None:  # noqa: E501
             raise ValueError("Invalid value for `system`, must not be `None`")  # noqa: E501
@@ -323,32 +323,40 @@ class V1ScaleIOPersistentVolumeSource(object):
         volumeName is the name of a volume already created in the ScaleIO system that is associated with this volume source.  # noqa: E501
 
         :param volume_name: The volume_name of this V1ScaleIOPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type volume_name: str
         """
 
         self._volume_name = volume_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

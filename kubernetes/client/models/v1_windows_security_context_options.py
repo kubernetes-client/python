@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1WindowsSecurityContextOptions(object):
     def __init__(self, gmsa_credential_spec=None, gmsa_credential_spec_name=None, host_process=None, run_as_user_name=None, local_vars_configuration=None):  # noqa: E501
         """V1WindowsSecurityContextOptions - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._gmsa_credential_spec = None
@@ -85,7 +85,7 @@ class V1WindowsSecurityContextOptions(object):
         GMSACredentialSpec is where the GMSA admission webhook (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the GMSA credential spec named by the GMSACredentialSpecName field.  # noqa: E501
 
         :param gmsa_credential_spec: The gmsa_credential_spec of this V1WindowsSecurityContextOptions.  # noqa: E501
-        :type: str
+        :type gmsa_credential_spec: str
         """
 
         self._gmsa_credential_spec = gmsa_credential_spec
@@ -108,7 +108,7 @@ class V1WindowsSecurityContextOptions(object):
         GMSACredentialSpecName is the name of the GMSA credential spec to use.  # noqa: E501
 
         :param gmsa_credential_spec_name: The gmsa_credential_spec_name of this V1WindowsSecurityContextOptions.  # noqa: E501
-        :type: str
+        :type gmsa_credential_spec_name: str
         """
 
         self._gmsa_credential_spec_name = gmsa_credential_spec_name
@@ -131,7 +131,7 @@ class V1WindowsSecurityContextOptions(object):
         HostProcess determines if a container should be run as a 'Host Process' container. All of a Pod's containers must have the same effective HostProcess value (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers). In addition, if HostProcess is true then HostNetwork must also be set to true.  # noqa: E501
 
         :param host_process: The host_process of this V1WindowsSecurityContextOptions.  # noqa: E501
-        :type: bool
+        :type host_process: bool
         """
 
         self._host_process = host_process
@@ -154,32 +154,40 @@ class V1WindowsSecurityContextOptions(object):
         The UserName in Windows to run the entrypoint of the container process. Defaults to the user specified in image metadata if unspecified. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.  # noqa: E501
 
         :param run_as_user_name: The run_as_user_name of this V1WindowsSecurityContextOptions.  # noqa: E501
-        :type: str
+        :type run_as_user_name: str
         """
 
         self._run_as_user_name = run_as_user_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

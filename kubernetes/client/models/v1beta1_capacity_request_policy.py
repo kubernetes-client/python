@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1beta1CapacityRequestPolicy(object):
     def __init__(self, default=None, valid_range=None, valid_values=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1CapacityRequestPolicy - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._default = None
@@ -80,7 +80,7 @@ class V1beta1CapacityRequestPolicy(object):
         Default specifies how much of this capacity is consumed by a request that does not contain an entry for it in DeviceRequest's Capacity.  # noqa: E501
 
         :param default: The default of this V1beta1CapacityRequestPolicy.  # noqa: E501
-        :type: str
+        :type default: str
         """
 
         self._default = default
@@ -101,7 +101,7 @@ class V1beta1CapacityRequestPolicy(object):
 
 
         :param valid_range: The valid_range of this V1beta1CapacityRequestPolicy.  # noqa: E501
-        :type: V1beta1CapacityRequestPolicyRange
+        :type valid_range: V1beta1CapacityRequestPolicyRange
         """
 
         self._valid_range = valid_range
@@ -124,32 +124,40 @@ class V1beta1CapacityRequestPolicy(object):
         ValidValues defines a set of acceptable quantity values in consuming requests.  Must not contain more than 10 entries. Must be sorted in ascending order.  If this field is set, Default must be defined and it must be included in ValidValues list.  If the requested amount does not match any valid value but smaller than some valid values, the scheduler calculates the smallest valid value that is greater than or equal to the request. That is: min(ceil(requestedValue) ∈ validValues), where requestedValue ≤ max(validValues).  If the requested amount exceeds all valid values, the request violates the policy, and this device cannot be allocated.  # noqa: E501
 
         :param valid_values: The valid_values of this V1beta1CapacityRequestPolicy.  # noqa: E501
-        :type: list[str]
+        :type valid_values: list[str]
         """
 
         self._valid_values = valid_values
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -36,7 +36,7 @@ class V1NodeSpec(object):
         'config_source': 'V1NodeConfigSource',
         'external_id': 'str',
         'pod_cidr': 'str',
-        'pod_cid_rs': 'list[str]',
+        'pod_cidrs': 'list[str]',
         'provider_id': 'str',
         'taints': 'list[V1Taint]',
         'unschedulable': 'bool'
@@ -46,22 +46,22 @@ class V1NodeSpec(object):
         'config_source': 'configSource',
         'external_id': 'externalID',
         'pod_cidr': 'podCIDR',
-        'pod_cid_rs': 'podCIDRs',
+        'pod_cidrs': 'podCIDRs',
         'provider_id': 'providerID',
         'taints': 'taints',
         'unschedulable': 'unschedulable'
     }
 
-    def __init__(self, config_source=None, external_id=None, pod_cidr=None, pod_cid_rs=None, provider_id=None, taints=None, unschedulable=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, config_source=None, external_id=None, pod_cidr=None, pod_cidrs=None, provider_id=None, taints=None, unschedulable=None, local_vars_configuration=None):  # noqa: E501
         """V1NodeSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._config_source = None
         self._external_id = None
         self._pod_cidr = None
-        self._pod_cid_rs = None
+        self._pod_cidrs = None
         self._provider_id = None
         self._taints = None
         self._unschedulable = None
@@ -73,8 +73,8 @@ class V1NodeSpec(object):
             self.external_id = external_id
         if pod_cidr is not None:
             self.pod_cidr = pod_cidr
-        if pod_cid_rs is not None:
-            self.pod_cid_rs = pod_cid_rs
+        if pod_cidrs is not None:
+            self.pod_cidrs = pod_cidrs
         if provider_id is not None:
             self.provider_id = provider_id
         if taints is not None:
@@ -98,7 +98,7 @@ class V1NodeSpec(object):
 
 
         :param config_source: The config_source of this V1NodeSpec.  # noqa: E501
-        :type: V1NodeConfigSource
+        :type config_source: V1NodeConfigSource
         """
 
         self._config_source = config_source
@@ -121,7 +121,7 @@ class V1NodeSpec(object):
         Deprecated. Not all kubelets will set this field. Remove field after 1.13. see: https://issues.k8s.io/61966  # noqa: E501
 
         :param external_id: The external_id of this V1NodeSpec.  # noqa: E501
-        :type: str
+        :type external_id: str
         """
 
         self._external_id = external_id
@@ -144,33 +144,33 @@ class V1NodeSpec(object):
         PodCIDR represents the pod IP range assigned to the node.  # noqa: E501
 
         :param pod_cidr: The pod_cidr of this V1NodeSpec.  # noqa: E501
-        :type: str
+        :type pod_cidr: str
         """
 
         self._pod_cidr = pod_cidr
 
     @property
-    def pod_cid_rs(self):
-        """Gets the pod_cid_rs of this V1NodeSpec.  # noqa: E501
+    def pod_cidrs(self):
+        """Gets the pod_cidrs of this V1NodeSpec.  # noqa: E501
 
         podCIDRs represents the IP ranges assigned to the node for usage by Pods on that node. If this field is specified, the 0th entry must match the podCIDR field. It may contain at most 1 value for each of IPv4 and IPv6.  # noqa: E501
 
-        :return: The pod_cid_rs of this V1NodeSpec.  # noqa: E501
+        :return: The pod_cidrs of this V1NodeSpec.  # noqa: E501
         :rtype: list[str]
         """
-        return self._pod_cid_rs
+        return self._pod_cidrs
 
-    @pod_cid_rs.setter
-    def pod_cid_rs(self, pod_cid_rs):
-        """Sets the pod_cid_rs of this V1NodeSpec.
+    @pod_cidrs.setter
+    def pod_cidrs(self, pod_cidrs):
+        """Sets the pod_cidrs of this V1NodeSpec.
 
         podCIDRs represents the IP ranges assigned to the node for usage by Pods on that node. If this field is specified, the 0th entry must match the podCIDR field. It may contain at most 1 value for each of IPv4 and IPv6.  # noqa: E501
 
-        :param pod_cid_rs: The pod_cid_rs of this V1NodeSpec.  # noqa: E501
-        :type: list[str]
+        :param pod_cidrs: The pod_cidrs of this V1NodeSpec.  # noqa: E501
+        :type pod_cidrs: list[str]
         """
 
-        self._pod_cid_rs = pod_cid_rs
+        self._pod_cidrs = pod_cidrs
 
     @property
     def provider_id(self):
@@ -190,7 +190,7 @@ class V1NodeSpec(object):
         ID of the node assigned by the cloud provider in the format: <ProviderName>://<ProviderSpecificNodeID>  # noqa: E501
 
         :param provider_id: The provider_id of this V1NodeSpec.  # noqa: E501
-        :type: str
+        :type provider_id: str
         """
 
         self._provider_id = provider_id
@@ -213,7 +213,7 @@ class V1NodeSpec(object):
         If specified, the node's taints.  # noqa: E501
 
         :param taints: The taints of this V1NodeSpec.  # noqa: E501
-        :type: list[V1Taint]
+        :type taints: list[V1Taint]
         """
 
         self._taints = taints
@@ -236,32 +236,40 @@ class V1NodeSpec(object):
         Unschedulable controls node schedulability of new pods. By default, node is schedulable. More info: https://kubernetes.io/docs/concepts/nodes/node/#manual-node-administration  # noqa: E501
 
         :param unschedulable: The unschedulable of this V1NodeSpec.  # noqa: E501
-        :type: bool
+        :type unschedulable: bool
         """
 
         self._unschedulable = unschedulable
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

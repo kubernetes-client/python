@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +51,7 @@ class V1FlexPersistentVolumeSource(object):
     def __init__(self, driver=None, fs_type=None, options=None, read_only=None, secret_ref=None, local_vars_configuration=None):  # noqa: E501
         """V1FlexPersistentVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._driver = None
@@ -89,7 +89,7 @@ class V1FlexPersistentVolumeSource(object):
         driver is the name of the driver to use for this volume.  # noqa: E501
 
         :param driver: The driver of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type driver: str
         """
         if self.local_vars_configuration.client_side_validation and driver is None:  # noqa: E501
             raise ValueError("Invalid value for `driver`, must not be `None`")  # noqa: E501
@@ -114,7 +114,7 @@ class V1FlexPersistentVolumeSource(object):
         fsType is the Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". The default filesystem depends on FlexVolume script.  # noqa: E501
 
         :param fs_type: The fs_type of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -137,7 +137,7 @@ class V1FlexPersistentVolumeSource(object):
         options is Optional: this field holds extra command options if any.  # noqa: E501
 
         :param options: The options of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :type: dict(str, str)
+        :type options: dict(str, str)
         """
 
         self._options = options
@@ -160,7 +160,7 @@ class V1FlexPersistentVolumeSource(object):
         readOnly is Optional: defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.  # noqa: E501
 
         :param read_only: The read_only of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -181,32 +181,40 @@ class V1FlexPersistentVolumeSource(object):
 
 
         :param secret_ref: The secret_ref of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :type: V1SecretReference
+        :type secret_ref: V1SecretReference
         """
 
         self._secret_ref = secret_ref
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

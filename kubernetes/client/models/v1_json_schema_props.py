@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -129,7 +129,7 @@ class V1JSONSchemaProps(object):
     def __init__(self, ref=None, schema=None, additional_items=None, additional_properties=None, all_of=None, any_of=None, default=None, definitions=None, dependencies=None, description=None, enum=None, example=None, exclusive_maximum=None, exclusive_minimum=None, external_docs=None, format=None, id=None, items=None, max_items=None, max_length=None, max_properties=None, maximum=None, min_items=None, min_length=None, min_properties=None, minimum=None, multiple_of=None, _not=None, nullable=None, one_of=None, pattern=None, pattern_properties=None, properties=None, required=None, title=None, type=None, unique_items=None, x_kubernetes_embedded_resource=None, x_kubernetes_int_or_string=None, x_kubernetes_list_map_keys=None, x_kubernetes_list_type=None, x_kubernetes_map_type=None, x_kubernetes_preserve_unknown_fields=None, x_kubernetes_validations=None, local_vars_configuration=None):  # noqa: E501
         """V1JSONSchemaProps - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._ref = None
@@ -283,7 +283,7 @@ class V1JSONSchemaProps(object):
 
 
         :param ref: The ref of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type ref: str
         """
 
         self._ref = ref
@@ -304,7 +304,7 @@ class V1JSONSchemaProps(object):
 
 
         :param schema: The schema of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type schema: str
         """
 
         self._schema = schema
@@ -327,7 +327,7 @@ class V1JSONSchemaProps(object):
         JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value. Defaults to true for the boolean property.  # noqa: E501
 
         :param additional_items: The additional_items of this V1JSONSchemaProps.  # noqa: E501
-        :type: object
+        :type additional_items: object
         """
 
         self._additional_items = additional_items
@@ -350,7 +350,7 @@ class V1JSONSchemaProps(object):
         JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value. Defaults to true for the boolean property.  # noqa: E501
 
         :param additional_properties: The additional_properties of this V1JSONSchemaProps.  # noqa: E501
-        :type: object
+        :type additional_properties: object
         """
 
         self._additional_properties = additional_properties
@@ -371,7 +371,7 @@ class V1JSONSchemaProps(object):
 
 
         :param all_of: The all_of of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[V1JSONSchemaProps]
+        :type all_of: list[V1JSONSchemaProps]
         """
 
         self._all_of = all_of
@@ -392,7 +392,7 @@ class V1JSONSchemaProps(object):
 
 
         :param any_of: The any_of of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[V1JSONSchemaProps]
+        :type any_of: list[V1JSONSchemaProps]
         """
 
         self._any_of = any_of
@@ -415,7 +415,7 @@ class V1JSONSchemaProps(object):
         default is a default value for undefined object fields. Defaulting is a beta feature under the CustomResourceDefaulting feature gate. Defaulting requires spec.preserveUnknownFields to be false.  # noqa: E501
 
         :param default: The default of this V1JSONSchemaProps.  # noqa: E501
-        :type: object
+        :type default: object
         """
 
         self._default = default
@@ -436,7 +436,7 @@ class V1JSONSchemaProps(object):
 
 
         :param definitions: The definitions of this V1JSONSchemaProps.  # noqa: E501
-        :type: dict(str, V1JSONSchemaProps)
+        :type definitions: dict(str, V1JSONSchemaProps)
         """
 
         self._definitions = definitions
@@ -457,7 +457,7 @@ class V1JSONSchemaProps(object):
 
 
         :param dependencies: The dependencies of this V1JSONSchemaProps.  # noqa: E501
-        :type: dict(str, object)
+        :type dependencies: dict(str, object)
         """
 
         self._dependencies = dependencies
@@ -478,7 +478,7 @@ class V1JSONSchemaProps(object):
 
 
         :param description: The description of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type description: str
         """
 
         self._description = description
@@ -499,7 +499,7 @@ class V1JSONSchemaProps(object):
 
 
         :param enum: The enum of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[object]
+        :type enum: list[object]
         """
 
         self._enum = enum
@@ -522,7 +522,7 @@ class V1JSONSchemaProps(object):
         JSON represents any valid JSON value. These types are supported: bool, int64, float64, string, []interface{}, map[string]interface{} and nil.  # noqa: E501
 
         :param example: The example of this V1JSONSchemaProps.  # noqa: E501
-        :type: object
+        :type example: object
         """
 
         self._example = example
@@ -543,7 +543,7 @@ class V1JSONSchemaProps(object):
 
 
         :param exclusive_maximum: The exclusive_maximum of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type exclusive_maximum: bool
         """
 
         self._exclusive_maximum = exclusive_maximum
@@ -564,7 +564,7 @@ class V1JSONSchemaProps(object):
 
 
         :param exclusive_minimum: The exclusive_minimum of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type exclusive_minimum: bool
         """
 
         self._exclusive_minimum = exclusive_minimum
@@ -585,7 +585,7 @@ class V1JSONSchemaProps(object):
 
 
         :param external_docs: The external_docs of this V1JSONSchemaProps.  # noqa: E501
-        :type: V1ExternalDocumentation
+        :type external_docs: V1ExternalDocumentation
         """
 
         self._external_docs = external_docs
@@ -608,7 +608,7 @@ class V1JSONSchemaProps(object):
         format is an OpenAPI v3 format string. Unknown formats are ignored. The following formats are validated:  - bsonobjectid: a bson object ID, i.e. a 24 characters hex string - uri: an URI as parsed by Golang net/url.ParseRequestURI - email: an email address as parsed by Golang net/mail.ParseAddress - hostname: a valid representation for an Internet host name, as defined by RFC 1034, section 3.1 [RFC1034]. - ipv4: an IPv4 IP as parsed by Golang net.ParseIP - ipv6: an IPv6 IP as parsed by Golang net.ParseIP - cidr: a CIDR as parsed by Golang net.ParseCIDR - mac: a MAC address as parsed by Golang net.ParseMAC - uuid: an UUID that allows uppercase defined by the regex (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$ - uuid3: an UUID3 that allows uppercase defined by the regex (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?3[0-9a-f]{3}-?[0-9a-f]{4}-?[0-9a-f]{12}$ - uuid4: an UUID4 that allows uppercase defined by the regex (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12}$ - uuid5: an UUID5 that allows uppercase defined by the regex (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?5[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12}$ - isbn: an ISBN10 or ISBN13 number string like \"0321751043\" or \"978-0321751041\" - isbn10: an ISBN10 number string like \"0321751043\" - isbn13: an ISBN13 number string like \"978-0321751041\" - creditcard: a credit card number defined by the regex ^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\\\d{3})\\\\d{11})$ with any non digit characters mixed in - ssn: a U.S. social security number following the regex ^\\\\d{3}[- ]?\\\\d{2}[- ]?\\\\d{4}$ - hexcolor: an hexadecimal color code like \"#FFFFFF: following the regex ^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$ - rgbcolor: an RGB color code like rgb like \"rgb(255,255,2559\" - byte: base64 encoded binary data - password: any kind of string - date: a date string like \"2006-01-02\" as defined by full-date in RFC3339 - duration: a duration string like \"22 ns\" as parsed by Golang time.ParseDuration or compatible with Scala duration format - datetime: a date time string like \"2014-12-15T19:30:20.000Z\" as defined by date-time in RFC3339.  # noqa: E501
 
         :param format: The format of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type format: str
         """
 
         self._format = format
@@ -629,7 +629,7 @@ class V1JSONSchemaProps(object):
 
 
         :param id: The id of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type id: str
         """
 
         self._id = id
@@ -652,7 +652,7 @@ class V1JSONSchemaProps(object):
         JSONSchemaPropsOrArray represents a value that can either be a JSONSchemaProps or an array of JSONSchemaProps. Mainly here for serialization purposes.  # noqa: E501
 
         :param items: The items of this V1JSONSchemaProps.  # noqa: E501
-        :type: object
+        :type items: object
         """
 
         self._items = items
@@ -673,7 +673,7 @@ class V1JSONSchemaProps(object):
 
 
         :param max_items: The max_items of this V1JSONSchemaProps.  # noqa: E501
-        :type: int
+        :type max_items: int
         """
 
         self._max_items = max_items
@@ -694,7 +694,7 @@ class V1JSONSchemaProps(object):
 
 
         :param max_length: The max_length of this V1JSONSchemaProps.  # noqa: E501
-        :type: int
+        :type max_length: int
         """
 
         self._max_length = max_length
@@ -715,7 +715,7 @@ class V1JSONSchemaProps(object):
 
 
         :param max_properties: The max_properties of this V1JSONSchemaProps.  # noqa: E501
-        :type: int
+        :type max_properties: int
         """
 
         self._max_properties = max_properties
@@ -736,7 +736,7 @@ class V1JSONSchemaProps(object):
 
 
         :param maximum: The maximum of this V1JSONSchemaProps.  # noqa: E501
-        :type: float
+        :type maximum: float
         """
 
         self._maximum = maximum
@@ -757,7 +757,7 @@ class V1JSONSchemaProps(object):
 
 
         :param min_items: The min_items of this V1JSONSchemaProps.  # noqa: E501
-        :type: int
+        :type min_items: int
         """
 
         self._min_items = min_items
@@ -778,7 +778,7 @@ class V1JSONSchemaProps(object):
 
 
         :param min_length: The min_length of this V1JSONSchemaProps.  # noqa: E501
-        :type: int
+        :type min_length: int
         """
 
         self._min_length = min_length
@@ -799,7 +799,7 @@ class V1JSONSchemaProps(object):
 
 
         :param min_properties: The min_properties of this V1JSONSchemaProps.  # noqa: E501
-        :type: int
+        :type min_properties: int
         """
 
         self._min_properties = min_properties
@@ -820,7 +820,7 @@ class V1JSONSchemaProps(object):
 
 
         :param minimum: The minimum of this V1JSONSchemaProps.  # noqa: E501
-        :type: float
+        :type minimum: float
         """
 
         self._minimum = minimum
@@ -841,7 +841,7 @@ class V1JSONSchemaProps(object):
 
 
         :param multiple_of: The multiple_of of this V1JSONSchemaProps.  # noqa: E501
-        :type: float
+        :type multiple_of: float
         """
 
         self._multiple_of = multiple_of
@@ -862,7 +862,7 @@ class V1JSONSchemaProps(object):
 
 
         :param _not: The _not of this V1JSONSchemaProps.  # noqa: E501
-        :type: V1JSONSchemaProps
+        :type _not: V1JSONSchemaProps
         """
 
         self.__not = _not
@@ -883,7 +883,7 @@ class V1JSONSchemaProps(object):
 
 
         :param nullable: The nullable of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type nullable: bool
         """
 
         self._nullable = nullable
@@ -904,7 +904,7 @@ class V1JSONSchemaProps(object):
 
 
         :param one_of: The one_of of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[V1JSONSchemaProps]
+        :type one_of: list[V1JSONSchemaProps]
         """
 
         self._one_of = one_of
@@ -925,7 +925,7 @@ class V1JSONSchemaProps(object):
 
 
         :param pattern: The pattern of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type pattern: str
         """
 
         self._pattern = pattern
@@ -946,7 +946,7 @@ class V1JSONSchemaProps(object):
 
 
         :param pattern_properties: The pattern_properties of this V1JSONSchemaProps.  # noqa: E501
-        :type: dict(str, V1JSONSchemaProps)
+        :type pattern_properties: dict(str, V1JSONSchemaProps)
         """
 
         self._pattern_properties = pattern_properties
@@ -967,7 +967,7 @@ class V1JSONSchemaProps(object):
 
 
         :param properties: The properties of this V1JSONSchemaProps.  # noqa: E501
-        :type: dict(str, V1JSONSchemaProps)
+        :type properties: dict(str, V1JSONSchemaProps)
         """
 
         self._properties = properties
@@ -988,7 +988,7 @@ class V1JSONSchemaProps(object):
 
 
         :param required: The required of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[str]
+        :type required: list[str]
         """
 
         self._required = required
@@ -1009,7 +1009,7 @@ class V1JSONSchemaProps(object):
 
 
         :param title: The title of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type title: str
         """
 
         self._title = title
@@ -1030,7 +1030,7 @@ class V1JSONSchemaProps(object):
 
 
         :param type: The type of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type type: str
         """
 
         self._type = type
@@ -1051,7 +1051,7 @@ class V1JSONSchemaProps(object):
 
 
         :param unique_items: The unique_items of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type unique_items: bool
         """
 
         self._unique_items = unique_items
@@ -1074,7 +1074,7 @@ class V1JSONSchemaProps(object):
         x-kubernetes-embedded-resource defines that the value is an embedded Kubernetes runtime.Object, with TypeMeta and ObjectMeta. The type must be object. It is allowed to further restrict the embedded object. kind, apiVersion and metadata are validated automatically. x-kubernetes-preserve-unknown-fields is allowed to be true, but does not have to be if the object is fully specified (up to kind, apiVersion, metadata).  # noqa: E501
 
         :param x_kubernetes_embedded_resource: The x_kubernetes_embedded_resource of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type x_kubernetes_embedded_resource: bool
         """
 
         self._x_kubernetes_embedded_resource = x_kubernetes_embedded_resource
@@ -1097,7 +1097,7 @@ class V1JSONSchemaProps(object):
         x-kubernetes-int-or-string specifies that this value is either an integer or a string. If this is true, an empty type is allowed and type as child of anyOf is permitted if following one of the following patterns:  1) anyOf:    - type: integer    - type: string 2) allOf:    - anyOf:      - type: integer      - type: string    - ... zero or more  # noqa: E501
 
         :param x_kubernetes_int_or_string: The x_kubernetes_int_or_string of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type x_kubernetes_int_or_string: bool
         """
 
         self._x_kubernetes_int_or_string = x_kubernetes_int_or_string
@@ -1120,7 +1120,7 @@ class V1JSONSchemaProps(object):
         x-kubernetes-list-map-keys annotates an array with the x-kubernetes-list-type `map` by specifying the keys used as the index of the map.  This tag MUST only be used on lists that have the \"x-kubernetes-list-type\" extension set to \"map\". Also, the values specified for this attribute must be a scalar typed field of the child structure (no nesting is supported).  The properties specified must either be required or have a default value, to ensure those properties are present for all list items.  # noqa: E501
 
         :param x_kubernetes_list_map_keys: The x_kubernetes_list_map_keys of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[str]
+        :type x_kubernetes_list_map_keys: list[str]
         """
 
         self._x_kubernetes_list_map_keys = x_kubernetes_list_map_keys
@@ -1143,7 +1143,7 @@ class V1JSONSchemaProps(object):
         x-kubernetes-list-type annotates an array to further describe its topology. This extension must only be used on lists and may have 3 possible values:  1) `atomic`: the list is treated as a single entity, like a scalar.      Atomic lists will be entirely replaced when updated. This extension      may be used on any type of list (struct, scalar, ...). 2) `set`:      Sets are lists that must not have multiple items with the same value. Each      value must be a scalar, an object with x-kubernetes-map-type `atomic` or an      array with x-kubernetes-list-type `atomic`. 3) `map`:      These lists are like maps in that their elements have a non-index key      used to identify them. Order is preserved upon merge. The map tag      must only be used on a list with elements of type object. Defaults to atomic for arrays.  # noqa: E501
 
         :param x_kubernetes_list_type: The x_kubernetes_list_type of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type x_kubernetes_list_type: str
         """
 
         self._x_kubernetes_list_type = x_kubernetes_list_type
@@ -1166,7 +1166,7 @@ class V1JSONSchemaProps(object):
         x-kubernetes-map-type annotates an object to further describe its topology. This extension must only be used when type is object and may have 2 possible values:  1) `granular`:      These maps are actual maps (key-value pairs) and each fields are independent      from each other (they can each be manipulated by separate actors). This is      the default behaviour for all maps. 2) `atomic`: the list is treated as a single entity, like a scalar.      Atomic maps will be entirely replaced when updated.  # noqa: E501
 
         :param x_kubernetes_map_type: The x_kubernetes_map_type of this V1JSONSchemaProps.  # noqa: E501
-        :type: str
+        :type x_kubernetes_map_type: str
         """
 
         self._x_kubernetes_map_type = x_kubernetes_map_type
@@ -1189,7 +1189,7 @@ class V1JSONSchemaProps(object):
         x-kubernetes-preserve-unknown-fields stops the API server decoding step from pruning fields which are not specified in the validation schema. This affects fields recursively, but switches back to normal pruning behaviour if nested properties or additionalProperties are specified in the schema. This can either be true or undefined. False is forbidden.  # noqa: E501
 
         :param x_kubernetes_preserve_unknown_fields: The x_kubernetes_preserve_unknown_fields of this V1JSONSchemaProps.  # noqa: E501
-        :type: bool
+        :type x_kubernetes_preserve_unknown_fields: bool
         """
 
         self._x_kubernetes_preserve_unknown_fields = x_kubernetes_preserve_unknown_fields
@@ -1212,32 +1212,40 @@ class V1JSONSchemaProps(object):
         x-kubernetes-validations describes a list of validation rules written in the CEL expression language.  # noqa: E501
 
         :param x_kubernetes_validations: The x_kubernetes_validations of this V1JSONSchemaProps.  # noqa: E501
-        :type: list[V1ValidationRule]
+        :type x_kubernetes_validations: list[V1ValidationRule]
         """
 
         self._x_kubernetes_validations = x_kubernetes_validations
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

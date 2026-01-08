@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +51,7 @@ class V2HorizontalPodAutoscalerSpec(object):
     def __init__(self, behavior=None, max_replicas=None, metrics=None, min_replicas=None, scale_target_ref=None, local_vars_configuration=None):  # noqa: E501
         """V2HorizontalPodAutoscalerSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._behavior = None
@@ -86,7 +86,7 @@ class V2HorizontalPodAutoscalerSpec(object):
 
 
         :param behavior: The behavior of this V2HorizontalPodAutoscalerSpec.  # noqa: E501
-        :type: V2HorizontalPodAutoscalerBehavior
+        :type behavior: V2HorizontalPodAutoscalerBehavior
         """
 
         self._behavior = behavior
@@ -109,7 +109,7 @@ class V2HorizontalPodAutoscalerSpec(object):
         maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up. It cannot be less that minReplicas.  # noqa: E501
 
         :param max_replicas: The max_replicas of this V2HorizontalPodAutoscalerSpec.  # noqa: E501
-        :type: int
+        :type max_replicas: int
         """
         if self.local_vars_configuration.client_side_validation and max_replicas is None:  # noqa: E501
             raise ValueError("Invalid value for `max_replicas`, must not be `None`")  # noqa: E501
@@ -134,7 +134,7 @@ class V2HorizontalPodAutoscalerSpec(object):
         metrics contains the specifications for which to use to calculate the desired replica count (the maximum replica count across all metrics will be used).  The desired replica count is calculated multiplying the ratio between the target value and the current value by the current number of pods.  Ergo, metrics used must decrease as the pod count is increased, and vice-versa.  See the individual metric source types for more information about how each type of metric must respond. If not set, the default metric will be set to 80% average CPU utilization.  # noqa: E501
 
         :param metrics: The metrics of this V2HorizontalPodAutoscalerSpec.  # noqa: E501
-        :type: list[V2MetricSpec]
+        :type metrics: list[V2MetricSpec]
         """
 
         self._metrics = metrics
@@ -157,7 +157,7 @@ class V2HorizontalPodAutoscalerSpec(object):
         minReplicas is the lower limit for the number of replicas to which the autoscaler can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the alpha feature gate HPAScaleToZero is enabled and at least one Object or External metric is configured.  Scaling is active as long as at least one metric value is available.  # noqa: E501
 
         :param min_replicas: The min_replicas of this V2HorizontalPodAutoscalerSpec.  # noqa: E501
-        :type: int
+        :type min_replicas: int
         """
 
         self._min_replicas = min_replicas
@@ -178,34 +178,42 @@ class V2HorizontalPodAutoscalerSpec(object):
 
 
         :param scale_target_ref: The scale_target_ref of this V2HorizontalPodAutoscalerSpec.  # noqa: E501
-        :type: V2CrossVersionObjectReference
+        :type scale_target_ref: V2CrossVersionObjectReference
         """
         if self.local_vars_configuration.client_side_validation and scale_target_ref is None:  # noqa: E501
             raise ValueError("Invalid value for `scale_target_ref`, must not be `None`")  # noqa: E501
 
         self._scale_target_ref = scale_target_ref
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -1,6 +1,3 @@
-# coding: utf-8
-
-
 import atexit
 import weakref
 import unittest

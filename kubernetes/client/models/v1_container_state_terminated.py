@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +55,7 @@ class V1ContainerStateTerminated(object):
     def __init__(self, container_id=None, exit_code=None, finished_at=None, message=None, reason=None, signal=None, started_at=None, local_vars_configuration=None):  # noqa: E501
         """V1ContainerStateTerminated - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._container_id = None
@@ -99,7 +99,7 @@ class V1ContainerStateTerminated(object):
         Container's ID in the format '<type>://<container_id>'  # noqa: E501
 
         :param container_id: The container_id of this V1ContainerStateTerminated.  # noqa: E501
-        :type: str
+        :type container_id: str
         """
 
         self._container_id = container_id
@@ -122,7 +122,7 @@ class V1ContainerStateTerminated(object):
         Exit status from the last termination of the container  # noqa: E501
 
         :param exit_code: The exit_code of this V1ContainerStateTerminated.  # noqa: E501
-        :type: int
+        :type exit_code: int
         """
         if self.local_vars_configuration.client_side_validation and exit_code is None:  # noqa: E501
             raise ValueError("Invalid value for `exit_code`, must not be `None`")  # noqa: E501
@@ -147,7 +147,7 @@ class V1ContainerStateTerminated(object):
         Time at which the container last terminated  # noqa: E501
 
         :param finished_at: The finished_at of this V1ContainerStateTerminated.  # noqa: E501
-        :type: datetime
+        :type finished_at: datetime
         """
 
         self._finished_at = finished_at
@@ -170,7 +170,7 @@ class V1ContainerStateTerminated(object):
         Message regarding the last termination of the container  # noqa: E501
 
         :param message: The message of this V1ContainerStateTerminated.  # noqa: E501
-        :type: str
+        :type message: str
         """
 
         self._message = message
@@ -193,7 +193,7 @@ class V1ContainerStateTerminated(object):
         (brief) reason from the last termination of the container  # noqa: E501
 
         :param reason: The reason of this V1ContainerStateTerminated.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
@@ -216,7 +216,7 @@ class V1ContainerStateTerminated(object):
         Signal from the last termination of the container  # noqa: E501
 
         :param signal: The signal of this V1ContainerStateTerminated.  # noqa: E501
-        :type: int
+        :type signal: int
         """
 
         self._signal = signal
@@ -239,32 +239,40 @@ class V1ContainerStateTerminated(object):
         Time at which previous execution of the container started  # noqa: E501
 
         :param started_at: The started_at of this V1ContainerStateTerminated.  # noqa: E501
-        :type: datetime
+        :type started_at: datetime
         """
 
         self._started_at = started_at
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

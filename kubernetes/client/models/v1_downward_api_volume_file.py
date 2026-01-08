@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1DownwardAPIVolumeFile(object):
     def __init__(self, field_ref=None, mode=None, path=None, resource_field_ref=None, local_vars_configuration=None):  # noqa: E501
         """V1DownwardAPIVolumeFile - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._field_ref = None
@@ -82,7 +82,7 @@ class V1DownwardAPIVolumeFile(object):
 
 
         :param field_ref: The field_ref of this V1DownwardAPIVolumeFile.  # noqa: E501
-        :type: V1ObjectFieldSelector
+        :type field_ref: V1ObjectFieldSelector
         """
 
         self._field_ref = field_ref
@@ -105,7 +105,7 @@ class V1DownwardAPIVolumeFile(object):
         Optional: mode bits used to set permissions on this file, must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. If not specified, the volume defaultMode will be used. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.  # noqa: E501
 
         :param mode: The mode of this V1DownwardAPIVolumeFile.  # noqa: E501
-        :type: int
+        :type mode: int
         """
 
         self._mode = mode
@@ -128,7 +128,7 @@ class V1DownwardAPIVolumeFile(object):
         Required: Path is  the relative path name of the file to be created. Must not be absolute or contain the '..' path. Must be utf-8 encoded. The first item of the relative path must not start with '..'  # noqa: E501
 
         :param path: The path of this V1DownwardAPIVolumeFile.  # noqa: E501
-        :type: str
+        :type path: str
         """
         if self.local_vars_configuration.client_side_validation and path is None:  # noqa: E501
             raise ValueError("Invalid value for `path`, must not be `None`")  # noqa: E501
@@ -151,32 +151,40 @@ class V1DownwardAPIVolumeFile(object):
 
 
         :param resource_field_ref: The resource_field_ref of this V1DownwardAPIVolumeFile.  # noqa: E501
-        :type: V1ResourceFieldSelector
+        :type resource_field_ref: V1ResourceFieldSelector
         """
 
         self._resource_field_ref = resource_field_ref
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

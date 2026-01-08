@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -45,7 +45,7 @@ class V1ServerAddressByClientCIDR(object):
     def __init__(self, client_cidr=None, server_address=None, local_vars_configuration=None):  # noqa: E501
         """V1ServerAddressByClientCIDR - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._client_cidr = None
@@ -73,7 +73,7 @@ class V1ServerAddressByClientCIDR(object):
         The CIDR with which clients can match their IP to figure out the server address that they should use.  # noqa: E501
 
         :param client_cidr: The client_cidr of this V1ServerAddressByClientCIDR.  # noqa: E501
-        :type: str
+        :type client_cidr: str
         """
         if self.local_vars_configuration.client_side_validation and client_cidr is None:  # noqa: E501
             raise ValueError("Invalid value for `client_cidr`, must not be `None`")  # noqa: E501
@@ -98,34 +98,42 @@ class V1ServerAddressByClientCIDR(object):
         Address of this server, suitable for a client that matches the above CIDR. This can be a hostname, hostname:port, IP or IP:port.  # noqa: E501
 
         :param server_address: The server_address of this V1ServerAddressByClientCIDR.  # noqa: E501
-        :type: str
+        :type server_address: str
         """
         if self.local_vars_configuration.client_side_validation and server_address is None:  # noqa: E501
             raise ValueError("Invalid value for `server_address`, must not be `None`")  # noqa: E501
 
         self._server_address = server_address
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

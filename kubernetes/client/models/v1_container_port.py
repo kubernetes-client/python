@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +51,7 @@ class V1ContainerPort(object):
     def __init__(self, container_port=None, host_ip=None, host_port=None, name=None, protocol=None, local_vars_configuration=None):  # noqa: E501
         """V1ContainerPort - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._container_port = None
@@ -89,7 +89,7 @@ class V1ContainerPort(object):
         Number of port to expose on the pod's IP address. This must be a valid port number, 0 < x < 65536.  # noqa: E501
 
         :param container_port: The container_port of this V1ContainerPort.  # noqa: E501
-        :type: int
+        :type container_port: int
         """
         if self.local_vars_configuration.client_side_validation and container_port is None:  # noqa: E501
             raise ValueError("Invalid value for `container_port`, must not be `None`")  # noqa: E501
@@ -114,7 +114,7 @@ class V1ContainerPort(object):
         What host IP to bind the external port to.  # noqa: E501
 
         :param host_ip: The host_ip of this V1ContainerPort.  # noqa: E501
-        :type: str
+        :type host_ip: str
         """
 
         self._host_ip = host_ip
@@ -137,7 +137,7 @@ class V1ContainerPort(object):
         Number of port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If HostNetwork is specified, this must match ContainerPort. Most containers do not need this.  # noqa: E501
 
         :param host_port: The host_port of this V1ContainerPort.  # noqa: E501
-        :type: int
+        :type host_port: int
         """
 
         self._host_port = host_port
@@ -160,7 +160,7 @@ class V1ContainerPort(object):
         If specified, this must be an IANA_SVC_NAME and unique within the pod. Each named port in a pod must have a unique name. Name for the port that can be referred to by services.  # noqa: E501
 
         :param name: The name of this V1ContainerPort.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -183,32 +183,40 @@ class V1ContainerPort(object):
         Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".  # noqa: E501
 
         :param protocol: The protocol of this V1ContainerPort.  # noqa: E501
-        :type: str
+        :type protocol: str
         """
 
         self._protocol = protocol
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

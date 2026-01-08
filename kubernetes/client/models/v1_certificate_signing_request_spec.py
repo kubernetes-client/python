@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -57,7 +57,7 @@ class V1CertificateSigningRequestSpec(object):
     def __init__(self, expiration_seconds=None, extra=None, groups=None, request=None, signer_name=None, uid=None, usages=None, username=None, local_vars_configuration=None):  # noqa: E501
         """V1CertificateSigningRequestSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._expiration_seconds = None
@@ -103,7 +103,7 @@ class V1CertificateSigningRequestSpec(object):
         expirationSeconds is the requested duration of validity of the issued certificate. The certificate signer may issue a certificate with a different validity duration so a client must check the delta between the notBefore and and notAfter fields in the issued certificate to determine the actual duration.  The v1.22+ in-tree implementations of the well-known Kubernetes signers will honor this field as long as the requested duration is not greater than the maximum duration they will honor per the --cluster-signing-duration CLI flag to the Kubernetes controller manager.  Certificate signers may not honor this field for various reasons:    1. Old signer that is unaware of the field (such as the in-tree      implementations prior to v1.22)   2. Signer whose configured maximum is shorter than the requested duration   3. Signer whose configured minimum is longer than the requested duration  The minimum valid value for expirationSeconds is 600, i.e. 10 minutes.  # noqa: E501
 
         :param expiration_seconds: The expiration_seconds of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: int
+        :type expiration_seconds: int
         """
 
         self._expiration_seconds = expiration_seconds
@@ -126,7 +126,7 @@ class V1CertificateSigningRequestSpec(object):
         extra contains extra attributes of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.  # noqa: E501
 
         :param extra: The extra of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: dict(str, list[str])
+        :type extra: dict(str, list[str])
         """
 
         self._extra = extra
@@ -149,7 +149,7 @@ class V1CertificateSigningRequestSpec(object):
         groups contains group membership of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.  # noqa: E501
 
         :param groups: The groups of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: list[str]
+        :type groups: list[str]
         """
 
         self._groups = groups
@@ -172,7 +172,7 @@ class V1CertificateSigningRequestSpec(object):
         request contains an x509 certificate signing request encoded in a \"CERTIFICATE REQUEST\" PEM block. When serialized as JSON or YAML, the data is additionally base64-encoded.  # noqa: E501
 
         :param request: The request of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: str
+        :type request: str
         """
         if self.local_vars_configuration.client_side_validation and request is None:  # noqa: E501
             raise ValueError("Invalid value for `request`, must not be `None`")  # noqa: E501
@@ -200,7 +200,7 @@ class V1CertificateSigningRequestSpec(object):
         signerName indicates the requested signer, and is a qualified name.  List/watch requests for CertificateSigningRequests can filter on this field using a \"spec.signerName=NAME\" fieldSelector.  Well-known Kubernetes signers are:  1. \"kubernetes.io/kube-apiserver-client\": issues client certificates that can be used to authenticate to kube-apiserver.   Requests for this signer are never auto-approved by kube-controller-manager, can be issued by the \"csrsigning\" controller in kube-controller-manager.  2. \"kubernetes.io/kube-apiserver-client-kubelet\": issues client certificates that kubelets use to authenticate to kube-apiserver.   Requests for this signer can be auto-approved by the \"csrapproving\" controller in kube-controller-manager, and can be issued by the \"csrsigning\" controller in kube-controller-manager.  3. \"kubernetes.io/kubelet-serving\" issues serving certificates that kubelets use to serve TLS endpoints, which kube-apiserver can connect to securely.   Requests for this signer are never auto-approved by kube-controller-manager, and can be issued by the \"csrsigning\" controller in kube-controller-manager.  More details are available at https://k8s.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers  Custom signerNames can also be specified. The signer defines:  1. Trust distribution: how trust (CA bundles) are distributed.  2. Permitted subjects: and behavior when a disallowed subject is requested.  3. Required, permitted, or forbidden x509 extensions in the request (including whether subjectAltNames are allowed, which types, restrictions on allowed values) and behavior when a disallowed extension is requested.  4. Required, permitted, or forbidden key usages / extended key usages.  5. Expiration/certificate lifetime: whether it is fixed by the signer, configurable by the admin.  6. Whether or not requests for CA certificates are allowed.  # noqa: E501
 
         :param signer_name: The signer_name of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: str
+        :type signer_name: str
         """
         if self.local_vars_configuration.client_side_validation and signer_name is None:  # noqa: E501
             raise ValueError("Invalid value for `signer_name`, must not be `None`")  # noqa: E501
@@ -225,7 +225,7 @@ class V1CertificateSigningRequestSpec(object):
         uid contains the uid of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.  # noqa: E501
 
         :param uid: The uid of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: str
+        :type uid: str
         """
 
         self._uid = uid
@@ -248,7 +248,7 @@ class V1CertificateSigningRequestSpec(object):
         usages specifies a set of key usages requested in the issued certificate.  Requests for TLS client certificates typically request: \"digital signature\", \"key encipherment\", \"client auth\".  Requests for TLS serving certificates typically request: \"key encipherment\", \"digital signature\", \"server auth\".  Valid values are:  \"signing\", \"digital signature\", \"content commitment\",  \"key encipherment\", \"key agreement\", \"data encipherment\",  \"cert sign\", \"crl sign\", \"encipher only\", \"decipher only\", \"any\",  \"server auth\", \"client auth\",  \"code signing\", \"email protection\", \"s/mime\",  \"ipsec end system\", \"ipsec tunnel\", \"ipsec user\",  \"timestamping\", \"ocsp signing\", \"microsoft sgc\", \"netscape sgc\"  # noqa: E501
 
         :param usages: The usages of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: list[str]
+        :type usages: list[str]
         """
 
         self._usages = usages
@@ -271,32 +271,40 @@ class V1CertificateSigningRequestSpec(object):
         username contains the name of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.  # noqa: E501
 
         :param username: The username of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type: str
+        :type username: str
         """
 
         self._username = username
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

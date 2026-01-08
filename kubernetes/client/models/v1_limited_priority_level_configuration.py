@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1LimitedPriorityLevelConfiguration(object):
     def __init__(self, borrowing_limit_percent=None, lendable_percent=None, limit_response=None, nominal_concurrency_shares=None, local_vars_configuration=None):  # noqa: E501
         """V1LimitedPriorityLevelConfiguration - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._borrowing_limit_percent = None
@@ -85,7 +85,7 @@ class V1LimitedPriorityLevelConfiguration(object):
         `borrowingLimitPercent`, if present, configures a limit on how many seats this priority level can borrow from other priority levels. The limit is known as this level's BorrowingConcurrencyLimit (BorrowingCL) and is a limit on the total number of seats that this level may borrow at any one time. This field holds the ratio of that limit to the level's nominal concurrency limit. When this field is non-nil, it must hold a non-negative integer and the limit is calculated as follows.  BorrowingCL(i) = round( NominalCL(i) * borrowingLimitPercent(i)/100.0 )  The value of this field can be more than 100, implying that this priority level can borrow a number of seats that is greater than its own nominal concurrency limit (NominalCL). When this field is left `nil`, the limit is effectively infinite.  # noqa: E501
 
         :param borrowing_limit_percent: The borrowing_limit_percent of this V1LimitedPriorityLevelConfiguration.  # noqa: E501
-        :type: int
+        :type borrowing_limit_percent: int
         """
 
         self._borrowing_limit_percent = borrowing_limit_percent
@@ -108,7 +108,7 @@ class V1LimitedPriorityLevelConfiguration(object):
         `lendablePercent` prescribes the fraction of the level's NominalCL that can be borrowed by other priority levels. The value of this field must be between 0 and 100, inclusive, and it defaults to 0. The number of seats that other levels can borrow from this level, known as this level's LendableConcurrencyLimit (LendableCL), is defined as follows.  LendableCL(i) = round( NominalCL(i) * lendablePercent(i)/100.0 )  # noqa: E501
 
         :param lendable_percent: The lendable_percent of this V1LimitedPriorityLevelConfiguration.  # noqa: E501
-        :type: int
+        :type lendable_percent: int
         """
 
         self._lendable_percent = lendable_percent
@@ -129,7 +129,7 @@ class V1LimitedPriorityLevelConfiguration(object):
 
 
         :param limit_response: The limit_response of this V1LimitedPriorityLevelConfiguration.  # noqa: E501
-        :type: V1LimitResponse
+        :type limit_response: V1LimitResponse
         """
 
         self._limit_response = limit_response
@@ -152,32 +152,40 @@ class V1LimitedPriorityLevelConfiguration(object):
         `nominalConcurrencyShares` (NCS) contributes to the computation of the NominalConcurrencyLimit (NominalCL) of this level. This is the number of execution seats available at this priority level. This is used both for requests dispatched from this priority level as well as requests dispatched from other priority levels borrowing seats from this level. The server's concurrency limit (ServerCL) is divided among the Limited priority levels in proportion to their NCS values:  NominalCL(i)  = ceil( ServerCL * NCS(i) / sum_ncs ) sum_ncs = sum[priority level k] NCS(k)  Bigger numbers mean a larger nominal concurrency limit, at the expense of every other priority level.  If not specified, this field defaults to a value of 30.  Setting this field to zero supports the construction of a \"jail\" for this priority level that is used to hold some request(s)  # noqa: E501
 
         :param nominal_concurrency_shares: The nominal_concurrency_shares of this V1LimitedPriorityLevelConfiguration.  # noqa: E501
-        :type: int
+        :type nominal_concurrency_shares: int
         """
 
         self._nominal_concurrency_shares = nominal_concurrency_shares
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

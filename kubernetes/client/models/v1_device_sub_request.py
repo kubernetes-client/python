@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +55,7 @@ class V1DeviceSubRequest(object):
     def __init__(self, allocation_mode=None, capacity=None, count=None, device_class_name=None, name=None, selectors=None, tolerations=None, local_vars_configuration=None):  # noqa: E501
         """V1DeviceSubRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocation_mode = None
@@ -98,7 +98,7 @@ class V1DeviceSubRequest(object):
         AllocationMode and its related fields define how devices are allocated to satisfy this subrequest. Supported values are:  - ExactCount: This request is for a specific number of devices.   This is the default. The exact number is provided in the   count field.  - All: This subrequest is for all of the matching devices in a pool.   Allocation will fail if some devices are already allocated,   unless adminAccess is requested.  If AllocationMode is not specified, the default mode is ExactCount. If the mode is ExactCount and count is not specified, the default count is one. Any other subrequests must specify this field.  More modes may get added in the future. Clients must refuse to handle requests with unknown modes.  # noqa: E501
 
         :param allocation_mode: The allocation_mode of this V1DeviceSubRequest.  # noqa: E501
-        :type: str
+        :type allocation_mode: str
         """
 
         self._allocation_mode = allocation_mode
@@ -119,7 +119,7 @@ class V1DeviceSubRequest(object):
 
 
         :param capacity: The capacity of this V1DeviceSubRequest.  # noqa: E501
-        :type: V1CapacityRequirements
+        :type capacity: V1CapacityRequirements
         """
 
         self._capacity = capacity
@@ -142,7 +142,7 @@ class V1DeviceSubRequest(object):
         Count is used only when the count mode is \"ExactCount\". Must be greater than zero. If AllocationMode is ExactCount and this field is not specified, the default is one.  # noqa: E501
 
         :param count: The count of this V1DeviceSubRequest.  # noqa: E501
-        :type: int
+        :type count: int
         """
 
         self._count = count
@@ -165,7 +165,7 @@ class V1DeviceSubRequest(object):
         DeviceClassName references a specific DeviceClass, which can define additional configuration and selectors to be inherited by this subrequest.  A class is required. Which classes are available depends on the cluster.  Administrators may use this to restrict which devices may get requested by only installing classes with selectors for permitted devices. If users are free to request anything without restrictions, then administrators can create an empty DeviceClass for users to reference.  # noqa: E501
 
         :param device_class_name: The device_class_name of this V1DeviceSubRequest.  # noqa: E501
-        :type: str
+        :type device_class_name: str
         """
         if self.local_vars_configuration.client_side_validation and device_class_name is None:  # noqa: E501
             raise ValueError("Invalid value for `device_class_name`, must not be `None`")  # noqa: E501
@@ -190,7 +190,7 @@ class V1DeviceSubRequest(object):
         Name can be used to reference this subrequest in the list of constraints or the list of configurations for the claim. References must use the format <main request>/<subrequest>.  Must be a DNS label.  # noqa: E501
 
         :param name: The name of this V1DeviceSubRequest.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -215,7 +215,7 @@ class V1DeviceSubRequest(object):
         Selectors define criteria which must be satisfied by a specific device in order for that device to be considered for this subrequest. All selectors must be satisfied for a device to be considered.  # noqa: E501
 
         :param selectors: The selectors of this V1DeviceSubRequest.  # noqa: E501
-        :type: list[V1DeviceSelector]
+        :type selectors: list[V1DeviceSelector]
         """
 
         self._selectors = selectors
@@ -238,32 +238,40 @@ class V1DeviceSubRequest(object):
         If specified, the request's tolerations.  Tolerations for NoSchedule are required to allocate a device which has a taint with that effect. The same applies to NoExecute.  In addition, should any of the allocated devices get tainted with NoExecute after allocation and that effect is not tolerated, then all pods consuming the ResourceClaim get deleted to evict them. The scheduler will not let new pods reserve the claim while it has these tainted devices. Once all pods are evicted, the claim will get deallocated.  The maximum number of tolerations is 16.  This is an alpha field and requires enabling the DRADeviceTaints feature gate.  # noqa: E501
 
         :param tolerations: The tolerations of this V1DeviceSubRequest.  # noqa: E501
-        :type: list[V1DeviceToleration]
+        :type tolerations: list[V1DeviceToleration]
         """
 
         self._tolerations = tolerations
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

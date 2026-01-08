@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1NetworkPolicySpec(object):
     def __init__(self, egress=None, ingress=None, pod_selector=None, policy_types=None, local_vars_configuration=None):  # noqa: E501
         """V1NetworkPolicySpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._egress = None
@@ -85,7 +85,7 @@ class V1NetworkPolicySpec(object):
         egress is a list of egress rules to be applied to the selected pods. Outgoing traffic is allowed if there are no NetworkPolicies selecting the pod (and cluster policy otherwise allows the traffic), OR if the traffic matches at least one egress rule across all of the NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy limits all outgoing traffic (and serves solely to ensure that the pods it selects are isolated by default). This field is beta-level in 1.8  # noqa: E501
 
         :param egress: The egress of this V1NetworkPolicySpec.  # noqa: E501
-        :type: list[V1NetworkPolicyEgressRule]
+        :type egress: list[V1NetworkPolicyEgressRule]
         """
 
         self._egress = egress
@@ -108,7 +108,7 @@ class V1NetworkPolicySpec(object):
         ingress is a list of ingress rules to be applied to the selected pods. Traffic is allowed to a pod if there are no NetworkPolicies selecting the pod (and cluster policy otherwise allows the traffic), OR if the traffic source is the pod's local node, OR if the traffic matches at least one ingress rule across all of the NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy does not allow any traffic (and serves solely to ensure that the pods it selects are isolated by default)  # noqa: E501
 
         :param ingress: The ingress of this V1NetworkPolicySpec.  # noqa: E501
-        :type: list[V1NetworkPolicyIngressRule]
+        :type ingress: list[V1NetworkPolicyIngressRule]
         """
 
         self._ingress = ingress
@@ -129,7 +129,7 @@ class V1NetworkPolicySpec(object):
 
 
         :param pod_selector: The pod_selector of this V1NetworkPolicySpec.  # noqa: E501
-        :type: V1LabelSelector
+        :type pod_selector: V1LabelSelector
         """
 
         self._pod_selector = pod_selector
@@ -152,32 +152,40 @@ class V1NetworkPolicySpec(object):
         policyTypes is a list of rule types that the NetworkPolicy relates to. Valid options are [\"Ingress\"], [\"Egress\"], or [\"Ingress\", \"Egress\"]. If this field is not specified, it will default based on the existence of ingress or egress rules; policies that contain an egress section are assumed to affect egress, and all policies (whether or not they contain an ingress section) are assumed to affect ingress. If you want to write an egress-only policy, you must explicitly specify policyTypes [ \"Egress\" ]. Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include \"Egress\" (since such a policy would not include an egress section and would otherwise default to just [ \"Ingress\" ]). This field is beta-level in 1.8  # noqa: E501
 
         :param policy_types: The policy_types of this V1NetworkPolicySpec.  # noqa: E501
-        :type: list[str]
+        :type policy_types: list[str]
         """
 
         self._policy_types = policy_types
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -71,7 +71,7 @@ class V1ObjectMeta(object):
     def __init__(self, annotations=None, creation_timestamp=None, deletion_grace_period_seconds=None, deletion_timestamp=None, finalizers=None, generate_name=None, generation=None, labels=None, managed_fields=None, name=None, namespace=None, owner_references=None, resource_version=None, self_link=None, uid=None, local_vars_configuration=None):  # noqa: E501
         """V1ObjectMeta - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._annotations = None
@@ -140,7 +140,7 @@ class V1ObjectMeta(object):
         Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations  # noqa: E501
 
         :param annotations: The annotations of this V1ObjectMeta.  # noqa: E501
-        :type: dict(str, str)
+        :type annotations: dict(str, str)
         """
 
         self._annotations = annotations
@@ -163,7 +163,7 @@ class V1ObjectMeta(object):
         CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.  Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata  # noqa: E501
 
         :param creation_timestamp: The creation_timestamp of this V1ObjectMeta.  # noqa: E501
-        :type: datetime
+        :type creation_timestamp: datetime
         """
 
         self._creation_timestamp = creation_timestamp
@@ -186,7 +186,7 @@ class V1ObjectMeta(object):
         Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.  # noqa: E501
 
         :param deletion_grace_period_seconds: The deletion_grace_period_seconds of this V1ObjectMeta.  # noqa: E501
-        :type: int
+        :type deletion_grace_period_seconds: int
         """
 
         self._deletion_grace_period_seconds = deletion_grace_period_seconds
@@ -209,7 +209,7 @@ class V1ObjectMeta(object):
         DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.  Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata  # noqa: E501
 
         :param deletion_timestamp: The deletion_timestamp of this V1ObjectMeta.  # noqa: E501
-        :type: datetime
+        :type deletion_timestamp: datetime
         """
 
         self._deletion_timestamp = deletion_timestamp
@@ -232,7 +232,7 @@ class V1ObjectMeta(object):
         Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed. Finalizers may be processed and removed in any order.  Order is NOT enforced because it introduces significant risk of stuck finalizers. finalizers is a shared field, any actor with permission can reorder it. If the finalizer list is processed in order, then this can lead to a situation in which the component responsible for the first finalizer in the list is waiting for a signal (field value, external system, or other) produced by a component responsible for a finalizer later in the list, resulting in a deadlock. Without enforced ordering finalizers are free to order amongst themselves and are not vulnerable to ordering changes in the list.  # noqa: E501
 
         :param finalizers: The finalizers of this V1ObjectMeta.  # noqa: E501
-        :type: list[str]
+        :type finalizers: list[str]
         """
 
         self._finalizers = finalizers
@@ -255,7 +255,7 @@ class V1ObjectMeta(object):
         GenerateName is an optional prefix, used by the server, to generate a unique name ONLY IF the Name field has not been provided. If this field is used, the name returned to the client will be different than the name passed. This value will also be combined with a unique suffix. The provided value has the same validation rules as the Name field, and may be truncated by the length of the suffix required to make the value unique on the server.  If this field is specified and the generated name exists, the server will return a 409.  Applied only if Name is not specified. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency  # noqa: E501
 
         :param generate_name: The generate_name of this V1ObjectMeta.  # noqa: E501
-        :type: str
+        :type generate_name: str
         """
 
         self._generate_name = generate_name
@@ -278,7 +278,7 @@ class V1ObjectMeta(object):
         A sequence number representing a specific generation of the desired state. Populated by the system. Read-only.  # noqa: E501
 
         :param generation: The generation of this V1ObjectMeta.  # noqa: E501
-        :type: int
+        :type generation: int
         """
 
         self._generation = generation
@@ -301,7 +301,7 @@ class V1ObjectMeta(object):
         Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels  # noqa: E501
 
         :param labels: The labels of this V1ObjectMeta.  # noqa: E501
-        :type: dict(str, str)
+        :type labels: dict(str, str)
         """
 
         self._labels = labels
@@ -324,7 +324,7 @@ class V1ObjectMeta(object):
         ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object.  # noqa: E501
 
         :param managed_fields: The managed_fields of this V1ObjectMeta.  # noqa: E501
-        :type: list[V1ManagedFieldsEntry]
+        :type managed_fields: list[V1ManagedFieldsEntry]
         """
 
         self._managed_fields = managed_fields
@@ -347,7 +347,7 @@ class V1ObjectMeta(object):
         Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names  # noqa: E501
 
         :param name: The name of this V1ObjectMeta.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -370,7 +370,7 @@ class V1ObjectMeta(object):
         Namespace defines the space within which each name must be unique. An empty namespace is equivalent to the \"default\" namespace, but \"default\" is the canonical representation. Not all objects are required to be scoped to a namespace - the value of this field for those objects will be empty.  Must be a DNS_LABEL. Cannot be updated. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces  # noqa: E501
 
         :param namespace: The namespace of this V1ObjectMeta.  # noqa: E501
-        :type: str
+        :type namespace: str
         """
 
         self._namespace = namespace
@@ -393,7 +393,7 @@ class V1ObjectMeta(object):
         List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.  # noqa: E501
 
         :param owner_references: The owner_references of this V1ObjectMeta.  # noqa: E501
-        :type: list[V1OwnerReference]
+        :type owner_references: list[V1OwnerReference]
         """
 
         self._owner_references = owner_references
@@ -416,7 +416,7 @@ class V1ObjectMeta(object):
         An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources.  Populated by the system. Read-only. Value must be treated as opaque by clients and . More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency  # noqa: E501
 
         :param resource_version: The resource_version of this V1ObjectMeta.  # noqa: E501
-        :type: str
+        :type resource_version: str
         """
 
         self._resource_version = resource_version
@@ -439,7 +439,7 @@ class V1ObjectMeta(object):
         Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.  # noqa: E501
 
         :param self_link: The self_link of this V1ObjectMeta.  # noqa: E501
-        :type: str
+        :type self_link: str
         """
 
         self._self_link = self_link
@@ -462,32 +462,40 @@ class V1ObjectMeta(object):
         UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.  Populated by the system. Read-only. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids  # noqa: E501
 
         :param uid: The uid of this V1ObjectMeta.  # noqa: E501
-        :type: str
+        :type uid: str
         """
 
         self._uid = uid
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

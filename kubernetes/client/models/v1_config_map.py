@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +53,7 @@ class V1ConfigMap(object):
     def __init__(self, api_version=None, binary_data=None, data=None, immutable=None, kind=None, metadata=None, local_vars_configuration=None):  # noqa: E501
         """V1ConfigMap - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -95,7 +95,7 @@ class V1ConfigMap(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1ConfigMap.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -118,7 +118,7 @@ class V1ConfigMap(object):
         BinaryData contains the binary data. Each key must consist of alphanumeric characters, '-', '_' or '.'. BinaryData can contain byte sequences that are not in the UTF-8 range. The keys stored in BinaryData must not overlap with the ones in the Data field, this is enforced during validation process. Using this field will require 1.10+ apiserver and kubelet.  # noqa: E501
 
         :param binary_data: The binary_data of this V1ConfigMap.  # noqa: E501
-        :type: dict(str, str)
+        :type binary_data: dict(str, str)
         """
 
         self._binary_data = binary_data
@@ -141,7 +141,7 @@ class V1ConfigMap(object):
         Data contains the configuration data. Each key must consist of alphanumeric characters, '-', '_' or '.'. Values with non-UTF-8 byte sequences must use the BinaryData field. The keys stored in Data must not overlap with the keys in the BinaryData field, this is enforced during validation process.  # noqa: E501
 
         :param data: The data of this V1ConfigMap.  # noqa: E501
-        :type: dict(str, str)
+        :type data: dict(str, str)
         """
 
         self._data = data
@@ -164,7 +164,7 @@ class V1ConfigMap(object):
         Immutable, if set to true, ensures that data stored in the ConfigMap cannot be updated (only object metadata can be modified). If not set to true, the field can be modified at any time. Defaulted to nil.  # noqa: E501
 
         :param immutable: The immutable of this V1ConfigMap.  # noqa: E501
-        :type: bool
+        :type immutable: bool
         """
 
         self._immutable = immutable
@@ -187,7 +187,7 @@ class V1ConfigMap(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1ConfigMap.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -208,32 +208,40 @@ class V1ConfigMap(object):
 
 
         :param metadata: The metadata of this V1ConfigMap.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

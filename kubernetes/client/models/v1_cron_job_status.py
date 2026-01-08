@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1CronJobStatus(object):
     def __init__(self, active=None, last_schedule_time=None, last_successful_time=None, local_vars_configuration=None):  # noqa: E501
         """V1CronJobStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._active = None
@@ -80,7 +80,7 @@ class V1CronJobStatus(object):
         A list of pointers to currently running jobs.  # noqa: E501
 
         :param active: The active of this V1CronJobStatus.  # noqa: E501
-        :type: list[V1ObjectReference]
+        :type active: list[V1ObjectReference]
         """
 
         self._active = active
@@ -103,7 +103,7 @@ class V1CronJobStatus(object):
         Information when was the last time the job was successfully scheduled.  # noqa: E501
 
         :param last_schedule_time: The last_schedule_time of this V1CronJobStatus.  # noqa: E501
-        :type: datetime
+        :type last_schedule_time: datetime
         """
 
         self._last_schedule_time = last_schedule_time
@@ -126,32 +126,40 @@ class V1CronJobStatus(object):
         Information when was the last time the job successfully completed.  # noqa: E501
 
         :param last_successful_time: The last_successful_time of this V1CronJobStatus.  # noqa: E501
-        :type: datetime
+        :type last_successful_time: datetime
         """
 
         self._last_successful_time = last_successful_time
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

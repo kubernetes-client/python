@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1beta1DeviceClassSpec(object):
     def __init__(self, config=None, extended_resource_name=None, selectors=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1DeviceClassSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._config = None
@@ -80,7 +80,7 @@ class V1beta1DeviceClassSpec(object):
         Config defines configuration parameters that apply to each device that is claimed via this class. Some classses may potentially be satisfied by multiple drivers, so each instance of a vendor configuration applies to exactly one driver.  They are passed to the driver, but are not considered while allocating the claim.  # noqa: E501
 
         :param config: The config of this V1beta1DeviceClassSpec.  # noqa: E501
-        :type: list[V1beta1DeviceClassConfiguration]
+        :type config: list[V1beta1DeviceClassConfiguration]
         """
 
         self._config = config
@@ -103,7 +103,7 @@ class V1beta1DeviceClassSpec(object):
         ExtendedResourceName is the extended resource name for the devices of this class. The devices of this class can be used to satisfy a pod's extended resource requests. It has the same format as the name of a pod's extended resource. It should be unique among all the device classes in a cluster. If two device classes have the same name, then the class created later is picked to satisfy a pod's extended resource requests. If two classes are created at the same time, then the name of the class lexicographically sorted first is picked.  This is an alpha field.  # noqa: E501
 
         :param extended_resource_name: The extended_resource_name of this V1beta1DeviceClassSpec.  # noqa: E501
-        :type: str
+        :type extended_resource_name: str
         """
 
         self._extended_resource_name = extended_resource_name
@@ -126,32 +126,40 @@ class V1beta1DeviceClassSpec(object):
         Each selector must be satisfied by a device which is claimed via this class.  # noqa: E501
 
         :param selectors: The selectors of this V1beta1DeviceClassSpec.  # noqa: E501
-        :type: list[V1beta1DeviceSelector]
+        :type selectors: list[V1beta1DeviceSelector]
         """
 
         self._selectors = selectors
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

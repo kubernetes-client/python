@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +47,7 @@ class V1PolicyRulesWithSubjects(object):
     def __init__(self, non_resource_rules=None, resource_rules=None, subjects=None, local_vars_configuration=None):  # noqa: E501
         """V1PolicyRulesWithSubjects - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._non_resource_rules = None
@@ -79,7 +79,7 @@ class V1PolicyRulesWithSubjects(object):
         `nonResourceRules` is a list of NonResourcePolicyRules that identify matching requests according to their verb and the target non-resource URL.  # noqa: E501
 
         :param non_resource_rules: The non_resource_rules of this V1PolicyRulesWithSubjects.  # noqa: E501
-        :type: list[V1NonResourcePolicyRule]
+        :type non_resource_rules: list[V1NonResourcePolicyRule]
         """
 
         self._non_resource_rules = non_resource_rules
@@ -102,7 +102,7 @@ class V1PolicyRulesWithSubjects(object):
         `resourceRules` is a slice of ResourcePolicyRules that identify matching requests according to their verb and the target resource. At least one of `resourceRules` and `nonResourceRules` has to be non-empty.  # noqa: E501
 
         :param resource_rules: The resource_rules of this V1PolicyRulesWithSubjects.  # noqa: E501
-        :type: list[V1ResourcePolicyRule]
+        :type resource_rules: list[V1ResourcePolicyRule]
         """
 
         self._resource_rules = resource_rules
@@ -125,34 +125,42 @@ class V1PolicyRulesWithSubjects(object):
         subjects is the list of normal user, serviceaccount, or group that this rule cares about. There must be at least one member in this slice. A slice that includes both the system:authenticated and system:unauthenticated user groups matches every request. Required.  # noqa: E501
 
         :param subjects: The subjects of this V1PolicyRulesWithSubjects.  # noqa: E501
-        :type: list[FlowcontrolV1Subject]
+        :type subjects: list[FlowcontrolV1Subject]
         """
         if self.local_vars_configuration.client_side_validation and subjects is None:  # noqa: E501
             raise ValueError("Invalid value for `subjects`, must not be `None`")  # noqa: E501
 
         self._subjects = subjects
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

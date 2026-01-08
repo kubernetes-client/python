@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -61,7 +61,7 @@ class V1StorageClass(object):
     def __init__(self, allow_volume_expansion=None, allowed_topologies=None, api_version=None, kind=None, metadata=None, mount_options=None, parameters=None, provisioner=None, reclaim_policy=None, volume_binding_mode=None, local_vars_configuration=None):  # noqa: E501
         """V1StorageClass - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allow_volume_expansion = None
@@ -114,7 +114,7 @@ class V1StorageClass(object):
         allowVolumeExpansion shows whether the storage class allow volume expand.  # noqa: E501
 
         :param allow_volume_expansion: The allow_volume_expansion of this V1StorageClass.  # noqa: E501
-        :type: bool
+        :type allow_volume_expansion: bool
         """
 
         self._allow_volume_expansion = allow_volume_expansion
@@ -137,7 +137,7 @@ class V1StorageClass(object):
         allowedTopologies restrict the node topologies where volumes can be dynamically provisioned. Each volume plugin defines its own supported topology specifications. An empty TopologySelectorTerm list means there is no topology restriction. This field is only honored by servers that enable the VolumeScheduling feature.  # noqa: E501
 
         :param allowed_topologies: The allowed_topologies of this V1StorageClass.  # noqa: E501
-        :type: list[V1TopologySelectorTerm]
+        :type allowed_topologies: list[V1TopologySelectorTerm]
         """
 
         self._allowed_topologies = allowed_topologies
@@ -160,7 +160,7 @@ class V1StorageClass(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1StorageClass.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -183,7 +183,7 @@ class V1StorageClass(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1StorageClass.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -204,7 +204,7 @@ class V1StorageClass(object):
 
 
         :param metadata: The metadata of this V1StorageClass.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
@@ -227,7 +227,7 @@ class V1StorageClass(object):
         mountOptions controls the mountOptions for dynamically provisioned PersistentVolumes of this storage class. e.g. [\"ro\", \"soft\"]. Not validated - mount of the PVs will simply fail if one is invalid.  # noqa: E501
 
         :param mount_options: The mount_options of this V1StorageClass.  # noqa: E501
-        :type: list[str]
+        :type mount_options: list[str]
         """
 
         self._mount_options = mount_options
@@ -250,7 +250,7 @@ class V1StorageClass(object):
         parameters holds the parameters for the provisioner that should create volumes of this storage class.  # noqa: E501
 
         :param parameters: The parameters of this V1StorageClass.  # noqa: E501
-        :type: dict(str, str)
+        :type parameters: dict(str, str)
         """
 
         self._parameters = parameters
@@ -273,7 +273,7 @@ class V1StorageClass(object):
         provisioner indicates the type of the provisioner.  # noqa: E501
 
         :param provisioner: The provisioner of this V1StorageClass.  # noqa: E501
-        :type: str
+        :type provisioner: str
         """
         if self.local_vars_configuration.client_side_validation and provisioner is None:  # noqa: E501
             raise ValueError("Invalid value for `provisioner`, must not be `None`")  # noqa: E501
@@ -298,7 +298,7 @@ class V1StorageClass(object):
         reclaimPolicy controls the reclaimPolicy for dynamically provisioned PersistentVolumes of this storage class. Defaults to Delete.  # noqa: E501
 
         :param reclaim_policy: The reclaim_policy of this V1StorageClass.  # noqa: E501
-        :type: str
+        :type reclaim_policy: str
         """
 
         self._reclaim_policy = reclaim_policy
@@ -321,32 +321,40 @@ class V1StorageClass(object):
         volumeBindingMode indicates how PersistentVolumeClaims should be provisioned and bound.  When unset, VolumeBindingImmediate is used. This field is only honored by servers that enable the VolumeScheduling feature.  # noqa: E501
 
         :param volume_binding_mode: The volume_binding_mode of this V1StorageClass.  # noqa: E501
-        :type: str
+        :type volume_binding_mode: str
         """
 
         self._volume_binding_mode = volume_binding_mode
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

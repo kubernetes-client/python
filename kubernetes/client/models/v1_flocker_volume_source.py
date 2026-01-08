@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -45,7 +45,7 @@ class V1FlockerVolumeSource(object):
     def __init__(self, dataset_name=None, dataset_uuid=None, local_vars_configuration=None):  # noqa: E501
         """V1FlockerVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._dataset_name = None
@@ -75,7 +75,7 @@ class V1FlockerVolumeSource(object):
         datasetName is Name of the dataset stored as metadata -> name on the dataset for Flocker should be considered as deprecated  # noqa: E501
 
         :param dataset_name: The dataset_name of this V1FlockerVolumeSource.  # noqa: E501
-        :type: str
+        :type dataset_name: str
         """
 
         self._dataset_name = dataset_name
@@ -98,32 +98,40 @@ class V1FlockerVolumeSource(object):
         datasetUUID is the UUID of the dataset. This is unique identifier of a Flocker dataset  # noqa: E501
 
         :param dataset_uuid: The dataset_uuid of this V1FlockerVolumeSource.  # noqa: E501
-        :type: str
+        :type dataset_uuid: str
         """
 
         self._dataset_uuid = dataset_uuid
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

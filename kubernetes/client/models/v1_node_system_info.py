@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -63,7 +63,7 @@ class V1NodeSystemInfo(object):
     def __init__(self, architecture=None, boot_id=None, container_runtime_version=None, kernel_version=None, kube_proxy_version=None, kubelet_version=None, machine_id=None, operating_system=None, os_image=None, swap=None, system_uuid=None, local_vars_configuration=None):  # noqa: E501
         """V1NodeSystemInfo - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._architecture = None
@@ -110,7 +110,7 @@ class V1NodeSystemInfo(object):
         The Architecture reported by the node  # noqa: E501
 
         :param architecture: The architecture of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type architecture: str
         """
         if self.local_vars_configuration.client_side_validation and architecture is None:  # noqa: E501
             raise ValueError("Invalid value for `architecture`, must not be `None`")  # noqa: E501
@@ -135,7 +135,7 @@ class V1NodeSystemInfo(object):
         Boot ID reported by the node.  # noqa: E501
 
         :param boot_id: The boot_id of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type boot_id: str
         """
         if self.local_vars_configuration.client_side_validation and boot_id is None:  # noqa: E501
             raise ValueError("Invalid value for `boot_id`, must not be `None`")  # noqa: E501
@@ -160,7 +160,7 @@ class V1NodeSystemInfo(object):
         ContainerRuntime Version reported by the node through runtime remote API (e.g. containerd://1.4.2).  # noqa: E501
 
         :param container_runtime_version: The container_runtime_version of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type container_runtime_version: str
         """
         if self.local_vars_configuration.client_side_validation and container_runtime_version is None:  # noqa: E501
             raise ValueError("Invalid value for `container_runtime_version`, must not be `None`")  # noqa: E501
@@ -185,7 +185,7 @@ class V1NodeSystemInfo(object):
         Kernel Version reported by the node from 'uname -r' (e.g. 3.16.0-0.bpo.4-amd64).  # noqa: E501
 
         :param kernel_version: The kernel_version of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type kernel_version: str
         """
         if self.local_vars_configuration.client_side_validation and kernel_version is None:  # noqa: E501
             raise ValueError("Invalid value for `kernel_version`, must not be `None`")  # noqa: E501
@@ -210,7 +210,7 @@ class V1NodeSystemInfo(object):
         Deprecated: KubeProxy Version reported by the node.  # noqa: E501
 
         :param kube_proxy_version: The kube_proxy_version of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type kube_proxy_version: str
         """
         if self.local_vars_configuration.client_side_validation and kube_proxy_version is None:  # noqa: E501
             raise ValueError("Invalid value for `kube_proxy_version`, must not be `None`")  # noqa: E501
@@ -235,7 +235,7 @@ class V1NodeSystemInfo(object):
         Kubelet Version reported by the node.  # noqa: E501
 
         :param kubelet_version: The kubelet_version of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type kubelet_version: str
         """
         if self.local_vars_configuration.client_side_validation and kubelet_version is None:  # noqa: E501
             raise ValueError("Invalid value for `kubelet_version`, must not be `None`")  # noqa: E501
@@ -260,7 +260,7 @@ class V1NodeSystemInfo(object):
         MachineID reported by the node. For unique machine identification in the cluster this field is preferred. Learn more from man(5) machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html  # noqa: E501
 
         :param machine_id: The machine_id of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type machine_id: str
         """
         if self.local_vars_configuration.client_side_validation and machine_id is None:  # noqa: E501
             raise ValueError("Invalid value for `machine_id`, must not be `None`")  # noqa: E501
@@ -285,7 +285,7 @@ class V1NodeSystemInfo(object):
         The Operating System reported by the node  # noqa: E501
 
         :param operating_system: The operating_system of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type operating_system: str
         """
         if self.local_vars_configuration.client_side_validation and operating_system is None:  # noqa: E501
             raise ValueError("Invalid value for `operating_system`, must not be `None`")  # noqa: E501
@@ -310,7 +310,7 @@ class V1NodeSystemInfo(object):
         OS Image reported by the node from /etc/os-release (e.g. Debian GNU/Linux 7 (wheezy)).  # noqa: E501
 
         :param os_image: The os_image of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type os_image: str
         """
         if self.local_vars_configuration.client_side_validation and os_image is None:  # noqa: E501
             raise ValueError("Invalid value for `os_image`, must not be `None`")  # noqa: E501
@@ -333,7 +333,7 @@ class V1NodeSystemInfo(object):
 
 
         :param swap: The swap of this V1NodeSystemInfo.  # noqa: E501
-        :type: V1NodeSwapStatus
+        :type swap: V1NodeSwapStatus
         """
 
         self._swap = swap
@@ -356,34 +356,42 @@ class V1NodeSystemInfo(object):
         SystemUUID reported by the node. For unique machine identification MachineID is preferred. This field is specific to Red Hat hosts https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid  # noqa: E501
 
         :param system_uuid: The system_uuid of this V1NodeSystemInfo.  # noqa: E501
-        :type: str
+        :type system_uuid: str
         """
         if self.local_vars_configuration.client_side_validation and system_uuid is None:  # noqa: E501
             raise ValueError("Invalid value for `system_uuid`, must not be `None`")  # noqa: E501
 
         self._system_uuid = system_uuid
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

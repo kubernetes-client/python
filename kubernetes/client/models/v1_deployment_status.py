@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -59,7 +59,7 @@ class V1DeploymentStatus(object):
     def __init__(self, available_replicas=None, collision_count=None, conditions=None, observed_generation=None, ready_replicas=None, replicas=None, terminating_replicas=None, unavailable_replicas=None, updated_replicas=None, local_vars_configuration=None):  # noqa: E501
         """V1DeploymentStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._available_replicas = None
@@ -110,7 +110,7 @@ class V1DeploymentStatus(object):
         Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.  # noqa: E501
 
         :param available_replicas: The available_replicas of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type available_replicas: int
         """
 
         self._available_replicas = available_replicas
@@ -133,7 +133,7 @@ class V1DeploymentStatus(object):
         Count of hash collisions for the Deployment. The Deployment controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.  # noqa: E501
 
         :param collision_count: The collision_count of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type collision_count: int
         """
 
         self._collision_count = collision_count
@@ -156,7 +156,7 @@ class V1DeploymentStatus(object):
         Represents the latest available observations of a deployment's current state.  # noqa: E501
 
         :param conditions: The conditions of this V1DeploymentStatus.  # noqa: E501
-        :type: list[V1DeploymentCondition]
+        :type conditions: list[V1DeploymentCondition]
         """
 
         self._conditions = conditions
@@ -179,7 +179,7 @@ class V1DeploymentStatus(object):
         The generation observed by the deployment controller.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -202,7 +202,7 @@ class V1DeploymentStatus(object):
         Total number of non-terminating pods targeted by this Deployment with a Ready Condition.  # noqa: E501
 
         :param ready_replicas: The ready_replicas of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type ready_replicas: int
         """
 
         self._ready_replicas = ready_replicas
@@ -225,7 +225,7 @@ class V1DeploymentStatus(object):
         Total number of non-terminating pods targeted by this deployment (their labels match the selector).  # noqa: E501
 
         :param replicas: The replicas of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type replicas: int
         """
 
         self._replicas = replicas
@@ -248,7 +248,7 @@ class V1DeploymentStatus(object):
         Total number of terminating pods targeted by this deployment. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.  This is a beta field and requires enabling DeploymentReplicaSetTerminatingReplicas feature (enabled by default).  # noqa: E501
 
         :param terminating_replicas: The terminating_replicas of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type terminating_replicas: int
         """
 
         self._terminating_replicas = terminating_replicas
@@ -271,7 +271,7 @@ class V1DeploymentStatus(object):
         Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.  # noqa: E501
 
         :param unavailable_replicas: The unavailable_replicas of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type unavailable_replicas: int
         """
 
         self._unavailable_replicas = unavailable_replicas
@@ -294,32 +294,40 @@ class V1DeploymentStatus(object):
         Total number of non-terminating pods targeted by this deployment that have the desired template spec.  # noqa: E501
 
         :param updated_replicas: The updated_replicas of this V1DeploymentStatus.  # noqa: E501
-        :type: int
+        :type updated_replicas: int
         """
 
         self._updated_replicas = updated_replicas
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

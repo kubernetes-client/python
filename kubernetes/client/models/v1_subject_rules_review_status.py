@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +49,7 @@ class V1SubjectRulesReviewStatus(object):
     def __init__(self, evaluation_error=None, incomplete=None, non_resource_rules=None, resource_rules=None, local_vars_configuration=None):  # noqa: E501
         """V1SubjectRulesReviewStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._evaluation_error = None
@@ -82,7 +82,7 @@ class V1SubjectRulesReviewStatus(object):
         EvaluationError can appear in combination with Rules. It indicates an error occurred during rule evaluation, such as an authorizer that doesn't support rule evaluation, and that ResourceRules and/or NonResourceRules may be incomplete.  # noqa: E501
 
         :param evaluation_error: The evaluation_error of this V1SubjectRulesReviewStatus.  # noqa: E501
-        :type: str
+        :type evaluation_error: str
         """
 
         self._evaluation_error = evaluation_error
@@ -105,7 +105,7 @@ class V1SubjectRulesReviewStatus(object):
         Incomplete is true when the rules returned by this call are incomplete. This is most commonly encountered when an authorizer, such as an external authorizer, doesn't support rules evaluation.  # noqa: E501
 
         :param incomplete: The incomplete of this V1SubjectRulesReviewStatus.  # noqa: E501
-        :type: bool
+        :type incomplete: bool
         """
         if self.local_vars_configuration.client_side_validation and incomplete is None:  # noqa: E501
             raise ValueError("Invalid value for `incomplete`, must not be `None`")  # noqa: E501
@@ -130,7 +130,7 @@ class V1SubjectRulesReviewStatus(object):
         NonResourceRules is the list of actions the subject is allowed to perform on non-resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.  # noqa: E501
 
         :param non_resource_rules: The non_resource_rules of this V1SubjectRulesReviewStatus.  # noqa: E501
-        :type: list[V1NonResourceRule]
+        :type non_resource_rules: list[V1NonResourceRule]
         """
         if self.local_vars_configuration.client_side_validation and non_resource_rules is None:  # noqa: E501
             raise ValueError("Invalid value for `non_resource_rules`, must not be `None`")  # noqa: E501
@@ -155,34 +155,42 @@ class V1SubjectRulesReviewStatus(object):
         ResourceRules is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.  # noqa: E501
 
         :param resource_rules: The resource_rules of this V1SubjectRulesReviewStatus.  # noqa: E501
-        :type: list[V1ResourceRule]
+        :type resource_rules: list[V1ResourceRule]
         """
         if self.local_vars_configuration.client_side_validation and resource_rules is None:  # noqa: E501
             raise ValueError("Invalid value for `resource_rules`, must not be `None`")  # noqa: E501
 
         self._resource_rules = resource_rules
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

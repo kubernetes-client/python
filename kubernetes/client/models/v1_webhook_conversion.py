@@ -10,9 +10,9 @@
 """
 
 
+import inspect
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -45,7 +45,7 @@ class V1WebhookConversion(object):
     def __init__(self, client_config=None, conversion_review_versions=None, local_vars_configuration=None):  # noqa: E501
         """V1WebhookConversion - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._client_config = None
@@ -72,7 +72,7 @@ class V1WebhookConversion(object):
 
 
         :param client_config: The client_config of this V1WebhookConversion.  # noqa: E501
-        :type: ApiextensionsV1WebhookClientConfig
+        :type client_config: ApiextensionsV1WebhookClientConfig
         """
 
         self._client_config = client_config
@@ -95,34 +95,42 @@ class V1WebhookConversion(object):
         conversionReviewVersions is an ordered list of preferred `ConversionReview` versions the Webhook expects. The API server will use the first version in the list which it supports. If none of the versions specified in this list are supported by API server, conversion will fail for the custom resource. If a persisted Webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail.  # noqa: E501
 
         :param conversion_review_versions: The conversion_review_versions of this V1WebhookConversion.  # noqa: E501
-        :type: list[str]
+        :type conversion_review_versions: list[str]
         """
         if self.local_vars_configuration.client_side_validation and conversion_review_versions is None:  # noqa: E501
             raise ValueError("Invalid value for `conversion_review_versions`, must not be `None`")  # noqa: E501
 
         self._conversion_review_versions = conversion_review_versions
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = inspect.getargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 
