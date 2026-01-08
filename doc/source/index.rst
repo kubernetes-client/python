@@ -1,7 +1,5 @@
-Welcome to kubernetes-python-client's documentation!
-========================================================
-
-Contents:
+kubernetes-python-client
+========================
 
 .. toctree::
    :maxdepth: 2
@@ -9,12 +7,4 @@ Contents:
    README <README.md>
    installation
    usage
-   examples
    contributing <CONTRIBUTING.md>
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
