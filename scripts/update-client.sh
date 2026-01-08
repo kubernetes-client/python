@@ -21,9 +21,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# The openapi-generator version used by this client
-export OPENAPI_GENERATOR_COMMIT="v4.3.0"
-
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
 CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
@@ -61,7 +58,12 @@ echo ">>> Running python generator from the gen repo"
 "${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}"
 mv "${CLIENT_ROOT}/swagger.json" "${SCRIPT_ROOT}/swagger.json"
 
-echo ">>> updating version information..."
+# This is a hack: openapi-generator shouldn't be producing syntactically
+# incorrect tests
+echo ">>> Removing broken tests"
+git clean -fd -- kubernetes/test/
+
+echo ">>> Updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^__version__ = .*/__version__ = \\\"${CLIENT_VERSION}\\\"/" "${CLIENT_ROOT}/__init__.py"
 sed -i'' "s/^PACKAGE_NAME = .*/PACKAGE_NAME = \\\"${PACKAGE_NAME}\\\"/" "${SCRIPT_ROOT}/../setup.py"
@@ -70,7 +72,8 @@ sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STAT
 # This is a terrible hack:
 # first, this must be in gen repo not here
 # second, this should be ported to swagger-codegen
-echo ">>> patching client..."
+echo ">>> Patching client..."
+git apply "${SCRIPT_ROOT}/hotfixes.diff"
 git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 # The fix this patch is trying to make is already in the upstream swagger-codegen
 # repo but it's not in the version we're using. We can remove this patch
