@@ -138,12 +138,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_delete_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_delete_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -155,7 +153,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -300,16 +298,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_delete_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_delete_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_delete_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -323,7 +318,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -463,12 +458,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_delete_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_delete_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -480,7 +473,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -625,16 +618,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_delete_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_delete_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_delete_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -648,7 +638,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -783,8 +773,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_delete_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -794,7 +783,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -934,12 +923,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_delete_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_delete_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -951,7 +938,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -1111,12 +1098,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_pod_attach`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_pod_attach`")  # noqa: E501
 
         collection_formats = {}
@@ -1128,15 +1113,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'container' in local_var_params and local_var_params['container'] is not None:  # noqa: E501
+        if local_var_params.get('container') is not None:  # noqa: E501
             query_params.append(('container', local_var_params['container']))  # noqa: E501
-        if 'stderr' in local_var_params and local_var_params['stderr'] is not None:  # noqa: E501
+        if local_var_params.get('stderr') is not None:  # noqa: E501
             query_params.append(('stderr', local_var_params['stderr']))  # noqa: E501
-        if 'stdin' in local_var_params and local_var_params['stdin'] is not None:  # noqa: E501
+        if local_var_params.get('stdin') is not None:  # noqa: E501
             query_params.append(('stdin', local_var_params['stdin']))  # noqa: E501
-        if 'stdout' in local_var_params and local_var_params['stdout'] is not None:  # noqa: E501
+        if local_var_params.get('stdout') is not None:  # noqa: E501
             query_params.append(('stdout', local_var_params['stdout']))  # noqa: E501
-        if 'tty' in local_var_params and local_var_params['tty'] is not None:  # noqa: E501
+        if local_var_params.get('tty') is not None:  # noqa: E501
             query_params.append(('tty', local_var_params['tty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -1301,12 +1286,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_pod_exec`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_pod_exec`")  # noqa: E501
 
         collection_formats = {}
@@ -1318,17 +1301,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'command' in local_var_params and local_var_params['command'] is not None:  # noqa: E501
+        if local_var_params.get('command') is not None:  # noqa: E501
             query_params.append(('command', local_var_params['command']))  # noqa: E501
-        if 'container' in local_var_params and local_var_params['container'] is not None:  # noqa: E501
+        if local_var_params.get('container') is not None:  # noqa: E501
             query_params.append(('container', local_var_params['container']))  # noqa: E501
-        if 'stderr' in local_var_params and local_var_params['stderr'] is not None:  # noqa: E501
+        if local_var_params.get('stderr') is not None:  # noqa: E501
             query_params.append(('stderr', local_var_params['stderr']))  # noqa: E501
-        if 'stdin' in local_var_params and local_var_params['stdin'] is not None:  # noqa: E501
+        if local_var_params.get('stdin') is not None:  # noqa: E501
             query_params.append(('stdin', local_var_params['stdin']))  # noqa: E501
-        if 'stdout' in local_var_params and local_var_params['stdout'] is not None:  # noqa: E501
+        if local_var_params.get('stdout') is not None:  # noqa: E501
             query_params.append(('stdout', local_var_params['stdout']))  # noqa: E501
-        if 'tty' in local_var_params and local_var_params['tty'] is not None:  # noqa: E501
+        if local_var_params.get('tty') is not None:  # noqa: E501
             query_params.append(('tty', local_var_params['tty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -1468,12 +1451,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_pod_portforward`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_pod_portforward`")  # noqa: E501
 
         collection_formats = {}
@@ -1485,7 +1466,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'ports' in local_var_params and local_var_params['ports'] is not None:  # noqa: E501
+        if local_var_params.get('ports') is not None:  # noqa: E501
             query_params.append(('ports', local_var_params['ports']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -1625,12 +1606,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -1642,7 +1621,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -1787,16 +1766,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_get_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -1810,7 +1786,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -1950,12 +1926,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -1967,7 +1941,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -2112,16 +2086,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_get_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_get_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -2135,7 +2106,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -2270,8 +2241,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -2281,7 +2251,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -2421,12 +2391,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_get_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_get_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -2438,7 +2406,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -2578,12 +2546,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_head_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_head_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -2595,7 +2561,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -2740,16 +2706,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_head_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_head_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_head_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -2763,7 +2726,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -2903,12 +2866,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_head_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_head_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -2920,7 +2881,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -3065,16 +3026,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_head_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_head_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_head_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -3088,7 +3046,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -3223,8 +3181,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_head_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -3234,7 +3191,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -3374,12 +3331,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_head_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_head_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -3391,7 +3346,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -3531,12 +3486,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_options_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_options_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -3548,7 +3501,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -3693,16 +3646,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_options_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_options_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_options_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -3716,7 +3666,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -3856,12 +3806,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_options_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_options_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -3873,7 +3821,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4018,16 +3966,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_options_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_options_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_options_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -4041,7 +3986,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4176,8 +4121,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_options_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -4187,7 +4131,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4327,12 +4271,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_options_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_options_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -4344,7 +4286,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4484,12 +4426,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_patch_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_patch_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -4501,7 +4441,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4646,16 +4586,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_patch_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_patch_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_patch_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -4669,7 +4606,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4809,12 +4746,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_patch_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_patch_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -4826,7 +4761,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -4971,16 +4906,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_patch_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_patch_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_patch_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -4994,7 +4926,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -5129,8 +5061,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_patch_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -5140,7 +5071,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -5280,12 +5211,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_patch_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_patch_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -5297,7 +5226,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -5457,12 +5386,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_pod_attach`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_pod_attach`")  # noqa: E501
 
         collection_formats = {}
@@ -5474,15 +5401,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'container' in local_var_params and local_var_params['container'] is not None:  # noqa: E501
+        if local_var_params.get('container') is not None:  # noqa: E501
             query_params.append(('container', local_var_params['container']))  # noqa: E501
-        if 'stderr' in local_var_params and local_var_params['stderr'] is not None:  # noqa: E501
+        if local_var_params.get('stderr') is not None:  # noqa: E501
             query_params.append(('stderr', local_var_params['stderr']))  # noqa: E501
-        if 'stdin' in local_var_params and local_var_params['stdin'] is not None:  # noqa: E501
+        if local_var_params.get('stdin') is not None:  # noqa: E501
             query_params.append(('stdin', local_var_params['stdin']))  # noqa: E501
-        if 'stdout' in local_var_params and local_var_params['stdout'] is not None:  # noqa: E501
+        if local_var_params.get('stdout') is not None:  # noqa: E501
             query_params.append(('stdout', local_var_params['stdout']))  # noqa: E501
-        if 'tty' in local_var_params and local_var_params['tty'] is not None:  # noqa: E501
+        if local_var_params.get('tty') is not None:  # noqa: E501
             query_params.append(('tty', local_var_params['tty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -5647,12 +5574,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_pod_exec`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_pod_exec`")  # noqa: E501
 
         collection_formats = {}
@@ -5664,17 +5589,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'command' in local_var_params and local_var_params['command'] is not None:  # noqa: E501
+        if local_var_params.get('command') is not None:  # noqa: E501
             query_params.append(('command', local_var_params['command']))  # noqa: E501
-        if 'container' in local_var_params and local_var_params['container'] is not None:  # noqa: E501
+        if local_var_params.get('container') is not None:  # noqa: E501
             query_params.append(('container', local_var_params['container']))  # noqa: E501
-        if 'stderr' in local_var_params and local_var_params['stderr'] is not None:  # noqa: E501
+        if local_var_params.get('stderr') is not None:  # noqa: E501
             query_params.append(('stderr', local_var_params['stderr']))  # noqa: E501
-        if 'stdin' in local_var_params and local_var_params['stdin'] is not None:  # noqa: E501
+        if local_var_params.get('stdin') is not None:  # noqa: E501
             query_params.append(('stdin', local_var_params['stdin']))  # noqa: E501
-        if 'stdout' in local_var_params and local_var_params['stdout'] is not None:  # noqa: E501
+        if local_var_params.get('stdout') is not None:  # noqa: E501
             query_params.append(('stdout', local_var_params['stdout']))  # noqa: E501
-        if 'tty' in local_var_params and local_var_params['tty'] is not None:  # noqa: E501
+        if local_var_params.get('tty') is not None:  # noqa: E501
             query_params.append(('tty', local_var_params['tty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -5814,12 +5739,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_pod_portforward`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_pod_portforward`")  # noqa: E501
 
         collection_formats = {}
@@ -5831,7 +5754,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'ports' in local_var_params and local_var_params['ports'] is not None:  # noqa: E501
+        if local_var_params.get('ports') is not None:  # noqa: E501
             query_params.append(('ports', local_var_params['ports']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -5971,12 +5894,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -5988,7 +5909,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -6133,16 +6054,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_post_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -6156,7 +6074,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -6296,12 +6214,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -6313,7 +6229,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -6458,16 +6374,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_post_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_post_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -6481,7 +6394,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -6616,8 +6529,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -6627,7 +6539,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -6767,12 +6679,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_post_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_post_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -6784,7 +6694,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -6924,12 +6834,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_put_namespaced_pod_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_put_namespaced_pod_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -6941,7 +6849,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -7086,16 +6994,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_put_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_put_namespaced_pod_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_put_namespaced_pod_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -7109,7 +7014,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -7249,12 +7154,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_put_namespaced_service_proxy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_put_namespaced_service_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -7266,7 +7169,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -7411,16 +7314,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_put_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `connect_put_namespaced_service_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_put_namespaced_service_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -7434,7 +7334,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -7569,8 +7469,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_put_node_proxy`")  # noqa: E501
 
         collection_formats = {}
@@ -7580,7 +7479,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
+        if local_var_params.get('path') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -7720,12 +7619,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `connect_put_node_proxy_with_path`")  # noqa: E501
         # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('path') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `path` when calling `connect_put_node_proxy_with_path`")  # noqa: E501
 
         collection_formats = {}
@@ -7737,7 +7634,7 @@ class CoreV1Api(object):
             path_params['path'] = local_var_params['path']  # noqa: E501
 
         query_params = []
-        if 'path2' in local_var_params and local_var_params['path2'] is not None:  # noqa: E501
+        if local_var_params.get('path2') is not None:  # noqa: E501
             query_params.append(('path', local_var_params['path2']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -7887,8 +7784,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespace`")  # noqa: E501
 
         collection_formats = {}
@@ -7896,13 +7792,13 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -8061,12 +7957,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_binding`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_binding`")  # noqa: E501
 
         collection_formats = {}
@@ -8076,13 +7970,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -8241,12 +8135,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -8256,13 +8148,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -8421,12 +8313,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -8436,13 +8326,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -8601,12 +8491,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_event`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -8616,13 +8504,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -8781,12 +8669,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -8796,13 +8682,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -8961,12 +8847,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -8976,13 +8860,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -9141,12 +9025,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -9156,13 +9038,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -9326,16 +9208,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `create_namespaced_pod_binding`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_pod_binding`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_pod_binding`")  # noqa: E501
 
         collection_formats = {}
@@ -9347,13 +9226,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -9517,16 +9396,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `create_namespaced_pod_eviction`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_pod_eviction`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_pod_eviction`")  # noqa: E501
 
         collection_formats = {}
@@ -9538,13 +9414,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -9703,12 +9579,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -9718,13 +9592,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -9883,12 +9757,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -9898,13 +9770,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -10063,12 +9935,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -10078,13 +9948,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -10243,12 +10113,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -10258,13 +10126,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -10423,12 +10291,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_service`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -10438,13 +10304,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -10603,12 +10469,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -10618,13 +10482,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -10788,16 +10652,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `create_namespaced_service_account_token`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_service_account_token`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_service_account_token`")  # noqa: E501
 
         collection_formats = {}
@@ -10809,13 +10670,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -10969,8 +10830,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_node`")  # noqa: E501
 
         collection_formats = {}
@@ -10978,13 +10838,13 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -11138,8 +10998,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_persistent_volume`")  # noqa: E501
 
         collection_formats = {}
@@ -11147,13 +11006,13 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -11362,8 +11221,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -11373,33 +11231,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -11606,8 +11464,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -11617,33 +11474,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -11850,8 +11707,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -11861,33 +11717,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -12094,8 +11950,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -12105,33 +11960,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -12338,8 +12193,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -12349,33 +12203,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -12582,8 +12436,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -12593,33 +12446,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -12826,8 +12679,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -12837,33 +12689,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -13070,8 +12922,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -13081,33 +12932,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -13314,8 +13165,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -13325,33 +13175,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -13558,8 +13408,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -13569,33 +13418,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -13802,8 +13651,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -13813,33 +13661,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -14046,8 +13894,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -14057,33 +13904,33 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -14290,33 +14137,33 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -14523,33 +14370,33 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -14716,8 +14563,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespace`")  # noqa: E501
 
         collection_formats = {}
@@ -14727,17 +14573,17 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -14910,12 +14756,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -14927,17 +14771,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -15110,12 +14954,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -15127,17 +14969,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -15310,12 +15152,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_event`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -15327,17 +15167,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -15510,12 +15350,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -15527,17 +15365,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -15710,12 +15548,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -15727,17 +15563,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -15910,12 +15746,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -15927,17 +15761,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -16110,12 +15944,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -16127,17 +15959,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -16310,12 +16142,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -16327,17 +16157,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -16510,12 +16340,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -16527,17 +16355,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -16710,12 +16538,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -16727,17 +16553,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -16910,12 +16736,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_service`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -16927,17 +16751,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -17110,12 +16934,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -17127,17 +16949,17 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -17305,8 +17127,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_node`")  # noqa: E501
 
         collection_formats = {}
@@ -17316,17 +17137,17 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -17494,8 +17315,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_persistent_volume`")  # noqa: E501
 
         collection_formats = {}
@@ -17505,17 +17325,17 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -17831,27 +17651,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -18036,27 +17856,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -18241,27 +18061,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -18446,27 +18266,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -18651,27 +18471,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -18856,27 +18676,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -19061,8 +18881,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -19072,27 +18891,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -19277,8 +19096,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -19288,27 +19106,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -19493,8 +19311,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -19504,27 +19321,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -19709,8 +19526,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -19720,27 +19536,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -19925,8 +19741,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -19936,27 +19751,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -20141,8 +19956,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -20152,27 +19966,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -20357,8 +20171,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -20368,27 +20181,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -20573,8 +20386,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -20584,27 +20396,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -20789,8 +20601,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -20800,27 +20611,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -21005,8 +20816,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -21016,27 +20826,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -21221,8 +21031,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -21232,27 +21041,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -21437,8 +21246,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -21448,27 +21256,27 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -21653,27 +21461,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -21858,27 +21666,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -22063,27 +21871,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -22268,27 +22076,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -22473,27 +22281,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -22678,27 +22486,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -22883,27 +22691,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -23088,27 +22896,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -23293,27 +23101,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -23498,27 +23306,27 @@ class CoreV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -23678,12 +23486,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespace`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespace`")  # noqa: E501
 
         collection_formats = {}
@@ -23693,15 +23499,15 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -23717,10 +23523,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -23870,12 +23678,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespace_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespace_status`")  # noqa: E501
 
         collection_formats = {}
@@ -23885,15 +23691,15 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -23909,10 +23715,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -24067,16 +23875,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -24088,15 +23893,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -24112,10 +23917,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -24270,16 +24077,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -24291,15 +24095,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -24315,10 +24119,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -24473,16 +24279,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_event`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_event`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -24494,15 +24297,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -24518,10 +24321,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -24676,16 +24481,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -24697,15 +24499,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -24721,10 +24523,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -24879,16 +24683,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -24900,15 +24701,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -24924,10 +24725,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -25082,16 +24885,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_persistent_volume_claim_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_persistent_volume_claim_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_persistent_volume_claim_status`")  # noqa: E501
 
         collection_formats = {}
@@ -25103,15 +24903,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -25127,10 +24927,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -25285,16 +25087,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -25306,15 +25105,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -25330,10 +25129,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -25488,16 +25289,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod_ephemeralcontainers`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod_ephemeralcontainers`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod_ephemeralcontainers`")  # noqa: E501
 
         collection_formats = {}
@@ -25509,15 +25307,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -25533,10 +25331,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -25691,16 +25491,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod_resize`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod_resize`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod_resize`")  # noqa: E501
 
         collection_formats = {}
@@ -25712,15 +25509,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -25736,10 +25533,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -25894,16 +25693,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod_status`")  # noqa: E501
 
         collection_formats = {}
@@ -25915,15 +25711,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -25939,10 +25735,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -26097,16 +25895,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -26118,15 +25913,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -26142,10 +25937,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -26300,16 +26097,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -26321,15 +26115,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -26345,10 +26139,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -26503,16 +26299,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_replication_controller_scale`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_replication_controller_scale`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_replication_controller_scale`")  # noqa: E501
 
         collection_formats = {}
@@ -26524,15 +26317,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -26548,10 +26341,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -26706,16 +26501,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_replication_controller_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_replication_controller_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_replication_controller_status`")  # noqa: E501
 
         collection_formats = {}
@@ -26727,15 +26519,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -26751,10 +26543,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -26909,16 +26703,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -26930,15 +26721,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -26954,10 +26745,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -27112,16 +26905,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_resource_quota_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_resource_quota_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_resource_quota_status`")  # noqa: E501
 
         collection_formats = {}
@@ -27133,15 +26923,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -27157,10 +26947,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -27315,16 +27107,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -27336,15 +27125,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -27360,10 +27149,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -27518,16 +27309,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_service`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_service`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -27539,15 +27327,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -27563,10 +27351,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -27721,16 +27511,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -27742,15 +27529,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -27766,10 +27553,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -27924,16 +27713,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_service_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_service_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_service_status`")  # noqa: E501
 
         collection_formats = {}
@@ -27945,15 +27731,15 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -27969,10 +27755,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -28122,12 +27910,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_node`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_node`")  # noqa: E501
 
         collection_formats = {}
@@ -28137,15 +27923,15 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -28161,10 +27947,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -28314,12 +28102,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_node_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_node_status`")  # noqa: E501
 
         collection_formats = {}
@@ -28329,15 +28115,15 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -28353,10 +28139,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -28506,12 +28294,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_persistent_volume`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_persistent_volume`")  # noqa: E501
 
         collection_formats = {}
@@ -28521,15 +28307,15 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -28545,10 +28331,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -28698,12 +28486,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_persistent_volume_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_persistent_volume_status`")  # noqa: E501
 
         collection_formats = {}
@@ -28713,15 +28499,15 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -28737,10 +28523,12 @@ class CoreV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = local_var_params.get('_content_type',
+        content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
                 ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
                 'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -28865,8 +28653,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_component_status`")  # noqa: E501
 
         collection_formats = {}
@@ -28876,7 +28663,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29011,8 +28798,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespace`")  # noqa: E501
 
         collection_formats = {}
@@ -29022,7 +28808,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29157,8 +28943,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespace_status`")  # noqa: E501
 
         collection_formats = {}
@@ -29168,7 +28953,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29308,12 +29093,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -29325,7 +29108,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29465,12 +29248,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -29482,7 +29263,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29622,12 +29403,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_event`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -29639,7 +29418,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29779,12 +29558,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -29796,7 +29573,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -29936,12 +29713,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -29953,7 +29728,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -30093,12 +29868,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_persistent_volume_claim_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_persistent_volume_claim_status`")  # noqa: E501
 
         collection_formats = {}
@@ -30110,7 +29883,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -30250,12 +30023,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -30267,7 +30038,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -30407,12 +30178,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_ephemeralcontainers`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_ephemeralcontainers`")  # noqa: E501
 
         collection_formats = {}
@@ -30424,7 +30193,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -30609,12 +30378,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_log`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_log`")  # noqa: E501
 
         collection_formats = {}
@@ -30626,25 +30393,25 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'container' in local_var_params and local_var_params['container'] is not None:  # noqa: E501
+        if local_var_params.get('container') is not None:  # noqa: E501
             query_params.append(('container', local_var_params['container']))  # noqa: E501
-        if 'follow' in local_var_params and local_var_params['follow'] is not None:  # noqa: E501
+        if local_var_params.get('follow') is not None:  # noqa: E501
             query_params.append(('follow', local_var_params['follow']))  # noqa: E501
-        if 'insecure_skip_tls_verify_backend' in local_var_params and local_var_params['insecure_skip_tls_verify_backend'] is not None:  # noqa: E501
+        if local_var_params.get('insecure_skip_tls_verify_backend') is not None:  # noqa: E501
             query_params.append(('insecureSkipTLSVerifyBackend', local_var_params['insecure_skip_tls_verify_backend']))  # noqa: E501
-        if 'limit_bytes' in local_var_params and local_var_params['limit_bytes'] is not None:  # noqa: E501
+        if local_var_params.get('limit_bytes') is not None:  # noqa: E501
             query_params.append(('limitBytes', local_var_params['limit_bytes']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'previous' in local_var_params and local_var_params['previous'] is not None:  # noqa: E501
+        if local_var_params.get('previous') is not None:  # noqa: E501
             query_params.append(('previous', local_var_params['previous']))  # noqa: E501
-        if 'since_seconds' in local_var_params and local_var_params['since_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('since_seconds') is not None:  # noqa: E501
             query_params.append(('sinceSeconds', local_var_params['since_seconds']))  # noqa: E501
-        if 'stream' in local_var_params and local_var_params['stream'] is not None:  # noqa: E501
+        if local_var_params.get('stream') is not None:  # noqa: E501
             query_params.append(('stream', local_var_params['stream']))  # noqa: E501
-        if 'tail_lines' in local_var_params and local_var_params['tail_lines'] is not None:  # noqa: E501
+        if local_var_params.get('tail_lines') is not None:  # noqa: E501
             query_params.append(('tailLines', local_var_params['tail_lines']))  # noqa: E501
-        if 'timestamps' in local_var_params and local_var_params['timestamps'] is not None:  # noqa: E501
+        if local_var_params.get('timestamps') is not None:  # noqa: E501
             query_params.append(('timestamps', local_var_params['timestamps']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -30784,12 +30551,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_resize`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_resize`")  # noqa: E501
 
         collection_formats = {}
@@ -30801,7 +30566,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -30941,12 +30706,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_status`")  # noqa: E501
 
         collection_formats = {}
@@ -30958,7 +30721,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -31098,12 +30861,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -31115,7 +30876,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -31255,12 +31016,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -31272,7 +31031,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -31412,12 +31171,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_replication_controller_scale`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_replication_controller_scale`")  # noqa: E501
 
         collection_formats = {}
@@ -31429,7 +31186,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -31569,12 +31326,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_replication_controller_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_replication_controller_status`")  # noqa: E501
 
         collection_formats = {}
@@ -31586,7 +31341,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -31726,12 +31481,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -31743,7 +31496,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -31883,12 +31636,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_resource_quota_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_resource_quota_status`")  # noqa: E501
 
         collection_formats = {}
@@ -31900,7 +31651,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32040,12 +31791,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -32057,7 +31806,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32197,12 +31946,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_service`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -32214,7 +31961,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32354,12 +32101,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -32371,7 +32116,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32511,12 +32256,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_service_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_service_status`")  # noqa: E501
 
         collection_formats = {}
@@ -32528,7 +32271,7 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32663,8 +32406,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_node`")  # noqa: E501
 
         collection_formats = {}
@@ -32674,7 +32416,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32809,8 +32551,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_node_status`")  # noqa: E501
 
         collection_formats = {}
@@ -32820,7 +32561,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -32955,8 +32696,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_persistent_volume`")  # noqa: E501
 
         collection_formats = {}
@@ -32966,7 +32706,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -33101,8 +32841,7 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_persistent_volume_status`")  # noqa: E501
 
         collection_formats = {}
@@ -33112,7 +32851,7 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -33267,12 +33006,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespace`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespace`")  # noqa: E501
 
         collection_formats = {}
@@ -33282,13 +33019,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -33446,12 +33183,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespace_finalize`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespace_finalize`")  # noqa: E501
 
         collection_formats = {}
@@ -33461,13 +33196,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -33625,12 +33360,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespace_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespace_status`")  # noqa: E501
 
         collection_formats = {}
@@ -33640,13 +33373,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -33809,16 +33542,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_config_map`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_config_map`")  # noqa: E501
 
         collection_formats = {}
@@ -33830,13 +33560,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -33999,16 +33729,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_endpoints`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_endpoints`")  # noqa: E501
 
         collection_formats = {}
@@ -34020,13 +33747,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -34189,16 +33916,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_event`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_event`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_event`")  # noqa: E501
 
         collection_formats = {}
@@ -34210,13 +33934,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -34379,16 +34103,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_limit_range`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_limit_range`")  # noqa: E501
 
         collection_formats = {}
@@ -34400,13 +34121,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -34569,16 +34290,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_persistent_volume_claim`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_persistent_volume_claim`")  # noqa: E501
 
         collection_formats = {}
@@ -34590,13 +34308,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -34759,16 +34477,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_persistent_volume_claim_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_persistent_volume_claim_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_persistent_volume_claim_status`")  # noqa: E501
 
         collection_formats = {}
@@ -34780,13 +34495,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -34949,16 +34664,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod`")  # noqa: E501
 
         collection_formats = {}
@@ -34970,13 +34682,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -35139,16 +34851,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod_ephemeralcontainers`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod_ephemeralcontainers`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod_ephemeralcontainers`")  # noqa: E501
 
         collection_formats = {}
@@ -35160,13 +34869,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -35329,16 +35038,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod_resize`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod_resize`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod_resize`")  # noqa: E501
 
         collection_formats = {}
@@ -35350,13 +35056,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -35519,16 +35225,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod_status`")  # noqa: E501
 
         collection_formats = {}
@@ -35540,13 +35243,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -35709,16 +35412,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_pod_template`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_pod_template`")  # noqa: E501
 
         collection_formats = {}
@@ -35730,13 +35430,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -35899,16 +35599,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_replication_controller`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_replication_controller`")  # noqa: E501
 
         collection_formats = {}
@@ -35920,13 +35617,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -36089,16 +35786,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_replication_controller_scale`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_replication_controller_scale`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_replication_controller_scale`")  # noqa: E501
 
         collection_formats = {}
@@ -36110,13 +35804,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -36279,16 +35973,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_replication_controller_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_replication_controller_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_replication_controller_status`")  # noqa: E501
 
         collection_formats = {}
@@ -36300,13 +35991,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -36469,16 +36160,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_resource_quota`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_resource_quota`")  # noqa: E501
 
         collection_formats = {}
@@ -36490,13 +36178,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -36659,16 +36347,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_resource_quota_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_resource_quota_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_resource_quota_status`")  # noqa: E501
 
         collection_formats = {}
@@ -36680,13 +36365,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -36849,16 +36534,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_secret`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_secret`")  # noqa: E501
 
         collection_formats = {}
@@ -36870,13 +36552,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -37039,16 +36721,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_service`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_service`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_service`")  # noqa: E501
 
         collection_formats = {}
@@ -37060,13 +36739,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -37229,16 +36908,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_service_account`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_service_account`")  # noqa: E501
 
         collection_formats = {}
@@ -37250,13 +36926,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -37419,16 +37095,13 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_service_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_service_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_service_status`")  # noqa: E501
 
         collection_formats = {}
@@ -37440,13 +37113,13 @@ class CoreV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -37604,12 +37277,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_node`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_node`")  # noqa: E501
 
         collection_formats = {}
@@ -37619,13 +37290,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -37783,12 +37454,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_node_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_node_status`")  # noqa: E501
 
         collection_formats = {}
@@ -37798,13 +37467,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -37962,12 +37631,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_persistent_volume`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_persistent_volume`")  # noqa: E501
 
         collection_formats = {}
@@ -37977,13 +37644,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -38141,12 +37808,10 @@ class CoreV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_persistent_volume_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_persistent_volume_status`")  # noqa: E501
 
         collection_formats = {}
@@ -38156,13 +37821,13 @@ class CoreV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))

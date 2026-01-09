@@ -148,8 +148,7 @@ class AuthenticationV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_self_subject_review`")  # noqa: E501
 
         collection_formats = {}
@@ -157,13 +156,13 @@ class AuthenticationV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))
@@ -317,8 +316,7 @@ class AuthenticationV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_token_review`")  # noqa: E501
 
         collection_formats = {}
@@ -326,13 +324,13 @@ class AuthenticationV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
         header_params = dict(local_var_params.get('_headers', {}))

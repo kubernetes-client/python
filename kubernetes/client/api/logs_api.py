@@ -126,8 +126,7 @@ class LogsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'logpath' is set
-        if self.api_client.client_side_validation and ('logpath' not in local_var_params or  # noqa: E501
-                                                        local_var_params['logpath'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('logpath') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `logpath` when calling `log_file_handler`")  # noqa: E501
 
         collection_formats = {}
