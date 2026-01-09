@@ -111,6 +111,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -132,7 +133,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -163,7 +166,7 @@ class CertificatesV1beta1Api(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -281,6 +284,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -303,7 +307,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -340,7 +346,7 @@ class CertificatesV1beta1Api(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -466,6 +472,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -490,7 +497,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -527,7 +536,7 @@ class CertificatesV1beta1Api(object):
         if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -680,6 +689,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -711,7 +721,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -758,7 +770,7 @@ class CertificatesV1beta1Api(object):
         if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -914,6 +926,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -946,7 +959,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -999,7 +1014,7 @@ class CertificatesV1beta1Api(object):
         if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1127,6 +1142,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1152,7 +1168,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1195,7 +1213,7 @@ class CertificatesV1beta1Api(object):
         if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1288,6 +1306,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1304,7 +1323,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1323,7 +1344,7 @@ class CertificatesV1beta1Api(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1457,6 +1478,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1484,7 +1506,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1525,7 +1549,7 @@ class CertificatesV1beta1Api(object):
         if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1663,6 +1687,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1691,7 +1716,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1738,7 +1765,7 @@ class CertificatesV1beta1Api(object):
         if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1872,6 +1899,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1899,7 +1927,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1940,7 +1970,7 @@ class CertificatesV1beta1Api(object):
         if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2058,6 +2088,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2081,7 +2112,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2120,7 +2153,7 @@ class CertificatesV1beta1Api(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2133,8 +2166,10 @@ class CertificatesV1beta1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2249,6 +2284,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2273,7 +2309,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2318,7 +2356,7 @@ class CertificatesV1beta1Api(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2331,8 +2369,10 @@ class CertificatesV1beta1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2447,6 +2487,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2471,7 +2512,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2516,7 +2559,7 @@ class CertificatesV1beta1Api(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2529,8 +2572,10 @@ class CertificatesV1beta1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -2621,6 +2666,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2639,7 +2685,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2666,7 +2714,7 @@ class CertificatesV1beta1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2768,6 +2816,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2787,7 +2836,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2820,7 +2871,7 @@ class CertificatesV1beta1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2922,6 +2973,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2941,7 +2993,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2974,7 +3028,7 @@ class CertificatesV1beta1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3088,6 +3142,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3110,7 +3165,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3147,7 +3204,7 @@ class CertificatesV1beta1Api(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3268,6 +3325,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3291,7 +3349,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3334,7 +3394,7 @@ class CertificatesV1beta1Api(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3455,6 +3515,7 @@ class CertificatesV1beta1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3478,7 +3539,9 @@ class CertificatesV1beta1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3521,7 +3584,7 @@ class CertificatesV1beta1Api(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}

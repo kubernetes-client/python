@@ -115,6 +115,7 @@ class AuthorizationV1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -137,7 +138,9 @@ class AuthorizationV1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -174,7 +177,7 @@ class AuthorizationV1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -288,6 +291,7 @@ class AuthorizationV1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -309,7 +313,9 @@ class AuthorizationV1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -340,7 +346,7 @@ class AuthorizationV1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -454,6 +460,7 @@ class AuthorizationV1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -475,7 +482,9 @@ class AuthorizationV1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -506,7 +515,7 @@ class AuthorizationV1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -620,6 +629,7 @@ class AuthorizationV1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -641,7 +651,9 @@ class AuthorizationV1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -672,7 +684,7 @@ class AuthorizationV1Api(object):
         if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -766,6 +778,7 @@ class AuthorizationV1Api(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -782,7 +795,9 @@ class AuthorizationV1Api(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -801,7 +816,7 @@ class AuthorizationV1Api(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}

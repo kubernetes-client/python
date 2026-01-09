@@ -123,6 +123,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -147,7 +148,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -196,7 +199,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -324,6 +327,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -349,7 +353,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -404,7 +410,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -532,6 +538,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -557,7 +564,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -608,7 +617,7 @@ class CustomObjectsApi(object):
         if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -740,6 +749,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -766,7 +776,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -815,7 +827,7 @@ class CustomObjectsApi(object):
         if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -955,6 +967,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -983,7 +996,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1040,7 +1055,7 @@ class CustomObjectsApi(object):
         if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1172,6 +1187,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1198,7 +1214,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1255,7 +1273,7 @@ class CustomObjectsApi(object):
         if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1355,6 +1373,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1373,7 +1392,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1404,7 +1425,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1510,6 +1531,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1530,7 +1552,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1573,7 +1597,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1679,6 +1703,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1699,7 +1724,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1742,7 +1769,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1848,6 +1875,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1868,7 +1896,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1911,7 +1941,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2021,6 +2051,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2042,7 +2073,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2091,7 +2124,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2201,6 +2234,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2222,7 +2256,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2271,7 +2307,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2381,6 +2417,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2402,7 +2439,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2451,7 +2490,7 @@ class CustomObjectsApi(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2593,6 +2632,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2622,7 +2662,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2679,7 +2721,7 @@ class CustomObjectsApi(object):
         if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2821,6 +2863,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2850,7 +2893,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2907,7 +2952,7 @@ class CustomObjectsApi(object):
         if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3053,6 +3098,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3083,7 +3129,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3146,7 +3194,7 @@ class CustomObjectsApi(object):
         if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3272,6 +3320,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3297,7 +3346,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3352,7 +3403,7 @@ class CustomObjectsApi(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3365,8 +3416,10 @@ class CustomObjectsApi(object):
             ['application/json'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3484,6 +3537,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3509,7 +3563,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3564,7 +3620,7 @@ class CustomObjectsApi(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3577,8 +3633,10 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3696,6 +3754,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3721,7 +3780,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3776,7 +3837,7 @@ class CustomObjectsApi(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3789,8 +3850,10 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -3912,6 +3975,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3938,7 +4002,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3999,7 +4065,7 @@ class CustomObjectsApi(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4012,8 +4078,10 @@ class CustomObjectsApi(object):
             ['application/json'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -4135,6 +4203,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -4161,7 +4230,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4222,7 +4293,7 @@ class CustomObjectsApi(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4235,8 +4306,10 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -4358,6 +4431,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -4384,7 +4458,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4445,7 +4521,7 @@ class CustomObjectsApi(object):
         if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4458,8 +4534,10 @@ class CustomObjectsApi(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
+        header_params['Content-Type'] = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'],
+                'PATCH', body_params))  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
@@ -4573,6 +4651,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -4597,7 +4676,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4650,7 +4731,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4774,6 +4855,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -4798,7 +4880,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4851,7 +4935,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4976,6 +5060,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -5000,7 +5085,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5053,7 +5140,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5182,6 +5269,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -5207,7 +5295,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5266,7 +5356,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5394,6 +5484,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -5419,7 +5510,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5478,7 +5571,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5607,6 +5700,7 @@ class CustomObjectsApi(object):
                               request; this effectively ignores the authentication
                               in the spec for a single request.
         :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -5632,7 +5726,9 @@ class CustomObjectsApi(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5691,7 +5787,7 @@ class CustomObjectsApi(object):
         if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
