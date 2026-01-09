@@ -1,6 +1,7 @@
 # V1beta1ResourcePool
 
 ResourcePool describes the pool that ResourceSlices belong to.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

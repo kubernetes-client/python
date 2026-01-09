@@ -1,6 +1,7 @@
 # V1ResourceQuotaList
 
 ResourceQuotaList is a list of ResourceQuota items.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

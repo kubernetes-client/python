@@ -1,6 +1,7 @@
 # V1HTTPHeader
 
 HTTPHeader describes a custom header to be used in HTTP probes
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

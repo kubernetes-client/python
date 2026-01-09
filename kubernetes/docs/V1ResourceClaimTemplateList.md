@@ -1,6 +1,7 @@
 # V1ResourceClaimTemplateList
 
 ResourceClaimTemplateList is a collection of claim templates.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

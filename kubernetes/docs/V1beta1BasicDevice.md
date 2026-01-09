@@ -1,6 +1,7 @@
 # V1beta1BasicDevice
 
 BasicDevice defines one device instance.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

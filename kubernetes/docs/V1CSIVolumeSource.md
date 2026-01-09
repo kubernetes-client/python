@@ -1,6 +1,7 @@
 # V1CSIVolumeSource
 
 Represents a source location of a volume to mount, managed by an external CSI driver
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

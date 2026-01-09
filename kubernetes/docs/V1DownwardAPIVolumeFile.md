@@ -1,6 +1,7 @@
 # V1DownwardAPIVolumeFile
 
 DownwardAPIVolumeFile represents information to create the file containing the pod field
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

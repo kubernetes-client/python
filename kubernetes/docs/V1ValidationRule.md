@@ -1,6 +1,7 @@
 # V1ValidationRule
 
 ValidationRule describes a validation rule written in the CEL expression language.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

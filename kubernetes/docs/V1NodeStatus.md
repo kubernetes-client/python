@@ -1,6 +1,7 @@
 # V1NodeStatus
 
 NodeStatus is information about the current status of a node.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

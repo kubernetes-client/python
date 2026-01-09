@@ -1,6 +1,7 @@
 # V1DeviceCounterConsumption
 
 DeviceCounterConsumption defines a set of counters that a device will consume from a CounterSet.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

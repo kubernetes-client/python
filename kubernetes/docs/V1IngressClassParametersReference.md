@@ -1,6 +1,7 @@
 # V1IngressClassParametersReference
 
 IngressClassParametersReference identifies an API object. This can be used to specify a cluster or namespace-scoped resource.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

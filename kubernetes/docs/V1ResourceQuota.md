@@ -1,6 +1,7 @@
 # V1ResourceQuota
 
 ResourceQuota sets aggregate quota restrictions enforced per namespace
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

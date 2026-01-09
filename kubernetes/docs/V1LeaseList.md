@@ -1,6 +1,7 @@
 # V1LeaseList
 
 LeaseList is a list of Lease objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

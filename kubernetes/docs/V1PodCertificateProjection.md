@@ -1,6 +1,7 @@
 # V1PodCertificateProjection
 
 PodCertificateProjection provides a private key and X.509 certificate in the pod filesystem.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

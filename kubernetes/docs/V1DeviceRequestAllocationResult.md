@@ -1,6 +1,7 @@
 # V1DeviceRequestAllocationResult
 
 DeviceRequestAllocationResult contains the allocation result for one request.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

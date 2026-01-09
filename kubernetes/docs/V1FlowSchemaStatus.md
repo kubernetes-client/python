@@ -1,6 +1,7 @@
 # V1FlowSchemaStatus
 
 FlowSchemaStatus represents the current state of a FlowSchema.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

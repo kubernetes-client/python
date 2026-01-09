@@ -1,6 +1,7 @@
 # V1PodDisruptionBudgetStatus
 
 PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may trail the actual state of a system.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

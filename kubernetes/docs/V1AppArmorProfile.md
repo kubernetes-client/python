@@ -1,6 +1,7 @@
 # V1AppArmorProfile
 
 AppArmorProfile defines a pod or container's AppArmor settings.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

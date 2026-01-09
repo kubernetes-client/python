@@ -1,6 +1,7 @@
 # V1PersistentVolumeList
 
 PersistentVolumeList is a list of PersistentVolume items.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

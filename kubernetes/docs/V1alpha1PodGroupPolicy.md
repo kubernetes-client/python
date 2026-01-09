@@ -1,6 +1,7 @@
 # V1alpha1PodGroupPolicy
 
 PodGroupPolicy defines the scheduling configuration for a PodGroup.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1beta1DeviceClaim
 
 DeviceClaim defines how to request devices with a ResourceClaim.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

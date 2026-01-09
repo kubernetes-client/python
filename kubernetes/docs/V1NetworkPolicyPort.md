@@ -1,6 +1,7 @@
 # V1NetworkPolicyPort
 
 NetworkPolicyPort describes a port to allow traffic on
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

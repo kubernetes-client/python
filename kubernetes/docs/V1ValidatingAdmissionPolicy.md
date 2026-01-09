@@ -1,6 +1,7 @@
 # V1ValidatingAdmissionPolicy
 
 ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1IngressServiceBackend
 
 IngressServiceBackend references a Kubernetes Service as a Backend.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

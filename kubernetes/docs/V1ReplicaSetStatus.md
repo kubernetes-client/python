@@ -1,6 +1,7 @@
 # V1ReplicaSetStatus
 
 ReplicaSetStatus represents the current status of a ReplicaSet.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

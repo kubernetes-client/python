@@ -1,6 +1,7 @@
 # V1NodeSpec
 
 NodeSpec describes the attributes that a node is created with.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

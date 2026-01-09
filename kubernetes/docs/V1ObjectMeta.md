@@ -1,6 +1,7 @@
 # V1ObjectMeta
 
 ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

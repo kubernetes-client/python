@@ -1,6 +1,7 @@
 # V1beta1PodCertificateRequestSpec
 
 PodCertificateRequestSpec describes the certificate request.  All fields are immutable after creation.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

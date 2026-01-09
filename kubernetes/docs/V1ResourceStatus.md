@@ -1,6 +1,7 @@
 # V1ResourceStatus
 
 ResourceStatus represents the status of a single resource allocated to a Pod.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

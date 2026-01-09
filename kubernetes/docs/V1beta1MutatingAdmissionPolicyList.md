@@ -1,6 +1,7 @@
 # V1beta1MutatingAdmissionPolicyList
 
 MutatingAdmissionPolicyList is a list of MutatingAdmissionPolicy.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1IngressPortStatus
 
 IngressPortStatus represents the error condition of a service port
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

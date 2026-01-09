@@ -1,6 +1,7 @@
 # V1DeviceClassList
 
 DeviceClassList is a collection of classes.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

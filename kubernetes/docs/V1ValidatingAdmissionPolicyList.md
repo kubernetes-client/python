@@ -1,6 +1,7 @@
 # V1ValidatingAdmissionPolicyList
 
 ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1beta1JSONPatch
 
 JSONPatch defines a JSON Patch.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

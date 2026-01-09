@@ -1,6 +1,7 @@
 # V1ExpressionWarning
 
 ExpressionWarning is a warning information that targets a specific expression.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

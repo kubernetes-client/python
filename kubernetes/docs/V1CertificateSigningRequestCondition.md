@@ -1,6 +1,7 @@
 # V1CertificateSigningRequestCondition
 
 CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1APIGroup
 
 APIGroup contains the name, the supported versions, and the preferred version of a group.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

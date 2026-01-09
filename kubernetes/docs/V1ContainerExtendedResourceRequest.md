@@ -1,6 +1,7 @@
 # V1ContainerExtendedResourceRequest
 
 ContainerExtendedResourceRequest has the mapping of container name, extended resource name to the device request name.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1NamespaceList
 
 NamespaceList is a list of Namespaces.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

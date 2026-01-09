@@ -1,6 +1,7 @@
 # V1beta1ClusterTrustBundleSpec
 
 ClusterTrustBundleSpec contains the signer and trust anchors.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

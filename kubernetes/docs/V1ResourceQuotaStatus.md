@@ -1,6 +1,7 @@
 # V1ResourceQuotaStatus
 
 ResourceQuotaStatus defines the enforced hard limits and observed use.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

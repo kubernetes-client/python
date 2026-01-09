@@ -1,6 +1,7 @@
 # V1PriorityLevelConfigurationList
 
 PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

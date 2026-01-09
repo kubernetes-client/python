@@ -1,6 +1,7 @@
 # V1CSIPersistentVolumeSource
 
 Represents storage that is managed by an external CSI volume driver
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

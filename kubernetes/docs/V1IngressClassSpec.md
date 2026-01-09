@@ -1,6 +1,7 @@
 # V1IngressClassSpec
 
 IngressClassSpec provides information about the class of an Ingress.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

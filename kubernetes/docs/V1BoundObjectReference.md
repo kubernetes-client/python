@@ -1,6 +1,7 @@
 # V1BoundObjectReference
 
 BoundObjectReference is a reference to an object that a token is bound to.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1FlowSchemaSpec
 
 FlowSchemaSpec describes how the FlowSchema's specification looks like.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

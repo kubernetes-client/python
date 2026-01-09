@@ -1,6 +1,7 @@
 # V1UncountedTerminatedPods
 
 UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't been accounted in Job status counters.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

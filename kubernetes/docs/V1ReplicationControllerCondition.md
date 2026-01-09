@@ -1,6 +1,7 @@
 # V1ReplicationControllerCondition
 
 ReplicationControllerCondition describes the state of a replication controller at a certain point.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

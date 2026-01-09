@@ -1,6 +1,7 @@
 # V1PodAntiAffinity
 
 Pod anti affinity is a group of inter pod anti affinity scheduling rules.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1beta1StorageVersionMigration
 
 StorageVersionMigration represents a migration of stored data to the latest storage version.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

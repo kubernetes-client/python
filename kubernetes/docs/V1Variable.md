@@ -1,6 +1,7 @@
 # V1Variable
 
 Variable is the definition of a variable that is used for composition. A variable is defined as a named expression.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

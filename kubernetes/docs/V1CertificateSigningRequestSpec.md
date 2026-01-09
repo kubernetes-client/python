@@ -1,6 +1,7 @@
 # V1CertificateSigningRequestSpec
 
 CertificateSigningRequestSpec contains the certificate request.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

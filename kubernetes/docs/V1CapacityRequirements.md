@@ -1,6 +1,7 @@
 # V1CapacityRequirements
 
 CapacityRequirements defines the capacity requirements for a specific device request.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

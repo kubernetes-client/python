@@ -1,6 +1,7 @@
 # V1OpaqueDeviceConfiguration
 
 OpaqueDeviceConfiguration contains configuration parameters for a driver in a format defined by the driver vendor.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

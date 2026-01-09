@@ -1,6 +1,7 @@
 # V2MetricIdentifier
 
 MetricIdentifier defines the name and optionally selector for a metric
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

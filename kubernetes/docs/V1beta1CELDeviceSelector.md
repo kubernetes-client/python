@@ -1,6 +1,7 @@
 # V1beta1CELDeviceSelector
 
 CELDeviceSelector contains a CEL expression for selecting a device.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

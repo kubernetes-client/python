@@ -1,6 +1,7 @@
 # V1MutatingWebhookConfigurationList
 
 MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

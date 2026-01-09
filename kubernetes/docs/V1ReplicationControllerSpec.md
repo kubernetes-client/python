@@ -1,6 +1,7 @@
 # V1ReplicationControllerSpec
 
 ReplicationControllerSpec is the specification of a replication controller.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

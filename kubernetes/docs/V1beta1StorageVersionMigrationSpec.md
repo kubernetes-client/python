@@ -1,6 +1,7 @@
 # V1beta1StorageVersionMigrationSpec
 
 Spec of the storage version migration.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

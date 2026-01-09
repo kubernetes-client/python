@@ -1,6 +1,7 @@
 # V1ResourceClaimTemplateSpec
 
 ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

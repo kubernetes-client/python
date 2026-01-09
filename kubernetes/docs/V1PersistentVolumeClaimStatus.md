@@ -1,6 +1,7 @@
 # V1PersistentVolumeClaimStatus
 
 PersistentVolumeClaimStatus is the current status of a persistent volume claim.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1ClusterRoleList
 
 ClusterRoleList is a collection of ClusterRoles
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

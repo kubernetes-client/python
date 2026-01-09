@@ -1,6 +1,7 @@
 # V1beta1MutatingAdmissionPolicyBindingSpec
 
 MutatingAdmissionPolicyBindingSpec is the specification of the MutatingAdmissionPolicyBinding.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

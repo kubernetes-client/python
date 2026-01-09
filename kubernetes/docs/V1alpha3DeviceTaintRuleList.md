@@ -1,6 +1,7 @@
 # V1alpha3DeviceTaintRuleList
 
 DeviceTaintRuleList is a collection of DeviceTaintRules.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

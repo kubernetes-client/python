@@ -1,6 +1,7 @@
 # V1SecretList
 
 SecretList is a list of Secret.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

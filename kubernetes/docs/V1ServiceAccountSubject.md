@@ -1,6 +1,7 @@
 # V1ServiceAccountSubject
 
 ServiceAccountSubject holds detailed information for service-account-kind subject.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1IngressClassList
 
 IngressClassList is a collection of IngressClasses.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

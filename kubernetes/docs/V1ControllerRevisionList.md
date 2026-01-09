@@ -1,6 +1,7 @@
 # V1ControllerRevisionList
 
 ControllerRevisionList is a resource containing a list of ControllerRevision objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

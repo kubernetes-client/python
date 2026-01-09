@@ -1,6 +1,7 @@
 # V1CustomResourceSubresources
 
 CustomResourceSubresources defines the status and scale subresources for CustomResources.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

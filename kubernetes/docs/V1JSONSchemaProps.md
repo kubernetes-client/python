@@ -1,6 +1,7 @@
 # V1JSONSchemaProps
 
 JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

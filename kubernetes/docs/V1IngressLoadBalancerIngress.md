@@ -1,6 +1,7 @@
 # V1IngressLoadBalancerIngress
 
 IngressLoadBalancerIngress represents the status of a load-balancer ingress point.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

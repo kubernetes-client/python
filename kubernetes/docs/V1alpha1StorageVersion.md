@@ -1,6 +1,7 @@
 # V1alpha1StorageVersion
 
 Storage version of a specific resource.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

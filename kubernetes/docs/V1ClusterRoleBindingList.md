@@ -1,6 +1,7 @@
 # V1ClusterRoleBindingList
 
 ClusterRoleBindingList is a collection of ClusterRoleBindings
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

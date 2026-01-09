@@ -1,6 +1,7 @@
 # V1alpha1MutatingAdmissionPolicyBindingList
 
 MutatingAdmissionPolicyBindingList is a list of MutatingAdmissionPolicyBinding.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
