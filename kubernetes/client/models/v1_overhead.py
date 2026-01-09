@@ -36,7 +36,7 @@ class V1Overhead(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'pod_fixed': 'dict(str, str)'
+        'pod_fixed': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -62,7 +62,7 @@ class V1Overhead(object):
         podFixed represents the fixed resource overhead associated with running a pod.  # noqa: E501
 
         :return: The pod_fixed of this V1Overhead.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._pod_fixed
 
@@ -73,7 +73,7 @@ class V1Overhead(object):
         podFixed represents the fixed resource overhead associated with running a pod.  # noqa: E501
 
         :param pod_fixed: The pod_fixed of this V1Overhead.  # noqa: E501
-        :type pod_fixed: dict(str, str)
+        :type pod_fixed: dict[str, str]
         """
 
         self._pod_fixed = pod_fixed

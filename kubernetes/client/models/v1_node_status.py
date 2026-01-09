@@ -37,8 +37,8 @@ class V1NodeStatus(object):
     """
     openapi_types = {
         'addresses': 'list[V1NodeAddress]',
-        'allocatable': 'dict(str, str)',
-        'capacity': 'dict(str, str)',
+        'allocatable': 'dict[str, str]',
+        'capacity': 'dict[str, str]',
         'conditions': 'list[V1NodeCondition]',
         'config': 'V1NodeConfigStatus',
         'daemon_endpoints': 'V1NodeDaemonEndpoints',
@@ -150,7 +150,7 @@ class V1NodeStatus(object):
         Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.  # noqa: E501
 
         :return: The allocatable of this V1NodeStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._allocatable
 
@@ -161,7 +161,7 @@ class V1NodeStatus(object):
         Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.  # noqa: E501
 
         :param allocatable: The allocatable of this V1NodeStatus.  # noqa: E501
-        :type allocatable: dict(str, str)
+        :type allocatable: dict[str, str]
         """
 
         self._allocatable = allocatable
@@ -173,7 +173,7 @@ class V1NodeStatus(object):
         Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/reference/node/node-status/#capacity  # noqa: E501
 
         :return: The capacity of this V1NodeStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._capacity
 
@@ -184,7 +184,7 @@ class V1NodeStatus(object):
         Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/reference/node/node-status/#capacity  # noqa: E501
 
         :param capacity: The capacity of this V1NodeStatus.  # noqa: E501
-        :type capacity: dict(str, str)
+        :type capacity: dict[str, str]
         """
 
         self._capacity = capacity

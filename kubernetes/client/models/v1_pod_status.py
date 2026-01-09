@@ -36,7 +36,7 @@ class V1PodStatus(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'allocated_resources': 'dict(str, str)',
+        'allocated_resources': 'dict[str, str]',
         'conditions': 'list[V1PodCondition]',
         'container_statuses': 'list[V1ContainerStatus]',
         'ephemeral_container_statuses': 'list[V1ContainerStatus]',
@@ -157,7 +157,7 @@ class V1PodStatus(object):
         AllocatedResources is the total requests allocated for this pod by the node. If pod-level requests are not set, this will be the total requests aggregated across containers in the pod.  # noqa: E501
 
         :return: The allocated_resources of this V1PodStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._allocated_resources
 
@@ -168,7 +168,7 @@ class V1PodStatus(object):
         AllocatedResources is the total requests allocated for this pod by the node. If pod-level requests are not set, this will be the total requests aggregated across containers in the pod.  # noqa: E501
 
         :param allocated_resources: The allocated_resources of this V1PodStatus.  # noqa: E501
-        :type allocated_resources: dict(str, str)
+        :type allocated_resources: dict[str, str]
         """
 
         self._allocated_resources = allocated_resources

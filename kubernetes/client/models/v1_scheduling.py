@@ -36,7 +36,7 @@ class V1Scheduling(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'node_selector': 'dict(str, str)',
+        'node_selector': 'dict[str, str]',
         'tolerations': 'list[V1Toleration]'
     }
 
@@ -67,7 +67,7 @@ class V1Scheduling(object):
         nodeSelector lists labels that must be present on nodes that support this RuntimeClass. Pods using this RuntimeClass can only be scheduled to a node matched by this selector. The RuntimeClass nodeSelector is merged with a pod's existing nodeSelector. Any conflicts will cause the pod to be rejected in admission.  # noqa: E501
 
         :return: The node_selector of this V1Scheduling.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._node_selector
 
@@ -78,7 +78,7 @@ class V1Scheduling(object):
         nodeSelector lists labels that must be present on nodes that support this RuntimeClass. Pods using this RuntimeClass can only be scheduled to a node matched by this selector. The RuntimeClass nodeSelector is merged with a pod's existing nodeSelector. Any conflicts will cause the pod to be rejected in admission.  # noqa: E501
 
         :param node_selector: The node_selector of this V1Scheduling.  # noqa: E501
-        :type node_selector: dict(str, str)
+        :type node_selector: dict[str, str]
         """
 
         self._node_selector = node_selector

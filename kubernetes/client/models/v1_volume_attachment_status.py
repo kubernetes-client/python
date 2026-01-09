@@ -38,7 +38,7 @@ class V1VolumeAttachmentStatus(object):
     openapi_types = {
         'attach_error': 'V1VolumeError',
         'attached': 'bool',
-        'attachment_metadata': 'dict(str, str)',
+        'attachment_metadata': 'dict[str, str]',
         'detach_error': 'V1VolumeError'
     }
 
@@ -122,7 +122,7 @@ class V1VolumeAttachmentStatus(object):
         attachmentMetadata is populated with any information returned by the attach operation, upon successful attach, that must be passed into subsequent WaitForAttach or Mount calls. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.  # noqa: E501
 
         :return: The attachment_metadata of this V1VolumeAttachmentStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._attachment_metadata
 
@@ -133,7 +133,7 @@ class V1VolumeAttachmentStatus(object):
         attachmentMetadata is populated with any information returned by the attach operation, upon successful attach, that must be passed into subsequent WaitForAttach or Mount calls. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.  # noqa: E501
 
         :param attachment_metadata: The attachment_metadata of this V1VolumeAttachmentStatus.  # noqa: E501
-        :type attachment_metadata: dict(str, str)
+        :type attachment_metadata: dict[str, str]
         """
 
         self._attachment_metadata = attachment_metadata

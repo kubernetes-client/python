@@ -5,7 +5,7 @@ CounterSet defines a named set of counters that are available to be used by devi
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**counters** | [**dict(str, V1Counter)**](V1Counter.md) | Counters defines the set of counters for this CounterSet The name of each counter must be unique in that set and must be a DNS label.  The maximum number of counters is 32. | 
+**counters** | [**dict[str, V1Counter]**](V1Counter.md) | Counters defines the set of counters for this CounterSet The name of each counter must be unique in that set and must be a DNS label.  The maximum number of counters is 32. | 
 **name** | **str** | Name defines the name of the counter set. It must be a DNS label. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

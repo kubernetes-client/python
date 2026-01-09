@@ -46,7 +46,7 @@ class V1beta1PodCertificateRequestSpec(object):
         'service_account_name': 'str',
         'service_account_uid': 'str',
         'signer_name': 'str',
-        'unverified_user_annotations': 'dict(str, str)'
+        'unverified_user_annotations': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -357,7 +357,7 @@ class V1beta1PodCertificateRequestSpec(object):
         unverifiedUserAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support.  Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :return: The unverified_user_annotations of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._unverified_user_annotations
 
@@ -368,7 +368,7 @@ class V1beta1PodCertificateRequestSpec(object):
         unverifiedUserAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support.  Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :param unverified_user_annotations: The unverified_user_annotations of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type unverified_user_annotations: dict(str, str)
+        :type unverified_user_annotations: dict[str, str]
         """
 
         self._unverified_user_annotations = unverified_user_annotations

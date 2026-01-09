@@ -36,7 +36,7 @@ class V1UserInfo(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'extra': 'dict(str, list[str])',
+        'extra': 'dict[str, list[str]]',
         'groups': 'list[str]',
         'uid': 'str',
         'username': 'str'
@@ -77,7 +77,7 @@ class V1UserInfo(object):
         Any additional information provided by the authenticator.  # noqa: E501
 
         :return: The extra of this V1UserInfo.  # noqa: E501
-        :rtype: dict(str, list[str])
+        :rtype: dict[str, list[str]]
         """
         return self._extra
 
@@ -88,7 +88,7 @@ class V1UserInfo(object):
         Any additional information provided by the authenticator.  # noqa: E501
 
         :param extra: The extra of this V1UserInfo.  # noqa: E501
-        :type extra: dict(str, list[str])
+        :type extra: dict[str, list[str]]
         """
 
         self._extra = extra

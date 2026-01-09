@@ -36,7 +36,7 @@ class V1ContainerStatus(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'allocated_resources': 'dict(str, str)',
+        'allocated_resources': 'dict[str, str]',
         'allocated_resources_status': 'list[V1ResourceStatus]',
         'container_id': 'str',
         'image': 'str',
@@ -127,7 +127,7 @@ class V1ContainerStatus(object):
         AllocatedResources represents the compute resources allocated for this container by the node. Kubelet sets this value to Container.Resources.Requests upon successful pod admission and after successfully admitting desired pod resize.  # noqa: E501
 
         :return: The allocated_resources of this V1ContainerStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._allocated_resources
 
@@ -138,7 +138,7 @@ class V1ContainerStatus(object):
         AllocatedResources represents the compute resources allocated for this container by the node. Kubelet sets this value to Container.Resources.Requests upon successful pod admission and after successfully admitting desired pod resize.  # noqa: E501
 
         :param allocated_resources: The allocated_resources of this V1ContainerStatus.  # noqa: E501
-        :type allocated_resources: dict(str, str)
+        :type allocated_resources: dict[str, str]
         """
 
         self._allocated_resources = allocated_resources

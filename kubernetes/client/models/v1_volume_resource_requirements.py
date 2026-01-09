@@ -36,8 +36,8 @@ class V1VolumeResourceRequirements(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'limits': 'dict(str, str)',
-        'requests': 'dict(str, str)'
+        'limits': 'dict[str, str]',
+        'requests': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -67,7 +67,7 @@ class V1VolumeResourceRequirements(object):
         Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/  # noqa: E501
 
         :return: The limits of this V1VolumeResourceRequirements.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._limits
 
@@ -78,7 +78,7 @@ class V1VolumeResourceRequirements(object):
         Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/  # noqa: E501
 
         :param limits: The limits of this V1VolumeResourceRequirements.  # noqa: E501
-        :type limits: dict(str, str)
+        :type limits: dict[str, str]
         """
 
         self._limits = limits
@@ -90,7 +90,7 @@ class V1VolumeResourceRequirements(object):
         Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. Requests cannot exceed Limits. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/  # noqa: E501
 
         :return: The requests of this V1VolumeResourceRequirements.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._requests
 
@@ -101,7 +101,7 @@ class V1VolumeResourceRequirements(object):
         Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. Requests cannot exceed Limits. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/  # noqa: E501
 
         :param requests: The requests of this V1VolumeResourceRequirements.  # noqa: E501
-        :type requests: dict(str, str)
+        :type requests: dict[str, str]
         """
 
         self._requests = requests

@@ -54,9 +54,9 @@ class V1PodSpec(object):
         'image_pull_secrets': 'list[V1LocalObjectReference]',
         'init_containers': 'list[V1Container]',
         'node_name': 'str',
-        'node_selector': 'dict(str, str)',
+        'node_selector': 'dict[str, str]',
         'os': 'V1PodOS',
-        'overhead': 'dict(str, str)',
+        'overhead': 'dict[str, str]',
         'preemption_policy': 'str',
         'priority': 'int',
         'priority_class_name': 'str',
@@ -678,7 +678,7 @@ class V1PodSpec(object):
         NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/  # noqa: E501
 
         :return: The node_selector of this V1PodSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._node_selector
 
@@ -689,7 +689,7 @@ class V1PodSpec(object):
         NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/  # noqa: E501
 
         :param node_selector: The node_selector of this V1PodSpec.  # noqa: E501
-        :type node_selector: dict(str, str)
+        :type node_selector: dict[str, str]
         """
 
         self._node_selector = node_selector
@@ -722,7 +722,7 @@ class V1PodSpec(object):
         Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md  # noqa: E501
 
         :return: The overhead of this V1PodSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._overhead
 
@@ -733,7 +733,7 @@ class V1PodSpec(object):
         Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md  # noqa: E501
 
         :param overhead: The overhead of this V1PodSpec.  # noqa: E501
-        :type overhead: dict(str, str)
+        :type overhead: dict[str, str]
         """
 
         self._overhead = overhead

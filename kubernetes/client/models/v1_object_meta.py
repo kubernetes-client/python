@@ -36,14 +36,14 @@ class V1ObjectMeta(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'annotations': 'dict(str, str)',
+        'annotations': 'dict[str, str]',
         'creation_timestamp': 'datetime',
         'deletion_grace_period_seconds': 'int',
         'deletion_timestamp': 'datetime',
         'finalizers': 'list[str]',
         'generate_name': 'str',
         'generation': 'int',
-        'labels': 'dict(str, str)',
+        'labels': 'dict[str, str]',
         'managed_fields': 'list[V1ManagedFieldsEntry]',
         'name': 'str',
         'namespace': 'str',
@@ -132,7 +132,7 @@ class V1ObjectMeta(object):
         Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations  # noqa: E501
 
         :return: The annotations of this V1ObjectMeta.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._annotations
 
@@ -143,7 +143,7 @@ class V1ObjectMeta(object):
         Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations  # noqa: E501
 
         :param annotations: The annotations of this V1ObjectMeta.  # noqa: E501
-        :type annotations: dict(str, str)
+        :type annotations: dict[str, str]
         """
 
         self._annotations = annotations
@@ -293,7 +293,7 @@ class V1ObjectMeta(object):
         Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels  # noqa: E501
 
         :return: The labels of this V1ObjectMeta.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._labels
 
@@ -304,7 +304,7 @@ class V1ObjectMeta(object):
         Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels  # noqa: E501
 
         :param labels: The labels of this V1ObjectMeta.  # noqa: E501
-        :type labels: dict(str, str)
+        :type labels: dict[str, str]
         """
 
         self._labels = labels

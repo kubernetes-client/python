@@ -36,8 +36,8 @@ class V1ResourceQuotaStatus(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'hard': 'dict(str, str)',
-        'used': 'dict(str, str)'
+        'hard': 'dict[str, str]',
+        'used': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -67,7 +67,7 @@ class V1ResourceQuotaStatus(object):
         Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/  # noqa: E501
 
         :return: The hard of this V1ResourceQuotaStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._hard
 
@@ -78,7 +78,7 @@ class V1ResourceQuotaStatus(object):
         Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/  # noqa: E501
 
         :param hard: The hard of this V1ResourceQuotaStatus.  # noqa: E501
-        :type hard: dict(str, str)
+        :type hard: dict[str, str]
         """
 
         self._hard = hard
@@ -90,7 +90,7 @@ class V1ResourceQuotaStatus(object):
         Used is the current observed total usage of the resource in the namespace.  # noqa: E501
 
         :return: The used of this V1ResourceQuotaStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._used
 
@@ -101,7 +101,7 @@ class V1ResourceQuotaStatus(object):
         Used is the current observed total usage of the resource in the namespace.  # noqa: E501
 
         :param used: The used of this V1ResourceQuotaStatus.  # noqa: E501
-        :type used: dict(str, str)
+        :type used: dict[str, str]
         """
 
         self._used = used

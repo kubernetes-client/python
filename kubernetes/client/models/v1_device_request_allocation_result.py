@@ -39,7 +39,7 @@ class V1DeviceRequestAllocationResult(object):
         'admin_access': 'bool',
         'binding_conditions': 'list[str]',
         'binding_failure_conditions': 'list[str]',
-        'consumed_capacity': 'dict(str, str)',
+        'consumed_capacity': 'dict[str, str]',
         'device': 'str',
         'driver': 'str',
         'pool': 'str',
@@ -172,7 +172,7 @@ class V1DeviceRequestAllocationResult(object):
         ConsumedCapacity tracks the amount of capacity consumed per device as part of the claim request. The consumed amount may differ from the requested amount: it is rounded up to the nearest valid value based on the device’s requestPolicy if applicable (i.e., may not be less than the requested amount).  The total consumed capacity for each device must not exceed the DeviceCapacity's Value.  This field is populated only for devices that allow multiple allocations. All capacity entries are included, even if the consumed amount is zero.  # noqa: E501
 
         :return: The consumed_capacity of this V1DeviceRequestAllocationResult.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._consumed_capacity
 
@@ -183,7 +183,7 @@ class V1DeviceRequestAllocationResult(object):
         ConsumedCapacity tracks the amount of capacity consumed per device as part of the claim request. The consumed amount may differ from the requested amount: it is rounded up to the nearest valid value based on the device’s requestPolicy if applicable (i.e., may not be less than the requested amount).  The total consumed capacity for each device must not exceed the DeviceCapacity's Value.  This field is populated only for devices that allow multiple allocations. All capacity entries are included, even if the consumed amount is zero.  # noqa: E501
 
         :param consumed_capacity: The consumed_capacity of this V1DeviceRequestAllocationResult.  # noqa: E501
-        :type consumed_capacity: dict(str, str)
+        :type consumed_capacity: dict[str, str]
         """
 
         self._consumed_capacity = consumed_capacity

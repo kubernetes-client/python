@@ -38,11 +38,11 @@ class V1beta1BasicDevice(object):
     openapi_types = {
         'all_nodes': 'bool',
         'allow_multiple_allocations': 'bool',
-        'attributes': 'dict(str, V1beta1DeviceAttribute)',
+        'attributes': 'dict[str, V1beta1DeviceAttribute]',
         'binding_conditions': 'list[str]',
         'binding_failure_conditions': 'list[str]',
         'binds_to_node': 'bool',
-        'capacity': 'dict(str, V1beta1DeviceCapacity)',
+        'capacity': 'dict[str, V1beta1DeviceCapacity]',
         'consumes_counters': 'list[V1beta1DeviceCounterConsumption]',
         'node_name': 'str',
         'node_selector': 'V1NodeSelector',
@@ -158,7 +158,7 @@ class V1beta1BasicDevice(object):
         Attributes defines the set of attributes for this device. The name of each attribute must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :return: The attributes of this V1beta1BasicDevice.  # noqa: E501
-        :rtype: dict(str, V1beta1DeviceAttribute)
+        :rtype: dict[str, V1beta1DeviceAttribute]
         """
         return self._attributes
 
@@ -169,7 +169,7 @@ class V1beta1BasicDevice(object):
         Attributes defines the set of attributes for this device. The name of each attribute must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :param attributes: The attributes of this V1beta1BasicDevice.  # noqa: E501
-        :type attributes: dict(str, V1beta1DeviceAttribute)
+        :type attributes: dict[str, V1beta1DeviceAttribute]
         """
 
         self._attributes = attributes
@@ -250,7 +250,7 @@ class V1beta1BasicDevice(object):
         Capacity defines the set of capacities for this device. The name of each capacity must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :return: The capacity of this V1beta1BasicDevice.  # noqa: E501
-        :rtype: dict(str, V1beta1DeviceCapacity)
+        :rtype: dict[str, V1beta1DeviceCapacity]
         """
         return self._capacity
 
@@ -261,7 +261,7 @@ class V1beta1BasicDevice(object):
         Capacity defines the set of capacities for this device. The name of each capacity must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :param capacity: The capacity of this V1beta1BasicDevice.  # noqa: E501
-        :type capacity: dict(str, V1beta1DeviceCapacity)
+        :type capacity: dict[str, V1beta1DeviceCapacity]
         """
 
         self._capacity = capacity

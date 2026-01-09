@@ -51,7 +51,7 @@ class V1ServiceSpec(object):
         'load_balancer_source_ranges': 'list[str]',
         'ports': 'list[V1ServicePort]',
         'publish_not_ready_addresses': 'bool',
-        'selector': 'dict(str, str)',
+        'selector': 'dict[str, str]',
         'session_affinity': 'str',
         'session_affinity_config': 'V1SessionAffinityConfig',
         'traffic_distribution': 'str',
@@ -502,7 +502,7 @@ class V1ServiceSpec(object):
         Route service traffic to pods with label keys and values matching this selector. If empty or not present, the service is assumed to have an external process managing its endpoints, which Kubernetes will not modify. Only applies to types ClusterIP, NodePort, and LoadBalancer. Ignored if type is ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/  # noqa: E501
 
         :return: The selector of this V1ServiceSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._selector
 
@@ -513,7 +513,7 @@ class V1ServiceSpec(object):
         Route service traffic to pods with label keys and values matching this selector. If empty or not present, the service is assumed to have an external process managing its endpoints, which Kubernetes will not modify. Only applies to types ClusterIP, NodePort, and LoadBalancer. Ignored if type is ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/  # noqa: E501
 
         :param selector: The selector of this V1ServiceSpec.  # noqa: E501
-        :type selector: dict(str, str)
+        :type selector: dict[str, str]
         """
 
         self._selector = selector

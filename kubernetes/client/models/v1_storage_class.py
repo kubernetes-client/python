@@ -42,7 +42,7 @@ class V1StorageClass(object):
         'kind': 'str',
         'metadata': 'V1ObjectMeta',
         'mount_options': 'list[str]',
-        'parameters': 'dict(str, str)',
+        'parameters': 'dict[str, str]',
         'provisioner': 'str',
         'reclaim_policy': 'str',
         'volume_binding_mode': 'str'
@@ -242,7 +242,7 @@ class V1StorageClass(object):
         parameters holds the parameters for the provisioner that should create volumes of this storage class.  # noqa: E501
 
         :return: The parameters of this V1StorageClass.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._parameters
 
@@ -253,7 +253,7 @@ class V1StorageClass(object):
         parameters holds the parameters for the provisioner that should create volumes of this storage class.  # noqa: E501
 
         :param parameters: The parameters of this V1StorageClass.  # noqa: E501
-        :type parameters: dict(str, str)
+        :type parameters: dict[str, str]
         """
 
         self._parameters = parameters

@@ -38,7 +38,7 @@ class V1ReplicationControllerSpec(object):
     openapi_types = {
         'min_ready_seconds': 'int',
         'replicas': 'int',
-        'selector': 'dict(str, str)',
+        'selector': 'dict[str, str]',
         'template': 'V1PodTemplateSpec'
     }
 
@@ -123,7 +123,7 @@ class V1ReplicationControllerSpec(object):
         Selector is a label query over pods that should match the Replicas count. If Selector is empty, it is defaulted to the labels present on the Pod template. Label keys and values that must match in order to be controlled by this replication controller, if empty defaulted to labels on Pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors  # noqa: E501
 
         :return: The selector of this V1ReplicationControllerSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._selector
 
@@ -134,7 +134,7 @@ class V1ReplicationControllerSpec(object):
         Selector is a label query over pods that should match the Replicas count. If Selector is empty, it is defaulted to the labels present on the Pod template. Label keys and values that must match in order to be controlled by this replication controller, if empty defaulted to labels on Pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors  # noqa: E501
 
         :param selector: The selector of this V1ReplicationControllerSpec.  # noqa: E501
-        :type selector: dict(str, str)
+        :type selector: dict[str, str]
         """
 
         self._selector = selector

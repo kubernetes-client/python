@@ -38,7 +38,7 @@ class V1FlexPersistentVolumeSource(object):
     openapi_types = {
         'driver': 'str',
         'fs_type': 'str',
-        'options': 'dict(str, str)',
+        'options': 'dict[str, str]',
         'read_only': 'bool',
         'secret_ref': 'V1SecretReference'
     }
@@ -129,7 +129,7 @@ class V1FlexPersistentVolumeSource(object):
         options is Optional: this field holds extra command options if any.  # noqa: E501
 
         :return: The options of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._options
 
@@ -140,7 +140,7 @@ class V1FlexPersistentVolumeSource(object):
         options is Optional: this field holds extra command options if any.  # noqa: E501
 
         :param options: The options of this V1FlexPersistentVolumeSource.  # noqa: E501
-        :type options: dict(str, str)
+        :type options: dict[str, str]
         """
 
         self._options = options

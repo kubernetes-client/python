@@ -42,7 +42,7 @@ class V1PodCertificateProjection(object):
         'key_type': 'str',
         'max_expiration_seconds': 'int',
         'signer_name': 'str',
-        'user_annotations': 'dict(str, str)'
+        'user_annotations': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -232,7 +232,7 @@ class V1PodCertificateProjection(object):
         userAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  These values are copied verbatim into the `spec.unverifiedUserAnnotations` field of the PodCertificateRequest objects that Kubelet creates.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support. Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :return: The user_annotations of this V1PodCertificateProjection.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._user_annotations
 
@@ -243,7 +243,7 @@ class V1PodCertificateProjection(object):
         userAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  These values are copied verbatim into the `spec.unverifiedUserAnnotations` field of the PodCertificateRequest objects that Kubelet creates.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support. Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :param user_annotations: The user_annotations of this V1PodCertificateProjection.  # noqa: E501
-        :type user_annotations: dict(str, str)
+        :type user_annotations: dict[str, str]
         """
 
         self._user_annotations = user_annotations

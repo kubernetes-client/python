@@ -40,7 +40,7 @@ class V1PersistentVolumeSpec(object):
         'aws_elastic_block_store': 'V1AWSElasticBlockStoreVolumeSource',
         'azure_disk': 'V1AzureDiskVolumeSource',
         'azure_file': 'V1AzureFilePersistentVolumeSource',
-        'capacity': 'dict(str, str)',
+        'capacity': 'dict[str, str]',
         'cephfs': 'V1CephFSPersistentVolumeSource',
         'cinder': 'V1CinderPersistentVolumeSource',
         'claim_ref': 'V1ObjectReference',
@@ -298,7 +298,7 @@ class V1PersistentVolumeSpec(object):
         capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity  # noqa: E501
 
         :return: The capacity of this V1PersistentVolumeSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._capacity
 
@@ -309,7 +309,7 @@ class V1PersistentVolumeSpec(object):
         capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity  # noqa: E501
 
         :param capacity: The capacity of this V1PersistentVolumeSpec.  # noqa: E501
-        :type capacity: dict(str, str)
+        :type capacity: dict[str, str]
         """
 
         self._capacity = capacity

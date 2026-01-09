@@ -38,7 +38,7 @@ class V1Endpoint(object):
     openapi_types = {
         'addresses': 'list[str]',
         'conditions': 'V1EndpointConditions',
-        'deprecated_topology': 'dict(str, str)',
+        'deprecated_topology': 'dict[str, str]',
         'hints': 'V1EndpointHints',
         'hostname': 'str',
         'node_name': 'str',
@@ -142,7 +142,7 @@ class V1Endpoint(object):
         deprecatedTopology contains topology information part of the v1beta1 API. This field is deprecated, and will be removed when the v1beta1 API is removed (no sooner than kubernetes v1.24).  While this field can hold values, it is not writable through the v1 API, and any attempts to write to it will be silently ignored. Topology information can be found in the zone and nodeName fields instead.  # noqa: E501
 
         :return: The deprecated_topology of this V1Endpoint.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._deprecated_topology
 
@@ -153,7 +153,7 @@ class V1Endpoint(object):
         deprecatedTopology contains topology information part of the v1beta1 API. This field is deprecated, and will be removed when the v1beta1 API is removed (no sooner than kubernetes v1.24).  While this field can hold values, it is not writable through the v1 API, and any attempts to write to it will be silently ignored. Topology information can be found in the zone and nodeName fields instead.  # noqa: E501
 
         :param deprecated_topology: The deprecated_topology of this V1Endpoint.  # noqa: E501
-        :type deprecated_topology: dict(str, str)
+        :type deprecated_topology: dict[str, str]
         """
 
         self._deprecated_topology = deprecated_topology

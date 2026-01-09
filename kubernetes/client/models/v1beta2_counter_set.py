@@ -36,7 +36,7 @@ class V1beta2CounterSet(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'counters': 'dict(str, V1beta2Counter)',
+        'counters': 'dict[str, V1beta2Counter]',
         'name': 'str'
     }
 
@@ -65,7 +65,7 @@ class V1beta2CounterSet(object):
         Counters defines the set of counters for this CounterSet The name of each counter must be unique in that set and must be a DNS label.  The maximum number of counters is 32.  # noqa: E501
 
         :return: The counters of this V1beta2CounterSet.  # noqa: E501
-        :rtype: dict(str, V1beta2Counter)
+        :rtype: dict[str, V1beta2Counter]
         """
         return self._counters
 
@@ -76,7 +76,7 @@ class V1beta2CounterSet(object):
         Counters defines the set of counters for this CounterSet The name of each counter must be unique in that set and must be a DNS label.  The maximum number of counters is 32.  # noqa: E501
 
         :param counters: The counters of this V1beta2CounterSet.  # noqa: E501
-        :type counters: dict(str, V1beta2Counter)
+        :type counters: dict[str, V1beta2Counter]
         """
         if self.local_vars_configuration.client_side_validation and counters is None:  # noqa: E501
             raise ValueError("Invalid value for `counters`, must not be `None`")  # noqa: E501

@@ -44,7 +44,7 @@ class V1CSIPersistentVolumeSource(object):
         'node_publish_secret_ref': 'V1SecretReference',
         'node_stage_secret_ref': 'V1SecretReference',
         'read_only': 'bool',
-        'volume_attributes': 'dict(str, str)',
+        'volume_attributes': 'dict[str, str]',
         'volume_handle': 'str'
     }
 
@@ -281,7 +281,7 @@ class V1CSIPersistentVolumeSource(object):
         volumeAttributes of the volume to publish.  # noqa: E501
 
         :return: The volume_attributes of this V1CSIPersistentVolumeSource.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._volume_attributes
 
@@ -292,7 +292,7 @@ class V1CSIPersistentVolumeSource(object):
         volumeAttributes of the volume to publish.  # noqa: E501
 
         :param volume_attributes: The volume_attributes of this V1CSIPersistentVolumeSource.  # noqa: E501
-        :type volume_attributes: dict(str, str)
+        :type volume_attributes: dict[str, str]
         """
 
         self._volume_attributes = volume_attributes

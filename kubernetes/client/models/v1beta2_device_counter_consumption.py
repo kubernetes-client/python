@@ -37,7 +37,7 @@ class V1beta2DeviceCounterConsumption(object):
     """
     openapi_types = {
         'counter_set': 'str',
-        'counters': 'dict(str, V1beta2Counter)'
+        'counters': 'dict[str, V1beta2Counter]'
     }
 
     attribute_map = {
@@ -90,7 +90,7 @@ class V1beta2DeviceCounterConsumption(object):
         Counters defines the counters that will be consumed by the device.  The maximum number of counters is 32.  # noqa: E501
 
         :return: The counters of this V1beta2DeviceCounterConsumption.  # noqa: E501
-        :rtype: dict(str, V1beta2Counter)
+        :rtype: dict[str, V1beta2Counter]
         """
         return self._counters
 
@@ -101,7 +101,7 @@ class V1beta2DeviceCounterConsumption(object):
         Counters defines the counters that will be consumed by the device.  The maximum number of counters is 32.  # noqa: E501
 
         :param counters: The counters of this V1beta2DeviceCounterConsumption.  # noqa: E501
-        :type counters: dict(str, V1beta2Counter)
+        :type counters: dict[str, V1beta2Counter]
         """
         if self.local_vars_configuration.client_side_validation and counters is None:  # noqa: E501
             raise ValueError("Invalid value for `counters`, must not be `None`")  # noqa: E501

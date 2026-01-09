@@ -36,7 +36,7 @@ class V1SubjectAccessReviewSpec(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'extra': 'dict(str, list[str])',
+        'extra': 'dict[str, list[str]]',
         'groups': 'list[str]',
         'non_resource_attributes': 'V1NonResourceAttributes',
         'resource_attributes': 'V1ResourceAttributes',
@@ -87,7 +87,7 @@ class V1SubjectAccessReviewSpec(object):
         Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here.  # noqa: E501
 
         :return: The extra of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :rtype: dict(str, list[str])
+        :rtype: dict[str, list[str]]
         """
         return self._extra
 
@@ -98,7 +98,7 @@ class V1SubjectAccessReviewSpec(object):
         Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here.  # noqa: E501
 
         :param extra: The extra of this V1SubjectAccessReviewSpec.  # noqa: E501
-        :type extra: dict(str, list[str])
+        :type extra: dict[str, list[str]]
         """
 
         self._extra = extra

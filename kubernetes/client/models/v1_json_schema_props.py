@@ -43,8 +43,8 @@ class V1JSONSchemaProps(object):
         'all_of': 'list[V1JSONSchemaProps]',
         'any_of': 'list[V1JSONSchemaProps]',
         'default': 'object',
-        'definitions': 'dict(str, V1JSONSchemaProps)',
-        'dependencies': 'dict(str, object)',
+        'definitions': 'dict[str, V1JSONSchemaProps]',
+        'dependencies': 'dict[str, object]',
         'description': 'str',
         'enum': 'list[object]',
         'example': 'object',
@@ -67,8 +67,8 @@ class V1JSONSchemaProps(object):
         'nullable': 'bool',
         'one_of': 'list[V1JSONSchemaProps]',
         'pattern': 'str',
-        'pattern_properties': 'dict(str, V1JSONSchemaProps)',
-        'properties': 'dict(str, V1JSONSchemaProps)',
+        'pattern_properties': 'dict[str, V1JSONSchemaProps]',
+        'properties': 'dict[str, V1JSONSchemaProps]',
         'required': 'list[str]',
         'title': 'str',
         'type': 'str',
@@ -429,7 +429,7 @@ class V1JSONSchemaProps(object):
 
 
         :return: The definitions of this V1JSONSchemaProps.  # noqa: E501
-        :rtype: dict(str, V1JSONSchemaProps)
+        :rtype: dict[str, V1JSONSchemaProps]
         """
         return self._definitions
 
@@ -439,7 +439,7 @@ class V1JSONSchemaProps(object):
 
 
         :param definitions: The definitions of this V1JSONSchemaProps.  # noqa: E501
-        :type definitions: dict(str, V1JSONSchemaProps)
+        :type definitions: dict[str, V1JSONSchemaProps]
         """
 
         self._definitions = definitions
@@ -450,7 +450,7 @@ class V1JSONSchemaProps(object):
 
 
         :return: The dependencies of this V1JSONSchemaProps.  # noqa: E501
-        :rtype: dict(str, object)
+        :rtype: dict[str, object]
         """
         return self._dependencies
 
@@ -460,7 +460,7 @@ class V1JSONSchemaProps(object):
 
 
         :param dependencies: The dependencies of this V1JSONSchemaProps.  # noqa: E501
-        :type dependencies: dict(str, object)
+        :type dependencies: dict[str, object]
         """
 
         self._dependencies = dependencies
@@ -939,7 +939,7 @@ class V1JSONSchemaProps(object):
 
 
         :return: The pattern_properties of this V1JSONSchemaProps.  # noqa: E501
-        :rtype: dict(str, V1JSONSchemaProps)
+        :rtype: dict[str, V1JSONSchemaProps]
         """
         return self._pattern_properties
 
@@ -949,7 +949,7 @@ class V1JSONSchemaProps(object):
 
 
         :param pattern_properties: The pattern_properties of this V1JSONSchemaProps.  # noqa: E501
-        :type pattern_properties: dict(str, V1JSONSchemaProps)
+        :type pattern_properties: dict[str, V1JSONSchemaProps]
         """
 
         self._pattern_properties = pattern_properties
@@ -960,7 +960,7 @@ class V1JSONSchemaProps(object):
 
 
         :return: The properties of this V1JSONSchemaProps.  # noqa: E501
-        :rtype: dict(str, V1JSONSchemaProps)
+        :rtype: dict[str, V1JSONSchemaProps]
         """
         return self._properties
 
@@ -970,7 +970,7 @@ class V1JSONSchemaProps(object):
 
 
         :param properties: The properties of this V1JSONSchemaProps.  # noqa: E501
-        :type properties: dict(str, V1JSONSchemaProps)
+        :type properties: dict[str, V1JSONSchemaProps]
         """
 
         self._properties = properties

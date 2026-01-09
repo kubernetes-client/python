@@ -36,7 +36,7 @@ class V1ResourceQuotaSpec(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'hard': 'dict(str, str)',
+        'hard': 'dict[str, str]',
         'scope_selector': 'V1ScopeSelector',
         'scopes': 'list[str]'
     }
@@ -72,7 +72,7 @@ class V1ResourceQuotaSpec(object):
         hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/  # noqa: E501
 
         :return: The hard of this V1ResourceQuotaSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._hard
 
@@ -83,7 +83,7 @@ class V1ResourceQuotaSpec(object):
         hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/  # noqa: E501
 
         :param hard: The hard of this V1ResourceQuotaSpec.  # noqa: E501
-        :type hard: dict(str, str)
+        :type hard: dict[str, str]
         """
 
         self._hard = hard

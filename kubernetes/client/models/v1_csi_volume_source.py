@@ -40,7 +40,7 @@ class V1CSIVolumeSource(object):
         'fs_type': 'str',
         'node_publish_secret_ref': 'V1LocalObjectReference',
         'read_only': 'bool',
-        'volume_attributes': 'dict(str, str)'
+        'volume_attributes': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -173,7 +173,7 @@ class V1CSIVolumeSource(object):
         volumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.  # noqa: E501
 
         :return: The volume_attributes of this V1CSIVolumeSource.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._volume_attributes
 
@@ -184,7 +184,7 @@ class V1CSIVolumeSource(object):
         volumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.  # noqa: E501
 
         :param volume_attributes: The volume_attributes of this V1CSIVolumeSource.  # noqa: E501
-        :type volume_attributes: dict(str, str)
+        :type volume_attributes: dict[str, str]
         """
 
         self._volume_attributes = volume_attributes

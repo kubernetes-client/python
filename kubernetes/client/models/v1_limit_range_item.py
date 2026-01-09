@@ -36,11 +36,11 @@ class V1LimitRangeItem(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'default': 'dict(str, str)',
-        'default_request': 'dict(str, str)',
-        'max': 'dict(str, str)',
-        'max_limit_request_ratio': 'dict(str, str)',
-        'min': 'dict(str, str)',
+        'default': 'dict[str, str]',
+        'default_request': 'dict[str, str]',
+        'max': 'dict[str, str]',
+        'max_limit_request_ratio': 'dict[str, str]',
+        'min': 'dict[str, str]',
         'type': 'str'
     }
 
@@ -86,7 +86,7 @@ class V1LimitRangeItem(object):
         Default resource requirement limit value by resource name if resource limit is omitted.  # noqa: E501
 
         :return: The default of this V1LimitRangeItem.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._default
 
@@ -97,7 +97,7 @@ class V1LimitRangeItem(object):
         Default resource requirement limit value by resource name if resource limit is omitted.  # noqa: E501
 
         :param default: The default of this V1LimitRangeItem.  # noqa: E501
-        :type default: dict(str, str)
+        :type default: dict[str, str]
         """
 
         self._default = default
@@ -109,7 +109,7 @@ class V1LimitRangeItem(object):
         DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.  # noqa: E501
 
         :return: The default_request of this V1LimitRangeItem.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._default_request
 
@@ -120,7 +120,7 @@ class V1LimitRangeItem(object):
         DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.  # noqa: E501
 
         :param default_request: The default_request of this V1LimitRangeItem.  # noqa: E501
-        :type default_request: dict(str, str)
+        :type default_request: dict[str, str]
         """
 
         self._default_request = default_request
@@ -132,7 +132,7 @@ class V1LimitRangeItem(object):
         Max usage constraints on this kind by resource name.  # noqa: E501
 
         :return: The max of this V1LimitRangeItem.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._max
 
@@ -143,7 +143,7 @@ class V1LimitRangeItem(object):
         Max usage constraints on this kind by resource name.  # noqa: E501
 
         :param max: The max of this V1LimitRangeItem.  # noqa: E501
-        :type max: dict(str, str)
+        :type max: dict[str, str]
         """
 
         self._max = max
@@ -155,7 +155,7 @@ class V1LimitRangeItem(object):
         MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.  # noqa: E501
 
         :return: The max_limit_request_ratio of this V1LimitRangeItem.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._max_limit_request_ratio
 
@@ -166,7 +166,7 @@ class V1LimitRangeItem(object):
         MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.  # noqa: E501
 
         :param max_limit_request_ratio: The max_limit_request_ratio of this V1LimitRangeItem.  # noqa: E501
-        :type max_limit_request_ratio: dict(str, str)
+        :type max_limit_request_ratio: dict[str, str]
         """
 
         self._max_limit_request_ratio = max_limit_request_ratio
@@ -178,7 +178,7 @@ class V1LimitRangeItem(object):
         Min usage constraints on this kind by resource name.  # noqa: E501
 
         :return: The min of this V1LimitRangeItem.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._min
 
@@ -189,7 +189,7 @@ class V1LimitRangeItem(object):
         Min usage constraints on this kind by resource name.  # noqa: E501
 
         :param min: The min of this V1LimitRangeItem.  # noqa: E501
-        :type min: dict(str, str)
+        :type min: dict[str, str]
         """
 
         self._min = min

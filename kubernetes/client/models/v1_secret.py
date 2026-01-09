@@ -37,11 +37,11 @@ class V1Secret(object):
     """
     openapi_types = {
         'api_version': 'str',
-        'data': 'dict(str, str)',
+        'data': 'dict[str, str]',
         'immutable': 'bool',
         'kind': 'str',
         'metadata': 'V1ObjectMeta',
-        'string_data': 'dict(str, str)',
+        'string_data': 'dict[str, str]',
         'type': 'str'
     }
 
@@ -115,7 +115,7 @@ class V1Secret(object):
         Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4  # noqa: E501
 
         :return: The data of this V1Secret.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._data
 
@@ -126,7 +126,7 @@ class V1Secret(object):
         Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4  # noqa: E501
 
         :param data: The data of this V1Secret.  # noqa: E501
-        :type data: dict(str, str)
+        :type data: dict[str, str]
         """
 
         self._data = data
@@ -205,7 +205,7 @@ class V1Secret(object):
         stringData allows specifying non-binary secret data in string form. It is provided as a write-only input field for convenience. All keys and values are merged into the data field on write, overwriting any existing values. The stringData field is never output when reading from the API.  # noqa: E501
 
         :return: The string_data of this V1Secret.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._string_data
 
@@ -216,7 +216,7 @@ class V1Secret(object):
         stringData allows specifying non-binary secret data in string form. It is provided as a write-only input field for convenience. All keys and values are merged into the data field on write, overwriting any existing values. The stringData field is never output when reading from the API.  # noqa: E501
 
         :param string_data: The string_data of this V1Secret.  # noqa: E501
-        :type string_data: dict(str, str)
+        :type string_data: dict[str, str]
         """
 
         self._string_data = string_data

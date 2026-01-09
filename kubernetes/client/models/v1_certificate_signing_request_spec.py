@@ -37,7 +37,7 @@ class V1CertificateSigningRequestSpec(object):
     """
     openapi_types = {
         'expiration_seconds': 'int',
-        'extra': 'dict(str, list[str])',
+        'extra': 'dict[str, list[str]]',
         'groups': 'list[str]',
         'request': 'str',
         'signer_name': 'str',
@@ -118,7 +118,7 @@ class V1CertificateSigningRequestSpec(object):
         extra contains extra attributes of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.  # noqa: E501
 
         :return: The extra of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :rtype: dict(str, list[str])
+        :rtype: dict[str, list[str]]
         """
         return self._extra
 
@@ -129,7 +129,7 @@ class V1CertificateSigningRequestSpec(object):
         extra contains extra attributes of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.  # noqa: E501
 
         :param extra: The extra of this V1CertificateSigningRequestSpec.  # noqa: E501
-        :type extra: dict(str, list[str])
+        :type extra: dict[str, list[str]]
         """
 
         self._extra = extra

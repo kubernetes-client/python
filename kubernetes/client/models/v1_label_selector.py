@@ -37,7 +37,7 @@ class V1LabelSelector(object):
     """
     openapi_types = {
         'match_expressions': 'list[V1LabelSelectorRequirement]',
-        'match_labels': 'dict(str, str)'
+        'match_labels': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -90,7 +90,7 @@ class V1LabelSelector(object):
         matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.  # noqa: E501
 
         :return: The match_labels of this V1LabelSelector.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._match_labels
 
@@ -101,7 +101,7 @@ class V1LabelSelector(object):
         matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.  # noqa: E501
 
         :param match_labels: The match_labels of this V1LabelSelector.  # noqa: E501
-        :type match_labels: dict(str, str)
+        :type match_labels: dict[str, str]
         """
 
         self._match_labels = match_labels

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **kind** | **str** | Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the kubernetes.client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds | [optional] 
 **metadata** | [**V1ObjectMeta**](V1ObjectMeta.md) |  | [optional] 
 **mount_options** | **list[str]** | mountOptions controls the mountOptions for dynamically provisioned PersistentVolumes of this storage class. e.g. [\&quot;ro\&quot;, \&quot;soft\&quot;]. Not validated - mount of the PVs will simply fail if one is invalid. | [optional] 
-**parameters** | **dict(str, str)** | parameters holds the parameters for the provisioner that should create volumes of this storage class. | [optional] 
+**parameters** | **dict[str, str]** | parameters holds the parameters for the provisioner that should create volumes of this storage class. | [optional] 
 **provisioner** | **str** | provisioner indicates the type of the provisioner. | 
 **reclaim_policy** | **str** | reclaimPolicy controls the reclaimPolicy for dynamically provisioned PersistentVolumes of this storage class. Defaults to Delete. | [optional] 
 **volume_binding_mode** | **str** | volumeBindingMode indicates how PersistentVolumeClaims should be provisioned and bound.  When unset, VolumeBindingImmediate is used. This field is only honored by servers that enable the VolumeScheduling feature. | [optional] 

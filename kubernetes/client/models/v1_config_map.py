@@ -37,8 +37,8 @@ class V1ConfigMap(object):
     """
     openapi_types = {
         'api_version': 'str',
-        'binary_data': 'dict(str, str)',
-        'data': 'dict(str, str)',
+        'binary_data': 'dict[str, str]',
+        'data': 'dict[str, str]',
         'immutable': 'bool',
         'kind': 'str',
         'metadata': 'V1ObjectMeta'
@@ -110,7 +110,7 @@ class V1ConfigMap(object):
         BinaryData contains the binary data. Each key must consist of alphanumeric characters, '-', '_' or '.'. BinaryData can contain byte sequences that are not in the UTF-8 range. The keys stored in BinaryData must not overlap with the ones in the Data field, this is enforced during validation process. Using this field will require 1.10+ apiserver and kubelet.  # noqa: E501
 
         :return: The binary_data of this V1ConfigMap.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._binary_data
 
@@ -121,7 +121,7 @@ class V1ConfigMap(object):
         BinaryData contains the binary data. Each key must consist of alphanumeric characters, '-', '_' or '.'. BinaryData can contain byte sequences that are not in the UTF-8 range. The keys stored in BinaryData must not overlap with the ones in the Data field, this is enforced during validation process. Using this field will require 1.10+ apiserver and kubelet.  # noqa: E501
 
         :param binary_data: The binary_data of this V1ConfigMap.  # noqa: E501
-        :type binary_data: dict(str, str)
+        :type binary_data: dict[str, str]
         """
 
         self._binary_data = binary_data
@@ -133,7 +133,7 @@ class V1ConfigMap(object):
         Data contains the configuration data. Each key must consist of alphanumeric characters, '-', '_' or '.'. Values with non-UTF-8 byte sequences must use the BinaryData field. The keys stored in Data must not overlap with the keys in the BinaryData field, this is enforced during validation process.  # noqa: E501
 
         :return: The data of this V1ConfigMap.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._data
 
@@ -144,7 +144,7 @@ class V1ConfigMap(object):
         Data contains the configuration data. Each key must consist of alphanumeric characters, '-', '_' or '.'. Values with non-UTF-8 byte sequences must use the BinaryData field. The keys stored in Data must not overlap with the keys in the BinaryData field, this is enforced during validation process.  # noqa: E501
 
         :param data: The data of this V1ConfigMap.  # noqa: E501
-        :type data: dict(str, str)
+        :type data: dict[str, str]
         """
 
         self._data = data
