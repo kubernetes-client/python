@@ -1707,10 +1707,13 @@ Class | Method | HTTP request | Description
  - [VersionInfo](docs/VersionInfo.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
 
-## BearerToken
+Authentication schemes defined for the API:
+<a id="BearerToken"></a>
+### BearerToken
 
 - **Type**: API key
 - **API key parameter name**: authorization

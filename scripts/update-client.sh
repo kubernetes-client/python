@@ -76,10 +76,5 @@ sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STAT
 echo ">>> Patching client..."
 git apply "${SCRIPT_ROOT}/hotfixes.diff"
 git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
-# The fix this patch is trying to make is already in the upstream swagger-codegen
-# repo but it's not in the version we're using. We can remove this patch
-# once we upgrade to a version of swagger-codegen that includes it (version>= 6.6.0).
-# See https://github.com/OpenAPITools/openapi-generator/pull/15283
-git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
 
 echo ">>> Done."
