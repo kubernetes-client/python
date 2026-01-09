@@ -188,7 +188,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             201: "V1PodDisruptionBudget",
@@ -431,7 +431,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -627,7 +627,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -753,7 +753,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -966,7 +966,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudgetList",
             401: None,
@@ -1168,7 +1168,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudgetList",
             401: None,
@@ -1365,7 +1365,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             201: "V1PodDisruptionBudget",
@@ -1563,7 +1563,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             201: "V1PodDisruptionBudget",
@@ -1718,7 +1718,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             401: None,
@@ -1872,7 +1872,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             401: None,
@@ -2058,7 +2058,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             201: "V1PodDisruptionBudget",
@@ -2245,7 +2245,7 @@ class PolicyV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PodDisruptionBudget",
             201: "V1PodDisruptionBudget",

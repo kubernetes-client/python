@@ -177,7 +177,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRole",
             201: "V1ClusterRole",
@@ -343,7 +343,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRoleBinding",
             201: "V1ClusterRoleBinding",
@@ -520,7 +520,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Role",
             201: "V1Role",
@@ -697,7 +697,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleBinding",
             201: "V1RoleBinding",
@@ -884,7 +884,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1070,7 +1070,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1301,7 +1301,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1531,7 +1531,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1772,7 +1772,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -2013,7 +2013,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -2209,7 +2209,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2406,7 +2406,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2532,7 +2532,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -2734,7 +2734,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRoleList",
             401: None,
@@ -2936,7 +2936,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRoleBindingList",
             401: None,
@@ -3149,7 +3149,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleList",
             401: None,
@@ -3362,7 +3362,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleBindingList",
             401: None,
@@ -3564,7 +3564,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleBindingList",
             401: None,
@@ -3766,7 +3766,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleList",
             401: None,
@@ -3952,7 +3952,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRole",
             201: "V1ClusterRole",
@@ -4139,7 +4139,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRoleBinding",
             201: "V1ClusterRoleBinding",
@@ -4337,7 +4337,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Role",
             201: "V1Role",
@@ -4535,7 +4535,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleBinding",
             201: "V1RoleBinding",
@@ -4679,7 +4679,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRole",
             401: None,
@@ -4822,7 +4822,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRoleBinding",
             401: None,
@@ -4976,7 +4976,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Role",
             401: None,
@@ -5130,7 +5130,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleBinding",
             401: None,
@@ -5305,7 +5305,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRole",
             201: "V1ClusterRole",
@@ -5481,7 +5481,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ClusterRoleBinding",
             201: "V1ClusterRoleBinding",
@@ -5668,7 +5668,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Role",
             201: "V1Role",
@@ -5855,7 +5855,7 @@ class RbacAuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RoleBinding",
             201: "V1RoleBinding",

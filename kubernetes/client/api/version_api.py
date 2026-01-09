@@ -138,7 +138,7 @@ class VersionApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "VersionInfo",
             401: None,

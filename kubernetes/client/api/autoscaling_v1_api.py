@@ -188,7 +188,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             201: "V1HorizontalPodAutoscaler",
@@ -431,7 +431,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -627,7 +627,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -753,7 +753,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -955,7 +955,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscalerList",
             401: None,
@@ -1168,7 +1168,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscalerList",
             401: None,
@@ -1365,7 +1365,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             201: "V1HorizontalPodAutoscaler",
@@ -1563,7 +1563,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             201: "V1HorizontalPodAutoscaler",
@@ -1718,7 +1718,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             401: None,
@@ -1872,7 +1872,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             401: None,
@@ -2058,7 +2058,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             201: "V1HorizontalPodAutoscaler",
@@ -2245,7 +2245,7 @@ class AutoscalingV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1HorizontalPodAutoscaler",
             201: "V1HorizontalPodAutoscaler",

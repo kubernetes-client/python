@@ -177,7 +177,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             201: "V1alpha3DeviceTaintRule",
@@ -409,7 +409,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -594,7 +594,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             202: "V1alpha3DeviceTaintRule",
@@ -720,7 +720,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -922,7 +922,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRuleList",
             401: None,
@@ -1108,7 +1108,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             201: "V1alpha3DeviceTaintRule",
@@ -1295,7 +1295,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             201: "V1alpha3DeviceTaintRule",
@@ -1439,7 +1439,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             401: None,
@@ -1582,7 +1582,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             401: None,
@@ -1757,7 +1757,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             201: "V1alpha3DeviceTaintRule",
@@ -1933,7 +1933,7 @@ class ResourceV1alpha3Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1alpha3DeviceTaintRule",
             201: "V1alpha3DeviceTaintRule",

@@ -177,7 +177,7 @@ class AuthenticationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1SelfSubjectReview",
             201: "V1SelfSubjectReview",
@@ -343,7 +343,7 @@ class AuthenticationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1TokenReview",
             201: "V1TokenReview",
@@ -470,7 +470,7 @@ class AuthenticationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,

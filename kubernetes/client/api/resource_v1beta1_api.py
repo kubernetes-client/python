@@ -177,7 +177,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1DeviceClass",
             201: "V1beta1DeviceClass",
@@ -354,7 +354,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             201: "V1beta1ResourceClaim",
@@ -531,7 +531,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplate",
             201: "V1beta1ResourceClaimTemplate",
@@ -697,7 +697,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceSlice",
             201: "V1beta1ResourceSlice",
@@ -929,7 +929,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1170,7 +1170,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1411,7 +1411,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1641,7 +1641,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1826,7 +1826,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1DeviceClass",
             202: "V1beta1DeviceClass",
@@ -2023,7 +2023,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             202: "V1beta1ResourceClaim",
@@ -2220,7 +2220,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplate",
             202: "V1beta1ResourceClaimTemplate",
@@ -2406,7 +2406,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceSlice",
             202: "V1beta1ResourceSlice",
@@ -2532,7 +2532,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -2734,7 +2734,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1DeviceClassList",
             401: None,
@@ -2947,7 +2947,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimList",
             401: None,
@@ -3160,7 +3160,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplateList",
             401: None,
@@ -3362,7 +3362,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimList",
             401: None,
@@ -3564,7 +3564,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplateList",
             401: None,
@@ -3766,7 +3766,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceSliceList",
             401: None,
@@ -3952,7 +3952,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1DeviceClass",
             201: "V1beta1DeviceClass",
@@ -4150,7 +4150,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             201: "V1beta1ResourceClaim",
@@ -4348,7 +4348,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             201: "V1beta1ResourceClaim",
@@ -4546,7 +4546,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplate",
             201: "V1beta1ResourceClaimTemplate",
@@ -4733,7 +4733,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceSlice",
             201: "V1beta1ResourceSlice",
@@ -4877,7 +4877,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1DeviceClass",
             401: None,
@@ -5031,7 +5031,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             401: None,
@@ -5185,7 +5185,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             401: None,
@@ -5339,7 +5339,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplate",
             401: None,
@@ -5482,7 +5482,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceSlice",
             401: None,
@@ -5657,7 +5657,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1DeviceClass",
             201: "V1beta1DeviceClass",
@@ -5844,7 +5844,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             201: "V1beta1ResourceClaim",
@@ -6031,7 +6031,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaim",
             201: "V1beta1ResourceClaim",
@@ -6218,7 +6218,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceClaimTemplate",
             201: "V1beta1ResourceClaimTemplate",
@@ -6394,7 +6394,7 @@ class ResourceV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ResourceSlice",
             201: "V1beta1ResourceSlice",

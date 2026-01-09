@@ -177,7 +177,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicy",
             201: "V1beta1MutatingAdmissionPolicy",
@@ -343,7 +343,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicyBinding",
             201: "V1beta1MutatingAdmissionPolicyBinding",
@@ -575,7 +575,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -805,7 +805,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -990,7 +990,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1176,7 +1176,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1302,7 +1302,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -1504,7 +1504,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicyList",
             401: None,
@@ -1706,7 +1706,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicyBindingList",
             401: None,
@@ -1892,7 +1892,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicy",
             201: "V1beta1MutatingAdmissionPolicy",
@@ -2079,7 +2079,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicyBinding",
             201: "V1beta1MutatingAdmissionPolicyBinding",
@@ -2223,7 +2223,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicy",
             401: None,
@@ -2366,7 +2366,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicyBinding",
             401: None,
@@ -2541,7 +2541,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicy",
             201: "V1beta1MutatingAdmissionPolicy",
@@ -2717,7 +2717,7 @@ class AdmissionregistrationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1MutatingAdmissionPolicyBinding",
             201: "V1beta1MutatingAdmissionPolicyBinding",

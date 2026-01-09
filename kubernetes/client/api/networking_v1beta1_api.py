@@ -177,7 +177,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1IPAddress",
             201: "V1beta1IPAddress",
@@ -343,7 +343,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             201: "V1beta1ServiceCIDR",
@@ -575,7 +575,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -805,7 +805,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -990,7 +990,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1176,7 +1176,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1302,7 +1302,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -1504,7 +1504,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1IPAddressList",
             401: None,
@@ -1706,7 +1706,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDRList",
             401: None,
@@ -1892,7 +1892,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1IPAddress",
             201: "V1beta1IPAddress",
@@ -2079,7 +2079,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             201: "V1beta1ServiceCIDR",
@@ -2266,7 +2266,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             201: "V1beta1ServiceCIDR",
@@ -2410,7 +2410,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1IPAddress",
             401: None,
@@ -2553,7 +2553,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             401: None,
@@ -2696,7 +2696,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             401: None,
@@ -2871,7 +2871,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1IPAddress",
             201: "V1beta1IPAddress",
@@ -3047,7 +3047,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             201: "V1beta1ServiceCIDR",
@@ -3223,7 +3223,7 @@ class NetworkingV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ServiceCIDR",
             201: "V1beta1ServiceCIDR",

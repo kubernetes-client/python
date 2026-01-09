@@ -177,7 +177,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RuntimeClass",
             201: "V1RuntimeClass",
@@ -409,7 +409,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -594,7 +594,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -720,7 +720,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -922,7 +922,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RuntimeClassList",
             401: None,
@@ -1108,7 +1108,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RuntimeClass",
             201: "V1RuntimeClass",
@@ -1252,7 +1252,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RuntimeClass",
             401: None,
@@ -1427,7 +1427,7 @@ class NodeV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1RuntimeClass",
             201: "V1RuntimeClass",

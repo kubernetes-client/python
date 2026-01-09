@@ -210,7 +210,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             201: "object",
             401: None,
@@ -418,7 +418,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             201: "object",
             401: None,
@@ -622,7 +622,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -829,7 +829,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -1054,7 +1054,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -1269,7 +1269,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -1416,7 +1416,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -1585,7 +1585,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -1754,7 +1754,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -1923,7 +1923,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -2103,7 +2103,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -2283,7 +2283,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -2463,7 +2463,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -2691,7 +2691,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -2919,7 +2919,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -3158,7 +3158,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -3370,7 +3370,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -3582,7 +3582,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -3794,7 +3794,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -4017,7 +4017,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -4240,7 +4240,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -4463,7 +4463,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -4664,7 +4664,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -4865,7 +4865,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             201: "object",
@@ -5067,7 +5067,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             201: "object",
@@ -5280,7 +5280,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             401: None,
@@ -5492,7 +5492,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             201: "object",
@@ -5705,7 +5705,7 @@ class CustomObjectsApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "object",
             201: "object",

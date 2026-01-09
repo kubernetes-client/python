@@ -177,7 +177,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ClusterTrustBundle",
             201: "V1beta1ClusterTrustBundle",
@@ -354,7 +354,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             201: "V1beta1PodCertificateRequest",
@@ -541,7 +541,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -772,7 +772,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1013,7 +1013,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1209,7 +1209,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1335,7 +1335,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -1537,7 +1537,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ClusterTrustBundleList",
             401: None,
@@ -1750,7 +1750,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequestList",
             401: None,
@@ -1952,7 +1952,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequestList",
             401: None,
@@ -2138,7 +2138,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ClusterTrustBundle",
             201: "V1beta1ClusterTrustBundle",
@@ -2336,7 +2336,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             201: "V1beta1PodCertificateRequest",
@@ -2534,7 +2534,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             201: "V1beta1PodCertificateRequest",
@@ -2678,7 +2678,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ClusterTrustBundle",
             401: None,
@@ -2832,7 +2832,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             401: None,
@@ -2986,7 +2986,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             401: None,
@@ -3161,7 +3161,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1ClusterTrustBundle",
             201: "V1beta1ClusterTrustBundle",
@@ -3348,7 +3348,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             201: "V1beta1PodCertificateRequest",
@@ -3535,7 +3535,7 @@ class CertificatesV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1PodCertificateRequest",
             201: "V1beta1PodCertificateRequest",

@@ -188,7 +188,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ControllerRevision",
             201: "V1ControllerRevision",
@@ -365,7 +365,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             201: "V1DaemonSet",
@@ -542,7 +542,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             201: "V1Deployment",
@@ -719,7 +719,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             201: "V1ReplicaSet",
@@ -896,7 +896,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             201: "V1StatefulSet",
@@ -1139,7 +1139,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1380,7 +1380,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1621,7 +1621,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1862,7 +1862,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -2103,7 +2103,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -2299,7 +2299,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2496,7 +2496,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2693,7 +2693,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2890,7 +2890,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -3087,7 +3087,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -3213,7 +3213,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -3415,7 +3415,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ControllerRevisionList",
             401: None,
@@ -3617,7 +3617,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSetList",
             401: None,
@@ -3819,7 +3819,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DeploymentList",
             401: None,
@@ -4032,7 +4032,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ControllerRevisionList",
             401: None,
@@ -4245,7 +4245,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSetList",
             401: None,
@@ -4458,7 +4458,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DeploymentList",
             401: None,
@@ -4671,7 +4671,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSetList",
             401: None,
@@ -4884,7 +4884,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSetList",
             401: None,
@@ -5086,7 +5086,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSetList",
             401: None,
@@ -5288,7 +5288,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSetList",
             401: None,
@@ -5485,7 +5485,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ControllerRevision",
             201: "V1ControllerRevision",
@@ -5683,7 +5683,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             201: "V1DaemonSet",
@@ -5881,7 +5881,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             201: "V1DaemonSet",
@@ -6079,7 +6079,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             201: "V1Deployment",
@@ -6277,7 +6277,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             201: "V1Scale",
@@ -6475,7 +6475,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             201: "V1Deployment",
@@ -6673,7 +6673,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             201: "V1ReplicaSet",
@@ -6871,7 +6871,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             201: "V1Scale",
@@ -7069,7 +7069,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             201: "V1ReplicaSet",
@@ -7267,7 +7267,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             201: "V1StatefulSet",
@@ -7465,7 +7465,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             201: "V1Scale",
@@ -7663,7 +7663,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             201: "V1StatefulSet",
@@ -7818,7 +7818,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ControllerRevision",
             401: None,
@@ -7972,7 +7972,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             401: None,
@@ -8126,7 +8126,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             401: None,
@@ -8280,7 +8280,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             401: None,
@@ -8434,7 +8434,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             401: None,
@@ -8588,7 +8588,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             401: None,
@@ -8742,7 +8742,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             401: None,
@@ -8896,7 +8896,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             401: None,
@@ -9050,7 +9050,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             401: None,
@@ -9204,7 +9204,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             401: None,
@@ -9358,7 +9358,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             401: None,
@@ -9512,7 +9512,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             401: None,
@@ -9698,7 +9698,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ControllerRevision",
             201: "V1ControllerRevision",
@@ -9885,7 +9885,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             201: "V1DaemonSet",
@@ -10072,7 +10072,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1DaemonSet",
             201: "V1DaemonSet",
@@ -10259,7 +10259,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             201: "V1Deployment",
@@ -10446,7 +10446,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             201: "V1Scale",
@@ -10633,7 +10633,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Deployment",
             201: "V1Deployment",
@@ -10820,7 +10820,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             201: "V1ReplicaSet",
@@ -11007,7 +11007,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             201: "V1Scale",
@@ -11194,7 +11194,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ReplicaSet",
             201: "V1ReplicaSet",
@@ -11381,7 +11381,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             201: "V1StatefulSet",
@@ -11568,7 +11568,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Scale",
             201: "V1Scale",
@@ -11755,7 +11755,7 @@ class AppsV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1StatefulSet",
             201: "V1StatefulSet",

@@ -138,7 +138,7 @@ class RbacAuthorizationApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIGroup",
             401: None,

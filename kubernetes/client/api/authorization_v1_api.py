@@ -188,7 +188,7 @@ class AuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1LocalSubjectAccessReview",
             201: "V1LocalSubjectAccessReview",
@@ -354,7 +354,7 @@ class AuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1SelfSubjectAccessReview",
             201: "V1SelfSubjectAccessReview",
@@ -520,7 +520,7 @@ class AuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1SelfSubjectRulesReview",
             201: "V1SelfSubjectRulesReview",
@@ -686,7 +686,7 @@ class AuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1SubjectAccessReview",
             201: "V1SubjectAccessReview",
@@ -813,7 +813,7 @@ class AuthorizationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,

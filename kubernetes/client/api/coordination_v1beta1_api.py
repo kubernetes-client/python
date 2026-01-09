@@ -188,7 +188,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1LeaseCandidate",
             201: "V1beta1LeaseCandidate",
@@ -431,7 +431,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -627,7 +627,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -753,7 +753,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -955,7 +955,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1LeaseCandidateList",
             401: None,
@@ -1168,7 +1168,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1LeaseCandidateList",
             401: None,
@@ -1365,7 +1365,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1LeaseCandidate",
             201: "V1beta1LeaseCandidate",
@@ -1520,7 +1520,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1LeaseCandidate",
             401: None,
@@ -1706,7 +1706,7 @@ class CoordinationV1beta1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1beta1LeaseCandidate",
             201: "V1beta1LeaseCandidate",

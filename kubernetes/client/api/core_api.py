@@ -138,7 +138,7 @@ class CoreApi(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIVersions",
             401: None,

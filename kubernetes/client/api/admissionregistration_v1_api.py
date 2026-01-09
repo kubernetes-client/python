@@ -177,7 +177,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1MutatingWebhookConfiguration",
             201: "V1MutatingWebhookConfiguration",
@@ -343,7 +343,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             201: "V1ValidatingAdmissionPolicy",
@@ -509,7 +509,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicyBinding",
             201: "V1ValidatingAdmissionPolicyBinding",
@@ -675,7 +675,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingWebhookConfiguration",
             201: "V1ValidatingWebhookConfiguration",
@@ -907,7 +907,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1137,7 +1137,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1367,7 +1367,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1597,7 +1597,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1782,7 +1782,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1968,7 +1968,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2154,7 +2154,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2340,7 +2340,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -2466,7 +2466,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -2668,7 +2668,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1MutatingWebhookConfigurationList",
             401: None,
@@ -2870,7 +2870,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicyList",
             401: None,
@@ -3072,7 +3072,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicyBindingList",
             401: None,
@@ -3274,7 +3274,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingWebhookConfigurationList",
             401: None,
@@ -3460,7 +3460,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1MutatingWebhookConfiguration",
             201: "V1MutatingWebhookConfiguration",
@@ -3647,7 +3647,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             201: "V1ValidatingAdmissionPolicy",
@@ -3834,7 +3834,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicyBinding",
             201: "V1ValidatingAdmissionPolicyBinding",
@@ -4021,7 +4021,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             201: "V1ValidatingAdmissionPolicy",
@@ -4208,7 +4208,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingWebhookConfiguration",
             201: "V1ValidatingWebhookConfiguration",
@@ -4352,7 +4352,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1MutatingWebhookConfiguration",
             401: None,
@@ -4495,7 +4495,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             401: None,
@@ -4638,7 +4638,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicyBinding",
             401: None,
@@ -4781,7 +4781,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             401: None,
@@ -4924,7 +4924,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingWebhookConfiguration",
             401: None,
@@ -5099,7 +5099,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1MutatingWebhookConfiguration",
             201: "V1MutatingWebhookConfiguration",
@@ -5275,7 +5275,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             201: "V1ValidatingAdmissionPolicy",
@@ -5451,7 +5451,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicyBinding",
             201: "V1ValidatingAdmissionPolicyBinding",
@@ -5627,7 +5627,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingAdmissionPolicy",
             201: "V1ValidatingAdmissionPolicy",
@@ -5803,7 +5803,7 @@ class AdmissionregistrationV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1ValidatingWebhookConfiguration",
             201: "V1ValidatingWebhookConfiguration",

@@ -188,7 +188,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             201: "V1CronJob",
@@ -365,7 +365,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             201: "V1Job",
@@ -608,7 +608,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -849,7 +849,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -1045,7 +1045,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1242,7 +1242,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1368,7 +1368,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -1570,7 +1570,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJobList",
             401: None,
@@ -1772,7 +1772,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1JobList",
             401: None,
@@ -1985,7 +1985,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJobList",
             401: None,
@@ -2198,7 +2198,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1JobList",
             401: None,
@@ -2395,7 +2395,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             201: "V1CronJob",
@@ -2593,7 +2593,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             201: "V1CronJob",
@@ -2791,7 +2791,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             201: "V1Job",
@@ -2989,7 +2989,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             201: "V1Job",
@@ -3144,7 +3144,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             401: None,
@@ -3298,7 +3298,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             401: None,
@@ -3452,7 +3452,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             401: None,
@@ -3606,7 +3606,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             401: None,
@@ -3792,7 +3792,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             201: "V1CronJob",
@@ -3979,7 +3979,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1CronJob",
             201: "V1CronJob",
@@ -4166,7 +4166,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             201: "V1Job",
@@ -4353,7 +4353,7 @@ class BatchV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Job",
             201: "V1Job",

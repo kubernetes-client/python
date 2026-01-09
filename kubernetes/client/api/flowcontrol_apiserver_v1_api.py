@@ -177,7 +177,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             201: "V1FlowSchema",
@@ -343,7 +343,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             201: "V1PriorityLevelConfiguration",
@@ -575,7 +575,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -805,7 +805,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             401: None,
@@ -990,7 +990,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1176,7 +1176,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1Status",
             202: "V1Status",
@@ -1302,7 +1302,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1APIResourceList",
             401: None,
@@ -1504,7 +1504,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchemaList",
             401: None,
@@ -1706,7 +1706,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfigurationList",
             401: None,
@@ -1892,7 +1892,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             201: "V1FlowSchema",
@@ -2079,7 +2079,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             201: "V1FlowSchema",
@@ -2266,7 +2266,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             201: "V1PriorityLevelConfiguration",
@@ -2453,7 +2453,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             201: "V1PriorityLevelConfiguration",
@@ -2597,7 +2597,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             401: None,
@@ -2740,7 +2740,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             401: None,
@@ -2883,7 +2883,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             401: None,
@@ -3026,7 +3026,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             401: None,
@@ -3201,7 +3201,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             201: "V1FlowSchema",
@@ -3377,7 +3377,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1FlowSchema",
             201: "V1FlowSchema",
@@ -3553,7 +3553,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             201: "V1PriorityLevelConfiguration",
@@ -3729,7 +3729,7 @@ class FlowcontrolApiserverV1Api(object):
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {
             200: "V1PriorityLevelConfiguration",
             201: "V1PriorityLevelConfiguration",

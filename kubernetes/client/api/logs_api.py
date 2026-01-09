@@ -143,7 +143,7 @@ class LogsApi(object):
         body_params = None
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {}
 
         return self.api_client.call_api(
@@ -259,7 +259,7 @@ class LogsApi(object):
         body_params = None
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
-        
+
         response_types_map = {}
 
         return self.api_client.call_api(
