@@ -15,3 +15,15 @@ installed following the directions
 
 If you find a problem please file an
 [issue](https://github.com/kubernetes-client/python/issues).
+
+
+---
+
+## Running Examples Locally
+
+### Prerequisites
+
+- Python 3.8 or newer
+- Kubernetes Python client installed:
+  ```bash
+  pip install kubernetes
