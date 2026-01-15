@@ -25,6 +25,32 @@ class TestApiClient(unittest.TestCase):
         atexit._run_exitfuncs()
         self.assertIsNone(client._pool)
 
+    def test_deserialize_dict_syntax_compatibility(self):
+        """Test ApiClient.__deserialize supports both dict(str, str) and dict[str, str] syntax"""
+        client = kubernetes.client.ApiClient()
+        
+        # Test data
+        test_data = {
+            'key1': 'value1',
+            'key2': 'value2'
+        }
+        
+        # Test legacy syntax: dict(str, str)
+        result_legacy = client._ApiClient__deserialize(test_data, 'dict(str, str)')
+        self.assertEqual(result_legacy, test_data)
+        
+        # Test modern syntax: dict[str, str]
+        result_modern = client._ApiClient__deserialize(test_data, 'dict[str, str]')
+        self.assertEqual(result_modern, test_data)
+        
+        # Test nested dict: dict[str, dict[str, str]]
+        nested_data = {
+            'outer1': {'inner1': 'value1', 'inner2': 'value2'},
+            'outer2': {'inner3': 'value3'}
+        }
+        result_nested = client._ApiClient__deserialize(nested_data, 'dict[str, dict[str, str]]')
+        self.assertEqual(result_nested, nested_data)
+
     def test_rest_proxycare(self):
 
         pool = { 'proxy': urllib3.ProxyManager, 'direct': urllib3.PoolManager }
