@@ -1,0 +1,188 @@
+diff --git a/kubernetes/client/api/custom_objects_api.py b/kubernetes/client/api/custom_objects_api.py
+index 8b7bce096..23de49810 100644
+--- a/kubernetes/client/api/custom_objects_api.py
++++ b/kubernetes/client/api/custom_objects_api.py
+@@ -2760,7 +2760,7 @@ class CustomObjectsApi(object):
+ 
+         # HTTP header `Content-Type`
+         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
++            ['application/merge-patch+json'])  # noqa: E501
+ 
+         # Authentication setting
+         auth_settings = ['BearerToken']  # noqa: E501
+@@ -2934,7 +2934,7 @@ class CustomObjectsApi(object):
+ 
+         # HTTP header `Content-Type`
+         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
++            ['application/merge-patch+json'])  # noqa: E501
+ 
+         # Authentication setting
+         auth_settings = ['BearerToken']  # noqa: E501
+@@ -3108,7 +3108,7 @@ class CustomObjectsApi(object):
+ 
+         # HTTP header `Content-Type`
+         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
++            ['application/merge-patch+json'])  # noqa: E501
+ 
+         # Authentication setting
+         auth_settings = ['BearerToken']  # noqa: E501
+@@ -3291,7 +3291,7 @@ class CustomObjectsApi(object):
+ 
+         # HTTP header `Content-Type`
+         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+-            ['application/json-patch+json', 'application/merge-patch+json'])  # noqa: E501
++            ['application/merge-patch+json'])  # noqa: E501
+ 
+         # Authentication setting
+         auth_settings = ['BearerToken']  # noqa: E501
+@@ -3474,7 +3474,7 @@ class CustomObjectsApi(object):
+ 
+         # HTTP header `Content-Type`
+         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+-            ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
++            ['application/merge-patch+json'])  # noqa: E501
+ 
+         # Authentication setting
+         auth_settings = ['BearerToken']  # noqa: E501
+@@ -3657,7 +3657,7 @@ class CustomObjectsApi(object):
+ 
+         # HTTP header `Content-Type`
+         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+-            ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'])  # noqa: E501
++            ['application/merge-patch+json'])  # noqa: E501
+ 
+         # Authentication setting
+         auth_settings = ['BearerToken']  # noqa: E501
+diff --git a/kubernetes/client/apis/__init__.py b/kubernetes/client/apis/__init__.py
+new file mode 100644
+index 000000000..ca4b321de
+--- /dev/null
++++ b/kubernetes/client/apis/__init__.py
+@@ -0,0 +1,13 @@
++from __future__ import absolute_import
++import warnings
++
++# flake8: noqa
++
++# alias kubernetes.client.api package and print deprecation warning
++from kubernetes.client.api import *
++
++warnings.filterwarnings('default', module='kubernetes.client.apis')
++warnings.warn(
++    "The package kubernetes.client.apis is renamed and deprecated, use kubernetes.client.api instead (please note that the trailing s was removed).",
++    DeprecationWarning
++)
+diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
+index ff0d43b60..02d60486b 100644
+--- a/kubernetes/client/configuration.py
++++ b/kubernetes/client/configuration.py
+@@ -20,6 +20,7 @@ import urllib3
+ 
+ import six
+ from six.moves import http_client as httplib
++import os
+ 
+ 
+ class Configuration(object):
+@@ -158,8 +159,20 @@ class Configuration(object):
+         """
+ 
+         self.proxy = None
++# Load proxy from environment variables (if set)
++        if os.getenv("HTTPS_PROXY"): self.proxy = os.getenv("HTTPS_PROXY")
++        if os.getenv("https_proxy"): self.proxy = os.getenv("https_proxy")
++        if os.getenv("HTTP_PROXY"): self.proxy = os.getenv("HTTP_PROXY")
++        if os.getenv("http_proxy"): self.proxy = os.getenv("http_proxy")
++        self.no_proxy = None
++        # Load no_proxy from environment variables (if set)
++        if os.getenv("NO_PROXY"): self.no_proxy = os.getenv("NO_PROXY")
++        if os.getenv("no_proxy"): self.no_proxy = os.getenv("no_proxy")
+         """Proxy URL
+         """
++        self.no_proxy = None
++        """bypass proxy for host in the no_proxy list.
++        """
+         self.proxy_headers = None
+         """Proxy headers
+         """
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+index 201dc43ce..43301efc3 100644
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -25,6 +25,7 @@ from six.moves.urllib.parse import urlencode
+ import urllib3
+ 
+ from kubernetes.client.exceptions import ApiException, ApiValueError
++from requests.utils import should_bypass_proxies
+ 
+ 
+ logger = logging.getLogger(__name__)
+@@ -86,7 +87,7 @@ class RESTClientObject(object):
+                 maxsize = 4
+ 
+         # https pool manager
+-        if configuration.proxy:
++        if configuration.proxy and not should_bypass_proxies(configuration.host, no_proxy=configuration.no_proxy or ''):
+             self.pool_manager = urllib3.ProxyManager(
+                 num_pools=pools_size,
+                 maxsize=maxsize,
+diff --git a/kubernetes/test/test_api_client.py b/kubernetes/test/test_api_client.py
+new file mode 100644
+index 000000000..486b4ac5b
+--- /dev/null
++++ b/kubernetes/test/test_api_client.py
+@@ -0,0 +1,51 @@
++# coding: utf-8
++
++
++import atexit
++import weakref
++import unittest
++
++import kubernetes
++from kubernetes.client.configuration import Configuration
++import urllib3
++
++class TestApiClient(unittest.TestCase):
++
++    def test_context_manager_closes_threadpool(self):
++        with kubernetes.client.ApiClient() as client:
++            self.assertIsNotNone(client.pool)
++            pool_ref = weakref.ref(client._pool)
++            self.assertIsNotNone(pool_ref())
++        self.assertIsNone(pool_ref())
++
++    def test_atexit_closes_threadpool(self):
++        client = kubernetes.client.ApiClient()
++        self.assertIsNotNone(client.pool)
++        self.assertIsNotNone(client._pool)
++        atexit._run_exitfuncs()
++        self.assertIsNone(client._pool)
++
++    def test_rest_proxycare(self):
++
++        pool = { 'proxy': urllib3.ProxyManager, 'direct': urllib3.PoolManager }
++
++        for dst, proxy, no_proxy, expected_pool in [
++             ( 'http://kube.local/',           None,                       None,                           pool['direct']),
++             ( 'http://kube.local/',          'http://proxy.local:8080/',  None,                           pool['proxy']),
++             ( 'http://127.0.0.1:8080/',      'http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['direct']),
++             ( 'http://kube.local/',          'http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['direct']),
++             ( 'http://kube.others.com:1234/','http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['proxy']),
++             ( 'http://kube.others.com:1234/','http://proxy.local:8080/',  '*',                            pool['direct']),
++        ]:
++            # setup input
++            config = Configuration()
++            setattr(config, 'host', dst)
++            if proxy is not None:
++                setattr(config, 'proxy', proxy)
++            if no_proxy is not None:
++                setattr(config, 'no_proxy', no_proxy)
++            # setup done
++
++            # test
++            client = kubernetes.client.ApiClient(configuration=config)
++            self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )
