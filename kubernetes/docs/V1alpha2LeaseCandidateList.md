@@ -1,6 +1,7 @@
 # V1alpha2LeaseCandidateList
 
 LeaseCandidateList is a list of Lease objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # CoreV1ResourceClaim
 
 ResourceClaim references one entry in PodSpec.ResourceClaims.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

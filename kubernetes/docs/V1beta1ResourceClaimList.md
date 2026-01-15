@@ -1,6 +1,7 @@
 # V1beta1ResourceClaimList
 
 ResourceClaimList is a collection of claims.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1DaemonSetSpec(object):
     def __init__(self, min_ready_seconds=None, revision_history_limit=None, selector=None, template=None, update_strategy=None, local_vars_configuration=None):  # noqa: E501
         """V1DaemonSetSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._min_ready_seconds = None
@@ -88,7 +91,7 @@ class V1DaemonSetSpec(object):
         The minimum number of seconds for which a newly created DaemonSet pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready).  # noqa: E501
 
         :param min_ready_seconds: The min_ready_seconds of this V1DaemonSetSpec.  # noqa: E501
-        :type: int
+        :type min_ready_seconds: int
         """
 
         self._min_ready_seconds = min_ready_seconds
@@ -111,7 +114,7 @@ class V1DaemonSetSpec(object):
         The number of old history to retain to allow rollback. This is a pointer to distinguish between explicit zero and not specified. Defaults to 10.  # noqa: E501
 
         :param revision_history_limit: The revision_history_limit of this V1DaemonSetSpec.  # noqa: E501
-        :type: int
+        :type revision_history_limit: int
         """
 
         self._revision_history_limit = revision_history_limit
@@ -132,7 +135,7 @@ class V1DaemonSetSpec(object):
 
 
         :param selector: The selector of this V1DaemonSetSpec.  # noqa: E501
-        :type: V1LabelSelector
+        :type selector: V1LabelSelector
         """
         if self.local_vars_configuration.client_side_validation and selector is None:  # noqa: E501
             raise ValueError("Invalid value for `selector`, must not be `None`")  # noqa: E501
@@ -155,7 +158,7 @@ class V1DaemonSetSpec(object):
 
 
         :param template: The template of this V1DaemonSetSpec.  # noqa: E501
-        :type: V1PodTemplateSpec
+        :type template: V1PodTemplateSpec
         """
         if self.local_vars_configuration.client_side_validation and template is None:  # noqa: E501
             raise ValueError("Invalid value for `template`, must not be `None`")  # noqa: E501
@@ -178,32 +181,40 @@ class V1DaemonSetSpec(object):
 
 
         :param update_strategy: The update_strategy of this V1DaemonSetSpec.  # noqa: E501
-        :type: V1DaemonSetUpdateStrategy
+        :type update_strategy: V1DaemonSetUpdateStrategy
         """
 
         self._update_strategy = update_strategy
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V2HPAScalingRules(object):
     def __init__(self, policies=None, select_policy=None, stabilization_window_seconds=None, tolerance=None, local_vars_configuration=None):  # noqa: E501
         """V2HPAScalingRules - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._policies = None
@@ -85,7 +88,7 @@ class V2HPAScalingRules(object):
         policies is a list of potential scaling polices which can be used during scaling. If not set, use the default values: - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window. - For scale down: allow all pods to be removed in a 15s window.  # noqa: E501
 
         :param policies: The policies of this V2HPAScalingRules.  # noqa: E501
-        :type: list[V2HPAScalingPolicy]
+        :type policies: list[V2HPAScalingPolicy]
         """
 
         self._policies = policies
@@ -108,7 +111,7 @@ class V2HPAScalingRules(object):
         selectPolicy is used to specify which policy should be used. If not set, the default value Max is used.  # noqa: E501
 
         :param select_policy: The select_policy of this V2HPAScalingRules.  # noqa: E501
-        :type: str
+        :type select_policy: str
         """
 
         self._select_policy = select_policy
@@ -131,7 +134,7 @@ class V2HPAScalingRules(object):
         stabilizationWindowSeconds is the number of seconds for which past recommendations should be considered while scaling up or scaling down. StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour). If not set, use the default values: - For scale up: 0 (i.e. no stabilization is done). - For scale down: 300 (i.e. the stabilization window is 300 seconds long).  # noqa: E501
 
         :param stabilization_window_seconds: The stabilization_window_seconds of this V2HPAScalingRules.  # noqa: E501
-        :type: int
+        :type stabilization_window_seconds: int
         """
 
         self._stabilization_window_seconds = stabilization_window_seconds
@@ -154,32 +157,40 @@ class V2HPAScalingRules(object):
         tolerance is the tolerance on the ratio between the current and desired metric value under which no updates are made to the desired number of replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not set, the default cluster-wide tolerance is applied (by default 10%).  For example, if autoscaling is configured with a memory consumption target of 100Mi, and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be triggered when the actual consumption falls below 95Mi or exceeds 101Mi.  This is an beta field and requires the HPAConfigurableTolerance feature gate to be enabled.  # noqa: E501
 
         :param tolerance: The tolerance of this V2HPAScalingRules.  # noqa: E501
-        :type: str
+        :type tolerance: str
         """
 
         self._tolerance = tolerance
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

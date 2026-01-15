@@ -1,6 +1,7 @@
 # V1CronJobSpec
 
 CronJobSpec describes how the job execution will look like and when it will actually run.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

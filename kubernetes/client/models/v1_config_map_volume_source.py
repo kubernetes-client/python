@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1ConfigMapVolumeSource(object):
     def __init__(self, default_mode=None, items=None, name=None, optional=None, local_vars_configuration=None):  # noqa: E501
         """V1ConfigMapVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._default_mode = None
@@ -85,7 +88,7 @@ class V1ConfigMapVolumeSource(object):
         defaultMode is optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.  # noqa: E501
 
         :param default_mode: The default_mode of this V1ConfigMapVolumeSource.  # noqa: E501
-        :type: int
+        :type default_mode: int
         """
 
         self._default_mode = default_mode
@@ -108,7 +111,7 @@ class V1ConfigMapVolumeSource(object):
         items if unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.  # noqa: E501
 
         :param items: The items of this V1ConfigMapVolumeSource.  # noqa: E501
-        :type: list[V1KeyToPath]
+        :type items: list[V1KeyToPath]
         """
 
         self._items = items
@@ -131,7 +134,7 @@ class V1ConfigMapVolumeSource(object):
         Name of the referent. This field is effectively required, but due to backwards compatibility is allowed to be empty. Instances of this type with an empty value here are almost certainly wrong. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names  # noqa: E501
 
         :param name: The name of this V1ConfigMapVolumeSource.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -154,32 +157,40 @@ class V1ConfigMapVolumeSource(object):
         optional specify whether the ConfigMap or its keys must be defined  # noqa: E501
 
         :param optional: The optional of this V1ConfigMapVolumeSource.  # noqa: E501
-        :type: bool
+        :type optional: bool
         """
 
         self._optional = optional
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1beta1ResourceClaimStatus(object):
     def __init__(self, allocation=None, devices=None, reserved_for=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1ResourceClaimStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocation = None
@@ -78,7 +81,7 @@ class V1beta1ResourceClaimStatus(object):
 
 
         :param allocation: The allocation of this V1beta1ResourceClaimStatus.  # noqa: E501
-        :type: V1beta1AllocationResult
+        :type allocation: V1beta1AllocationResult
         """
 
         self._allocation = allocation
@@ -101,7 +104,7 @@ class V1beta1ResourceClaimStatus(object):
         Devices contains the status of each device allocated for this claim, as reported by the driver. This can include driver-specific information. Entries are owned by their respective drivers.  # noqa: E501
 
         :param devices: The devices of this V1beta1ResourceClaimStatus.  # noqa: E501
-        :type: list[V1beta1AllocatedDeviceStatus]
+        :type devices: list[V1beta1AllocatedDeviceStatus]
         """
 
         self._devices = devices
@@ -124,32 +127,40 @@ class V1beta1ResourceClaimStatus(object):
         ReservedFor indicates which entities are currently allowed to use the claim. A Pod which references a ResourceClaim which is not reserved for that Pod will not be started. A claim that is in use or might be in use because it has been reserved must not get deallocated.  In a cluster with multiple scheduler instances, two pods might get scheduled concurrently by different schedulers. When they reference the same ResourceClaim which already has reached its maximum number of consumers, only one pod can be scheduled.  Both schedulers try to add their pod to the claim.status.reservedFor field, but only the update that reaches the API server first gets stored. The other one fails with an error and the scheduler which issued it knows that it must put the pod back into the queue, waiting for the ResourceClaim to become usable again.  There can be at most 256 such reservations. This may get increased in the future, but not reduced.  # noqa: E501
 
         :param reserved_for: The reserved_for of this V1beta1ResourceClaimStatus.  # noqa: E501
-        :type: list[V1beta1ResourceClaimConsumerReference]
+        :type reserved_for: list[V1beta1ResourceClaimConsumerReference]
         """
 
         self._reserved_for = reserved_for
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

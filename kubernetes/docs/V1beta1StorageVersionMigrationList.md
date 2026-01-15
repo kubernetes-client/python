@@ -1,6 +1,7 @@
 # V1beta1StorageVersionMigrationList
 
 StorageVersionMigrationList is a collection of storage version migrations.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

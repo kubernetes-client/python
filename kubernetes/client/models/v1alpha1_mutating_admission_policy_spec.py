@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
     def __init__(self, failure_policy=None, match_conditions=None, match_constraints=None, mutations=None, param_kind=None, reinvocation_policy=None, variables=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha1MutatingAdmissionPolicySpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._failure_policy = None
@@ -100,7 +103,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
         failurePolicy defines how to handle failures for the admission policy. Failures can occur from CEL expression parse errors, type check errors, runtime errors and invalid or mis-configured policy definitions or bindings.  A policy is invalid if paramKind refers to a non-existent Kind. A binding is invalid if paramRef.name refers to a non-existent resource.  failurePolicy does not define how validations that evaluate to false are handled.  Allowed values are Ignore or Fail. Defaults to Fail.  # noqa: E501
 
         :param failure_policy: The failure_policy of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: str
+        :type failure_policy: str
         """
 
         self._failure_policy = failure_policy
@@ -123,7 +126,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
         matchConditions is a list of conditions that must be met for a request to be validated. Match conditions filter requests that have already been matched by the matchConstraints. An empty list of matchConditions matches all requests. There are a maximum of 64 match conditions allowed.  If a parameter object is provided, it can be accessed via the `params` handle in the same manner as validation expressions.  The exact matching logic is (in order):   1. If ANY matchCondition evaluates to FALSE, the policy is skipped.   2. If ALL matchConditions evaluate to TRUE, the policy is evaluated.   3. If any matchCondition evaluates to an error (but none are FALSE):      - If failurePolicy=Fail, reject the request      - If failurePolicy=Ignore, the policy is skipped  # noqa: E501
 
         :param match_conditions: The match_conditions of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1alpha1MatchCondition]
+        :type match_conditions: list[V1alpha1MatchCondition]
         """
 
         self._match_conditions = match_conditions
@@ -144,7 +147,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
 
 
         :param match_constraints: The match_constraints of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: V1alpha1MatchResources
+        :type match_constraints: V1alpha1MatchResources
         """
 
         self._match_constraints = match_constraints
@@ -167,7 +170,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
         mutations contain operations to perform on matching objects. mutations may not be empty; a minimum of one mutation is required. mutations are evaluated in order, and are reinvoked according to the reinvocationPolicy. The mutations of a policy are invoked for each binding of this policy and reinvocation of mutations occurs on a per binding basis.  # noqa: E501
 
         :param mutations: The mutations of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1alpha1Mutation]
+        :type mutations: list[V1alpha1Mutation]
         """
 
         self._mutations = mutations
@@ -188,7 +191,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
 
 
         :param param_kind: The param_kind of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: V1alpha1ParamKind
+        :type param_kind: V1alpha1ParamKind
         """
 
         self._param_kind = param_kind
@@ -211,7 +214,7 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
         reinvocationPolicy indicates whether mutations may be called multiple times per MutatingAdmissionPolicyBinding as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".  Never: These mutations will not be called more than once per binding in a single admission evaluation.  IfNeeded: These mutations may be invoked more than once per binding for a single admission request and there is no guarantee of order with respect to other admission plugins, admission webhooks, bindings of this policy and admission policies.  Mutations are only reinvoked when mutations change the object after this mutation is invoked. Required.  # noqa: E501
 
         :param reinvocation_policy: The reinvocation_policy of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: str
+        :type reinvocation_policy: str
         """
 
         self._reinvocation_policy = reinvocation_policy
@@ -234,32 +237,40 @@ class V1alpha1MutatingAdmissionPolicySpec(object):
         variables contain definitions of variables that can be used in composition of other expressions. Each variable is defined as a named CEL expression. The variables defined here will be available under `variables` in other expressions of the policy except matchConditions because matchConditions are evaluated before the rest of the policy.  The expression of a variable can refer to other variables defined earlier in the list but not those after. Thus, variables must be sorted by the order of first appearance and acyclic.  # noqa: E501
 
         :param variables: The variables of this V1alpha1MutatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1alpha1Variable]
+        :type variables: list[V1alpha1Variable]
         """
 
         self._variables = variables
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

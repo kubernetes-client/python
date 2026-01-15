@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1ContainerExtendedResourceRequest(object):
     def __init__(self, container_name=None, request_name=None, resource_name=None, local_vars_configuration=None):  # noqa: E501
         """V1ContainerExtendedResourceRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._container_name = None
@@ -77,7 +80,7 @@ class V1ContainerExtendedResourceRequest(object):
         The name of the container requesting resources.  # noqa: E501
 
         :param container_name: The container_name of this V1ContainerExtendedResourceRequest.  # noqa: E501
-        :type: str
+        :type container_name: str
         """
         if self.local_vars_configuration.client_side_validation and container_name is None:  # noqa: E501
             raise ValueError("Invalid value for `container_name`, must not be `None`")  # noqa: E501
@@ -102,7 +105,7 @@ class V1ContainerExtendedResourceRequest(object):
         The name of the request in the special ResourceClaim which corresponds to the extended resource.  # noqa: E501
 
         :param request_name: The request_name of this V1ContainerExtendedResourceRequest.  # noqa: E501
-        :type: str
+        :type request_name: str
         """
         if self.local_vars_configuration.client_side_validation and request_name is None:  # noqa: E501
             raise ValueError("Invalid value for `request_name`, must not be `None`")  # noqa: E501
@@ -127,34 +130,42 @@ class V1ContainerExtendedResourceRequest(object):
         The name of the extended resource in that container which gets backed by DRA.  # noqa: E501
 
         :param resource_name: The resource_name of this V1ContainerExtendedResourceRequest.  # noqa: E501
-        :type: str
+        :type resource_name: str
         """
         if self.local_vars_configuration.client_side_validation and resource_name is None:  # noqa: E501
             raise ValueError("Invalid value for `resource_name`, must not be `None`")  # noqa: E501
 
         self._resource_name = resource_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

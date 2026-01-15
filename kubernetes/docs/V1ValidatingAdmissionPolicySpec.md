@@ -1,6 +1,7 @@
 # V1ValidatingAdmissionPolicySpec
 
 ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1ContainerRestartRule
 
 ContainerRestartRule describes how a container exit is handled.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

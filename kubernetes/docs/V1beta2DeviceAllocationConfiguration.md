@@ -1,6 +1,7 @@
 # V1beta2DeviceAllocationConfiguration
 
 DeviceAllocationConfiguration gets embedded in an AllocationResult.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1AzureFilePersistentVolumeSource(object):
     def __init__(self, read_only=None, secret_name=None, secret_namespace=None, share_name=None, local_vars_configuration=None):  # noqa: E501
         """V1AzureFilePersistentVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._read_only = None
@@ -83,7 +86,7 @@ class V1AzureFilePersistentVolumeSource(object):
         readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.  # noqa: E501
 
         :param read_only: The read_only of this V1AzureFilePersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -106,7 +109,7 @@ class V1AzureFilePersistentVolumeSource(object):
         secretName is the name of secret that contains Azure Storage Account Name and Key  # noqa: E501
 
         :param secret_name: The secret_name of this V1AzureFilePersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type secret_name: str
         """
         if self.local_vars_configuration.client_side_validation and secret_name is None:  # noqa: E501
             raise ValueError("Invalid value for `secret_name`, must not be `None`")  # noqa: E501
@@ -131,7 +134,7 @@ class V1AzureFilePersistentVolumeSource(object):
         secretNamespace is the namespace of the secret that contains Azure Storage Account Name and Key default is the same as the Pod  # noqa: E501
 
         :param secret_namespace: The secret_namespace of this V1AzureFilePersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type secret_namespace: str
         """
 
         self._secret_namespace = secret_namespace
@@ -154,34 +157,42 @@ class V1AzureFilePersistentVolumeSource(object):
         shareName is the azure Share Name  # noqa: E501
 
         :param share_name: The share_name of this V1AzureFilePersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type share_name: str
         """
         if self.local_vars_configuration.client_side_validation and share_name is None:  # noqa: E501
             raise ValueError("Invalid value for `share_name`, must not be `None`")  # noqa: E501
 
         self._share_name = share_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

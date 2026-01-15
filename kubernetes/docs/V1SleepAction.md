@@ -1,6 +1,7 @@
 # V1SleepAction
 
 SleepAction describes a \"sleep\" action.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

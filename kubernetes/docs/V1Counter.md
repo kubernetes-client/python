@@ -1,6 +1,7 @@
 # V1Counter
 
 Counter describes a quantity associated with a device.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

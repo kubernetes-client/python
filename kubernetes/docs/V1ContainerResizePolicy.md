@@ -1,6 +1,7 @@
 # V1ContainerResizePolicy
 
 ContainerResizePolicy represents resource resize policy for the container.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

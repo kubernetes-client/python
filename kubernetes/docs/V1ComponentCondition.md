@@ -1,6 +1,7 @@
 # V1ComponentCondition
 
 Information about the condition of a component.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1PodIP
 
 PodIP represents a single IP address allocated to the pod.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

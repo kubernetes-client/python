@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -33,20 +36,20 @@ class V1PodStatus(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'allocated_resources': 'dict(str, str)',
+        'allocated_resources': 'dict[str, str]',
         'conditions': 'list[V1PodCondition]',
         'container_statuses': 'list[V1ContainerStatus]',
         'ephemeral_container_statuses': 'list[V1ContainerStatus]',
         'extended_resource_claim_status': 'V1PodExtendedResourceClaimStatus',
         'host_ip': 'str',
-        'host_i_ps': 'list[V1HostIP]',
+        'host_ips': 'list[V1HostIP]',
         'init_container_statuses': 'list[V1ContainerStatus]',
         'message': 'str',
         'nominated_node_name': 'str',
         'observed_generation': 'int',
         'phase': 'str',
         'pod_ip': 'str',
-        'pod_i_ps': 'list[V1PodIP]',
+        'pod_ips': 'list[V1PodIP]',
         'qos_class': 'str',
         'reason': 'str',
         'resize': 'str',
@@ -62,14 +65,14 @@ class V1PodStatus(object):
         'ephemeral_container_statuses': 'ephemeralContainerStatuses',
         'extended_resource_claim_status': 'extendedResourceClaimStatus',
         'host_ip': 'hostIP',
-        'host_i_ps': 'hostIPs',
+        'host_ips': 'hostIPs',
         'init_container_statuses': 'initContainerStatuses',
         'message': 'message',
         'nominated_node_name': 'nominatedNodeName',
         'observed_generation': 'observedGeneration',
         'phase': 'phase',
         'pod_ip': 'podIP',
-        'pod_i_ps': 'podIPs',
+        'pod_ips': 'podIPs',
         'qos_class': 'qosClass',
         'reason': 'reason',
         'resize': 'resize',
@@ -78,10 +81,10 @@ class V1PodStatus(object):
         'start_time': 'startTime'
     }
 
-    def __init__(self, allocated_resources=None, conditions=None, container_statuses=None, ephemeral_container_statuses=None, extended_resource_claim_status=None, host_ip=None, host_i_ps=None, init_container_statuses=None, message=None, nominated_node_name=None, observed_generation=None, phase=None, pod_ip=None, pod_i_ps=None, qos_class=None, reason=None, resize=None, resource_claim_statuses=None, resources=None, start_time=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, allocated_resources=None, conditions=None, container_statuses=None, ephemeral_container_statuses=None, extended_resource_claim_status=None, host_ip=None, host_ips=None, init_container_statuses=None, message=None, nominated_node_name=None, observed_generation=None, phase=None, pod_ip=None, pod_ips=None, qos_class=None, reason=None, resize=None, resource_claim_statuses=None, resources=None, start_time=None, local_vars_configuration=None):  # noqa: E501
         """V1PodStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocated_resources = None
@@ -90,14 +93,14 @@ class V1PodStatus(object):
         self._ephemeral_container_statuses = None
         self._extended_resource_claim_status = None
         self._host_ip = None
-        self._host_i_ps = None
+        self._host_ips = None
         self._init_container_statuses = None
         self._message = None
         self._nominated_node_name = None
         self._observed_generation = None
         self._phase = None
         self._pod_ip = None
-        self._pod_i_ps = None
+        self._pod_ips = None
         self._qos_class = None
         self._reason = None
         self._resize = None
@@ -118,8 +121,8 @@ class V1PodStatus(object):
             self.extended_resource_claim_status = extended_resource_claim_status
         if host_ip is not None:
             self.host_ip = host_ip
-        if host_i_ps is not None:
-            self.host_i_ps = host_i_ps
+        if host_ips is not None:
+            self.host_ips = host_ips
         if init_container_statuses is not None:
             self.init_container_statuses = init_container_statuses
         if message is not None:
@@ -132,8 +135,8 @@ class V1PodStatus(object):
             self.phase = phase
         if pod_ip is not None:
             self.pod_ip = pod_ip
-        if pod_i_ps is not None:
-            self.pod_i_ps = pod_i_ps
+        if pod_ips is not None:
+            self.pod_ips = pod_ips
         if qos_class is not None:
             self.qos_class = qos_class
         if reason is not None:
@@ -154,7 +157,7 @@ class V1PodStatus(object):
         AllocatedResources is the total requests allocated for this pod by the node. If pod-level requests are not set, this will be the total requests aggregated across containers in the pod.  # noqa: E501
 
         :return: The allocated_resources of this V1PodStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._allocated_resources
 
@@ -165,7 +168,7 @@ class V1PodStatus(object):
         AllocatedResources is the total requests allocated for this pod by the node. If pod-level requests are not set, this will be the total requests aggregated across containers in the pod.  # noqa: E501
 
         :param allocated_resources: The allocated_resources of this V1PodStatus.  # noqa: E501
-        :type: dict(str, str)
+        :type allocated_resources: dict[str, str]
         """
 
         self._allocated_resources = allocated_resources
@@ -188,7 +191,7 @@ class V1PodStatus(object):
         Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions  # noqa: E501
 
         :param conditions: The conditions of this V1PodStatus.  # noqa: E501
-        :type: list[V1PodCondition]
+        :type conditions: list[V1PodCondition]
         """
 
         self._conditions = conditions
@@ -211,7 +214,7 @@ class V1PodStatus(object):
         Statuses of containers in this pod. Each container in the pod should have at most one status in this list, and all statuses should be for containers in the pod. However this is not enforced. If a status for a non-existent container is present in the list, or the list has duplicate names, the behavior of various Kubernetes components is not defined and those statuses might be ignored. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status  # noqa: E501
 
         :param container_statuses: The container_statuses of this V1PodStatus.  # noqa: E501
-        :type: list[V1ContainerStatus]
+        :type container_statuses: list[V1ContainerStatus]
         """
 
         self._container_statuses = container_statuses
@@ -234,7 +237,7 @@ class V1PodStatus(object):
         Statuses for any ephemeral containers that have run in this pod. Each ephemeral container in the pod should have at most one status in this list, and all statuses should be for containers in the pod. However this is not enforced. If a status for a non-existent container is present in the list, or the list has duplicate names, the behavior of various Kubernetes components is not defined and those statuses might be ignored. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status  # noqa: E501
 
         :param ephemeral_container_statuses: The ephemeral_container_statuses of this V1PodStatus.  # noqa: E501
-        :type: list[V1ContainerStatus]
+        :type ephemeral_container_statuses: list[V1ContainerStatus]
         """
 
         self._ephemeral_container_statuses = ephemeral_container_statuses
@@ -255,7 +258,7 @@ class V1PodStatus(object):
 
 
         :param extended_resource_claim_status: The extended_resource_claim_status of this V1PodStatus.  # noqa: E501
-        :type: V1PodExtendedResourceClaimStatus
+        :type extended_resource_claim_status: V1PodExtendedResourceClaimStatus
         """
 
         self._extended_resource_claim_status = extended_resource_claim_status
@@ -278,33 +281,33 @@ class V1PodStatus(object):
         hostIP holds the IP address of the host to which the pod is assigned. Empty if the pod has not started yet. A pod can be assigned to a node that has a problem in kubelet which in turns mean that HostIP will not be updated even if there is a node is assigned to pod  # noqa: E501
 
         :param host_ip: The host_ip of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type host_ip: str
         """
 
         self._host_ip = host_ip
 
     @property
-    def host_i_ps(self):
-        """Gets the host_i_ps of this V1PodStatus.  # noqa: E501
+    def host_ips(self):
+        """Gets the host_ips of this V1PodStatus.  # noqa: E501
 
         hostIPs holds the IP addresses allocated to the host. If this field is specified, the first entry must match the hostIP field. This list is empty if the pod has not started yet. A pod can be assigned to a node that has a problem in kubelet which in turns means that HostIPs will not be updated even if there is a node is assigned to this pod.  # noqa: E501
 
-        :return: The host_i_ps of this V1PodStatus.  # noqa: E501
+        :return: The host_ips of this V1PodStatus.  # noqa: E501
         :rtype: list[V1HostIP]
         """
-        return self._host_i_ps
+        return self._host_ips
 
-    @host_i_ps.setter
-    def host_i_ps(self, host_i_ps):
-        """Sets the host_i_ps of this V1PodStatus.
+    @host_ips.setter
+    def host_ips(self, host_ips):
+        """Sets the host_ips of this V1PodStatus.
 
         hostIPs holds the IP addresses allocated to the host. If this field is specified, the first entry must match the hostIP field. This list is empty if the pod has not started yet. A pod can be assigned to a node that has a problem in kubelet which in turns means that HostIPs will not be updated even if there is a node is assigned to this pod.  # noqa: E501
 
-        :param host_i_ps: The host_i_ps of this V1PodStatus.  # noqa: E501
-        :type: list[V1HostIP]
+        :param host_ips: The host_ips of this V1PodStatus.  # noqa: E501
+        :type host_ips: list[V1HostIP]
         """
 
-        self._host_i_ps = host_i_ps
+        self._host_ips = host_ips
 
     @property
     def init_container_statuses(self):
@@ -324,7 +327,7 @@ class V1PodStatus(object):
         Statuses of init containers in this pod. The most recent successful non-restartable init container will have ready = true, the most recently started container will have startTime set. Each init container in the pod should have at most one status in this list, and all statuses should be for containers in the pod. However this is not enforced. If a status for a non-existent container is present in the list, or the list has duplicate names, the behavior of various Kubernetes components is not defined and those statuses might be ignored. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-and-container-status  # noqa: E501
 
         :param init_container_statuses: The init_container_statuses of this V1PodStatus.  # noqa: E501
-        :type: list[V1ContainerStatus]
+        :type init_container_statuses: list[V1ContainerStatus]
         """
 
         self._init_container_statuses = init_container_statuses
@@ -347,7 +350,7 @@ class V1PodStatus(object):
         A human readable message indicating details about why the pod is in this condition.  # noqa: E501
 
         :param message: The message of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type message: str
         """
 
         self._message = message
@@ -370,7 +373,7 @@ class V1PodStatus(object):
         nominatedNodeName is set only when this pod preempts other pods on the node, but it cannot be scheduled right away as preemption victims receive their graceful termination periods. This field does not guarantee that the pod will be scheduled on this node. Scheduler may decide to place the pod elsewhere if other nodes become available sooner. Scheduler may also decide to give the resources on this node to a higher priority pod that is created after preemption. As a result, this field may be different than PodSpec.nodeName when the pod is scheduled.  # noqa: E501
 
         :param nominated_node_name: The nominated_node_name of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type nominated_node_name: str
         """
 
         self._nominated_node_name = nominated_node_name
@@ -393,7 +396,7 @@ class V1PodStatus(object):
         If set, this represents the .metadata.generation that the pod status was set based upon. The PodObservedGenerationTracking feature gate must be enabled to use this field.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1PodStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -416,7 +419,7 @@ class V1PodStatus(object):
         The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle. The conditions array, the reason and message fields, and the individual container status arrays contain more detail about the pod's status. There are five possible phase values:  Pending: The pod has been accepted by the Kubernetes system, but one or more of the container images has not been created. This includes time before being scheduled as well as time spent downloading images over the network, which could take a while. Running: The pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting. Succeeded: All containers in the pod have terminated in success, and will not be restarted. Failed: All containers in the pod have terminated, and at least one container has terminated in failure. The container either exited with non-zero status or was terminated by the system. Unknown: For some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod.  More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase  # noqa: E501
 
         :param phase: The phase of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type phase: str
         """
 
         self._phase = phase
@@ -439,33 +442,33 @@ class V1PodStatus(object):
         podIP address allocated to the pod. Routable at least within the cluster. Empty if not yet allocated.  # noqa: E501
 
         :param pod_ip: The pod_ip of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type pod_ip: str
         """
 
         self._pod_ip = pod_ip
 
     @property
-    def pod_i_ps(self):
-        """Gets the pod_i_ps of this V1PodStatus.  # noqa: E501
+    def pod_ips(self):
+        """Gets the pod_ips of this V1PodStatus.  # noqa: E501
 
         podIPs holds the IP addresses allocated to the pod. If this field is specified, the 0th entry must match the podIP field. Pods may be allocated at most 1 value for each of IPv4 and IPv6. This list is empty if no IPs have been allocated yet.  # noqa: E501
 
-        :return: The pod_i_ps of this V1PodStatus.  # noqa: E501
+        :return: The pod_ips of this V1PodStatus.  # noqa: E501
         :rtype: list[V1PodIP]
         """
-        return self._pod_i_ps
+        return self._pod_ips
 
-    @pod_i_ps.setter
-    def pod_i_ps(self, pod_i_ps):
-        """Sets the pod_i_ps of this V1PodStatus.
+    @pod_ips.setter
+    def pod_ips(self, pod_ips):
+        """Sets the pod_ips of this V1PodStatus.
 
         podIPs holds the IP addresses allocated to the pod. If this field is specified, the 0th entry must match the podIP field. Pods may be allocated at most 1 value for each of IPv4 and IPv6. This list is empty if no IPs have been allocated yet.  # noqa: E501
 
-        :param pod_i_ps: The pod_i_ps of this V1PodStatus.  # noqa: E501
-        :type: list[V1PodIP]
+        :param pod_ips: The pod_ips of this V1PodStatus.  # noqa: E501
+        :type pod_ips: list[V1PodIP]
         """
 
-        self._pod_i_ps = pod_i_ps
+        self._pod_ips = pod_ips
 
     @property
     def qos_class(self):
@@ -485,7 +488,7 @@ class V1PodStatus(object):
         The Quality of Service (QOS) classification assigned to the pod based on resource requirements See PodQOSClass type for available QOS classes More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes  # noqa: E501
 
         :param qos_class: The qos_class of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type qos_class: str
         """
 
         self._qos_class = qos_class
@@ -508,7 +511,7 @@ class V1PodStatus(object):
         A brief CamelCase message indicating details about why the pod is in this state. e.g. 'Evicted'  # noqa: E501
 
         :param reason: The reason of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type reason: str
         """
 
         self._reason = reason
@@ -531,7 +534,7 @@ class V1PodStatus(object):
         Status of resources resize desired for pod's containers. It is empty if no resources resize is pending. Any changes to container resources will automatically set this to \"Proposed\" Deprecated: Resize status is moved to two pod conditions PodResizePending and PodResizeInProgress. PodResizePending will track states where the spec has been resized, but the Kubelet has not yet allocated the resources. PodResizeInProgress will track in-progress resizes, and should be present whenever allocated resources != acknowledged resources.  # noqa: E501
 
         :param resize: The resize of this V1PodStatus.  # noqa: E501
-        :type: str
+        :type resize: str
         """
 
         self._resize = resize
@@ -554,7 +557,7 @@ class V1PodStatus(object):
         Status of resource claims.  # noqa: E501
 
         :param resource_claim_statuses: The resource_claim_statuses of this V1PodStatus.  # noqa: E501
-        :type: list[V1PodResourceClaimStatus]
+        :type resource_claim_statuses: list[V1PodResourceClaimStatus]
         """
 
         self._resource_claim_statuses = resource_claim_statuses
@@ -575,7 +578,7 @@ class V1PodStatus(object):
 
 
         :param resources: The resources of this V1PodStatus.  # noqa: E501
-        :type: V1ResourceRequirements
+        :type resources: V1ResourceRequirements
         """
 
         self._resources = resources
@@ -598,32 +601,40 @@ class V1PodStatus(object):
         RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.  # noqa: E501
 
         :param start_time: The start_time of this V1PodStatus.  # noqa: E501
-        :type: datetime
+        :type start_time: datetime
         """
 
         self._start_time = start_time
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

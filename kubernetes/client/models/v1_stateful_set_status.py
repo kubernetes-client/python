@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -61,7 +64,7 @@ class V1StatefulSetStatus(object):
     def __init__(self, available_replicas=None, collision_count=None, conditions=None, current_replicas=None, current_revision=None, observed_generation=None, ready_replicas=None, replicas=None, update_revision=None, updated_replicas=None, local_vars_configuration=None):  # noqa: E501
         """V1StatefulSetStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._available_replicas = None
@@ -114,7 +117,7 @@ class V1StatefulSetStatus(object):
         Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset.  # noqa: E501
 
         :param available_replicas: The available_replicas of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type available_replicas: int
         """
 
         self._available_replicas = available_replicas
@@ -137,7 +140,7 @@ class V1StatefulSetStatus(object):
         collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.  # noqa: E501
 
         :param collision_count: The collision_count of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type collision_count: int
         """
 
         self._collision_count = collision_count
@@ -160,7 +163,7 @@ class V1StatefulSetStatus(object):
         Represents the latest available observations of a statefulset's current state.  # noqa: E501
 
         :param conditions: The conditions of this V1StatefulSetStatus.  # noqa: E501
-        :type: list[V1StatefulSetCondition]
+        :type conditions: list[V1StatefulSetCondition]
         """
 
         self._conditions = conditions
@@ -183,7 +186,7 @@ class V1StatefulSetStatus(object):
         currentReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by currentRevision.  # noqa: E501
 
         :param current_replicas: The current_replicas of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type current_replicas: int
         """
 
         self._current_replicas = current_replicas
@@ -206,7 +209,7 @@ class V1StatefulSetStatus(object):
         currentRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [0,currentReplicas).  # noqa: E501
 
         :param current_revision: The current_revision of this V1StatefulSetStatus.  # noqa: E501
-        :type: str
+        :type current_revision: str
         """
 
         self._current_revision = current_revision
@@ -229,7 +232,7 @@ class V1StatefulSetStatus(object):
         observedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the StatefulSet's generation, which is updated on mutation by the API Server.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -252,7 +255,7 @@ class V1StatefulSetStatus(object):
         readyReplicas is the number of pods created for this StatefulSet with a Ready Condition.  # noqa: E501
 
         :param ready_replicas: The ready_replicas of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type ready_replicas: int
         """
 
         self._ready_replicas = ready_replicas
@@ -275,7 +278,7 @@ class V1StatefulSetStatus(object):
         replicas is the number of Pods created by the StatefulSet controller.  # noqa: E501
 
         :param replicas: The replicas of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type replicas: int
         """
         if self.local_vars_configuration.client_side_validation and replicas is None:  # noqa: E501
             raise ValueError("Invalid value for `replicas`, must not be `None`")  # noqa: E501
@@ -300,7 +303,7 @@ class V1StatefulSetStatus(object):
         updateRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [replicas-updatedReplicas,replicas)  # noqa: E501
 
         :param update_revision: The update_revision of this V1StatefulSetStatus.  # noqa: E501
-        :type: str
+        :type update_revision: str
         """
 
         self._update_revision = update_revision
@@ -323,32 +326,40 @@ class V1StatefulSetStatus(object):
         updatedReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by updateRevision.  # noqa: E501
 
         :param updated_replicas: The updated_replicas of this V1StatefulSetStatus.  # noqa: E501
-        :type: int
+        :type updated_replicas: int
         """
 
         self._updated_replicas = updated_replicas
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

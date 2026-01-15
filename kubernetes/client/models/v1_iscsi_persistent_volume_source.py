@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -63,7 +66,7 @@ class V1ISCSIPersistentVolumeSource(object):
     def __init__(self, chap_auth_discovery=None, chap_auth_session=None, fs_type=None, initiator_name=None, iqn=None, iscsi_interface=None, lun=None, portals=None, read_only=None, secret_ref=None, target_portal=None, local_vars_configuration=None):  # noqa: E501
         """V1ISCSIPersistentVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._chap_auth_discovery = None
@@ -117,7 +120,7 @@ class V1ISCSIPersistentVolumeSource(object):
         chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication  # noqa: E501
 
         :param chap_auth_discovery: The chap_auth_discovery of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type chap_auth_discovery: bool
         """
 
         self._chap_auth_discovery = chap_auth_discovery
@@ -140,7 +143,7 @@ class V1ISCSIPersistentVolumeSource(object):
         chapAuthSession defines whether support iSCSI Session CHAP authentication  # noqa: E501
 
         :param chap_auth_session: The chap_auth_session of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type chap_auth_session: bool
         """
 
         self._chap_auth_session = chap_auth_session
@@ -163,7 +166,7 @@ class V1ISCSIPersistentVolumeSource(object):
         fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: \"ext4\", \"xfs\", \"ntfs\". Implicitly inferred to be \"ext4\" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi  # noqa: E501
 
         :param fs_type: The fs_type of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -186,7 +189,7 @@ class V1ISCSIPersistentVolumeSource(object):
         initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume name> will be created for the connection.  # noqa: E501
 
         :param initiator_name: The initiator_name of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type initiator_name: str
         """
 
         self._initiator_name = initiator_name
@@ -209,7 +212,7 @@ class V1ISCSIPersistentVolumeSource(object):
         iqn is Target iSCSI Qualified Name.  # noqa: E501
 
         :param iqn: The iqn of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type iqn: str
         """
         if self.local_vars_configuration.client_side_validation and iqn is None:  # noqa: E501
             raise ValueError("Invalid value for `iqn`, must not be `None`")  # noqa: E501
@@ -234,7 +237,7 @@ class V1ISCSIPersistentVolumeSource(object):
         iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).  # noqa: E501
 
         :param iscsi_interface: The iscsi_interface of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type iscsi_interface: str
         """
 
         self._iscsi_interface = iscsi_interface
@@ -257,7 +260,7 @@ class V1ISCSIPersistentVolumeSource(object):
         lun is iSCSI Target Lun number.  # noqa: E501
 
         :param lun: The lun of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: int
+        :type lun: int
         """
         if self.local_vars_configuration.client_side_validation and lun is None:  # noqa: E501
             raise ValueError("Invalid value for `lun`, must not be `None`")  # noqa: E501
@@ -282,7 +285,7 @@ class V1ISCSIPersistentVolumeSource(object):
         portals is the iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).  # noqa: E501
 
         :param portals: The portals of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: list[str]
+        :type portals: list[str]
         """
 
         self._portals = portals
@@ -305,7 +308,7 @@ class V1ISCSIPersistentVolumeSource(object):
         readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false.  # noqa: E501
 
         :param read_only: The read_only of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -326,7 +329,7 @@ class V1ISCSIPersistentVolumeSource(object):
 
 
         :param secret_ref: The secret_ref of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: V1SecretReference
+        :type secret_ref: V1SecretReference
         """
 
         self._secret_ref = secret_ref
@@ -349,34 +352,42 @@ class V1ISCSIPersistentVolumeSource(object):
         targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).  # noqa: E501
 
         :param target_portal: The target_portal of this V1ISCSIPersistentVolumeSource.  # noqa: E501
-        :type: str
+        :type target_portal: str
         """
         if self.local_vars_configuration.client_side_validation and target_portal is None:  # noqa: E501
             raise ValueError("Invalid value for `target_portal`, must not be `None`")  # noqa: E501
 
         self._target_portal = target_portal
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

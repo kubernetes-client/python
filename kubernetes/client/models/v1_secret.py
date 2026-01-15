@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -34,11 +37,11 @@ class V1Secret(object):
     """
     openapi_types = {
         'api_version': 'str',
-        'data': 'dict(str, str)',
+        'data': 'dict[str, str]',
         'immutable': 'bool',
         'kind': 'str',
         'metadata': 'V1ObjectMeta',
-        'string_data': 'dict(str, str)',
+        'string_data': 'dict[str, str]',
         'type': 'str'
     }
 
@@ -55,7 +58,7 @@ class V1Secret(object):
     def __init__(self, api_version=None, data=None, immutable=None, kind=None, metadata=None, string_data=None, type=None, local_vars_configuration=None):  # noqa: E501
         """V1Secret - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -100,7 +103,7 @@ class V1Secret(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1Secret.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -112,7 +115,7 @@ class V1Secret(object):
         Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4  # noqa: E501
 
         :return: The data of this V1Secret.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._data
 
@@ -123,7 +126,7 @@ class V1Secret(object):
         Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4  # noqa: E501
 
         :param data: The data of this V1Secret.  # noqa: E501
-        :type: dict(str, str)
+        :type data: dict[str, str]
         """
 
         self._data = data
@@ -146,7 +149,7 @@ class V1Secret(object):
         Immutable, if set to true, ensures that data stored in the Secret cannot be updated (only object metadata can be modified). If not set to true, the field can be modified at any time. Defaulted to nil.  # noqa: E501
 
         :param immutable: The immutable of this V1Secret.  # noqa: E501
-        :type: bool
+        :type immutable: bool
         """
 
         self._immutable = immutable
@@ -169,7 +172,7 @@ class V1Secret(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1Secret.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -190,7 +193,7 @@ class V1Secret(object):
 
 
         :param metadata: The metadata of this V1Secret.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
@@ -202,7 +205,7 @@ class V1Secret(object):
         stringData allows specifying non-binary secret data in string form. It is provided as a write-only input field for convenience. All keys and values are merged into the data field on write, overwriting any existing values. The stringData field is never output when reading from the API.  # noqa: E501
 
         :return: The string_data of this V1Secret.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._string_data
 
@@ -213,7 +216,7 @@ class V1Secret(object):
         stringData allows specifying non-binary secret data in string form. It is provided as a write-only input field for convenience. All keys and values are merged into the data field on write, overwriting any existing values. The stringData field is never output when reading from the API.  # noqa: E501
 
         :param string_data: The string_data of this V1Secret.  # noqa: E501
-        :type: dict(str, str)
+        :type string_data: dict[str, str]
         """
 
         self._string_data = string_data
@@ -236,32 +239,40 @@ class V1Secret(object):
         Used to facilitate programmatic handling of secret data. More info: https://kubernetes.io/docs/concepts/configuration/secret/#secret-types  # noqa: E501
 
         :param type: The type of this V1Secret.  # noqa: E501
-        :type: str
+        :type type: str
         """
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

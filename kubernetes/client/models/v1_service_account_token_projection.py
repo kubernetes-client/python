@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1ServiceAccountTokenProjection(object):
     def __init__(self, audience=None, expiration_seconds=None, path=None, local_vars_configuration=None):  # noqa: E501
         """V1ServiceAccountTokenProjection - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._audience = None
@@ -79,7 +82,7 @@ class V1ServiceAccountTokenProjection(object):
         audience is the intended audience of the token. A recipient of a token must identify itself with an identifier specified in the audience of the token, and otherwise should reject the token. The audience defaults to the identifier of the apiserver.  # noqa: E501
 
         :param audience: The audience of this V1ServiceAccountTokenProjection.  # noqa: E501
-        :type: str
+        :type audience: str
         """
 
         self._audience = audience
@@ -102,7 +105,7 @@ class V1ServiceAccountTokenProjection(object):
         expirationSeconds is the requested duration of validity of the service account token. As the token approaches expiration, the kubelet volume plugin will proactively rotate the service account token. The kubelet will start trying to rotate the token if the token is older than 80 percent of its time to live or if the token is older than 24 hours.Defaults to 1 hour and must be at least 10 minutes.  # noqa: E501
 
         :param expiration_seconds: The expiration_seconds of this V1ServiceAccountTokenProjection.  # noqa: E501
-        :type: int
+        :type expiration_seconds: int
         """
 
         self._expiration_seconds = expiration_seconds
@@ -125,34 +128,42 @@ class V1ServiceAccountTokenProjection(object):
         path is the path relative to the mount point of the file to project the token into.  # noqa: E501
 
         :param path: The path of this V1ServiceAccountTokenProjection.  # noqa: E501
-        :type: str
+        :type path: str
         """
         if self.local_vars_configuration.client_side_validation and path is None:  # noqa: E501
             raise ValueError("Invalid value for `path`, must not be `None`")  # noqa: E501
 
         self._path = path
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

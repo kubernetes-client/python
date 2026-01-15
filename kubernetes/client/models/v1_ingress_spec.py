@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1IngressSpec(object):
     def __init__(self, default_backend=None, ingress_class_name=None, rules=None, tls=None, local_vars_configuration=None):  # noqa: E501
         """V1IngressSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._default_backend = None
@@ -83,7 +86,7 @@ class V1IngressSpec(object):
 
 
         :param default_backend: The default_backend of this V1IngressSpec.  # noqa: E501
-        :type: V1IngressBackend
+        :type default_backend: V1IngressBackend
         """
 
         self._default_backend = default_backend
@@ -106,7 +109,7 @@ class V1IngressSpec(object):
         ingressClassName is the name of an IngressClass cluster resource. Ingress controller implementations use this field to know whether they should be serving this Ingress resource, by a transitive connection (controller -> IngressClass -> Ingress resource). Although the `kubernetes.io/ingress.class` annotation (simple constant name) was never formally defined, it was widely supported by Ingress controllers to create a direct binding between Ingress controller and Ingress resources. Newly created Ingress resources should prefer using the field. However, even though the annotation is officially deprecated, for backwards compatibility reasons, ingress controllers should still honor that annotation if present.  # noqa: E501
 
         :param ingress_class_name: The ingress_class_name of this V1IngressSpec.  # noqa: E501
-        :type: str
+        :type ingress_class_name: str
         """
 
         self._ingress_class_name = ingress_class_name
@@ -129,7 +132,7 @@ class V1IngressSpec(object):
         rules is a list of host rules used to configure the Ingress. If unspecified, or no rule matches, all traffic is sent to the default backend.  # noqa: E501
 
         :param rules: The rules of this V1IngressSpec.  # noqa: E501
-        :type: list[V1IngressRule]
+        :type rules: list[V1IngressRule]
         """
 
         self._rules = rules
@@ -152,32 +155,40 @@ class V1IngressSpec(object):
         tls represents the TLS configuration. Currently the Ingress only supports a single TLS port, 443. If multiple members of this list specify different hosts, they will be multiplexed on the same port according to the hostname specified through the SNI TLS extension, if the ingress controller fulfilling the ingress supports SNI.  # noqa: E501
 
         :param tls: The tls of this V1IngressSpec.  # noqa: E501
-        :type: list[V1IngressTLS]
+        :type tls: list[V1IngressTLS]
         """
 
         self._tls = tls
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

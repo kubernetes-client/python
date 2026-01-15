@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1TokenRequestSpec(object):
     def __init__(self, audiences=None, bound_object_ref=None, expiration_seconds=None, local_vars_configuration=None):  # noqa: E501
         """V1TokenRequestSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._audiences = None
@@ -79,7 +82,7 @@ class V1TokenRequestSpec(object):
         Audiences are the intendend audiences of the token. A recipient of a token must identify themself with an identifier in the list of audiences of the token, and otherwise should reject the token. A token issued for multiple audiences may be used to authenticate against any of the audiences listed but implies a high degree of trust between the target audiences.  # noqa: E501
 
         :param audiences: The audiences of this V1TokenRequestSpec.  # noqa: E501
-        :type: list[str]
+        :type audiences: list[str]
         """
         if self.local_vars_configuration.client_side_validation and audiences is None:  # noqa: E501
             raise ValueError("Invalid value for `audiences`, must not be `None`")  # noqa: E501
@@ -102,7 +105,7 @@ class V1TokenRequestSpec(object):
 
 
         :param bound_object_ref: The bound_object_ref of this V1TokenRequestSpec.  # noqa: E501
-        :type: V1BoundObjectReference
+        :type bound_object_ref: V1BoundObjectReference
         """
 
         self._bound_object_ref = bound_object_ref
@@ -125,32 +128,40 @@ class V1TokenRequestSpec(object):
         ExpirationSeconds is the requested duration of validity of the request. The token issuer may return a token with a different validity duration so a client needs to check the 'expiration' field in a response.  # noqa: E501
 
         :param expiration_seconds: The expiration_seconds of this V1TokenRequestSpec.  # noqa: E501
-        :type: int
+        :type expiration_seconds: int
         """
 
         self._expiration_seconds = expiration_seconds
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

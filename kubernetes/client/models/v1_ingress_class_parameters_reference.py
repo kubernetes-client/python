@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1IngressClassParametersReference(object):
     def __init__(self, api_group=None, kind=None, name=None, namespace=None, scope=None, local_vars_configuration=None):  # noqa: E501
         """V1IngressClassParametersReference - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_group = None
@@ -88,7 +91,7 @@ class V1IngressClassParametersReference(object):
         apiGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.  # noqa: E501
 
         :param api_group: The api_group of this V1IngressClassParametersReference.  # noqa: E501
-        :type: str
+        :type api_group: str
         """
 
         self._api_group = api_group
@@ -111,7 +114,7 @@ class V1IngressClassParametersReference(object):
         kind is the type of resource being referenced.  # noqa: E501
 
         :param kind: The kind of this V1IngressClassParametersReference.  # noqa: E501
-        :type: str
+        :type kind: str
         """
         if self.local_vars_configuration.client_side_validation and kind is None:  # noqa: E501
             raise ValueError("Invalid value for `kind`, must not be `None`")  # noqa: E501
@@ -136,7 +139,7 @@ class V1IngressClassParametersReference(object):
         name is the name of resource being referenced.  # noqa: E501
 
         :param name: The name of this V1IngressClassParametersReference.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -161,7 +164,7 @@ class V1IngressClassParametersReference(object):
         namespace is the namespace of the resource being referenced. This field is required when scope is set to \"Namespace\" and must be unset when scope is set to \"Cluster\".  # noqa: E501
 
         :param namespace: The namespace of this V1IngressClassParametersReference.  # noqa: E501
-        :type: str
+        :type namespace: str
         """
 
         self._namespace = namespace
@@ -184,32 +187,40 @@ class V1IngressClassParametersReference(object):
         scope represents if this refers to a cluster or namespace scoped resource. This may be set to \"Cluster\" (default) or \"Namespace\".  # noqa: E501
 
         :param scope: The scope of this V1IngressClassParametersReference.  # noqa: E501
-        :type: str
+        :type scope: str
         """
 
         self._scope = scope
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -1,6 +1,7 @@
 # V1TokenRequestSpec
 
 TokenRequestSpec contains kubernetes.client provided parameters of a token request.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

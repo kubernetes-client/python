@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -57,7 +60,7 @@ class V1CronJobSpec(object):
     def __init__(self, concurrency_policy=None, failed_jobs_history_limit=None, job_template=None, schedule=None, starting_deadline_seconds=None, successful_jobs_history_limit=None, suspend=None, time_zone=None, local_vars_configuration=None):  # noqa: E501
         """V1CronJobSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._concurrency_policy = None
@@ -103,7 +106,7 @@ class V1CronJobSpec(object):
         Specifies how to treat concurrent executions of a Job. Valid values are:  - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one  # noqa: E501
 
         :param concurrency_policy: The concurrency_policy of this V1CronJobSpec.  # noqa: E501
-        :type: str
+        :type concurrency_policy: str
         """
 
         self._concurrency_policy = concurrency_policy
@@ -126,7 +129,7 @@ class V1CronJobSpec(object):
         The number of failed finished jobs to retain. Value must be non-negative integer. Defaults to 1.  # noqa: E501
 
         :param failed_jobs_history_limit: The failed_jobs_history_limit of this V1CronJobSpec.  # noqa: E501
-        :type: int
+        :type failed_jobs_history_limit: int
         """
 
         self._failed_jobs_history_limit = failed_jobs_history_limit
@@ -147,7 +150,7 @@ class V1CronJobSpec(object):
 
 
         :param job_template: The job_template of this V1CronJobSpec.  # noqa: E501
-        :type: V1JobTemplateSpec
+        :type job_template: V1JobTemplateSpec
         """
         if self.local_vars_configuration.client_side_validation and job_template is None:  # noqa: E501
             raise ValueError("Invalid value for `job_template`, must not be `None`")  # noqa: E501
@@ -172,7 +175,7 @@ class V1CronJobSpec(object):
         The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.  # noqa: E501
 
         :param schedule: The schedule of this V1CronJobSpec.  # noqa: E501
-        :type: str
+        :type schedule: str
         """
         if self.local_vars_configuration.client_side_validation and schedule is None:  # noqa: E501
             raise ValueError("Invalid value for `schedule`, must not be `None`")  # noqa: E501
@@ -197,7 +200,7 @@ class V1CronJobSpec(object):
         Optional deadline in seconds for starting the job if it misses scheduled time for any reason.  Missed jobs executions will be counted as failed ones.  # noqa: E501
 
         :param starting_deadline_seconds: The starting_deadline_seconds of this V1CronJobSpec.  # noqa: E501
-        :type: int
+        :type starting_deadline_seconds: int
         """
 
         self._starting_deadline_seconds = starting_deadline_seconds
@@ -220,7 +223,7 @@ class V1CronJobSpec(object):
         The number of successful finished jobs to retain. Value must be non-negative integer. Defaults to 3.  # noqa: E501
 
         :param successful_jobs_history_limit: The successful_jobs_history_limit of this V1CronJobSpec.  # noqa: E501
-        :type: int
+        :type successful_jobs_history_limit: int
         """
 
         self._successful_jobs_history_limit = successful_jobs_history_limit
@@ -243,7 +246,7 @@ class V1CronJobSpec(object):
         This flag tells the controller to suspend subsequent executions, it does not apply to already started executions.  Defaults to false.  # noqa: E501
 
         :param suspend: The suspend of this V1CronJobSpec.  # noqa: E501
-        :type: bool
+        :type suspend: bool
         """
 
         self._suspend = suspend
@@ -266,32 +269,40 @@ class V1CronJobSpec(object):
         The time zone name for the given schedule, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. If not specified, this will default to the time zone of the kube-controller-manager process. The set of valid time zone names and the time zone offset is loaded from the system-wide time zone database by the API server during CronJob validation and the controller manager during execution. If no system-wide time zone database can be found a bundled version of the database is used instead. If the time zone name becomes invalid during the lifetime of a CronJob or due to a change in host configuration, the controller will stop creating new new Jobs and will create a system event with the reason UnknownTimeZone. More information can be found in https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones  # noqa: E501
 
         :param time_zone: The time_zone of this V1CronJobSpec.  # noqa: E501
-        :type: str
+        :type time_zone: str
         """
 
         self._time_zone = time_zone
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

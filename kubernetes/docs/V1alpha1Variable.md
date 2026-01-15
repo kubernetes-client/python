@@ -1,6 +1,7 @@
 # V1alpha1Variable
 
 Variable is the definition of a variable that is used for composition.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

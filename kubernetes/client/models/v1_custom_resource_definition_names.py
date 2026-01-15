@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +56,7 @@ class V1CustomResourceDefinitionNames(object):
     def __init__(self, categories=None, kind=None, list_kind=None, plural=None, short_names=None, singular=None, local_vars_configuration=None):  # noqa: E501
         """V1CustomResourceDefinitionNames - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._categories = None
@@ -93,7 +96,7 @@ class V1CustomResourceDefinitionNames(object):
         categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.  # noqa: E501
 
         :param categories: The categories of this V1CustomResourceDefinitionNames.  # noqa: E501
-        :type: list[str]
+        :type categories: list[str]
         """
 
         self._categories = categories
@@ -116,7 +119,7 @@ class V1CustomResourceDefinitionNames(object):
         kind is the serialized kind of the resource. It is normally CamelCase and singular. Custom resource instances will use this value as the `kind` attribute in API calls.  # noqa: E501
 
         :param kind: The kind of this V1CustomResourceDefinitionNames.  # noqa: E501
-        :type: str
+        :type kind: str
         """
         if self.local_vars_configuration.client_side_validation and kind is None:  # noqa: E501
             raise ValueError("Invalid value for `kind`, must not be `None`")  # noqa: E501
@@ -141,7 +144,7 @@ class V1CustomResourceDefinitionNames(object):
         listKind is the serialized kind of the list for this resource. Defaults to \"`kind`List\".  # noqa: E501
 
         :param list_kind: The list_kind of this V1CustomResourceDefinitionNames.  # noqa: E501
-        :type: str
+        :type list_kind: str
         """
 
         self._list_kind = list_kind
@@ -164,7 +167,7 @@ class V1CustomResourceDefinitionNames(object):
         plural is the plural name of the resource to serve. The custom resources are served under `/apis/<group>/<version>/.../<plural>`. Must match the name of the CustomResourceDefinition (in the form `<names.plural>.<group>`). Must be all lowercase.  # noqa: E501
 
         :param plural: The plural of this V1CustomResourceDefinitionNames.  # noqa: E501
-        :type: str
+        :type plural: str
         """
         if self.local_vars_configuration.client_side_validation and plural is None:  # noqa: E501
             raise ValueError("Invalid value for `plural`, must not be `None`")  # noqa: E501
@@ -189,7 +192,7 @@ class V1CustomResourceDefinitionNames(object):
         shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`. It must be all lowercase.  # noqa: E501
 
         :param short_names: The short_names of this V1CustomResourceDefinitionNames.  # noqa: E501
-        :type: list[str]
+        :type short_names: list[str]
         """
 
         self._short_names = short_names
@@ -212,32 +215,40 @@ class V1CustomResourceDefinitionNames(object):
         singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.  # noqa: E501
 
         :param singular: The singular of this V1CustomResourceDefinitionNames.  # noqa: E501
-        :type: str
+        :type singular: str
         """
 
         self._singular = singular
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

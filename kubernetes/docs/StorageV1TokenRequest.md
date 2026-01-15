@@ -1,6 +1,7 @@
 # StorageV1TokenRequest
 
 TokenRequest contains parameters of a service account token.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

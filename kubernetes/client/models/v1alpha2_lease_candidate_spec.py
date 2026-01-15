@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +56,7 @@ class V1alpha2LeaseCandidateSpec(object):
     def __init__(self, binary_version=None, emulation_version=None, lease_name=None, ping_time=None, renew_time=None, strategy=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha2LeaseCandidateSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._binary_version = None
@@ -92,7 +95,7 @@ class V1alpha2LeaseCandidateSpec(object):
         BinaryVersion is the binary version. It must be in a semver format without leading `v`. This field is required.  # noqa: E501
 
         :param binary_version: The binary_version of this V1alpha2LeaseCandidateSpec.  # noqa: E501
-        :type: str
+        :type binary_version: str
         """
         if self.local_vars_configuration.client_side_validation and binary_version is None:  # noqa: E501
             raise ValueError("Invalid value for `binary_version`, must not be `None`")  # noqa: E501
@@ -117,7 +120,7 @@ class V1alpha2LeaseCandidateSpec(object):
         EmulationVersion is the emulation version. It must be in a semver format without leading `v`. EmulationVersion must be less than or equal to BinaryVersion. This field is required when strategy is \"OldestEmulationVersion\"  # noqa: E501
 
         :param emulation_version: The emulation_version of this V1alpha2LeaseCandidateSpec.  # noqa: E501
-        :type: str
+        :type emulation_version: str
         """
 
         self._emulation_version = emulation_version
@@ -140,7 +143,7 @@ class V1alpha2LeaseCandidateSpec(object):
         LeaseName is the name of the lease for which this candidate is contending. This field is immutable.  # noqa: E501
 
         :param lease_name: The lease_name of this V1alpha2LeaseCandidateSpec.  # noqa: E501
-        :type: str
+        :type lease_name: str
         """
         if self.local_vars_configuration.client_side_validation and lease_name is None:  # noqa: E501
             raise ValueError("Invalid value for `lease_name`, must not be `None`")  # noqa: E501
@@ -165,7 +168,7 @@ class V1alpha2LeaseCandidateSpec(object):
         PingTime is the last time that the server has requested the LeaseCandidate to renew. It is only done during leader election to check if any LeaseCandidates have become ineligible. When PingTime is updated, the LeaseCandidate will respond by updating RenewTime.  # noqa: E501
 
         :param ping_time: The ping_time of this V1alpha2LeaseCandidateSpec.  # noqa: E501
-        :type: datetime
+        :type ping_time: datetime
         """
 
         self._ping_time = ping_time
@@ -188,7 +191,7 @@ class V1alpha2LeaseCandidateSpec(object):
         RenewTime is the time that the LeaseCandidate was last updated. Any time a Lease needs to do leader election, the PingTime field is updated to signal to the LeaseCandidate that they should update the RenewTime. Old LeaseCandidate objects are also garbage collected if it has been hours since the last renew. The PingTime field is updated regularly to prevent garbage collection for still active LeaseCandidates.  # noqa: E501
 
         :param renew_time: The renew_time of this V1alpha2LeaseCandidateSpec.  # noqa: E501
-        :type: datetime
+        :type renew_time: datetime
         """
 
         self._renew_time = renew_time
@@ -211,34 +214,42 @@ class V1alpha2LeaseCandidateSpec(object):
         Strategy is the strategy that coordinated leader election will use for picking the leader. If multiple candidates for the same Lease return different strategies, the strategy provided by the candidate with the latest BinaryVersion will be used. If there is still conflict, this is a user error and coordinated leader election will not operate the Lease until resolved.  # noqa: E501
 
         :param strategy: The strategy of this V1alpha2LeaseCandidateSpec.  # noqa: E501
-        :type: str
+        :type strategy: str
         """
         if self.local_vars_configuration.client_side_validation and strategy is None:  # noqa: E501
             raise ValueError("Invalid value for `strategy`, must not be `None`")  # noqa: E501
 
         self._strategy = strategy
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

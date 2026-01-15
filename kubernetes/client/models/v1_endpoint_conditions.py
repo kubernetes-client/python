@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1EndpointConditions(object):
     def __init__(self, ready=None, serving=None, terminating=None, local_vars_configuration=None):  # noqa: E501
         """V1EndpointConditions - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._ready = None
@@ -80,7 +83,7 @@ class V1EndpointConditions(object):
         ready indicates that this endpoint is ready to receive traffic, according to whatever system is managing the endpoint. A nil value should be interpreted as \"true\". In general, an endpoint should be marked ready if it is serving and not terminating, though this can be overridden in some cases, such as when the associated Service has set the publishNotReadyAddresses flag.  # noqa: E501
 
         :param ready: The ready of this V1EndpointConditions.  # noqa: E501
-        :type: bool
+        :type ready: bool
         """
 
         self._ready = ready
@@ -103,7 +106,7 @@ class V1EndpointConditions(object):
         serving indicates that this endpoint is able to receive traffic, according to whatever system is managing the endpoint. For endpoints backed by pods, the EndpointSlice controller will mark the endpoint as serving if the pod's Ready condition is True. A nil value should be interpreted as \"true\".  # noqa: E501
 
         :param serving: The serving of this V1EndpointConditions.  # noqa: E501
-        :type: bool
+        :type serving: bool
         """
 
         self._serving = serving
@@ -126,32 +129,40 @@ class V1EndpointConditions(object):
         terminating indicates that this endpoint is terminating. A nil value should be interpreted as \"false\".  # noqa: E501
 
         :param terminating: The terminating of this V1EndpointConditions.  # noqa: E501
-        :type: bool
+        :type terminating: bool
         """
 
         self._terminating = terminating
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

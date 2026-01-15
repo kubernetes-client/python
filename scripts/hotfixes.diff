@@ -1,0 +1,139 @@
+diff --git a/kubernetes/client/apis/__init__.py b/kubernetes/client/apis/__init__.py
+new file mode 100644
+index 000000000..ca4b321de
+--- /dev/null
++++ b/kubernetes/client/apis/__init__.py
+@@ -0,0 +1,13 @@
++from __future__ import absolute_import
++import warnings
++
++# flake8: noqa
++
++# alias kubernetes.client.api package and print deprecation warning
++from kubernetes.client.api import *
++
++warnings.filterwarnings('default', module='kubernetes.client.apis')
++warnings.warn(
++    "The package kubernetes.client.apis is renamed and deprecated, use kubernetes.client.api instead (please note that the trailing s was removed).",
++    DeprecationWarning
++)
+diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
+index 5a4174d63..e92e0a653 100644
+--- a/kubernetes/client/configuration.py
++++ b/kubernetes/client/configuration.py
+@@ -15,6 +15,7 @@ from __future__ import absolute_import
+ import copy
+ import logging
+ import multiprocessing
++import os
+ import sys
+ import urllib3
+ 
+@@ -202,6 +203,9 @@ conf = client.Configuration(
+         self.proxy = None
+         """Proxy URL
+         """
++        self.no_proxy = None
++        """Whether proxy is disabled or not
++        """
+         self.proxy_headers = None
+         """Proxy headers
+         """
+@@ -218,6 +222,22 @@ conf = client.Configuration(
+         """Options to pass down to the underlying urllib3 socket
+         """
+ 
++        # Load proxy from environment variables (if set)
++        if os.getenv("HTTPS_PROXY"):
++            self.proxy = os.getenv("HTTPS_PROXY")
++        if os.getenv("https_proxy"):
++            self.proxy = os.getenv("https_proxy")
++        if os.getenv("HTTP_PROXY"):
++            self.proxy = os.getenv("HTTP_PROXY")
++        if os.getenv("http_proxy"):
++            self.proxy = os.getenv("http_proxy")
++
++        # Load no_proxy from environment variables (if set)
++        if os.getenv("NO_PROXY"):
++            self.no_proxy = os.getenv("NO_PROXY")
++        if os.getenv("no_proxy"):
++            self.no_proxy = os.getenv("no_proxy")
++
+     def __deepcopy__(self, memo):
+         cls = self.__class__
+         result = cls.__new__(cls)
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+index 464ef77db..664668640 100644
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -18,6 +18,7 @@ import logging
+ import re
+ import ssl
+ 
++from requests.utils import should_bypass_proxies
+ # python 2 and python 3 compatibility library
+ import six
+ from six.moves.urllib.parse import urlencode
+@@ -78,7 +79,7 @@ class RESTClientObject(object):
+                 maxsize = 4
+ 
+         # https pool manager
+-        if configuration.proxy:
++        if configuration.proxy and not should_bypass_proxies(configuration.host, no_proxy=configuration.no_proxy or ''):
+             self.pool_manager = urllib3.ProxyManager(
+                 num_pools=pools_size,
+                 maxsize=maxsize,
+diff --git a/kubernetes/test/test_api_client.py b/kubernetes/test/test_api_client.py
+new file mode 100644
+index 000000000..a94721926
+--- /dev/null
++++ b/kubernetes/test/test_api_client.py
+@@ -0,0 +1,48 @@
++import atexit
++import weakref
++import unittest
++
++import kubernetes
++from kubernetes.client.configuration import Configuration
++import urllib3
++
++class TestApiClient(unittest.TestCase):
++
++    def test_context_manager_closes_threadpool(self):
++        with kubernetes.client.ApiClient() as client:
++            self.assertIsNotNone(client.pool)
++            pool_ref = weakref.ref(client._pool)
++            self.assertIsNotNone(pool_ref())
++        self.assertIsNone(pool_ref())
++
++    def test_atexit_closes_threadpool(self):
++        client = kubernetes.client.ApiClient()
++        self.assertIsNotNone(client.pool)
++        self.assertIsNotNone(client._pool)
++        atexit._run_exitfuncs()
++        self.assertIsNone(client._pool)
++
++    def test_rest_proxycare(self):
++
++        pool = { 'proxy': urllib3.ProxyManager, 'direct': urllib3.PoolManager }
++
++        for dst, proxy, no_proxy, expected_pool in [
++             ( 'http://kube.local/',           None,                       None,                           pool['direct']),
++             ( 'http://kube.local/',          'http://proxy.local:8080/',  None,                           pool['proxy']),
++             ( 'http://127.0.0.1:8080/',      'http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['direct']),
++             ( 'http://kube.local/',          'http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['direct']),
++             ( 'http://kube.others.com:1234/','http://proxy.local:8080/',  'localhost,127.0.0.0/8,.local', pool['proxy']),
++             ( 'http://kube.others.com:1234/','http://proxy.local:8080/',  '*',                            pool['direct']),
++        ]:
++            # setup input
++            config = Configuration()
++            setattr(config, 'host', dst)
++            if proxy is not None:
++                setattr(config, 'proxy', proxy)
++            if no_proxy is not None:
++                setattr(config, 'no_proxy', no_proxy)
++            # setup done
++
++            # test
++            client = kubernetes.client.ApiClient(configuration=config)
++            self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )

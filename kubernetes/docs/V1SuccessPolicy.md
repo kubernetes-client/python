@@ -1,6 +1,7 @@
 # V1SuccessPolicy
 
 SuccessPolicy describes when a Job can be declared as succeeded based on the success of some indexes.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

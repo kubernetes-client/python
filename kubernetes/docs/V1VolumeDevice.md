@@ -1,6 +1,7 @@
 # V1VolumeDevice
 
 volumeDevice describes a mapping of a raw block device within a container.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

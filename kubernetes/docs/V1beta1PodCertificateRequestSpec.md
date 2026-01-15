@@ -1,6 +1,7 @@
 # V1beta1PodCertificateRequestSpec
 
 PodCertificateRequestSpec describes the certificate request.  All fields are immutable after creation.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 **service_account_name** | **str** | serviceAccountName is the name of the service account the pod is running as. | 
 **service_account_uid** | **str** | serviceAccountUID is the UID of the service account the pod is running as. | 
 **signer_name** | **str** | signerName indicates the requested signer.  All signer names beginning with &#x60;kubernetes.io&#x60; are reserved for use by the Kubernetes project.  There is currently one well-known signer documented by the Kubernetes project, &#x60;kubernetes.io/kube-apiserver-kubernetes.client-pod&#x60;, which will issue kubernetes.client certificates understood by kube-apiserver.  It is currently unimplemented. | 
-**unverified_user_annotations** | **dict(str, str)** | unverifiedUserAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support.  Signers should deny requests that contain keys they do not recognize. | [optional] 
+**unverified_user_annotations** | **dict[str, str]** | unverifiedUserAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support.  Signers should deny requests that contain keys they do not recognize. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

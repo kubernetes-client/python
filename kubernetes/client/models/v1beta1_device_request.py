@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -59,7 +62,7 @@ class V1beta1DeviceRequest(object):
     def __init__(self, admin_access=None, allocation_mode=None, capacity=None, count=None, device_class_name=None, first_available=None, name=None, selectors=None, tolerations=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1DeviceRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._admin_access = None
@@ -109,7 +112,7 @@ class V1beta1DeviceRequest(object):
         AdminAccess indicates that this is a claim for administrative access to the device(s). Claims with AdminAccess are expected to be used for monitoring or other management services for a device.  They ignore all ordinary claims to the device with respect to access modes and any resource allocations.  This field can only be set when deviceClassName is set and no subrequests are specified in the firstAvailable list.  This is an alpha field and requires enabling the DRAAdminAccess feature gate. Admin access is disabled if this field is unset or set to false, otherwise it is enabled.  # noqa: E501
 
         :param admin_access: The admin_access of this V1beta1DeviceRequest.  # noqa: E501
-        :type: bool
+        :type admin_access: bool
         """
 
         self._admin_access = admin_access
@@ -132,7 +135,7 @@ class V1beta1DeviceRequest(object):
         AllocationMode and its related fields define how devices are allocated to satisfy this request. Supported values are:  - ExactCount: This request is for a specific number of devices.   This is the default. The exact number is provided in the   count field.  - All: This request is for all of the matching devices in a pool.   At least one device must exist on the node for the allocation to succeed.   Allocation will fail if some devices are already allocated,   unless adminAccess is requested.  If AllocationMode is not specified, the default mode is ExactCount. If the mode is ExactCount and count is not specified, the default count is one. Any other requests must specify this field.  This field can only be set when deviceClassName is set and no subrequests are specified in the firstAvailable list.  More modes may get added in the future. Clients must refuse to handle requests with unknown modes.  # noqa: E501
 
         :param allocation_mode: The allocation_mode of this V1beta1DeviceRequest.  # noqa: E501
-        :type: str
+        :type allocation_mode: str
         """
 
         self._allocation_mode = allocation_mode
@@ -153,7 +156,7 @@ class V1beta1DeviceRequest(object):
 
 
         :param capacity: The capacity of this V1beta1DeviceRequest.  # noqa: E501
-        :type: V1beta1CapacityRequirements
+        :type capacity: V1beta1CapacityRequirements
         """
 
         self._capacity = capacity
@@ -176,7 +179,7 @@ class V1beta1DeviceRequest(object):
         Count is used only when the count mode is \"ExactCount\". Must be greater than zero. If AllocationMode is ExactCount and this field is not specified, the default is one.  This field can only be set when deviceClassName is set and no subrequests are specified in the firstAvailable list.  # noqa: E501
 
         :param count: The count of this V1beta1DeviceRequest.  # noqa: E501
-        :type: int
+        :type count: int
         """
 
         self._count = count
@@ -199,7 +202,7 @@ class V1beta1DeviceRequest(object):
         DeviceClassName references a specific DeviceClass, which can define additional configuration and selectors to be inherited by this request.  A class is required if no subrequests are specified in the firstAvailable list and no class can be set if subrequests are specified in the firstAvailable list. Which classes are available depends on the cluster.  Administrators may use this to restrict which devices may get requested by only installing classes with selectors for permitted devices. If users are free to request anything without restrictions, then administrators can create an empty DeviceClass for users to reference.  # noqa: E501
 
         :param device_class_name: The device_class_name of this V1beta1DeviceRequest.  # noqa: E501
-        :type: str
+        :type device_class_name: str
         """
 
         self._device_class_name = device_class_name
@@ -222,7 +225,7 @@ class V1beta1DeviceRequest(object):
         FirstAvailable contains subrequests, of which exactly one will be satisfied by the scheduler to satisfy this request. It tries to satisfy them in the order in which they are listed here. So if there are two entries in the list, the scheduler will only check the second one if it determines that the first one cannot be used.  This field may only be set in the entries of DeviceClaim.Requests.  DRA does not yet implement scoring, so the scheduler will select the first set of devices that satisfies all the requests in the claim. And if the requirements can be satisfied on more than one node, other scheduling features will determine which node is chosen. This means that the set of devices allocated to a claim might not be the optimal set available to the cluster. Scoring will be implemented later.  # noqa: E501
 
         :param first_available: The first_available of this V1beta1DeviceRequest.  # noqa: E501
-        :type: list[V1beta1DeviceSubRequest]
+        :type first_available: list[V1beta1DeviceSubRequest]
         """
 
         self._first_available = first_available
@@ -245,7 +248,7 @@ class V1beta1DeviceRequest(object):
         Name can be used to reference this request in a pod.spec.containers[].resources.claims entry and in a constraint of the claim.  Must be a DNS label and unique among all DeviceRequests in a ResourceClaim.  # noqa: E501
 
         :param name: The name of this V1beta1DeviceRequest.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -270,7 +273,7 @@ class V1beta1DeviceRequest(object):
         Selectors define criteria which must be satisfied by a specific device in order for that device to be considered for this request. All selectors must be satisfied for a device to be considered.  This field can only be set when deviceClassName is set and no subrequests are specified in the firstAvailable list.  # noqa: E501
 
         :param selectors: The selectors of this V1beta1DeviceRequest.  # noqa: E501
-        :type: list[V1beta1DeviceSelector]
+        :type selectors: list[V1beta1DeviceSelector]
         """
 
         self._selectors = selectors
@@ -293,32 +296,40 @@ class V1beta1DeviceRequest(object):
         If specified, the request's tolerations.  Tolerations for NoSchedule are required to allocate a device which has a taint with that effect. The same applies to NoExecute.  In addition, should any of the allocated devices get tainted with NoExecute after allocation and that effect is not tolerated, then all pods consuming the ResourceClaim get deleted to evict them. The scheduler will not let new pods reserve the claim while it has these tainted devices. Once all pods are evicted, the claim will get deallocated.  The maximum number of tolerations is 16.  This field can only be set when deviceClassName is set and no subrequests are specified in the firstAvailable list.  This is an alpha field and requires enabling the DRADeviceTaints feature gate.  # noqa: E501
 
         :param tolerations: The tolerations of this V1beta1DeviceRequest.  # noqa: E501
-        :type: list[V1beta1DeviceToleration]
+        :type tolerations: list[V1beta1DeviceToleration]
         """
 
         self._tolerations = tolerations
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

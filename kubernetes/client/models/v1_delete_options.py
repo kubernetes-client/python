@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -57,7 +60,7 @@ class V1DeleteOptions(object):
     def __init__(self, api_version=None, dry_run=None, grace_period_seconds=None, ignore_store_read_error_with_cluster_breaking_potential=None, kind=None, orphan_dependents=None, preconditions=None, propagation_policy=None, local_vars_configuration=None):  # noqa: E501
         """V1DeleteOptions - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -105,7 +108,7 @@ class V1DeleteOptions(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1DeleteOptions.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -128,7 +131,7 @@ class V1DeleteOptions(object):
         When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed  # noqa: E501
 
         :param dry_run: The dry_run of this V1DeleteOptions.  # noqa: E501
-        :type: list[str]
+        :type dry_run: list[str]
         """
 
         self._dry_run = dry_run
@@ -151,7 +154,7 @@ class V1DeleteOptions(object):
         The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.  # noqa: E501
 
         :param grace_period_seconds: The grace_period_seconds of this V1DeleteOptions.  # noqa: E501
-        :type: int
+        :type grace_period_seconds: int
         """
 
         self._grace_period_seconds = grace_period_seconds
@@ -174,7 +177,7 @@ class V1DeleteOptions(object):
         if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it  # noqa: E501
 
         :param ignore_store_read_error_with_cluster_breaking_potential: The ignore_store_read_error_with_cluster_breaking_potential of this V1DeleteOptions.  # noqa: E501
-        :type: bool
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
         """
 
         self._ignore_store_read_error_with_cluster_breaking_potential = ignore_store_read_error_with_cluster_breaking_potential
@@ -197,7 +200,7 @@ class V1DeleteOptions(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1DeleteOptions.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -220,7 +223,7 @@ class V1DeleteOptions(object):
         Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.  # noqa: E501
 
         :param orphan_dependents: The orphan_dependents of this V1DeleteOptions.  # noqa: E501
-        :type: bool
+        :type orphan_dependents: bool
         """
 
         self._orphan_dependents = orphan_dependents
@@ -241,7 +244,7 @@ class V1DeleteOptions(object):
 
 
         :param preconditions: The preconditions of this V1DeleteOptions.  # noqa: E501
-        :type: V1Preconditions
+        :type preconditions: V1Preconditions
         """
 
         self._preconditions = preconditions
@@ -264,32 +267,40 @@ class V1DeleteOptions(object):
         Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.  # noqa: E501
 
         :param propagation_policy: The propagation_policy of this V1DeleteOptions.  # noqa: E501
-        :type: str
+        :type propagation_policy: str
         """
 
         self._propagation_policy = propagation_policy
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -90,6 +90,7 @@ from kubernetes.client.exceptions import OpenApiException
 from kubernetes.client.exceptions import ApiTypeError
 from kubernetes.client.exceptions import ApiValueError
 from kubernetes.client.exceptions import ApiKeyError
+from kubernetes.client.exceptions import ApiAttributeError
 from kubernetes.client.exceptions import ApiException
 # import models into sdk package
 from kubernetes.client.models.admissionregistration_v1_service_reference import AdmissionregistrationV1ServiceReference

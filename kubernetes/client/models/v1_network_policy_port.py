@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1NetworkPolicyPort(object):
     def __init__(self, end_port=None, port=None, protocol=None, local_vars_configuration=None):  # noqa: E501
         """V1NetworkPolicyPort - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._end_port = None
@@ -80,7 +83,7 @@ class V1NetworkPolicyPort(object):
         endPort indicates that the range of ports from port to endPort if set, inclusive, should be allowed by the policy. This field cannot be defined if the port field is not defined or if the port field is defined as a named (string) port. The endPort must be equal or greater than port.  # noqa: E501
 
         :param end_port: The end_port of this V1NetworkPolicyPort.  # noqa: E501
-        :type: int
+        :type end_port: int
         """
 
         self._end_port = end_port
@@ -103,7 +106,7 @@ class V1NetworkPolicyPort(object):
         port represents the port on the given protocol. This can either be a numerical or named port on a pod. If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.  # noqa: E501
 
         :param port: The port of this V1NetworkPolicyPort.  # noqa: E501
-        :type: object
+        :type port: object
         """
 
         self._port = port
@@ -126,32 +129,40 @@ class V1NetworkPolicyPort(object):
         protocol represents the protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.  # noqa: E501
 
         :param protocol: The protocol of this V1NetworkPolicyPort.  # noqa: E501
-        :type: str
+        :type protocol: str
         """
 
         self._protocol = protocol
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

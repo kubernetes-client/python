@@ -1,6 +1,7 @@
 # V1alpha1StorageVersionCondition
 
 Describes the state of the storageVersion at a certain point.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

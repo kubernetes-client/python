@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1CustomResourceSubresourceScale(object):
     def __init__(self, label_selector_path=None, spec_replicas_path=None, status_replicas_path=None, local_vars_configuration=None):  # noqa: E501
         """V1CustomResourceSubresourceScale - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._label_selector_path = None
@@ -78,7 +81,7 @@ class V1CustomResourceSubresourceScale(object):
         labelSelectorPath defines the JSON path inside of a custom resource that corresponds to Scale `status.selector`. Only JSON paths without the array notation are allowed. Must be a JSON Path under `.status` or `.spec`. Must be set to work with HorizontalPodAutoscaler. The field pointed by this JSON path must be a string field (not a complex selector struct) which contains a serialized label selector in string form. More info: https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions#scale-subresource If there is no value under the given path in the custom resource, the `status.selector` value in the `/scale` subresource will default to the empty string.  # noqa: E501
 
         :param label_selector_path: The label_selector_path of this V1CustomResourceSubresourceScale.  # noqa: E501
-        :type: str
+        :type label_selector_path: str
         """
 
         self._label_selector_path = label_selector_path
@@ -101,7 +104,7 @@ class V1CustomResourceSubresourceScale(object):
         specReplicasPath defines the JSON path inside of a custom resource that corresponds to Scale `spec.replicas`. Only JSON paths without the array notation are allowed. Must be a JSON Path under `.spec`. If there is no value under the given path in the custom resource, the `/scale` subresource will return an error on GET.  # noqa: E501
 
         :param spec_replicas_path: The spec_replicas_path of this V1CustomResourceSubresourceScale.  # noqa: E501
-        :type: str
+        :type spec_replicas_path: str
         """
         if self.local_vars_configuration.client_side_validation and spec_replicas_path is None:  # noqa: E501
             raise ValueError("Invalid value for `spec_replicas_path`, must not be `None`")  # noqa: E501
@@ -126,34 +129,42 @@ class V1CustomResourceSubresourceScale(object):
         statusReplicasPath defines the JSON path inside of a custom resource that corresponds to Scale `status.replicas`. Only JSON paths without the array notation are allowed. Must be a JSON Path under `.status`. If there is no value under the given path in the custom resource, the `status.replicas` value in the `/scale` subresource will default to 0.  # noqa: E501
 
         :param status_replicas_path: The status_replicas_path of this V1CustomResourceSubresourceScale.  # noqa: E501
-        :type: str
+        :type status_replicas_path: str
         """
         if self.local_vars_configuration.client_side_validation and status_replicas_path is None:  # noqa: E501
             raise ValueError("Invalid value for `status_replicas_path`, must not be `None`")  # noqa: E501
 
         self._status_replicas_path = status_replicas_path
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

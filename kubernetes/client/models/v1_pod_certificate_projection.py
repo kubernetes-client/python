@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -39,7 +42,7 @@ class V1PodCertificateProjection(object):
         'key_type': 'str',
         'max_expiration_seconds': 'int',
         'signer_name': 'str',
-        'user_annotations': 'dict(str, str)'
+        'user_annotations': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -55,7 +58,7 @@ class V1PodCertificateProjection(object):
     def __init__(self, certificate_chain_path=None, credential_bundle_path=None, key_path=None, key_type=None, max_expiration_seconds=None, signer_name=None, user_annotations=None, local_vars_configuration=None):  # noqa: E501
         """V1PodCertificateProjection - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._certificate_chain_path = None
@@ -98,7 +101,7 @@ class V1PodCertificateProjection(object):
         Write the certificate chain at this path in the projected volume.  Most applications should use credentialBundlePath.  When using keyPath and certificateChainPath, your application needs to check that the key and leaf certificate are consistent, because it is possible to read the files mid-rotation.  # noqa: E501
 
         :param certificate_chain_path: The certificate_chain_path of this V1PodCertificateProjection.  # noqa: E501
-        :type: str
+        :type certificate_chain_path: str
         """
 
         self._certificate_chain_path = certificate_chain_path
@@ -121,7 +124,7 @@ class V1PodCertificateProjection(object):
         Write the credential bundle at this path in the projected volume.  The credential bundle is a single file that contains multiple PEM blocks. The first PEM block is a PRIVATE KEY block, containing a PKCS#8 private key.  The remaining blocks are CERTIFICATE blocks, containing the issued certificate chain from the signer (leaf and any intermediates).  Using credentialBundlePath lets your Pod's application code make a single atomic read that retrieves a consistent key and certificate chain.  If you project them to separate files, your application code will need to additionally check that the leaf certificate was issued to the key.  # noqa: E501
 
         :param credential_bundle_path: The credential_bundle_path of this V1PodCertificateProjection.  # noqa: E501
-        :type: str
+        :type credential_bundle_path: str
         """
 
         self._credential_bundle_path = credential_bundle_path
@@ -144,7 +147,7 @@ class V1PodCertificateProjection(object):
         Write the key at this path in the projected volume.  Most applications should use credentialBundlePath.  When using keyPath and certificateChainPath, your application needs to check that the key and leaf certificate are consistent, because it is possible to read the files mid-rotation.  # noqa: E501
 
         :param key_path: The key_path of this V1PodCertificateProjection.  # noqa: E501
-        :type: str
+        :type key_path: str
         """
 
         self._key_path = key_path
@@ -167,7 +170,7 @@ class V1PodCertificateProjection(object):
         The type of keypair Kubelet will generate for the pod.  Valid values are \"RSA3072\", \"RSA4096\", \"ECDSAP256\", \"ECDSAP384\", \"ECDSAP521\", and \"ED25519\".  # noqa: E501
 
         :param key_type: The key_type of this V1PodCertificateProjection.  # noqa: E501
-        :type: str
+        :type key_type: str
         """
         if self.local_vars_configuration.client_side_validation and key_type is None:  # noqa: E501
             raise ValueError("Invalid value for `key_type`, must not be `None`")  # noqa: E501
@@ -192,7 +195,7 @@ class V1PodCertificateProjection(object):
         maxExpirationSeconds is the maximum lifetime permitted for the certificate.  Kubelet copies this value verbatim into the PodCertificateRequests it generates for this projection.  If omitted, kube-apiserver will set it to 86400(24 hours). kube-apiserver will reject values shorter than 3600 (1 hour).  The maximum allowable value is 7862400 (91 days).  The signer implementation is then free to issue a certificate with any lifetime *shorter* than MaxExpirationSeconds, but no shorter than 3600 seconds (1 hour).  This constraint is enforced by kube-apiserver. `kubernetes.io` signers will never issue certificates with a lifetime longer than 24 hours.  # noqa: E501
 
         :param max_expiration_seconds: The max_expiration_seconds of this V1PodCertificateProjection.  # noqa: E501
-        :type: int
+        :type max_expiration_seconds: int
         """
 
         self._max_expiration_seconds = max_expiration_seconds
@@ -215,7 +218,7 @@ class V1PodCertificateProjection(object):
         Kubelet's generated CSRs will be addressed to this signer.  # noqa: E501
 
         :param signer_name: The signer_name of this V1PodCertificateProjection.  # noqa: E501
-        :type: str
+        :type signer_name: str
         """
         if self.local_vars_configuration.client_side_validation and signer_name is None:  # noqa: E501
             raise ValueError("Invalid value for `signer_name`, must not be `None`")  # noqa: E501
@@ -229,7 +232,7 @@ class V1PodCertificateProjection(object):
         userAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  These values are copied verbatim into the `spec.unverifiedUserAnnotations` field of the PodCertificateRequest objects that Kubelet creates.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support. Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :return: The user_annotations of this V1PodCertificateProjection.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._user_annotations
 
@@ -240,32 +243,40 @@ class V1PodCertificateProjection(object):
         userAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  These values are copied verbatim into the `spec.unverifiedUserAnnotations` field of the PodCertificateRequest objects that Kubelet creates.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support. Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :param user_annotations: The user_annotations of this V1PodCertificateProjection.  # noqa: E501
-        :type: dict(str, str)
+        :type user_annotations: dict[str, str]
         """
 
         self._user_annotations = user_annotations
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -1,6 +1,7 @@
 # V1HostIP
 
 HostIP represents a single IP address allocated to the host.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

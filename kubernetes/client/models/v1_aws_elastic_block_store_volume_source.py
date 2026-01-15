@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1AWSElasticBlockStoreVolumeSource(object):
     def __init__(self, fs_type=None, partition=None, read_only=None, volume_id=None, local_vars_configuration=None):  # noqa: E501
         """V1AWSElasticBlockStoreVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._fs_type = None
@@ -84,7 +87,7 @@ class V1AWSElasticBlockStoreVolumeSource(object):
         fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: \"ext4\", \"xfs\", \"ntfs\". Implicitly inferred to be \"ext4\" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore  # noqa: E501
 
         :param fs_type: The fs_type of this V1AWSElasticBlockStoreVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -107,7 +110,7 @@ class V1AWSElasticBlockStoreVolumeSource(object):
         partition is the partition in the volume that you want to mount. If omitted, the default is to mount by volume name. Examples: For volume /dev/sda1, you specify the partition as \"1\". Similarly, the volume partition for /dev/sda is \"0\" (or you can leave the property empty).  # noqa: E501
 
         :param partition: The partition of this V1AWSElasticBlockStoreVolumeSource.  # noqa: E501
-        :type: int
+        :type partition: int
         """
 
         self._partition = partition
@@ -130,7 +133,7 @@ class V1AWSElasticBlockStoreVolumeSource(object):
         readOnly value true will force the readOnly setting in VolumeMounts. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore  # noqa: E501
 
         :param read_only: The read_only of this V1AWSElasticBlockStoreVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -153,34 +156,42 @@ class V1AWSElasticBlockStoreVolumeSource(object):
         volumeID is unique ID of the persistent disk resource in AWS (Amazon EBS volume). More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore  # noqa: E501
 
         :param volume_id: The volume_id of this V1AWSElasticBlockStoreVolumeSource.  # noqa: E501
-        :type: str
+        :type volume_id: str
         """
         if self.local_vars_configuration.client_side_validation and volume_id is None:  # noqa: E501
             raise ValueError("Invalid value for `volume_id`, must not be `None`")  # noqa: E501
 
         self._volume_id = volume_id
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

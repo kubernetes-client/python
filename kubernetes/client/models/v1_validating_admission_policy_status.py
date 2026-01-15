@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1ValidatingAdmissionPolicyStatus(object):
     def __init__(self, conditions=None, observed_generation=None, type_checking=None, local_vars_configuration=None):  # noqa: E501
         """V1ValidatingAdmissionPolicyStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._conditions = None
@@ -80,7 +83,7 @@ class V1ValidatingAdmissionPolicyStatus(object):
         The conditions represent the latest available observations of a policy's current state.  # noqa: E501
 
         :param conditions: The conditions of this V1ValidatingAdmissionPolicyStatus.  # noqa: E501
-        :type: list[V1Condition]
+        :type conditions: list[V1Condition]
         """
 
         self._conditions = conditions
@@ -103,7 +106,7 @@ class V1ValidatingAdmissionPolicyStatus(object):
         The generation observed by the controller.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1ValidatingAdmissionPolicyStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -124,32 +127,40 @@ class V1ValidatingAdmissionPolicyStatus(object):
 
 
         :param type_checking: The type_checking of this V1ValidatingAdmissionPolicyStatus.  # noqa: E501
-        :type: V1TypeChecking
+        :type type_checking: V1TypeChecking
         """
 
         self._type_checking = type_checking
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

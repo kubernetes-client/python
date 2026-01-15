@@ -1,6 +1,7 @@
 # V1GroupSubject
 
 GroupSubject holds detailed information for group-kind subject.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

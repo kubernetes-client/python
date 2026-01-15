@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1FlowSchemaSpec(object):
     def __init__(self, distinguisher_method=None, matching_precedence=None, priority_level_configuration=None, rules=None, local_vars_configuration=None):  # noqa: E501
         """V1FlowSchemaSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._distinguisher_method = None
@@ -82,7 +85,7 @@ class V1FlowSchemaSpec(object):
 
 
         :param distinguisher_method: The distinguisher_method of this V1FlowSchemaSpec.  # noqa: E501
-        :type: V1FlowDistinguisherMethod
+        :type distinguisher_method: V1FlowDistinguisherMethod
         """
 
         self._distinguisher_method = distinguisher_method
@@ -105,7 +108,7 @@ class V1FlowSchemaSpec(object):
         `matchingPrecedence` is used to choose among the FlowSchemas that match a given request. The chosen FlowSchema is among those with the numerically lowest (which we take to be logically highest) MatchingPrecedence.  Each MatchingPrecedence value must be ranged in [1,10000]. Note that if the precedence is not specified, it will be set to 1000 as default.  # noqa: E501
 
         :param matching_precedence: The matching_precedence of this V1FlowSchemaSpec.  # noqa: E501
-        :type: int
+        :type matching_precedence: int
         """
 
         self._matching_precedence = matching_precedence
@@ -126,7 +129,7 @@ class V1FlowSchemaSpec(object):
 
 
         :param priority_level_configuration: The priority_level_configuration of this V1FlowSchemaSpec.  # noqa: E501
-        :type: V1PriorityLevelConfigurationReference
+        :type priority_level_configuration: V1PriorityLevelConfigurationReference
         """
         if self.local_vars_configuration.client_side_validation and priority_level_configuration is None:  # noqa: E501
             raise ValueError("Invalid value for `priority_level_configuration`, must not be `None`")  # noqa: E501
@@ -151,32 +154,40 @@ class V1FlowSchemaSpec(object):
         `rules` describes which requests will match this flow schema. This FlowSchema matches a request if and only if at least one member of rules matches the request. if it is an empty slice, there will be no requests matching the FlowSchema.  # noqa: E501
 
         :param rules: The rules of this V1FlowSchemaSpec.  # noqa: E501
-        :type: list[V1PolicyRulesWithSubjects]
+        :type rules: list[V1PolicyRulesWithSubjects]
         """
 
         self._rules = rules
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

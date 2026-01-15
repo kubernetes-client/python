@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1EndpointAddress(object):
     def __init__(self, hostname=None, ip=None, node_name=None, target_ref=None, local_vars_configuration=None):  # noqa: E501
         """V1EndpointAddress - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._hostname = None
@@ -84,7 +87,7 @@ class V1EndpointAddress(object):
         The Hostname of this endpoint  # noqa: E501
 
         :param hostname: The hostname of this V1EndpointAddress.  # noqa: E501
-        :type: str
+        :type hostname: str
         """
 
         self._hostname = hostname
@@ -107,7 +110,7 @@ class V1EndpointAddress(object):
         The IP of this endpoint. May not be loopback (127.0.0.0/8 or ::1), link-local (169.254.0.0/16 or fe80::/10), or link-local multicast (224.0.0.0/24 or ff02::/16).  # noqa: E501
 
         :param ip: The ip of this V1EndpointAddress.  # noqa: E501
-        :type: str
+        :type ip: str
         """
         if self.local_vars_configuration.client_side_validation and ip is None:  # noqa: E501
             raise ValueError("Invalid value for `ip`, must not be `None`")  # noqa: E501
@@ -132,7 +135,7 @@ class V1EndpointAddress(object):
         Optional: Node hosting this endpoint. This can be used to determine endpoints local to a node.  # noqa: E501
 
         :param node_name: The node_name of this V1EndpointAddress.  # noqa: E501
-        :type: str
+        :type node_name: str
         """
 
         self._node_name = node_name
@@ -153,32 +156,40 @@ class V1EndpointAddress(object):
 
 
         :param target_ref: The target_ref of this V1EndpointAddress.  # noqa: E501
-        :type: V1ObjectReference
+        :type target_ref: V1ObjectReference
         """
 
         self._target_ref = target_ref
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

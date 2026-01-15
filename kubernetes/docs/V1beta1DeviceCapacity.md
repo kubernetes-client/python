@@ -1,6 +1,7 @@
 # V1beta1DeviceCapacity
 
 DeviceCapacity describes a quantity associated with a device.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

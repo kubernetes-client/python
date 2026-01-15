@@ -1,6 +1,7 @@
 # V1beta1Mutation
 
 Mutation specifies the CEL expression which is used to apply the Mutation.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

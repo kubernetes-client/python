@@ -1,6 +1,7 @@
 # V1DeviceClassSpec
 
 DeviceClassSpec is used in a [DeviceClass] to define what can be allocated and how to configure it.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

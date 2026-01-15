@@ -1,6 +1,7 @@
 # V1beta1PodCertificateRequestStatus
 
 PodCertificateRequestStatus describes the status of the request, and holds the certificate data if the request is issued.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

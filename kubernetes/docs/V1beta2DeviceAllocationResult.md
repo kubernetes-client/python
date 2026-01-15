@@ -1,6 +1,7 @@
 # V1beta2DeviceAllocationResult
 
 DeviceAllocationResult is the result of allocating devices.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

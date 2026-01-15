@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -43,7 +46,7 @@ class V1beta1PodCertificateRequestSpec(object):
         'service_account_name': 'str',
         'service_account_uid': 'str',
         'signer_name': 'str',
-        'unverified_user_annotations': 'dict(str, str)'
+        'unverified_user_annotations': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -63,7 +66,7 @@ class V1beta1PodCertificateRequestSpec(object):
     def __init__(self, max_expiration_seconds=None, node_name=None, node_uid=None, pkix_public_key=None, pod_name=None, pod_uid=None, proof_of_possession=None, service_account_name=None, service_account_uid=None, signer_name=None, unverified_user_annotations=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1PodCertificateRequestSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._max_expiration_seconds = None
@@ -111,7 +114,7 @@ class V1beta1PodCertificateRequestSpec(object):
         maxExpirationSeconds is the maximum lifetime permitted for the certificate.  If omitted, kube-apiserver will set it to 86400(24 hours). kube-apiserver will reject values shorter than 3600 (1 hour).  The maximum allowable value is 7862400 (91 days).  The signer implementation is then free to issue a certificate with any lifetime *shorter* than MaxExpirationSeconds, but no shorter than 3600 seconds (1 hour).  This constraint is enforced by kube-apiserver. `kubernetes.io` signers will never issue certificates with a lifetime longer than 24 hours.  # noqa: E501
 
         :param max_expiration_seconds: The max_expiration_seconds of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: int
+        :type max_expiration_seconds: int
         """
 
         self._max_expiration_seconds = max_expiration_seconds
@@ -134,7 +137,7 @@ class V1beta1PodCertificateRequestSpec(object):
         nodeName is the name of the node the pod is assigned to.  # noqa: E501
 
         :param node_name: The node_name of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type node_name: str
         """
         if self.local_vars_configuration.client_side_validation and node_name is None:  # noqa: E501
             raise ValueError("Invalid value for `node_name`, must not be `None`")  # noqa: E501
@@ -159,7 +162,7 @@ class V1beta1PodCertificateRequestSpec(object):
         nodeUID is the UID of the node the pod is assigned to.  # noqa: E501
 
         :param node_uid: The node_uid of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type node_uid: str
         """
         if self.local_vars_configuration.client_side_validation and node_uid is None:  # noqa: E501
             raise ValueError("Invalid value for `node_uid`, must not be `None`")  # noqa: E501
@@ -184,7 +187,7 @@ class V1beta1PodCertificateRequestSpec(object):
         pkixPublicKey is the PKIX-serialized public key the signer will issue the certificate to.  The key must be one of RSA3072, RSA4096, ECDSAP256, ECDSAP384, ECDSAP521, or ED25519. Note that this list may be expanded in the future.  Signer implementations do not need to support all key types supported by kube-apiserver and kubelet.  If a signer does not support the key type used for a given PodCertificateRequest, it must deny the request by setting a status.conditions entry with a type of \"Denied\" and a reason of \"UnsupportedKeyType\". It may also suggest a key type that it does support in the message field.  # noqa: E501
 
         :param pkix_public_key: The pkix_public_key of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type pkix_public_key: str
         """
         if self.local_vars_configuration.client_side_validation and pkix_public_key is None:  # noqa: E501
             raise ValueError("Invalid value for `pkix_public_key`, must not be `None`")  # noqa: E501
@@ -212,7 +215,7 @@ class V1beta1PodCertificateRequestSpec(object):
         podName is the name of the pod into which the certificate will be mounted.  # noqa: E501
 
         :param pod_name: The pod_name of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type pod_name: str
         """
         if self.local_vars_configuration.client_side_validation and pod_name is None:  # noqa: E501
             raise ValueError("Invalid value for `pod_name`, must not be `None`")  # noqa: E501
@@ -237,7 +240,7 @@ class V1beta1PodCertificateRequestSpec(object):
         podUID is the UID of the pod into which the certificate will be mounted.  # noqa: E501
 
         :param pod_uid: The pod_uid of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type pod_uid: str
         """
         if self.local_vars_configuration.client_side_validation and pod_uid is None:  # noqa: E501
             raise ValueError("Invalid value for `pod_uid`, must not be `None`")  # noqa: E501
@@ -262,7 +265,7 @@ class V1beta1PodCertificateRequestSpec(object):
         proofOfPossession proves that the requesting kubelet holds the private key corresponding to pkixPublicKey.  It is contructed by signing the ASCII bytes of the pod's UID using `pkixPublicKey`.  kube-apiserver validates the proof of possession during creation of the PodCertificateRequest.  If the key is an RSA key, then the signature is over the ASCII bytes of the pod UID, using RSASSA-PSS from RFC 8017 (as implemented by the golang function crypto/rsa.SignPSS with nil options).  If the key is an ECDSA key, then the signature is as described by [SEC 1, Version 2.0](https://www.secg.org/sec1-v2.pdf) (as implemented by the golang library function crypto/ecdsa.SignASN1)  If the key is an ED25519 key, the the signature is as described by the [ED25519 Specification](https://ed25519.cr.yp.to/) (as implemented by the golang library crypto/ed25519.Sign).  # noqa: E501
 
         :param proof_of_possession: The proof_of_possession of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type proof_of_possession: str
         """
         if self.local_vars_configuration.client_side_validation and proof_of_possession is None:  # noqa: E501
             raise ValueError("Invalid value for `proof_of_possession`, must not be `None`")  # noqa: E501
@@ -290,7 +293,7 @@ class V1beta1PodCertificateRequestSpec(object):
         serviceAccountName is the name of the service account the pod is running as.  # noqa: E501
 
         :param service_account_name: The service_account_name of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type service_account_name: str
         """
         if self.local_vars_configuration.client_side_validation and service_account_name is None:  # noqa: E501
             raise ValueError("Invalid value for `service_account_name`, must not be `None`")  # noqa: E501
@@ -315,7 +318,7 @@ class V1beta1PodCertificateRequestSpec(object):
         serviceAccountUID is the UID of the service account the pod is running as.  # noqa: E501
 
         :param service_account_uid: The service_account_uid of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type service_account_uid: str
         """
         if self.local_vars_configuration.client_side_validation and service_account_uid is None:  # noqa: E501
             raise ValueError("Invalid value for `service_account_uid`, must not be `None`")  # noqa: E501
@@ -340,7 +343,7 @@ class V1beta1PodCertificateRequestSpec(object):
         signerName indicates the requested signer.  All signer names beginning with `kubernetes.io` are reserved for use by the Kubernetes project.  There is currently one well-known signer documented by the Kubernetes project, `kubernetes.io/kube-apiserver-client-pod`, which will issue client certificates understood by kube-apiserver.  It is currently unimplemented.  # noqa: E501
 
         :param signer_name: The signer_name of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: str
+        :type signer_name: str
         """
         if self.local_vars_configuration.client_side_validation and signer_name is None:  # noqa: E501
             raise ValueError("Invalid value for `signer_name`, must not be `None`")  # noqa: E501
@@ -354,7 +357,7 @@ class V1beta1PodCertificateRequestSpec(object):
         unverifiedUserAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support.  Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :return: The unverified_user_annotations of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._unverified_user_annotations
 
@@ -365,32 +368,40 @@ class V1beta1PodCertificateRequestSpec(object):
         unverifiedUserAnnotations allow pod authors to pass additional information to the signer implementation.  Kubernetes does not restrict or validate this metadata in any way.  Entries are subject to the same validation as object metadata annotations, with the addition that all keys must be domain-prefixed. No restrictions are placed on values, except an overall size limitation on the entire field.  Signers should document the keys and values they support.  Signers should deny requests that contain keys they do not recognize.  # noqa: E501
 
         :param unverified_user_annotations: The unverified_user_annotations of this V1beta1PodCertificateRequestSpec.  # noqa: E501
-        :type: dict(str, str)
+        :type unverified_user_annotations: dict[str, str]
         """
 
         self._unverified_user_annotations = unverified_user_annotations
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

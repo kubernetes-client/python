@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -103,7 +106,7 @@ class V1Volume(object):
     def __init__(self, aws_elastic_block_store=None, azure_disk=None, azure_file=None, cephfs=None, cinder=None, config_map=None, csi=None, downward_api=None, empty_dir=None, ephemeral=None, fc=None, flex_volume=None, flocker=None, gce_persistent_disk=None, git_repo=None, glusterfs=None, host_path=None, image=None, iscsi=None, name=None, nfs=None, persistent_volume_claim=None, photon_persistent_disk=None, portworx_volume=None, projected=None, quobyte=None, rbd=None, scale_io=None, secret=None, storageos=None, vsphere_volume=None, local_vars_configuration=None):  # noqa: E501
         """V1Volume - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._aws_elastic_block_store = None
@@ -217,7 +220,7 @@ class V1Volume(object):
 
 
         :param aws_elastic_block_store: The aws_elastic_block_store of this V1Volume.  # noqa: E501
-        :type: V1AWSElasticBlockStoreVolumeSource
+        :type aws_elastic_block_store: V1AWSElasticBlockStoreVolumeSource
         """
 
         self._aws_elastic_block_store = aws_elastic_block_store
@@ -238,7 +241,7 @@ class V1Volume(object):
 
 
         :param azure_disk: The azure_disk of this V1Volume.  # noqa: E501
-        :type: V1AzureDiskVolumeSource
+        :type azure_disk: V1AzureDiskVolumeSource
         """
 
         self._azure_disk = azure_disk
@@ -259,7 +262,7 @@ class V1Volume(object):
 
 
         :param azure_file: The azure_file of this V1Volume.  # noqa: E501
-        :type: V1AzureFileVolumeSource
+        :type azure_file: V1AzureFileVolumeSource
         """
 
         self._azure_file = azure_file
@@ -280,7 +283,7 @@ class V1Volume(object):
 
 
         :param cephfs: The cephfs of this V1Volume.  # noqa: E501
-        :type: V1CephFSVolumeSource
+        :type cephfs: V1CephFSVolumeSource
         """
 
         self._cephfs = cephfs
@@ -301,7 +304,7 @@ class V1Volume(object):
 
 
         :param cinder: The cinder of this V1Volume.  # noqa: E501
-        :type: V1CinderVolumeSource
+        :type cinder: V1CinderVolumeSource
         """
 
         self._cinder = cinder
@@ -322,7 +325,7 @@ class V1Volume(object):
 
 
         :param config_map: The config_map of this V1Volume.  # noqa: E501
-        :type: V1ConfigMapVolumeSource
+        :type config_map: V1ConfigMapVolumeSource
         """
 
         self._config_map = config_map
@@ -343,7 +346,7 @@ class V1Volume(object):
 
 
         :param csi: The csi of this V1Volume.  # noqa: E501
-        :type: V1CSIVolumeSource
+        :type csi: V1CSIVolumeSource
         """
 
         self._csi = csi
@@ -364,7 +367,7 @@ class V1Volume(object):
 
 
         :param downward_api: The downward_api of this V1Volume.  # noqa: E501
-        :type: V1DownwardAPIVolumeSource
+        :type downward_api: V1DownwardAPIVolumeSource
         """
 
         self._downward_api = downward_api
@@ -385,7 +388,7 @@ class V1Volume(object):
 
 
         :param empty_dir: The empty_dir of this V1Volume.  # noqa: E501
-        :type: V1EmptyDirVolumeSource
+        :type empty_dir: V1EmptyDirVolumeSource
         """
 
         self._empty_dir = empty_dir
@@ -406,7 +409,7 @@ class V1Volume(object):
 
 
         :param ephemeral: The ephemeral of this V1Volume.  # noqa: E501
-        :type: V1EphemeralVolumeSource
+        :type ephemeral: V1EphemeralVolumeSource
         """
 
         self._ephemeral = ephemeral
@@ -427,7 +430,7 @@ class V1Volume(object):
 
 
         :param fc: The fc of this V1Volume.  # noqa: E501
-        :type: V1FCVolumeSource
+        :type fc: V1FCVolumeSource
         """
 
         self._fc = fc
@@ -448,7 +451,7 @@ class V1Volume(object):
 
 
         :param flex_volume: The flex_volume of this V1Volume.  # noqa: E501
-        :type: V1FlexVolumeSource
+        :type flex_volume: V1FlexVolumeSource
         """
 
         self._flex_volume = flex_volume
@@ -469,7 +472,7 @@ class V1Volume(object):
 
 
         :param flocker: The flocker of this V1Volume.  # noqa: E501
-        :type: V1FlockerVolumeSource
+        :type flocker: V1FlockerVolumeSource
         """
 
         self._flocker = flocker
@@ -490,7 +493,7 @@ class V1Volume(object):
 
 
         :param gce_persistent_disk: The gce_persistent_disk of this V1Volume.  # noqa: E501
-        :type: V1GCEPersistentDiskVolumeSource
+        :type gce_persistent_disk: V1GCEPersistentDiskVolumeSource
         """
 
         self._gce_persistent_disk = gce_persistent_disk
@@ -511,7 +514,7 @@ class V1Volume(object):
 
 
         :param git_repo: The git_repo of this V1Volume.  # noqa: E501
-        :type: V1GitRepoVolumeSource
+        :type git_repo: V1GitRepoVolumeSource
         """
 
         self._git_repo = git_repo
@@ -532,7 +535,7 @@ class V1Volume(object):
 
 
         :param glusterfs: The glusterfs of this V1Volume.  # noqa: E501
-        :type: V1GlusterfsVolumeSource
+        :type glusterfs: V1GlusterfsVolumeSource
         """
 
         self._glusterfs = glusterfs
@@ -553,7 +556,7 @@ class V1Volume(object):
 
 
         :param host_path: The host_path of this V1Volume.  # noqa: E501
-        :type: V1HostPathVolumeSource
+        :type host_path: V1HostPathVolumeSource
         """
 
         self._host_path = host_path
@@ -574,7 +577,7 @@ class V1Volume(object):
 
 
         :param image: The image of this V1Volume.  # noqa: E501
-        :type: V1ImageVolumeSource
+        :type image: V1ImageVolumeSource
         """
 
         self._image = image
@@ -595,7 +598,7 @@ class V1Volume(object):
 
 
         :param iscsi: The iscsi of this V1Volume.  # noqa: E501
-        :type: V1ISCSIVolumeSource
+        :type iscsi: V1ISCSIVolumeSource
         """
 
         self._iscsi = iscsi
@@ -618,7 +621,7 @@ class V1Volume(object):
         name of the volume. Must be a DNS_LABEL and unique within the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names  # noqa: E501
 
         :param name: The name of this V1Volume.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -641,7 +644,7 @@ class V1Volume(object):
 
 
         :param nfs: The nfs of this V1Volume.  # noqa: E501
-        :type: V1NFSVolumeSource
+        :type nfs: V1NFSVolumeSource
         """
 
         self._nfs = nfs
@@ -662,7 +665,7 @@ class V1Volume(object):
 
 
         :param persistent_volume_claim: The persistent_volume_claim of this V1Volume.  # noqa: E501
-        :type: V1PersistentVolumeClaimVolumeSource
+        :type persistent_volume_claim: V1PersistentVolumeClaimVolumeSource
         """
 
         self._persistent_volume_claim = persistent_volume_claim
@@ -683,7 +686,7 @@ class V1Volume(object):
 
 
         :param photon_persistent_disk: The photon_persistent_disk of this V1Volume.  # noqa: E501
-        :type: V1PhotonPersistentDiskVolumeSource
+        :type photon_persistent_disk: V1PhotonPersistentDiskVolumeSource
         """
 
         self._photon_persistent_disk = photon_persistent_disk
@@ -704,7 +707,7 @@ class V1Volume(object):
 
 
         :param portworx_volume: The portworx_volume of this V1Volume.  # noqa: E501
-        :type: V1PortworxVolumeSource
+        :type portworx_volume: V1PortworxVolumeSource
         """
 
         self._portworx_volume = portworx_volume
@@ -725,7 +728,7 @@ class V1Volume(object):
 
 
         :param projected: The projected of this V1Volume.  # noqa: E501
-        :type: V1ProjectedVolumeSource
+        :type projected: V1ProjectedVolumeSource
         """
 
         self._projected = projected
@@ -746,7 +749,7 @@ class V1Volume(object):
 
 
         :param quobyte: The quobyte of this V1Volume.  # noqa: E501
-        :type: V1QuobyteVolumeSource
+        :type quobyte: V1QuobyteVolumeSource
         """
 
         self._quobyte = quobyte
@@ -767,7 +770,7 @@ class V1Volume(object):
 
 
         :param rbd: The rbd of this V1Volume.  # noqa: E501
-        :type: V1RBDVolumeSource
+        :type rbd: V1RBDVolumeSource
         """
 
         self._rbd = rbd
@@ -788,7 +791,7 @@ class V1Volume(object):
 
 
         :param scale_io: The scale_io of this V1Volume.  # noqa: E501
-        :type: V1ScaleIOVolumeSource
+        :type scale_io: V1ScaleIOVolumeSource
         """
 
         self._scale_io = scale_io
@@ -809,7 +812,7 @@ class V1Volume(object):
 
 
         :param secret: The secret of this V1Volume.  # noqa: E501
-        :type: V1SecretVolumeSource
+        :type secret: V1SecretVolumeSource
         """
 
         self._secret = secret
@@ -830,7 +833,7 @@ class V1Volume(object):
 
 
         :param storageos: The storageos of this V1Volume.  # noqa: E501
-        :type: V1StorageOSVolumeSource
+        :type storageos: V1StorageOSVolumeSource
         """
 
         self._storageos = storageos
@@ -851,32 +854,40 @@ class V1Volume(object):
 
 
         :param vsphere_volume: The vsphere_volume of this V1Volume.  # noqa: E501
-        :type: V1VsphereVirtualDiskVolumeSource
+        :type vsphere_volume: V1VsphereVirtualDiskVolumeSource
         """
 
         self._vsphere_volume = vsphere_volume
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

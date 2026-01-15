@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1CSIStorageCapacity(object):
     def __init__(self, api_version=None, capacity=None, kind=None, maximum_volume_size=None, metadata=None, node_topology=None, storage_class_name=None, local_vars_configuration=None):  # noqa: E501
         """V1CSIStorageCapacity - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -99,7 +102,7 @@ class V1CSIStorageCapacity(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1CSIStorageCapacity.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -122,7 +125,7 @@ class V1CSIStorageCapacity(object):
         capacity is the value reported by the CSI driver in its GetCapacityResponse for a GetCapacityRequest with topology and parameters that match the previous fields.  The semantic is currently (CSI spec 1.2) defined as: The available capacity, in bytes, of the storage that can be used to provision volumes. If not set, that information is currently unavailable.  # noqa: E501
 
         :param capacity: The capacity of this V1CSIStorageCapacity.  # noqa: E501
-        :type: str
+        :type capacity: str
         """
 
         self._capacity = capacity
@@ -145,7 +148,7 @@ class V1CSIStorageCapacity(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1CSIStorageCapacity.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -168,7 +171,7 @@ class V1CSIStorageCapacity(object):
         maximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse for a GetCapacityRequest with topology and parameters that match the previous fields.  This is defined since CSI spec 1.4.0 as the largest size that may be used in a CreateVolumeRequest.capacity_range.required_bytes field to create a volume with the same parameters as those in GetCapacityRequest. The corresponding value in the Kubernetes API is ResourceRequirements.Requests in a volume claim.  # noqa: E501
 
         :param maximum_volume_size: The maximum_volume_size of this V1CSIStorageCapacity.  # noqa: E501
-        :type: str
+        :type maximum_volume_size: str
         """
 
         self._maximum_volume_size = maximum_volume_size
@@ -189,7 +192,7 @@ class V1CSIStorageCapacity(object):
 
 
         :param metadata: The metadata of this V1CSIStorageCapacity.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
@@ -210,7 +213,7 @@ class V1CSIStorageCapacity(object):
 
 
         :param node_topology: The node_topology of this V1CSIStorageCapacity.  # noqa: E501
-        :type: V1LabelSelector
+        :type node_topology: V1LabelSelector
         """
 
         self._node_topology = node_topology
@@ -233,34 +236,42 @@ class V1CSIStorageCapacity(object):
         storageClassName represents the name of the StorageClass that the reported capacity applies to. It must meet the same requirements as the name of a StorageClass object (non-empty, DNS subdomain). If that object no longer exists, the CSIStorageCapacity object is obsolete and should be removed by its creator. This field is immutable.  # noqa: E501
 
         :param storage_class_name: The storage_class_name of this V1CSIStorageCapacity.  # noqa: E501
-        :type: str
+        :type storage_class_name: str
         """
         if self.local_vars_configuration.client_side_validation and storage_class_name is None:  # noqa: E501
             raise ValueError("Invalid value for `storage_class_name`, must not be `None`")  # noqa: E501
 
         self._storage_class_name = storage_class_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

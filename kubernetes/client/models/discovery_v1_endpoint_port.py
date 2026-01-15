@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class DiscoveryV1EndpointPort(object):
     def __init__(self, app_protocol=None, name=None, port=None, protocol=None, local_vars_configuration=None):  # noqa: E501
         """DiscoveryV1EndpointPort - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._app_protocol = None
@@ -85,7 +88,7 @@ class DiscoveryV1EndpointPort(object):
         The application protocol for this port. This is used as a hint for implementations to offer richer behavior for protocols that they understand. This field follows standard Kubernetes label syntax. Valid values are either:  * Un-prefixed protocol names - reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names).  * Kubernetes-defined prefixed names:   * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-   * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455   * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455  * Other protocols should use implementation-defined prefixed names such as mycompany.com/my-custom-protocol.  # noqa: E501
 
         :param app_protocol: The app_protocol of this DiscoveryV1EndpointPort.  # noqa: E501
-        :type: str
+        :type app_protocol: str
         """
 
         self._app_protocol = app_protocol
@@ -108,7 +111,7 @@ class DiscoveryV1EndpointPort(object):
         name represents the name of this port. All ports in an EndpointSlice must have a unique name. If the EndpointSlice is derived from a Kubernetes service, this corresponds to the Service.ports[].name. Name must either be an empty string or pass DNS_LABEL validation: * must be no more than 63 characters long. * must consist of lower case alphanumeric characters or '-'. * must start and end with an alphanumeric character. Default is empty string.  # noqa: E501
 
         :param name: The name of this DiscoveryV1EndpointPort.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -131,7 +134,7 @@ class DiscoveryV1EndpointPort(object):
         port represents the port number of the endpoint. If the EndpointSlice is derived from a Kubernetes service, this must be set to the service's target port. EndpointSlices used for other purposes may have a nil port.  # noqa: E501
 
         :param port: The port of this DiscoveryV1EndpointPort.  # noqa: E501
-        :type: int
+        :type port: int
         """
 
         self._port = port
@@ -154,32 +157,40 @@ class DiscoveryV1EndpointPort(object):
         protocol represents the IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.  # noqa: E501
 
         :param protocol: The protocol of this DiscoveryV1EndpointPort.  # noqa: E501
-        :type: str
+        :type protocol: str
         """
 
         self._protocol = protocol
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

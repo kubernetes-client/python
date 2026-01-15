@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1alpha3DeviceTaintSelector(object):
     def __init__(self, device=None, driver=None, pool=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha3DeviceTaintSelector - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._device = None
@@ -80,7 +83,7 @@ class V1alpha3DeviceTaintSelector(object):
         If device is set, only devices with that name are selected. This field corresponds to slice.spec.devices[].name.  Setting also driver and pool may be required to avoid ambiguity, but is not required.  # noqa: E501
 
         :param device: The device of this V1alpha3DeviceTaintSelector.  # noqa: E501
-        :type: str
+        :type device: str
         """
 
         self._device = device
@@ -103,7 +106,7 @@ class V1alpha3DeviceTaintSelector(object):
         If driver is set, only devices from that driver are selected. This fields corresponds to slice.spec.driver.  # noqa: E501
 
         :param driver: The driver of this V1alpha3DeviceTaintSelector.  # noqa: E501
-        :type: str
+        :type driver: str
         """
 
         self._driver = driver
@@ -126,32 +129,40 @@ class V1alpha3DeviceTaintSelector(object):
         If pool is set, only devices in that pool are selected.  Also setting the driver name may be useful to avoid ambiguity when different drivers use the same pool name, but this is not required because selecting pools from different drivers may also be useful, for example when drivers with node-local devices use the node name as their pool name.  # noqa: E501
 
         :param pool: The pool of this V1alpha3DeviceTaintSelector.  # noqa: E501
-        :type: str
+        :type pool: str
         """
 
         self._pool = pool
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

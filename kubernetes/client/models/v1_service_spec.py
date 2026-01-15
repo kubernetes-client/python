@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -35,8 +38,8 @@ class V1ServiceSpec(object):
     openapi_types = {
         'allocate_load_balancer_node_ports': 'bool',
         'cluster_ip': 'str',
-        'cluster_i_ps': 'list[str]',
-        'external_i_ps': 'list[str]',
+        'cluster_ips': 'list[str]',
+        'external_ips': 'list[str]',
         'external_name': 'str',
         'external_traffic_policy': 'str',
         'health_check_node_port': 'int',
@@ -48,7 +51,7 @@ class V1ServiceSpec(object):
         'load_balancer_source_ranges': 'list[str]',
         'ports': 'list[V1ServicePort]',
         'publish_not_ready_addresses': 'bool',
-        'selector': 'dict(str, str)',
+        'selector': 'dict[str, str]',
         'session_affinity': 'str',
         'session_affinity_config': 'V1SessionAffinityConfig',
         'traffic_distribution': 'str',
@@ -58,8 +61,8 @@ class V1ServiceSpec(object):
     attribute_map = {
         'allocate_load_balancer_node_ports': 'allocateLoadBalancerNodePorts',
         'cluster_ip': 'clusterIP',
-        'cluster_i_ps': 'clusterIPs',
-        'external_i_ps': 'externalIPs',
+        'cluster_ips': 'clusterIPs',
+        'external_ips': 'externalIPs',
         'external_name': 'externalName',
         'external_traffic_policy': 'externalTrafficPolicy',
         'health_check_node_port': 'healthCheckNodePort',
@@ -78,16 +81,16 @@ class V1ServiceSpec(object):
         'type': 'type'
     }
 
-    def __init__(self, allocate_load_balancer_node_ports=None, cluster_ip=None, cluster_i_ps=None, external_i_ps=None, external_name=None, external_traffic_policy=None, health_check_node_port=None, internal_traffic_policy=None, ip_families=None, ip_family_policy=None, load_balancer_class=None, load_balancer_ip=None, load_balancer_source_ranges=None, ports=None, publish_not_ready_addresses=None, selector=None, session_affinity=None, session_affinity_config=None, traffic_distribution=None, type=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, allocate_load_balancer_node_ports=None, cluster_ip=None, cluster_ips=None, external_ips=None, external_name=None, external_traffic_policy=None, health_check_node_port=None, internal_traffic_policy=None, ip_families=None, ip_family_policy=None, load_balancer_class=None, load_balancer_ip=None, load_balancer_source_ranges=None, ports=None, publish_not_ready_addresses=None, selector=None, session_affinity=None, session_affinity_config=None, traffic_distribution=None, type=None, local_vars_configuration=None):  # noqa: E501
         """V1ServiceSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocate_load_balancer_node_ports = None
         self._cluster_ip = None
-        self._cluster_i_ps = None
-        self._external_i_ps = None
+        self._cluster_ips = None
+        self._external_ips = None
         self._external_name = None
         self._external_traffic_policy = None
         self._health_check_node_port = None
@@ -110,10 +113,10 @@ class V1ServiceSpec(object):
             self.allocate_load_balancer_node_ports = allocate_load_balancer_node_ports
         if cluster_ip is not None:
             self.cluster_ip = cluster_ip
-        if cluster_i_ps is not None:
-            self.cluster_i_ps = cluster_i_ps
-        if external_i_ps is not None:
-            self.external_i_ps = external_i_ps
+        if cluster_ips is not None:
+            self.cluster_ips = cluster_ips
+        if external_ips is not None:
+            self.external_ips = external_ips
         if external_name is not None:
             self.external_name = external_name
         if external_traffic_policy is not None:
@@ -165,7 +168,7 @@ class V1ServiceSpec(object):
         allocateLoadBalancerNodePorts defines if NodePorts will be automatically allocated for services with type LoadBalancer.  Default is \"true\". It may be set to \"false\" if the cluster load-balancer does not rely on NodePorts.  If the caller requests specific NodePorts (by specifying a value), those requests will be respected, regardless of this field. This field may only be set for services with type LoadBalancer and will be cleared if the type is changed to any other type.  # noqa: E501
 
         :param allocate_load_balancer_node_ports: The allocate_load_balancer_node_ports of this V1ServiceSpec.  # noqa: E501
-        :type: bool
+        :type allocate_load_balancer_node_ports: bool
         """
 
         self._allocate_load_balancer_node_ports = allocate_load_balancer_node_ports
@@ -188,56 +191,56 @@ class V1ServiceSpec(object):
         clusterIP is the IP address of the service and is usually assigned randomly. If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail. This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be blank) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above).  Valid values are \"None\", empty string (\"\"), or a valid IP address. Setting this to \"None\" makes a \"headless service\" (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required.  Only applies to types ClusterIP, NodePort, and LoadBalancer. If this field is specified when creating a Service of type ExternalName, creation will fail. This field will be wiped when updating a Service to type ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  # noqa: E501
 
         :param cluster_ip: The cluster_ip of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type cluster_ip: str
         """
 
         self._cluster_ip = cluster_ip
 
     @property
-    def cluster_i_ps(self):
-        """Gets the cluster_i_ps of this V1ServiceSpec.  # noqa: E501
+    def cluster_ips(self):
+        """Gets the cluster_ips of this V1ServiceSpec.  # noqa: E501
 
         ClusterIPs is a list of IP addresses assigned to this service, and are usually assigned randomly.  If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail. This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be empty) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above).  Valid values are \"None\", empty string (\"\"), or a valid IP address.  Setting this to \"None\" makes a \"headless service\" (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required.  Only applies to types ClusterIP, NodePort, and LoadBalancer. If this field is specified when creating a Service of type ExternalName, creation will fail. This field will be wiped when updating a Service to type ExternalName.  If this field is not specified, it will be initialized from the clusterIP field.  If this field is specified, clients must ensure that clusterIPs[0] and clusterIP have the same value.  This field may hold a maximum of two entries (dual-stack IPs, in either order). These IPs must correspond to the values of the ipFamilies field. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  # noqa: E501
 
-        :return: The cluster_i_ps of this V1ServiceSpec.  # noqa: E501
+        :return: The cluster_ips of this V1ServiceSpec.  # noqa: E501
         :rtype: list[str]
         """
-        return self._cluster_i_ps
+        return self._cluster_ips
 
-    @cluster_i_ps.setter
-    def cluster_i_ps(self, cluster_i_ps):
-        """Sets the cluster_i_ps of this V1ServiceSpec.
+    @cluster_ips.setter
+    def cluster_ips(self, cluster_ips):
+        """Sets the cluster_ips of this V1ServiceSpec.
 
         ClusterIPs is a list of IP addresses assigned to this service, and are usually assigned randomly.  If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail. This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be empty) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above).  Valid values are \"None\", empty string (\"\"), or a valid IP address.  Setting this to \"None\" makes a \"headless service\" (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required.  Only applies to types ClusterIP, NodePort, and LoadBalancer. If this field is specified when creating a Service of type ExternalName, creation will fail. This field will be wiped when updating a Service to type ExternalName.  If this field is not specified, it will be initialized from the clusterIP field.  If this field is specified, clients must ensure that clusterIPs[0] and clusterIP have the same value.  This field may hold a maximum of two entries (dual-stack IPs, in either order). These IPs must correspond to the values of the ipFamilies field. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  # noqa: E501
 
-        :param cluster_i_ps: The cluster_i_ps of this V1ServiceSpec.  # noqa: E501
-        :type: list[str]
+        :param cluster_ips: The cluster_ips of this V1ServiceSpec.  # noqa: E501
+        :type cluster_ips: list[str]
         """
 
-        self._cluster_i_ps = cluster_i_ps
+        self._cluster_ips = cluster_ips
 
     @property
-    def external_i_ps(self):
-        """Gets the external_i_ps of this V1ServiceSpec.  # noqa: E501
+    def external_ips(self):
+        """Gets the external_ips of this V1ServiceSpec.  # noqa: E501
 
         externalIPs is a list of IP addresses for which nodes in the cluster will also accept traffic for this service.  These IPs are not managed by Kubernetes.  The user is responsible for ensuring that traffic arrives at a node with this IP.  A common example is external load-balancers that are not part of the Kubernetes system.  # noqa: E501
 
-        :return: The external_i_ps of this V1ServiceSpec.  # noqa: E501
+        :return: The external_ips of this V1ServiceSpec.  # noqa: E501
         :rtype: list[str]
         """
-        return self._external_i_ps
+        return self._external_ips
 
-    @external_i_ps.setter
-    def external_i_ps(self, external_i_ps):
-        """Sets the external_i_ps of this V1ServiceSpec.
+    @external_ips.setter
+    def external_ips(self, external_ips):
+        """Sets the external_ips of this V1ServiceSpec.
 
         externalIPs is a list of IP addresses for which nodes in the cluster will also accept traffic for this service.  These IPs are not managed by Kubernetes.  The user is responsible for ensuring that traffic arrives at a node with this IP.  A common example is external load-balancers that are not part of the Kubernetes system.  # noqa: E501
 
-        :param external_i_ps: The external_i_ps of this V1ServiceSpec.  # noqa: E501
-        :type: list[str]
+        :param external_ips: The external_ips of this V1ServiceSpec.  # noqa: E501
+        :type external_ips: list[str]
         """
 
-        self._external_i_ps = external_i_ps
+        self._external_ips = external_ips
 
     @property
     def external_name(self):
@@ -257,7 +260,7 @@ class V1ServiceSpec(object):
         externalName is the external reference that discovery mechanisms will return as an alias for this service (e.g. a DNS CNAME record). No proxying will be involved.  Must be a lowercase RFC-1123 hostname (https://tools.ietf.org/html/rfc1123) and requires `type` to be \"ExternalName\".  # noqa: E501
 
         :param external_name: The external_name of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type external_name: str
         """
 
         self._external_name = external_name
@@ -280,7 +283,7 @@ class V1ServiceSpec(object):
         externalTrafficPolicy describes how nodes distribute service traffic they receive on one of the Service's \"externally-facing\" addresses (NodePorts, ExternalIPs, and LoadBalancer IPs). If set to \"Local\", the proxy will configure the service in a way that assumes that external load balancers will take care of balancing the service traffic between nodes, and so each node will deliver traffic only to the node-local endpoints of the service, without masquerading the client source IP. (Traffic mistakenly sent to a node with no endpoints will be dropped.) The default value, \"Cluster\", uses the standard behavior of routing to all endpoints evenly (possibly modified by topology and other features). Note that traffic sent to an External IP or LoadBalancer IP from within the cluster will always get \"Cluster\" semantics, but clients sending to a NodePort from within the cluster may need to take traffic policy into account when picking a node.  # noqa: E501
 
         :param external_traffic_policy: The external_traffic_policy of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type external_traffic_policy: str
         """
 
         self._external_traffic_policy = external_traffic_policy
@@ -303,7 +306,7 @@ class V1ServiceSpec(object):
         healthCheckNodePort specifies the healthcheck nodePort for the service. This only applies when type is set to LoadBalancer and externalTrafficPolicy is set to Local. If a value is specified, is in-range, and is not in use, it will be used.  If not specified, a value will be automatically allocated.  External systems (e.g. load-balancers) can use this port to determine if a given node holds endpoints for this service or not.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type). This field cannot be updated once set.  # noqa: E501
 
         :param health_check_node_port: The health_check_node_port of this V1ServiceSpec.  # noqa: E501
-        :type: int
+        :type health_check_node_port: int
         """
 
         self._health_check_node_port = health_check_node_port
@@ -326,7 +329,7 @@ class V1ServiceSpec(object):
         InternalTrafficPolicy describes how nodes distribute service traffic they receive on the ClusterIP. If set to \"Local\", the proxy will assume that pods only want to talk to endpoints of the service on the same node as the pod, dropping the traffic if there are no local endpoints. The default value, \"Cluster\", uses the standard behavior of routing to all endpoints evenly (possibly modified by topology and other features).  # noqa: E501
 
         :param internal_traffic_policy: The internal_traffic_policy of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type internal_traffic_policy: str
         """
 
         self._internal_traffic_policy = internal_traffic_policy
@@ -349,7 +352,7 @@ class V1ServiceSpec(object):
         IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service. This field is usually assigned automatically based on cluster configuration and the ipFamilyPolicy field. If this field is specified manually, the requested family is available in the cluster, and ipFamilyPolicy allows it, it will be used; otherwise creation of the service will fail. This field is conditionally mutable: it allows for adding or removing a secondary IP family, but it does not allow changing the primary IP family of the Service. Valid values are \"IPv4\" and \"IPv6\".  This field only applies to Services of types ClusterIP, NodePort, and LoadBalancer, and does apply to \"headless\" services. This field will be wiped when updating a Service to type ExternalName.  This field may hold a maximum of two entries (dual-stack families, in either order).  These families must correspond to the values of the clusterIPs field, if specified. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field.  # noqa: E501
 
         :param ip_families: The ip_families of this V1ServiceSpec.  # noqa: E501
-        :type: list[str]
+        :type ip_families: list[str]
         """
 
         self._ip_families = ip_families
@@ -372,7 +375,7 @@ class V1ServiceSpec(object):
         IPFamilyPolicy represents the dual-stack-ness requested or required by this Service. If there is no value provided, then this field will be set to SingleStack. Services can be \"SingleStack\" (a single IP family), \"PreferDualStack\" (two IP families on dual-stack configured clusters or a single IP family on single-stack clusters), or \"RequireDualStack\" (two IP families on dual-stack configured clusters, otherwise fail). The ipFamilies and clusterIPs fields depend on the value of this field. This field will be wiped when updating a service to type ExternalName.  # noqa: E501
 
         :param ip_family_policy: The ip_family_policy of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type ip_family_policy: str
         """
 
         self._ip_family_policy = ip_family_policy
@@ -395,7 +398,7 @@ class V1ServiceSpec(object):
         loadBalancerClass is the class of the load balancer implementation this Service belongs to. If specified, the value of this field must be a label-style identifier, with an optional prefix, e.g. \"internal-vip\" or \"example.com/internal-vip\". Unprefixed names are reserved for end-users. This field can only be set when the Service type is 'LoadBalancer'. If not set, the default load balancer implementation is used, today this is typically done through the cloud provider integration, but should apply for any default implementation. If set, it is assumed that a load balancer implementation is watching for Services with a matching class. Any default load balancer implementation (e.g. cloud providers) should ignore Services that set this field. This field can only be set when creating or updating a Service to type 'LoadBalancer'. Once set, it can not be changed. This field will be wiped when a service is updated to a non 'LoadBalancer' type.  # noqa: E501
 
         :param load_balancer_class: The load_balancer_class of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type load_balancer_class: str
         """
 
         self._load_balancer_class = load_balancer_class
@@ -418,7 +421,7 @@ class V1ServiceSpec(object):
         Only applies to Service Type: LoadBalancer. This feature depends on whether the underlying cloud-provider supports specifying the loadBalancerIP when a load balancer is created. This field will be ignored if the cloud-provider does not support the feature. Deprecated: This field was under-specified and its meaning varies across implementations. Using it is non-portable and it may not support dual-stack. Users are encouraged to use implementation-specific annotations when available.  # noqa: E501
 
         :param load_balancer_ip: The load_balancer_ip of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type load_balancer_ip: str
         """
 
         self._load_balancer_ip = load_balancer_ip
@@ -441,7 +444,7 @@ class V1ServiceSpec(object):
         If specified and supported by the platform, this will restrict traffic through the cloud-provider load-balancer will be restricted to the specified client IPs. This field will be ignored if the cloud-provider does not support the feature.\" More info: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/  # noqa: E501
 
         :param load_balancer_source_ranges: The load_balancer_source_ranges of this V1ServiceSpec.  # noqa: E501
-        :type: list[str]
+        :type load_balancer_source_ranges: list[str]
         """
 
         self._load_balancer_source_ranges = load_balancer_source_ranges
@@ -464,7 +467,7 @@ class V1ServiceSpec(object):
         The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  # noqa: E501
 
         :param ports: The ports of this V1ServiceSpec.  # noqa: E501
-        :type: list[V1ServicePort]
+        :type ports: list[V1ServicePort]
         """
 
         self._ports = ports
@@ -487,7 +490,7 @@ class V1ServiceSpec(object):
         publishNotReadyAddresses indicates that any agent which deals with endpoints for this Service should disregard any indications of ready/not-ready. The primary use case for setting this field is for a StatefulSet's Headless Service to propagate SRV DNS records for its Pods for the purpose of peer discovery. The Kubernetes controllers that generate Endpoints and EndpointSlice resources for Services interpret this to mean that all endpoints are considered \"ready\" even if the Pods themselves are not. Agents which consume only Kubernetes generated endpoints through the Endpoints or EndpointSlice resources can safely assume this behavior.  # noqa: E501
 
         :param publish_not_ready_addresses: The publish_not_ready_addresses of this V1ServiceSpec.  # noqa: E501
-        :type: bool
+        :type publish_not_ready_addresses: bool
         """
 
         self._publish_not_ready_addresses = publish_not_ready_addresses
@@ -499,7 +502,7 @@ class V1ServiceSpec(object):
         Route service traffic to pods with label keys and values matching this selector. If empty or not present, the service is assumed to have an external process managing its endpoints, which Kubernetes will not modify. Only applies to types ClusterIP, NodePort, and LoadBalancer. Ignored if type is ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/  # noqa: E501
 
         :return: The selector of this V1ServiceSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._selector
 
@@ -510,7 +513,7 @@ class V1ServiceSpec(object):
         Route service traffic to pods with label keys and values matching this selector. If empty or not present, the service is assumed to have an external process managing its endpoints, which Kubernetes will not modify. Only applies to types ClusterIP, NodePort, and LoadBalancer. Ignored if type is ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/  # noqa: E501
 
         :param selector: The selector of this V1ServiceSpec.  # noqa: E501
-        :type: dict(str, str)
+        :type selector: dict[str, str]
         """
 
         self._selector = selector
@@ -533,7 +536,7 @@ class V1ServiceSpec(object):
         Supports \"ClientIP\" and \"None\". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies  # noqa: E501
 
         :param session_affinity: The session_affinity of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type session_affinity: str
         """
 
         self._session_affinity = session_affinity
@@ -554,7 +557,7 @@ class V1ServiceSpec(object):
 
 
         :param session_affinity_config: The session_affinity_config of this V1ServiceSpec.  # noqa: E501
-        :type: V1SessionAffinityConfig
+        :type session_affinity_config: V1SessionAffinityConfig
         """
 
         self._session_affinity_config = session_affinity_config
@@ -577,7 +580,7 @@ class V1ServiceSpec(object):
         TrafficDistribution offers a way to express preferences for how traffic is distributed to Service endpoints. Implementations can use this field as a hint, but are not required to guarantee strict adherence. If the field is not set, the implementation will apply its default routing strategy. If set to \"PreferClose\", implementations should prioritize endpoints that are in the same zone.  # noqa: E501
 
         :param traffic_distribution: The traffic_distribution of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type traffic_distribution: str
         """
 
         self._traffic_distribution = traffic_distribution
@@ -600,32 +603,40 @@ class V1ServiceSpec(object):
         type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types  # noqa: E501
 
         :param type: The type of this V1ServiceSpec.  # noqa: E501
-        :type: str
+        :type type: str
         """
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

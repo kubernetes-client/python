@@ -1,6 +1,7 @@
 # V1PriorityLevelConfigurationStatus
 
 PriorityLevelConfigurationStatus represents the current state of a \"request-priority\".
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

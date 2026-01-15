@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1ListMeta(object):
     def __init__(self, _continue=None, remaining_item_count=None, resource_version=None, self_link=None, local_vars_configuration=None):  # noqa: E501
         """V1ListMeta - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self.__continue = None
@@ -85,7 +88,7 @@ class V1ListMeta(object):
         continue may be set if the user set a limit on the number of items returned, and indicates that the server has more data available. The value is opaque and may be used to issue another request to the endpoint that served this list to retrieve the next set of available objects. Continuing a consistent list may not be possible if the server configuration has changed or more than a few minutes have passed. The resourceVersion field returned when using this continue value will be identical to the value in the first response, unless you have received this token from an error message.  # noqa: E501
 
         :param _continue: The _continue of this V1ListMeta.  # noqa: E501
-        :type: str
+        :type _continue: str
         """
 
         self.__continue = _continue
@@ -108,7 +111,7 @@ class V1ListMeta(object):
         remainingItemCount is the number of subsequent items in the list which are not included in this list response. If the list request contained label or field selectors, then the number of remaining items is unknown and the field will be left unset and omitted during serialization. If the list is complete (either because it is not chunking or because this is the last chunk), then there are no more remaining items and this field will be left unset and omitted during serialization. Servers older than v1.15 do not set this field. The intended use of the remainingItemCount is *estimating* the size of a collection. Clients should not rely on the remainingItemCount to be set or to be exact.  # noqa: E501
 
         :param remaining_item_count: The remaining_item_count of this V1ListMeta.  # noqa: E501
-        :type: int
+        :type remaining_item_count: int
         """
 
         self._remaining_item_count = remaining_item_count
@@ -131,7 +134,7 @@ class V1ListMeta(object):
         String that identifies the server's internal version of this object that can be used by clients to determine when objects have changed. Value must be treated as opaque by clients and passed unmodified back to the server. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency  # noqa: E501
 
         :param resource_version: The resource_version of this V1ListMeta.  # noqa: E501
-        :type: str
+        :type resource_version: str
         """
 
         self._resource_version = resource_version
@@ -154,32 +157,40 @@ class V1ListMeta(object):
         Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.  # noqa: E501
 
         :param self_link: The self_link of this V1ListMeta.  # noqa: E501
-        :type: str
+        :type self_link: str
         """
 
         self._self_link = self_link
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

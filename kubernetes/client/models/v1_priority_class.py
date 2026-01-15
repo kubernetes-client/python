@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1PriorityClass(object):
     def __init__(self, api_version=None, description=None, global_default=None, kind=None, metadata=None, preemption_policy=None, value=None, local_vars_configuration=None):  # noqa: E501
         """V1PriorityClass - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -99,7 +102,7 @@ class V1PriorityClass(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1PriorityClass.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -122,7 +125,7 @@ class V1PriorityClass(object):
         description is an arbitrary string that usually provides guidelines on when this priority class should be used.  # noqa: E501
 
         :param description: The description of this V1PriorityClass.  # noqa: E501
-        :type: str
+        :type description: str
         """
 
         self._description = description
@@ -145,7 +148,7 @@ class V1PriorityClass(object):
         globalDefault specifies whether this PriorityClass should be considered as the default priority for pods that do not have any priority class. Only one PriorityClass can be marked as `globalDefault`. However, if more than one PriorityClasses exists with their `globalDefault` field set to true, the smallest value of such global default PriorityClasses will be used as the default priority.  # noqa: E501
 
         :param global_default: The global_default of this V1PriorityClass.  # noqa: E501
-        :type: bool
+        :type global_default: bool
         """
 
         self._global_default = global_default
@@ -168,7 +171,7 @@ class V1PriorityClass(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1PriorityClass.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -189,7 +192,7 @@ class V1PriorityClass(object):
 
 
         :param metadata: The metadata of this V1PriorityClass.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
@@ -212,7 +215,7 @@ class V1PriorityClass(object):
         preemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.  # noqa: E501
 
         :param preemption_policy: The preemption_policy of this V1PriorityClass.  # noqa: E501
-        :type: str
+        :type preemption_policy: str
         """
 
         self._preemption_policy = preemption_policy
@@ -235,34 +238,42 @@ class V1PriorityClass(object):
         value represents the integer value of this priority class. This is the actual priority that pods receive when they have the name of this class in their pod spec.  # noqa: E501
 
         :param value: The value of this V1PriorityClass.  # noqa: E501
-        :type: int
+        :type value: int
         """
         if self.local_vars_configuration.client_side_validation and value is None:  # noqa: E501
             raise ValueError("Invalid value for `value`, must not be `None`")  # noqa: E501
 
         self._value = value
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

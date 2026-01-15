@@ -1,6 +1,7 @@
 # V1JobSpec
 
 JobSpec describes how the job execution will look like.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

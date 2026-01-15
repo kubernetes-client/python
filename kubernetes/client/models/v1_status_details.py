@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +56,7 @@ class V1StatusDetails(object):
     def __init__(self, causes=None, group=None, kind=None, name=None, retry_after_seconds=None, uid=None, local_vars_configuration=None):  # noqa: E501
         """V1StatusDetails - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._causes = None
@@ -95,7 +98,7 @@ class V1StatusDetails(object):
         The Causes array includes more details associated with the StatusReason failure. Not all StatusReasons may provide detailed causes.  # noqa: E501
 
         :param causes: The causes of this V1StatusDetails.  # noqa: E501
-        :type: list[V1StatusCause]
+        :type causes: list[V1StatusCause]
         """
 
         self._causes = causes
@@ -118,7 +121,7 @@ class V1StatusDetails(object):
         The group attribute of the resource associated with the status StatusReason.  # noqa: E501
 
         :param group: The group of this V1StatusDetails.  # noqa: E501
-        :type: str
+        :type group: str
         """
 
         self._group = group
@@ -141,7 +144,7 @@ class V1StatusDetails(object):
         The kind attribute of the resource associated with the status StatusReason. On some operations may differ from the requested resource Kind. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1StatusDetails.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -164,7 +167,7 @@ class V1StatusDetails(object):
         The name attribute of the resource associated with the status StatusReason (when there is a single name which can be described).  # noqa: E501
 
         :param name: The name of this V1StatusDetails.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -187,7 +190,7 @@ class V1StatusDetails(object):
         If specified, the time in seconds before the operation should be retried. Some errors may indicate the client must take an alternate action - for those errors this field may indicate how long to wait before taking the alternate action.  # noqa: E501
 
         :param retry_after_seconds: The retry_after_seconds of this V1StatusDetails.  # noqa: E501
-        :type: int
+        :type retry_after_seconds: int
         """
 
         self._retry_after_seconds = retry_after_seconds
@@ -210,32 +213,40 @@ class V1StatusDetails(object):
         UID of the resource. (when there is a single resource which can be described). More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids  # noqa: E501
 
         :param uid: The uid of this V1StatusDetails.  # noqa: E501
-        :type: str
+        :type uid: str
         """
 
         self._uid = uid
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

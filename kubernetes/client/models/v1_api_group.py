@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -37,7 +40,7 @@ class V1APIGroup(object):
         'kind': 'str',
         'name': 'str',
         'preferred_version': 'V1GroupVersionForDiscovery',
-        'server_address_by_client_cid_rs': 'list[V1ServerAddressByClientCIDR]',
+        'server_address_by_client_cidrs': 'list[V1ServerAddressByClientCIDR]',
         'versions': 'list[V1GroupVersionForDiscovery]'
     }
 
@@ -46,21 +49,21 @@ class V1APIGroup(object):
         'kind': 'kind',
         'name': 'name',
         'preferred_version': 'preferredVersion',
-        'server_address_by_client_cid_rs': 'serverAddressByClientCIDRs',
+        'server_address_by_client_cidrs': 'serverAddressByClientCIDRs',
         'versions': 'versions'
     }
 
-    def __init__(self, api_version=None, kind=None, name=None, preferred_version=None, server_address_by_client_cid_rs=None, versions=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, api_version=None, kind=None, name=None, preferred_version=None, server_address_by_client_cidrs=None, versions=None, local_vars_configuration=None):  # noqa: E501
         """V1APIGroup - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
         self._kind = None
         self._name = None
         self._preferred_version = None
-        self._server_address_by_client_cid_rs = None
+        self._server_address_by_client_cidrs = None
         self._versions = None
         self.discriminator = None
 
@@ -71,8 +74,8 @@ class V1APIGroup(object):
         self.name = name
         if preferred_version is not None:
             self.preferred_version = preferred_version
-        if server_address_by_client_cid_rs is not None:
-            self.server_address_by_client_cid_rs = server_address_by_client_cid_rs
+        if server_address_by_client_cidrs is not None:
+            self.server_address_by_client_cidrs = server_address_by_client_cidrs
         self.versions = versions
 
     @property
@@ -93,7 +96,7 @@ class V1APIGroup(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1APIGroup.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -116,7 +119,7 @@ class V1APIGroup(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1APIGroup.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -139,7 +142,7 @@ class V1APIGroup(object):
         name is the name of the group.  # noqa: E501
 
         :param name: The name of this V1APIGroup.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -162,33 +165,33 @@ class V1APIGroup(object):
 
 
         :param preferred_version: The preferred_version of this V1APIGroup.  # noqa: E501
-        :type: V1GroupVersionForDiscovery
+        :type preferred_version: V1GroupVersionForDiscovery
         """
 
         self._preferred_version = preferred_version
 
     @property
-    def server_address_by_client_cid_rs(self):
-        """Gets the server_address_by_client_cid_rs of this V1APIGroup.  # noqa: E501
+    def server_address_by_client_cidrs(self):
+        """Gets the server_address_by_client_cidrs of this V1APIGroup.  # noqa: E501
 
         a map of client CIDR to server address that is serving this group. This is to help clients reach servers in the most network-efficient way possible. Clients can use the appropriate server address as per the CIDR that they match. In case of multiple matches, clients should use the longest matching CIDR. The server returns only those CIDRs that it thinks that the client can match. For example: the master will return an internal IP CIDR only, if the client reaches the server using an internal IP. Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.  # noqa: E501
 
-        :return: The server_address_by_client_cid_rs of this V1APIGroup.  # noqa: E501
+        :return: The server_address_by_client_cidrs of this V1APIGroup.  # noqa: E501
         :rtype: list[V1ServerAddressByClientCIDR]
         """
-        return self._server_address_by_client_cid_rs
+        return self._server_address_by_client_cidrs
 
-    @server_address_by_client_cid_rs.setter
-    def server_address_by_client_cid_rs(self, server_address_by_client_cid_rs):
-        """Sets the server_address_by_client_cid_rs of this V1APIGroup.
+    @server_address_by_client_cidrs.setter
+    def server_address_by_client_cidrs(self, server_address_by_client_cidrs):
+        """Sets the server_address_by_client_cidrs of this V1APIGroup.
 
         a map of client CIDR to server address that is serving this group. This is to help clients reach servers in the most network-efficient way possible. Clients can use the appropriate server address as per the CIDR that they match. In case of multiple matches, clients should use the longest matching CIDR. The server returns only those CIDRs that it thinks that the client can match. For example: the master will return an internal IP CIDR only, if the client reaches the server using an internal IP. Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.  # noqa: E501
 
-        :param server_address_by_client_cid_rs: The server_address_by_client_cid_rs of this V1APIGroup.  # noqa: E501
-        :type: list[V1ServerAddressByClientCIDR]
+        :param server_address_by_client_cidrs: The server_address_by_client_cidrs of this V1APIGroup.  # noqa: E501
+        :type server_address_by_client_cidrs: list[V1ServerAddressByClientCIDR]
         """
 
-        self._server_address_by_client_cid_rs = server_address_by_client_cid_rs
+        self._server_address_by_client_cidrs = server_address_by_client_cidrs
 
     @property
     def versions(self):
@@ -208,34 +211,42 @@ class V1APIGroup(object):
         versions are the versions supported in this group.  # noqa: E501
 
         :param versions: The versions of this V1APIGroup.  # noqa: E501
-        :type: list[V1GroupVersionForDiscovery]
+        :type versions: list[V1GroupVersionForDiscovery]
         """
         if self.local_vars_configuration.client_side_validation and versions is None:  # noqa: E501
             raise ValueError("Invalid value for `versions`, must not be `None`")  # noqa: E501
 
         self._versions = versions
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

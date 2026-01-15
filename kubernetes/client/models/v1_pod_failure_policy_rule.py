@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1PodFailurePolicyRule(object):
     def __init__(self, action=None, on_exit_codes=None, on_pod_conditions=None, local_vars_configuration=None):  # noqa: E501
         """V1PodFailurePolicyRule - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._action = None
@@ -79,7 +82,7 @@ class V1PodFailurePolicyRule(object):
         Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are:  - FailJob: indicates that the pod's job is marked as Failed and all   running pods are terminated. - FailIndex: indicates that the pod's index is marked as Failed and will   not be restarted. - Ignore: indicates that the counter towards the .backoffLimit is not   incremented and a replacement pod is created. - Count: indicates that the pod is handled in the default way - the   counter towards the .backoffLimit is incremented. Additional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.  # noqa: E501
 
         :param action: The action of this V1PodFailurePolicyRule.  # noqa: E501
-        :type: str
+        :type action: str
         """
         if self.local_vars_configuration.client_side_validation and action is None:  # noqa: E501
             raise ValueError("Invalid value for `action`, must not be `None`")  # noqa: E501
@@ -102,7 +105,7 @@ class V1PodFailurePolicyRule(object):
 
 
         :param on_exit_codes: The on_exit_codes of this V1PodFailurePolicyRule.  # noqa: E501
-        :type: V1PodFailurePolicyOnExitCodesRequirement
+        :type on_exit_codes: V1PodFailurePolicyOnExitCodesRequirement
         """
 
         self._on_exit_codes = on_exit_codes
@@ -125,32 +128,40 @@ class V1PodFailurePolicyRule(object):
         Represents the requirement on the pod conditions. The requirement is represented as a list of pod condition patterns. The requirement is satisfied if at least one pattern matches an actual pod condition. At most 20 elements are allowed.  # noqa: E501
 
         :param on_pod_conditions: The on_pod_conditions of this V1PodFailurePolicyRule.  # noqa: E501
-        :type: list[V1PodFailurePolicyOnPodConditionsPattern]
+        :type on_pod_conditions: list[V1PodFailurePolicyOnPodConditionsPattern]
         """
 
         self._on_pod_conditions = on_pod_conditions
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -37,7 +40,7 @@ class V1VolumeAttributesClass(object):
         'driver_name': 'str',
         'kind': 'str',
         'metadata': 'V1ObjectMeta',
-        'parameters': 'dict(str, str)'
+        'parameters': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -51,7 +54,7 @@ class V1VolumeAttributesClass(object):
     def __init__(self, api_version=None, driver_name=None, kind=None, metadata=None, parameters=None, local_vars_configuration=None):  # noqa: E501
         """V1VolumeAttributesClass - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -89,7 +92,7 @@ class V1VolumeAttributesClass(object):
         APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources  # noqa: E501
 
         :param api_version: The api_version of this V1VolumeAttributesClass.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -112,7 +115,7 @@ class V1VolumeAttributesClass(object):
         Name of the CSI driver This field is immutable.  # noqa: E501
 
         :param driver_name: The driver_name of this V1VolumeAttributesClass.  # noqa: E501
-        :type: str
+        :type driver_name: str
         """
         if self.local_vars_configuration.client_side_validation and driver_name is None:  # noqa: E501
             raise ValueError("Invalid value for `driver_name`, must not be `None`")  # noqa: E501
@@ -137,7 +140,7 @@ class V1VolumeAttributesClass(object):
         Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1VolumeAttributesClass.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -158,7 +161,7 @@ class V1VolumeAttributesClass(object):
 
 
         :param metadata: The metadata of this V1VolumeAttributesClass.  # noqa: E501
-        :type: V1ObjectMeta
+        :type metadata: V1ObjectMeta
         """
 
         self._metadata = metadata
@@ -170,7 +173,7 @@ class V1VolumeAttributesClass(object):
         parameters hold volume attributes defined by the CSI driver. These values are opaque to the Kubernetes and are passed directly to the CSI driver. The underlying storage provider supports changing these attributes on an existing volume, however the parameters field itself is immutable. To invoke a volume update, a new VolumeAttributesClass should be created with new parameters, and the PersistentVolumeClaim should be updated to reference the new VolumeAttributesClass.  This field is required and must contain at least one key/value pair. The keys cannot be empty, and the maximum number of parameters is 512, with a cumulative max size of 256K. If the CSI driver rejects invalid parameters, the target PersistentVolumeClaim will be set to an \"Infeasible\" state in the modifyVolumeStatus field.  # noqa: E501
 
         :return: The parameters of this V1VolumeAttributesClass.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._parameters
 
@@ -181,32 +184,40 @@ class V1VolumeAttributesClass(object):
         parameters hold volume attributes defined by the CSI driver. These values are opaque to the Kubernetes and are passed directly to the CSI driver. The underlying storage provider supports changing these attributes on an existing volume, however the parameters field itself is immutable. To invoke a volume update, a new VolumeAttributesClass should be created with new parameters, and the PersistentVolumeClaim should be updated to reference the new VolumeAttributesClass.  This field is required and must contain at least one key/value pair. The keys cannot be empty, and the maximum number of parameters is 512, with a cumulative max size of 256K. If the CSI driver rejects invalid parameters, the target PersistentVolumeClaim will be set to an \"Infeasible\" state in the modifyVolumeStatus field.  # noqa: E501
 
         :param parameters: The parameters of this V1VolumeAttributesClass.  # noqa: E501
-        :type: dict(str, str)
+        :type parameters: dict[str, str]
         """
 
         self._parameters = parameters
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 
