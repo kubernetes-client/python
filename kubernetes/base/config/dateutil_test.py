@@ -104,21 +104,22 @@ class DateUtilTest(unittest.TestCase):
             self.assertIn("expected", error_msg)
 
     def test_parse_rfc3339_handles_none_from_timezone_regex(self):
-        """Test that parse_rfc3339 handles cases where timezone regex returns None.
-        
-        This test addresses the GitHub issue where parse_rfc3339 was calling .groups()
-        on None when the timezone regex failed to match, causing:
-        'NoneType' object has no attribute 'groups'
-        
-        The fix adds a check to ensure _re_timezone.search() result is not None
-        before calling .groups(), and provides a clear error message.
+        """Test parse_rfc3339 handles timezone regex returning None.
+
+        This test addresses the GitHub issue where parse_rfc3339 was
+        calling .groups() on None when the timezone regex failed to match,
+        causing: 'NoneType' object has no attribute 'groups'
+
+        The fix adds a check to ensure _re_timezone.search() result is
+        not None before calling .groups(), and provides a clear error
+        message.
         """
-        # The main RFC3339 regex allows space in the timezone position: [zZ ]
+        # The main RFC3339 regex allows space in timezone position: [zZ ]
         # If a space ends up in groups[7], it should be handled gracefully
         # Since the current code uses strip(), trailing spaces are removed,
         # but the fix ensures robustness for any edge case
-        
+
         # Test that space in timezone is treated as UTC (like Z/z)
-        actual = parse_rfc3339("2017-07-25 04:44:21")  # No timezone specified
+        actual = parse_rfc3339("2017-07-25 04:44:21")
         expected = datetime(2017, 7, 25, 4, 44, 21, 0, UTC)
         self.assertEqual(expected, actual)

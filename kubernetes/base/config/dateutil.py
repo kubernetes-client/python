@@ -76,7 +76,8 @@ def parse_rfc3339(s):
         if tz_match is None:
             raise ValueError(
                 f"Invalid timezone format in RFC3339 string {s!r}: "
-                f"timezone part {groups[7]!r} does not match expected format (±HH:MM)"
+                f"timezone part {groups[7]!r} does not match expected "
+                f"format (±HH:MM)"
             )
         tz_groups = tz_match.groups()
         hour = int(tz_groups[1])
