@@ -5,7 +5,6 @@ pytest-cov
 pluggy>=0.3.1
 randomize>=0.13
 sphinx>=1.4 # BSD
-recommonmark
 sphinx_markdown_tables
 pycodestyle
 autopep8
