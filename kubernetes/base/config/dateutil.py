@@ -71,8 +71,15 @@ def parse_rfc3339(s):
         us = int(MICROSEC_PER_SEC * partial_sec)
     
     tz = UTC
-    if groups[7] is not None and groups[7] != 'Z' and groups[7] != 'z':
-        tz_groups = _re_timezone.search(groups[7]).groups()
+    if groups[7] is not None and groups[7] not in ('Z', 'z', ' '):
+        tz_match = _re_timezone.search(groups[7])
+        if tz_match is None:
+            raise ValueError(
+                f"Invalid timezone format in RFC3339 string {s!r}: "
+                f"timezone part {groups[7]!r} does not match expected "
+                f"format (±HH:MM)"
+            )
+        tz_groups = tz_match.groups()
         hour = int(tz_groups[1])
         minute = 0
         if tz_groups[0] == "-":
