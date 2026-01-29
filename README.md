@@ -1,6 +1,6 @@
 # Kubernetes Python Client
 
-[![Build Status](https://travis-ci.org/kubernetes-client/python.svg?branch=master)](https://travis-ci.org/kubernetes-client/python)
+[![CI](https://github.com/kubernetes-client/python/actions/workflows/test.yml/badge.svg)](https://github.com/kubernetes-client/python/actions/workflows/test.yml)
 [![PyPI version](https://badge.fury.io/py/kubernetes.svg)](https://badge.fury.io/py/kubernetes)
 [![codecov](https://codecov.io/gh/kubernetes-client/python/branch/master/graph/badge.svg)](https://codecov.io/gh/kubernetes-client/python "Non-generated packages only")
 [![pypi supported versions](https://img.shields.io/pypi/pyversions/kubernetes.svg)](https://pypi.python.org/pypi/kubernetes)
@@ -16,7 +16,7 @@ From source:
 ```
 git clone --recursive https://github.com/kubernetes-client/python.git
 cd python
-python setup.py install
+python -m pip install --upgrade .
 ```
 
 From [PyPI](https://pypi.python.org/pypi/kubernetes/) directly:
