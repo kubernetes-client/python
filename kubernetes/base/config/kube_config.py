@@ -38,11 +38,6 @@ from .config_exception import ConfigException
 from .dateutil import UTC, format_rfc3339, parse_rfc3339
 
 try:
-    import adal
-except ImportError:
-    pass
-
-try:
     import google.auth
     import google.auth.transport.requests
     google_auth_available = True
@@ -318,55 +313,10 @@ class KubeConfigLoader(object):
             return
         if provider['name'] == 'gcp':
             return self._load_gcp_token(provider)
-        if provider['name'] == 'azure':
-            return self._load_azure_token(provider)
         if provider['name'] == 'oidc':
             return self._load_oid_token(provider)
 
-    def _azure_is_expired(self, provider):
-        expires_on = provider['config']['expires-on']
-        if expires_on.isdigit():
-            return int(expires_on) < time.time()
-        else:
-            exp_time = time.strptime(expires_on, '%Y-%m-%d %H:%M:%S.%f')
-            return exp_time < time.gmtime()
 
-    def _load_azure_token(self, provider):
-        if 'config' not in provider:
-            return
-        if 'access-token' not in provider['config']:
-            return
-        if 'expires-on' in provider['config']:
-            if self._azure_is_expired(provider):
-                self._refresh_azure_token(provider['config'])
-        self.token = 'Bearer %s' % provider['config']['access-token']
-        return self.token
-
-    def _refresh_azure_token(self, config):
-        if 'adal' not in globals():
-            raise ImportError('refresh token error, adal library not imported')
-
-        tenant = config['tenant-id']
-        authority = 'https://login.microsoftonline.com/{}'.format(tenant)
-        context = adal.AuthenticationContext(
-            authority, validate_authority=True, api_version='1.0'
-        )
-        refresh_token = config['refresh-token']
-        client_id = config['client-id']
-        apiserver_id = '00000002-0000-0000-c000-000000000000'
-        try:
-            apiserver_id = config['apiserver-id']
-        except ConfigException:
-            # We've already set a default above
-            pass
-        token_response = context.acquire_token_with_refresh_token(
-            refresh_token, client_id, apiserver_id)
-
-        provider = self._user['auth-provider']['config']
-        provider.value['access-token'] = token_response['accessToken']
-        provider.value['expires-on'] = token_response['expiresOn']
-        if self._config_persister:
-            self._config_persister()
 
     def _load_gcp_token(self, provider):
         if (('config' not in provider) or
