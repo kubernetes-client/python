@@ -15,7 +15,9 @@
 import six
 import json
 
-from kubernetes import watch
+# Defer importing kubernetes.watch to avoid circular dependency during
+# kubernetes package initialization on Windows shim environments.
+_watch_mod = None
 from kubernetes.client.rest import ApiException
 
 from .discovery import EagerDiscoverer, LazyDiscoverer
@@ -194,7 +196,12 @@ class DynamicClient(object):
                 # If you want to gracefully stop the stream watcher
                 watcher.stop()
         """
-        if not watcher: watcher = watch.Watch()
+        global _watch_mod
+        if not watcher:
+            if _watch_mod is None:
+                from kubernetes import watch as _w
+                _watch_mod = _w
+            watcher = _watch_mod.Watch()
 
         # Use field selector to query for named instance so the watch parameter is handled properly.
         if name:

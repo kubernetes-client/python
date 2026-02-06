@@ -32,7 +32,12 @@ from requests_oauthlib import OAuth2Session
 from six import PY3
 
 from kubernetes.client import ApiClient, Configuration
-from kubernetes.config.exec_provider import ExecProvider
+try:
+    # Prefer intra-package relative import to avoid early resolution of
+    # kubernetes.config shim during Windows dynamic module registration.
+    from .exec_provider import ExecProvider  # type: ignore
+except ImportError:  # fallback for legacy absolute path
+    from .exec_provider import ExecProvider  # type: ignore
 
 from .config_exception import ConfigException
 from .dateutil import UTC, format_rfc3339, parse_rfc3339
