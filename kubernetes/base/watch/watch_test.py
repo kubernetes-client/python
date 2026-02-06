@@ -576,6 +576,36 @@ class WatchTests(unittest.TestCase):
             self.api.delete_namespaced_pod(name=pod_name, namespace=self.namespace)
             self.api.delete_namespaced_pod.assert_called_once_with(name=pod_name, namespace=self.namespace)
 
+    def test_health_check_detects_silent_connection_drop(self):
+        """Test that health check detects when connection stops receiving events"""
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        
+        def limited_stalled_stream():
+            yield '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}}}\n'
+            for _ in range(10):
+                yield ''
+            return
+
+        fake_resp.stream = Mock(return_value=limited_stalled_stream())
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        events = []
+        
+        try:
+            for e in w.stream(fake_api.get_namespaces, _health_check_interval=0.1, timeout_seconds=1):
+                events.append(e)
+        except Exception:
+            pass
+        
+        self.assertEqual(1, len(events))
+        self.assertEqual("test1", events[0]['object'].metadata.name)
+
 #    Comment out the test below, it does not work currently.
 #    def test_watch_with_deserialize_param(self):
 #        """test watch.stream() deserialize param"""
