@@ -35,6 +35,7 @@ logger = logging.getLogger(__name__)
 ADDED = "ADDED"
 MODIFIED = "MODIFIED"
 DELETED = "DELETED"
+BOOKMARK = "BOOKMARK"
 ERROR = "ERROR"
 
 
@@ -83,7 +84,7 @@ class SharedInformer:
         self._field_selector = field_selector
 
         self._cache = ObjectCache(key_func=key_func)
-        self._handlers = {ADDED: [], MODIFIED: [], DELETED: [], ERROR: []}
+        self._handlers = {ADDED: [], MODIFIED: [], DELETED: [], BOOKMARK: [], ERROR: []}
         self._handler_lock = threading.Lock()
 
         self._watch = None
@@ -105,8 +106,8 @@ class SharedInformer:
         Parameters
         ----------
         event_type:
-            One of :data:`ADDED`, :data:`MODIFIED`, :data:`DELETED` or
-            :data:`ERROR`.
+            One of :data:`ADDED`, :data:`MODIFIED`, :data:`DELETED`,
+            :data:`BOOKMARK` or :data:`ERROR`.
         handler:
             Callable invoked with the event object (or the raw exception for
             ERROR events).
@@ -227,6 +228,11 @@ class SharedInformer:
                     elif evt_type == DELETED:
                         self._cache._remove(obj)
                         self._fire(DELETED, obj)
+                    elif evt_type == BOOKMARK:
+                        # BOOKMARK events carry an updated resource version but
+                        # no object state change; the Watch instance already
+                        # records the new resource_version internally.
+                        self._fire(BOOKMARK, event.get("raw_object", obj))
                     elif evt_type == ERROR:
                         self._fire(ERROR, obj)
                     # Periodic resync: re-list and fire MODIFIED for all cached objects

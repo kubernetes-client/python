@@ -22,6 +22,7 @@ from unittest.mock import MagicMock, patch
 from kubernetes.informer.cache import ObjectCache, _meta_namespace_key
 from kubernetes.informer.informer import (
     ADDED,
+    BOOKMARK,
     DELETED,
     ERROR,
     MODIFIED,
@@ -269,6 +270,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         cached = informer.cache.get_by_key("default/mod-pod")
         self.assertIs(cached, pod_v2)
 
+
     def test_start_is_idempotent(self):
         list_func = MagicMock()
         list_resp = MagicMock()
@@ -289,6 +291,75 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
             self.assertIs(informer._thread, first_thread)
             informer.stop()
 
+    def test_bookmark_event_fires_handler(self):
+        bookmark_obj = {"metadata": {"resourceVersion": "42"}}
+        events = [
+            {"type": "BOOKMARK", "object": bookmark_obj, "raw_object": bookmark_obj},
+        ]
+
+        received = []
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(BOOKMARK, received.append)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                yield from events
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(len(received), 1)
+        self.assertEqual(received[0], bookmark_obj)
+        # Cache should be unchanged (BOOKMARK does not add/modify/delete objects)
+        self.assertEqual(informer.cache.list(), [])
+
+    def test_bookmark_event_does_not_modify_cache(self):
+        pod = _make_pod("default", "stable-pod")
+        bookmark_obj = {"metadata": {"resourceVersion": "99"}}
+        events = [
+            {"type": "ADDED", "object": pod},
+            {"type": "BOOKMARK", "object": bookmark_obj, "raw_object": bookmark_obj},
+        ]
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                yield from events
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # BOOKMARK must not have altered the cache content
+        cached = informer.cache.list()
+        self.assertEqual(len(cached), 1)
+        self.assertIs(cached[0], pod)
+
 
 if __name__ == "__main__":
     unittest.main()
+
