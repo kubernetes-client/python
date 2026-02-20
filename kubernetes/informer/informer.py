@@ -90,6 +90,7 @@ class SharedInformer:
         self._watch = None
         self._thread = None
         self._stop_event = threading.Event()
+        self._resource_version = None  # most recent RV seen; None forces a full re-list
 
     # ---------------------------------------------------------------- #
     # Public API                                                        #
@@ -185,7 +186,6 @@ class SharedInformer:
     def _initial_list(self):
         """Do the initial list and populate the cache."""
         kw = self._build_kwargs()
-        resource_version = "0"
         resp = self._list_func(**kw)
         items = getattr(resp, "items", []) or []
         self._cache._replace_all(items)
@@ -193,26 +193,33 @@ class SharedInformer:
         meta = getattr(resp, "metadata", None)
         if meta is not None:
             rv = getattr(meta, "resource_version", None)
-        if rv:
-            resource_version = rv
-        return resource_version
+        self._resource_version = rv or "0"
 
     def _run_loop(self):
-        """Background loop: list then watch, reconnect on errors."""
+        """Background loop: list then watch, reconnect on errors.
+
+        A full re-list is only performed when ``self._resource_version`` is
+        ``None`` (first start or after a 410 Gone response).  On all other
+        reconnects the most recent ``resourceVersion`` is reused so that no
+        events are missed and the API server does not need to send a full
+        object snapshot.
+        """
         while not self._stop_event.is_set():
-            try:
-                resource_version = self._initial_list()
-            except Exception as exc:
-                logger.exception("Error during initial list; retrying")
-                self._fire(ERROR, exc)
-                self._stop_event.wait(timeout=5)
-                continue
+            # Full re-list only when we have no resource version to resume from.
+            if self._resource_version is None:
+                try:
+                    self._initial_list()
+                except Exception as exc:
+                    logger.exception("Error during initial list; retrying")
+                    self._fire(ERROR, exc)
+                    self._stop_event.wait(timeout=5)
+                    continue
 
             # Watch loop
             last_resync = time.monotonic()
             self._watch = Watch()
             kw = self._build_kwargs()
-            kw["resource_version"] = resource_version
+            kw["resource_version"] = self._resource_version
             try:
                 for event in self._watch.stream(self._list_func, **kw):
                     if self._stop_event.is_set():
@@ -245,13 +252,30 @@ class SharedInformer:
                             self._fire(MODIFIED, cached_obj)
                         last_resync = time.monotonic()
             except ApiException as exc:
-                logger.warning(
-                    "Watch stream ended with ApiException (status=%s); reconnecting",
-                    exc.status,
-                )
+                if exc.status == 410:
+                    # The stored resource version is too old; force a full re-list.
+                    logger.warning(
+                        "Watch expired (410 Gone); will re-list from scratch"
+                    )
+                    self._resource_version = None
+                else:
+                    logger.warning(
+                        "Watch stream ended with ApiException (status=%s); reconnecting",
+                        exc.status,
+                    )
                 self._fire(ERROR, exc)
             except Exception as exc:
                 logger.exception("Unexpected error in watch loop; reconnecting")
                 self._fire(ERROR, exc)
             finally:
+                # Capture the most recent resource version seen by the Watch
+                # (updated on every ADDED/MODIFIED/DELETED/BOOKMARK event) so
+                # that the next watch connection can resume without re-listing.
+                # Do not overwrite a None that was set by a 410 handler above.
+                if (
+                    self._resource_version is not None
+                    and self._watch is not None
+                    and self._watch.resource_version
+                ):
+                    self._resource_version = self._watch.resource_version
                 self._watch = None
