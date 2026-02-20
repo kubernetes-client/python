@@ -1,4 +1,4 @@
-# Copyright 2022 The Kubernetes Authors.
+# Copyright 2024 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__project__ = 'kubernetes'
-# The version is auto-updated. Please do not edit.
-__version__ = "35.0.0+snapshot"
+from .cache import ObjectCache, _meta_namespace_key
+from .informer import SharedInformer, ADDED, MODIFIED, DELETED, ERROR
 
-from . import client
-from . import config
-from . import dynamic
-from . import watch
-from . import stream
-from . import utils
-from . import leaderelection
-from . import informer
+__all__ = [
+    "ObjectCache",
+    "_meta_namespace_key",
+    "SharedInformer",
+    "ADDED",
+    "MODIFIED",
+    "DELETED",
+    "ERROR",
+]
