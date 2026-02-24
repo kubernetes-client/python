@@ -57,7 +57,7 @@ def main():
     informer.add_event_handler(DELETED, on_pod_deleted)
 
     informer.start()
-    print("Informer started.  Watching pods in "default" namespace ...")
+    print('Informer started. Watching pods in "default" namespace ...')
 
     try:
         while True:
