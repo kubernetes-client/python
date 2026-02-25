@@ -226,6 +226,12 @@ class SharedInformer:
                         break
                     evt_type = event.get("type")
                     obj = event.get("object")
+                    # Sync the most recent resource version from the Watch
+                    # instance (updated by unmarshal_event before yielding).
+                    # Do this before firing handlers so consumers that wake on
+                    # an event immediately see the advanced resource version.
+                    if self._watch is not None and self._watch.resource_version:
+                        self._resource_version = self._watch.resource_version
                     if evt_type == ADDED:
                         self._cache._put(obj)
                         self._fire(ADDED, obj)
