@@ -359,6 +359,42 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertEqual(len(cached), 1)
         self.assertIs(cached[0], pod)
 
+    def test_resync_period_triggers_full_list(self):
+        """A full List call must be made to the API server on every resync_period."""
+        pod = _make_pod("default", "resync-pod")
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = [pod]
+        list_resp.metadata = MagicMock(resource_version="5")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func, resync_period=60)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch, \
+                patch("kubernetes.informer.informer.time") as mock_time:
+            # Sequence of time.monotonic() calls:
+            #   1. last_resync = time.monotonic()          → 0.0
+            #   2. (time.monotonic() - last_resync) check  → 61.0  (triggers resync)
+            #   3. last_resync = time.monotonic()          → 61.0  (reset after resync)
+            mock_time.monotonic.side_effect = [0.0, 61.0, 61.0]
+
+            mock_w = MagicMock()
+            mock_w.resource_version = "5"
+
+            def fake_stream(func, **kw):
+                yield {"type": "ADDED", "object": pod}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # list_func called once for the initial list + once for the resync = 2
+        self.assertEqual(list_func.call_count, 2)
+
     def test_resource_version_stored_from_watch(self):
         """After the watch stream ends the latest RV is preserved for reconnect."""
         pod = _make_pod("default", "rv-pod")

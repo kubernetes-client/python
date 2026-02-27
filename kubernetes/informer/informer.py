@@ -248,14 +248,22 @@ class SharedInformer:
                         self._fire(BOOKMARK, event.get("raw_object", obj))
                     elif evt_type == ERROR:
                         self._fire(ERROR, obj)
-                    # Periodic resync: re-list and fire MODIFIED for all cached objects
+                    # Periodic resync: full re-list from the API server, then
+                    # fire MODIFIED for every cached object so reconciliation
+                    # loops receive a fresh notification.
                     if (
                         self._resync_period > 0
                         and (time.monotonic() - last_resync) >= self._resync_period
                     ):
                         logger.debug("Informer resync triggered")
-                        for cached_obj in self._cache.list():
-                            self._fire(MODIFIED, cached_obj)
+                        try:
+                            self._initial_list()
+                        except Exception as exc:
+                            logger.exception("Error during resync list; continuing")
+                            self._fire(ERROR, exc)
+                        else:
+                            for cached_obj in self._cache.list():
+                                self._fire(MODIFIED, cached_obj)
                         last_resync = time.monotonic()
             except ApiException as exc:
                 if exc.status == 410:
