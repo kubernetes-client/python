@@ -752,6 +752,237 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         # list_func called twice: initial list + re-list after 410.
         self.assertEqual(list_func.call_count, 2)
 
+    # ------------------------------------------------------------------
+    # Tests analogous to client-go shared_informer_test.go scenarios.
+    # ------------------------------------------------------------------
+
+    def test_same_handler_registered_twice_fires_twice(self):
+        """Registering the same callable twice is two independent registrations.
+
+        Analogous to Go TestSharedInformerMultipleRegistration: the same
+        handler callable can be added twice, fires twice per event, and
+        removing one registration leaves the other active.
+        """
+        pod = _make_pod("default", "dup-pod")
+        received = []
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+        handler = received.append
+        informer.add_event_handler(ADDED, handler)
+        informer.add_event_handler(ADDED, handler)  # same callable, second registration
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                yield {"type": "ADDED", "object": pod}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # Two registrations → two calls
+        self.assertEqual(received.count(pod), 2)
+
+        # After removing one registration the other still works.
+        informer.remove_event_handler(ADDED, handler)
+        received.clear()
+        informer._fire(ADDED, pod)
+        self.assertEqual(received.count(pod), 1)
+
+    def test_remove_handler_while_running_stops_events(self):
+        """Removing a handler mid-run stops it receiving subsequent events.
+
+        Analogous to Go TestRemoveWhileActive.
+        """
+        pod1 = _make_pod("default", "pod1")
+        pod2 = _make_pod("default", "pod2")
+        received = []
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        # pod1_seen is set by the handler after pod1 is processed.
+        pod1_seen = threading.Event()
+        # can_send_pod2 is set by the test thread to allow pod2 to be yielded.
+        can_send_pod2 = threading.Event()
+
+        informer = SharedInformer(list_func=list_func)
+
+        def handler(obj):
+            received.append(obj)
+            if obj is pod1:
+                pod1_seen.set()
+
+        informer.add_event_handler(ADDED, handler)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                yield {"type": "ADDED", "object": pod1}
+                # Block until the test thread has removed the handler.
+                can_send_pod2.wait(timeout=5)
+                yield {"type": "ADDED", "object": pod2}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            # Wait until pod1 has been processed, then remove the handler.
+            pod1_seen.wait(timeout=3)
+            informer.remove_event_handler(ADDED, handler)
+            can_send_pod2.set()
+            informer._thread.join(timeout=3)
+
+        self.assertIn(pod1, received)
+        self.assertNotIn(pod2, received)
+
+    def test_add_handler_while_running_receives_subsequent_events(self):
+        """Adding a handler while the informer is running fires it for subsequent events.
+
+        Analogous to Go TestAddWhileActive.
+        """
+        pod1 = _make_pod("default", "pod1-aw")
+        pod2 = _make_pod("default", "pod2-aw")
+        received1 = []
+        received2 = []
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        pod1_processed = threading.Event()
+        can_send_pod2 = threading.Event()
+
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(ADDED, received1.append)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                yield {"type": "ADDED", "object": pod1}
+                # Signal that pod1 has been yielded and processed.
+                pod1_processed.set()
+                # Wait until the test thread registers handler2.
+                can_send_pod2.wait(timeout=5)
+                yield {"type": "ADDED", "object": pod2}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            # After pod1 is processed, register the second handler.
+            pod1_processed.wait(timeout=3)
+            informer.add_event_handler(ADDED, received2.append)
+            can_send_pod2.set()
+            informer._thread.join(timeout=3)
+
+        # handler1 sees both pods; handler2 (added late) only sees pod2.
+        self.assertIn(pod1, received1)
+        self.assertIn(pod2, received1)
+        self.assertNotIn(pod1, received2)
+        self.assertIn(pod2, received2)
+
+    def test_concurrent_handler_registration_is_thread_safe(self):
+        """Concurrent add/remove of handlers from many threads must not raise.
+
+        Analogous to Go TestSharedInformerHandlerAbuse (thread safety portion).
+        """
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+        errors = []
+
+        def worker():
+            try:
+                for _ in range(30):
+                    fn = lambda obj: None  # noqa: E731
+                    informer.add_event_handler(ADDED, fn)
+                    informer.add_event_handler(MODIFIED, fn)
+                    informer.remove_event_handler(ADDED, fn)
+                    informer.remove_event_handler(MODIFIED, fn)
+            except Exception as exc:
+                errors.append(exc)
+
+        threads = [threading.Thread(target=worker) for _ in range(10)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+
+        self.assertEqual(errors, [])
+
+    def test_watch_disruption_existing_items_fire_modified_after_relist(self):
+        """After a 410-triggered re-list, items in both old and new list fire MODIFIED.
+
+        Analogous to Go TestSharedInformerWatchDisruption: when a watch is
+        disrupted and the re-list returns the same objects (possibly with
+        updates), listeners receive MODIFIED for them.
+        """
+        from kubernetes.client.exceptions import ApiException
+
+        pod = _make_pod("default", "stable-pod")
+
+        list_call = {"n": 0}
+
+        def list_func(**kw):
+            list_call["n"] += 1
+            resp = MagicMock()
+            resp.items = [pod]  # pod present in both lists
+            resp.metadata = MagicMock(resource_version=str(list_call["n"]))
+            return resp
+
+        modified = []
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(MODIFIED, modified.append)
+
+        stream_calls = {"n": 0}
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "1"
+
+            def fake_stream(func, **kw):
+                stream_calls["n"] += 1
+                if stream_calls["n"] == 1:
+                    raise ApiException(status=410, reason="Gone")
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # pod was in both the initial list (call 1) and the re-list (call 2).
+        # On the re-list it should fire MODIFIED (not ADDED again).
+        self.assertIn(pod, modified)
+        # Still in cache.
+        self.assertIsNotNone(informer.cache.get_by_key("default/stable-pod"))
+
 
 if __name__ == "__main__":
     unittest.main()
