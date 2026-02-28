@@ -184,11 +184,45 @@ class SharedInformer:
                 )
 
     def _initial_list(self):
-        """Do the initial list and populate the cache."""
+        """List all objects and populate the cache, firing ADDED/MODIFIED/DELETED events.
+
+        On the first call (empty cache) every returned item fires ADDED.
+        On subsequent calls (resync or after a 410 Gone) the new list is
+        diffed against the existing cache:
+        * Items absent from the new list fire DELETED.
+        * Items present in both fire MODIFIED.
+        * Items only in the new list fire ADDED.
+        """
         kw = self._build_kwargs()
         resp = self._list_func(**kw)
         items = getattr(resp, "items", []) or []
+
+        # Build key → item map for incoming items.
+        new_items_map = {}
+        for item in items:
+            key = self._cache._key_func(item)
+            new_items_map[key] = item
+
+        # Snapshot the old keys before replacing the cache.
+        old_keys = set(self._cache.list_keys())
+
+        # Fire DELETED for items no longer present in the new list.
+        for key in old_keys:
+            if key not in new_items_map:
+                old_obj = self._cache.get_by_key(key)
+                if old_obj is not None:
+                    self._fire(DELETED, old_obj)
+
+        # Atomically replace the cache.
         self._cache._replace_all(items)
+
+        # Fire ADDED for genuinely new items, MODIFIED for existing ones.
+        for key, item in new_items_map.items():
+            if key in old_keys:
+                self._fire(MODIFIED, item)
+            else:
+                self._fire(ADDED, item)
+
         rv = None
         meta = getattr(resp, "metadata", None)
         if meta is not None:
@@ -248,9 +282,8 @@ class SharedInformer:
                         self._fire(BOOKMARK, event.get("raw_object", obj))
                     elif evt_type == ERROR:
                         self._fire(ERROR, obj)
-                    # Periodic resync: full re-list from the API server, then
-                    # fire MODIFIED for every cached object so reconciliation
-                    # loops receive a fresh notification.
+                    # Periodic resync: full re-list from the API server, firing
+                    # ADDED/MODIFIED/DELETED for any changes since the last list.
                     if (
                         self._resync_period > 0
                         and (time.monotonic() - last_resync) >= self._resync_period
@@ -261,9 +294,6 @@ class SharedInformer:
                         except Exception as exc:
                             logger.exception("Error during resync list; continuing")
                             self._fire(ERROR, exc)
-                        else:
-                            for cached_obj in self._cache.list():
-                                self._fire(MODIFIED, cached_obj)
                         last_resync = time.monotonic()
             except ApiException as exc:
                 if exc.status == 410:

@@ -395,6 +395,256 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         # list_func called once for the initial list + once for the resync = 2
         self.assertEqual(list_func.call_count, 2)
 
+    # ------------------------------------------------------------------
+    # Tests analogous to the JavaScript cache_test.ts and Java
+    # DefaultSharedIndexInformerWireMockTest scenarios.
+    # ------------------------------------------------------------------
+
+    def test_multiple_handlers_all_fire(self):
+        """All handlers registered for the same event type must be invoked."""
+        pod = _make_pod("default", "multi-pod")
+        received1 = []
+        received2 = []
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(ADDED, received1.append)
+        informer.add_event_handler(ADDED, received2.append)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                yield {"type": "ADDED", "object": pod}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(received1, [pod])
+        self.assertEqual(received2, [pod])
+
+    def test_selectors_and_namespace_forwarded(self):
+        """namespace, label_selector, and field_selector are forwarded to list_func
+        and Watch.stream kwargs."""
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(
+            list_func=list_func,
+            namespace="kube-system",
+            label_selector="app=myapp",
+            field_selector="status.phase=Running",
+        )
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "1"
+
+            def fake_stream(func, **kw):
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # Initial list call must include all selectors.
+        list_func.assert_called_once_with(
+            namespace="kube-system",
+            label_selector="app=myapp",
+            field_selector="status.phase=Running",
+        )
+        # Watch.stream must also receive them.
+        _, stream_kw = mock_w.stream.call_args
+        self.assertEqual(stream_kw.get("namespace"), "kube-system")
+        self.assertEqual(stream_kw.get("label_selector"), "app=myapp")
+        self.assertEqual(stream_kw.get("field_selector"), "status.phase=Running")
+
+    def test_watch_resource_version_passed_after_initial_list(self):
+        """After the initial list, Watch.stream is called with that list's resourceVersion."""
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="42")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "42"
+
+            def fake_stream(func, **kw):
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        _, stream_kw = mock_w.stream.call_args
+        self.assertEqual(stream_kw.get("resource_version"), "42")
+
+    def test_non_410_api_exception_reconnects_without_relist(self):
+        """A non-410 ApiException fires ERROR and reconnects without calling list_func again."""
+        from kubernetes.client.exceptions import ApiException
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        error_received = []
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(ERROR, error_received.append)
+
+        stream_calls = {"n": 0}
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "1"
+
+            def fake_stream(func, **kw):
+                stream_calls["n"] += 1
+                if stream_calls["n"] == 1:
+                    raise ApiException(status=409, reason="Conflict")
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # ERROR fires once for the 409; list_func not called a second time.
+        self.assertEqual(len(error_received), 1)
+        self.assertIsInstance(error_received[0], ApiException)
+        self.assertEqual(error_received[0].status, 409)
+        self.assertEqual(list_func.call_count, 1)
+        self.assertEqual(stream_calls["n"], 2)
+
+    def test_list_func_error_fires_error_handler(self):
+        """If the list function raises an exception the ERROR handler is called."""
+        from kubernetes.client.exceptions import ApiException
+
+        def always_fails(**kw):
+            raise ApiException(status=403, reason="Forbidden")
+
+        error_received = []
+        informer = SharedInformer(list_func=always_fails)
+
+        def on_error(exc):
+            error_received.append(exc)
+            informer._stop_event.set()  # stop after first error so the test is fast
+
+        informer.add_event_handler(ERROR, on_error)
+
+        with patch("kubernetes.informer.informer.Watch"):
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(len(error_received), 1)
+        self.assertIsInstance(error_received[0], ApiException)
+        self.assertEqual(error_received[0].status, 403)
+
+    def test_initial_list_fires_added_for_each_item(self):
+        """Items returned by the initial list must each fire an ADDED event."""
+        pod1 = _make_pod("default", "pod1")
+        pod2 = _make_pod("default", "pod2")
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = [pod1, pod2]
+        list_resp.metadata = MagicMock(resource_version="5")
+        list_func.return_value = list_resp
+
+        received = []
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(ADDED, received.append)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "5"
+
+            def fake_stream(func, **kw):
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertIn(pod1, received)
+        self.assertIn(pod2, received)
+        self.assertEqual(len(received), 2)
+
+    def test_relist_after_410_fires_delete_for_removed_items(self):
+        """After a 410-triggered re-list, items absent from the new list fire DELETED."""
+        from kubernetes.client.exceptions import ApiException
+
+        pod_keep = _make_pod("default", "pod-keep")
+        pod_delete = _make_pod("default", "pod-delete")
+
+        list_call = {"n": 0}
+
+        def list_func(**kw):
+            list_call["n"] += 1
+            resp = MagicMock()
+            if list_call["n"] == 1:
+                resp.items = [pod_keep, pod_delete]
+            else:
+                resp.items = [pod_keep]   # pod_delete is gone after 410 re-list
+            resp.metadata = MagicMock(resource_version=str(list_call["n"]))
+            return resp
+
+        deleted = []
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(DELETED, deleted.append)
+
+        stream_calls = {"n": 0}
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "1"
+
+            def fake_stream(func, **kw):
+                stream_calls["n"] += 1
+                if stream_calls["n"] == 1:
+                    raise ApiException(status=410, reason="Gone")
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertIn(pod_delete, deleted)
+        self.assertNotIn(pod_keep, deleted)
+        self.assertIsNone(informer.cache.get_by_key("default/pod-delete"))
+        self.assertIsNotNone(informer.cache.get_by_key("default/pod-keep"))
+
     def test_resource_version_stored_from_watch(self):
         """After the watch stream ends the latest RV is preserved for reconnect."""
         pod = _make_pod("default", "rv-pod")
