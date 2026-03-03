@@ -15,6 +15,7 @@
 import os
 import time
 import unittest
+from types import SimpleNamespace
 from unittest.mock import Mock, call
 
 from kubernetes import client, config
@@ -66,7 +67,10 @@ class WatchTests(unittest.TestCase):
         # make sure that all three records were consumed by the stream
         self.assertEqual(4, count)
 
-        fake_api.get_namespaces.assert_called_once_with(
+        # The function is called twice: first for the initial list (no watch
+        # kwargs), then for the actual watch (with resource_version from list).
+        self.assertEqual(fake_api.get_namespaces.call_count, 2)
+        fake_api.get_namespaces.assert_called_with(
             _preload_content=False, watch=True)
         fake_resp.stream.assert_called_once_with(
             amt=None, decode_content=False)
@@ -292,6 +296,67 @@ class WatchTests(unittest.TestCase):
         # more strict test with worse error message
         self.assertEqual(fake_api.get_namespaces.mock_calls, calls)
 
+    def test_watch_with_initial_list_resource_version(self):
+        """Verify the list-then-watch pattern.
+
+        When stream() is called without a resource_version, it should:
+          1. Perform an initial list call to get the current resourceVersion.
+          2. Yield items from that list as ADDED events.
+          3. Start the watch from the list's resourceVersion so that
+             subsequent restarts after a 410 use a valid, recent version.
+        """
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        # The watch stream returns one new event after the initial list.
+        fake_resp.stream = Mock(
+            return_value=[
+                '{"type": "MODIFIED", "object": {"metadata": '
+                '{"name": "ns-new", "resourceVersion": "200"}, '
+                '"spec": {}, "status": {}}}\n',
+            ])
+
+        # Build a real-ish list response with two existing namespaces.
+        ns1 = client.V1Namespace(
+            metadata=client.V1ObjectMeta(
+                name="ns-one", resource_version="100"))
+        ns2 = client.V1Namespace(
+            metadata=client.V1ObjectMeta(
+                name="ns-two", resource_version="150"))
+        fake_list = client.V1NamespaceList(
+            metadata=client.V1ListMeta(resource_version="180"),
+            items=[ns1, ns2])
+
+        def _list_or_watch(*args, **kwargs):
+            return fake_resp if kwargs.get('watch') else fake_list
+
+        fake_api = Mock()
+        fake_api.list_namespaces = Mock(side_effect=_list_or_watch)
+        fake_api.list_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        events = []
+        for e in w.stream(fake_api.list_namespaces, timeout_seconds=1):
+            events.append(e)
+
+        # The two existing namespaces must appear first as ADDED events.
+        self.assertEqual(len(events), 3)
+        self.assertEqual(events[0]['type'], 'ADDED')
+        self.assertEqual(events[0]['object'].metadata.name, 'ns-one')
+        self.assertEqual(events[1]['type'], 'ADDED')
+        self.assertEqual(events[1]['object'].metadata.name, 'ns-two')
+        # The new event from the watch stream follows.
+        self.assertEqual(events[2]['type'], 'MODIFIED')
+        self.assertEqual(events[2]['object'].metadata.name, 'ns-new')
+
+        # The watch must have started from the list's resourceVersion.
+        fake_api.list_namespaces.assert_has_calls([
+            call(),
+            call(_preload_content=False, watch=True,
+                 timeout_seconds=1, resource_version="180"),
+        ])
+        self.assertEqual(w.resource_version, "200")
+
     def test_watch_stream_twice(self):
         w = Watch(float)
         for step in ['first', 'second']:
@@ -312,7 +377,10 @@ class WatchTests(unittest.TestCase):
                     w.stop()
 
             self.assertEqual(count, 3)
-            fake_api.get_namespaces.assert_called_once_with(
+            # The function is called twice per stream() invocation: once for
+            # the initial list call and once for the actual watch call.
+            self.assertEqual(fake_api.get_namespaces.call_count, 2)
+            fake_api.get_namespaces.assert_called_with(
                 _preload_content=False, watch=True)
             fake_resp.stream.assert_called_once_with(
                 amt=None, decode_content=False)
@@ -346,7 +414,9 @@ class WatchTests(unittest.TestCase):
                 w.stop()
 
         self.assertEqual(count, 2)
-        self.assertEqual(fake_api.get_namespaces.call_count, 2)
+        # Each stream() call makes 2 API calls: initial list + watch.
+        # Two stream() calls = 4 total API calls.
+        self.assertEqual(fake_api.get_namespaces.call_count, 4)
         self.assertEqual(fake_resp.stream.call_count, 2)
         self.assertEqual(fake_resp.close.call_count, 2)
         self.assertEqual(fake_resp.release_conn.call_count, 2)
@@ -423,8 +493,9 @@ class WatchTests(unittest.TestCase):
             pass
             # expected
 
-        fake_api.get_thing.assert_called_once_with(
+        fake_api.get_thing.assert_called_with(
             _preload_content=False, watch=True)
+        self.assertEqual(fake_api.get_thing.call_count, 2)
         fake_resp.stream.assert_called_once_with(
             amt=None, decode_content=False)
         fake_resp.close.assert_called_once()
@@ -447,8 +518,9 @@ class WatchTests(unittest.TestCase):
         # No retry is attempted either, preventing an ApiException
         assert not list(w.stream(fake_api.get_thing))
 
-        fake_api.get_thing.assert_called_once_with(
+        fake_api.get_thing.assert_called_with(
             _preload_content=False, watch=True)
+        self.assertEqual(fake_api.get_thing.call_count, 2)
         fake_resp.stream.assert_called_once_with(
             amt=None, decode_content=False)
         fake_resp.close.assert_called_once()
@@ -500,8 +572,9 @@ class WatchTests(unittest.TestCase):
         except client.rest.ApiException:
             pass
 
-        fake_api.get_thing.assert_called_once_with(
+        fake_api.get_thing.assert_called_with(
             _preload_content=False, watch=True, timeout_seconds=10)
+        self.assertEqual(fake_api.get_thing.call_count, 2)
         fake_resp.stream.assert_called_once_with(
             amt=None, decode_content=False)
         fake_resp.close.assert_called_once()
