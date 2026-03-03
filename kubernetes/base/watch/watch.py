@@ -194,18 +194,17 @@ class Watch(object):
         # after a 410 uses a valid, recent resourceVersion rather than a
         # potentially stale one from an individual resource event.
         if watch_arg == 'watch' and self.resource_version is None:
+            _list_excluded = {watch_arg, '_preload_content',
+                              'allow_watch_bookmarks', 'timeout_seconds'}
             list_kwargs = {k: v for k, v in kwargs.items()
-                          if k not in (watch_arg, '_preload_content',
-                                       'allow_watch_bookmarks',
-                                       'timeout_seconds')}
+                          if k not in _list_excluded}
             initial_list = func(*args, **list_kwargs)
             if (hasattr(initial_list, 'metadata')
                     and hasattr(initial_list.metadata, 'resource_version')
                     and isinstance(
                         initial_list.metadata.resource_version, str)
                     and initial_list.metadata.resource_version):
-                self.resource_version = \
-                    initial_list.metadata.resource_version
+                self.resource_version = initial_list.metadata.resource_version
                 kwargs['resource_version'] = self.resource_version
             if (hasattr(initial_list, 'items')
                     and isinstance(initial_list.items, list)):

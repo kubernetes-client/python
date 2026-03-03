@@ -15,7 +15,6 @@
 import os
 import time
 import unittest
-from types import SimpleNamespace
 from unittest.mock import Mock, call
 
 from kubernetes import client, config
