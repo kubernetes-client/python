@@ -5,6 +5,11 @@ Please read the description at the top of each example for more information
 about what the script does and any prerequisites. Most scripts also include
 comments throughout the code.
 
+## Available Examples
+
+- pod_logs.py — basic (blocking) pod log streaming example
+- pod_logs_non_blocking.py — non-blocking streaming of pod logs with graceful shutdown
+
 ## Setup
 
 These scripts require Python 2.7 or 3.5+ and the Kubernetes client which can be
