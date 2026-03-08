@@ -285,6 +285,11 @@ class ApiClient(object):
                 return {k: self.__deserialize(v, sub_kls)
                         for k, v in six.iteritems(data)}
 
+            if klass.startswith('dict['):
+                sub_kls = re.match(r'dict\[([^,]*),\s*(.*)\]', klass).group(2)
+                return {k: self.__deserialize(v, sub_kls)
+                        for k, v in six.iteritems(data)}
+
             # convert str to class
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]

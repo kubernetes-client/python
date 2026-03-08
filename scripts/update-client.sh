@@ -78,6 +78,12 @@ git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 # once we upgrade to a version of swagger-codegen that includes it (version>= 6.6.0).
 # See https://github.com/OpenAPITools/openapi-generator/pull/15283
 git apply "${SCRIPT_ROOT}/rest_sni_patch.diff"
+# Support dict[str, str] syntax in ApiClient deserializer alongside legacy
+# dict(str, str). This enables forward compatibility with modern Python typing
+# syntax while maintaining backward compatibility. Users can now convert
+# openapi_types for Pydantic integration.
+# See https://github.com/kubernetes-client/python/issues/2463
+git apply "${SCRIPT_ROOT}/api_client_dict_syntax.diff"
 # The following is commented out due to:
 # AttributeError: 'RESTResponse' object has no attribute 'headers'
 # OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
