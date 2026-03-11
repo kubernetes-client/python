@@ -83,7 +83,11 @@ class TestSharedInformerE2E(unittest.TestCase):
         self.addCleanup(inf.stop)
 
         self._wait_in_cache(inf, "default/" + name)
-        self.assertEqual(_name_of(inf.cache.get_by_key("default/" + name)), name)
+        cached = inf.cache.get_by_key("default/" + name)
+        self.assertEqual(_name_of(cached), name)
+        # Verify the cached object actually contains the expected data payload.
+        data = cached.data if hasattr(cached, "data") else (cached.get("data") or {})
+        self.assertEqual(data.get("k"), "v")
 
     def test_added_event_and_cache_entry(self):
         """Creating a ConfigMap fires ADDED and the object appears in the cache."""
@@ -127,7 +131,11 @@ class TestSharedInformerE2E(unittest.TestCase):
             name=name, namespace="default", body={"data": {"k": "updated"}}
         )
         self._expect(seen, "MODIFIED/" + name)
-        self.assertIsNotNone(inf.cache.get_by_key("default/" + name))
+        # Verify that the cache now holds the updated data.
+        cached = inf.cache.get_by_key("default/" + name)
+        self.assertIsNotNone(cached)
+        data = cached.data if hasattr(cached, "data") else (cached.get("data") or {})
+        self.assertEqual(data.get("k"), "updated")
 
     def test_deleted_event_removes_from_cache(self):
         """Deleting a ConfigMap fires DELETED and removes it from the cache."""

@@ -173,6 +173,12 @@ class SharedInformer:
         return kw
 
     def _fire(self, event_type, obj):
+        """Execute all registered callbacks for *event_type*, passing *obj*.
+
+        Callbacks are invoked sequentially on the informer's background thread.
+        Any exception raised by an individual handler is logged and swallowed so
+        that remaining handlers still run.
+        """
         with self._handler_lock:
             handlers = list(self._handlers.get(event_type, []))
         for fn in handlers:
@@ -254,6 +260,13 @@ class SharedInformer:
             self._watch = Watch()
             kw = self._build_kwargs()
             kw["resource_version"] = self._resource_version
+            # When a resync period is configured, set a matching server-side
+            # watch timeout so that the stream exits after resync_period seconds
+            # even if no events arrive.  Without this, a quiet period longer
+            # than resync_period would never trigger a resync because the check
+            # below only runs when the generator yields an event.
+            if self._resync_period > 0:
+                kw["timeout_seconds"] = max(1, int(self._resync_period))
             try:
                 for event in self._watch.stream(self._list_func, **kw):
                     if self._stop_event.is_set():
@@ -282,19 +295,6 @@ class SharedInformer:
                         self._fire(BOOKMARK, event.get("raw_object", obj))
                     elif evt_type == ERROR:
                         self._fire(ERROR, obj)
-                    # Periodic resync: full re-list from the API server, firing
-                    # ADDED/MODIFIED/DELETED for any changes since the last list.
-                    if (
-                        self._resync_period > 0
-                        and (time.monotonic() - last_resync) >= self._resync_period
-                    ):
-                        logger.debug("Informer resync triggered")
-                        try:
-                            self._initial_list()
-                        except Exception as exc:
-                            logger.exception("Error during resync list; continuing")
-                            self._fire(ERROR, exc)
-                        last_resync = time.monotonic()
             except ApiException as exc:
                 if exc.status == 410:
                     # The stored resource version is too old; force a full re-list.
@@ -323,3 +323,20 @@ class SharedInformer:
                 ):
                     self._resource_version = self._watch.resource_version
                 self._watch = None
+
+            # Periodic resync: after the watch stream exits (whether due to the
+            # server-side timeout_seconds, a stop request, or an error) check if
+            # a resync is due.  This path is what actually fires the resync when
+            # the cluster is quiet and no events arrive for resync_period seconds.
+            if (
+                not self._stop_event.is_set()
+                and self._resource_version is not None  # 410 already schedules a re-list
+                and self._resync_period > 0
+                and (time.monotonic() - last_resync) >= self._resync_period
+            ):
+                logger.debug("Informer resync triggered")
+                try:
+                    self._initial_list()
+                except Exception as exc:
+                    logger.exception("Error during resync list; continuing")
+                    self._fire(ERROR, exc)

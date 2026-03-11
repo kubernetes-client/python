@@ -114,6 +114,14 @@ class TestObjectCache(unittest.TestCase):
         for t in threads:
             t.join()
         self.assertEqual(errors, [])
+        # Verify that the cache actually holds the objects that were put into it.
+        for n in range(5):
+            for i in range(50):
+                key = "default/pod-{}-{}".format(n, i)
+                self.assertIsNotNone(
+                    self.cache.get_by_key(key),
+                    "expected key {} in cache".format(key),
+                )
 
 
 class TestSharedInformerHandlers(unittest.TestCase):
@@ -360,7 +368,13 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertIs(cached[0], pod)
 
     def test_resync_period_triggers_full_list(self):
-        """A full List call must be made to the API server on every resync_period."""
+        """A full List call must be made to the API server on every resync_period.
+
+        With the new implementation the watch stream is given a server-side
+        timeout equal to resync_period (via timeout_seconds).  When the stream
+        exits, the elapsed-time check fires the resync even if no events
+        arrived – this is exactly the scenario this test exercises.
+        """
         pod = _make_pod("default", "resync-pod")
 
         list_func = MagicMock()
@@ -371,20 +385,31 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         informer = SharedInformer(list_func=list_func, resync_period=60)
 
+        stream_calls = {"n": 0}
+
         with patch("kubernetes.informer.informer.Watch") as MockWatch, \
                 patch("kubernetes.informer.informer.time") as mock_time:
-            # Sequence of time.monotonic() calls:
-            #   1. last_resync = time.monotonic()          → 0.0
-            #   2. (time.monotonic() - last_resync) check  → 61.0  (triggers resync)
-            #   3. last_resync = time.monotonic()          → 61.0  (reset after resync)
+            # Sequence of time.monotonic() calls inside _run_loop:
+            #   1. last_resync = time.monotonic()            → 0.0  (watch-loop start)
+            #   2. post-stream: time.monotonic()             → 61.0 (≥60 → resync fires)
+            #   3. last_resync = time.monotonic()            → 61.0 (second watch-loop start)
+            # The stop_event is set during the second stream, so the
+            # post-stream check is short-circuited and no further calls occur.
             mock_time.monotonic.side_effect = [0.0, 61.0, 61.0]
+            mock_time.sleep = time.sleep  # keep real sleep/wait working
 
             mock_w = MagicMock()
             mock_w.resource_version = "5"
 
             def fake_stream(func, **kw):
-                yield {"type": "ADDED", "object": pod}
+                stream_calls["n"] += 1
+                if stream_calls["n"] == 1:
+                    # Simulate the stream timing out (timeout_seconds expired)
+                    # with no events – the resync should fire after this returns.
+                    return iter([])
+                # Second iteration: stop the informer.
                 informer._stop_event.set()
+                return iter([])
 
             mock_w.stream.side_effect = fake_stream
             MockWatch.return_value = mock_w
@@ -955,8 +980,12 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
             return resp
 
         modified = []
+        added = []
+        deleted = []
         informer = SharedInformer(list_func=list_func)
         informer.add_event_handler(MODIFIED, modified.append)
+        informer.add_event_handler(ADDED, added.append)
+        informer.add_event_handler(DELETED, deleted.append)
 
         stream_calls = {"n": 0}
 
@@ -980,6 +1009,11 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         # pod was in both the initial list (call 1) and the re-list (call 2).
         # On the re-list it should fire MODIFIED (not ADDED again).
         self.assertIn(pod, modified)
+        # ADDED fires exactly once: for the initial list.  The re-list must
+        # NOT fire a second ADDED for an already-cached item.
+        self.assertEqual(len(added), 1, "ADDED should fire once (initial list) but not again on re-list")
+        # DELETED must not fire for an item present in both lists.
+        self.assertEqual(deleted, [], "DELETED should not fire for an item present in both lists")
         # Still in cache.
         self.assertIsNotNone(informer.cache.get_by_key("default/stable-pod"))
 
