@@ -16,6 +16,8 @@ import json
 import pydoc
 import sys
 
+from urllib3.exceptions import ProtocolError, ReadTimeoutError
+
 from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":return:"
@@ -154,6 +156,14 @@ class Watch(object):
         :param func: The API function pointer. Any parameter to the function
                      can be passed after this parameter.
 
+        :param int _health_check_interval: Optional. Number of seconds to wait
+            for data before assuming the connection has been silently dropped
+            (e.g., during a control plane upgrade). When set to a value > 0,
+            the watch will automatically detect silent connection drops and
+            reconnect using the last known resource_version. Default is 0
+            (disabled). This is useful for long-running watches that need to
+            survive cluster upgrades.
+
         :return: Event object with these keys:
                    'type': The type of event such as "ADDED", "DELETED", etc.
                    'raw_object': a dict representing the watched object.
@@ -172,6 +182,11 @@ class Watch(object):
                 ...
                 if should_stop:
                     watch.stop()
+
+        Example with health check (survives control plane upgrades):
+            for e in watch.stream(v1.list_namespace, _health_check_interval=30):
+                # If no data received for 30s, watch reconnects automatically
+                print(e['type'], e['object'].metadata.name)
         """
 
         self._stop = False
@@ -187,6 +202,20 @@ class Watch(object):
         disable_retries = ('timeout_seconds' in kwargs)
         retry_after_410 = False
         deserialize = kwargs.pop('deserialize', True)
+
+        # Health check interval: when > 0, sets a read timeout on the
+        # HTTP connection so that silent connection drops (e.g., during
+        # control plane upgrades) are detected and the watch reconnects.
+        # A value of 0 (default) disables this feature.
+        health_check_interval = kwargs.pop('_health_check_interval', 0)
+
+        # If health check is enabled and user hasn't set an explicit
+        # request timeout, use the health check interval as the read
+        # timeout. This causes urllib3 to raise ReadTimeoutError if no
+        # data arrives within the interval, which we catch below.
+        if health_check_interval > 0 and '_request_timeout' not in kwargs:
+            kwargs['_request_timeout'] = health_check_interval
+
         while True:
             resp = func(*args, **kwargs)
             try:
@@ -217,12 +246,20 @@ class Watch(object):
                             retry_after_410 = False
                             yield event
                     else:
-                        if line:  
+                        if line:
                             yield line  # Normal non-empty line
-                        else:  
-                            yield ''  # Only yield one empty line  
+                        else:
+                            yield ''  # Only yield one empty line
                     if self._stop:
                         break
+            except (ReadTimeoutError, ProtocolError) as e:
+                # If health check is enabled, treat a read timeout as a
+                # silent connection drop and allow the outer while loop
+                # to reconnect using the last known resource_version.
+                if health_check_interval > 0:
+                    pass  # Fall through to retry logic below
+                else:
+                    raise
             finally:
                 resp.close()
                 resp.release_conn()

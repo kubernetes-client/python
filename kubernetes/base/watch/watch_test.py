@@ -17,6 +17,8 @@ import time
 import unittest
 from unittest.mock import Mock, call
 
+from urllib3.exceptions import ReadTimeoutError
+
 from kubernetes import client, config
 from kubernetes.client import ApiException
 
@@ -625,6 +627,202 @@ class WatchTests(unittest.TestCase):
 #            call(_preload_content=False, watch=True)
 #        ])
     
+
+    def test_health_check_detects_silent_drop_and_reconnects(self):
+        """Test that _health_check_interval detects a silent connection drop
+        (simulated by ReadTimeoutError) and reconnects automatically,
+        continuing to yield events from the new connection."""
+
+        # First response: yields one event, then raises ReadTimeoutError
+        # (simulating a silent connection drop during control plane upgrade)
+        fake_resp_1 = Mock()
+        fake_resp_1.close = Mock()
+        fake_resp_1.release_conn = Mock()
+
+        def stream_then_timeout(*args, **kwargs):
+            yield '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}}}\n'
+            raise ReadTimeoutError(pool=None, url=None, message="Read timed out")
+
+        fake_resp_1.stream = Mock(side_effect=stream_then_timeout)
+
+        # Second response: yields another event (after reconnect)
+        fake_resp_2 = Mock()
+        fake_resp_2.close = Mock()
+        fake_resp_2.release_conn = Mock()
+        fake_resp_2.stream = Mock(
+            return_value=[
+                '{"type": "ADDED", "object": {"metadata": {"name": "test2", "resourceVersion": "2"}}}\n'
+            ])
+
+        fake_api = Mock()
+        # First call returns the stream that will timeout,
+        # second call returns the stream with new events
+        fake_api.get_namespaces = Mock(side_effect=[fake_resp_1, fake_resp_2])
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        events = []
+        # Note: we do NOT pass timeout_seconds here because that disables
+        # retries. The watch should reconnect after the ReadTimeoutError
+        # and then stop naturally when the second stream ends (resource_version
+        # is set from the first event, so the finally block won't set _stop).
+        for e in w.stream(fake_api.get_namespaces,
+                          _health_check_interval=5):
+            events.append(e)
+            # Stop after collecting events from both connections
+            if len(events) == 2:
+                w.stop()
+
+        # Should have received events from both connections
+        self.assertEqual(2, len(events))
+        self.assertEqual("test1", events[0]['object'].metadata.name)
+        self.assertEqual("test2", events[1]['object'].metadata.name)
+
+        # Verify the API was called twice (initial + reconnect)
+        self.assertEqual(2, fake_api.get_namespaces.call_count)
+
+        # Verify both responses were properly closed
+        fake_resp_1.close.assert_called_once()
+        fake_resp_1.release_conn.assert_called_once()
+        fake_resp_2.close.assert_called_once()
+        fake_resp_2.release_conn.assert_called_once()
+
+    def test_health_check_disabled_by_default(self):
+        """Test that without _health_check_interval, a ReadTimeoutError
+        propagates to the caller (backward compatibility)."""
+
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+
+        def stream_then_timeout(*args, **kwargs):
+            yield '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}}}\n'
+            raise ReadTimeoutError(pool=None, url=None, message="Read timed out")
+
+        fake_resp.stream = Mock(side_effect=stream_then_timeout)
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        events = []
+        with self.assertRaises(ReadTimeoutError):
+            for e in w.stream(fake_api.get_namespaces):
+                events.append(e)
+
+        # Should have received the one event before the timeout
+        self.assertEqual(1, len(events))
+        self.assertEqual("test1", events[0]['object'].metadata.name)
+
+        # Verify the response was properly closed even after exception
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
+
+    def test_health_check_sets_request_timeout(self):
+        """Test that _health_check_interval sets _request_timeout on the
+        API call when no explicit _request_timeout is provided."""
+
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.stream = Mock(
+            return_value=[
+                '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}}}\n'
+            ])
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        for e in w.stream(fake_api.get_namespaces,
+                          _health_check_interval=30,
+                          timeout_seconds=10):
+            pass
+
+        # Verify _request_timeout was set to the health check interval
+        fake_api.get_namespaces.assert_called_once_with(
+            _preload_content=False, watch=True,
+            timeout_seconds=10, _request_timeout=30)
+
+    def test_health_check_preserves_explicit_request_timeout(self):
+        """Test that _health_check_interval does NOT override an explicit
+        _request_timeout provided by the user."""
+
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.stream = Mock(
+            return_value=[
+                '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "1"}}}\n'
+            ])
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        for e in w.stream(fake_api.get_namespaces,
+                          _health_check_interval=30,
+                          _request_timeout=60,
+                          timeout_seconds=10):
+            pass
+
+        # Verify the user's _request_timeout (60) was preserved, not overridden
+        fake_api.get_namespaces.assert_called_once_with(
+            _preload_content=False, watch=True,
+            timeout_seconds=10, _request_timeout=60)
+
+    def test_health_check_reconnects_with_resource_version(self):
+        """Test that after a silent drop, the reconnect uses the last known
+        resource_version so no events are missed."""
+
+        # First response: yields events with resource versions, then times out
+        fake_resp_1 = Mock()
+        fake_resp_1.close = Mock()
+        fake_resp_1.release_conn = Mock()
+
+        def stream_then_timeout(*args, **kwargs):
+            yield '{"type": "ADDED", "object": {"metadata": {"name": "test1", "resourceVersion": "100"}}}\n'
+            yield '{"type": "MODIFIED", "object": {"metadata": {"name": "test1", "resourceVersion": "101"}}}\n'
+            raise ReadTimeoutError(pool=None, url=None, message="Read timed out")
+
+        fake_resp_1.stream = Mock(side_effect=stream_then_timeout)
+
+        # Second response: yields more events
+        fake_resp_2 = Mock()
+        fake_resp_2.close = Mock()
+        fake_resp_2.release_conn = Mock()
+        fake_resp_2.stream = Mock(
+            return_value=[
+                '{"type": "ADDED", "object": {"metadata": {"name": "test2", "resourceVersion": "102"}}}\n'
+            ])
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(side_effect=[fake_resp_1, fake_resp_2])
+        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+
+        w = Watch()
+        events = []
+        # Note: no timeout_seconds so retries are enabled
+        for e in w.stream(fake_api.get_namespaces,
+                          _health_check_interval=5):
+            events.append(e)
+            if len(events) == 3:
+                w.stop()
+
+        self.assertEqual(3, len(events))
+
+        # Verify the second call used the last resource_version from the
+        # first connection (101) so no events are missed
+        calls = fake_api.get_namespaces.call_args_list
+        self.assertEqual(2, len(calls))
+        # First call: no resource_version
+        self.assertNotIn('resource_version', calls[0].kwargs)
+        # Second call: should have resource_version=101
+        self.assertEqual('101', calls[1].kwargs['resource_version'])
+
 
 if __name__ == '__main__':
     unittest.main()
