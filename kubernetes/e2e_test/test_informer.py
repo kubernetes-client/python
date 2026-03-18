@@ -1,4 +1,4 @@
-# Copyright 2024 The Kubernetes Authors.
+# Copyright 2026 The Kubernetes Authors.
 # Licensed under the Apache License, Version 2.0 (the "License").
 # End-to-end tests for kubernetes.informer.SharedInformer.
 
@@ -179,6 +179,46 @@ class TestSharedInformerE2E(unittest.TestCase):
         self.api.create_namespaced_config_map(body=_cm(name), namespace="default")
         self._expect(seen, "ADDED/" + name)
         self.assertGreater(int(inf._resource_version), rv_before)
+
+
+    def test_resync_fires_modified_for_existing_objects(self):
+        """Periodic resync re-lists from the API server and fires MODIFIED for cached objects.
+
+        A short resync_period (5 s) is used so the test completes quickly.
+        After the informer has cached the ConfigMap via the initial list, we
+        wait for a MODIFIED event that is fired by the resync, verifying that
+        the resync actually contacts the API server and triggers callbacks.
+        """
+        name = "inf-rsync-" + _uid()
+        self.api.create_namespaced_config_map(body=_cm(name), namespace="default")
+        self.addCleanup(self._drop, name)
+
+        added = threading.Event()
+        resynced = threading.Event()
+
+        inf = SharedInformer(
+            list_func=self.api.list_namespaced_config_map,
+            namespace="default",
+            label_selector="inf-e2e=1",
+            resync_period=5,
+        )
+        inf.add_event_handler(ADDED, lambda o: added.set() if _name_of(o) == name else None)
+        # The resync fires MODIFIED for existing cached objects; wait for it.
+        inf.add_event_handler(MODIFIED, lambda o: resynced.set() if _name_of(o) == name else None)
+        inf.start()
+        self.addCleanup(inf.stop)
+
+        # First, wait for the object to be added to the cache.
+        self._expect(added, "ADDED/" + name)
+        # Then wait for the resync to fire MODIFIED (allow up to 3× resync_period).
+        if not resynced.wait(timeout=15):
+            self.fail("Timeout waiting for resync MODIFIED/" + name)
+
+        # Verify the cached object still holds the expected data.
+        cached = inf.cache.get_by_key("default/" + name)
+        self.assertIsNotNone(cached)
+        data = cached.data if hasattr(cached, "data") else (cached.get("data") or {})
+        self.assertEqual(data.get("k"), "v")
 
 
 if __name__ == "__main__":
