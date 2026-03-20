@@ -253,11 +253,20 @@ class Watch(object):
                     if self._stop:
                         break
             except (ReadTimeoutError, ProtocolError) as e:
-                # If health check is enabled, treat a read timeout as a
-                # silent connection drop and allow the outer while loop
-                # to reconnect using the last known resource_version.
-                if health_check_interval > 0:
-                    pass  # Fall through to retry logic below
+                # Only treat a read timeout / protocol error as a silent
+                # connection drop when we will actually retry:
+                #  - health checks are enabled (so we expect periodic timeouts),
+                #  - retries are not disabled, and
+                #  - for watch streams, we have a resumable resource_version.
+                should_retry = (
+                    health_check_interval > 0
+                    and not disable_retries
+                    and watch_arg == "watch"
+                    and self.resource_version is not None
+                )
+                if should_retry:
+                    # Fall through to the retry logic in the outer loop.
+                    pass
                 else:
                     raise
             finally:
