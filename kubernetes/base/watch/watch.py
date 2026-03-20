@@ -15,6 +15,7 @@
 import json
 import pydoc
 import sys
+import time
 
 from urllib3.exceptions import ProtocolError, ReadTimeoutError
 
@@ -214,7 +215,7 @@ class Watch(object):
         # timeout. This causes urllib3 to raise ReadTimeoutError if no
         # data arrives within the interval, which we catch below.
         if health_check_interval > 0 and '_request_timeout' not in kwargs:
-            kwargs['_request_timeout'] = health_check_interval
+            kwargs['_request_timeout'] = (None, health_check_interval)
 
         while True:
             resp = func(*args, **kwargs)
@@ -253,11 +254,7 @@ class Watch(object):
                     if self._stop:
                         break
             except (ReadTimeoutError, ProtocolError) as e:
-                # Only treat a read timeout / protocol error as a silent
-                # connection drop when we will actually retry:
-                #  - health checks are enabled (so we expect periodic timeouts),
-                #  - retries are not disabled, and
-                #  - for watch streams, we have a resumable resource_version.
+                # Only treat a read timeout / protocol error as a silent connection drop
                 should_retry = (
                     health_check_interval > 0
                     and not disable_retries
@@ -265,8 +262,9 @@ class Watch(object):
                     and self.resource_version is not None
                 )
                 if should_retry:
-                    # Fall through to the retry logic in the outer loop.
-                    pass
+                    # Add a small sleep to avoid a tight reconnect loop
+                    # in case the endpoint is hard-down or errors immediately.
+                    time.sleep(min(1.0,health_check_interval))
                 else:
                     raise
             finally:

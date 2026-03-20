@@ -744,7 +744,7 @@ class WatchTests(unittest.TestCase):
         # Verify _request_timeout was set to the health check interval
         fake_api.get_namespaces.assert_called_once_with(
             _preload_content=False, watch=True,
-            timeout_seconds=10, _request_timeout=30)
+            timeout_seconds=10, _request_timeout=(None,30))
 
     def test_health_check_preserves_explicit_request_timeout(self):
         """Test that _health_check_interval does NOT override an explicit
