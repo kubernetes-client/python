@@ -187,6 +187,45 @@ class Watch(object):
         disable_retries = ('timeout_seconds' in kwargs)
         retry_after_410 = False
         deserialize = kwargs.pop('deserialize', True)
+
+        # If no resource_version is specified for a watch (not a log follow),
+        # perform an initial list call to get the current resourceVersion from
+        # the list metadata. This ensures that any subsequent watch restart
+        # after a 410 uses a valid, recent resourceVersion rather than a
+        # potentially stale one from an individual resource event.
+        if watch_arg == 'watch' and self.resource_version is None:
+            _list_excluded = {watch_arg, '_preload_content',
+                              'allow_watch_bookmarks', 'timeout_seconds'}
+            list_kwargs = {k: v for k, v in kwargs.items()
+                          if k not in _list_excluded}
+            initial_list = func(*args, **list_kwargs)
+            if (hasattr(initial_list, 'metadata')
+                    and hasattr(initial_list.metadata, 'resource_version')
+                    and isinstance(
+                        initial_list.metadata.resource_version, str)
+                    and initial_list.metadata.resource_version):
+                self.resource_version = initial_list.metadata.resource_version
+                kwargs['resource_version'] = self.resource_version
+            if (hasattr(initial_list, 'items')
+                    and isinstance(initial_list.items, list)):
+                for item in initial_list.items:
+                    raw_obj = \
+                        self._api_client.sanitize_for_serialization(item)
+                    if deserialize:
+                        yield {
+                            'type': 'ADDED',
+                            'object': item,
+                            'raw_object': raw_obj,
+                        }
+                    else:
+                        yield {
+                            'type': 'ADDED',
+                            'object': raw_obj,
+                            'raw_object': raw_obj,
+                        }
+                    if self._stop:
+                        return
+
         while True:
             resp = func(*args, **kwargs)
             try:
