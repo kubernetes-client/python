@@ -367,6 +367,113 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertEqual(len(cached), 1)
         self.assertIs(cached[0], pod)
 
+    def test_bookmark_advances_resource_version(self):
+        """A BOOKMARK event causes the informer's _resource_version to advance.
+
+        PR #2505 added BOOKMARK-aware handling to Watch.unmarshal_event: it
+        extracts resourceVersion from the raw BOOKMARK dict and stores it on
+        self.resource_version *without* deserialising the object (because
+        BOOKMARK events may be incomplete).  The informer must read that value
+        back so that the next watch reconnect starts from the BOOKMARK's RV
+        rather than the initial-list RV.
+        """
+        bookmark_obj = {"metadata": {"resourceVersion": "100"}}
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="5")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            # Simulate Watch.unmarshal_event updating resource_version on BOOKMARK.
+            mock_w.resource_version = "100"
+
+            def fake_stream(func, **kw):
+                yield {"type": "BOOKMARK", "object": bookmark_obj, "raw_object": bookmark_obj}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        # The informer must have synced the RV from the BOOKMARK.
+        self.assertEqual(informer._resource_version, "100")
+
+    def test_bookmark_handler_receives_raw_dict(self):
+        """BOOKMARK handlers receive the raw dict, not a deserialized model.
+
+        Watch intentionally skips deserialization for BOOKMARK events (PR #2505)
+        because BOOKMARK objects may be incomplete. The informer passes
+        ``event.get('raw_object', obj)`` to the BOOKMARK handler, so it must
+        always be a dict rather than a typed Kubernetes model object.
+        """
+        bookmark_obj = {"metadata": {"resourceVersion": "77"}}
+        received = []
+
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+        informer.add_event_handler(BOOKMARK, received.append)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = "77"
+
+            def fake_stream(func, **kw):
+                yield {"type": "BOOKMARK", "object": bookmark_obj, "raw_object": bookmark_obj}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(len(received), 1)
+        # Must be the raw dict, not a deserialized model.
+        self.assertIsInstance(received[0], dict)
+        self.assertEqual(received[0]["metadata"]["resourceVersion"], "77")
+
+    def test_multiple_bookmarks_advance_resource_version_to_latest(self):
+        """Multiple BOOKMARK events each update _resource_version to the latest value."""
+        list_func = MagicMock()
+        list_resp = MagicMock()
+        list_resp.items = []
+        list_resp.metadata = MagicMock(resource_version="1")
+        list_func.return_value = list_resp
+
+        informer = SharedInformer(list_func=list_func)
+
+        rv_sequence = iter(["10", "20", "30"])
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+
+            def fake_stream(func, **kw):
+                for rv in ["10", "20", "30"]:
+                    bk = {"metadata": {"resourceVersion": rv}}
+                    mock_w.resource_version = rv
+                    yield {"type": "BOOKMARK", "object": bk, "raw_object": bk}
+                informer._stop_event.set()
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(informer._resource_version, "30")
+
     def test_resync_period_triggers_full_list(self):
         """A full List call must be made to the API server on every resync_period.
 
