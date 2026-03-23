@@ -264,7 +264,7 @@ class Watch(object):
                 if should_retry:
                     # Add a small sleep to avoid a tight reconnect loop
                     # in case the endpoint is hard-down or errors immediately.
-                    time.sleep(min(1.0,health_check_interval))
+                    time.sleep(min(1.0, health_check_interval))
                 else:
                     raise
             finally:
