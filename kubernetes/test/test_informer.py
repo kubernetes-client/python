@@ -389,10 +389,15 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         with patch("kubernetes.informer.informer.Watch") as MockWatch:
             mock_w = MagicMock()
-            # Simulate Watch.unmarshal_event updating resource_version on BOOKMARK.
-            mock_w.resource_version = "100"
+            # Start at the initial-list RV; fake_stream will advance it to the
+            # BOOKMARK's RV, mirroring how Watch.unmarshal_event updates
+            # self.resource_version before yielding a BOOKMARK event.
+            mock_w.resource_version = "5"
 
             def fake_stream(func, **kw):
+                # Simulate Watch.unmarshal_event setting resource_version from
+                # the BOOKMARK metadata before the event is yielded.
+                mock_w.resource_version = "100"
                 yield {"type": "BOOKMARK", "object": bookmark_obj, "raw_object": bookmark_obj}
                 informer._stop_event.set()
 
@@ -402,7 +407,8 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
             informer.start()
             informer._thread.join(timeout=3)
 
-        # The informer must have synced the RV from the BOOKMARK.
+        # The informer must have synced the RV from the BOOKMARK, not the
+        # stale initial-list RV ("5").
         self.assertEqual(informer._resource_version, "100")
 
     def test_bookmark_handler_receives_raw_dict(self):
