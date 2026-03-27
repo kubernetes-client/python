@@ -161,15 +161,28 @@ class Configuration(object):
         self.proxy = None
         """Proxy URL
         """
-        self.no_proxy = None
-# Load proxy from environment variables (if set)
+
+        self.no_proxy = []
+        # Load proxy from environment variables (if set)
         if os.getenv("HTTPS_PROXY"): self.proxy = os.getenv("HTTPS_PROXY")
         if os.getenv("https_proxy"): self.proxy = os.getenv("https_proxy")
         if os.getenv("HTTP_PROXY"): self.proxy = os.getenv("HTTP_PROXY")
         if os.getenv("http_proxy"): self.proxy = os.getenv("http_proxy")
-        # Load no_proxy from environment variables (if set)
-        if os.getenv("NO_PROXY"): self.no_proxy = os.getenv("NO_PROXY")
-        if os.getenv("no_proxy"): self.no_proxy = os.getenv("no_proxy")
+        # Load and parse no_proxy from environment variables
+        # Check for uppercase NO_PROXY first (should take precedence)
+        no_proxy_env = None
+        # Check if NO_PROXY exists in environment (even if empty)
+        if "NO_PROXY" in os.environ:
+            no_proxy_env = os.getenv("NO_PROXY")
+        elif "no_proxy" in os.environ:
+            no_proxy_env = os.getenv("no_proxy")
+            
+        if no_proxy_env is not None and no_proxy_env != "":
+            self.no_proxy = [
+                domain.strip()
+                for domain in no_proxy_env.split(",")
+                if domain.strip()
+            ]
         """bypass proxy for host in the no_proxy list.
         """
         self.proxy_headers = None
