@@ -154,7 +154,12 @@ class RESTClientObject(object):
             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
                 if query_params:
                     url += '?' + urlencode(query_params)
-                if re.search('json', headers['Content-Type'], re.IGNORECASE):
+                if (re.search('json', headers['Content-Type'], re.IGNORECASE) or
+                        headers['Content-Type'] == 'application/apply-patch+yaml'):
+                    if headers['Content-Type'] == 'application/json-patch+json':
+                        if not isinstance(body, list):
+                            headers['Content-Type'] = \
+                                'application/strategic-merge-patch+json'
                     request_body = None
                     if body is not None:
                         request_body = json.dumps(body)
