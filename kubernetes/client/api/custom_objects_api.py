@@ -3349,7 +3349,7 @@ class CustomObjectsApi(object):
         # HTTP header `Content-Type`
         content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/merge-patch+json'],
+                ['application/merge-patch+json'],
                 'PATCH', body_params))  # noqa: E501
         if content_types_list:
                 header_params['Content-Type'] = content_types_list
@@ -3563,7 +3563,7 @@ class CustomObjectsApi(object):
         # HTTP header `Content-Type`
         content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/merge-patch+json'],
+                ['application/merge-patch+json'],
                 'PATCH', body_params))  # noqa: E501
         if content_types_list:
                 header_params['Content-Type'] = content_types_list
@@ -3777,7 +3777,7 @@ class CustomObjectsApi(object):
         # HTTP header `Content-Type`
         content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/merge-patch+json'],
+                ['application/merge-patch+json'],
                 'PATCH', body_params))  # noqa: E501
         if content_types_list:
                 header_params['Content-Type'] = content_types_list
@@ -4001,7 +4001,7 @@ class CustomObjectsApi(object):
         # HTTP header `Content-Type`
         content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/merge-patch+json'],
+                ['application/merge-patch+json'],
                 'PATCH', body_params))  # noqa: E501
         if content_types_list:
                 header_params['Content-Type'] = content_types_list
@@ -4225,7 +4225,7 @@ class CustomObjectsApi(object):
         # HTTP header `Content-Type`
         content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'],
+                ['application/merge-patch+json', 'application/apply-patch+yaml'],
                 'PATCH', body_params))  # noqa: E501
         if content_types_list:
                 header_params['Content-Type'] = content_types_list
@@ -4449,7 +4449,7 @@ class CustomObjectsApi(object):
         # HTTP header `Content-Type`
         content_types_list = local_var_params.get('_content_type',
             self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/merge-patch+json', 'application/apply-patch+yaml'],
+                ['application/merge-patch+json', 'application/apply-patch+yaml'],
                 'PATCH', body_params))  # noqa: E501
         if content_types_list:
                 header_params['Content-Type'] = content_types_list
