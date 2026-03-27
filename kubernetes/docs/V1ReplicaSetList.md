@@ -1,6 +1,7 @@
 # V1ReplicaSetList
 
 ReplicaSetList is a collection of ReplicaSets.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

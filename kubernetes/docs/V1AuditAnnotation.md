@@ -1,6 +1,7 @@
 # V1AuditAnnotation
 
 AuditAnnotation describes how to produce an audit annotation for an API request.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

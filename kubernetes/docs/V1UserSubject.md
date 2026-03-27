@@ -1,6 +1,7 @@
 # V1UserSubject
 
 UserSubject holds detailed information for user-kind subject.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

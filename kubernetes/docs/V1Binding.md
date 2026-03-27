@@ -1,6 +1,7 @@
 # V1Binding
 
 Binding ties one object to another; for example, a pod is bound to a node by a scheduler.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

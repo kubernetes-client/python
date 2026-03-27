@@ -1,6 +1,7 @@
 # V1NodeRuntimeHandler
 
 NodeRuntimeHandler is a set of runtime handler information.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1NodeRuntimeHandlerFeatures
 
 NodeRuntimeHandlerFeatures is a set of features implemented by the runtime handler.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

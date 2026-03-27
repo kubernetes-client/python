@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -37,7 +40,7 @@ class V1CSIVolumeSource(object):
         'fs_type': 'str',
         'node_publish_secret_ref': 'V1LocalObjectReference',
         'read_only': 'bool',
-        'volume_attributes': 'dict(str, str)'
+        'volume_attributes': 'dict[str, str]'
     }
 
     attribute_map = {
@@ -51,7 +54,7 @@ class V1CSIVolumeSource(object):
     def __init__(self, driver=None, fs_type=None, node_publish_secret_ref=None, read_only=None, volume_attributes=None, local_vars_configuration=None):  # noqa: E501
         """V1CSIVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._driver = None
@@ -89,7 +92,7 @@ class V1CSIVolumeSource(object):
         driver is the name of the CSI driver that handles this volume. Consult with your admin for the correct name as registered in the cluster.  # noqa: E501
 
         :param driver: The driver of this V1CSIVolumeSource.  # noqa: E501
-        :type: str
+        :type driver: str
         """
         if self.local_vars_configuration.client_side_validation and driver is None:  # noqa: E501
             raise ValueError("Invalid value for `driver`, must not be `None`")  # noqa: E501
@@ -114,7 +117,7 @@ class V1CSIVolumeSource(object):
         fsType to mount. Ex. \"ext4\", \"xfs\", \"ntfs\". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply.  # noqa: E501
 
         :param fs_type: The fs_type of this V1CSIVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -135,7 +138,7 @@ class V1CSIVolumeSource(object):
 
 
         :param node_publish_secret_ref: The node_publish_secret_ref of this V1CSIVolumeSource.  # noqa: E501
-        :type: V1LocalObjectReference
+        :type node_publish_secret_ref: V1LocalObjectReference
         """
 
         self._node_publish_secret_ref = node_publish_secret_ref
@@ -158,7 +161,7 @@ class V1CSIVolumeSource(object):
         readOnly specifies a read-only configuration for the volume. Defaults to false (read/write).  # noqa: E501
 
         :param read_only: The read_only of this V1CSIVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -170,7 +173,7 @@ class V1CSIVolumeSource(object):
         volumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.  # noqa: E501
 
         :return: The volume_attributes of this V1CSIVolumeSource.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._volume_attributes
 
@@ -181,32 +184,40 @@ class V1CSIVolumeSource(object):
         volumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.  # noqa: E501
 
         :param volume_attributes: The volume_attributes of this V1CSIVolumeSource.  # noqa: E501
-        :type: dict(str, str)
+        :type volume_attributes: dict[str, str]
         """
 
         self._volume_attributes = volume_attributes
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -1,6 +1,7 @@
 # V1PodTemplateList
 
 PodTemplateList is a list of PodTemplates.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

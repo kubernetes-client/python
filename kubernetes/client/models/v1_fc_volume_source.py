@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -36,7 +39,7 @@ class V1FCVolumeSource(object):
         'fs_type': 'str',
         'lun': 'int',
         'read_only': 'bool',
-        'target_ww_ns': 'list[str]',
+        'target_wwns': 'list[str]',
         'wwids': 'list[str]'
     }
 
@@ -44,20 +47,20 @@ class V1FCVolumeSource(object):
         'fs_type': 'fsType',
         'lun': 'lun',
         'read_only': 'readOnly',
-        'target_ww_ns': 'targetWWNs',
+        'target_wwns': 'targetWWNs',
         'wwids': 'wwids'
     }
 
-    def __init__(self, fs_type=None, lun=None, read_only=None, target_ww_ns=None, wwids=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, fs_type=None, lun=None, read_only=None, target_wwns=None, wwids=None, local_vars_configuration=None):  # noqa: E501
         """V1FCVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._fs_type = None
         self._lun = None
         self._read_only = None
-        self._target_ww_ns = None
+        self._target_wwns = None
         self._wwids = None
         self.discriminator = None
 
@@ -67,8 +70,8 @@ class V1FCVolumeSource(object):
             self.lun = lun
         if read_only is not None:
             self.read_only = read_only
-        if target_ww_ns is not None:
-            self.target_ww_ns = target_ww_ns
+        if target_wwns is not None:
+            self.target_wwns = target_wwns
         if wwids is not None:
             self.wwids = wwids
 
@@ -90,7 +93,7 @@ class V1FCVolumeSource(object):
         fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Implicitly inferred to be \"ext4\" if unspecified.  # noqa: E501
 
         :param fs_type: The fs_type of this V1FCVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -113,7 +116,7 @@ class V1FCVolumeSource(object):
         lun is Optional: FC target lun number  # noqa: E501
 
         :param lun: The lun of this V1FCVolumeSource.  # noqa: E501
-        :type: int
+        :type lun: int
         """
 
         self._lun = lun
@@ -136,33 +139,33 @@ class V1FCVolumeSource(object):
         readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.  # noqa: E501
 
         :param read_only: The read_only of this V1FCVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
 
     @property
-    def target_ww_ns(self):
-        """Gets the target_ww_ns of this V1FCVolumeSource.  # noqa: E501
+    def target_wwns(self):
+        """Gets the target_wwns of this V1FCVolumeSource.  # noqa: E501
 
         targetWWNs is Optional: FC target worldwide names (WWNs)  # noqa: E501
 
-        :return: The target_ww_ns of this V1FCVolumeSource.  # noqa: E501
+        :return: The target_wwns of this V1FCVolumeSource.  # noqa: E501
         :rtype: list[str]
         """
-        return self._target_ww_ns
+        return self._target_wwns
 
-    @target_ww_ns.setter
-    def target_ww_ns(self, target_ww_ns):
-        """Sets the target_ww_ns of this V1FCVolumeSource.
+    @target_wwns.setter
+    def target_wwns(self, target_wwns):
+        """Sets the target_wwns of this V1FCVolumeSource.
 
         targetWWNs is Optional: FC target worldwide names (WWNs)  # noqa: E501
 
-        :param target_ww_ns: The target_ww_ns of this V1FCVolumeSource.  # noqa: E501
-        :type: list[str]
+        :param target_wwns: The target_wwns of this V1FCVolumeSource.  # noqa: E501
+        :type target_wwns: list[str]
         """
 
-        self._target_ww_ns = target_ww_ns
+        self._target_wwns = target_wwns
 
     @property
     def wwids(self):
@@ -182,32 +185,40 @@ class V1FCVolumeSource(object):
         wwids Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously.  # noqa: E501
 
         :param wwids: The wwids of this V1FCVolumeSource.  # noqa: E501
-        :type: list[str]
+        :type wwids: list[str]
         """
 
         self._wwids = wwids
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

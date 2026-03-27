@@ -1,6 +1,7 @@
 # V1LimitResponse
 
 LimitResponse defines how to handle requests that can not be executed right now.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

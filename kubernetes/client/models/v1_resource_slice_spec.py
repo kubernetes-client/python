@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -57,7 +60,7 @@ class V1ResourceSliceSpec(object):
     def __init__(self, all_nodes=None, devices=None, driver=None, node_name=None, node_selector=None, per_device_node_selection=None, pool=None, shared_counters=None, local_vars_configuration=None):  # noqa: E501
         """V1ResourceSliceSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._all_nodes = None
@@ -103,7 +106,7 @@ class V1ResourceSliceSpec(object):
         AllNodes indicates that all nodes have access to the resources in the pool.  Exactly one of NodeName, NodeSelector, AllNodes, and PerDeviceNodeSelection must be set.  # noqa: E501
 
         :param all_nodes: The all_nodes of this V1ResourceSliceSpec.  # noqa: E501
-        :type: bool
+        :type all_nodes: bool
         """
 
         self._all_nodes = all_nodes
@@ -126,7 +129,7 @@ class V1ResourceSliceSpec(object):
         Devices lists some or all of the devices in this pool.  Must not have more than 128 entries. If any device uses taints or consumes counters the limit is 64.  Only one of Devices and SharedCounters can be set in a ResourceSlice.  # noqa: E501
 
         :param devices: The devices of this V1ResourceSliceSpec.  # noqa: E501
-        :type: list[V1Device]
+        :type devices: list[V1Device]
         """
 
         self._devices = devices
@@ -149,7 +152,7 @@ class V1ResourceSliceSpec(object):
         Driver identifies the DRA driver providing the capacity information. A field selector can be used to list only ResourceSlice objects with a certain driver name.  Must be a DNS subdomain and should end with a DNS domain owned by the vendor of the driver. It should use only lower case characters. This field is immutable.  # noqa: E501
 
         :param driver: The driver of this V1ResourceSliceSpec.  # noqa: E501
-        :type: str
+        :type driver: str
         """
         if self.local_vars_configuration.client_side_validation and driver is None:  # noqa: E501
             raise ValueError("Invalid value for `driver`, must not be `None`")  # noqa: E501
@@ -174,7 +177,7 @@ class V1ResourceSliceSpec(object):
         NodeName identifies the node which provides the resources in this pool. A field selector can be used to list only ResourceSlice objects belonging to a certain node.  This field can be used to limit access from nodes to ResourceSlices with the same node name. It also indicates to autoscalers that adding new nodes of the same type as some old node might also make new resources available.  Exactly one of NodeName, NodeSelector, AllNodes, and PerDeviceNodeSelection must be set. This field is immutable.  # noqa: E501
 
         :param node_name: The node_name of this V1ResourceSliceSpec.  # noqa: E501
-        :type: str
+        :type node_name: str
         """
 
         self._node_name = node_name
@@ -195,7 +198,7 @@ class V1ResourceSliceSpec(object):
 
 
         :param node_selector: The node_selector of this V1ResourceSliceSpec.  # noqa: E501
-        :type: V1NodeSelector
+        :type node_selector: V1NodeSelector
         """
 
         self._node_selector = node_selector
@@ -218,7 +221,7 @@ class V1ResourceSliceSpec(object):
         PerDeviceNodeSelection defines whether the access from nodes to resources in the pool is set on the ResourceSlice level or on each device. If it is set to true, every device defined the ResourceSlice must specify this individually.  Exactly one of NodeName, NodeSelector, AllNodes, and PerDeviceNodeSelection must be set.  # noqa: E501
 
         :param per_device_node_selection: The per_device_node_selection of this V1ResourceSliceSpec.  # noqa: E501
-        :type: bool
+        :type per_device_node_selection: bool
         """
 
         self._per_device_node_selection = per_device_node_selection
@@ -239,7 +242,7 @@ class V1ResourceSliceSpec(object):
 
 
         :param pool: The pool of this V1ResourceSliceSpec.  # noqa: E501
-        :type: V1ResourcePool
+        :type pool: V1ResourcePool
         """
         if self.local_vars_configuration.client_side_validation and pool is None:  # noqa: E501
             raise ValueError("Invalid value for `pool`, must not be `None`")  # noqa: E501
@@ -264,32 +267,40 @@ class V1ResourceSliceSpec(object):
         SharedCounters defines a list of counter sets, each of which has a name and a list of counters available.  The names of the counter sets must be unique in the ResourcePool.  Only one of Devices and SharedCounters can be set in a ResourceSlice.  The maximum number of counter sets is 8.  # noqa: E501
 
         :param shared_counters: The shared_counters of this V1ResourceSliceSpec.  # noqa: E501
-        :type: list[V1CounterSet]
+        :type shared_counters: list[V1CounterSet]
         """
 
         self._shared_counters = shared_counters
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

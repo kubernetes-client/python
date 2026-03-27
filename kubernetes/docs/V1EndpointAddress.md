@@ -1,6 +1,7 @@
 # V1EndpointAddress
 
 EndpointAddress is a tuple that describes single IP address. Deprecated: This API is deprecated in v1.33+.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

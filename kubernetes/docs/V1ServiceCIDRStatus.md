@@ -1,6 +1,7 @@
 # V1ServiceCIDRStatus
 
 ServiceCIDRStatus describes the current state of the ServiceCIDR.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

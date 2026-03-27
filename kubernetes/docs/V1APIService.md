@@ -1,6 +1,7 @@
 # V1APIService
 
 APIService represents a server for a particular GroupVersion. Name must be \"version.group\".
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1ValidatingAdmissionPolicySpec(object):
     def __init__(self, audit_annotations=None, failure_policy=None, match_conditions=None, match_constraints=None, param_kind=None, validations=None, variables=None, local_vars_configuration=None):  # noqa: E501
         """V1ValidatingAdmissionPolicySpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._audit_annotations = None
@@ -100,7 +103,7 @@ class V1ValidatingAdmissionPolicySpec(object):
         auditAnnotations contains CEL expressions which are used to produce audit annotations for the audit event of the API request. validations and auditAnnotations may not both be empty; a least one of validations or auditAnnotations is required.  # noqa: E501
 
         :param audit_annotations: The audit_annotations of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1AuditAnnotation]
+        :type audit_annotations: list[V1AuditAnnotation]
         """
 
         self._audit_annotations = audit_annotations
@@ -123,7 +126,7 @@ class V1ValidatingAdmissionPolicySpec(object):
         failurePolicy defines how to handle failures for the admission policy. Failures can occur from CEL expression parse errors, type check errors, runtime errors and invalid or mis-configured policy definitions or bindings.  A policy is invalid if spec.paramKind refers to a non-existent Kind. A binding is invalid if spec.paramRef.name refers to a non-existent resource.  failurePolicy does not define how validations that evaluate to false are handled.  When failurePolicy is set to Fail, ValidatingAdmissionPolicyBinding validationActions define how failures are enforced.  Allowed values are Ignore or Fail. Defaults to Fail.  # noqa: E501
 
         :param failure_policy: The failure_policy of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: str
+        :type failure_policy: str
         """
 
         self._failure_policy = failure_policy
@@ -146,7 +149,7 @@ class V1ValidatingAdmissionPolicySpec(object):
         MatchConditions is a list of conditions that must be met for a request to be validated. Match conditions filter requests that have already been matched by the rules, namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests. There are a maximum of 64 match conditions allowed.  If a parameter object is provided, it can be accessed via the `params` handle in the same manner as validation expressions.  The exact matching logic is (in order):   1. If ANY matchCondition evaluates to FALSE, the policy is skipped.   2. If ALL matchConditions evaluate to TRUE, the policy is evaluated.   3. If any matchCondition evaluates to an error (but none are FALSE):      - If failurePolicy=Fail, reject the request      - If failurePolicy=Ignore, the policy is skipped  # noqa: E501
 
         :param match_conditions: The match_conditions of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1MatchCondition]
+        :type match_conditions: list[V1MatchCondition]
         """
 
         self._match_conditions = match_conditions
@@ -167,7 +170,7 @@ class V1ValidatingAdmissionPolicySpec(object):
 
 
         :param match_constraints: The match_constraints of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: V1MatchResources
+        :type match_constraints: V1MatchResources
         """
 
         self._match_constraints = match_constraints
@@ -188,7 +191,7 @@ class V1ValidatingAdmissionPolicySpec(object):
 
 
         :param param_kind: The param_kind of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: V1ParamKind
+        :type param_kind: V1ParamKind
         """
 
         self._param_kind = param_kind
@@ -211,7 +214,7 @@ class V1ValidatingAdmissionPolicySpec(object):
         Validations contain CEL expressions which is used to apply the validation. Validations and AuditAnnotations may not both be empty; a minimum of one Validations or AuditAnnotations is required.  # noqa: E501
 
         :param validations: The validations of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1Validation]
+        :type validations: list[V1Validation]
         """
 
         self._validations = validations
@@ -234,32 +237,40 @@ class V1ValidatingAdmissionPolicySpec(object):
         Variables contain definitions of variables that can be used in composition of other expressions. Each variable is defined as a named CEL expression. The variables defined here will be available under `variables` in other expressions of the policy except MatchConditions because MatchConditions are evaluated before the rest of the policy.  The expression of a variable can refer to other variables defined earlier in the list but not those after. Thus, Variables must be sorted by the order of first appearance and acyclic.  # noqa: E501
 
         :param variables: The variables of this V1ValidatingAdmissionPolicySpec.  # noqa: E501
-        :type: list[V1Variable]
+        :type variables: list[V1Variable]
         """
 
         self._variables = variables
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

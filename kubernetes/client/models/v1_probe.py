@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -61,7 +64,7 @@ class V1Probe(object):
     def __init__(self, _exec=None, failure_threshold=None, grpc=None, http_get=None, initial_delay_seconds=None, period_seconds=None, success_threshold=None, tcp_socket=None, termination_grace_period_seconds=None, timeout_seconds=None, local_vars_configuration=None):  # noqa: E501
         """V1Probe - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self.__exec = None
@@ -113,7 +116,7 @@ class V1Probe(object):
 
 
         :param _exec: The _exec of this V1Probe.  # noqa: E501
-        :type: V1ExecAction
+        :type _exec: V1ExecAction
         """
 
         self.__exec = _exec
@@ -136,7 +139,7 @@ class V1Probe(object):
         Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1.  # noqa: E501
 
         :param failure_threshold: The failure_threshold of this V1Probe.  # noqa: E501
-        :type: int
+        :type failure_threshold: int
         """
 
         self._failure_threshold = failure_threshold
@@ -157,7 +160,7 @@ class V1Probe(object):
 
 
         :param grpc: The grpc of this V1Probe.  # noqa: E501
-        :type: V1GRPCAction
+        :type grpc: V1GRPCAction
         """
 
         self._grpc = grpc
@@ -178,7 +181,7 @@ class V1Probe(object):
 
 
         :param http_get: The http_get of this V1Probe.  # noqa: E501
-        :type: V1HTTPGetAction
+        :type http_get: V1HTTPGetAction
         """
 
         self._http_get = http_get
@@ -201,7 +204,7 @@ class V1Probe(object):
         Number of seconds after the container has started before liveness probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes  # noqa: E501
 
         :param initial_delay_seconds: The initial_delay_seconds of this V1Probe.  # noqa: E501
-        :type: int
+        :type initial_delay_seconds: int
         """
 
         self._initial_delay_seconds = initial_delay_seconds
@@ -224,7 +227,7 @@ class V1Probe(object):
         How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.  # noqa: E501
 
         :param period_seconds: The period_seconds of this V1Probe.  # noqa: E501
-        :type: int
+        :type period_seconds: int
         """
 
         self._period_seconds = period_seconds
@@ -247,7 +250,7 @@ class V1Probe(object):
         Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1.  # noqa: E501
 
         :param success_threshold: The success_threshold of this V1Probe.  # noqa: E501
-        :type: int
+        :type success_threshold: int
         """
 
         self._success_threshold = success_threshold
@@ -268,7 +271,7 @@ class V1Probe(object):
 
 
         :param tcp_socket: The tcp_socket of this V1Probe.  # noqa: E501
-        :type: V1TCPSocketAction
+        :type tcp_socket: V1TCPSocketAction
         """
 
         self._tcp_socket = tcp_socket
@@ -291,7 +294,7 @@ class V1Probe(object):
         Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate. Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.  # noqa: E501
 
         :param termination_grace_period_seconds: The termination_grace_period_seconds of this V1Probe.  # noqa: E501
-        :type: int
+        :type termination_grace_period_seconds: int
         """
 
         self._termination_grace_period_seconds = termination_grace_period_seconds
@@ -314,32 +317,40 @@ class V1Probe(object):
         Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes  # noqa: E501
 
         :param timeout_seconds: The timeout_seconds of this V1Probe.  # noqa: E501
-        :type: int
+        :type timeout_seconds: int
         """
 
         self._timeout_seconds = timeout_seconds
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

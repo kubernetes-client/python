@@ -1,6 +1,7 @@
 # V1ConfigMapList
 
 ConfigMapList is a resource containing a list of ConfigMap objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -36,7 +39,7 @@ class V1PodDisruptionBudgetStatus(object):
         'conditions': 'list[V1Condition]',
         'current_healthy': 'int',
         'desired_healthy': 'int',
-        'disrupted_pods': 'dict(str, datetime)',
+        'disrupted_pods': 'dict[str, datetime]',
         'disruptions_allowed': 'int',
         'expected_pods': 'int',
         'observed_generation': 'int'
@@ -55,7 +58,7 @@ class V1PodDisruptionBudgetStatus(object):
     def __init__(self, conditions=None, current_healthy=None, desired_healthy=None, disrupted_pods=None, disruptions_allowed=None, expected_pods=None, observed_generation=None, local_vars_configuration=None):  # noqa: E501
         """V1PodDisruptionBudgetStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._conditions = None
@@ -96,7 +99,7 @@ class V1PodDisruptionBudgetStatus(object):
         Conditions contain conditions for PDB. The disruption controller sets the DisruptionAllowed condition. The following are known values for the reason field (additional reasons could be added in the future): - SyncFailed: The controller encountered an error and wasn't able to compute               the number of allowed disruptions. Therefore no disruptions are               allowed and the status of the condition will be False. - InsufficientPods: The number of pods are either at or below the number                     required by the PodDisruptionBudget. No disruptions are                     allowed and the status of the condition will be False. - SufficientPods: There are more pods than required by the PodDisruptionBudget.                   The condition will be True, and the number of allowed                   disruptions are provided by the disruptionsAllowed property.  # noqa: E501
 
         :param conditions: The conditions of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: list[V1Condition]
+        :type conditions: list[V1Condition]
         """
 
         self._conditions = conditions
@@ -119,7 +122,7 @@ class V1PodDisruptionBudgetStatus(object):
         current number of healthy pods  # noqa: E501
 
         :param current_healthy: The current_healthy of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: int
+        :type current_healthy: int
         """
         if self.local_vars_configuration.client_side_validation and current_healthy is None:  # noqa: E501
             raise ValueError("Invalid value for `current_healthy`, must not be `None`")  # noqa: E501
@@ -144,7 +147,7 @@ class V1PodDisruptionBudgetStatus(object):
         minimum desired number of healthy pods  # noqa: E501
 
         :param desired_healthy: The desired_healthy of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: int
+        :type desired_healthy: int
         """
         if self.local_vars_configuration.client_side_validation and desired_healthy is None:  # noqa: E501
             raise ValueError("Invalid value for `desired_healthy`, must not be `None`")  # noqa: E501
@@ -158,7 +161,7 @@ class V1PodDisruptionBudgetStatus(object):
         DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions.  # noqa: E501
 
         :return: The disrupted_pods of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :rtype: dict(str, datetime)
+        :rtype: dict[str, datetime]
         """
         return self._disrupted_pods
 
@@ -169,7 +172,7 @@ class V1PodDisruptionBudgetStatus(object):
         DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions.  # noqa: E501
 
         :param disrupted_pods: The disrupted_pods of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: dict(str, datetime)
+        :type disrupted_pods: dict[str, datetime]
         """
 
         self._disrupted_pods = disrupted_pods
@@ -192,7 +195,7 @@ class V1PodDisruptionBudgetStatus(object):
         Number of pod disruptions that are currently allowed.  # noqa: E501
 
         :param disruptions_allowed: The disruptions_allowed of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: int
+        :type disruptions_allowed: int
         """
         if self.local_vars_configuration.client_side_validation and disruptions_allowed is None:  # noqa: E501
             raise ValueError("Invalid value for `disruptions_allowed`, must not be `None`")  # noqa: E501
@@ -217,7 +220,7 @@ class V1PodDisruptionBudgetStatus(object):
         total number of pods counted by this disruption budget  # noqa: E501
 
         :param expected_pods: The expected_pods of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: int
+        :type expected_pods: int
         """
         if self.local_vars_configuration.client_side_validation and expected_pods is None:  # noqa: E501
             raise ValueError("Invalid value for `expected_pods`, must not be `None`")  # noqa: E501
@@ -242,32 +245,40 @@ class V1PodDisruptionBudgetStatus(object):
         Most recent generation observed when updating this PDB status. DisruptionsAllowed and other status information is valid only if observedGeneration equals to PDB's object generation.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1PodDisruptionBudgetStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

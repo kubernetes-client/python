@@ -1,6 +1,7 @@
 # V1alpha1TypedLocalObjectReference
 
 TypedLocalObjectReference allows to reference typed object inside the same namespace.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

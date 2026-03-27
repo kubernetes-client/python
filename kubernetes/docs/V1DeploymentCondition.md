@@ -1,6 +1,7 @@
 # V1DeploymentCondition
 
 DeploymentCondition describes the state of a deployment at a certain point.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

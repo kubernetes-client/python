@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1APIServiceSpec(object):
     def __init__(self, ca_bundle=None, group=None, group_priority_minimum=None, insecure_skip_tls_verify=None, service=None, version=None, version_priority=None, local_vars_configuration=None):  # noqa: E501
         """V1APIServiceSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._ca_bundle = None
@@ -98,7 +101,7 @@ class V1APIServiceSpec(object):
         CABundle is a PEM encoded CA bundle which will be used to validate an API server's serving certificate. If unspecified, system trust roots on the apiserver are used.  # noqa: E501
 
         :param ca_bundle: The ca_bundle of this V1APIServiceSpec.  # noqa: E501
-        :type: str
+        :type ca_bundle: str
         """
         if (self.local_vars_configuration.client_side_validation and
                 ca_bundle is not None and not re.search(r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$', ca_bundle)):  # noqa: E501
@@ -124,7 +127,7 @@ class V1APIServiceSpec(object):
         Group is the API group name this server hosts  # noqa: E501
 
         :param group: The group of this V1APIServiceSpec.  # noqa: E501
-        :type: str
+        :type group: str
         """
 
         self._group = group
@@ -147,7 +150,7 @@ class V1APIServiceSpec(object):
         GroupPriorityMinimum is the priority this group should have at least. Higher priority means that the group is preferred by clients over lower priority ones. Note that other versions of this group might specify even higher GroupPriorityMinimum values such that the whole group gets a higher priority. The primary sort is based on GroupPriorityMinimum, ordered highest number to lowest (20 before 10). The secondary sort is based on the alphabetical comparison of the name of the object.  (v1.bar before v1.foo) We'd recommend something like: *.k8s.io (except extensions) at 18000 and PaaSes (OpenShift, Deis) are recommended to be in the 2000s  # noqa: E501
 
         :param group_priority_minimum: The group_priority_minimum of this V1APIServiceSpec.  # noqa: E501
-        :type: int
+        :type group_priority_minimum: int
         """
         if self.local_vars_configuration.client_side_validation and group_priority_minimum is None:  # noqa: E501
             raise ValueError("Invalid value for `group_priority_minimum`, must not be `None`")  # noqa: E501
@@ -172,7 +175,7 @@ class V1APIServiceSpec(object):
         InsecureSkipTLSVerify disables TLS certificate verification when communicating with this server. This is strongly discouraged.  You should use the CABundle instead.  # noqa: E501
 
         :param insecure_skip_tls_verify: The insecure_skip_tls_verify of this V1APIServiceSpec.  # noqa: E501
-        :type: bool
+        :type insecure_skip_tls_verify: bool
         """
 
         self._insecure_skip_tls_verify = insecure_skip_tls_verify
@@ -193,7 +196,7 @@ class V1APIServiceSpec(object):
 
 
         :param service: The service of this V1APIServiceSpec.  # noqa: E501
-        :type: ApiregistrationV1ServiceReference
+        :type service: ApiregistrationV1ServiceReference
         """
 
         self._service = service
@@ -216,7 +219,7 @@ class V1APIServiceSpec(object):
         Version is the API version this server hosts.  For example, \"v1\"  # noqa: E501
 
         :param version: The version of this V1APIServiceSpec.  # noqa: E501
-        :type: str
+        :type version: str
         """
 
         self._version = version
@@ -239,34 +242,42 @@ class V1APIServiceSpec(object):
         VersionPriority controls the ordering of this API version inside of its group.  Must be greater than zero. The primary sort is based on VersionPriority, ordered highest to lowest (20 before 10). Since it's inside of a group, the number can be small, probably in the 10s. In case of equal version priorities, the version string will be used to compute the order inside a group. If the version string is \"kube-like\", it will sort above non \"kube-like\" version strings, which are ordered lexicographically. \"Kube-like\" versions start with a \"v\", then are followed by a number (the major version), then optionally the string \"alpha\" or \"beta\" and another number (the minor version). These are sorted first by GA > beta > alpha (where GA is a version with no suffix such as beta or alpha), and then by comparing major version, then minor version. An example sorted list of versions: v10, v2, v1, v11beta2, v10beta3, v3beta1, v12alpha1, v11alpha2, foo1, foo10.  # noqa: E501
 
         :param version_priority: The version_priority of this V1APIServiceSpec.  # noqa: E501
-        :type: int
+        :type version_priority: int
         """
         if self.local_vars_configuration.client_side_validation and version_priority is None:  # noqa: E501
             raise ValueError("Invalid value for `version_priority`, must not be `None`")  # noqa: E501
 
         self._version_priority = version_priority
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

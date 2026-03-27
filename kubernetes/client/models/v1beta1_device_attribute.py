@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1beta1DeviceAttribute(object):
     def __init__(self, bool=None, int=None, string=None, version=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1DeviceAttribute - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._bool = None
@@ -85,7 +88,7 @@ class V1beta1DeviceAttribute(object):
         BoolValue is a true/false value.  # noqa: E501
 
         :param bool: The bool of this V1beta1DeviceAttribute.  # noqa: E501
-        :type: bool
+        :type bool: bool
         """
 
         self._bool = bool
@@ -108,7 +111,7 @@ class V1beta1DeviceAttribute(object):
         IntValue is a number.  # noqa: E501
 
         :param int: The int of this V1beta1DeviceAttribute.  # noqa: E501
-        :type: int
+        :type int: int
         """
 
         self._int = int
@@ -131,7 +134,7 @@ class V1beta1DeviceAttribute(object):
         StringValue is a string. Must not be longer than 64 characters.  # noqa: E501
 
         :param string: The string of this V1beta1DeviceAttribute.  # noqa: E501
-        :type: str
+        :type string: str
         """
 
         self._string = string
@@ -154,32 +157,40 @@ class V1beta1DeviceAttribute(object):
         VersionValue is a semantic version according to semver.org spec 2.0.0. Must not be longer than 64 characters.  # noqa: E501
 
         :param version: The version of this V1beta1DeviceAttribute.  # noqa: E501
-        :type: str
+        :type version: str
         """
 
         self._version = version
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

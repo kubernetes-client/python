@@ -1,6 +1,7 @@
 # V1beta2DeviceAttribute
 
 DeviceAttribute must have exactly one field set.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

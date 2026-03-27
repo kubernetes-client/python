@@ -1,6 +1,7 @@
 # V1ScaleStatus
 
 ScaleStatus represents the current status of a scale subresource.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

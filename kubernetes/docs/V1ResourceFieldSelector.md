@@ -1,6 +1,7 @@
 # V1ResourceFieldSelector
 
 ResourceFieldSelector represents container resources (cpu, memory) and their output format
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

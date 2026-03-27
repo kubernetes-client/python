@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -36,7 +39,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         'admin_access': 'bool',
         'binding_conditions': 'list[str]',
         'binding_failure_conditions': 'list[str]',
-        'consumed_capacity': 'dict(str, str)',
+        'consumed_capacity': 'dict[str, str]',
         'device': 'str',
         'driver': 'str',
         'pool': 'str',
@@ -61,7 +64,7 @@ class V1beta2DeviceRequestAllocationResult(object):
     def __init__(self, admin_access=None, binding_conditions=None, binding_failure_conditions=None, consumed_capacity=None, device=None, driver=None, pool=None, request=None, share_id=None, tolerations=None, local_vars_configuration=None):  # noqa: E501
         """V1beta2DeviceRequestAllocationResult - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._admin_access = None
@@ -111,7 +114,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         AdminAccess indicates that this device was allocated for administrative access. See the corresponding request field for a definition of mode.  This is an alpha field and requires enabling the DRAAdminAccess feature gate. Admin access is disabled if this field is unset or set to false, otherwise it is enabled.  # noqa: E501
 
         :param admin_access: The admin_access of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: bool
+        :type admin_access: bool
         """
 
         self._admin_access = admin_access
@@ -134,7 +137,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         BindingConditions contains a copy of the BindingConditions from the corresponding ResourceSlice at the time of allocation.  This is an alpha field and requires enabling the DRADeviceBindingConditions and DRAResourceClaimDeviceStatus feature gates.  # noqa: E501
 
         :param binding_conditions: The binding_conditions of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: list[str]
+        :type binding_conditions: list[str]
         """
 
         self._binding_conditions = binding_conditions
@@ -157,7 +160,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         BindingFailureConditions contains a copy of the BindingFailureConditions from the corresponding ResourceSlice at the time of allocation.  This is an alpha field and requires enabling the DRADeviceBindingConditions and DRAResourceClaimDeviceStatus feature gates.  # noqa: E501
 
         :param binding_failure_conditions: The binding_failure_conditions of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: list[str]
+        :type binding_failure_conditions: list[str]
         """
 
         self._binding_failure_conditions = binding_failure_conditions
@@ -169,7 +172,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         ConsumedCapacity tracks the amount of capacity consumed per device as part of the claim request. The consumed amount may differ from the requested amount: it is rounded up to the nearest valid value based on the device’s requestPolicy if applicable (i.e., may not be less than the requested amount).  The total consumed capacity for each device must not exceed the DeviceCapacity's Value.  This field is populated only for devices that allow multiple allocations. All capacity entries are included, even if the consumed amount is zero.  # noqa: E501
 
         :return: The consumed_capacity of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._consumed_capacity
 
@@ -180,7 +183,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         ConsumedCapacity tracks the amount of capacity consumed per device as part of the claim request. The consumed amount may differ from the requested amount: it is rounded up to the nearest valid value based on the device’s requestPolicy if applicable (i.e., may not be less than the requested amount).  The total consumed capacity for each device must not exceed the DeviceCapacity's Value.  This field is populated only for devices that allow multiple allocations. All capacity entries are included, even if the consumed amount is zero.  # noqa: E501
 
         :param consumed_capacity: The consumed_capacity of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: dict(str, str)
+        :type consumed_capacity: dict[str, str]
         """
 
         self._consumed_capacity = consumed_capacity
@@ -203,7 +206,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         Device references one device instance via its name in the driver's resource pool. It must be a DNS label.  # noqa: E501
 
         :param device: The device of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: str
+        :type device: str
         """
         if self.local_vars_configuration.client_side_validation and device is None:  # noqa: E501
             raise ValueError("Invalid value for `device`, must not be `None`")  # noqa: E501
@@ -228,7 +231,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         Driver specifies the name of the DRA driver whose kubelet plugin should be invoked to process the allocation once the claim is needed on a node.  Must be a DNS subdomain and should end with a DNS domain owned by the vendor of the driver. It should use only lower case characters.  # noqa: E501
 
         :param driver: The driver of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: str
+        :type driver: str
         """
         if self.local_vars_configuration.client_side_validation and driver is None:  # noqa: E501
             raise ValueError("Invalid value for `driver`, must not be `None`")  # noqa: E501
@@ -253,7 +256,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         This name together with the driver name and the device name field identify which device was allocated (`<driver name>/<pool name>/<device name>`).  Must not be longer than 253 characters and may contain one or more DNS sub-domains separated by slashes.  # noqa: E501
 
         :param pool: The pool of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: str
+        :type pool: str
         """
         if self.local_vars_configuration.client_side_validation and pool is None:  # noqa: E501
             raise ValueError("Invalid value for `pool`, must not be `None`")  # noqa: E501
@@ -278,7 +281,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         Request is the name of the request in the claim which caused this device to be allocated. If it references a subrequest in the firstAvailable list on a DeviceRequest, this field must include both the name of the main request and the subrequest using the format <main request>/<subrequest>.  Multiple devices may have been allocated per request.  # noqa: E501
 
         :param request: The request of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: str
+        :type request: str
         """
         if self.local_vars_configuration.client_side_validation and request is None:  # noqa: E501
             raise ValueError("Invalid value for `request`, must not be `None`")  # noqa: E501
@@ -303,7 +306,7 @@ class V1beta2DeviceRequestAllocationResult(object):
         ShareID uniquely identifies an individual allocation share of the device, used when the device supports multiple simultaneous allocations. It serves as an additional map key to differentiate concurrent shares of the same device.  # noqa: E501
 
         :param share_id: The share_id of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: str
+        :type share_id: str
         """
 
         self._share_id = share_id
@@ -326,32 +329,40 @@ class V1beta2DeviceRequestAllocationResult(object):
         A copy of all tolerations specified in the request at the time when the device got allocated.  The maximum number of tolerations is 16.  This is an alpha field and requires enabling the DRADeviceTaints feature gate.  # noqa: E501
 
         :param tolerations: The tolerations of this V1beta2DeviceRequestAllocationResult.  # noqa: E501
-        :type: list[V1beta2DeviceToleration]
+        :type tolerations: list[V1beta2DeviceToleration]
         """
 
         self._tolerations = tolerations
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 
