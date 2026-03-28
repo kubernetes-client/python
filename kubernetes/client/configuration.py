@@ -21,6 +21,7 @@ import urllib3
 import six
 from six.moves import http_client as httplib
 from kubernetes.client.exceptions import ApiValueError
+import os
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -207,6 +208,14 @@ conf = client.Configuration(
         """Proxy URL
         """
         self.no_proxy = None
+# Load proxy from environment variables (if set)
+        if os.getenv("HTTPS_PROXY"): self.proxy = os.getenv("HTTPS_PROXY")
+        if os.getenv("https_proxy"): self.proxy = os.getenv("https_proxy")
+        if os.getenv("HTTP_PROXY"): self.proxy = os.getenv("HTTP_PROXY")
+        if os.getenv("http_proxy"): self.proxy = os.getenv("http_proxy")
+        # Load no_proxy from environment variables (if set)
+        if os.getenv("NO_PROXY"): self.no_proxy = os.getenv("NO_PROXY")
+        if os.getenv("no_proxy"): self.no_proxy = os.getenv("no_proxy")
         """bypass proxy for host in the no_proxy list.
         """
         self.proxy_headers = None
