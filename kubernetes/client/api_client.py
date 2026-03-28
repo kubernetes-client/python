@@ -199,7 +199,7 @@ class ApiClient(object):
 
         response_type = response_types_map.get(response_data.status, None)
 
-        if six.PY3 and response_type not in ["file", "bytes"]:
+        if six.PY3 and response_type not in ["file", "bytes", "str"]:
             match = None
             content_type = response_data.getheader('content-type')
             if content_type is not None:
