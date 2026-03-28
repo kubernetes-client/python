@@ -24,6 +24,7 @@ from six.moves.urllib.parse import urlencode
 import urllib3
 
 from kubernetes.client.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
+from requests.utils import should_bypass_proxies
 
 
 logger = logging.getLogger(__name__)
@@ -81,7 +82,7 @@ class RESTClientObject(object):
                 maxsize = 4
 
         # https pool manager
-        if configuration.proxy:
+        if configuration.proxy and not should_bypass_proxies(configuration.host, no_proxy=configuration.no_proxy or ''):
             self.pool_manager = urllib3.ProxyManager(
                 num_pools=pools_size,
                 maxsize=maxsize,
