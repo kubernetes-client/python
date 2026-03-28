@@ -45,7 +45,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.get_namespaces = Mock(return_value=fake_resp)
-        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
 
         w = Watch()
         count = 1
@@ -92,7 +92,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.get_namespaces = Mock(return_value=fake_resp)
-        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
 
         w = Watch()
         count = 0
@@ -129,7 +129,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.get_configmaps = Mock(return_value=fake_resp)
-        fake_api.get_configmaps.__doc__ = ':return: V1ConfigMapList'
+        fake_api.get_configmaps.__doc__ = ':rtype: V1ConfigMapList'
 
         w = Watch()
         count = 0
@@ -175,7 +175,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.get_configmaps = Mock(return_value=fake_resp)
-        fake_api.get_configmaps.__doc__ = ':return: V1ConfigMapList'
+        fake_api.get_configmaps.__doc__ = ':rtype: V1ConfigMapList'
 
         w = Watch()
         count = 0
@@ -204,7 +204,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.read_namespaced_pod_log = Mock(return_value=fake_resp)
-        fake_api.read_namespaced_pod_log.__doc__ = ':param bool follow:\n:return: str'
+        fake_api.read_namespaced_pod_log.__doc__ = ':param bool follow:\n:rtype: str'
 
         w = Watch()
         count = 1
@@ -256,7 +256,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.get_namespaces = Mock(return_value=fake_resp)
-        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
 
         w = Watch()
         # ensure we keep our requested resource version or the version latest
@@ -303,7 +303,7 @@ class WatchTests(unittest.TestCase):
 
             fake_api = Mock()
             fake_api.get_namespaces = Mock(return_value=fake_resp)
-            fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+            fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
 
             count = 1
             for e in w.stream(fake_api.get_namespaces):
@@ -330,7 +330,7 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.get_namespaces = Mock(return_value=fake_resp)
-        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
 
         count = 0
 
@@ -597,7 +597,7 @@ class WatchTests(unittest.TestCase):
 #    
 #        fake_api = Mock()
 #        fake_api.get_namespaces = Mock(return_value=fake_resp)
-#        fake_api.get_namespaces.__doc__ = ':return: V1NamespaceList'
+#        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
 #    
 #        # test case with deserialize=True
 #        w = Watch()
