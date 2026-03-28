@@ -69,6 +69,7 @@ sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STAT
 # second, this should be ported to swagger-codegen
 echo ">>> patching client..."
 git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
+git apply "${SCRIPT_ROOT}/api_client_patch.diff"
 # The following is commented out due to:
 # AttributeError: 'RESTResponse' object has no attribute 'headers'
 # OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
