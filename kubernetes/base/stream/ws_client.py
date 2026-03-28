@@ -254,8 +254,16 @@ class WSClient:
             self.sock.close(**kwargs)
 
 
-WSResponse = collections.namedtuple('WSResponse', ['data'])
+#WSResponse = collections.namedtuple('WSResponse', ['data', 'status', 'getheader'])
+class WSResponse:
 
+    def __init__(self, data, status):
+        self.status = status
+        self.data = data
+
+    def getheader(self, name, default=None):
+        """Returns a given response header."""
+        return None
 
 class PortForward:
     def __init__(self, websocket, ports):
@@ -536,9 +544,9 @@ def websocket_call(configuration, _method, url, **kwargs):
         client.run_forever(timeout=_request_timeout)
         all = client.read_all()
         if binary:
-            return WSResponse(all)
+            return WSResponse(data=all, status=200)
         else:
-            return WSResponse('%s' % ''.join(all))
+            return WSResponse(data='%s' % ''.join(all), status=200)
     except (Exception, KeyboardInterrupt, SystemExit) as e:
         raise ApiException(status=0, reason=str(e))
 
