@@ -1,6 +1,7 @@
 # V1PhotonPersistentDiskVolumeSource
 
 Represents a Photon Controller persistent disk resource.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

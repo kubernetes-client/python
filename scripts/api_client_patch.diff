@@ -1,0 +1,13 @@
+diff --git a/kubernetes/client/api_client.py b/kubernetes/client/api_client.py
+index 558f0e734..aeace543e 100644
+--- a/kubernetes/client/api_client.py
++++ b/kubernetes/client/api_client.py
+@@ -199,7 +199,7 @@ class ApiClient(object):
+ 
+         response_type = response_types_map.get(response_data.status, None)
+ 
+-        if six.PY3 and response_type not in ["file", "bytes"]:
++        if six.PY3 and response_type not in ["file", "bytes", "str"]:
+             match = None
+             content_type = response_data.getheader('content-type')
+             if content_type is not None:

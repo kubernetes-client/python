@@ -1,6 +1,7 @@
 # V1Condition
 
 Condition contains details for one aspect of the current state of this API Resource.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1EndpointSliceList
 
 EndpointSliceList represents a list of endpoint slices
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

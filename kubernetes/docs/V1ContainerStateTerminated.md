@@ -1,6 +1,7 @@
 # V1ContainerStateTerminated
 
 ContainerStateTerminated is a terminated state of a container.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1alpha3DeviceTaintRuleStatus
 
 DeviceTaintRuleStatus provides information about an on-going pod eviction.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

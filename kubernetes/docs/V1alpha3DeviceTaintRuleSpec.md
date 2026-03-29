@@ -1,6 +1,7 @@
 # V1alpha3DeviceTaintRuleSpec
 
 DeviceTaintRuleSpec specifies the selector and one taint.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

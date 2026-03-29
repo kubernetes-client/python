@@ -1,6 +1,7 @@
 # V1alpha1GangSchedulingPolicy
 
 GangSchedulingPolicy defines the parameters for gang scheduling.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

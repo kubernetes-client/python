@@ -1,6 +1,7 @@
 # V1EndpointConditions
 
 EndpointConditions represents the current condition of an endpoint.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1alpha1NamedRuleWithOperations
 
 NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

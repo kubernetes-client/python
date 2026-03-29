@@ -1,6 +1,7 @@
 # V1beta1ServiceCIDRSpec
 
 ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

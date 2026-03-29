@@ -69,14 +69,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -144,14 +152,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -219,14 +235,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -296,14 +320,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -371,14 +403,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -446,14 +486,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -521,14 +569,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -614,14 +670,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -707,14 +771,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -802,14 +874,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -895,14 +975,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -988,14 +1076,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1081,14 +1177,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1161,14 +1265,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1241,14 +1353,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1323,14 +1443,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1403,14 +1531,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1483,14 +1619,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1563,14 +1707,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1624,14 +1776,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1709,14 +1869,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1794,14 +1962,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1879,14 +2055,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -1966,14 +2150,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2051,14 +2243,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2136,14 +2336,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2221,14 +2429,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2299,14 +2515,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2377,14 +2601,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2457,14 +2689,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2535,14 +2775,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2613,14 +2861,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2691,14 +2947,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2769,14 +3033,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2836,14 +3108,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2903,14 +3183,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -2972,14 +3260,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3039,14 +3335,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3106,14 +3410,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3173,14 +3485,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3240,14 +3560,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3316,14 +3644,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3392,14 +3728,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3470,14 +3814,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3546,14 +3898,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3622,14 +3982,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:
@@ -3698,14 +4066,22 @@ import time
 import kubernetes.client
 from kubernetes.client.rest import ApiException
 from pprint import pprint
-configuration = kubernetes.client.Configuration()
-# Configure API key authorization: BearerToken
-configuration.api_key['authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authorization'] = 'Bearer'
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
+# The kubernetes.client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
 
 # Enter a context with an instance of the API kubernetes.client
 with kubernetes.client.ApiClient(configuration) as api_client:

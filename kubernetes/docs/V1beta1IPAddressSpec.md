@@ -1,6 +1,7 @@
 # V1beta1IPAddressSpec
 
 IPAddressSpec describe the attributes in an IP Address.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

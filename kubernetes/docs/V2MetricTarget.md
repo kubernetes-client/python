@@ -1,6 +1,7 @@
 # V2MetricTarget
 
 MetricTarget defines the target value, average value, or average utilization of a specific metric
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

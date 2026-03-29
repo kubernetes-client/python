@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1ReplicaSetSpec(object):
     def __init__(self, min_ready_seconds=None, replicas=None, selector=None, template=None, local_vars_configuration=None):  # noqa: E501
         """V1ReplicaSetSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._min_ready_seconds = None
@@ -84,7 +87,7 @@ class V1ReplicaSetSpec(object):
         Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)  # noqa: E501
 
         :param min_ready_seconds: The min_ready_seconds of this V1ReplicaSetSpec.  # noqa: E501
-        :type: int
+        :type min_ready_seconds: int
         """
 
         self._min_ready_seconds = min_ready_seconds
@@ -107,7 +110,7 @@ class V1ReplicaSetSpec(object):
         Replicas is the number of desired pods. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset  # noqa: E501
 
         :param replicas: The replicas of this V1ReplicaSetSpec.  # noqa: E501
-        :type: int
+        :type replicas: int
         """
 
         self._replicas = replicas
@@ -128,7 +131,7 @@ class V1ReplicaSetSpec(object):
 
 
         :param selector: The selector of this V1ReplicaSetSpec.  # noqa: E501
-        :type: V1LabelSelector
+        :type selector: V1LabelSelector
         """
         if self.local_vars_configuration.client_side_validation and selector is None:  # noqa: E501
             raise ValueError("Invalid value for `selector`, must not be `None`")  # noqa: E501
@@ -151,32 +154,40 @@ class V1ReplicaSetSpec(object):
 
 
         :param template: The template of this V1ReplicaSetSpec.  # noqa: E501
-        :type: V1PodTemplateSpec
+        :type template: V1PodTemplateSpec
         """
 
         self._template = template
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

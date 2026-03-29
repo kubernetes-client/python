@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1StorageOSVolumeSource(object):
     def __init__(self, fs_type=None, read_only=None, secret_ref=None, volume_name=None, volume_namespace=None, local_vars_configuration=None):  # noqa: E501
         """V1StorageOSVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._fs_type = None
@@ -90,7 +93,7 @@ class V1StorageOSVolumeSource(object):
         fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Implicitly inferred to be \"ext4\" if unspecified.  # noqa: E501
 
         :param fs_type: The fs_type of this V1StorageOSVolumeSource.  # noqa: E501
-        :type: str
+        :type fs_type: str
         """
 
         self._fs_type = fs_type
@@ -113,7 +116,7 @@ class V1StorageOSVolumeSource(object):
         readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.  # noqa: E501
 
         :param read_only: The read_only of this V1StorageOSVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -134,7 +137,7 @@ class V1StorageOSVolumeSource(object):
 
 
         :param secret_ref: The secret_ref of this V1StorageOSVolumeSource.  # noqa: E501
-        :type: V1LocalObjectReference
+        :type secret_ref: V1LocalObjectReference
         """
 
         self._secret_ref = secret_ref
@@ -157,7 +160,7 @@ class V1StorageOSVolumeSource(object):
         volumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace.  # noqa: E501
 
         :param volume_name: The volume_name of this V1StorageOSVolumeSource.  # noqa: E501
-        :type: str
+        :type volume_name: str
         """
 
         self._volume_name = volume_name
@@ -180,32 +183,40 @@ class V1StorageOSVolumeSource(object):
         volumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to \"default\" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created.  # noqa: E501
 
         :param volume_namespace: The volume_namespace of this V1StorageOSVolumeSource.  # noqa: E501
-        :type: str
+        :type volume_namespace: str
         """
 
         self._volume_namespace = volume_namespace
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

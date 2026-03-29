@@ -1,6 +1,7 @@
 # V1alpha1StorageVersionList
 
 A list of StorageVersions.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

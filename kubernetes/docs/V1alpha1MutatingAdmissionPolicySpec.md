@@ -1,6 +1,7 @@
 # V1alpha1MutatingAdmissionPolicySpec
 
 MutatingAdmissionPolicySpec is the specification of the desired behavior of the admission policy.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1EndpointHints
 
 EndpointHints provides hints describing how an endpoint should be consumed.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

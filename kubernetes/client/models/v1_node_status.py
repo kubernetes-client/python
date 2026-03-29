@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -34,8 +37,8 @@ class V1NodeStatus(object):
     """
     openapi_types = {
         'addresses': 'list[V1NodeAddress]',
-        'allocatable': 'dict(str, str)',
-        'capacity': 'dict(str, str)',
+        'allocatable': 'dict[str, str]',
+        'capacity': 'dict[str, str]',
         'conditions': 'list[V1NodeCondition]',
         'config': 'V1NodeConfigStatus',
         'daemon_endpoints': 'V1NodeDaemonEndpoints',
@@ -69,7 +72,7 @@ class V1NodeStatus(object):
     def __init__(self, addresses=None, allocatable=None, capacity=None, conditions=None, config=None, daemon_endpoints=None, declared_features=None, features=None, images=None, node_info=None, phase=None, runtime_handlers=None, volumes_attached=None, volumes_in_use=None, local_vars_configuration=None):  # noqa: E501
         """V1NodeStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._addresses = None
@@ -135,7 +138,7 @@ class V1NodeStatus(object):
         List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/reference/node/node-status/#addresses Note: This field is declared as mergeable, but the merge key is not sufficiently unique, which can cause data corruption when it is merged. Callers should instead use a full-replacement patch. See https://pr.k8s.io/79391 for an example. Consumers should assume that addresses can change during the lifetime of a Node. However, there are some exceptions where this may not be possible, such as Pods that inherit a Node's address in its own status or consumers of the downward API (status.hostIP).  # noqa: E501
 
         :param addresses: The addresses of this V1NodeStatus.  # noqa: E501
-        :type: list[V1NodeAddress]
+        :type addresses: list[V1NodeAddress]
         """
 
         self._addresses = addresses
@@ -147,7 +150,7 @@ class V1NodeStatus(object):
         Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.  # noqa: E501
 
         :return: The allocatable of this V1NodeStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._allocatable
 
@@ -158,7 +161,7 @@ class V1NodeStatus(object):
         Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.  # noqa: E501
 
         :param allocatable: The allocatable of this V1NodeStatus.  # noqa: E501
-        :type: dict(str, str)
+        :type allocatable: dict[str, str]
         """
 
         self._allocatable = allocatable
@@ -170,7 +173,7 @@ class V1NodeStatus(object):
         Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/reference/node/node-status/#capacity  # noqa: E501
 
         :return: The capacity of this V1NodeStatus.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._capacity
 
@@ -181,7 +184,7 @@ class V1NodeStatus(object):
         Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/reference/node/node-status/#capacity  # noqa: E501
 
         :param capacity: The capacity of this V1NodeStatus.  # noqa: E501
-        :type: dict(str, str)
+        :type capacity: dict[str, str]
         """
 
         self._capacity = capacity
@@ -204,7 +207,7 @@ class V1NodeStatus(object):
         Conditions is an array of current observed node conditions. More info: https://kubernetes.io/docs/reference/node/node-status/#condition  # noqa: E501
 
         :param conditions: The conditions of this V1NodeStatus.  # noqa: E501
-        :type: list[V1NodeCondition]
+        :type conditions: list[V1NodeCondition]
         """
 
         self._conditions = conditions
@@ -225,7 +228,7 @@ class V1NodeStatus(object):
 
 
         :param config: The config of this V1NodeStatus.  # noqa: E501
-        :type: V1NodeConfigStatus
+        :type config: V1NodeConfigStatus
         """
 
         self._config = config
@@ -246,7 +249,7 @@ class V1NodeStatus(object):
 
 
         :param daemon_endpoints: The daemon_endpoints of this V1NodeStatus.  # noqa: E501
-        :type: V1NodeDaemonEndpoints
+        :type daemon_endpoints: V1NodeDaemonEndpoints
         """
 
         self._daemon_endpoints = daemon_endpoints
@@ -269,7 +272,7 @@ class V1NodeStatus(object):
         DeclaredFeatures represents the features related to feature gates that are declared by the node.  # noqa: E501
 
         :param declared_features: The declared_features of this V1NodeStatus.  # noqa: E501
-        :type: list[str]
+        :type declared_features: list[str]
         """
 
         self._declared_features = declared_features
@@ -290,7 +293,7 @@ class V1NodeStatus(object):
 
 
         :param features: The features of this V1NodeStatus.  # noqa: E501
-        :type: V1NodeFeatures
+        :type features: V1NodeFeatures
         """
 
         self._features = features
@@ -313,7 +316,7 @@ class V1NodeStatus(object):
         List of container images on this node  # noqa: E501
 
         :param images: The images of this V1NodeStatus.  # noqa: E501
-        :type: list[V1ContainerImage]
+        :type images: list[V1ContainerImage]
         """
 
         self._images = images
@@ -334,7 +337,7 @@ class V1NodeStatus(object):
 
 
         :param node_info: The node_info of this V1NodeStatus.  # noqa: E501
-        :type: V1NodeSystemInfo
+        :type node_info: V1NodeSystemInfo
         """
 
         self._node_info = node_info
@@ -357,7 +360,7 @@ class V1NodeStatus(object):
         NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.  # noqa: E501
 
         :param phase: The phase of this V1NodeStatus.  # noqa: E501
-        :type: str
+        :type phase: str
         """
 
         self._phase = phase
@@ -380,7 +383,7 @@ class V1NodeStatus(object):
         The available runtime handlers.  # noqa: E501
 
         :param runtime_handlers: The runtime_handlers of this V1NodeStatus.  # noqa: E501
-        :type: list[V1NodeRuntimeHandler]
+        :type runtime_handlers: list[V1NodeRuntimeHandler]
         """
 
         self._runtime_handlers = runtime_handlers
@@ -403,7 +406,7 @@ class V1NodeStatus(object):
         List of volumes that are attached to the node.  # noqa: E501
 
         :param volumes_attached: The volumes_attached of this V1NodeStatus.  # noqa: E501
-        :type: list[V1AttachedVolume]
+        :type volumes_attached: list[V1AttachedVolume]
         """
 
         self._volumes_attached = volumes_attached
@@ -426,32 +429,40 @@ class V1NodeStatus(object):
         List of attachable volumes in use (mounted) by the node.  # noqa: E501
 
         :param volumes_in_use: The volumes_in_use of this V1NodeStatus.  # noqa: E501
-        :type: list[str]
+        :type volumes_in_use: list[str]
         """
 
         self._volumes_in_use = volumes_in_use
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

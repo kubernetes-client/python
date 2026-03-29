@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -34,7 +37,7 @@ class V1DeviceCounterConsumption(object):
     """
     openapi_types = {
         'counter_set': 'str',
-        'counters': 'dict(str, V1Counter)'
+        'counters': 'dict[str, V1Counter]'
     }
 
     attribute_map = {
@@ -45,7 +48,7 @@ class V1DeviceCounterConsumption(object):
     def __init__(self, counter_set=None, counters=None, local_vars_configuration=None):  # noqa: E501
         """V1DeviceCounterConsumption - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._counter_set = None
@@ -73,7 +76,7 @@ class V1DeviceCounterConsumption(object):
         CounterSet is the name of the set from which the counters defined will be consumed.  # noqa: E501
 
         :param counter_set: The counter_set of this V1DeviceCounterConsumption.  # noqa: E501
-        :type: str
+        :type counter_set: str
         """
         if self.local_vars_configuration.client_side_validation and counter_set is None:  # noqa: E501
             raise ValueError("Invalid value for `counter_set`, must not be `None`")  # noqa: E501
@@ -87,7 +90,7 @@ class V1DeviceCounterConsumption(object):
         Counters defines the counters that will be consumed by the device.  The maximum number of counters is 32.  # noqa: E501
 
         :return: The counters of this V1DeviceCounterConsumption.  # noqa: E501
-        :rtype: dict(str, V1Counter)
+        :rtype: dict[str, V1Counter]
         """
         return self._counters
 
@@ -98,34 +101,42 @@ class V1DeviceCounterConsumption(object):
         Counters defines the counters that will be consumed by the device.  The maximum number of counters is 32.  # noqa: E501
 
         :param counters: The counters of this V1DeviceCounterConsumption.  # noqa: E501
-        :type: dict(str, V1Counter)
+        :type counters: dict[str, V1Counter]
         """
         if self.local_vars_configuration.client_side_validation and counters is None:  # noqa: E501
             raise ValueError("Invalid value for `counters`, must not be `None`")  # noqa: E501
 
         self._counters = counters
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

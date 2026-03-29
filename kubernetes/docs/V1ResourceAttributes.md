@@ -1,6 +1,7 @@
 # V1ResourceAttributes
 
 ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

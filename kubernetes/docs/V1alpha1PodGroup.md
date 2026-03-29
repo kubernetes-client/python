@@ -1,6 +1,7 @@
 # V1alpha1PodGroup
 
 PodGroup represents a set of pods with a common scheduling policy.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

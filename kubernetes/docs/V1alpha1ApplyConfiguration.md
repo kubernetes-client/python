@@ -1,6 +1,7 @@
 # V1alpha1ApplyConfiguration
 
 ApplyConfiguration defines the desired configuration values of an object.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

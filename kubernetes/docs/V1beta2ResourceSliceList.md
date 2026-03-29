@@ -1,6 +1,7 @@
 # V1beta2ResourceSliceList
 
 ResourceSliceList is a collection of ResourceSlices.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
