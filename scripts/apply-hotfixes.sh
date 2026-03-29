@@ -25,10 +25,10 @@ then
 fi
 
 # Patching commit for custom client behavior
-# UPDATE: The commit being cherry-picked is updated since the the client generated in 1adaaecd0879d7315f48259ad8d6cbd66b835385
-# differs from the initial hotfix
+# UPDATE: The commit being cherry-picked is updated after upgrading openapi generator to v6.6.0 in PR:
+# https://github.com/kubernetes-client/python/pull/2532/changes/73bb58c92a8ff856712103587f0078998d6734c7
 # Ref: https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede
-git cherry-pick -n 88397bcc5b3b348a41dbf641367756b86552d362
+git cherry-pick -n 73bb58c92a8ff856712103587f0078998d6734c7
 if [ $? -eq 0 ]
 then
     echo Successfully patched changes for custom client behavior
@@ -63,6 +63,5 @@ else
     git restore --staged .
     exit 1
 fi;
-
 
 git commit -m "Apply hotfixes"
