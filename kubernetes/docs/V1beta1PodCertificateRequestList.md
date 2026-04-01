@@ -1,6 +1,7 @@
 # V1beta1PodCertificateRequestList
 
 PodCertificateRequestList is a collection of PodCertificateRequest objects
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

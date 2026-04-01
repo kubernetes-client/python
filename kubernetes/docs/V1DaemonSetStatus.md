@@ -1,6 +1,7 @@
 # V1DaemonSetStatus
 
 DaemonSetStatus represents the current status of a daemon set.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

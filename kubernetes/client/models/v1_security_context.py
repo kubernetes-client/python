@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -65,7 +68,7 @@ class V1SecurityContext(object):
     def __init__(self, allow_privilege_escalation=None, app_armor_profile=None, capabilities=None, privileged=None, proc_mount=None, read_only_root_filesystem=None, run_as_group=None, run_as_non_root=None, run_as_user=None, se_linux_options=None, seccomp_profile=None, windows_options=None, local_vars_configuration=None):  # noqa: E501
         """V1SecurityContext - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allow_privilege_escalation = None
@@ -125,7 +128,7 @@ class V1SecurityContext(object):
         AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. This bool directly controls if the no_new_privs flag will be set on the container process. AllowPrivilegeEscalation is true always when the container is: 1) run as Privileged 2) has CAP_SYS_ADMIN Note that this field cannot be set when spec.os.name is windows.  # noqa: E501
 
         :param allow_privilege_escalation: The allow_privilege_escalation of this V1SecurityContext.  # noqa: E501
-        :type: bool
+        :type allow_privilege_escalation: bool
         """
 
         self._allow_privilege_escalation = allow_privilege_escalation
@@ -146,7 +149,7 @@ class V1SecurityContext(object):
 
 
         :param app_armor_profile: The app_armor_profile of this V1SecurityContext.  # noqa: E501
-        :type: V1AppArmorProfile
+        :type app_armor_profile: V1AppArmorProfile
         """
 
         self._app_armor_profile = app_armor_profile
@@ -167,7 +170,7 @@ class V1SecurityContext(object):
 
 
         :param capabilities: The capabilities of this V1SecurityContext.  # noqa: E501
-        :type: V1Capabilities
+        :type capabilities: V1Capabilities
         """
 
         self._capabilities = capabilities
@@ -190,7 +193,7 @@ class V1SecurityContext(object):
         Run container in privileged mode. Processes in privileged containers are essentially equivalent to root on the host. Defaults to false. Note that this field cannot be set when spec.os.name is windows.  # noqa: E501
 
         :param privileged: The privileged of this V1SecurityContext.  # noqa: E501
-        :type: bool
+        :type privileged: bool
         """
 
         self._privileged = privileged
@@ -213,7 +216,7 @@ class V1SecurityContext(object):
         procMount denotes the type of proc mount to use for the containers. The default value is Default which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. Note that this field cannot be set when spec.os.name is windows.  # noqa: E501
 
         :param proc_mount: The proc_mount of this V1SecurityContext.  # noqa: E501
-        :type: str
+        :type proc_mount: str
         """
 
         self._proc_mount = proc_mount
@@ -236,7 +239,7 @@ class V1SecurityContext(object):
         Whether this container has a read-only root filesystem. Default is false. Note that this field cannot be set when spec.os.name is windows.  # noqa: E501
 
         :param read_only_root_filesystem: The read_only_root_filesystem of this V1SecurityContext.  # noqa: E501
-        :type: bool
+        :type read_only_root_filesystem: bool
         """
 
         self._read_only_root_filesystem = read_only_root_filesystem
@@ -259,7 +262,7 @@ class V1SecurityContext(object):
         The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows.  # noqa: E501
 
         :param run_as_group: The run_as_group of this V1SecurityContext.  # noqa: E501
-        :type: int
+        :type run_as_group: int
         """
 
         self._run_as_group = run_as_group
@@ -282,7 +285,7 @@ class V1SecurityContext(object):
         Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.  # noqa: E501
 
         :param run_as_non_root: The run_as_non_root of this V1SecurityContext.  # noqa: E501
-        :type: bool
+        :type run_as_non_root: bool
         """
 
         self._run_as_non_root = run_as_non_root
@@ -305,7 +308,7 @@ class V1SecurityContext(object):
         The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows.  # noqa: E501
 
         :param run_as_user: The run_as_user of this V1SecurityContext.  # noqa: E501
-        :type: int
+        :type run_as_user: int
         """
 
         self._run_as_user = run_as_user
@@ -326,7 +329,7 @@ class V1SecurityContext(object):
 
 
         :param se_linux_options: The se_linux_options of this V1SecurityContext.  # noqa: E501
-        :type: V1SELinuxOptions
+        :type se_linux_options: V1SELinuxOptions
         """
 
         self._se_linux_options = se_linux_options
@@ -347,7 +350,7 @@ class V1SecurityContext(object):
 
 
         :param seccomp_profile: The seccomp_profile of this V1SecurityContext.  # noqa: E501
-        :type: V1SeccompProfile
+        :type seccomp_profile: V1SeccompProfile
         """
 
         self._seccomp_profile = seccomp_profile
@@ -368,32 +371,40 @@ class V1SecurityContext(object):
 
 
         :param windows_options: The windows_options of this V1SecurityContext.  # noqa: E501
-        :type: V1WindowsSecurityContextOptions
+        :type windows_options: V1WindowsSecurityContextOptions
         """
 
         self._windows_options = windows_options
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

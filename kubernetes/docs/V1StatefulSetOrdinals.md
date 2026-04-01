@@ -1,6 +1,7 @@
 # V1StatefulSetOrdinals
 
 StatefulSetOrdinals describes the policy used for replica ordinal assignment in this StatefulSet.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

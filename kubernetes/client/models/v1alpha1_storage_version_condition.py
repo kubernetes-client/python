@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +56,7 @@ class V1alpha1StorageVersionCondition(object):
     def __init__(self, last_transition_time=None, message=None, observed_generation=None, reason=None, status=None, type=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha1StorageVersionCondition - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._last_transition_time = None
@@ -91,7 +94,7 @@ class V1alpha1StorageVersionCondition(object):
         Last time the condition transitioned from one status to another.  # noqa: E501
 
         :param last_transition_time: The last_transition_time of this V1alpha1StorageVersionCondition.  # noqa: E501
-        :type: datetime
+        :type last_transition_time: datetime
         """
 
         self._last_transition_time = last_transition_time
@@ -114,7 +117,7 @@ class V1alpha1StorageVersionCondition(object):
         A human readable message indicating details about the transition.  # noqa: E501
 
         :param message: The message of this V1alpha1StorageVersionCondition.  # noqa: E501
-        :type: str
+        :type message: str
         """
         if self.local_vars_configuration.client_side_validation and message is None:  # noqa: E501
             raise ValueError("Invalid value for `message`, must not be `None`")  # noqa: E501
@@ -139,7 +142,7 @@ class V1alpha1StorageVersionCondition(object):
         If set, this represents the .metadata.generation that the condition was set based upon.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1alpha1StorageVersionCondition.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -162,7 +165,7 @@ class V1alpha1StorageVersionCondition(object):
         The reason for the condition's last transition.  # noqa: E501
 
         :param reason: The reason of this V1alpha1StorageVersionCondition.  # noqa: E501
-        :type: str
+        :type reason: str
         """
         if self.local_vars_configuration.client_side_validation and reason is None:  # noqa: E501
             raise ValueError("Invalid value for `reason`, must not be `None`")  # noqa: E501
@@ -187,7 +190,7 @@ class V1alpha1StorageVersionCondition(object):
         Status of the condition, one of True, False, Unknown.  # noqa: E501
 
         :param status: The status of this V1alpha1StorageVersionCondition.  # noqa: E501
-        :type: str
+        :type status: str
         """
         if self.local_vars_configuration.client_side_validation and status is None:  # noqa: E501
             raise ValueError("Invalid value for `status`, must not be `None`")  # noqa: E501
@@ -212,34 +215,42 @@ class V1alpha1StorageVersionCondition(object):
         Type of the condition.  # noqa: E501
 
         :param type: The type of this V1alpha1StorageVersionCondition.  # noqa: E501
-        :type: str
+        :type type: str
         """
         if self.local_vars_configuration.client_side_validation and type is None:  # noqa: E501
             raise ValueError("Invalid value for `type`, must not be `None`")  # noqa: E501
 
         self._type = type
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

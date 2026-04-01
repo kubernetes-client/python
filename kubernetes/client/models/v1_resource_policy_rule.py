@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1ResourcePolicyRule(object):
     def __init__(self, api_groups=None, cluster_scope=None, namespaces=None, resources=None, verbs=None, local_vars_configuration=None):  # noqa: E501
         """V1ResourcePolicyRule - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_groups = None
@@ -87,7 +90,7 @@ class V1ResourcePolicyRule(object):
         `apiGroups` is a list of matching API groups and may not be empty. \"*\" matches all API groups and, if present, must be the only entry. Required.  # noqa: E501
 
         :param api_groups: The api_groups of this V1ResourcePolicyRule.  # noqa: E501
-        :type: list[str]
+        :type api_groups: list[str]
         """
         if self.local_vars_configuration.client_side_validation and api_groups is None:  # noqa: E501
             raise ValueError("Invalid value for `api_groups`, must not be `None`")  # noqa: E501
@@ -112,7 +115,7 @@ class V1ResourcePolicyRule(object):
         `clusterScope` indicates whether to match requests that do not specify a namespace (which happens either because the resource is not namespaced or the request targets all namespaces). If this field is omitted or false then the `namespaces` field must contain a non-empty list.  # noqa: E501
 
         :param cluster_scope: The cluster_scope of this V1ResourcePolicyRule.  # noqa: E501
-        :type: bool
+        :type cluster_scope: bool
         """
 
         self._cluster_scope = cluster_scope
@@ -135,7 +138,7 @@ class V1ResourcePolicyRule(object):
         `namespaces` is a list of target namespaces that restricts matches.  A request that specifies a target namespace matches only if either (a) this list contains that target namespace or (b) this list contains \"*\".  Note that \"*\" matches any specified namespace but does not match a request that _does not specify_ a namespace (see the `clusterScope` field for that). This list may be empty, but only if `clusterScope` is true.  # noqa: E501
 
         :param namespaces: The namespaces of this V1ResourcePolicyRule.  # noqa: E501
-        :type: list[str]
+        :type namespaces: list[str]
         """
 
         self._namespaces = namespaces
@@ -158,7 +161,7 @@ class V1ResourcePolicyRule(object):
         `resources` is a list of matching resources (i.e., lowercase and plural) with, if desired, subresource.  For example, [ \"services\", \"nodes/status\" ].  This list may not be empty. \"*\" matches all resources and, if present, must be the only entry. Required.  # noqa: E501
 
         :param resources: The resources of this V1ResourcePolicyRule.  # noqa: E501
-        :type: list[str]
+        :type resources: list[str]
         """
         if self.local_vars_configuration.client_side_validation and resources is None:  # noqa: E501
             raise ValueError("Invalid value for `resources`, must not be `None`")  # noqa: E501
@@ -183,34 +186,42 @@ class V1ResourcePolicyRule(object):
         `verbs` is a list of matching verbs and may not be empty. \"*\" matches all verbs and, if present, must be the only entry. Required.  # noqa: E501
 
         :param verbs: The verbs of this V1ResourcePolicyRule.  # noqa: E501
-        :type: list[str]
+        :type verbs: list[str]
         """
         if self.local_vars_configuration.client_side_validation and verbs is None:  # noqa: E501
             raise ValueError("Invalid value for `verbs`, must not be `None`")  # noqa: E501
 
         self._verbs = verbs
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

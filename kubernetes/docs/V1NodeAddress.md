@@ -1,6 +1,7 @@
 # V1NodeAddress
 
 NodeAddress contains information for the node's address.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

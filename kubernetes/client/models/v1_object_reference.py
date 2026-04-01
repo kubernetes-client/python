@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1ObjectReference(object):
     def __init__(self, api_version=None, field_path=None, kind=None, name=None, namespace=None, resource_version=None, uid=None, local_vars_configuration=None):  # noqa: E501
         """V1ObjectReference - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_version = None
@@ -100,7 +103,7 @@ class V1ObjectReference(object):
         API version of the referent.  # noqa: E501
 
         :param api_version: The api_version of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type api_version: str
         """
 
         self._api_version = api_version
@@ -123,7 +126,7 @@ class V1ObjectReference(object):
         If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: \"spec.containers{name}\" (where \"name\" refers to the name of the container that triggered the event) or if no container name is specified \"spec.containers[2]\" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object.  # noqa: E501
 
         :param field_path: The field_path of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type field_path: str
         """
 
         self._field_path = field_path
@@ -146,7 +149,7 @@ class V1ObjectReference(object):
         Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds  # noqa: E501
 
         :param kind: The kind of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type kind: str
         """
 
         self._kind = kind
@@ -169,7 +172,7 @@ class V1ObjectReference(object):
         Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names  # noqa: E501
 
         :param name: The name of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -192,7 +195,7 @@ class V1ObjectReference(object):
         Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/  # noqa: E501
 
         :param namespace: The namespace of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type namespace: str
         """
 
         self._namespace = namespace
@@ -215,7 +218,7 @@ class V1ObjectReference(object):
         Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency  # noqa: E501
 
         :param resource_version: The resource_version of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type resource_version: str
         """
 
         self._resource_version = resource_version
@@ -238,32 +241,40 @@ class V1ObjectReference(object):
         UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids  # noqa: E501
 
         :param uid: The uid of this V1ObjectReference.  # noqa: E501
-        :type: str
+        :type uid: str
         """
 
         self._uid = uid
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

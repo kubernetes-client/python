@@ -1,6 +1,7 @@
 # V1FlowDistinguisherMethod
 
 FlowDistinguisherMethod specifies the method of a flow distinguisher.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

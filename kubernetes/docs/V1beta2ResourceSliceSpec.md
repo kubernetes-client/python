@@ -1,6 +1,7 @@
 # V1beta2ResourceSliceSpec
 
 ResourceSliceSpec contains the information published by the driver in one ResourceSlice.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

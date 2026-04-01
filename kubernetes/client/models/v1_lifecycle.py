@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1Lifecycle(object):
     def __init__(self, post_start=None, pre_stop=None, stop_signal=None, local_vars_configuration=None):  # noqa: E501
         """V1Lifecycle - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._post_start = None
@@ -78,7 +81,7 @@ class V1Lifecycle(object):
 
 
         :param post_start: The post_start of this V1Lifecycle.  # noqa: E501
-        :type: V1LifecycleHandler
+        :type post_start: V1LifecycleHandler
         """
 
         self._post_start = post_start
@@ -99,7 +102,7 @@ class V1Lifecycle(object):
 
 
         :param pre_stop: The pre_stop of this V1Lifecycle.  # noqa: E501
-        :type: V1LifecycleHandler
+        :type pre_stop: V1LifecycleHandler
         """
 
         self._pre_stop = pre_stop
@@ -122,32 +125,40 @@ class V1Lifecycle(object):
         StopSignal defines which signal will be sent to a container when it is being stopped. If not specified, the default is defined by the container runtime in use. StopSignal can only be set for Pods with a non-empty .spec.os.name  # noqa: E501
 
         :param stop_signal: The stop_signal of this V1Lifecycle.  # noqa: E501
-        :type: str
+        :type stop_signal: str
         """
 
         self._stop_signal = stop_signal
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

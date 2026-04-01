@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1NodeConfigStatus(object):
     def __init__(self, active=None, assigned=None, error=None, last_known_good=None, local_vars_configuration=None):  # noqa: E501
         """V1NodeConfigStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._active = None
@@ -83,7 +86,7 @@ class V1NodeConfigStatus(object):
 
 
         :param active: The active of this V1NodeConfigStatus.  # noqa: E501
-        :type: V1NodeConfigSource
+        :type active: V1NodeConfigSource
         """
 
         self._active = active
@@ -104,7 +107,7 @@ class V1NodeConfigStatus(object):
 
 
         :param assigned: The assigned of this V1NodeConfigStatus.  # noqa: E501
-        :type: V1NodeConfigSource
+        :type assigned: V1NodeConfigSource
         """
 
         self._assigned = assigned
@@ -127,7 +130,7 @@ class V1NodeConfigStatus(object):
         Error describes any problems reconciling the Spec.ConfigSource to the Active config. Errors may occur, for example, attempting to checkpoint Spec.ConfigSource to the local Assigned record, attempting to checkpoint the payload associated with Spec.ConfigSource, attempting to load or validate the Assigned config, etc. Errors may occur at different points while syncing config. Earlier errors (e.g. download or checkpointing errors) will not result in a rollback to LastKnownGood, and may resolve across Kubelet retries. Later errors (e.g. loading or validating a checkpointed config) will result in a rollback to LastKnownGood. In the latter case, it is usually possible to resolve the error by fixing the config assigned in Spec.ConfigSource. You can find additional information for debugging by searching the error message in the Kubelet log. Error is a human-readable description of the error state; machines can check whether or not Error is empty, but should not rely on the stability of the Error text across Kubelet versions.  # noqa: E501
 
         :param error: The error of this V1NodeConfigStatus.  # noqa: E501
-        :type: str
+        :type error: str
         """
 
         self._error = error
@@ -148,32 +151,40 @@ class V1NodeConfigStatus(object):
 
 
         :param last_known_good: The last_known_good of this V1NodeConfigStatus.  # noqa: E501
-        :type: V1NodeConfigSource
+        :type last_known_good: V1NodeConfigSource
         """
 
         self._last_known_good = last_known_good
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

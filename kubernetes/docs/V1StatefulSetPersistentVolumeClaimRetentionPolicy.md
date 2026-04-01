@@ -1,6 +1,7 @@
 # V1StatefulSetPersistentVolumeClaimRetentionPolicy
 
 StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1NamespaceStatus
 
 NamespaceStatus is information about the current status of a Namespace.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

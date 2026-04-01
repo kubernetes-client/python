@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1TokenReviewStatus(object):
     def __init__(self, audiences=None, authenticated=None, error=None, user=None, local_vars_configuration=None):  # noqa: E501
         """V1TokenReviewStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._audiences = None
@@ -85,7 +88,7 @@ class V1TokenReviewStatus(object):
         Audiences are audience identifiers chosen by the authenticator that are compatible with both the TokenReview and token. An identifier is any identifier in the intersection of the TokenReviewSpec audiences and the token's audiences. A client of the TokenReview API that sets the spec.audiences field should validate that a compatible audience identifier is returned in the status.audiences field to ensure that the TokenReview server is audience aware. If a TokenReview returns an empty status.audience field where status.authenticated is \"true\", the token is valid against the audience of the Kubernetes API server.  # noqa: E501
 
         :param audiences: The audiences of this V1TokenReviewStatus.  # noqa: E501
-        :type: list[str]
+        :type audiences: list[str]
         """
 
         self._audiences = audiences
@@ -108,7 +111,7 @@ class V1TokenReviewStatus(object):
         Authenticated indicates that the token was associated with a known user.  # noqa: E501
 
         :param authenticated: The authenticated of this V1TokenReviewStatus.  # noqa: E501
-        :type: bool
+        :type authenticated: bool
         """
 
         self._authenticated = authenticated
@@ -131,7 +134,7 @@ class V1TokenReviewStatus(object):
         Error indicates that the token couldn't be checked  # noqa: E501
 
         :param error: The error of this V1TokenReviewStatus.  # noqa: E501
-        :type: str
+        :type error: str
         """
 
         self._error = error
@@ -152,32 +155,40 @@ class V1TokenReviewStatus(object):
 
 
         :param user: The user of this V1TokenReviewStatus.  # noqa: E501
-        :type: V1UserInfo
+        :type user: V1UserInfo
         """
 
         self._user = user
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

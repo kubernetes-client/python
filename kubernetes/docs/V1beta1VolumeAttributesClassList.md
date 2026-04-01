@@ -1,6 +1,7 @@
 # V1beta1VolumeAttributesClassList
 
 VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

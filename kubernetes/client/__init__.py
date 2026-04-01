@@ -90,6 +90,7 @@ from kubernetes.client.exceptions import OpenApiException
 from kubernetes.client.exceptions import ApiTypeError
 from kubernetes.client.exceptions import ApiValueError
 from kubernetes.client.exceptions import ApiKeyError
+from kubernetes.client.exceptions import ApiAttributeError
 from kubernetes.client.exceptions import ApiException
 # import models into sdk package
 from kubernetes.client.models.admissionregistration_v1_service_reference import AdmissionregistrationV1ServiceReference
@@ -788,6 +789,11 @@ from kubernetes.client.models.v1beta2_resource_pool import V1beta2ResourcePool
 from kubernetes.client.models.v1beta2_resource_slice import V1beta2ResourceSlice
 from kubernetes.client.models.v1beta2_resource_slice_list import V1beta2ResourceSliceList
 from kubernetes.client.models.v1beta2_resource_slice_spec import V1beta2ResourceSliceSpec
+from kubernetes.client.models.v2_api_group_discovery import V2APIGroupDiscovery
+from kubernetes.client.models.v2_api_group_discovery_list import V2APIGroupDiscoveryList
+from kubernetes.client.models.v2_api_resource_discovery import V2APIResourceDiscovery
+from kubernetes.client.models.v2_api_subresource_discovery import V2APISubresourceDiscovery
+from kubernetes.client.models.v2_api_version_discovery import V2APIVersionDiscovery
 from kubernetes.client.models.v2_container_resource_metric_source import V2ContainerResourceMetricSource
 from kubernetes.client.models.v2_container_resource_metric_status import V2ContainerResourceMetricStatus
 from kubernetes.client.models.v2_cross_version_object_reference import V2CrossVersionObjectReference
@@ -812,5 +818,10 @@ from kubernetes.client.models.v2_pods_metric_source import V2PodsMetricSource
 from kubernetes.client.models.v2_pods_metric_status import V2PodsMetricStatus
 from kubernetes.client.models.v2_resource_metric_source import V2ResourceMetricSource
 from kubernetes.client.models.v2_resource_metric_status import V2ResourceMetricStatus
+from kubernetes.client.models.v2beta1_api_group_discovery import V2beta1APIGroupDiscovery
+from kubernetes.client.models.v2beta1_api_group_discovery_list import V2beta1APIGroupDiscoveryList
+from kubernetes.client.models.v2beta1_api_resource_discovery import V2beta1APIResourceDiscovery
+from kubernetes.client.models.v2beta1_api_subresource_discovery import V2beta1APISubresourceDiscovery
+from kubernetes.client.models.v2beta1_api_version_discovery import V2beta1APIVersionDiscovery
 from kubernetes.client.models.version_info import VersionInfo
 

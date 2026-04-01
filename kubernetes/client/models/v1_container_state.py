@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1ContainerState(object):
     def __init__(self, running=None, terminated=None, waiting=None, local_vars_configuration=None):  # noqa: E501
         """V1ContainerState - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._running = None
@@ -78,7 +81,7 @@ class V1ContainerState(object):
 
 
         :param running: The running of this V1ContainerState.  # noqa: E501
-        :type: V1ContainerStateRunning
+        :type running: V1ContainerStateRunning
         """
 
         self._running = running
@@ -99,7 +102,7 @@ class V1ContainerState(object):
 
 
         :param terminated: The terminated of this V1ContainerState.  # noqa: E501
-        :type: V1ContainerStateTerminated
+        :type terminated: V1ContainerStateTerminated
         """
 
         self._terminated = terminated
@@ -120,32 +123,40 @@ class V1ContainerState(object):
 
 
         :param waiting: The waiting of this V1ContainerState.  # noqa: E501
-        :type: V1ContainerStateWaiting
+        :type waiting: V1ContainerStateWaiting
         """
 
         self._waiting = waiting
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

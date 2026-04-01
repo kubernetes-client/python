@@ -1,6 +1,7 @@
 # V1PriorityLevelConfiguration
 
 PriorityLevelConfiguration represents the configuration of a priority level.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

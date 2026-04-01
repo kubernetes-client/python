@@ -1,6 +1,7 @@
 # V1CertificateSigningRequestStatus
 
 CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of the request, and the issued certificate.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

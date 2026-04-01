@@ -1,6 +1,7 @@
 # V1SelectableField
 
 SelectableField specifies the JSON path of a field that may be used with field selectors.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

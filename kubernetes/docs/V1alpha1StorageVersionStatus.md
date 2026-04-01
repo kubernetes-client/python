@@ -1,6 +1,7 @@
 # V1alpha1StorageVersionStatus
 
 API server instances report the versions they can decode and the version they encode objects to when persisting objects in the backend.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

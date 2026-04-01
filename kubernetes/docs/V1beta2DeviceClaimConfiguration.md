@@ -1,6 +1,7 @@
 # V1beta2DeviceClaimConfiguration
 
 DeviceClaimConfiguration is used for configuration parameters in DeviceClaim.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

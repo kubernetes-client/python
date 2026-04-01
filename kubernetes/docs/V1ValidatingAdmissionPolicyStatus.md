@@ -1,6 +1,7 @@
 # V1ValidatingAdmissionPolicyStatus
 
 ValidatingAdmissionPolicyStatus represents the status of an admission validation policy.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1CronJobStatus
 
 CronJobStatus represents the current state of a cron job.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

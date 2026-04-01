@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -53,7 +56,7 @@ class V1QuobyteVolumeSource(object):
     def __init__(self, group=None, read_only=None, registry=None, tenant=None, user=None, volume=None, local_vars_configuration=None):  # noqa: E501
         """V1QuobyteVolumeSource - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._group = None
@@ -93,7 +96,7 @@ class V1QuobyteVolumeSource(object):
         group to map volume access to Default is no group  # noqa: E501
 
         :param group: The group of this V1QuobyteVolumeSource.  # noqa: E501
-        :type: str
+        :type group: str
         """
 
         self._group = group
@@ -116,7 +119,7 @@ class V1QuobyteVolumeSource(object):
         readOnly here will force the Quobyte volume to be mounted with read-only permissions. Defaults to false.  # noqa: E501
 
         :param read_only: The read_only of this V1QuobyteVolumeSource.  # noqa: E501
-        :type: bool
+        :type read_only: bool
         """
 
         self._read_only = read_only
@@ -139,7 +142,7 @@ class V1QuobyteVolumeSource(object):
         registry represents a single or multiple Quobyte Registry services specified as a string as host:port pair (multiple entries are separated with commas) which acts as the central registry for volumes  # noqa: E501
 
         :param registry: The registry of this V1QuobyteVolumeSource.  # noqa: E501
-        :type: str
+        :type registry: str
         """
         if self.local_vars_configuration.client_side_validation and registry is None:  # noqa: E501
             raise ValueError("Invalid value for `registry`, must not be `None`")  # noqa: E501
@@ -164,7 +167,7 @@ class V1QuobyteVolumeSource(object):
         tenant owning the given Quobyte volume in the Backend Used with dynamically provisioned Quobyte volumes, value is set by the plugin  # noqa: E501
 
         :param tenant: The tenant of this V1QuobyteVolumeSource.  # noqa: E501
-        :type: str
+        :type tenant: str
         """
 
         self._tenant = tenant
@@ -187,7 +190,7 @@ class V1QuobyteVolumeSource(object):
         user to map volume access to Defaults to serivceaccount user  # noqa: E501
 
         :param user: The user of this V1QuobyteVolumeSource.  # noqa: E501
-        :type: str
+        :type user: str
         """
 
         self._user = user
@@ -210,34 +213,42 @@ class V1QuobyteVolumeSource(object):
         volume is a string that references an already created Quobyte volume by name.  # noqa: E501
 
         :param volume: The volume of this V1QuobyteVolumeSource.  # noqa: E501
-        :type: str
+        :type volume: str
         """
         if self.local_vars_configuration.client_side_validation and volume is None:  # noqa: E501
             raise ValueError("Invalid value for `volume`, must not be `None`")  # noqa: E501
 
         self._volume = volume
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

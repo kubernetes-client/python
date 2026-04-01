@@ -1,6 +1,7 @@
 # V1beta1ServiceCIDRList
 
 ServiceCIDRList contains a list of ServiceCIDR objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

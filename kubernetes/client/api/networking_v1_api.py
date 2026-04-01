@@ -42,25 +42,34 @@ class NetworkingV1Api(object):
         create an IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_ingress_class(body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param V1IngressClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param body: (required)
+        :type body: V1IngressClass
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressClass
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressClass
         """
         kwargs['_return_http_data_only'] = True
         return self.create_ingress_class_with_http_info(body, **kwargs)  # noqa: E501
@@ -71,27 +80,42 @@ class NetworkingV1Api(object):
         create an IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_ingress_class_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param V1IngressClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param body: (required)
+        :type body: V1IngressClass
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -108,7 +132,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -121,8 +148,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_ingress_class`")  # noqa: E501
 
         collection_formats = {}
@@ -130,16 +156,16 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -154,6 +180,13 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IngressClass",
+            201: "V1IngressClass",
+            202: "V1IngressClass",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses', 'POST',
             path_params,
@@ -162,13 +195,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressClass',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def create_ip_address(self, body, **kwargs):  # noqa: E501
         """create_ip_address  # noqa: E501
@@ -176,25 +210,34 @@ class NetworkingV1Api(object):
         create an IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_ip_address(body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param V1IPAddress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param body: (required)
+        :type body: V1IPAddress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IPAddress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IPAddress
         """
         kwargs['_return_http_data_only'] = True
         return self.create_ip_address_with_http_info(body, **kwargs)  # noqa: E501
@@ -205,27 +248,42 @@ class NetworkingV1Api(object):
         create an IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_ip_address_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param V1IPAddress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param body: (required)
+        :type body: V1IPAddress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -242,7 +300,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -255,8 +316,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_ip_address`")  # noqa: E501
 
         collection_formats = {}
@@ -264,16 +324,16 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -288,6 +348,13 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IPAddress",
+            201: "V1IPAddress",
+            202: "V1IPAddress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses', 'POST',
             path_params,
@@ -296,13 +363,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IPAddress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def create_namespaced_ingress(self, namespace, body, **kwargs):  # noqa: E501
         """create_namespaced_ingress  # noqa: E501
@@ -310,26 +378,36 @@ class NetworkingV1Api(object):
         create an Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_namespaced_ingress(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Ingress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1Ingress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.create_namespaced_ingress_with_http_info(namespace, body, **kwargs)  # noqa: E501
@@ -340,28 +418,44 @@ class NetworkingV1Api(object):
         create an Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_namespaced_ingress_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Ingress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1Ingress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -379,7 +473,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -392,12 +489,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -407,16 +502,16 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -431,6 +526,13 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Ingress",
+            201: "V1Ingress",
+            202: "V1Ingress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses', 'POST',
             path_params,
@@ -439,13 +541,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def create_namespaced_network_policy(self, namespace, body, **kwargs):  # noqa: E501
         """create_namespaced_network_policy  # noqa: E501
@@ -453,26 +556,36 @@ class NetworkingV1Api(object):
         create a NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_namespaced_network_policy(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1NetworkPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1NetworkPolicy
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1NetworkPolicy
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1NetworkPolicy
         """
         kwargs['_return_http_data_only'] = True
         return self.create_namespaced_network_policy_with_http_info(namespace, body, **kwargs)  # noqa: E501
@@ -483,28 +596,44 @@ class NetworkingV1Api(object):
         create a NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_namespaced_network_policy_with_http_info(namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1NetworkPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1NetworkPolicy
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -522,7 +651,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -535,12 +667,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `create_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -550,16 +680,16 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -574,6 +704,13 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1NetworkPolicy",
+            201: "V1NetworkPolicy",
+            202: "V1NetworkPolicy",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies', 'POST',
             path_params,
@@ -582,13 +719,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1NetworkPolicy',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def create_service_cidr(self, body, **kwargs):  # noqa: E501
         """create_service_cidr  # noqa: E501
@@ -596,25 +734,34 @@ class NetworkingV1Api(object):
         create a ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_service_cidr(body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param V1ServiceCIDR body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param body: (required)
+        :type body: V1ServiceCIDR
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.create_service_cidr_with_http_info(body, **kwargs)  # noqa: E501
@@ -625,27 +772,42 @@ class NetworkingV1Api(object):
         create a ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_service_cidr_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param V1ServiceCIDR body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param body: (required)
+        :type body: V1ServiceCIDR
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -662,7 +824,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -675,8 +840,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `create_service_cidr`")  # noqa: E501
 
         collection_formats = {}
@@ -684,16 +848,16 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -708,6 +872,13 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            201: "V1ServiceCIDR",
+            202: "V1ServiceCIDR",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs', 'POST',
             path_params,
@@ -716,13 +887,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_collection_ingress_class(self, **kwargs):  # noqa: E501
         """delete_collection_ingress_class  # noqa: E501
@@ -730,35 +902,54 @@ class NetworkingV1Api(object):
         delete collection of IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_ingress_class(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_collection_ingress_class_with_http_info(**kwargs)  # noqa: E501
@@ -769,37 +960,62 @@ class NetworkingV1Api(object):
         delete collection of IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_ingress_class_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -826,7 +1042,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -844,36 +1063,36 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -888,6 +1107,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses', 'DELETE',
             path_params,
@@ -896,13 +1120,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_collection_ip_address(self, **kwargs):  # noqa: E501
         """delete_collection_ip_address  # noqa: E501
@@ -910,35 +1135,54 @@ class NetworkingV1Api(object):
         delete collection of IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_ip_address(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_collection_ip_address_with_http_info(**kwargs)  # noqa: E501
@@ -949,37 +1193,62 @@ class NetworkingV1Api(object):
         delete collection of IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_ip_address_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -1006,7 +1275,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1024,36 +1296,36 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1068,6 +1340,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses', 'DELETE',
             path_params,
@@ -1076,13 +1353,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_collection_namespaced_ingress(self, namespace, **kwargs):  # noqa: E501
         """delete_collection_namespaced_ingress  # noqa: E501
@@ -1090,36 +1368,56 @@ class NetworkingV1Api(object):
         delete collection of Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_namespaced_ingress(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_collection_namespaced_ingress_with_http_info(namespace, **kwargs)  # noqa: E501
@@ -1130,38 +1428,64 @@ class NetworkingV1Api(object):
         delete collection of Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_namespaced_ingress_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -1189,7 +1513,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1202,8 +1529,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -1213,36 +1539,36 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1257,6 +1583,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses', 'DELETE',
             path_params,
@@ -1265,13 +1596,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_collection_namespaced_network_policy(self, namespace, **kwargs):  # noqa: E501
         """delete_collection_namespaced_network_policy  # noqa: E501
@@ -1279,36 +1611,56 @@ class NetworkingV1Api(object):
         delete collection of NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_namespaced_network_policy(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_collection_namespaced_network_policy_with_http_info(namespace, **kwargs)  # noqa: E501
@@ -1319,38 +1671,64 @@ class NetworkingV1Api(object):
         delete collection of NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_namespaced_network_policy_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -1378,7 +1756,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1391,8 +1772,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_collection_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -1402,36 +1782,36 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1446,6 +1826,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies', 'DELETE',
             path_params,
@@ -1454,13 +1839,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_collection_service_cidr(self, **kwargs):  # noqa: E501
         """delete_collection_service_cidr  # noqa: E501
@@ -1468,35 +1854,54 @@ class NetworkingV1Api(object):
         delete collection of ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_service_cidr(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_collection_service_cidr_with_http_info(**kwargs)  # noqa: E501
@@ -1507,37 +1912,62 @@ class NetworkingV1Api(object):
         delete collection of ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_collection_service_cidr_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param V1DeleteOptions body:
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -1564,7 +1994,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1582,36 +2015,36 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1626,6 +2059,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs', 'DELETE',
             path_params,
@@ -1634,13 +2072,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_ingress_class(self, name, **kwargs):  # noqa: E501
         """delete_ingress_class  # noqa: E501
@@ -1648,28 +2087,40 @@ class NetworkingV1Api(object):
         delete an IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_ingress_class(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_ingress_class_with_http_info(name, **kwargs)  # noqa: E501
@@ -1680,30 +2131,48 @@ class NetworkingV1Api(object):
         delete an IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_ingress_class_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -1723,7 +2192,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1736,8 +2208,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_ingress_class`")  # noqa: E501
 
         collection_formats = {}
@@ -1747,20 +2218,20 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1775,6 +2246,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            202: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses/{name}', 'DELETE',
             path_params,
@@ -1783,13 +2260,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_ip_address(self, name, **kwargs):  # noqa: E501
         """delete_ip_address  # noqa: E501
@@ -1797,28 +2275,40 @@ class NetworkingV1Api(object):
         delete an IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_ip_address(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_ip_address_with_http_info(name, **kwargs)  # noqa: E501
@@ -1829,30 +2319,48 @@ class NetworkingV1Api(object):
         delete an IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_ip_address_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -1872,7 +2380,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -1885,8 +2396,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_ip_address`")  # noqa: E501
 
         collection_formats = {}
@@ -1896,20 +2406,20 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -1924,6 +2434,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            202: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses/{name}', 'DELETE',
             path_params,
@@ -1932,13 +2448,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_namespaced_ingress(self, name, namespace, **kwargs):  # noqa: E501
         """delete_namespaced_ingress  # noqa: E501
@@ -1946,29 +2463,42 @@ class NetworkingV1Api(object):
         delete an Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_namespaced_ingress(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_namespaced_ingress_with_http_info(name, namespace, **kwargs)  # noqa: E501
@@ -1979,31 +2509,50 @@ class NetworkingV1Api(object):
         delete an Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_namespaced_ingress_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2024,7 +2573,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2037,12 +2589,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -2054,20 +2604,20 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2082,6 +2632,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            202: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}', 'DELETE',
             path_params,
@@ -2090,13 +2646,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_namespaced_network_policy(self, name, namespace, **kwargs):  # noqa: E501
         """delete_namespaced_network_policy  # noqa: E501
@@ -2104,29 +2661,42 @@ class NetworkingV1Api(object):
         delete a NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_namespaced_network_policy(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_namespaced_network_policy_with_http_info(name, namespace, **kwargs)  # noqa: E501
@@ -2137,31 +2707,50 @@ class NetworkingV1Api(object):
         delete a NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_namespaced_network_policy_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2182,7 +2771,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2195,12 +2787,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `delete_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -2212,20 +2802,20 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2240,6 +2830,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            202: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}', 'DELETE',
             path_params,
@@ -2248,13 +2844,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def delete_service_cidr(self, name, **kwargs):  # noqa: E501
         """delete_service_cidr  # noqa: E501
@@ -2262,28 +2859,40 @@ class NetworkingV1Api(object):
         delete a ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_service_cidr(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Status
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Status
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_service_cidr_with_http_info(name, **kwargs)  # noqa: E501
@@ -2294,30 +2903,48 @@ class NetworkingV1Api(object):
         delete a ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.delete_service_cidr_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param int grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-        :param bool ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
-        :param bool orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-        :param str propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-        :param V1DeleteOptions body:
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param grace_period_seconds: The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+        :type grace_period_seconds: int
+        :param ignore_store_read_error_with_cluster_breaking_potential: if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+        :type ignore_store_read_error_with_cluster_breaking_potential: bool
+        :param orphan_dependents: Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+        :type orphan_dependents: bool
+        :param propagation_policy: Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+        :type propagation_policy: str
+        :param body:
+        :type body: V1DeleteOptions
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Status, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2337,7 +2964,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2350,8 +2980,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `delete_service_cidr`")  # noqa: E501
 
         collection_formats = {}
@@ -2361,20 +2990,20 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'grace_period_seconds' in local_var_params and local_var_params['grace_period_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('grace_period_seconds') is not None:  # noqa: E501
             query_params.append(('gracePeriodSeconds', local_var_params['grace_period_seconds']))  # noqa: E501
-        if 'ignore_store_read_error_with_cluster_breaking_potential' in local_var_params and local_var_params['ignore_store_read_error_with_cluster_breaking_potential'] is not None:  # noqa: E501
+        if local_var_params.get('ignore_store_read_error_with_cluster_breaking_potential') is not None:  # noqa: E501
             query_params.append(('ignoreStoreReadErrorWithClusterBreakingPotential', local_var_params['ignore_store_read_error_with_cluster_breaking_potential']))  # noqa: E501
-        if 'orphan_dependents' in local_var_params and local_var_params['orphan_dependents'] is not None:  # noqa: E501
+        if local_var_params.get('orphan_dependents') is not None:  # noqa: E501
             query_params.append(('orphanDependents', local_var_params['orphan_dependents']))  # noqa: E501
-        if 'propagation_policy' in local_var_params and local_var_params['propagation_policy'] is not None:  # noqa: E501
+        if local_var_params.get('propagation_policy') is not None:  # noqa: E501
             query_params.append(('propagationPolicy', local_var_params['propagation_policy']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2389,6 +3018,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Status",
+            202: "V1Status",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}', 'DELETE',
             path_params,
@@ -2397,13 +3032,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Status',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def get_api_resources(self, **kwargs):  # noqa: E501
         """get_api_resources  # noqa: E501
@@ -2411,20 +3047,24 @@ class NetworkingV1Api(object):
         get available resources  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.get_api_resources(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1APIResourceList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1APIResourceList
         """
         kwargs['_return_http_data_only'] = True
         return self.get_api_resources_with_http_info(**kwargs)  # noqa: E501
@@ -2435,22 +3075,32 @@ class NetworkingV1Api(object):
         get available resources  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.get_api_resources_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1APIResourceList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1APIResourceList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2462,7 +3112,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2481,7 +3134,7 @@ class NetworkingV1Api(object):
 
         query_params = []
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2494,6 +3147,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1APIResourceList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/', 'GET',
             path_params,
@@ -2502,13 +3160,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1APIResourceList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_ingress_class(self, **kwargs):  # noqa: E501
         """list_ingress_class  # noqa: E501
@@ -2516,31 +3175,46 @@ class NetworkingV1Api(object):
         list or watch objects of kind IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_ingress_class(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressClassList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressClassList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_ingress_class_with_http_info(**kwargs)  # noqa: E501
@@ -2551,33 +3225,54 @@ class NetworkingV1Api(object):
         list or watch objects of kind IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_ingress_class_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressClassList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressClassList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2600,7 +3295,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2618,30 +3316,30 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2654,6 +3352,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IngressClassList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses', 'GET',
             path_params,
@@ -2662,13 +3365,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressClassList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_ingress_for_all_namespaces(self, **kwargs):  # noqa: E501
         """list_ingress_for_all_namespaces  # noqa: E501
@@ -2676,31 +3380,46 @@ class NetworkingV1Api(object):
         list or watch objects of kind Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_ingress_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_ingress_for_all_namespaces_with_http_info(**kwargs)  # noqa: E501
@@ -2711,33 +3430,54 @@ class NetworkingV1Api(object):
         list or watch objects of kind Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_ingress_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2760,7 +3500,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2778,30 +3521,30 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2814,6 +3557,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IngressList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingresses', 'GET',
             path_params,
@@ -2822,13 +3570,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_ip_address(self, **kwargs):  # noqa: E501
         """list_ip_address  # noqa: E501
@@ -2836,31 +3585,46 @@ class NetworkingV1Api(object):
         list or watch objects of kind IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_ip_address(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IPAddressList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IPAddressList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_ip_address_with_http_info(**kwargs)  # noqa: E501
@@ -2871,33 +3635,54 @@ class NetworkingV1Api(object):
         list or watch objects of kind IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_ip_address_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IPAddressList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IPAddressList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -2920,7 +3705,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -2938,30 +3726,30 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -2974,6 +3762,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IPAddressList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses', 'GET',
             path_params,
@@ -2982,13 +3775,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IPAddressList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_namespaced_ingress(self, namespace, **kwargs):  # noqa: E501
         """list_namespaced_ingress  # noqa: E501
@@ -2996,32 +3790,48 @@ class NetworkingV1Api(object):
         list or watch objects of kind Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_namespaced_ingress(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_namespaced_ingress_with_http_info(namespace, **kwargs)  # noqa: E501
@@ -3032,34 +3842,56 @@ class NetworkingV1Api(object):
         list or watch objects of kind Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_namespaced_ingress_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -3083,7 +3915,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3096,8 +3931,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -3107,30 +3941,30 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3143,6 +3977,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IngressList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses', 'GET',
             path_params,
@@ -3151,13 +3990,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_namespaced_network_policy(self, namespace, **kwargs):  # noqa: E501
         """list_namespaced_network_policy  # noqa: E501
@@ -3165,32 +4005,48 @@ class NetworkingV1Api(object):
         list or watch objects of kind NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_namespaced_network_policy(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1NetworkPolicyList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1NetworkPolicyList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_namespaced_network_policy_with_http_info(namespace, **kwargs)  # noqa: E501
@@ -3201,34 +4057,56 @@ class NetworkingV1Api(object):
         list or watch objects of kind NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_namespaced_network_policy_with_http_info(namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1NetworkPolicyList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1NetworkPolicyList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -3252,7 +4130,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3265,8 +4146,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `list_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -3276,30 +4156,30 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3312,6 +4192,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1NetworkPolicyList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies', 'GET',
             path_params,
@@ -3320,13 +4205,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1NetworkPolicyList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_network_policy_for_all_namespaces(self, **kwargs):  # noqa: E501
         """list_network_policy_for_all_namespaces  # noqa: E501
@@ -3334,31 +4220,46 @@ class NetworkingV1Api(object):
         list or watch objects of kind NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_network_policy_for_all_namespaces(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1NetworkPolicyList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1NetworkPolicyList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_network_policy_for_all_namespaces_with_http_info(**kwargs)  # noqa: E501
@@ -3369,33 +4270,54 @@ class NetworkingV1Api(object):
         list or watch objects of kind NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_network_policy_for_all_namespaces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1NetworkPolicyList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1NetworkPolicyList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -3418,7 +4340,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3436,30 +4361,30 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3472,6 +4397,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1NetworkPolicyList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/networkpolicies', 'GET',
             path_params,
@@ -3480,13 +4410,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1NetworkPolicyList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_service_cidr(self, **kwargs):  # noqa: E501
         """list_service_cidr  # noqa: E501
@@ -3494,31 +4425,46 @@ class NetworkingV1Api(object):
         list or watch objects of kind ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_service_cidr(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDRList
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDRList
         """
         kwargs['_return_http_data_only'] = True
         return self.list_service_cidr_with_http_info(**kwargs)  # noqa: E501
@@ -3529,33 +4475,54 @@ class NetworkingV1Api(object):
         list or watch objects of kind ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_service_cidr_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param bool allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-        :param str _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-        :param str field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
-        :param str label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
-        :param int limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-        :param str resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param str resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-        :param bool send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-        :param int timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-        :param bool watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param allow_watch_bookmarks: allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+        :type allow_watch_bookmarks: bool
+        :param _continue: The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        :type _continue: str
+        :param field_selector: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        :type field_selector: str
+        :param label_selector: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        :type label_selector: str
+        :param limit: limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        :type limit: int
+        :param resource_version: resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version: str
+        :param resource_version_match: resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+        :type resource_version_match: str
+        :param send_initial_events: `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+        :type send_initial_events: bool
+        :param timeout_seconds: Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+        :type timeout_seconds: int
+        :param watch: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+        :type watch: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDRList, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDRList, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -3578,7 +4545,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3596,30 +4566,30 @@ class NetworkingV1Api(object):
         path_params = {}
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'allow_watch_bookmarks' in local_var_params and local_var_params['allow_watch_bookmarks'] is not None:  # noqa: E501
+        if local_var_params.get('allow_watch_bookmarks') is not None:  # noqa: E501
             query_params.append(('allowWatchBookmarks', local_var_params['allow_watch_bookmarks']))  # noqa: E501
-        if '_continue' in local_var_params and local_var_params['_continue'] is not None:  # noqa: E501
+        if local_var_params.get('_continue') is not None:  # noqa: E501
             query_params.append(('continue', local_var_params['_continue']))  # noqa: E501
-        if 'field_selector' in local_var_params and local_var_params['field_selector'] is not None:  # noqa: E501
+        if local_var_params.get('field_selector') is not None:  # noqa: E501
             query_params.append(('fieldSelector', local_var_params['field_selector']))  # noqa: E501
-        if 'label_selector' in local_var_params and local_var_params['label_selector'] is not None:  # noqa: E501
+        if local_var_params.get('label_selector') is not None:  # noqa: E501
             query_params.append(('labelSelector', local_var_params['label_selector']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'resource_version' in local_var_params and local_var_params['resource_version'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version') is not None:  # noqa: E501
             query_params.append(('resourceVersion', local_var_params['resource_version']))  # noqa: E501
-        if 'resource_version_match' in local_var_params and local_var_params['resource_version_match'] is not None:  # noqa: E501
+        if local_var_params.get('resource_version_match') is not None:  # noqa: E501
             query_params.append(('resourceVersionMatch', local_var_params['resource_version_match']))  # noqa: E501
-        if 'send_initial_events' in local_var_params and local_var_params['send_initial_events'] is not None:  # noqa: E501
+        if local_var_params.get('send_initial_events') is not None:  # noqa: E501
             query_params.append(('sendInitialEvents', local_var_params['send_initial_events']))  # noqa: E501
-        if 'timeout_seconds' in local_var_params and local_var_params['timeout_seconds'] is not None:  # noqa: E501
+        if local_var_params.get('timeout_seconds') is not None:  # noqa: E501
             query_params.append(('timeoutSeconds', local_var_params['timeout_seconds']))  # noqa: E501
-        if 'watch' in local_var_params and local_var_params['watch'] is not None:  # noqa: E501
+        if local_var_params.get('watch') is not None:  # noqa: E501
             query_params.append(('watch', local_var_params['watch']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3632,6 +4602,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1ServiceCIDRList",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs', 'GET',
             path_params,
@@ -3640,13 +4615,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDRList',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_ingress_class(self, name, body, **kwargs):  # noqa: E501
         """patch_ingress_class  # noqa: E501
@@ -3654,27 +4630,38 @@ class NetworkingV1Api(object):
         partially update the specified IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_ingress_class(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressClass
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressClass
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_ingress_class_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -3685,29 +4672,46 @@ class NetworkingV1Api(object):
         partially update the specified IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_ingress_class_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -3726,7 +4730,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3739,12 +4746,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_ingress_class`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_ingress_class`")  # noqa: E501
 
         collection_formats = {}
@@ -3754,18 +4759,18 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3778,11 +4783,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1IngressClass",
+            201: "V1IngressClass",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses/{name}', 'PATCH',
@@ -3792,13 +4807,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressClass',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_ip_address(self, name, body, **kwargs):  # noqa: E501
         """patch_ip_address  # noqa: E501
@@ -3806,27 +4822,38 @@ class NetworkingV1Api(object):
         partially update the specified IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_ip_address(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IPAddress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IPAddress
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_ip_address_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -3837,29 +4864,46 @@ class NetworkingV1Api(object):
         partially update the specified IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_ip_address_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -3878,7 +4922,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -3891,12 +4938,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_ip_address`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_ip_address`")  # noqa: E501
 
         collection_formats = {}
@@ -3906,18 +4951,18 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -3930,11 +4975,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1IPAddress",
+            201: "V1IPAddress",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses/{name}', 'PATCH',
@@ -3944,13 +4999,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IPAddress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_namespaced_ingress(self, name, namespace, body, **kwargs):  # noqa: E501
         """patch_namespaced_ingress  # noqa: E501
@@ -3958,28 +5014,40 @@ class NetworkingV1Api(object):
         partially update the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_namespaced_ingress(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
@@ -3990,30 +5058,48 @@ class NetworkingV1Api(object):
         partially update the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_namespaced_ingress_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4033,7 +5119,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4046,16 +5135,13 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -4067,18 +5153,18 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4091,11 +5177,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1Ingress",
+            201: "V1Ingress",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}', 'PATCH',
@@ -4105,13 +5201,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_namespaced_ingress_status(self, name, namespace, body, **kwargs):  # noqa: E501
         """patch_namespaced_ingress_status  # noqa: E501
@@ -4119,28 +5216,40 @@ class NetworkingV1Api(object):
         partially update status of the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_namespaced_ingress_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
@@ -4151,30 +5260,48 @@ class NetworkingV1Api(object):
         partially update status of the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_namespaced_ingress_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4194,7 +5321,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4207,16 +5337,13 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_ingress_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_ingress_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_ingress_status`")  # noqa: E501
 
         collection_formats = {}
@@ -4228,18 +5355,18 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4252,11 +5379,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1Ingress",
+            201: "V1Ingress",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status', 'PATCH',
@@ -4266,13 +5403,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_namespaced_network_policy(self, name, namespace, body, **kwargs):  # noqa: E501
         """patch_namespaced_network_policy  # noqa: E501
@@ -4280,28 +5418,40 @@ class NetworkingV1Api(object):
         partially update the specified NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_namespaced_network_policy(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1NetworkPolicy
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1NetworkPolicy
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
@@ -4312,30 +5462,48 @@ class NetworkingV1Api(object):
         partially update the specified NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_namespaced_network_policy_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4355,7 +5523,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4368,16 +5539,13 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `patch_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -4389,18 +5557,18 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4413,11 +5581,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1NetworkPolicy",
+            201: "V1NetworkPolicy",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}', 'PATCH',
@@ -4427,13 +5605,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1NetworkPolicy',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_service_cidr(self, name, body, **kwargs):  # noqa: E501
         """patch_service_cidr  # noqa: E501
@@ -4441,27 +5620,38 @@ class NetworkingV1Api(object):
         partially update the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_service_cidr(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_service_cidr_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -4472,29 +5662,46 @@ class NetworkingV1Api(object):
         partially update the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_service_cidr_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4513,7 +5720,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4526,12 +5736,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_service_cidr`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_service_cidr`")  # noqa: E501
 
         collection_formats = {}
@@ -4541,18 +5749,18 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4565,11 +5773,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            201: "V1ServiceCIDR",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}', 'PATCH',
@@ -4579,13 +5797,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def patch_service_cidr_status(self, name, body, **kwargs):  # noqa: E501
         """patch_service_cidr_status  # noqa: E501
@@ -4593,27 +5812,38 @@ class NetworkingV1Api(object):
         partially update status of the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_service_cidr_status(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.patch_service_cidr_status_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -4624,29 +5854,46 @@ class NetworkingV1Api(object):
         partially update status of the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.patch_service_cidr_status_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param object body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-        :param bool force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: object
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param force: Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+        :type force: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4665,7 +5912,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4678,12 +5928,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `patch_service_cidr_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `patch_service_cidr_status`")  # noqa: E501
 
         collection_formats = {}
@@ -4693,18 +5941,18 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
+        if local_var_params.get('force') is not None:  # noqa: E501
             query_params.append(('force', local_var_params['force']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4717,11 +5965,21 @@ class NetworkingV1Api(object):
             ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf', 'application/cbor'])  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'])  # noqa: E501
+        content_types_list = local_var_params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/merge-patch+json', 'application/strategic-merge-patch+json', 'application/apply-patch+yaml', 'application/apply-patch+cbor'],
+                'PATCH', body_params))  # noqa: E501
+        if content_types_list:
+                header_params['Content-Type'] = content_types_list
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
+
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            201: "V1ServiceCIDR",
+            401: None,
+        }
 
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}/status', 'PATCH',
@@ -4731,13 +5989,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_ingress_class(self, name, **kwargs):  # noqa: E501
         """read_ingress_class  # noqa: E501
@@ -4745,22 +6004,28 @@ class NetworkingV1Api(object):
         read the specified IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_ingress_class(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressClass
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressClass
         """
         kwargs['_return_http_data_only'] = True
         return self.read_ingress_class_with_http_info(name, **kwargs)  # noqa: E501
@@ -4771,24 +6036,36 @@ class NetworkingV1Api(object):
         read the specified IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_ingress_class_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4802,7 +6079,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4815,8 +6095,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_ingress_class`")  # noqa: E501
 
         collection_formats = {}
@@ -4826,10 +6105,10 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4842,6 +6121,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IngressClass",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses/{name}', 'GET',
             path_params,
@@ -4850,13 +6134,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressClass',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_ip_address(self, name, **kwargs):  # noqa: E501
         """read_ip_address  # noqa: E501
@@ -4864,22 +6149,28 @@ class NetworkingV1Api(object):
         read the specified IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_ip_address(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IPAddress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IPAddress
         """
         kwargs['_return_http_data_only'] = True
         return self.read_ip_address_with_http_info(name, **kwargs)  # noqa: E501
@@ -4890,24 +6181,36 @@ class NetworkingV1Api(object):
         read the specified IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_ip_address_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -4921,7 +6224,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -4934,8 +6240,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_ip_address`")  # noqa: E501
 
         collection_formats = {}
@@ -4945,10 +6250,10 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -4961,6 +6266,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IPAddress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses/{name}', 'GET',
             path_params,
@@ -4969,13 +6279,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IPAddress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_namespaced_ingress(self, name, namespace, **kwargs):  # noqa: E501
         """read_namespaced_ingress  # noqa: E501
@@ -4983,23 +6294,30 @@ class NetworkingV1Api(object):
         read the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_namespaced_ingress(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.read_namespaced_ingress_with_http_info(name, namespace, **kwargs)  # noqa: E501
@@ -5010,25 +6328,38 @@ class NetworkingV1Api(object):
         read the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_namespaced_ingress_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5043,7 +6374,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5056,12 +6390,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -5073,10 +6405,10 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5089,6 +6421,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Ingress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}', 'GET',
             path_params,
@@ -5097,13 +6434,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_namespaced_ingress_status(self, name, namespace, **kwargs):  # noqa: E501
         """read_namespaced_ingress_status  # noqa: E501
@@ -5111,23 +6449,30 @@ class NetworkingV1Api(object):
         read status of the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_namespaced_ingress_status(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.read_namespaced_ingress_status_with_http_info(name, namespace, **kwargs)  # noqa: E501
@@ -5138,25 +6483,38 @@ class NetworkingV1Api(object):
         read status of the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_namespaced_ingress_status_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5171,7 +6529,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5184,12 +6545,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_ingress_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_ingress_status`")  # noqa: E501
 
         collection_formats = {}
@@ -5201,10 +6560,10 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5217,6 +6576,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Ingress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status', 'GET',
             path_params,
@@ -5225,13 +6589,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_namespaced_network_policy(self, name, namespace, **kwargs):  # noqa: E501
         """read_namespaced_network_policy  # noqa: E501
@@ -5239,23 +6604,30 @@ class NetworkingV1Api(object):
         read the specified NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_namespaced_network_policy(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1NetworkPolicy
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1NetworkPolicy
         """
         kwargs['_return_http_data_only'] = True
         return self.read_namespaced_network_policy_with_http_info(name, namespace, **kwargs)  # noqa: E501
@@ -5266,25 +6638,38 @@ class NetworkingV1Api(object):
         read the specified NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_namespaced_network_policy_with_http_info(name, namespace, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5299,7 +6684,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5312,12 +6700,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `read_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -5329,10 +6715,10 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5345,6 +6731,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1NetworkPolicy",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}', 'GET',
             path_params,
@@ -5353,13 +6744,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1NetworkPolicy',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_service_cidr(self, name, **kwargs):  # noqa: E501
         """read_service_cidr  # noqa: E501
@@ -5367,22 +6759,28 @@ class NetworkingV1Api(object):
         read the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_service_cidr(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.read_service_cidr_with_http_info(name, **kwargs)  # noqa: E501
@@ -5393,24 +6791,36 @@ class NetworkingV1Api(object):
         read the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_service_cidr_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5424,7 +6834,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5437,8 +6850,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_service_cidr`")  # noqa: E501
 
         collection_formats = {}
@@ -5448,10 +6860,10 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5464,6 +6876,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}', 'GET',
             path_params,
@@ -5472,13 +6889,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def read_service_cidr_status(self, name, **kwargs):  # noqa: E501
         """read_service_cidr_status  # noqa: E501
@@ -5486,22 +6904,28 @@ class NetworkingV1Api(object):
         read status of the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_service_cidr_status(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.read_service_cidr_status_with_http_info(name, **kwargs)  # noqa: E501
@@ -5512,24 +6936,36 @@ class NetworkingV1Api(object):
         read status of the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.read_service_cidr_status_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5543,7 +6979,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5556,8 +6995,7 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `read_service_cidr_status`")  # noqa: E501
 
         collection_formats = {}
@@ -5567,10 +7005,10 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5583,6 +7021,11 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}/status', 'GET',
             path_params,
@@ -5591,13 +7034,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_ingress_class(self, name, body, **kwargs):  # noqa: E501
         """replace_ingress_class  # noqa: E501
@@ -5605,26 +7049,36 @@ class NetworkingV1Api(object):
         replace the specified IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_ingress_class(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param V1IngressClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1IngressClass
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IngressClass
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IngressClass
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_ingress_class_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -5635,28 +7089,44 @@ class NetworkingV1Api(object):
         replace the specified IngressClass  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_ingress_class_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IngressClass (required)
-        :param V1IngressClass body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the IngressClass (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1IngressClass
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IngressClass, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5674,7 +7144,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5687,12 +7160,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_ingress_class`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_ingress_class`")  # noqa: E501
 
         collection_formats = {}
@@ -5702,16 +7173,16 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5726,6 +7197,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IngressClass",
+            201: "V1IngressClass",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ingressclasses/{name}', 'PUT',
             path_params,
@@ -5734,13 +7211,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IngressClass',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_ip_address(self, name, body, **kwargs):  # noqa: E501
         """replace_ip_address  # noqa: E501
@@ -5748,26 +7226,36 @@ class NetworkingV1Api(object):
         replace the specified IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_ip_address(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param V1IPAddress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1IPAddress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1IPAddress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1IPAddress
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_ip_address_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -5778,28 +7266,44 @@ class NetworkingV1Api(object):
         replace the specified IPAddress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_ip_address_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the IPAddress (required)
-        :param V1IPAddress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the IPAddress (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1IPAddress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1IPAddress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5817,7 +7321,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5830,12 +7337,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_ip_address`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_ip_address`")  # noqa: E501
 
         collection_formats = {}
@@ -5845,16 +7350,16 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -5869,6 +7374,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1IPAddress",
+            201: "V1IPAddress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/ipaddresses/{name}', 'PUT',
             path_params,
@@ -5877,13 +7388,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1IPAddress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_namespaced_ingress(self, name, namespace, body, **kwargs):  # noqa: E501
         """replace_namespaced_ingress  # noqa: E501
@@ -5891,27 +7403,38 @@ class NetworkingV1Api(object):
         replace the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_namespaced_ingress(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Ingress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1Ingress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_namespaced_ingress_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
@@ -5922,29 +7445,46 @@ class NetworkingV1Api(object):
         replace the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_namespaced_ingress_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Ingress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1Ingress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -5963,7 +7503,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -5976,16 +7519,13 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_ingress`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_ingress`")  # noqa: E501
 
         collection_formats = {}
@@ -5997,16 +7537,16 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -6021,6 +7561,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Ingress",
+            201: "V1Ingress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}', 'PUT',
             path_params,
@@ -6029,13 +7575,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_namespaced_ingress_status(self, name, namespace, body, **kwargs):  # noqa: E501
         """replace_namespaced_ingress_status  # noqa: E501
@@ -6043,27 +7590,38 @@ class NetworkingV1Api(object):
         replace status of the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_namespaced_ingress_status(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Ingress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1Ingress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1Ingress
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1Ingress
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_namespaced_ingress_status_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
@@ -6074,29 +7632,46 @@ class NetworkingV1Api(object):
         replace status of the specified Ingress  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_namespaced_ingress_status_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the Ingress (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1Ingress body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the Ingress (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1Ingress
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1Ingress, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -6115,7 +7690,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -6128,16 +7706,13 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_ingress_status`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_ingress_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_ingress_status`")  # noqa: E501
 
         collection_formats = {}
@@ -6149,16 +7724,16 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -6173,6 +7748,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1Ingress",
+            201: "V1Ingress",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status', 'PUT',
             path_params,
@@ -6181,13 +7762,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1Ingress',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_namespaced_network_policy(self, name, namespace, body, **kwargs):  # noqa: E501
         """replace_namespaced_network_policy  # noqa: E501
@@ -6195,27 +7777,38 @@ class NetworkingV1Api(object):
         replace the specified NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_namespaced_network_policy(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1NetworkPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1NetworkPolicy
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1NetworkPolicy
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1NetworkPolicy
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_namespaced_network_policy_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
@@ -6226,29 +7819,46 @@ class NetworkingV1Api(object):
         replace the specified NetworkPolicy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_namespaced_network_policy_with_http_info(name, namespace, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the NetworkPolicy (required)
-        :param str namespace: object name and auth scope, such as for teams and projects (required)
-        :param V1NetworkPolicy body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the NetworkPolicy (required)
+        :type name: str
+        :param namespace: object name and auth scope, such as for teams and projects (required)
+        :type namespace: str
+        :param body: (required)
+        :type body: V1NetworkPolicy
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1NetworkPolicy, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -6267,7 +7877,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -6280,16 +7893,13 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'namespace' is set
-        if self.api_client.client_side_validation and ('namespace' not in local_var_params or  # noqa: E501
-                                                        local_var_params['namespace'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('namespace') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `namespace` when calling `replace_namespaced_network_policy`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_namespaced_network_policy`")  # noqa: E501
 
         collection_formats = {}
@@ -6301,16 +7911,16 @@ class NetworkingV1Api(object):
             path_params['namespace'] = local_var_params['namespace']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -6325,6 +7935,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1NetworkPolicy",
+            201: "V1NetworkPolicy",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}', 'PUT',
             path_params,
@@ -6333,13 +7949,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1NetworkPolicy',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_service_cidr(self, name, body, **kwargs):  # noqa: E501
         """replace_service_cidr  # noqa: E501
@@ -6347,26 +7964,36 @@ class NetworkingV1Api(object):
         replace the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_service_cidr(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param V1ServiceCIDR body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1ServiceCIDR
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_service_cidr_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -6377,28 +8004,44 @@ class NetworkingV1Api(object):
         replace the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_service_cidr_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param V1ServiceCIDR body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1ServiceCIDR
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -6416,7 +8059,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -6429,12 +8075,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_service_cidr`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_service_cidr`")  # noqa: E501
 
         collection_formats = {}
@@ -6444,16 +8088,16 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -6468,6 +8112,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            201: "V1ServiceCIDR",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}', 'PUT',
             path_params,
@@ -6476,13 +8126,14 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def replace_service_cidr_status(self, name, body, **kwargs):  # noqa: E501
         """replace_service_cidr_status  # noqa: E501
@@ -6490,26 +8141,36 @@ class NetworkingV1Api(object):
         replace status of the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_service_cidr_status(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param V1ServiceCIDR body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1ServiceCIDR
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: V1ServiceCIDR
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: V1ServiceCIDR
         """
         kwargs['_return_http_data_only'] = True
         return self.replace_service_cidr_status_with_http_info(name, body, **kwargs)  # noqa: E501
@@ -6520,28 +8181,44 @@ class NetworkingV1Api(object):
         replace status of the specified ServiceCIDR  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.replace_service_cidr_status_with_http_info(name, body, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str name: name of the ServiceCIDR (required)
-        :param V1ServiceCIDR body: (required)
-        :param str pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-        :param str dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-        :param str field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-        :param str field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :param name: name of the ServiceCIDR (required)
+        :type name: str
+        :param body: (required)
+        :type body: V1ServiceCIDR
+        :param pretty: If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+        :type pretty: str
+        :param dry_run: When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+        :type dry_run: str
+        :param field_manager: fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+        :type field_manager: str
+        :param field_validation: fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+        :type field_validation: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(V1ServiceCIDR, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -6559,7 +8236,10 @@ class NetworkingV1Api(object):
                 'async_req',
                 '_return_http_data_only',
                 '_preload_content',
-                '_request_timeout'
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
             ]
         )
 
@@ -6572,12 +8252,10 @@ class NetworkingV1Api(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'name' is set
-        if self.api_client.client_side_validation and ('name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['name'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('name') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `name` when calling `replace_service_cidr_status`")  # noqa: E501
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
+        if self.api_client.client_side_validation and local_var_params.get('body') is None:  # noqa: E501
             raise ApiValueError("Missing the required parameter `body` when calling `replace_service_cidr_status`")  # noqa: E501
 
         collection_formats = {}
@@ -6587,16 +8265,16 @@ class NetworkingV1Api(object):
             path_params['name'] = local_var_params['name']  # noqa: E501
 
         query_params = []
-        if 'pretty' in local_var_params and local_var_params['pretty'] is not None:  # noqa: E501
+        if local_var_params.get('pretty') is not None:  # noqa: E501
             query_params.append(('pretty', local_var_params['pretty']))  # noqa: E501
-        if 'dry_run' in local_var_params and local_var_params['dry_run'] is not None:  # noqa: E501
+        if local_var_params.get('dry_run') is not None:  # noqa: E501
             query_params.append(('dryRun', local_var_params['dry_run']))  # noqa: E501
-        if 'field_manager' in local_var_params and local_var_params['field_manager'] is not None:  # noqa: E501
+        if local_var_params.get('field_manager') is not None:  # noqa: E501
             query_params.append(('fieldManager', local_var_params['field_manager']))  # noqa: E501
-        if 'field_validation' in local_var_params and local_var_params['field_validation'] is not None:  # noqa: E501
+        if local_var_params.get('field_validation') is not None:  # noqa: E501
             query_params.append(('fieldValidation', local_var_params['field_validation']))  # noqa: E501
 
-        header_params = {}
+        header_params = dict(local_var_params.get('_headers', {}))
 
         form_params = []
         local_var_files = {}
@@ -6611,6 +8289,12 @@ class NetworkingV1Api(object):
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
 
+        response_types_map = {
+            200: "V1ServiceCIDR",
+            201: "V1ServiceCIDR",
+            401: None,
+        }
+
         return self.api_client.call_api(
             '/apis/networking.k8s.io/v1/servicecidrs/{name}/status', 'PUT',
             path_params,
@@ -6619,10 +8303,11 @@ class NetworkingV1Api(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='V1ServiceCIDR',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))

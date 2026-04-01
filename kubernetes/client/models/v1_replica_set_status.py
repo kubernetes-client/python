@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -55,7 +58,7 @@ class V1ReplicaSetStatus(object):
     def __init__(self, available_replicas=None, conditions=None, fully_labeled_replicas=None, observed_generation=None, ready_replicas=None, replicas=None, terminating_replicas=None, local_vars_configuration=None):  # noqa: E501
         """V1ReplicaSetStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._available_replicas = None
@@ -99,7 +102,7 @@ class V1ReplicaSetStatus(object):
         The number of available non-terminating pods (ready for at least minReadySeconds) for this replica set.  # noqa: E501
 
         :param available_replicas: The available_replicas of this V1ReplicaSetStatus.  # noqa: E501
-        :type: int
+        :type available_replicas: int
         """
 
         self._available_replicas = available_replicas
@@ -122,7 +125,7 @@ class V1ReplicaSetStatus(object):
         Represents the latest available observations of a replica set's current state.  # noqa: E501
 
         :param conditions: The conditions of this V1ReplicaSetStatus.  # noqa: E501
-        :type: list[V1ReplicaSetCondition]
+        :type conditions: list[V1ReplicaSetCondition]
         """
 
         self._conditions = conditions
@@ -145,7 +148,7 @@ class V1ReplicaSetStatus(object):
         The number of non-terminating pods that have labels matching the labels of the pod template of the replicaset.  # noqa: E501
 
         :param fully_labeled_replicas: The fully_labeled_replicas of this V1ReplicaSetStatus.  # noqa: E501
-        :type: int
+        :type fully_labeled_replicas: int
         """
 
         self._fully_labeled_replicas = fully_labeled_replicas
@@ -168,7 +171,7 @@ class V1ReplicaSetStatus(object):
         ObservedGeneration reflects the generation of the most recently observed ReplicaSet.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1ReplicaSetStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -191,7 +194,7 @@ class V1ReplicaSetStatus(object):
         The number of non-terminating pods targeted by this ReplicaSet with a Ready Condition.  # noqa: E501
 
         :param ready_replicas: The ready_replicas of this V1ReplicaSetStatus.  # noqa: E501
-        :type: int
+        :type ready_replicas: int
         """
 
         self._ready_replicas = ready_replicas
@@ -214,7 +217,7 @@ class V1ReplicaSetStatus(object):
         Replicas is the most recently observed number of non-terminating pods. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset  # noqa: E501
 
         :param replicas: The replicas of this V1ReplicaSetStatus.  # noqa: E501
-        :type: int
+        :type replicas: int
         """
         if self.local_vars_configuration.client_side_validation and replicas is None:  # noqa: E501
             raise ValueError("Invalid value for `replicas`, must not be `None`")  # noqa: E501
@@ -239,32 +242,40 @@ class V1ReplicaSetStatus(object):
         The number of terminating pods for this replica set. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.  This is a beta field and requires enabling DeploymentReplicaSetTerminatingReplicas feature (enabled by default).  # noqa: E501
 
         :param terminating_replicas: The terminating_replicas of this V1ReplicaSetStatus.  # noqa: E501
-        :type: int
+        :type terminating_replicas: int
         """
 
         self._terminating_replicas = terminating_replicas
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

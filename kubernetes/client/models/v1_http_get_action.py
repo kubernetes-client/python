@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1HTTPGetAction(object):
     def __init__(self, host=None, http_headers=None, path=None, port=None, scheme=None, local_vars_configuration=None):  # noqa: E501
         """V1HTTPGetAction - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._host = None
@@ -89,7 +92,7 @@ class V1HTTPGetAction(object):
         Host name to connect to, defaults to the pod IP. You probably want to set \"Host\" in httpHeaders instead.  # noqa: E501
 
         :param host: The host of this V1HTTPGetAction.  # noqa: E501
-        :type: str
+        :type host: str
         """
 
         self._host = host
@@ -112,7 +115,7 @@ class V1HTTPGetAction(object):
         Custom headers to set in the request. HTTP allows repeated headers.  # noqa: E501
 
         :param http_headers: The http_headers of this V1HTTPGetAction.  # noqa: E501
-        :type: list[V1HTTPHeader]
+        :type http_headers: list[V1HTTPHeader]
         """
 
         self._http_headers = http_headers
@@ -135,7 +138,7 @@ class V1HTTPGetAction(object):
         Path to access on the HTTP server.  # noqa: E501
 
         :param path: The path of this V1HTTPGetAction.  # noqa: E501
-        :type: str
+        :type path: str
         """
 
         self._path = path
@@ -158,7 +161,7 @@ class V1HTTPGetAction(object):
         Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.  # noqa: E501
 
         :param port: The port of this V1HTTPGetAction.  # noqa: E501
-        :type: object
+        :type port: object
         """
         if self.local_vars_configuration.client_side_validation and port is None:  # noqa: E501
             raise ValueError("Invalid value for `port`, must not be `None`")  # noqa: E501
@@ -183,32 +186,40 @@ class V1HTTPGetAction(object):
         Scheme to use for connecting to the host. Defaults to HTTP.  # noqa: E501
 
         :param scheme: The scheme of this V1HTTPGetAction.  # noqa: E501
-        :type: str
+        :type scheme: str
         """
 
         self._scheme = scheme
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

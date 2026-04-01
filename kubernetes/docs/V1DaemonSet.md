@@ -1,6 +1,7 @@
 # V1DaemonSet
 
 DaemonSet represents the configuration of a daemon set.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

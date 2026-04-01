@@ -1,6 +1,7 @@
 # EventsV1EventList
 
 EventList is a list of Event objects.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

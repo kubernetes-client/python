@@ -1,6 +1,7 @@
 # V1beta1StorageVersionMigrationStatus
 
 Status of the storage version migration.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
