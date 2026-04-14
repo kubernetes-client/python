@@ -1,6 +1,7 @@
 # V1PriorityLevelConfigurationReference
 
 PriorityLevelConfigurationReference contains information that points to the \"request-priority\" being used.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1alpha1ClusterTrustBundleList
 
 ClusterTrustBundleList is a collection of ClusterTrustBundle objects
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

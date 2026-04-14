@@ -1,6 +1,7 @@
 # V1NetworkPolicy
 
 NetworkPolicy describes what network traffic is allowed for a set of Pods
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

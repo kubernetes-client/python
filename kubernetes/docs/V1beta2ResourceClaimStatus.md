@@ -1,6 +1,7 @@
 # V1beta2ResourceClaimStatus
 
 ResourceClaimStatus tracks whether the resource has been allocated and what the result of that was.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

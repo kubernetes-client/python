@@ -1,6 +1,7 @@
 # V1alpha1ParamKind
 
 ParamKind is a tuple of Group Kind and Version.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

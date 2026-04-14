@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -34,7 +37,7 @@ class V1PolicyRule(object):
     """
     openapi_types = {
         'api_groups': 'list[str]',
-        'non_resource_ur_ls': 'list[str]',
+        'non_resource_urls': 'list[str]',
         'resource_names': 'list[str]',
         'resources': 'list[str]',
         'verbs': 'list[str]'
@@ -42,20 +45,20 @@ class V1PolicyRule(object):
 
     attribute_map = {
         'api_groups': 'apiGroups',
-        'non_resource_ur_ls': 'nonResourceURLs',
+        'non_resource_urls': 'nonResourceURLs',
         'resource_names': 'resourceNames',
         'resources': 'resources',
         'verbs': 'verbs'
     }
 
-    def __init__(self, api_groups=None, non_resource_ur_ls=None, resource_names=None, resources=None, verbs=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, api_groups=None, non_resource_urls=None, resource_names=None, resources=None, verbs=None, local_vars_configuration=None):  # noqa: E501
         """V1PolicyRule - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._api_groups = None
-        self._non_resource_ur_ls = None
+        self._non_resource_urls = None
         self._resource_names = None
         self._resources = None
         self._verbs = None
@@ -63,8 +66,8 @@ class V1PolicyRule(object):
 
         if api_groups is not None:
             self.api_groups = api_groups
-        if non_resource_ur_ls is not None:
-            self.non_resource_ur_ls = non_resource_ur_ls
+        if non_resource_urls is not None:
+            self.non_resource_urls = non_resource_urls
         if resource_names is not None:
             self.resource_names = resource_names
         if resources is not None:
@@ -89,33 +92,33 @@ class V1PolicyRule(object):
         APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of the enumerated resources in any API group will be allowed. \"\" represents the core API group and \"*\" represents all API groups.  # noqa: E501
 
         :param api_groups: The api_groups of this V1PolicyRule.  # noqa: E501
-        :type: list[str]
+        :type api_groups: list[str]
         """
 
         self._api_groups = api_groups
 
     @property
-    def non_resource_ur_ls(self):
-        """Gets the non_resource_ur_ls of this V1PolicyRule.  # noqa: E501
+    def non_resource_urls(self):
+        """Gets the non_resource_urls of this V1PolicyRule.  # noqa: E501
 
         NonResourceURLs is a set of partial urls that a user should have access to.  *s are allowed, but only as the full, final step in the path Since non-resource URLs are not namespaced, this field is only applicable for ClusterRoles referenced from a ClusterRoleBinding. Rules can either apply to API resources (such as \"pods\" or \"secrets\") or non-resource URL paths (such as \"/api\"),  but not both.  # noqa: E501
 
-        :return: The non_resource_ur_ls of this V1PolicyRule.  # noqa: E501
+        :return: The non_resource_urls of this V1PolicyRule.  # noqa: E501
         :rtype: list[str]
         """
-        return self._non_resource_ur_ls
+        return self._non_resource_urls
 
-    @non_resource_ur_ls.setter
-    def non_resource_ur_ls(self, non_resource_ur_ls):
-        """Sets the non_resource_ur_ls of this V1PolicyRule.
+    @non_resource_urls.setter
+    def non_resource_urls(self, non_resource_urls):
+        """Sets the non_resource_urls of this V1PolicyRule.
 
         NonResourceURLs is a set of partial urls that a user should have access to.  *s are allowed, but only as the full, final step in the path Since non-resource URLs are not namespaced, this field is only applicable for ClusterRoles referenced from a ClusterRoleBinding. Rules can either apply to API resources (such as \"pods\" or \"secrets\") or non-resource URL paths (such as \"/api\"),  but not both.  # noqa: E501
 
-        :param non_resource_ur_ls: The non_resource_ur_ls of this V1PolicyRule.  # noqa: E501
-        :type: list[str]
+        :param non_resource_urls: The non_resource_urls of this V1PolicyRule.  # noqa: E501
+        :type non_resource_urls: list[str]
         """
 
-        self._non_resource_ur_ls = non_resource_ur_ls
+        self._non_resource_urls = non_resource_urls
 
     @property
     def resource_names(self):
@@ -135,7 +138,7 @@ class V1PolicyRule(object):
         ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.  # noqa: E501
 
         :param resource_names: The resource_names of this V1PolicyRule.  # noqa: E501
-        :type: list[str]
+        :type resource_names: list[str]
         """
 
         self._resource_names = resource_names
@@ -158,7 +161,7 @@ class V1PolicyRule(object):
         Resources is a list of resources this rule applies to. '*' represents all resources.  # noqa: E501
 
         :param resources: The resources of this V1PolicyRule.  # noqa: E501
-        :type: list[str]
+        :type resources: list[str]
         """
 
         self._resources = resources
@@ -181,34 +184,42 @@ class V1PolicyRule(object):
         Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '*' represents all verbs.  # noqa: E501
 
         :param verbs: The verbs of this V1PolicyRule.  # noqa: E501
-        :type: list[str]
+        :type verbs: list[str]
         """
         if self.local_vars_configuration.client_side_validation and verbs is None:  # noqa: E501
             raise ValueError("Invalid value for `verbs`, must not be `None`")  # noqa: E501
 
         self._verbs = verbs
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

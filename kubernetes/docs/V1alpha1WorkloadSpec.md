@@ -1,6 +1,7 @@
 # V1alpha1WorkloadSpec
 
 WorkloadSpec defines the desired state of a Workload.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1PodCondition
 
 PodCondition contains details for the current condition of this pod.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1ValidatingAdmissionPolicyBindingList
 
 ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

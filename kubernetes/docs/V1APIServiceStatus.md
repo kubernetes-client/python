@@ -1,6 +1,7 @@
 # V1APIServiceStatus
 
 APIServiceStatus contains derived information about an API server
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

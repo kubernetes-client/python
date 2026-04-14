@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1beta2DeviceClaim(object):
     def __init__(self, config=None, constraints=None, requests=None, local_vars_configuration=None):  # noqa: E501
         """V1beta2DeviceClaim - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._config = None
@@ -80,7 +83,7 @@ class V1beta2DeviceClaim(object):
         This field holds configuration for multiple potential drivers which could satisfy requests in this claim. It is ignored while allocating the claim.  # noqa: E501
 
         :param config: The config of this V1beta2DeviceClaim.  # noqa: E501
-        :type: list[V1beta2DeviceClaimConfiguration]
+        :type config: list[V1beta2DeviceClaimConfiguration]
         """
 
         self._config = config
@@ -103,7 +106,7 @@ class V1beta2DeviceClaim(object):
         These constraints must be satisfied by the set of devices that get allocated for the claim.  # noqa: E501
 
         :param constraints: The constraints of this V1beta2DeviceClaim.  # noqa: E501
-        :type: list[V1beta2DeviceConstraint]
+        :type constraints: list[V1beta2DeviceConstraint]
         """
 
         self._constraints = constraints
@@ -126,32 +129,40 @@ class V1beta2DeviceClaim(object):
         Requests represent individual requests for distinct devices which must all be satisfied. If empty, nothing needs to be allocated.  # noqa: E501
 
         :param requests: The requests of this V1beta2DeviceClaim.  # noqa: E501
-        :type: list[V1beta2DeviceRequest]
+        :type requests: list[V1beta2DeviceRequest]
         """
 
         self._requests = requests
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

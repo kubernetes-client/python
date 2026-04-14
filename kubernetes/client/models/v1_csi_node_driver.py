@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -49,7 +52,7 @@ class V1CSINodeDriver(object):
     def __init__(self, allocatable=None, name=None, node_id=None, topology_keys=None, local_vars_configuration=None):  # noqa: E501
         """V1CSINodeDriver - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._allocatable = None
@@ -81,7 +84,7 @@ class V1CSINodeDriver(object):
 
 
         :param allocatable: The allocatable of this V1CSINodeDriver.  # noqa: E501
-        :type: V1VolumeNodeResources
+        :type allocatable: V1VolumeNodeResources
         """
 
         self._allocatable = allocatable
@@ -104,7 +107,7 @@ class V1CSINodeDriver(object):
         name represents the name of the CSI driver that this object refers to. This MUST be the same name returned by the CSI GetPluginName() call for that driver.  # noqa: E501
 
         :param name: The name of this V1CSINodeDriver.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -129,7 +132,7 @@ class V1CSINodeDriver(object):
         nodeID of the node from the driver point of view. This field enables Kubernetes to communicate with storage systems that do not share the same nomenclature for nodes. For example, Kubernetes may refer to a given node as \"node1\", but the storage system may refer to the same node as \"nodeA\". When Kubernetes issues a command to the storage system to attach a volume to a specific node, it can use this field to refer to the node name using the ID that the storage system will understand, e.g. \"nodeA\" instead of \"node1\". This field is required.  # noqa: E501
 
         :param node_id: The node_id of this V1CSINodeDriver.  # noqa: E501
-        :type: str
+        :type node_id: str
         """
         if self.local_vars_configuration.client_side_validation and node_id is None:  # noqa: E501
             raise ValueError("Invalid value for `node_id`, must not be `None`")  # noqa: E501
@@ -154,32 +157,40 @@ class V1CSINodeDriver(object):
         topologyKeys is the list of keys supported by the driver. When a driver is initialized on a cluster, it provides a set of topology keys that it understands (e.g. \"company.com/zone\", \"company.com/region\"). When a driver is initialized on a node, it provides the same topology keys along with values. Kubelet will expose these topology keys as labels on its own node object. When Kubernetes does topology aware provisioning, it can use this list to determine which labels it should retrieve from the node object and pass back to the driver. It is possible for different nodes to use different topology keys. This can be empty if driver does not support topology.  # noqa: E501
 
         :param topology_keys: The topology_keys of this V1CSINodeDriver.  # noqa: E501
-        :type: list[str]
+        :type topology_keys: list[str]
         """
 
         self._topology_keys = topology_keys
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

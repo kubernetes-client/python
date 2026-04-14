@@ -1,6 +1,7 @@
 # V1CapacityRequestPolicy
 
 CapacityRequestPolicy defines how requests consume device capacity.  Must not set more than one ValidRequestValues.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

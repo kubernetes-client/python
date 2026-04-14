@@ -1,6 +1,7 @@
 # V1alpha1ServerStorageVersion
 
 An API server instance reports the version it can decode and the version it encodes objects to when persisting objects in the backend.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1ValidatingAdmissionPolicyBindingSpec
 
 ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

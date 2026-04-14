@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,9 +54,9 @@ class V1PodSpec(object):
         'image_pull_secrets': 'list[V1LocalObjectReference]',
         'init_containers': 'list[V1Container]',
         'node_name': 'str',
-        'node_selector': 'dict(str, str)',
+        'node_selector': 'dict[str, str]',
         'os': 'V1PodOS',
-        'overhead': 'dict(str, str)',
+        'overhead': 'dict[str, str]',
         'preemption_policy': 'str',
         'priority': 'int',
         'priority_class_name': 'str',
@@ -125,7 +128,7 @@ class V1PodSpec(object):
     def __init__(self, active_deadline_seconds=None, affinity=None, automount_service_account_token=None, containers=None, dns_config=None, dns_policy=None, enable_service_links=None, ephemeral_containers=None, host_aliases=None, host_ipc=None, host_network=None, host_pid=None, host_users=None, hostname=None, hostname_override=None, image_pull_secrets=None, init_containers=None, node_name=None, node_selector=None, os=None, overhead=None, preemption_policy=None, priority=None, priority_class_name=None, readiness_gates=None, resource_claims=None, resources=None, restart_policy=None, runtime_class_name=None, scheduler_name=None, scheduling_gates=None, security_context=None, service_account=None, service_account_name=None, set_hostname_as_fqdn=None, share_process_namespace=None, subdomain=None, termination_grace_period_seconds=None, tolerations=None, topology_spread_constraints=None, volumes=None, workload_ref=None, local_vars_configuration=None):  # noqa: E501
         """V1PodSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._active_deadline_seconds = None
@@ -274,7 +277,7 @@ class V1PodSpec(object):
         Optional duration in seconds the pod may be active on the node relative to StartTime before the system will actively try to mark it failed and kill associated containers. Value must be a positive integer.  # noqa: E501
 
         :param active_deadline_seconds: The active_deadline_seconds of this V1PodSpec.  # noqa: E501
-        :type: int
+        :type active_deadline_seconds: int
         """
 
         self._active_deadline_seconds = active_deadline_seconds
@@ -295,7 +298,7 @@ class V1PodSpec(object):
 
 
         :param affinity: The affinity of this V1PodSpec.  # noqa: E501
-        :type: V1Affinity
+        :type affinity: V1Affinity
         """
 
         self._affinity = affinity
@@ -318,7 +321,7 @@ class V1PodSpec(object):
         AutomountServiceAccountToken indicates whether a service account token should be automatically mounted.  # noqa: E501
 
         :param automount_service_account_token: The automount_service_account_token of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type automount_service_account_token: bool
         """
 
         self._automount_service_account_token = automount_service_account_token
@@ -341,7 +344,7 @@ class V1PodSpec(object):
         List of containers belonging to the pod. Containers cannot currently be added or removed. There must be at least one container in a Pod. Cannot be updated.  # noqa: E501
 
         :param containers: The containers of this V1PodSpec.  # noqa: E501
-        :type: list[V1Container]
+        :type containers: list[V1Container]
         """
         if self.local_vars_configuration.client_side_validation and containers is None:  # noqa: E501
             raise ValueError("Invalid value for `containers`, must not be `None`")  # noqa: E501
@@ -364,7 +367,7 @@ class V1PodSpec(object):
 
 
         :param dns_config: The dns_config of this V1PodSpec.  # noqa: E501
-        :type: V1PodDNSConfig
+        :type dns_config: V1PodDNSConfig
         """
 
         self._dns_config = dns_config
@@ -387,7 +390,7 @@ class V1PodSpec(object):
         Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.  # noqa: E501
 
         :param dns_policy: The dns_policy of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type dns_policy: str
         """
 
         self._dns_policy = dns_policy
@@ -410,7 +413,7 @@ class V1PodSpec(object):
         EnableServiceLinks indicates whether information about services should be injected into pod's environment variables, matching the syntax of Docker links. Optional: Defaults to true.  # noqa: E501
 
         :param enable_service_links: The enable_service_links of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type enable_service_links: bool
         """
 
         self._enable_service_links = enable_service_links
@@ -433,7 +436,7 @@ class V1PodSpec(object):
         List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource.  # noqa: E501
 
         :param ephemeral_containers: The ephemeral_containers of this V1PodSpec.  # noqa: E501
-        :type: list[V1EphemeralContainer]
+        :type ephemeral_containers: list[V1EphemeralContainer]
         """
 
         self._ephemeral_containers = ephemeral_containers
@@ -456,7 +459,7 @@ class V1PodSpec(object):
         HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified.  # noqa: E501
 
         :param host_aliases: The host_aliases of this V1PodSpec.  # noqa: E501
-        :type: list[V1HostAlias]
+        :type host_aliases: list[V1HostAlias]
         """
 
         self._host_aliases = host_aliases
@@ -479,7 +482,7 @@ class V1PodSpec(object):
         Use the host's ipc namespace. Optional: Default to false.  # noqa: E501
 
         :param host_ipc: The host_ipc of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type host_ipc: bool
         """
 
         self._host_ipc = host_ipc
@@ -502,7 +505,7 @@ class V1PodSpec(object):
         Host networking requested for this pod. Use the host's network namespace. When using HostNetwork you should specify ports so the scheduler is aware. When `hostNetwork` is true, specified `hostPort` fields in port definitions must match `containerPort`, and unspecified `hostPort` fields in port definitions are defaulted to match `containerPort`. Default to false.  # noqa: E501
 
         :param host_network: The host_network of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type host_network: bool
         """
 
         self._host_network = host_network
@@ -525,7 +528,7 @@ class V1PodSpec(object):
         Use the host's pid namespace. Optional: Default to false.  # noqa: E501
 
         :param host_pid: The host_pid of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type host_pid: bool
         """
 
         self._host_pid = host_pid
@@ -548,7 +551,7 @@ class V1PodSpec(object):
         Use the host's user namespace. Optional: Default to true. If set to true or not present, the pod will be run in the host user namespace, useful for when the pod needs a feature only available to the host user namespace, such as loading a kernel module with CAP_SYS_MODULE. When set to false, a new userns is created for the pod. Setting false is useful for mitigating container breakout vulnerabilities even allowing users to run their containers as root without actually having root privileges on the host. This field is alpha-level and is only honored by servers that enable the UserNamespacesSupport feature.  # noqa: E501
 
         :param host_users: The host_users of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type host_users: bool
         """
 
         self._host_users = host_users
@@ -571,7 +574,7 @@ class V1PodSpec(object):
         Specifies the hostname of the Pod If not specified, the pod's hostname will be set to a system-defined value.  # noqa: E501
 
         :param hostname: The hostname of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type hostname: str
         """
 
         self._hostname = hostname
@@ -594,7 +597,7 @@ class V1PodSpec(object):
         HostnameOverride specifies an explicit override for the pod's hostname as perceived by the pod. This field only specifies the pod's hostname and does not affect its DNS records. When this field is set to a non-empty string: - It takes precedence over the values set in `hostname` and `subdomain`. - The Pod's hostname will be set to this value. - `setHostnameAsFQDN` must be nil or set to false. - `hostNetwork` must be set to false.  This field must be a valid DNS subdomain as defined in RFC 1123 and contain at most 64 characters. Requires the HostnameOverride feature gate to be enabled.  # noqa: E501
 
         :param hostname_override: The hostname_override of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type hostname_override: str
         """
 
         self._hostname_override = hostname_override
@@ -617,7 +620,7 @@ class V1PodSpec(object):
         ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod  # noqa: E501
 
         :param image_pull_secrets: The image_pull_secrets of this V1PodSpec.  # noqa: E501
-        :type: list[V1LocalObjectReference]
+        :type image_pull_secrets: list[V1LocalObjectReference]
         """
 
         self._image_pull_secrets = image_pull_secrets
@@ -640,7 +643,7 @@ class V1PodSpec(object):
         List of initialization containers belonging to the pod. Init containers are executed in order prior to containers being started. If any init container fails, the pod is considered to have failed and is handled according to its restartPolicy. The name for an init container or normal container must be unique among all containers. Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes. The resourceRequirements of an init container are taken into account during scheduling by finding the highest request/limit for each resource type, and then using the max of that value or the sum of the normal containers. Limits are applied to init containers in a similar fashion. Init containers cannot currently be added or removed. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/  # noqa: E501
 
         :param init_containers: The init_containers of this V1PodSpec.  # noqa: E501
-        :type: list[V1Container]
+        :type init_containers: list[V1Container]
         """
 
         self._init_containers = init_containers
@@ -663,7 +666,7 @@ class V1PodSpec(object):
         NodeName indicates in which node this pod is scheduled. If empty, this pod is a candidate for scheduling by the scheduler defined in schedulerName. Once this field is set, the kubelet for this node becomes responsible for the lifecycle of this pod. This field should not be used to express a desire for the pod to be scheduled on a specific node. https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename  # noqa: E501
 
         :param node_name: The node_name of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type node_name: str
         """
 
         self._node_name = node_name
@@ -675,7 +678,7 @@ class V1PodSpec(object):
         NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/  # noqa: E501
 
         :return: The node_selector of this V1PodSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._node_selector
 
@@ -686,7 +689,7 @@ class V1PodSpec(object):
         NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/  # noqa: E501
 
         :param node_selector: The node_selector of this V1PodSpec.  # noqa: E501
-        :type: dict(str, str)
+        :type node_selector: dict[str, str]
         """
 
         self._node_selector = node_selector
@@ -707,7 +710,7 @@ class V1PodSpec(object):
 
 
         :param os: The os of this V1PodSpec.  # noqa: E501
-        :type: V1PodOS
+        :type os: V1PodOS
         """
 
         self._os = os
@@ -719,7 +722,7 @@ class V1PodSpec(object):
         Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md  # noqa: E501
 
         :return: The overhead of this V1PodSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._overhead
 
@@ -730,7 +733,7 @@ class V1PodSpec(object):
         Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md  # noqa: E501
 
         :param overhead: The overhead of this V1PodSpec.  # noqa: E501
-        :type: dict(str, str)
+        :type overhead: dict[str, str]
         """
 
         self._overhead = overhead
@@ -753,7 +756,7 @@ class V1PodSpec(object):
         PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.  # noqa: E501
 
         :param preemption_policy: The preemption_policy of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type preemption_policy: str
         """
 
         self._preemption_policy = preemption_policy
@@ -776,7 +779,7 @@ class V1PodSpec(object):
         The priority value. Various system components use this field to find the priority of the pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority.  # noqa: E501
 
         :param priority: The priority of this V1PodSpec.  # noqa: E501
-        :type: int
+        :type priority: int
         """
 
         self._priority = priority
@@ -799,7 +802,7 @@ class V1PodSpec(object):
         If specified, indicates the pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default.  # noqa: E501
 
         :param priority_class_name: The priority_class_name of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type priority_class_name: str
         """
 
         self._priority_class_name = priority_class_name
@@ -822,7 +825,7 @@ class V1PodSpec(object):
         If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to \"True\" More info: https://git.k8s.io/enhancements/keps/sig-network/580-pod-readiness-gates  # noqa: E501
 
         :param readiness_gates: The readiness_gates of this V1PodSpec.  # noqa: E501
-        :type: list[V1PodReadinessGate]
+        :type readiness_gates: list[V1PodReadinessGate]
         """
 
         self._readiness_gates = readiness_gates
@@ -845,7 +848,7 @@ class V1PodSpec(object):
         ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. The resources will be made available to those containers which consume them by name.  This is a stable field but requires that the DynamicResourceAllocation feature gate is enabled.  This field is immutable.  # noqa: E501
 
         :param resource_claims: The resource_claims of this V1PodSpec.  # noqa: E501
-        :type: list[V1PodResourceClaim]
+        :type resource_claims: list[V1PodResourceClaim]
         """
 
         self._resource_claims = resource_claims
@@ -866,7 +869,7 @@ class V1PodSpec(object):
 
 
         :param resources: The resources of this V1PodSpec.  # noqa: E501
-        :type: V1ResourceRequirements
+        :type resources: V1ResourceRequirements
         """
 
         self._resources = resources
@@ -889,7 +892,7 @@ class V1PodSpec(object):
         Restart policy for all containers within the pod. One of Always, OnFailure, Never. In some contexts, only a subset of those values may be permitted. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy  # noqa: E501
 
         :param restart_policy: The restart_policy of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type restart_policy: str
         """
 
         self._restart_policy = restart_policy
@@ -912,7 +915,7 @@ class V1PodSpec(object):
         RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which should be used to run this pod.  If no RuntimeClass resource matches the named class, the pod will not be run. If unset or empty, the \"legacy\" RuntimeClass will be used, which is an implicit class with an empty definition that uses the default runtime handler. More info: https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class  # noqa: E501
 
         :param runtime_class_name: The runtime_class_name of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type runtime_class_name: str
         """
 
         self._runtime_class_name = runtime_class_name
@@ -935,7 +938,7 @@ class V1PodSpec(object):
         If specified, the pod will be dispatched by specified scheduler. If not specified, the pod will be dispatched by default scheduler.  # noqa: E501
 
         :param scheduler_name: The scheduler_name of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type scheduler_name: str
         """
 
         self._scheduler_name = scheduler_name
@@ -958,7 +961,7 @@ class V1PodSpec(object):
         SchedulingGates is an opaque list of values that if specified will block scheduling the pod. If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the scheduler will not attempt to schedule the pod.  SchedulingGates can only be set at pod creation time, and be removed only afterwards.  # noqa: E501
 
         :param scheduling_gates: The scheduling_gates of this V1PodSpec.  # noqa: E501
-        :type: list[V1PodSchedulingGate]
+        :type scheduling_gates: list[V1PodSchedulingGate]
         """
 
         self._scheduling_gates = scheduling_gates
@@ -979,7 +982,7 @@ class V1PodSpec(object):
 
 
         :param security_context: The security_context of this V1PodSpec.  # noqa: E501
-        :type: V1PodSecurityContext
+        :type security_context: V1PodSecurityContext
         """
 
         self._security_context = security_context
@@ -1002,7 +1005,7 @@ class V1PodSpec(object):
         DeprecatedServiceAccount is a deprecated alias for ServiceAccountName. Deprecated: Use serviceAccountName instead.  # noqa: E501
 
         :param service_account: The service_account of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type service_account: str
         """
 
         self._service_account = service_account
@@ -1025,7 +1028,7 @@ class V1PodSpec(object):
         ServiceAccountName is the name of the ServiceAccount to use to run this pod. More info: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/  # noqa: E501
 
         :param service_account_name: The service_account_name of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type service_account_name: str
         """
 
         self._service_account_name = service_account_name
@@ -1048,7 +1051,7 @@ class V1PodSpec(object):
         If true the pod's hostname will be configured as the pod's FQDN, rather than the leaf name (the default). In Linux containers, this means setting the FQDN in the hostname field of the kernel (the nodename field of struct utsname). In Windows containers, this means setting the registry value of hostname for the registry key HKEY_LOCAL_MACHINE\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\Tcpip\\\\Parameters to FQDN. If a pod does not have FQDN, this has no effect. Default to false.  # noqa: E501
 
         :param set_hostname_as_fqdn: The set_hostname_as_fqdn of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type set_hostname_as_fqdn: bool
         """
 
         self._set_hostname_as_fqdn = set_hostname_as_fqdn
@@ -1071,7 +1074,7 @@ class V1PodSpec(object):
         Share a single process namespace between all of the containers in a pod. When this is set containers will be able to view and signal processes from other containers in the same pod, and the first process in each container will not be assigned PID 1. HostPID and ShareProcessNamespace cannot both be set. Optional: Default to false.  # noqa: E501
 
         :param share_process_namespace: The share_process_namespace of this V1PodSpec.  # noqa: E501
-        :type: bool
+        :type share_process_namespace: bool
         """
 
         self._share_process_namespace = share_process_namespace
@@ -1094,7 +1097,7 @@ class V1PodSpec(object):
         If specified, the fully qualified Pod hostname will be \"<hostname>.<subdomain>.<pod namespace>.svc.<cluster domain>\". If not specified, the pod will not have a domainname at all.  # noqa: E501
 
         :param subdomain: The subdomain of this V1PodSpec.  # noqa: E501
-        :type: str
+        :type subdomain: str
         """
 
         self._subdomain = subdomain
@@ -1117,7 +1120,7 @@ class V1PodSpec(object):
         Optional duration in seconds the pod needs to terminate gracefully. May be decreased in delete request. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). If this value is nil, the default grace period will be used instead. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. Defaults to 30 seconds.  # noqa: E501
 
         :param termination_grace_period_seconds: The termination_grace_period_seconds of this V1PodSpec.  # noqa: E501
-        :type: int
+        :type termination_grace_period_seconds: int
         """
 
         self._termination_grace_period_seconds = termination_grace_period_seconds
@@ -1140,7 +1143,7 @@ class V1PodSpec(object):
         If specified, the pod's tolerations.  # noqa: E501
 
         :param tolerations: The tolerations of this V1PodSpec.  # noqa: E501
-        :type: list[V1Toleration]
+        :type tolerations: list[V1Toleration]
         """
 
         self._tolerations = tolerations
@@ -1163,7 +1166,7 @@ class V1PodSpec(object):
         TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. Scheduler will schedule pods in a way which abides by the constraints. All topologySpreadConstraints are ANDed.  # noqa: E501
 
         :param topology_spread_constraints: The topology_spread_constraints of this V1PodSpec.  # noqa: E501
-        :type: list[V1TopologySpreadConstraint]
+        :type topology_spread_constraints: list[V1TopologySpreadConstraint]
         """
 
         self._topology_spread_constraints = topology_spread_constraints
@@ -1186,7 +1189,7 @@ class V1PodSpec(object):
         List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes  # noqa: E501
 
         :param volumes: The volumes of this V1PodSpec.  # noqa: E501
-        :type: list[V1Volume]
+        :type volumes: list[V1Volume]
         """
 
         self._volumes = volumes
@@ -1207,32 +1210,40 @@ class V1PodSpec(object):
 
 
         :param workload_ref: The workload_ref of this V1PodSpec.  # noqa: E501
-        :type: V1WorkloadReference
+        :type workload_ref: V1WorkloadReference
         """
 
         self._workload_ref = workload_ref
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

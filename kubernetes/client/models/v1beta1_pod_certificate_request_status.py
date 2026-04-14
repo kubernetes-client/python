@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1beta1PodCertificateRequestStatus(object):
     def __init__(self, begin_refresh_at=None, certificate_chain=None, conditions=None, not_after=None, not_before=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1PodCertificateRequestStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._begin_refresh_at = None
@@ -90,7 +93,7 @@ class V1beta1PodCertificateRequestStatus(object):
         beginRefreshAt is the time at which the kubelet should begin trying to refresh the certificate.  This field is set via the /status subresource, and must be set at the same time as certificateChain.  Once populated, this field is immutable.  This field is only a hint.  Kubelet may start refreshing before or after this time if necessary.  # noqa: E501
 
         :param begin_refresh_at: The begin_refresh_at of this V1beta1PodCertificateRequestStatus.  # noqa: E501
-        :type: datetime
+        :type begin_refresh_at: datetime
         """
 
         self._begin_refresh_at = begin_refresh_at
@@ -113,7 +116,7 @@ class V1beta1PodCertificateRequestStatus(object):
         certificateChain is populated with an issued certificate by the signer. This field is set via the /status subresource. Once populated, this field is immutable.  If the certificate signing request is denied, a condition of type \"Denied\" is added and this field remains empty. If the signer cannot issue the certificate, a condition of type \"Failed\" is added and this field remains empty.  Validation requirements:  1. certificateChain must consist of one or more PEM-formatted certificates.  2. Each entry must be a valid PEM-wrapped, DER-encoded ASN.1 Certificate as     described in section 4 of RFC5280.  If more than one block is present, and the definition of the requested spec.signerName does not indicate otherwise, the first block is the issued certificate, and subsequent blocks should be treated as intermediate certificates and presented in TLS handshakes.  When projecting the chain into a pod volume, kubelet will drop any data in-between the PEM blocks, as well as any PEM block headers.  # noqa: E501
 
         :param certificate_chain: The certificate_chain of this V1beta1PodCertificateRequestStatus.  # noqa: E501
-        :type: str
+        :type certificate_chain: str
         """
 
         self._certificate_chain = certificate_chain
@@ -136,7 +139,7 @@ class V1beta1PodCertificateRequestStatus(object):
         conditions applied to the request.  The types \"Issued\", \"Denied\", and \"Failed\" have special handling.  At most one of these conditions may be present, and they must have status \"True\".  If the request is denied with `Reason=UnsupportedKeyType`, the signer may suggest a key type that will work in the message field.  # noqa: E501
 
         :param conditions: The conditions of this V1beta1PodCertificateRequestStatus.  # noqa: E501
-        :type: list[V1Condition]
+        :type conditions: list[V1Condition]
         """
 
         self._conditions = conditions
@@ -159,7 +162,7 @@ class V1beta1PodCertificateRequestStatus(object):
         notAfter is the time at which the certificate expires.  The value must be the same as the notAfter value in the leaf certificate in certificateChain.  This field is set via the /status subresource.  Once populated, it is immutable.  The signer must set this field at the same time it sets certificateChain.  # noqa: E501
 
         :param not_after: The not_after of this V1beta1PodCertificateRequestStatus.  # noqa: E501
-        :type: datetime
+        :type not_after: datetime
         """
 
         self._not_after = not_after
@@ -182,32 +185,40 @@ class V1beta1PodCertificateRequestStatus(object):
         notBefore is the time at which the certificate becomes valid.  The value must be the same as the notBefore value in the leaf certificate in certificateChain.  This field is set via the /status subresource.  Once populated, it is immutable. The signer must set this field at the same time it sets certificateChain.  # noqa: E501
 
         :param not_before: The not_before of this V1beta1PodCertificateRequestStatus.  # noqa: E501
-        :type: datetime
+        :type not_before: datetime
         """
 
         self._not_before = not_before
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

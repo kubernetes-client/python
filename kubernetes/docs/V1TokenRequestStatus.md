@@ -1,6 +1,7 @@
 # V1TokenRequestStatus
 
 TokenRequestStatus is the result of a token request.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

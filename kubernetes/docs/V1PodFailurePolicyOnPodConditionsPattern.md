@@ -1,6 +1,7 @@
 # V1PodFailurePolicyOnPodConditionsPattern
 
 PodFailurePolicyOnPodConditionsPattern describes a pattern for matching an actual pod condition type.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

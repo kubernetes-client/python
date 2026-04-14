@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -35,11 +38,11 @@ class V1beta2Device(object):
     openapi_types = {
         'all_nodes': 'bool',
         'allow_multiple_allocations': 'bool',
-        'attributes': 'dict(str, V1beta2DeviceAttribute)',
+        'attributes': 'dict[str, V1beta2DeviceAttribute]',
         'binding_conditions': 'list[str]',
         'binding_failure_conditions': 'list[str]',
         'binds_to_node': 'bool',
-        'capacity': 'dict(str, V1beta2DeviceCapacity)',
+        'capacity': 'dict[str, V1beta2DeviceCapacity]',
         'consumes_counters': 'list[V1beta2DeviceCounterConsumption]',
         'name': 'str',
         'node_name': 'str',
@@ -65,7 +68,7 @@ class V1beta2Device(object):
     def __init__(self, all_nodes=None, allow_multiple_allocations=None, attributes=None, binding_conditions=None, binding_failure_conditions=None, binds_to_node=None, capacity=None, consumes_counters=None, name=None, node_name=None, node_selector=None, taints=None, local_vars_configuration=None):  # noqa: E501
         """V1beta2Device - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._all_nodes = None
@@ -124,7 +127,7 @@ class V1beta2Device(object):
         AllNodes indicates that all nodes have access to the device.  Must only be set if Spec.PerDeviceNodeSelection is set to true. At most one of NodeName, NodeSelector and AllNodes can be set.  # noqa: E501
 
         :param all_nodes: The all_nodes of this V1beta2Device.  # noqa: E501
-        :type: bool
+        :type all_nodes: bool
         """
 
         self._all_nodes = all_nodes
@@ -147,7 +150,7 @@ class V1beta2Device(object):
         AllowMultipleAllocations marks whether the device is allowed to be allocated to multiple DeviceRequests.  If AllowMultipleAllocations is set to true, the device can be allocated more than once, and all of its capacity is consumable, regardless of whether the requestPolicy is defined or not.  # noqa: E501
 
         :param allow_multiple_allocations: The allow_multiple_allocations of this V1beta2Device.  # noqa: E501
-        :type: bool
+        :type allow_multiple_allocations: bool
         """
 
         self._allow_multiple_allocations = allow_multiple_allocations
@@ -159,7 +162,7 @@ class V1beta2Device(object):
         Attributes defines the set of attributes for this device. The name of each attribute must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :return: The attributes of this V1beta2Device.  # noqa: E501
-        :rtype: dict(str, V1beta2DeviceAttribute)
+        :rtype: dict[str, V1beta2DeviceAttribute]
         """
         return self._attributes
 
@@ -170,7 +173,7 @@ class V1beta2Device(object):
         Attributes defines the set of attributes for this device. The name of each attribute must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :param attributes: The attributes of this V1beta2Device.  # noqa: E501
-        :type: dict(str, V1beta2DeviceAttribute)
+        :type attributes: dict[str, V1beta2DeviceAttribute]
         """
 
         self._attributes = attributes
@@ -193,7 +196,7 @@ class V1beta2Device(object):
         BindingConditions defines the conditions for proceeding with binding. All of these conditions must be set in the per-device status conditions with a value of True to proceed with binding the pod to the node while scheduling the pod.  The maximum number of binding conditions is 4.  The conditions must be a valid condition type string.  This is an alpha field and requires enabling the DRADeviceBindingConditions and DRAResourceClaimDeviceStatus feature gates.  # noqa: E501
 
         :param binding_conditions: The binding_conditions of this V1beta2Device.  # noqa: E501
-        :type: list[str]
+        :type binding_conditions: list[str]
         """
 
         self._binding_conditions = binding_conditions
@@ -216,7 +219,7 @@ class V1beta2Device(object):
         BindingFailureConditions defines the conditions for binding failure. They may be set in the per-device status conditions. If any is set to \"True\", a binding failure occurred.  The maximum number of binding failure conditions is 4.  The conditions must be a valid condition type string.  This is an alpha field and requires enabling the DRADeviceBindingConditions and DRAResourceClaimDeviceStatus feature gates.  # noqa: E501
 
         :param binding_failure_conditions: The binding_failure_conditions of this V1beta2Device.  # noqa: E501
-        :type: list[str]
+        :type binding_failure_conditions: list[str]
         """
 
         self._binding_failure_conditions = binding_failure_conditions
@@ -239,7 +242,7 @@ class V1beta2Device(object):
         BindsToNode indicates if the usage of an allocation involving this device has to be limited to exactly the node that was chosen when allocating the claim. If set to true, the scheduler will set the ResourceClaim.Status.Allocation.NodeSelector to match the node where the allocation was made.  This is an alpha field and requires enabling the DRADeviceBindingConditions and DRAResourceClaimDeviceStatus feature gates.  # noqa: E501
 
         :param binds_to_node: The binds_to_node of this V1beta2Device.  # noqa: E501
-        :type: bool
+        :type binds_to_node: bool
         """
 
         self._binds_to_node = binds_to_node
@@ -251,7 +254,7 @@ class V1beta2Device(object):
         Capacity defines the set of capacities for this device. The name of each capacity must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :return: The capacity of this V1beta2Device.  # noqa: E501
-        :rtype: dict(str, V1beta2DeviceCapacity)
+        :rtype: dict[str, V1beta2DeviceCapacity]
         """
         return self._capacity
 
@@ -262,7 +265,7 @@ class V1beta2Device(object):
         Capacity defines the set of capacities for this device. The name of each capacity must be unique in that set.  The maximum number of attributes and capacities combined is 32.  # noqa: E501
 
         :param capacity: The capacity of this V1beta2Device.  # noqa: E501
-        :type: dict(str, V1beta2DeviceCapacity)
+        :type capacity: dict[str, V1beta2DeviceCapacity]
         """
 
         self._capacity = capacity
@@ -285,7 +288,7 @@ class V1beta2Device(object):
         ConsumesCounters defines a list of references to sharedCounters and the set of counters that the device will consume from those counter sets.  There can only be a single entry per counterSet.  The maximum number of device counter consumptions per device is 2.  # noqa: E501
 
         :param consumes_counters: The consumes_counters of this V1beta2Device.  # noqa: E501
-        :type: list[V1beta2DeviceCounterConsumption]
+        :type consumes_counters: list[V1beta2DeviceCounterConsumption]
         """
 
         self._consumes_counters = consumes_counters
@@ -308,7 +311,7 @@ class V1beta2Device(object):
         Name is unique identifier among all devices managed by the driver in the pool. It must be a DNS label.  # noqa: E501
 
         :param name: The name of this V1beta2Device.  # noqa: E501
-        :type: str
+        :type name: str
         """
         if self.local_vars_configuration.client_side_validation and name is None:  # noqa: E501
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
@@ -333,7 +336,7 @@ class V1beta2Device(object):
         NodeName identifies the node where the device is available.  Must only be set if Spec.PerDeviceNodeSelection is set to true. At most one of NodeName, NodeSelector and AllNodes can be set.  # noqa: E501
 
         :param node_name: The node_name of this V1beta2Device.  # noqa: E501
-        :type: str
+        :type node_name: str
         """
 
         self._node_name = node_name
@@ -354,7 +357,7 @@ class V1beta2Device(object):
 
 
         :param node_selector: The node_selector of this V1beta2Device.  # noqa: E501
-        :type: V1NodeSelector
+        :type node_selector: V1NodeSelector
         """
 
         self._node_selector = node_selector
@@ -377,32 +380,40 @@ class V1beta2Device(object):
         If specified, these are the driver-defined taints.  The maximum number of taints is 16. If taints are set for any device in a ResourceSlice, then the maximum number of allowed devices per ResourceSlice is 64 instead of 128.  This is an alpha field and requires enabling the DRADeviceTaints feature gate.  # noqa: E501
 
         :param taints: The taints of this V1beta2Device.  # noqa: E501
-        :type: list[V1beta2DeviceTaint]
+        :type taints: list[V1beta2DeviceTaint]
         """
 
         self._taints = taints
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

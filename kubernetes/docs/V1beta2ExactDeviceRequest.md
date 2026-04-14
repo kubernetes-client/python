@@ -1,6 +1,7 @@
 # V1beta2ExactDeviceRequest
 
 ExactDeviceRequest is a request for one or more identical devices.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # V1beta1AllocationResult
 
 AllocationResult contains attributes of an allocated resource.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

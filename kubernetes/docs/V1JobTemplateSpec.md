@@ -1,6 +1,7 @@
 # V1JobTemplateSpec
 
 JobTemplateSpec describes the data a Job should have when created from a template
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

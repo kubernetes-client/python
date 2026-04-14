@@ -1,6 +1,7 @@
 # CoreV1EventSeries
 
 EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

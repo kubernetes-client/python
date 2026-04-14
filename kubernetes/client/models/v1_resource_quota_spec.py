@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -33,7 +36,7 @@ class V1ResourceQuotaSpec(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'hard': 'dict(str, str)',
+        'hard': 'dict[str, str]',
         'scope_selector': 'V1ScopeSelector',
         'scopes': 'list[str]'
     }
@@ -47,7 +50,7 @@ class V1ResourceQuotaSpec(object):
     def __init__(self, hard=None, scope_selector=None, scopes=None, local_vars_configuration=None):  # noqa: E501
         """V1ResourceQuotaSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._hard = None
@@ -69,7 +72,7 @@ class V1ResourceQuotaSpec(object):
         hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/  # noqa: E501
 
         :return: The hard of this V1ResourceQuotaSpec.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: dict[str, str]
         """
         return self._hard
 
@@ -80,7 +83,7 @@ class V1ResourceQuotaSpec(object):
         hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/  # noqa: E501
 
         :param hard: The hard of this V1ResourceQuotaSpec.  # noqa: E501
-        :type: dict(str, str)
+        :type hard: dict[str, str]
         """
 
         self._hard = hard
@@ -101,7 +104,7 @@ class V1ResourceQuotaSpec(object):
 
 
         :param scope_selector: The scope_selector of this V1ResourceQuotaSpec.  # noqa: E501
-        :type: V1ScopeSelector
+        :type scope_selector: V1ScopeSelector
         """
 
         self._scope_selector = scope_selector
@@ -124,32 +127,40 @@ class V1ResourceQuotaSpec(object):
         A collection of filters that must match each object tracked by a quota. If not specified, the quota matches all objects.  # noqa: E501
 
         :param scopes: The scopes of this V1ResourceQuotaSpec.  # noqa: E501
-        :type: list[str]
+        :type scopes: list[str]
         """
 
         self._scopes = scopes
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

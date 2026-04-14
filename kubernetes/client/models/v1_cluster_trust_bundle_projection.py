@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1ClusterTrustBundleProjection(object):
     def __init__(self, label_selector=None, name=None, optional=None, path=None, signer_name=None, local_vars_configuration=None):  # noqa: E501
         """V1ClusterTrustBundleProjection - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._label_selector = None
@@ -87,7 +90,7 @@ class V1ClusterTrustBundleProjection(object):
 
 
         :param label_selector: The label_selector of this V1ClusterTrustBundleProjection.  # noqa: E501
-        :type: V1LabelSelector
+        :type label_selector: V1LabelSelector
         """
 
         self._label_selector = label_selector
@@ -110,7 +113,7 @@ class V1ClusterTrustBundleProjection(object):
         Select a single ClusterTrustBundle by object name.  Mutually-exclusive with signerName and labelSelector.  # noqa: E501
 
         :param name: The name of this V1ClusterTrustBundleProjection.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -133,7 +136,7 @@ class V1ClusterTrustBundleProjection(object):
         If true, don't block pod startup if the referenced ClusterTrustBundle(s) aren't available.  If using name, then the named ClusterTrustBundle is allowed not to exist.  If using signerName, then the combination of signerName and labelSelector is allowed to match zero ClusterTrustBundles.  # noqa: E501
 
         :param optional: The optional of this V1ClusterTrustBundleProjection.  # noqa: E501
-        :type: bool
+        :type optional: bool
         """
 
         self._optional = optional
@@ -156,7 +159,7 @@ class V1ClusterTrustBundleProjection(object):
         Relative path from the volume root to write the bundle.  # noqa: E501
 
         :param path: The path of this V1ClusterTrustBundleProjection.  # noqa: E501
-        :type: str
+        :type path: str
         """
         if self.local_vars_configuration.client_side_validation and path is None:  # noqa: E501
             raise ValueError("Invalid value for `path`, must not be `None`")  # noqa: E501
@@ -181,32 +184,40 @@ class V1ClusterTrustBundleProjection(object):
         Select all ClusterTrustBundles that match this signer name. Mutually-exclusive with name.  The contents of all selected ClusterTrustBundles will be unified and deduplicated.  # noqa: E501
 
         :param signer_name: The signer_name of this V1ClusterTrustBundleProjection.  # noqa: E501
-        :type: str
+        :type signer_name: str
         """
 
         self._signer_name = signer_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1NetworkDeviceData(object):
     def __init__(self, hardware_address=None, interface_name=None, ips=None, local_vars_configuration=None):  # noqa: E501
         """V1NetworkDeviceData - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._hardware_address = None
@@ -80,7 +83,7 @@ class V1NetworkDeviceData(object):
         HardwareAddress represents the hardware address (e.g. MAC Address) of the device's network interface.  Must not be longer than 128 characters.  # noqa: E501
 
         :param hardware_address: The hardware_address of this V1NetworkDeviceData.  # noqa: E501
-        :type: str
+        :type hardware_address: str
         """
 
         self._hardware_address = hardware_address
@@ -103,7 +106,7 @@ class V1NetworkDeviceData(object):
         InterfaceName specifies the name of the network interface associated with the allocated device. This might be the name of a physical or virtual network interface being configured in the pod.  Must not be longer than 256 characters.  # noqa: E501
 
         :param interface_name: The interface_name of this V1NetworkDeviceData.  # noqa: E501
-        :type: str
+        :type interface_name: str
         """
 
         self._interface_name = interface_name
@@ -126,32 +129,40 @@ class V1NetworkDeviceData(object):
         IPs lists the network addresses assigned to the device's network interface. This can include both IPv4 and IPv6 addresses. The IPs are in the CIDR notation, which includes both the address and the associated subnet mask. e.g.: \"192.0.2.5/24\" for IPv4 and \"2001:db8::5/64\" for IPv6.  # noqa: E501
 
         :param ips: The ips of this V1NetworkDeviceData.  # noqa: E501
-        :type: list[str]
+        :type ips: list[str]
         """
 
         self._ips = ips
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

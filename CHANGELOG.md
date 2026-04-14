@@ -1,3 +1,13 @@
+# Breaking Change from upgrading openapi generator to v6.6.0
+
+- Legacy dict(str, str) syntax is no longer supported in ApiClient deserializer. Only modern dict[str, str] syntax is supported.
+
+- All models __init__ will now use Configuration.get_default_copy() instead of Configuration() if the passed in parameter local_vars_configuration is None. [OpenAPITools/openapi-generator#8500](https://github.com/OpenAPITools/openapi-generator/pull/8500).
+
+- ApiClient's `update_params_for_auth` method has one parameter name changed from `querys` to `queries`.
+
+- Configuration auth uses 'BearerToken' instead of 'authorization' in api_key.
+
 # v35.0.0+snapshot
 
 Kubernetes API Version: v1.35.0

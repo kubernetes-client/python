@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -61,7 +64,7 @@ class V1DaemonSetStatus(object):
     def __init__(self, collision_count=None, conditions=None, current_number_scheduled=None, desired_number_scheduled=None, number_available=None, number_misscheduled=None, number_ready=None, number_unavailable=None, observed_generation=None, updated_number_scheduled=None, local_vars_configuration=None):  # noqa: E501
         """V1DaemonSetStatus - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._collision_count = None
@@ -111,7 +114,7 @@ class V1DaemonSetStatus(object):
         Count of hash collisions for the DaemonSet. The DaemonSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.  # noqa: E501
 
         :param collision_count: The collision_count of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type collision_count: int
         """
 
         self._collision_count = collision_count
@@ -134,7 +137,7 @@ class V1DaemonSetStatus(object):
         Represents the latest available observations of a DaemonSet's current state.  # noqa: E501
 
         :param conditions: The conditions of this V1DaemonSetStatus.  # noqa: E501
-        :type: list[V1DaemonSetCondition]
+        :type conditions: list[V1DaemonSetCondition]
         """
 
         self._conditions = conditions
@@ -157,7 +160,7 @@ class V1DaemonSetStatus(object):
         The number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/  # noqa: E501
 
         :param current_number_scheduled: The current_number_scheduled of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type current_number_scheduled: int
         """
         if self.local_vars_configuration.client_side_validation and current_number_scheduled is None:  # noqa: E501
             raise ValueError("Invalid value for `current_number_scheduled`, must not be `None`")  # noqa: E501
@@ -182,7 +185,7 @@ class V1DaemonSetStatus(object):
         The total number of nodes that should be running the daemon pod (including nodes correctly running the daemon pod). More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/  # noqa: E501
 
         :param desired_number_scheduled: The desired_number_scheduled of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type desired_number_scheduled: int
         """
         if self.local_vars_configuration.client_side_validation and desired_number_scheduled is None:  # noqa: E501
             raise ValueError("Invalid value for `desired_number_scheduled`, must not be `None`")  # noqa: E501
@@ -207,7 +210,7 @@ class V1DaemonSetStatus(object):
         The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and available (ready for at least spec.minReadySeconds)  # noqa: E501
 
         :param number_available: The number_available of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type number_available: int
         """
 
         self._number_available = number_available
@@ -230,7 +233,7 @@ class V1DaemonSetStatus(object):
         The number of nodes that are running the daemon pod, but are not supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/  # noqa: E501
 
         :param number_misscheduled: The number_misscheduled of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type number_misscheduled: int
         """
         if self.local_vars_configuration.client_side_validation and number_misscheduled is None:  # noqa: E501
             raise ValueError("Invalid value for `number_misscheduled`, must not be `None`")  # noqa: E501
@@ -255,7 +258,7 @@ class V1DaemonSetStatus(object):
         numberReady is the number of nodes that should be running the daemon pod and have one or more of the daemon pod running with a Ready Condition.  # noqa: E501
 
         :param number_ready: The number_ready of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type number_ready: int
         """
         if self.local_vars_configuration.client_side_validation and number_ready is None:  # noqa: E501
             raise ValueError("Invalid value for `number_ready`, must not be `None`")  # noqa: E501
@@ -280,7 +283,7 @@ class V1DaemonSetStatus(object):
         The number of nodes that should be running the daemon pod and have none of the daemon pod running and available (ready for at least spec.minReadySeconds)  # noqa: E501
 
         :param number_unavailable: The number_unavailable of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type number_unavailable: int
         """
 
         self._number_unavailable = number_unavailable
@@ -303,7 +306,7 @@ class V1DaemonSetStatus(object):
         The most recent generation observed by the daemon set controller.  # noqa: E501
 
         :param observed_generation: The observed_generation of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type observed_generation: int
         """
 
         self._observed_generation = observed_generation
@@ -326,32 +329,40 @@ class V1DaemonSetStatus(object):
         The total number of nodes that are running updated daemon pod  # noqa: E501
 
         :param updated_number_scheduled: The updated_number_scheduled of this V1DaemonSetStatus.  # noqa: E501
-        :type: int
+        :type updated_number_scheduled: int
         """
 
         self._updated_number_scheduled = updated_number_scheduled
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -1,6 +1,7 @@
 # V1EventSource
 
 EventSource contains information for an event.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

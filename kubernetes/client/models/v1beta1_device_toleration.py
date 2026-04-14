@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -51,7 +54,7 @@ class V1beta1DeviceToleration(object):
     def __init__(self, effect=None, key=None, operator=None, toleration_seconds=None, value=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1DeviceToleration - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._effect = None
@@ -90,7 +93,7 @@ class V1beta1DeviceToleration(object):
         Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule and NoExecute.  # noqa: E501
 
         :param effect: The effect of this V1beta1DeviceToleration.  # noqa: E501
-        :type: str
+        :type effect: str
         """
 
         self._effect = effect
@@ -113,7 +116,7 @@ class V1beta1DeviceToleration(object):
         Key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys. Must be a label name.  # noqa: E501
 
         :param key: The key of this V1beta1DeviceToleration.  # noqa: E501
-        :type: str
+        :type key: str
         """
 
         self._key = key
@@ -136,7 +139,7 @@ class V1beta1DeviceToleration(object):
         Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a ResourceClaim can tolerate all taints of a particular category.  # noqa: E501
 
         :param operator: The operator of this V1beta1DeviceToleration.  # noqa: E501
-        :type: str
+        :type operator: str
         """
 
         self._operator = operator
@@ -159,7 +162,7 @@ class V1beta1DeviceToleration(object):
         TolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system. If larger than zero, the time when the pod needs to be evicted is calculated as <time when taint was adedd> + <toleration seconds>.  # noqa: E501
 
         :param toleration_seconds: The toleration_seconds of this V1beta1DeviceToleration.  # noqa: E501
-        :type: int
+        :type toleration_seconds: int
         """
 
         self._toleration_seconds = toleration_seconds
@@ -182,32 +185,40 @@ class V1beta1DeviceToleration(object):
         Value is the taint value the toleration matches to. If the operator is Exists, the value must be empty, otherwise just a regular string. Must be a label value.  # noqa: E501
 
         :param value: The value of this V1beta1DeviceToleration.  # noqa: E501
-        :type: str
+        :type value: str
         """
 
         self._value = value
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -59,7 +62,7 @@ class V1ResourceAttributes(object):
     def __init__(self, field_selector=None, group=None, label_selector=None, name=None, namespace=None, resource=None, subresource=None, verb=None, version=None, local_vars_configuration=None):  # noqa: E501
         """V1ResourceAttributes - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._field_selector = None
@@ -108,7 +111,7 @@ class V1ResourceAttributes(object):
 
 
         :param field_selector: The field_selector of this V1ResourceAttributes.  # noqa: E501
-        :type: V1FieldSelectorAttributes
+        :type field_selector: V1FieldSelectorAttributes
         """
 
         self._field_selector = field_selector
@@ -131,7 +134,7 @@ class V1ResourceAttributes(object):
         Group is the API Group of the Resource.  \"*\" means all.  # noqa: E501
 
         :param group: The group of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type group: str
         """
 
         self._group = group
@@ -152,7 +155,7 @@ class V1ResourceAttributes(object):
 
 
         :param label_selector: The label_selector of this V1ResourceAttributes.  # noqa: E501
-        :type: V1LabelSelectorAttributes
+        :type label_selector: V1LabelSelectorAttributes
         """
 
         self._label_selector = label_selector
@@ -175,7 +178,7 @@ class V1ResourceAttributes(object):
         Name is the name of the resource being requested for a \"get\" or deleted for a \"delete\". \"\" (empty) means all.  # noqa: E501
 
         :param name: The name of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type name: str
         """
 
         self._name = name
@@ -198,7 +201,7 @@ class V1ResourceAttributes(object):
         Namespace is the namespace of the action being requested.  Currently, there is no distinction between no namespace and all namespaces \"\" (empty) is defaulted for LocalSubjectAccessReviews \"\" (empty) is empty for cluster-scoped resources \"\" (empty) means \"all\" for namespace scoped resources from a SubjectAccessReview or SelfSubjectAccessReview  # noqa: E501
 
         :param namespace: The namespace of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type namespace: str
         """
 
         self._namespace = namespace
@@ -221,7 +224,7 @@ class V1ResourceAttributes(object):
         Resource is one of the existing resource types.  \"*\" means all.  # noqa: E501
 
         :param resource: The resource of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type resource: str
         """
 
         self._resource = resource
@@ -244,7 +247,7 @@ class V1ResourceAttributes(object):
         Subresource is one of the existing resource types.  \"\" means none.  # noqa: E501
 
         :param subresource: The subresource of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type subresource: str
         """
 
         self._subresource = subresource
@@ -267,7 +270,7 @@ class V1ResourceAttributes(object):
         Verb is a kubernetes resource API verb, like: get, list, watch, create, update, delete, proxy.  \"*\" means all.  # noqa: E501
 
         :param verb: The verb of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type verb: str
         """
 
         self._verb = verb
@@ -290,32 +293,40 @@ class V1ResourceAttributes(object):
         Version is the API Version of the Resource.  \"*\" means all.  # noqa: E501
 
         :param version: The version of this V1ResourceAttributes.  # noqa: E501
-        :type: str
+        :type version: str
         """
 
         self._version = version
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

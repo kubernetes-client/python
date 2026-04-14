@@ -10,9 +10,12 @@
 """
 
 
+try:
+    from inspect import getfullargspec
+except ImportError:
+    from inspect import getargspec as getfullargspec
 import pprint
 import re  # noqa: F401
-
 import six
 
 from kubernetes.client.configuration import Configuration
@@ -47,7 +50,7 @@ class V1alpha1MutatingAdmissionPolicyBindingSpec(object):
     def __init__(self, match_resources=None, param_ref=None, policy_name=None, local_vars_configuration=None):  # noqa: E501
         """V1alpha1MutatingAdmissionPolicyBindingSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
-            local_vars_configuration = Configuration()
+            local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
         self._match_resources = None
@@ -78,7 +81,7 @@ class V1alpha1MutatingAdmissionPolicyBindingSpec(object):
 
 
         :param match_resources: The match_resources of this V1alpha1MutatingAdmissionPolicyBindingSpec.  # noqa: E501
-        :type: V1alpha1MatchResources
+        :type match_resources: V1alpha1MatchResources
         """
 
         self._match_resources = match_resources
@@ -99,7 +102,7 @@ class V1alpha1MutatingAdmissionPolicyBindingSpec(object):
 
 
         :param param_ref: The param_ref of this V1alpha1MutatingAdmissionPolicyBindingSpec.  # noqa: E501
-        :type: V1alpha1ParamRef
+        :type param_ref: V1alpha1ParamRef
         """
 
         self._param_ref = param_ref
@@ -122,32 +125,40 @@ class V1alpha1MutatingAdmissionPolicyBindingSpec(object):
         policyName references a MutatingAdmissionPolicy name which the MutatingAdmissionPolicyBinding binds to. If the referenced resource does not exist, this binding is considered invalid and will be ignored Required.  # noqa: E501
 
         :param policy_name: The policy_name of this V1alpha1MutatingAdmissionPolicyBindingSpec.  # noqa: E501
-        :type: str
+        :type policy_name: str
         """
 
         self._policy_name = policy_name
 
-    def to_dict(self):
+    def to_dict(self, serialize=False):
         """Returns the model properties as a dict"""
         result = {}
 
+        def convert(x):
+            if hasattr(x, "to_dict"):
+                args = getfullargspec(x.to_dict).args
+                if len(args) == 1:
+                    return x.to_dict()
+                else:
+                    return x.to_dict(serialize)
+            else:
+                return x
+
         for attr, _ in six.iteritems(self.openapi_types):
             value = getattr(self, attr)
+            attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: convert(x),
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], convert(item[1])),
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[attr] = convert(value)
 
         return result
 

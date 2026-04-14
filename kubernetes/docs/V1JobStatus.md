@@ -1,6 +1,7 @@
 # V1JobStatus
 
 JobStatus represents the current state of a Job.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

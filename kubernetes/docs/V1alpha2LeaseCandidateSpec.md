@@ -1,6 +1,7 @@
 # V1alpha2LeaseCandidateSpec
 
 LeaseCandidateSpec is a specification of a Lease.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

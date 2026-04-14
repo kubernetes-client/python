@@ -1,6 +1,7 @@
 # V1ReplicationController
 
 ReplicationController represents the configuration of a replication controller.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
