@@ -1,0 +1,15 @@
+diff --git a/kubernetes_asyncio/client/api_client.py b/kubernetes_asyncio/client/api_client.py
+index 0d543478..2791a9cd 100644
+--- a/kubernetes_asyncio/client/api_client.py
++++ b/kubernetes_asyncio/client/api_client.py
+@@ -198,7 +198,9 @@ class ApiClient(object):
+         if not _preload_content:
+             return return_data
+ 
+-        response_type = response_types_map.get(response_data.status, None)
++        response_type = None
++        if response_types_map:
++            response_type = response_types_map.get(response_data.status, None)
+ 
+         if six.PY3 and response_type not in ["file", "bytes"]:
+             match = None
