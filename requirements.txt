@@ -1,6 +1,6 @@
 certifi>=14.05.14 # MPL
 six>=1.9.0  # MIT
-python-dateutil>=2.5.3  # BSD
+python-dateutil>=2.9.0.post0  # BSD
 setuptools>=21.0.0  # PSF/ZPL
 pyyaml>=5.4.1  # MIT
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
