@@ -1,0 +1,12 @@
+# V1IngressStatus
+
+IngressStatus describe the current state of the Ingress.
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**load_balancer** | [**V1IngressLoadBalancerStatus**](V1IngressLoadBalancerStatus.md) |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
