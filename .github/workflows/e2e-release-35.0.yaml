@@ -1,36 +1,36 @@
-name: End to End Tests - release-26.0
+name: End to End Tests - release-35.0
 
 on:
   push:
     branches:
-      - release-26.0
+      - release-35.0
   pull_request:
     branches:
-      - release-26.0
+      - release-35.0
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.10, 3.11, 3.12]
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         submodules: true
     - name: Create Kind Cluster
-      uses: helm/kind-action@v1.14.0
+      uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc
       with:
-        cluster_name: kubernetes-python-e2e-release-26.0-${{ matrix.python-version }}
+        cluster_name: kubernetes-python-e2e-release-35.0-${{ matrix.python-version }}
         # The kind version to be used to spin the cluster up
         # this needs to be updated whenever a new Kind version is released
         version: v0.17.0
         # Update the config here whenever a new client snapshot is performed
         # This would eventually point to cluster with the latest Kubernetes version
         # as we sync with Kubernetes upstream
-        config: .github/workflows/kind-configs/cluster-1.26.yaml
+        config: .github/workflows/kind-configs/cluster-1.35.yaml
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
