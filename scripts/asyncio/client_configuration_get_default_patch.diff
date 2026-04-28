@@ -1,0 +1,19 @@
+--- kubernetes_asyncio/client/configuration.py	2024-01-28 00:09:56.593954742 +0100
++++ /tmp/configuration.py	2024-01-28 00:00:42.583447266 +0100
+@@ -254,6 +254,16 @@
+         cls._default = copy.deepcopy(default)
+ 
+     @classmethod
++    def get_default(cls):
++        """Get default instance of configuration.
++
++        :return: The Configuration object.
++        """
++        if cls._default is None:
++            cls.set_default(Configuration())
++        return cls._default
++
++    @classmethod
+     def get_default_copy(cls):
+         """Return new instance of configuration.
+ 

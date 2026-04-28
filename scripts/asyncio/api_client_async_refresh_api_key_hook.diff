@@ -1,0 +1,31 @@
+diff --git a/kubernetes_asyncio/client/api_client.py b/kubernetes_asyncio/client/api_client.py
+index 81c12e00..02c9d0f2 100644
+--- a/kubernetes_asyncio/client/api_client.py
++++ b/kubernetes_asyncio/client/api_client.py
+@@ -165,7 +165,7 @@ class ApiClient(object):
+             post_params.extend(self.files_parameters(files))
+
+         # auth setting
+-        self.update_params_for_auth(
++        await self.update_params_for_auth(
+             header_params, query_params, auth_settings,
+             request_auth=_request_auth)
+
+@@ -548,7 +548,7 @@ class ApiClient(object):
+         else:
+             return content_types[0]
+
+-    def update_params_for_auth(self, headers, queries, auth_settings,
++    async def update_params_for_auth(self, headers, queries, auth_settings,
+                                request_auth=None):
+         """Updates header and query params based on authentication setting.
+
+@@ -566,6 +566,6 @@ class ApiClient(object):
+             return
+
+         for auth in auth_settings:
+-            auth_setting = self.configuration.auth_settings().get(auth)
++            auth_setting = (await self.configuration.auth_settings()).get(auth)
+             if auth_setting:
+                 self._apply_auth_params(headers, queries, auth_setting)
+
