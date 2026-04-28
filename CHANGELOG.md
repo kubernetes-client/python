@@ -1,3 +1,9 @@
+# Basic asyncio support
+
+- Basic asyncio with kube config, and in_cluster_config is added.
+
+- Dynamic client, watch, stream, shared informer, leader election are not yet supported in asyncio.
+
 # Breaking Change from upgrading openapi generator to v6.6.0
 
 - Legacy dict(str, str) syntax is no longer supported in ApiClient deserializer. Only modern dict[str, str] syntax is supported.
