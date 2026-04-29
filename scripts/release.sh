@@ -222,9 +222,15 @@ if [[ -n "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
   git add kubernetes/client/api/custom_objects_api.py
   git commit -m "generated client change for custom_objects"
 fi
+
+# Re-generate the asyncio client
+scripts/update-client-asyncio.sh
+
 # Check if there is any API change, then commit
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json
+git add kubernetes_asyncio/docs kubernetes_asyncio/client/api/ kubernetes_asyncio/client/models/ kubernetes_asyncio/swagger.json.unprocessed
 git diff-index --quiet --cached HEAD || git commit -m "generated API change"
+
 # Commit everything else
 git add .
 git commit -m "generated client change"
