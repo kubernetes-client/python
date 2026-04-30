@@ -78,4 +78,15 @@ else
     exit 1
 fi;
 
+# Patching commit for test_informer and test_metrics
+git cherry-pick b5f4b4cc504e7f10956b52de6aa676e22c8952f0
+if [ $? -eq 0 ]
+then
+    echo Successfully patched changes for test_informer and test_metrics
+else
+    echo Failed to patch changes for test_informer and test_metrics
+    git restore --staged .
+    exit 1
+fi;
+
 git commit -m "Apply hotfixes"
