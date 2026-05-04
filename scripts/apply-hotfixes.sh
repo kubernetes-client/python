@@ -54,7 +54,7 @@ fi;
 # Patching commits for Client Context Manager
 # UPDATE: OpenAPI generator v4.3.0 has the context manager as a functionality. Cherry-picking just the tests for completeness.
 # Ref: https://github.com/kubernetes-client/python/pull/1073
-git cherry-pick -n 13dffb897617f87aaaee247095107d7011e002d5
+git cherry-pick -X no-renames -n 13dffb897617f87aaaee247095107d7011e002d5
 if [ $? -eq 0 ]
 then
     echo Succesfully patched changes for Client Context Manager
@@ -74,6 +74,17 @@ then
     echo Successfully patched changes for no_proxy support
 else
     echo Failed to patch changes for no_proxy support
+    git restore --staged .
+    exit 1
+fi;
+
+# Patching commit for test_informer and test_metrics
+git cherry-pick -n b5f4b4cc504e7f10956b52de6aa676e22c8952f0
+if [ $? -eq 0 ]
+then
+    echo Successfully patched changes for test_informer and test_metrics
+else
+    echo Failed to patch changes for test_informer and test_metrics
     git restore --staged .
     exit 1
 fi;
