@@ -6,6 +6,8 @@ import weakref
 import unittest
 
 import kubernetes
+from kubernetes.client.configuration import Configuration
+import urllib3
 
 class TestApiClient(unittest.TestCase):
 
