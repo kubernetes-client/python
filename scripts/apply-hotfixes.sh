@@ -68,7 +68,7 @@ fi;
 # UPDATE: The commit being cherry-picked is updated kubernetes/client/ unless OpenAPI generator v5.3.1 involved (offinical support of no_proxy feature).
 # Ref: https://github.com/kubernetes-client/python/pull/1579/commits/95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc and conversations in the PR.
 # UPDATE: The commit being cherry-picked is updated after upgrading openapi-generator to v6.6.0.
-git cherry-pick -n 95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc d8c380e8bdef99e14c7a0e5a8ee216af370a10d8
+git cherry-pick -n c5939ff3ae82b4cb711208af682f7395297fe751 0d2d174206a743b672dd3181f74932d7c96bed82
 if [ $? -eq 0 ]
 then
     echo Successfully patched changes for no_proxy support
@@ -78,13 +78,13 @@ else
     exit 1
 fi;
 
-# Patching commit for test_informer and test_metrics
-git cherry-pick -n b5f4b4cc504e7f10956b52de6aa676e22c8952f0
+# Patching commit for test_api_client.py, test_informer and test_metrics
+git cherry-pick -n b5f4b4cc504e7f10956b52de6aa676e22c8952f0 d8c380e8bdef99e14c7a0e5a8ee216af370a10d8
 if [ $? -eq 0 ]
 then
-    echo Successfully patched changes for test_informer and test_metrics
+    echo Successfully patched changes for test_api_client.py, test_informer and test_metrics
 else
-    echo Failed to patch changes for test_informer and test_metrics
+    echo Failed to patch changes for test_api_client.py, test_informer and test_metrics
     git restore --staged .
     exit 1
 fi;
