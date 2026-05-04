@@ -5,7 +5,7 @@ RoleRef contains information that points to the role being used
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_group** | **str** | APIGroup is the group for the resource being referenced | 
+**api_group** | **str** | APIGroup is the group for the resource being referenced | [optional] 
 **kind** | **str** | Kind is the type of resource being referenced | 
 **name** | **str** | Name is the name of resource being referenced | 
 

@@ -61,7 +61,7 @@ from kubernetes_asyncio.client.api.resource_v1beta1_api import ResourceV1beta1Ap
 from kubernetes_asyncio.client.api.resource_v1beta2_api import ResourceV1beta2Api
 from kubernetes_asyncio.client.api.scheduling_api import SchedulingApi
 from kubernetes_asyncio.client.api.scheduling_v1_api import SchedulingV1Api
-from kubernetes_asyncio.client.api.scheduling_v1alpha1_api import SchedulingV1alpha1Api
+from kubernetes_asyncio.client.api.scheduling_v1alpha2_api import SchedulingV1alpha2Api
 from kubernetes_asyncio.client.api.storage_api import StorageApi
 from kubernetes_asyncio.client.api.storage_v1_api import StorageV1Api
 from kubernetes_asyncio.client.api.storage_v1beta1_api import StorageV1beta1Api

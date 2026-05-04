@@ -1,6 +1,6 @@
 # V1ResourceClaimTemplate
 
-ResourceClaimTemplate is used to produce ResourceClaim objects.  This is an alpha type and requires enabling the DynamicResourceAllocation feature gate.
+ResourceClaimTemplate is used to produce ResourceClaim objects.
 
 ## Properties
 Name | Type | Description | Notes
