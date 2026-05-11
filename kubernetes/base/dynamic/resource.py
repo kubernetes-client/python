@@ -19,7 +19,7 @@ from functools import partial
 from pprint import pformat
 
 
-class Resource(object):
+class Resource:
     """ Represents an API resource type, containing the information required to build urls for requests """
 
     def __init__(self, prefix=None, group=None, api_version=None, kind=None,
@@ -278,7 +278,7 @@ class Subresource(Resource):
         return d
 
 
-class ResourceInstance(object):
+class ResourceInstance:
     """ A parsed instance of an API resource. It exists solely to
         ease interaction with API objects by allowing attributes to
         be accessed with '.' notation.
@@ -338,14 +338,14 @@ class ResourceInstance(object):
 
     def __getattr__(self, name):
         if not '_ResourceInstance__initialised' in self.__dict__:
-            return super(ResourceInstance, self).__getattr__(name)
+            return super().__getattr__(name)
         return getattr(self.attributes, name)
 
     def __setattr__(self, name, value):
         if not '_ResourceInstance__initialised' in self.__dict__:
-            return super(ResourceInstance, self).__setattr__(name, value)
+            return super().__setattr__(name, value)
         elif name in self.__dict__:
-            return super(ResourceInstance, self).__setattr__(name, value)
+            return super().__setattr__(name, value)
         else:
             self.attributes[name] = value
 
@@ -359,7 +359,7 @@ class ResourceInstance(object):
         return dir(type(self)) + list(self.attributes.__dict__.keys())
 
 
-class ResourceField(object):
+class ResourceField:
     """ A parsed instance of an API resource attribute. It exists
         solely to ease interaction with API objects by allowing
         attributes to be accessed with '.' notation
@@ -389,8 +389,7 @@ class ResourceField(object):
         return dir(type(self)) + list(self.__dict__.keys())
 
     def __iter__(self):
-        for k, v in self.__dict__.items():
-            yield (k, v)
+        yield from self.__dict__.items()
 
     def to_dict(self):
         return self.__serialize(self)

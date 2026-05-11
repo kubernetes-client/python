@@ -19,8 +19,7 @@ Shows the functionality of portforward streaming using an nginx container.
 import select
 import socket
 import time
-
-import six.moves.urllib.request as urllib_request
+from urllib import request as urllib_request
 
 from kubernetes import config
 from kubernetes.client import Configuration

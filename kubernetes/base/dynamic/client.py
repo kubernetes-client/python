@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import six
 import json
 
 from kubernetes import watch
@@ -57,19 +56,15 @@ def meta_request(func):
             raise api_exception(e)
         if serialize_response:
             try:
-                if six.PY2:
-                    return serializer(self, json.loads(resp.data))
                 return serializer(self, json.loads(resp.data.decode('utf8')))
             except ValueError:
-                if six.PY2:
-                    return resp.data
                 return resp.data.decode('utf8')
         return resp
 
     return inner
 
 
-class DynamicClient(object):
+class DynamicClient:
     """ A kubernetes client that dynamically discovers and interacts with
         the kubernetes API
     """
@@ -258,7 +253,7 @@ class DynamicClient(object):
         local_var_files = {}
 
         # Checking Accept header.
-        new_header_params = dict((key.lower(), value) for key, value in header_params.items())
+        new_header_params = {key.lower(): value for key, value in header_params.items()}
         if not 'accept' in new_header_params:
             header_params['Accept'] = self.client.select_header_accept([
                 'application/json',

@@ -34,7 +34,7 @@ def _join_host_port(host, port):
     return template % (host, port)
 
 
-class InClusterConfigLoader(object):
+class InClusterConfigLoader:
     def __init__(self,
                  token_filename,
                  cert_filename,

@@ -19,11 +19,8 @@ import json
 import threading
 from .leaderelectionrecord import LeaderElectionRecord
 import logging
-# if condition to be removed when support for python2 will be removed
-if sys.version_info > (3, 0):
-    from http import HTTPStatus
-else:
-    import httplib
+from http import HTTPStatus
+
 logger = logging.getLogger("leaderelection")
 
 """
@@ -125,7 +122,7 @@ class LeaderElection:
                                                                                   old_election_record.reason))
                     return False
             else:
-                if json.loads(old_election_record.body)['code'] != httplib.NOT_FOUND:
+                if json.loads(old_election_record.body)['code'] != HTTPStatus.NOT_FOUND:
                     logger.info("Error retrieving resource lock {} as {}".format(self.election_config.lock.name,
                                                                                   old_election_record.reason))
                     return False
