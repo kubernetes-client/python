@@ -83,7 +83,7 @@ def iter_resp_lines(resp):
             next_newline = buffer.find(b'\n')
 
 
-class Watch(object):
+class Watch:
 
     def __init__(self, return_type=None):
         self._raw_return_type = return_type

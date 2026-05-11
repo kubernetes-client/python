@@ -22,14 +22,12 @@ import os
 import platform
 import subprocess
 import tempfile
-import time
 from collections import namedtuple
 
 import oauthlib.oauth2
 import urllib3
 import yaml
 from requests_oauthlib import OAuth2Session
-from six import PY3
 
 from kubernetes.client import ApiClient, Configuration
 from kubernetes.config.exec_provider import ExecProvider
@@ -85,7 +83,7 @@ def _is_expired(expiry):
             datetime.datetime.now(tz=UTC))
 
 
-class FileOrData(object):
+class FileOrData:
     """Utility class to read content of obj[%data_key_name] or file's
      content of obj[%file_key_name] and represent it as file or data.
      Note that the data is preferred. The obj[%file_key_name] will be used iff
@@ -151,7 +149,7 @@ class FileOrData(object):
                 self._data, self._temp_file_path, force_recreate=force_rewrite)
 
 
-class CommandTokenSource(object):
+class CommandTokenSource:
     def __init__(self, cmd, args, tokenKey, expiryKey):
         self._cmd = cmd
         self._args = args
@@ -191,7 +189,7 @@ class CommandTokenSource(object):
             expiry=parse_rfc3339(data['credential']['token_expiry']))
 
 
-class KubeConfigLoader(object):
+class KubeConfigLoader:
 
     def __init__(self, config_dict, active_context=None,
                  get_google_credentials=None,
@@ -363,14 +361,9 @@ class KubeConfigLoader(object):
             # https://tools.ietf.org/html/rfc7515#appendix-C
             return
 
-        if PY3:
-            jwt_attributes = json.loads(
-                base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
-            )
-        else:
-            jwt_attributes = json.loads(
-                base64.b64decode(parts[1] + padding)
-            )
+        jwt_attributes = json.loads(
+            base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
+        )
 
         expire = jwt_attributes.get('exp')
 
@@ -392,14 +385,9 @@ class KubeConfigLoader(object):
         if 'idp-certificate-authority-data' in provider['config']:
             ca_cert = tempfile.NamedTemporaryFile(delete=True)
 
-            if PY3:
-                cert = base64.b64decode(
-                    provider['config']['idp-certificate-authority-data']
-                ).decode('utf-8')
-            else:
-                cert = base64.b64decode(
-                    provider['config']['idp-certificate-authority-data'] + "=="
-                )
+            cert = base64.b64decode(
+                provider['config']['idp-certificate-authority-data']
+            ).decode('utf-8')
 
             with open(ca_cert.name, 'w') as fh:
                 fh.write(cert)
@@ -565,7 +553,7 @@ class KubeConfigLoader(object):
         return self._current_context.value
 
 
-class ConfigNode(object):
+class ConfigNode:
     """Remembers each config key's path and construct a relevant exception
     message in case of missing keys. The assumption is all access keys are
     present in a well-formed kube-config."""
