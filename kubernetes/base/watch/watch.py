@@ -93,6 +93,21 @@ class Watch(object):
 
     def stop(self):
         self._stop = True
+        if hasattr(self, '_resp') and self._resp:
+            import socket
+            try:
+                # Python SSL/socket GIL Workaround: Force-shutdown the raw socket under HTTP/1.1 
+                # to immediately unblock the background thread blocked in CPython's ssl.read() recv_into
+                # call. This avoids deadlock where close() hangs waiting for SSL socket locks held by 
+                # the blocked read call. The actual response/connection closing is handled in the finally 
+                # block when the stream loop exits.
+                conn = getattr(self._resp, 'connection', None)
+                sock = getattr(conn, 'sock', None) if conn else None
+                if sock:
+                    sock.shutdown(socket.SHUT_RDWR)
+            except Exception:
+                pass
+
 
     def get_return_type(self, func):
         if self._raw_return_type:
@@ -189,6 +204,7 @@ class Watch(object):
         deserialize = kwargs.pop('deserialize', True)
         while True:
             resp = func(*args, **kwargs)
+            self._resp = resp
             try:
                 for line in iter_resp_lines(resp):
                     # unmarshal when we are receiving events from watch,
@@ -226,6 +242,7 @@ class Watch(object):
             finally:
                 resp.close()
                 resp.release_conn()
+                self._resp = None
                 if self.resource_version is not None:
                     kwargs['resource_version'] = self.resource_version
                 else:

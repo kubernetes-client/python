@@ -13,8 +13,10 @@
 # limitations under the License.
 
 import unittest
+from unittest.mock import MagicMock, patch
 
-from .ws_client import get_websocket_url
+from . import ws_client as ws_client_module
+from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL
 from .ws_client import websocket_proxycare
 from kubernetes.client.configuration import Configuration
 import os
@@ -22,6 +24,7 @@ import socket
 import threading
 import pytest
 from kubernetes import stream, client, config
+import websocket
 
 try:
     import urllib3
@@ -122,6 +125,224 @@ class WSClientTest(unittest.TestCase):
             assert dictval(connect_opts, 'http_proxy_port') == expect_port
             assert dictval(connect_opts, 'http_proxy_auth') == expect_auth
             assert dictval(connect_opts, 'http_no_proxy') == expect_noproxy
+
+
+class WSClientProtocolTest(unittest.TestCase):
+    """Tests for WSClient V5 protocol handling"""
+
+    def setUp(self):
+        # Mock configuration to avoid real connections in WSClient.__init__
+        self.config_mock = MagicMock()
+        self.config_mock.assert_hostname = False
+        self.config_mock.api_key = {}
+        self.config_mock.proxy = None
+        self.config_mock.ssl_ca_cert = None
+        self.config_mock.cert_file = None
+        self.config_mock.key_file = None
+        self.config_mock.verify_ssl = True
+
+    def test_create_websocket_header(self):
+        """Verify sec-websocket-protocol header requests v5 first"""
+        # Patch WebSocket class in the module
+        with patch.object(ws_client_module, 'WebSocket', autospec=True) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+
+            WSClient(self.config_mock, "ws://test", headers=None, capture_all=True)
+
+            mock_ws.connect.assert_called_once()
+            call_args = mock_ws.connect.call_args
+            # connect(url, **options)
+            # check kwargs for 'header'
+            kwargs = call_args[1]
+            self.assertIn('header', kwargs)
+            expected_header = f"sec-websocket-protocol: {V5_CHANNEL_PROTOCOL},{V4_CHANNEL_PROTOCOL}"
+            self.assertIn(expected_header, kwargs['header'])
+
+    def test_close_channel_v5(self):
+        """Verify close_channel sends correct frame when v5 is negotiated"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True)
+            client.close_channel(0)
+
+            mock_ws.send.assert_called_with(bytes([CLOSE_CHANNEL, STDIN_CHANNEL]), opcode=websocket.ABNF.OPCODE_BINARY)
+
+    def test_close_channel_v4(self):
+        """Verify close_channel does nothing when v4 is negotiated"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True)
+            client.close_channel(0)
+
+            mock_ws.send.assert_not_called()
+
+    def test_update_receives_close_v5(self):
+        """Verify update processes close signal when v5 is negotiated"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create, \
+            patch('select.select') as mock_select:
+
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.sock.fileno.return_value = 10
+
+            # Setup frame with close signal for channel 0
+            frame = MagicMock()
+            frame.data = bytes([CLOSE_CHANNEL, STDIN_CHANNEL])
+            mock_ws.recv_data_frame.return_value = (websocket.ABNF.OPCODE_BINARY, frame)
+
+            mock_create.return_value = mock_ws
+            # Make select return ready
+            mock_select.return_value = ([mock_ws.sock], [], [])
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True)
+            client.update(timeout=0)
+
+            self.assertIn(0, client._closed_channels)
+
+    def test_update_ignores_close_signal_v4(self):
+        """Verify update treats 0xFF as regular data (or ignores signal interpretation) when v4"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create, \
+            patch('select.select') as mock_select:
+
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.sock.fileno.return_value = 10
+
+            # Setup frame that looks like close signal but should be treated as data
+            frame = MagicMock()
+            frame.data = bytes([CLOSE_CHANNEL, STDIN_CHANNEL])
+            mock_ws.recv_data_frame.return_value = (websocket.ABNF.OPCODE_BINARY, frame)
+
+            mock_create.return_value = mock_ws
+            mock_select.return_value = ([mock_ws.sock], [], [])
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=True) # binary=True to avoid decode errors
+            client.update(timeout=0)
+
+            # Should NOT be in closed channels
+            self.assertNotIn(0, client._closed_channels)
+            # Should be in data channels (channel 255 with data \x00)
+            # Code: channel = data[0] (255), data = data[1:] (\x00)
+            # if channel (255) not in _channels...
+            self.assertIn(255, client._channels)
+            self.assertEqual(client._channels[255], b'\x00')
+
+    def test_readline_channel_closed_with_leftover_data(self):
+        """Verify readline_channel flushes remaining buffer when channel is closed"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=False)
+
+            # Simulate some data in the channel buffer, and then close it
+            client._channels[1] = "hello"
+            client._closed_channels.add(1)
+
+            # First call to readline should flush "hello" even though there is no newline
+            line1 = client.readline_channel(1)
+            self.assertEqual(line1, "hello")
+
+            # Subsequent call should return empty string
+            line2 = client.readline_channel(1)
+            self.assertEqual(line2, "")
+
+    def test_readline_channel_closed_with_leftover_data_binary(self):
+        """Verify readline_channel flushes remaining buffer when channel is closed in binary mode"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=True)
+
+            # Simulate some bytes in the channel buffer, and then close it
+            client._channels[1] = b"hello-binary"
+            client._closed_channels.add(1)
+
+            # First call to readline should flush leftover bytes
+            line1 = client.readline_channel(1)
+            self.assertEqual(line1, b"hello-binary")
+
+            # Subsequent call should return empty bytes
+            line2 = client.readline_channel(1)
+            self.assertEqual(line2, b"")
+
+    def test_read_channel_closed_with_leftover_data(self):
+        """Verify read_channel drains leftover data and then short-circuits on closed channel"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.sock.fileno.return_value = 10
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=False)
+
+            # Simulate leftover data and closed channel
+            client._channels[1] = "hello"
+            client._closed_channels.add(1)
+
+            # First call should drain data
+            data1 = client.read_channel(1)
+            self.assertEqual(data1, "hello")
+
+            # Subsequent call should short-circuit and return empty string
+            # Patch `update` to assert it is NOT called (short-circuit)
+            with patch.object(client, 'update') as mock_update:
+                data2 = client.read_channel(1)
+                self.assertEqual(data2, "")
+                mock_update.assert_not_called()
+
+    def test_peek_channel_closed_with_leftover_data(self):
+        """Verify peek_channel allows peeking leftover data and then short-circuits after draining"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create, \
+             patch('select.poll') as mock_poll:
+            mock_poll.return_value.poll.return_value = []
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.sock.fileno.return_value = 10
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=False)
+
+            # Simulate leftover data and closed channel
+            client._channels[1] = "hello"
+            client._closed_channels.add(1)
+
+            # First peek should return data without draining
+            data1 = client.peek_channel(1)
+            self.assertEqual(data1, "hello")
+
+            # Second peek should still return data
+            data2 = client.peek_channel(1)
+            self.assertEqual(data2, "hello")
+
+            # Drain it
+            client.read_channel(1)
+
+            # Now peek should short-circuit and return empty string
+            # Patch `update` to assert it is NOT called (short-circuit)
+            with patch.object(client, 'update') as mock_update:
+                data3 = client.peek_channel(1)
+                self.assertEqual(data3, "")
+                mock_update.assert_not_called()
+
+
 
 @pytest.fixture(scope="module")
 def dummy_proxy():

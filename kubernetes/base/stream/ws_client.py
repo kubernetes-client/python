@@ -39,6 +39,10 @@ STDOUT_CHANNEL = 1
 STDERR_CHANNEL = 2
 ERROR_CHANNEL = 3
 RESIZE_CHANNEL = 4
+CLOSE_CHANNEL = 255
+
+V4_CHANNEL_PROTOCOL = "v4.channel.k8s.io"
+V5_CHANNEL_PROTOCOL = "v5.channel.k8s.io"
 
 class _IgnoredIO:
     def write(self, _x):
@@ -59,6 +63,8 @@ class WSClient:
         """
         self._connected = False
         self._channels = {}
+        self._closed_channels = set()
+        self.subprotocol = None
         self.binary = binary
         self.newline = '\n' if not self.binary else b'\n'
         if capture_all:
@@ -66,19 +72,31 @@ class WSClient:
         else:
             self._all = _IgnoredIO()
         self.sock = create_websocket(configuration, url, headers)
+        self.subprotocol = getattr(self.sock, 'subprotocol', None)
+        if not self.subprotocol and self.sock:
+            headers_dict = self.sock.getheaders()
+            if headers_dict:
+                for k, v in headers_dict.items():
+                    if k.lower() == 'sec-websocket-protocol':
+                        self.subprotocol = v
+                        break
         self._connected = True
         self._returncode = None
 
     def peek_channel(self, channel, timeout=0):
         """Peek a channel and return part of the input,
         empty string otherwise."""
+        if channel in self._closed_channels and channel not in self._channels:
+            return b"" if self.binary else ""
         self.update(timeout=timeout)
         if channel in self._channels:
             return self._channels[channel]
-        return ""
+        return b"" if self.binary else ""
 
     def read_channel(self, channel, timeout=0):
         """Read data from a channel."""
+        if channel in self._closed_channels and channel not in self._channels:
+            return b"" if self.binary else ""
         if channel not in self._channels:
             ret = self.peek_channel(channel, timeout)
         else:
@@ -93,6 +111,7 @@ class WSClient:
             timeout = float("inf")
         start = time.time()
         while self.is_open() and time.time() - start < timeout:
+            # Always try to drain the channel first
             if channel in self._channels:
                 data = self._channels[channel]
                 if self.newline in data:
@@ -104,6 +123,14 @@ class WSClient:
                     else:
                         del self._channels[channel]
                     return ret
+
+            if channel in self._closed_channels:
+                if channel in self._channels:
+                    ret = self._channels[channel]
+                    del self._channels[channel]
+                    return ret
+                return b"" if self.binary else ""
+
             self.update(timeout=(timeout - time.time() + start))
 
     def write_channel(self, channel, data):
@@ -118,6 +145,14 @@ class WSClient:
 
         payload = channel_prefix + data
         self.sock.send(payload, opcode=opcode)
+
+    def close_channel(self, channel):
+        """Close a channel (v5 protocol only)."""
+        if self.subprotocol != V5_CHANNEL_PROTOCOL:
+            return
+        data = bytes([CLOSE_CHANNEL, channel])
+        self.sock.send(data, opcode=ABNF.OPCODE_BINARY)
+        self._closed_channels.add(channel)
 
     def peek_stdout(self, timeout=0):
         """Same as peek_channel with channel=1."""
@@ -200,13 +235,24 @@ class WSClient:
                 return
             elif op_code == ABNF.OPCODE_BINARY or op_code == ABNF.OPCODE_TEXT:
                 data = frame.data
-                if six.PY3 and not self.binary:
-                    data = data.decode("utf-8", "replace")
-                if len(data) > 1:
+                if len(data) > 0:
+                    # Parse channel from raw bytes to support v5 CLOSE signal AND avoid charset issues
                     channel = data[0]
-                    if six.PY3 and not self.binary:
-                        channel = ord(channel)
+                    # In Py3, iterating bytes gives int, but indexing bytes gives int.
+                    # websocket-client frame.data might be bytes.
+
+                    if channel == CLOSE_CHANNEL and self.subprotocol == V5_CHANNEL_PROTOCOL: # v5 CLOSE
+                         if len(data) > 1:
+                             # data[1] is already int in Py3 bytes
+                             close_chan = data[1]
+                             self._closed_channels.add(close_chan)
+                         return
+
                     data = data[1:]
+                    # Decode data if expected text
+                    if not self.binary:
+                        data = data.decode("utf-8", "replace")
+
                     if data:
                         if channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
                             # keeping all messages in the order they received
@@ -476,7 +522,7 @@ def create_websocket(configuration, url, headers=None):
         header.append("sec-websocket-protocol: %s" %
                       headers['sec-websocket-protocol'])
     else:
-        header.append("sec-websocket-protocol: v4.channel.k8s.io")
+        header.append("sec-websocket-protocol: %s,%s" % (V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL))
 
     if url.startswith('wss://') and configuration.verify_ssl:
         ssl_opts = {

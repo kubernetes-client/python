@@ -24,7 +24,7 @@ jobs:
         cluster_name: kubernetes-python-e2e-master-${{ matrix.python-version }}
         # The kind version to be used to spin the cluster up
         # this needs to be updated whenever a new Kind version is released
-        version: v0.17.0
+        version: v0.31.0
         # Update the config here whenever a new client snapshot is performed
         # This would eventually point to cluster with the latest Kubernetes version
         # as we sync with Kubernetes upstream
