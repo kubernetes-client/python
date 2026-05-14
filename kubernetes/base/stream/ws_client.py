@@ -284,12 +284,15 @@ class WSClient:
         else:
             if self._returncode is None:
                 err = self.read_channel(ERROR_CHANNEL)
+                if not err:
+                    return None
                 err = yaml.safe_load(err)
-                if err['status'] == "Success":
+                if err and err.get('status') == 'Success':
                     self._returncode = 0
-                else:
-                    self._returncode = int(err['details']['causes'][0]['message'])
-            return self._returncode
+                elif err and err.get('status') == 'Failure':
+                    self._returncode = int(
+                        err['details']['causes'][0]['message']
+                    )
 
     def close(self, **kwargs):
         """
