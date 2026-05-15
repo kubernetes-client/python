@@ -25,7 +25,6 @@ from collections import namedtuple
 
 from unittest import mock
 import yaml
-from six import PY3, next
 
 from kubernetes.client import Configuration
 
@@ -300,7 +299,7 @@ class TestConfigNode(BaseTestCase):
     ]}
 
     def setUp(self):
-        super(TestConfigNode, self).setUp()
+        super().setUp()
         self.node = ConfigNode("test_obj", self.test_obj)
 
     def test_normal_map_array_operations(self):
@@ -1274,12 +1273,8 @@ class TestKubeConfigLoader(BaseTestCase):
             config_file=config_file)
         self.assertDictEqual(self.TEST_KUBE_CONFIG['contexts'][0],
                              active_context)
-        if PY3:
-            self.assertCountEqual(self.TEST_KUBE_CONFIG['contexts'],
-                                  contexts)
-        else:
-            self.assertItemsEqual(self.TEST_KUBE_CONFIG['contexts'],
-                                  contexts)
+        self.assertCountEqual(self.TEST_KUBE_CONFIG['contexts'],
+                              contexts)
 
     def test_new_client_from_config(self):
         config_file = self._create_temp_file(

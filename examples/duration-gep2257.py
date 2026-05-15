@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# -*- coding:utf-8 -*-
 
 """
 This example uses kubernetes.utils.duration to parse and display

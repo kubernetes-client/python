@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import print_function
 
 import argparse
 import datetime
@@ -60,7 +59,7 @@ def get_refs():
             args.boilerplate_dir, "boilerplate.*.txt")):
         extension = os.path.basename(path).split(".")[1]
 
-        ref_file = open(path, 'r')
+        ref_file = open(path)
         ref = ref_file.read().splitlines()
         ref_file.close()
         refs[extension] = ref
@@ -70,7 +69,7 @@ def get_refs():
 
 def file_passes(filename, refs, regexs):
     try:
-        f = open(filename, 'r')
+        f = open(filename)
     except Exception as exc:
         print("Unable to open %s: %s" % (filename, exc), file=verbose_out)
         return False
@@ -172,7 +171,7 @@ def get_files(extensions):
 
 def get_dates():
     years = datetime.datetime.now().year
-    return '(%s)' % '|'.join((str(year) for year in range(2014, years+1)))
+    return '(%s)' % '|'.join(str(year) for year in range(2014, years+1))
 
 
 def get_regexs():

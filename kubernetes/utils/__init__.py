@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
 
 from .create_from_yaml import (FailToCreateError, create_from_dict,
                                create_from_yaml, create_from_directory)

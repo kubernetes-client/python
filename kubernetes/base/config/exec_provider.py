@@ -19,7 +19,7 @@ import sys
 from .config_exception import ConfigException
 
 
-class ExecProvider(object):
+class ExecProvider:
     """
     Implementation of the proposal for out-of-tree client
     authentication providers as described here --

@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import http
 import json
 import pydoc
-import sys
 
 from kubernetes import client
 
@@ -28,14 +28,7 @@ PYDOC_FOLLOW_PARAM = ":param bool follow:"
 # provide return_type to Watch class's __init__.
 TYPE_LIST_SUFFIX = "List"
 
-
-PY2 = sys.version_info[0] == 2
-if PY2:
-    import httplib
-    HTTP_STATUS_GONE = httplib.GONE
-else:
-    import http
-    HTTP_STATUS_GONE = http.HTTPStatus.GONE
+HTTP_STATUS_GONE = http.HTTPStatus.GONE
 
 
 class SimpleNamespace:
@@ -83,7 +76,7 @@ def iter_resp_lines(resp):
             next_newline = buffer.find(b'\n')
 
 
-class Watch(object):
+class Watch:
 
     def __init__(self, return_type=None):
         self._raw_return_type = return_type
