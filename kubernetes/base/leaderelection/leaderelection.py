@@ -25,7 +25,7 @@ logger = logging.getLogger("leaderelection")
 
 """
 This package implements leader election using an annotation in a Kubernetes object.
-The onstarted_leading function is run in a thread and when it returns, if it does 
+The onstarted_leading function is run in a thread and when it returns, if it does
 it might not be safe to run it again in a process.
 
 At first all candidates are considered followers. The one to create a lock or update
@@ -115,17 +115,13 @@ class LeaderElection:
 
         # A lock is not created with that name, try to create one
         if not lock_status:
-            # To be removed when support for python2 will be removed
-            if sys.version_info > (3, 0):
-                if json.loads(old_election_record.body)['code'] != HTTPStatus.NOT_FOUND:
-                    logger.info("Error retrieving resource lock {} as {}".format(self.election_config.lock.name,
-                                                                                  old_election_record.reason))
-                    return False
-            else:
-                if json.loads(old_election_record.body)['code'] != HTTPStatus.NOT_FOUND:
-                    logger.info("Error retrieving resource lock {} as {}".format(self.election_config.lock.name,
-                                                                                  old_election_record.reason))
-                    return False
+            if json.loads(old_election_record.body)[
+                    'code'] != HTTPStatus.NOT_FOUND:
+                logger.info(
+                    "Error retrieving resource lock {} as {}".format(
+                        self.election_config.lock.name,
+                        old_election_record.reason))
+                return False
 
             logger.info("{} is trying to create a lock".format(leader_election_record.holder_identity))
             create_status = self.election_config.lock.create(name=self.election_config.lock.name,
