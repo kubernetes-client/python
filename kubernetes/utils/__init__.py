@@ -20,3 +20,10 @@ from .quantity import parse_quantity
 from .duration import parse_duration
 from .metrics import (get_nodes_metrics, get_pods_metrics,
                       get_pods_metrics_in_all_namespaces)
+from .resource_quota import (
+    ResourceChangeKind,
+    ResourceDiff,
+    get_resource_list_diff,
+    resource_quotas_equal,
+    compare_resource_quotas,
+)
