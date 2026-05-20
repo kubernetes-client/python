@@ -1,3 +1,7 @@
+# v36.0.0
+
+Kubernetes API Version: v1.36.1
+
 # v36.0.0b1
 
 Kubernetes API Version: v1.36.1
