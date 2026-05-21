@@ -24,10 +24,10 @@ import tempfile
 import six
 from six.moves.urllib.parse import quote
 
-from kubernetes_asyncio.client.configuration import Configuration
-import kubernetes_asyncio.client.models
-from kubernetes_asyncio.client import rest
-from kubernetes_asyncio.client.exceptions import ApiValueError, ApiException
+from .configuration import Configuration
+from . import models
+from . import rest
+from .exceptions import ApiValueError, ApiException
 
 
 class ApiClient(object):
@@ -313,7 +313,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(kubernetes_asyncio.client.models, klass)
+                klass = getattr(models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

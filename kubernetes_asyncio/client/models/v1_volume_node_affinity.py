@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import six
 
-from kubernetes_asyncio.client.configuration import Configuration
+from ..configuration import Configuration
 
 
 class V1VolumeNodeAffinity(object):

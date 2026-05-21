@@ -53,7 +53,7 @@ import asyncio
 import sys
 import traceback
 
-from kubernetes_asyncio import client, config
+from kubernetes.aio import client, config
 
 
 async def main():

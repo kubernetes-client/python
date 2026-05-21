@@ -20,7 +20,7 @@ import aiohttp
 # python 2 and python 3 compatibility library
 from six.moves.urllib.parse import urlencode
 
-from kubernetes_asyncio.client.exceptions import ApiException, ApiValueError
+from .exceptions import ApiException, ApiValueError
 
 logger = logging.getLogger(__name__)
 

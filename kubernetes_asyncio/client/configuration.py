@@ -20,7 +20,7 @@ import urllib3
 
 import six
 from six.moves import http_client as httplib
-from kubernetes_asyncio.client.exceptions import ApiValueError
+from .exceptions import ApiValueError
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {

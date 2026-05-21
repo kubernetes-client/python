@@ -26,7 +26,7 @@ import tempfile
 
 import yaml
 
-from kubernetes_asyncio.client import ApiClient, Configuration
+from ..client import ApiClient, Configuration
 
 from .config_exception import ConfigException
 from .dateutil import UTC, parse_rfc3339

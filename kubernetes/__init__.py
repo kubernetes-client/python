@@ -24,3 +24,7 @@ from . import stream
 from . import utils
 from . import leaderelection
 from . import informer
+try:
+    from . import aio
+except ImportError:
+    pass

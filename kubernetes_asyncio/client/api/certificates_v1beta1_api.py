@@ -17,8 +17,8 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from kubernetes_asyncio.client.api_client import ApiClient
-from kubernetes_asyncio.client.exceptions import (  # noqa: F401
+from ..api_client import ApiClient
+from ..exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )
