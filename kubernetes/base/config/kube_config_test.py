@@ -369,7 +369,6 @@ class FakeConfig:
         # Provided by the OpenAPI-generated Configuration class
         self.refresh_api_key_hook = None
         if token:
-            self.api_key['authorization'] = token
             self.api_key['BearerToken'] = token
 
         self.__dict__.update(kwargs)
@@ -906,7 +905,7 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertIsNotNone(fake_config.refresh_api_key_hook)
         self.assertEqual(TEST_HOST, fake_config.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
-                         fake_config.api_key['authorization'])
+                         fake_config.api_key['BearerToken'])
 
     def test_load_gcp_token_no_refresh(self):
         loader = KubeConfigLoader(
@@ -1284,14 +1283,14 @@ class TestKubeConfigLoader(BaseTestCase):
             config_file=config_file, context="simple_token")
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
-                         client.configuration.api_key['authorization'])
+                         client.configuration.api_key['BearerToken'])
 
     def test_new_client_from_config_dict(self):
         client = new_client_from_config_dict(
             config_dict=self.TEST_KUBE_CONFIG, context="simple_token")
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
-                         client.configuration.api_key['authorization'])
+                         client.configuration.api_key['BearerToken'])
 
     def test_no_users_section(self):
         expected = FakeConfig(host=TEST_HOST)
@@ -1318,7 +1317,6 @@ class TestKubeConfigLoader(BaseTestCase):
             "token": token
         }
         expected = FakeConfig(host=TEST_HOST, api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token,
                               "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         KubeConfigLoader(
@@ -1349,13 +1347,13 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="exec_cred_user").load_and_set(fake_config)
         # The kube config should use the first token returned from the
         # exec provider.
-        self.assertEqual(fake_config.api_key["authorization"],
+        self.assertEqual(fake_config.api_key["BearerToken"],
                          BEARER_TOKEN_FORMAT % expired_token)
         # Should now be populated with a method to refresh expired tokens.
         self.assertIsNotNone(fake_config.refresh_api_key_hook)
         # Refresh the token; the kube config should be updated.
         fake_config.refresh_api_key_hook(fake_config)
-        self.assertEqual(fake_config.api_key["authorization"],
+        self.assertEqual(fake_config.api_key["BearerToken"],
                          BEARER_TOKEN_FORMAT % current_token)
 
     @mock.patch('kubernetes.config.kube_config.ExecProvider.run')
@@ -1397,7 +1395,6 @@ class TestKubeConfigLoader(BaseTestCase):
         return_value = A(token, parse_rfc3339(datetime.datetime.now()))
         CommandTokenSource.token = mock.Mock(return_value=return_value)
         expected = FakeConfig(api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token,
                               "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         KubeConfigLoader(
@@ -1411,7 +1408,6 @@ class TestKubeConfigLoader(BaseTestCase):
         return_value = A(token, parse_rfc3339(datetime.datetime.now()))
         CommandTokenSource.token = mock.Mock(return_value=return_value)
         expected = FakeConfig(api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token,
                               "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         self.expect_exception(lambda: KubeConfigLoader(
@@ -1426,7 +1422,6 @@ class TestKubeConfigLoader(BaseTestCase):
         return_value = A(token, parse_rfc3339(datetime.datetime.now()))
         CommandTokenSource.token = mock.Mock(return_value=return_value)
         expected = FakeConfig(api_key={
-                              "authorization": BEARER_TOKEN_FORMAT % token,
                               "BearerToken": BEARER_TOKEN_FORMAT % token})
         actual = FakeConfig()
         self.expect_exception(lambda: KubeConfigLoader(
@@ -1728,7 +1723,7 @@ class TestKubeConfigMerger(BaseTestCase):
             config_file=kubeconfigs, context="simple_token")
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
-                         client.configuration.api_key['authorization'])
+                         client.configuration.api_key['BearerToken'])
 
     def test_merge_with_context_in_different_file(self):
         kubeconfigs = self._create_multi_config(self.TEST_KUBE_CONFIG_SET2)
@@ -1744,7 +1739,7 @@ class TestKubeConfigMerger(BaseTestCase):
         self.assertEqual(active_context, expected_contexts[0])
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
-                         client.configuration.api_key['authorization'])
+                         client.configuration.api_key['BearerToken'])
 
     def test_save_changes(self):
         kubeconfigs = self._create_multi_config(self.TEST_KUBE_CONFIG_SET1)

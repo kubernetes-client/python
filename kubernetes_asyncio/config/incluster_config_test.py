@@ -91,7 +91,7 @@ class InClusterConfigTest(unittest.TestCase):
         loader.load_and_set(config)
 
         self.assertEqual('bearer ' + _TEST_TOKEN,
-                         await config.get_api_key_with_prefix('authorization'))
+                         await config.get_api_key_with_prefix('BearerToken'))
         self.assertEqual('bearer ' + _TEST_TOKEN, loader.token)
         self.assertIsNotNone(loader.token_expires_at)
 
@@ -100,11 +100,11 @@ class InClusterConfigTest(unittest.TestCase):
         loader._token_filename = self._create_file_with_temp_content(
             _TEST_NEW_TOKEN)
         self.assertEqual('bearer ' + _TEST_TOKEN,
-                         await config.get_api_key_with_prefix('authorization'))
+                         await config.get_api_key_with_prefix('BearerToken'))
 
         loader.token_expires_at = datetime.datetime.now()
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN,
-                         await config.get_api_key_with_prefix('authorization'))
+                         await config.get_api_key_with_prefix('BearerToken'))
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN, loader.token)
         self.assertGreater(loader.token_expires_at, old_token_expires_at)
 
