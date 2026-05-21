@@ -89,6 +89,7 @@ class InClusterConfigLoader:
         client_configuration.ssl_ca_cert = self.ssl_ca_cert
         if self.token is not None:
             client_configuration.api_key['authorization'] = self.token
+            client_configuration.api_key['BearerToken'] = self.token
         if not self._try_refresh_token:
             return
 
