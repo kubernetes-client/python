@@ -22,9 +22,9 @@ set -o nounset
 set -o pipefail
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
-CLIENT_ROOT="$(dirname ${SCRIPT_ROOT})/kubernetes_asyncio"
+CLIENT_ROOT="$(dirname ${SCRIPT_ROOT})/kubernetes/aio"
 CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
-PACKAGE_NAME=$(python "${SCRIPT_ROOT}/constants.py" PACKAGE_NAME)_asyncio
+PACKAGE_NAME=$(python "${SCRIPT_ROOT}/constants.py" PACKAGE_NAME).aio
 DEVELOPMENT_STATUS=$(python "${SCRIPT_ROOT}/constants.py" DEVELOPMENT_STATUS)
 
 pushd "${SCRIPT_ROOT}" > /dev/null
@@ -55,7 +55,7 @@ else
 fi
 
 echo ">>> Running python generator from the gen repo"
-"${GEN_ROOT}/openapi/python-asyncio.sh" "${CLIENT_ROOT}" "${SETTING_FILE}"
+"${GEN_ROOT}/openapi/python-aio.sh" "${CLIENT_ROOT}" "${SETTING_FILE}"
 mv "${CLIENT_ROOT}/swagger.json" "${SCRIPT_ROOT}/swagger.json"
 
 echo ">>> updating version information..."

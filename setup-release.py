@@ -73,11 +73,11 @@ setup(
               'kubernetes.dynamic', 'kubernetes.leaderelection',
               'kubernetes.leaderelection.resourcelock',
               'kubernetes.informer',
-              'kubernetes_asyncio',
-              'kubernetes_asyncio.config',
-              'kubernetes_asyncio.client',
-              'kubernetes_asyncio.client.api',
-              'kubernetes_asyncio.client.models'
+              'kubernetes.aio',
+              'kubernetes.aio.config',
+              'kubernetes.aio.client',
+              'kubernetes.aio.client.api',
+              'kubernetes.aio.client.models'
               ],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",

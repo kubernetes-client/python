@@ -46,8 +46,8 @@ list all pods using asyncio:
 
 ```python
 import asyncio
-from kubernetes_asyncio import client, config
-from kubernetes_asyncio.client.api_client import ApiClient
+from kubernetes.aio import client, config
+from kubernetes.aio.client.api_client import ApiClient
 
 
 async def main():
