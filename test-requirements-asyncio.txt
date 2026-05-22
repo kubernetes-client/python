@@ -1,6 +1,6 @@
 isort
 pluggy>=1.6.0
-py>=1.4.31
+py>=1.11.0
 pytest
 pytest-cov
 randomize>=0.13
