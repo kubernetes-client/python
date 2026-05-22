@@ -745,7 +745,7 @@ class TestKubeConfigLoader(BaseTestCase):
         await loader._load_authentication()
         self.assertEqual(TEST_OIDC_TOKEN, loader.token)
 
-    @patch('kubernetes_asyncio.config.kube_config.OpenIDRequestor.refresh_token')
+    @patch('config.kube_config.OpenIDRequestor.refresh_token')
     async def test_oidc_with_refresh(self, mock_refresh_token):
         mock_refresh_token.return_value = {
             'id_token': 'abc123',
@@ -759,7 +759,7 @@ class TestKubeConfigLoader(BaseTestCase):
         await loader._load_authentication()
         self.assertEqual('Bearer abc123', loader.token)
 
-    @patch('kubernetes_asyncio.config.kube_config.OpenIDRequestor.refresh_token')
+    @patch('config.kube_config.OpenIDRequestor.refresh_token')
     async def test_oidc_with_refresh_no_idp_cert_data(self, mock_refresh_token):
         mock_refresh_token.return_value = {
             'id_token': 'abc123',
@@ -796,7 +796,7 @@ class TestKubeConfigLoader(BaseTestCase):
         with self.assertRaises(ConfigException):
             await loader._refresh_oidc({'config': {}})
 
-    @patch('kubernetes_asyncio.config.kube_config.ExecProvider.run')
+    @patch('config.kube_config.ExecProvider.run')
     async def test_user_exec_auth(self, mock):
         token = "dummy"
         mock.return_value = {
@@ -810,7 +810,7 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="exec_cred_user").load_and_set(actual)
         self.assertEqual(expected, actual)
 
-    @patch('kubernetes_asyncio.config.kube_config.ExecProvider.run')
+    @patch('config.kube_config.ExecProvider.run')
     async def test_user_exec_auth_certificates(self, mock):
         mock.return_value = {
             "clientCertificateData": TEST_CLIENT_CERT,

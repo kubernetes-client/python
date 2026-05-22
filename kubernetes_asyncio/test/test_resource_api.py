@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.resource_api import ResourceApi  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.resource_api import ResourceApi  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestResourceApi(unittest.IsolatedAsyncioTestCase):
     """ResourceApi unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.resource_api.ResourceApi()  # noqa: E501
+        self.api = client.api.resource_api.ResourceApi()  # noqa: E501
 
     def tearDown(self):
         pass

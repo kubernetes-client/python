@@ -41,7 +41,7 @@ class ExecProviderTest(IsolatedAsyncioTestCase):
         }
         """
 
-        process_patch = patch('kubernetes_asyncio.config.exec_provider.asyncio.create_subprocess_exec')
+        process_patch = patch('config.exec_provider.asyncio.create_subprocess_exec')
         self.exec_mock = process_patch.start()
         self.process_mock = self.exec_mock.return_value
         self.process_mock.stdout.read = AsyncMock(return_value=self.output_ok)

@@ -15,13 +15,22 @@ def convert_imports_in_file(filepath):
     
     # If it's a top-level file like api_client.py, depth is 0, so prefix is '.'
     # If it's in client/api/, depth is 2, so prefix is '..'
-    prefix = '.' * depth if depth > 0 else '.'
+    prefix = '.' * (depth + 1)
     
-    # Simple regex to replace absolute imports
-    # from kubernetes_asyncio.client.X import Y -> from ..X import Y
-    new_content = re.sub(r'from kubernetes_asyncio\.client\.', f'from {prefix}.', content)
-    new_content = re.sub(r'from kubernetes_asyncio\.client ', f'from {prefix} ', new_content)
-    new_content = re.sub(r'import kubernetes_asyncio\.client\.(\w+)', r'from ' + prefix + r' import \1', new_content)
+    # 1. from kubernetes_asyncio.X.Y import Z to from ..X.Y import Z
+    new_content = re.sub(r'from kubernetes_asyncio\.(\w+)\.', r'from ' + prefix + r'\1.', content)
+    
+    # 2. from kubernetes_asyncio.X import Y to from ..X import Y
+    new_content = re.sub(r'from kubernetes_asyncio\.(\w+) ', r'from ' + prefix + r'\1 ', new_content)
+    
+    # 3. from kubernetes_asyncio import X to from .. import X
+    new_content = re.sub(r'from kubernetes_asyncio import ', f'from {prefix} import ', new_content)
+    
+    # 4. import kubernetes_asyncio.X to from .. import X
+    new_content = re.sub(r'^import kubernetes_asyncio\.(\w+)$', r'from ' + prefix + r' import \1', new_content, flags=re.MULTILINE)
+
+    # 5. Inline usage: kubernetes_asyncio.X.Y to X.Y
+    new_content = re.sub(r'kubernetes_asyncio\.(\w+)\.', r'\1.', new_content)
     
     if new_content != content:
         with open(filepath, 'w') as f:

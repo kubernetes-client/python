@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestAdmissionregistrationV1beta1Api(unittest.IsolatedAsyncioTestCase):
     """AdmissionregistrationV1beta1Api unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.admissionregistration_v1beta1_api.AdmissionregistrationV1beta1Api()  # noqa: E501
+        self.api = client.api.admissionregistration_v1beta1_api.AdmissionregistrationV1beta1Api()  # noqa: E501
 
     def tearDown(self):
         pass

@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.autoscaling_api import AutoscalingApi  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.autoscaling_api import AutoscalingApi  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestAutoscalingApi(unittest.IsolatedAsyncioTestCase):
     """AutoscalingApi unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.autoscaling_api.AutoscalingApi()  # noqa: E501
+        self.api = client.api.autoscaling_api.AutoscalingApi()  # noqa: E501
 
     def tearDown(self):
         pass

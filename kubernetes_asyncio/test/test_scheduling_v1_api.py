@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.scheduling_v1_api import SchedulingV1Api  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.scheduling_v1_api import SchedulingV1Api  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestSchedulingV1Api(unittest.IsolatedAsyncioTestCase):
     """SchedulingV1Api unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.scheduling_v1_api.SchedulingV1Api()  # noqa: E501
+        self.api = client.api.scheduling_v1_api.SchedulingV1Api()  # noqa: E501
 
     def tearDown(self):
         pass

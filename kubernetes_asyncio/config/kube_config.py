@@ -626,7 +626,7 @@ async def load_kube_config_from_dict(config_dict, context=None,
     :param config_dict: Takes the config file as a dict.
     :param context: set the active context. If is set to None, current_context
         from config file will be used.
-    :param client_configuration: The kubernetes_asyncio.client.Configuration to
+    :param client_configuration: The client.Configuration to
         set configs to.
     :param temp_file_path: directory where temp files are stored
         (default - system temp dir).

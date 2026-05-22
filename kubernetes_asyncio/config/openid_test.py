@@ -37,7 +37,7 @@ def working_client():
     app.router.add_get('/.well-known/openid-configuration', respond_json({'token_endpoint': '/token'}))
     app.router.add_post('/token', respond_json({'id-token': 'id-token-data', 'refresh-token': 'refresh-token-data'}))
 
-    with patch('kubernetes_asyncio.config.openid.aiohttp.ClientSession') as _client_session:
+    with patch('config.openid.aiohttp.ClientSession') as _client_session:
         client = _TestClient(_TestServer(app, loop=loop), loop=loop)
         _client_session.return_value = client
 
@@ -50,7 +50,7 @@ def fail_well_known_client():
     app = web.Application()
     app.router.add_get('/.well-known/openid-configuration', make_responder(web.Response(status=500)))
 
-    with patch('kubernetes_asyncio.config.openid.aiohttp.ClientSession') as _client_session:
+    with patch('config.openid.aiohttp.ClientSession') as _client_session:
         client = _TestClient(_TestServer(app, loop=loop), loop=loop)
         _client_session.return_value = client
         yield client
@@ -63,7 +63,7 @@ def fail_token_request_client():
     app.router.add_get('/.well-known/openid-configuration', respond_json({'token_endpoint': '/token'}))
     app.router.add_post('/token', make_responder(web.Response(status=500)))
 
-    with patch('kubernetes_asyncio.config.openid.aiohttp.ClientSession') as _client_session:
+    with patch('config.openid.aiohttp.ClientSession') as _client_session:
         client = _TestClient(_TestServer(app, loop=loop), loop=loop)
         _client_session.return_value = client
 

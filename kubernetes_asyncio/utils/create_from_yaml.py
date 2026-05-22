@@ -18,7 +18,7 @@ from os import path
 
 import yaml
 
-from kubernetes_asyncio import client
+from . import client
 
 
 async def create_from_yaml(

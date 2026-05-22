@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.apiextensions_v1_api import ApiextensionsV1Api  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.apiextensions_v1_api import ApiextensionsV1Api  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestApiextensionsV1Api(unittest.IsolatedAsyncioTestCase):
     """ApiextensionsV1Api unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.apiextensions_v1_api.ApiextensionsV1Api()  # noqa: E501
+        self.api = client.api.apiextensions_v1_api.ApiextensionsV1Api()  # noqa: E501
 
     def tearDown(self):
         pass

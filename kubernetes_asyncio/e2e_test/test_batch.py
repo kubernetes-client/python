@@ -15,9 +15,9 @@
 import uuid
 from unittest import IsolatedAsyncioTestCase
 
-from . import api_client
-from ..api import batch_v1_api
-from kubernetes_asyncio.e2e_test import base
+from ..client import api_client
+from ..client.api import batch_v1_api
+from ..e2e_test import base
 
 
 class TestClientBatch(IsolatedAsyncioTestCase):

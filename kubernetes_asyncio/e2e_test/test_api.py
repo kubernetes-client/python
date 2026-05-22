@@ -18,11 +18,11 @@ from unittest import IsolatedAsyncioTestCase
 
 import yaml
 
-from kubernetes_asyncio import utils
-from . import api_client
-from ..api import apps_v1_api
-from ..models import v1_delete_options
-from kubernetes_asyncio.e2e_test import base
+from .. import utils
+from ..client import api_client
+from ..client.api import apps_v1_api
+from ..client.models import v1_delete_options
+from ..e2e_test import base
 
 
 class TestClientApi(IsolatedAsyncioTestCase):

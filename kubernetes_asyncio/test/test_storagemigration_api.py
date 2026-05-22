@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.storagemigration_api import StoragemigrationApi  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.storagemigration_api import StoragemigrationApi  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestStoragemigrationApi(unittest.IsolatedAsyncioTestCase):
     """StoragemigrationApi unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.storagemigration_api.StoragemigrationApi()  # noqa: E501
+        self.api = client.api.storagemigration_api.StoragemigrationApi()  # noqa: E501
 
     def tearDown(self):
         pass

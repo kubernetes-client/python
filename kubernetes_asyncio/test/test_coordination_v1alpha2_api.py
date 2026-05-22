@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.coordination_v1alpha2_api import CoordinationV1alpha2Api  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.coordination_v1alpha2_api import CoordinationV1alpha2Api  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestCoordinationV1alpha2Api(unittest.IsolatedAsyncioTestCase):
     """CoordinationV1alpha2Api unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.coordination_v1alpha2_api.CoordinationV1alpha2Api()  # noqa: E501
+        self.api = client.api.coordination_v1alpha2_api.CoordinationV1alpha2Api()  # noqa: E501
 
     def tearDown(self):
         pass

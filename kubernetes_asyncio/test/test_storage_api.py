@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.storage_api import StorageApi  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.storage_api import StorageApi  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestStorageApi(unittest.IsolatedAsyncioTestCase):
     """StorageApi unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.storage_api.StorageApi()  # noqa: E501
+        self.api = client.api.storage_api.StorageApi()  # noqa: E501
 
     def tearDown(self):
         pass

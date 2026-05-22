@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.flowcontrol_apiserver_v1_api import FlowcontrolApiserverV1Api  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.flowcontrol_apiserver_v1_api import FlowcontrolApiserverV1Api  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestFlowcontrolApiserverV1Api(unittest.IsolatedAsyncioTestCase):
     """FlowcontrolApiserverV1Api unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.flowcontrol_apiserver_v1_api.FlowcontrolApiserverV1Api()  # noqa: E501
+        self.api = client.api.flowcontrol_apiserver_v1_api.FlowcontrolApiserverV1Api()  # noqa: E501
 
     def tearDown(self):
         pass

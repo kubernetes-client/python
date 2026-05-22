@@ -14,16 +14,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import kubernetes_asyncio.client
-from ..api.batch_v1_api import BatchV1Api  # noqa: E501
-from ..rest import ApiException
+from .. import client
+from ..client.api.batch_v1_api import BatchV1Api  # noqa: E501
+from ..client.rest import ApiException
 
 
 class TestBatchV1Api(unittest.IsolatedAsyncioTestCase):
     """BatchV1Api unit test stubs"""
 
     async def asyncSetUp(self):
-        self.api = kubernetes_asyncio.client.api.batch_v1_api.BatchV1Api()  # noqa: E501
+        self.api = client.api.batch_v1_api.BatchV1Api()  # noqa: E501
 
     def tearDown(self):
         pass
