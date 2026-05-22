@@ -231,7 +231,10 @@ Kubernetes API Version: v1.36.0
 - The `endpoints` field in discovery.k8s.io/v1 EndpointSlice is now correctly defined as optional in the OpenAPI specification, matching the server's behavior. ([kubernetes/kubernetes#136111](https://github.com/kubernetes/kubernetes/pull/136111), [@aojea](https://github.com/aojea)) [SIG Network]
 - Update API comments to reflect that stable state of Dynamic Resource Allocation ([kubernetes/kubernetes#136441](https://github.com/kubernetes/kubernetes/pull/136441), [@kannon92](https://github.com/kannon92)) [SIG API Machinery]
 
-# Basic asyncio support
+# Basic asyncio support (Experimental)
+
+- Asyncio package is experimental currently, breaking changes may be introduced
+  in future releases.
 
 - Basic asyncio with kube config, and in_cluster_config is added.
 
