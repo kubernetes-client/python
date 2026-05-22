@@ -95,4 +95,7 @@ grep -r make_instance "${CLIENT_ROOT}/test/" | awk '{ gsub(":", ""); print $1}' 
 echo ">>> Fix API tests (https://github.com/aio-libs/aiohttp/issues/8555)"
 find "${CLIENT_ROOT}/test/" -type f -print0 | xargs -0 sed -i -e 's/unittest.TestCase/unittest.IsolatedAsyncioTestCase/g' -e 's/def setUp(self):/async def asyncSetUp(self):/g'
 
+echo ">>> Convert absolute imports to relative imports for kubernetes.aio compatibility..."
+python3 "${SCRIPT_ROOT}/asyncio/convert_to_relative_imports.py"
+
 echo ">>> Done."
