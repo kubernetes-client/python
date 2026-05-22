@@ -228,7 +228,7 @@ scripts/update-client-asyncio.sh
 
 # Check if there is any API change, then commit
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json
-git add kubernetes_asyncio/docs kubernetes_asyncio/client/api/ kubernetes_asyncio/client/models/ kubernetes_asyncio/swagger.json.unprocessed
+git add kubernetes_aio/docs kubernetes_aio/client/api/ kubernetes_aio/client/models/ kubernetes_aio/swagger.json.unprocessed
 git diff-index --quiet --cached HEAD || git commit -m "generated API change"
 
 # Commit everything else

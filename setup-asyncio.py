@@ -17,7 +17,7 @@ from setuptools import setup
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
 CLIENT_VERSION = "36.0.0+snapshot"
-PACKAGE_NAME = "kubernetes_asyncio"
+PACKAGE_NAME = "kubernetes_aio"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
 # To install the library, run the following
@@ -40,17 +40,17 @@ setup(
     author_email="",
     author="Kubernetes",
     license="Apache License Version 2.0",
-    url="https://github.com/kubernetes-client/kubernetes_asyncio",
+    url="https://github.com/kubernetes-client/kubernetes_aio",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
     python_requires=">=3.10",
     tests_require=TESTS_REQUIRES,
     packages=[
-        'kubernetes_asyncio',
-        'kubernetes_asyncio.config',
-        'kubernetes_asyncio.client',
-        'kubernetes_asyncio.client.api',
-        'kubernetes_asyncio.client.models'],
+        'kubernetes_aio',
+        'kubernetes_aio.config',
+        'kubernetes_aio.client',
+        'kubernetes_aio.client.api',
+        'kubernetes_aio.client.models'],
     include_package_data=True,
     long_description="Python asynchronous client for kubernetes http://kubernetes.io/",
     classifiers=[
