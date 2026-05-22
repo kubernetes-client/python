@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__project__ = "kubernetes_asyncio"
+__project__ = "kubernetes_aio"
 # The version is auto-updated. Please do not edit.
 __version__ = "36.0.0+snapshot"
 
-import kubernetes_asyncio.client as client
+import kubernetes_aio.client as client
 
 __all__ = ["client"]
