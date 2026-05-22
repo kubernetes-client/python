@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.autoscaling_v2_api import AutoscalingV2Api  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.autoscaling_v2_api import AutoscalingV2Api  # noqa: E501
+from ..rest import ApiException
 
 
 class TestAutoscalingV2Api(unittest.IsolatedAsyncioTestCase):

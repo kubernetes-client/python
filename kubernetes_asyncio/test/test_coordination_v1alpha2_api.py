@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.coordination_v1alpha2_api import CoordinationV1alpha2Api  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.coordination_v1alpha2_api import CoordinationV1alpha2Api  # noqa: E501
+from ..rest import ApiException
 
 
 class TestCoordinationV1alpha2Api(unittest.IsolatedAsyncioTestCase):

@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.certificates_v1alpha1_api import CertificatesV1alpha1Api  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.certificates_v1alpha1_api import CertificatesV1alpha1Api  # noqa: E501
+from ..rest import ApiException
 
 
 class TestCertificatesV1alpha1Api(unittest.IsolatedAsyncioTestCase):

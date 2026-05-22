@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.apiextensions_api import ApiextensionsApi  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.apiextensions_api import ApiextensionsApi  # noqa: E501
+from ..rest import ApiException
 
 
 class TestApiextensionsApi(unittest.IsolatedAsyncioTestCase):

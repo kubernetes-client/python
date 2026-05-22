@@ -19,9 +19,9 @@ from unittest import IsolatedAsyncioTestCase
 import yaml
 
 from kubernetes_asyncio import utils
-from kubernetes_asyncio.client import api_client
-from kubernetes_asyncio.client.api import apps_v1_api
-from kubernetes_asyncio.client.models import v1_delete_options
+from . import api_client
+from ..api import apps_v1_api
+from ..models import v1_delete_options
 from kubernetes_asyncio.e2e_test import base
 
 

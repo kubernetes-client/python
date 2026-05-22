@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.discovery_v1_api import DiscoveryV1Api  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.discovery_v1_api import DiscoveryV1Api  # noqa: E501
+from ..rest import ApiException
 
 
 class TestDiscoveryV1Api(unittest.IsolatedAsyncioTestCase):

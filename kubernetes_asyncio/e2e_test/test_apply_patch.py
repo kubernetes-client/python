@@ -15,8 +15,8 @@
 import uuid
 from unittest import IsolatedAsyncioTestCase
 
-from kubernetes_asyncio.client import api_client
-from kubernetes_asyncio.client.api import core_v1_api
+from . import api_client
+from ..api import core_v1_api
 from kubernetes_asyncio.e2e_test import base
 
 

@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.rbac_authorization_api import RbacAuthorizationApi  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.rbac_authorization_api import RbacAuthorizationApi  # noqa: E501
+from ..rest import ApiException
 
 
 class TestRbacAuthorizationApi(unittest.IsolatedAsyncioTestCase):

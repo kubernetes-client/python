@@ -15,8 +15,8 @@ from __future__ import absolute_import
 import unittest
 
 import kubernetes_asyncio.client
-from kubernetes_asyncio.client.api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api  # noqa: E501
-from kubernetes_asyncio.client.rest import ApiException
+from ..api.admissionregistration_v1beta1_api import AdmissionregistrationV1beta1Api  # noqa: E501
+from ..rest import ApiException
 
 
 class TestAdmissionregistrationV1beta1Api(unittest.IsolatedAsyncioTestCase):
