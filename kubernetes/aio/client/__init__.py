@@ -14,7 +14,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "36.0.0+snapshot"
+__version__ = "36.0.1"
 
 # import apis into sdk package
 from kubernetes.aio.client.api.well_known_api import WellKnownApi
