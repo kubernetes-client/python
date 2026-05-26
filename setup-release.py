@@ -16,7 +16,7 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "36.0.0"
+CLIENT_VERSION = "36.0.1"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "5 - Production/Stable"
 
@@ -73,11 +73,11 @@ setup(
               'kubernetes.dynamic', 'kubernetes.leaderelection',
               'kubernetes.leaderelection.resourcelock',
               'kubernetes.informer',
-              'kubernetes_asyncio',
-              'kubernetes_asyncio.config',
-              'kubernetes_asyncio.client',
-              'kubernetes_asyncio.client.api',
-              'kubernetes_asyncio.client.models'
+              'kubernetes.aio',
+              'kubernetes.aio.config',
+              'kubernetes.aio.client',
+              'kubernetes.aio.client.api',
+              'kubernetes.aio.client.models'
               ],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",

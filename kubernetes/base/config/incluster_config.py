@@ -34,7 +34,7 @@ def _join_host_port(host, port):
     return template % (host, port)
 
 
-class InClusterConfigLoader(object):
+class InClusterConfigLoader:
     def __init__(self,
                  token_filename,
                  cert_filename,
@@ -88,7 +88,7 @@ class InClusterConfigLoader(object):
         client_configuration.host = self.host
         client_configuration.ssl_ca_cert = self.ssl_ca_cert
         if self.token is not None:
-            client_configuration.api_key['authorization'] = self.token
+            client_configuration.api_key['BearerToken'] = self.token
         if not self._try_refresh_token:
             return
 

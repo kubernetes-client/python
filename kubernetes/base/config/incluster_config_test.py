@@ -91,7 +91,7 @@ class InClusterConfigTest(unittest.TestCase):
         loader.load_and_set(config)
 
         self.assertEqual('bearer ' + _TEST_TOKEN,
-                         config.get_api_key_with_prefix('authorization'))
+                         config.get_api_key_with_prefix('BearerToken'))
         self.assertEqual('bearer ' + _TEST_TOKEN, loader.token)
         self.assertIsNotNone(loader.token_expires_at)
 
@@ -100,13 +100,30 @@ class InClusterConfigTest(unittest.TestCase):
         loader._token_filename = self._create_file_with_temp_content(
             _TEST_NEW_TOKEN)
         self.assertEqual('bearer ' + _TEST_TOKEN,
-                         config.get_api_key_with_prefix('authorization'))
+                         config.get_api_key_with_prefix('BearerToken'))
 
         loader.token_expires_at = datetime.datetime.now()
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN,
-                         config.get_api_key_with_prefix('authorization'))
+                         config.get_api_key_with_prefix('BearerToken'))
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN, loader.token)
         self.assertGreater(loader.token_expires_at, old_token_expires_at)
+
+    def test_load_incluster_sets_request_authorization_header(self):
+        from kubernetes.client import ApiClient
+        cert_filename = self._create_file_with_temp_content(_TEST_CERT)
+        loader = self.get_test_loader(cert_filename=cert_filename)
+        config = Configuration()
+        loader.load_and_set(config)
+
+        api_client = ApiClient(config)
+        headers = {}
+        api_client.update_params_for_auth(headers, [], ['BearerToken'])
+
+        self.assertIn('authorization', headers)
+        self.assertTrue(
+            headers['authorization'].lower().startswith('bearer '),
+            "Expected a Bearer authorization header, got: %r"
+            % headers['authorization'])
 
     def _should_fail_load(self, config_loader, reason):
         try:
