@@ -4,6 +4,7 @@
 import atexit
 import weakref
 import unittest
+from unittest.mock import Mock
 
 import kubernetes
 from kubernetes.client.configuration import Configuration
@@ -53,6 +54,25 @@ class TestApiClient(unittest.TestCase):
         }
         result_nested = client._ApiClient__deserialize(nested_data, 'dict[str, dict[str, str]]')
         self.assertEqual(result_nested, nested_data)
+
+    def test_call_api_decodes_string_response_bytes(self):
+        response = Mock()
+        response.status = 200
+        response.data = b"2026-05-25T07:52:34Z log line\n"
+        response.getheader.return_value = "text/plain; charset=utf-8"
+        response.getheaders.return_value = {}
+
+        client = kubernetes.client.ApiClient()
+        client.request = Mock(return_value=response)
+
+        result = client.call_api(
+            "/api/v1/namespaces/default/pods/test/log",
+            "GET",
+            response_types_map={200: "str"},
+            auth_settings=[],
+            _return_http_data_only=True)
+
+        self.assertEqual("2026-05-25T07:52:34Z log line\n", result)
 
     def test_rest_proxycare(self):
 
