@@ -78,3 +78,45 @@ class TestApiClient(unittest.TestCase):
             # test
             client = kubernetes.client.ApiClient(configuration=config)
             self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )
+
+
+class TestConfigurationAuthSettings(unittest.TestCase):
+    """Regression tests for Configuration.auth_settings() bearer-token lookup.
+
+    Prior to v36.0.0 the generated client stored the bearer token under
+    ``api_key['authorization']`` (e.g. set by ``load_kube_config`` or by
+    user code directly). v36.0.0 switched the lookup to
+    ``api_key['BearerToken']`` without a fallback, which silently dropped
+    the Authorization header from every outgoing request and caused 401
+    Unauthorized against any cluster relying on bearer tokens.
+    See: https://github.com/kubernetes-client/python/issues/2595
+    """
+
+    def _bearer_value(self, config):
+        settings = config.auth_settings()
+        self.assertIn('BearerToken', settings)
+        return settings['BearerToken']['value']
+
+    def test_auth_settings_with_bearer_token_key(self):
+        """The new key 'BearerToken' continues to work."""
+        config = Configuration()
+        config.api_key['BearerToken'] = 'Bearer abc123'
+        self.assertEqual(self._bearer_value(config), 'Bearer abc123')
+
+    def test_auth_settings_with_authorization_key(self):
+        """Legacy key 'authorization' is honored as a fallback."""
+        config = Configuration()
+        config.api_key['authorization'] = 'Bearer abc123'
+        self.assertEqual(self._bearer_value(config), 'Bearer abc123')
+
+    def test_auth_settings_bearer_token_takes_precedence(self):
+        """When both keys are set, 'BearerToken' wins."""
+        config = Configuration()
+        config.api_key['BearerToken'] = 'Bearer new'
+        config.api_key['authorization'] = 'Bearer old'
+        self.assertEqual(self._bearer_value(config), 'Bearer new')
+
+    def test_auth_settings_with_no_token(self):
+        """No api_key entry yields an empty auth dict."""
+        config = Configuration()
+        self.assertEqual(config.auth_settings(), {})

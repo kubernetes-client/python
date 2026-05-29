@@ -406,13 +406,19 @@ conf = client.Configuration(
         :return: The Auth Settings information dict.
         """
         auth = {}
-        if 'BearerToken' in self.api_key:
+        # Backward compatibility: prior to v36.0.0 the bearer token was
+        # stored under the 'authorization' api_key. Continue to honor it
+        # so user code that sets ``config.api_key['authorization']``
+        # directly keeps working with the new 'BearerToken' key the
+        # generated client now looks for.
+        # See: https://github.com/kubernetes-client/python/issues/2595
+        if 'BearerToken' in self.api_key or 'authorization' in self.api_key:
             auth['BearerToken'] = {
                 'type': 'api_key',
                 'in': 'header',
                 'key': 'authorization',
                 'value': self.get_api_key_with_prefix(
-                    'BearerToken',
+                    'BearerToken', alias='authorization',
                 ),
             }
         return auth
