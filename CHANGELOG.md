@@ -1,3 +1,13 @@
+# v36.0.2
+
+Kubernetes API Version: v1.36.1
+
+### Uncategorized
+- Restored backward compatibility for `Configuration.auth_settings()`:
+  the legacy `api_key['authorization']` lookup is honored as a fallback
+  when `api_key['BearerToken']` is not set, fixing 401 Unauthorized
+  regressions seen after upgrading to v36.0.0 (#2595). (#2604, @GK-07)
+
 # v36.0.1
 
 Kubernetes API Version: v1.36.1
