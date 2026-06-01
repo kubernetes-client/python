@@ -260,6 +260,9 @@ Kubernetes API Version: v1.36.0
 
 - Configuration auth uses 'BearerToken' instead of 'authorization' in api_key.
 
+- V1ServiceSpec's external_i_ps has been renamed to external_ips, and
+  cluster_i_ps to cluster_ips.
+
 # v35.0.0
 
 Kubernetes API Version: v1.35.0
