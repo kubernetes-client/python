@@ -19,6 +19,7 @@ from unittest.mock import Mock, call
 
 from kubernetes import client, config
 from kubernetes.client import ApiException
+from kubernetes.client.exceptions import ApiTypeError
 
 from .watch import Watch
 
@@ -213,6 +214,44 @@ class WatchTests(unittest.TestCase):
             count += 1
             # make sure we can stop the watch and the last event with won't be
             # returned
+            if count == 2:
+                w.stop()
+
+        fake_api.read_namespaced_pod_log.assert_called_once_with(
+            _preload_content=False, follow=True)
+        fake_resp.stream.assert_called_once_with(
+            amt=None, decode_content=False)
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
+
+    def test_watch_for_follow_with_split_param_type_docstring(self):
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.stream = Mock(
+            return_value=[
+                'log_line_1\n',
+                'log_line_2\n'])
+
+        def read_pod_log(*args, **kwargs):
+            if 'watch' in kwargs:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument 'watch'"
+                    " to method read_namespaced_pod_log")
+            return fake_resp
+
+        fake_api = Mock()
+        fake_api.read_namespaced_pod_log = Mock(side_effect=read_pod_log)
+        fake_api.read_namespaced_pod_log.__doc__ = (
+            ':param follow: Follow the log stream of the pod. Defaults to false.\n'
+            ':type follow: bool\n'
+            ':rtype: str')
+
+        w = Watch()
+        count = 1
+        for e in w.stream(fake_api.read_namespaced_pod_log):
+            self.assertEqual("log_line_1", e)
+            count += 1
             if count == 2:
                 w.stop()
 

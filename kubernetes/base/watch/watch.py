@@ -19,7 +19,7 @@ import pydoc
 from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":rtype:"
-PYDOC_FOLLOW_PARAM = ":param bool follow:"
+PYDOC_FOLLOW_PARAMS = (":param bool follow:", ":param follow:")
 
 # Removing this suffix from return type name should give us event's object
 # type. e.g., if list_namespaces() returns "NamespaceList" type,
@@ -111,7 +111,8 @@ class Watch:
         return return_type
 
     def get_watch_argument_name(self, func):
-        if PYDOC_FOLLOW_PARAM in pydoc.getdoc(func):
+        doc = pydoc.getdoc(func)
+        if any(param in doc for param in PYDOC_FOLLOW_PARAMS):
             return 'follow'
         else:
             return 'watch'
