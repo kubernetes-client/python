@@ -204,7 +204,8 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.read_namespaced_pod_log = Mock(return_value=fake_resp)
-        fake_api.read_namespaced_pod_log.__doc__ = ':param bool follow:\n:rtype: str'
+        fake_api.read_namespaced_pod_log.__doc__ = (
+            ':param follow:\n:type follow: bool\n:rtype: str')
 
         w = Watch()
         count = 1
