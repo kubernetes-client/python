@@ -757,9 +757,11 @@ class TestUtilsUnitTests(unittest.TestCase):
             "0.3Gi")
 
         # == base 1000 ==
-        self.assertEqual(quantity.format_quantity(Decimal(0.000_000_001), "n"), "1n")
-        self.assertEqual(quantity.format_quantity(Decimal(0.000_001), "u"), "1u")
-        self.assertEqual(quantity.format_quantity(Decimal(0.001), "m"), "1m")
+        # Exact Decimals: float-derived Decimals (e.g. Decimal(0.001)) carry binary
+        # rounding error that the precise scaling surfaces into the output.
+        self.assertEqual(quantity.format_quantity(Decimal("0.000000001"), "n"), "1n")
+        self.assertEqual(quantity.format_quantity(Decimal("0.000001"), "u"), "1u")
+        self.assertEqual(quantity.format_quantity(Decimal("0.001"), "m"), "1m")
         self.assertEqual(quantity.format_quantity(Decimal(1_000), "k"), "1k")
         self.assertEqual(quantity.format_quantity(Decimal(1_000_000), "M"), "1M")
         self.assertEqual(quantity.format_quantity(Decimal(1_000_000_000), "G"), "1G")
@@ -780,4 +782,20 @@ class TestUtilsUnitTests(unittest.TestCase):
                 Decimal(1_000_000 / 3), "k", quantize=Decimal(1000)
             ),
             "333k",
+        )
+
+        # == milli/micro/nano keep full precision in canonical decimal form ==
+        # Regression: these divided by a float-built Decimal and rendered in
+        # scientific notation (e.g. "499.9999999999999895916591441m", "1E+9").
+        self.assertEqual(quantity.format_quantity(Decimal("0.5"), "m"), "500m")
+        self.assertEqual(quantity.format_quantity(Decimal("0.5"), "u"), "500000u")
+        self.assertEqual(quantity.format_quantity(Decimal("0.5"), "n"), "500000000n")
+        self.assertEqual(quantity.format_quantity(Decimal("1"), "m"), "1000m")
+        self.assertEqual(quantity.format_quantity(Decimal("1"), "n"), "1000000000n")
+
+        # == quantize=Decimal(0) is honored, not treated as falsy ==
+        self.assertEqual(quantity.format_quantity(Decimal("0.5006"), "m"), "500.6m")
+        self.assertEqual(
+            quantity.format_quantity(Decimal("0.5006"), "m", quantize=Decimal(0)),
+            "501m",
         )
