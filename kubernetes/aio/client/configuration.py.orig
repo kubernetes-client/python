@@ -432,7 +432,7 @@ conf = client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: release-1.36\n"\
-               "SDK Package Version: 36.0.2".\
+               "SDK Package Version: 36.0.3".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

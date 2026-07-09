@@ -16,9 +16,9 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "36.0.0+snapshot"
+CLIENT_VERSION = "36.0.3"
 PACKAGE_NAME = "kubernetes.aio"
-DEVELOPMENT_STATUS = "3 - Alpha"
+DEVELOPMENT_STATUS = "5 - Production/Stable"
 
 # To install the library, run the following
 #
