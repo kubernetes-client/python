@@ -1,3 +1,13 @@
+# v36.0.3
+
+Kubernetes API Version: v1.36.2
+
+### Bug or Regression
+- Fix Watch.stream selecting watch instead of follow when streaming pod logs.
+- Start the leader election worker thread as a daemon so it does not block process shutdown.
+- Fix readline_channel, readline_stdout and readline_stderr crashing with OverflowError when using the default timeout, and returning None when a timeout expires.
+- Fix format_quantity returning imprecise, non-canonical values for the milli, micro and nano suffixes, and ignoring quantize=Decimal(0).
+
 # v36.0.2
 
 Kubernetes API Version: v1.36.1
