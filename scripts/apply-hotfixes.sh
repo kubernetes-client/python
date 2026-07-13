@@ -89,4 +89,15 @@ else
     exit 1
 fi;
 
+# Patching commit for bearer-token fallback in Configuration.auth_settings
+git cherry-pick -n 5621a4c2cf5cc278e8f45ce759ce44c057f1dbe2
+if [ $? -eq 0 ]
+then
+    echo Successfully patched changes for bearer-token fallback in Configuration.auth_settings
+else
+    echo Failed to patch changes for bearer-token fallback in Configuration.auth_settings
+    git restore --staged .
+    exit 1
+fi;
+
 git commit -m "Apply hotfixes"

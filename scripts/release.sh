@@ -207,6 +207,10 @@ git diff-index --quiet --cached HEAD || git commit -am "update changelog"
 
 # Re-generate the client
 scripts/update-client.sh
+
+# Re-generate the asyncio client
+scripts/update-client-asyncio.sh
+
 # Apply hotfixes
 rm -r kubernetes/test/
 git add .
@@ -222,9 +226,6 @@ if [[ -n "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
   git add kubernetes/client/api/custom_objects_api.py
   git commit -m "generated client change for custom_objects"
 fi
-
-# Re-generate the asyncio client
-scripts/update-client-asyncio.sh
 
 # Check if there is any API change, then commit
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json

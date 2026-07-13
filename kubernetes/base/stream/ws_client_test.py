@@ -342,6 +342,48 @@ class WSClientProtocolTest(unittest.TestCase):
                 self.assertEqual(data3, "")
                 mock_update.assert_not_called()
 
+    def test_update_infinite_timeout_polls_without_overflow(self):
+        """Verify update maps an infinite (default) timeout to a blocking poll instead of overflowing"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create, \
+             patch('select.poll') as mock_poll:
+            mock_poll.return_value.poll.return_value = []
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.sock.fileno.return_value = 10
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True)
+            client.update(timeout=float("inf"))
+
+            mock_poll.return_value.poll.assert_called_once_with(None)
+
+    def test_readline_channel_returns_empty_string_on_expired_timeout(self):
+        """Verify readline_channel returns '' (not None) when a finite timeout expires"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=False)
+            with patch.object(client, 'update'):
+                line = client.readline_channel(1, timeout=0.01)
+            self.assertEqual(line, "")
+
+    def test_readline_channel_returns_empty_bytes_on_expired_timeout(self):
+        """Verify readline_channel returns b'' (not None) when a finite timeout expires in binary mode"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_create.return_value = mock_ws
+
+            client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=True)
+            with patch.object(client, 'update'):
+                line = client.readline_channel(1, timeout=0.01)
+            self.assertEqual(line, b"")
+
 
 
 @pytest.fixture(scope="module")

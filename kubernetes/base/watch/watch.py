@@ -19,7 +19,7 @@ import pydoc
 from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":rtype:"
-PYDOC_FOLLOW_PARAM = ":param bool follow:"
+PYDOC_FOLLOW_PARAM = ":param follow:"
 
 # Removing this suffix from return type name should give us event's object
 # type. e.g., if list_namespaces() returns "NamespaceList" type,

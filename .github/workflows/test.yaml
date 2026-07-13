@@ -13,11 +13,11 @@ jobs:
             use_coverage: 'coverage'
 
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
       with:
         submodules: true
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+      uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
@@ -45,7 +45,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: "matrix.use_coverage"
-      uses: codecov/codecov-action@e79a6962e0d4c0c17b229090214935d2e33f8354
+      uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
       with:
         fail_ci_if_error: false
         verbose: true
