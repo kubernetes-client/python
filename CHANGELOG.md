@@ -1,13 +1,20 @@
 # Breaking Change from upgrading OpenAPI Generator to v7.24.0
 
-The synchronous client now uses the modern Python generator instead of
-`python-legacy`. Existing endpoint names, model names, and wire aliases
-are preserved, but applications may need the following updates:
+Both clients now use the modern Python generator instead of
+`python-legacy`. The asynchronous client uses the generator's `asyncio`
+library and `aiohttp` transport. Existing endpoint names, model names,
+and wire aliases are preserved, but applications may need the following
+updates:
 
 - Synchronous runtime dependencies now require `urllib3>=2.6.3,<3`,
   `pydantic>=2.11`, `lazy-imports>=1,<2`,
-  `typing-extensions>=4.7.1`, and `python-dateutil>=2.8.2`. Python 3.10
-  remains the minimum supported version. Async generation is unchanged.
+  `typing-extensions>=4.7.1`, and `python-dateutil>=2.8.2`.
+- Asynchronous runtime dependencies now require
+  `aiohttp>=3.13.5,<4.0.0`, `aiohttp-retry>=2.8.3`, `pydantic>=2.11`,
+  `lazy-imports>=1,<2`, `typing-extensions>=4.7.1`, and
+  `python-dateutil>=2.8.2`. `certifi` and `six` are no longer direct
+  asynchronous dependencies. Python 3.10 remains the minimum supported
+  version for both clients.
 - Models and API-call arguments now use Pydantic validation. Invalid,
   unknown, or previously coerced values can raise
   `pydantic.ValidationError` before a request is sent; models are
@@ -22,6 +29,14 @@ are preserved, but applications may need the following updates:
   the `RESTClientObject` HTTP-verb helpers must migrate to the modern
   request/response interface. `ApiException.body` is now decoded text
   instead of bytes.
+- Low-level asynchronous transport interfaces also changed. Direct
+  callers of `ApiClient.call_api`, `ApiClient.param_serialize`,
+  `ApiClient.response_deserialize`, or `RESTClientObject.request` must
+  migrate to the modern `aiohttp` request/response interface. HTTP
+  sessions are created lazily; close an owned client with
+  `await client.close()` or an async context manager. Interactive
+  websocket streams use the generated `_without_preload_content`
+  operations.
 - `CoreV1Api.delete_namespace` now returns a decoded dictionary rather
   than `V1Status`, since a successful deletion can return either a
   terminating Namespace or a Status.
