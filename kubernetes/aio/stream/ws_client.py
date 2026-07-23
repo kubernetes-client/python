@@ -11,8 +11,7 @@
 # under the License.
 
 import json
-
-from six.moves.urllib.parse import urlencode, urlparse, urlunparse
+from urllib.parse import urlencode, urlparse, urlunparse
 
 from kubernetes.aio.client import ApiClient
 from kubernetes.aio.client.rest import RESTResponse
@@ -36,11 +35,19 @@ def get_websocket_url(url):
 
 class WsResponse(RESTResponse):
 
-    def __init__(self, status, data):
+    def __init__(self, status, data, response=None):
         self.status = status
         self.data = data
-        self.headers = {}
+        self.response = response
+        self._headers = {}
         self.reason = None
+
+    @property
+    def headers(self):
+        return self._headers
+
+    async def read(self):
+        return self.data
 
     def getheaders(self):
         return self.headers
@@ -53,7 +60,7 @@ class WsApiClient(ApiClient):
 
     def __init__(self, configuration=None, header_name=None, header_value=None,
                  cookie=None, pool_threads=1, heartbeat=None):
-        super().__init__(configuration, header_name, header_value, cookie, pool_threads)
+        super().__init__(configuration, header_name, header_value, cookie)
         self.heartbeat = heartbeat
 
     @classmethod
@@ -65,6 +72,29 @@ class WsApiClient(ApiClient):
         if error_data_json.get("status") == "Success":
             return 0
         return int(error_data_json["details"]["causes"][0]['message'])
+
+    async def call_api(
+        self,
+        method,
+        url,
+        header_params=None,
+        body=None,
+        post_params=None,
+        _request_timeout=None,
+        _preload_content=True,
+    ):
+        response = await self.request(
+            method,
+            url,
+            headers=header_params,
+            body=body,
+            post_params=post_params,
+            _request_timeout=_request_timeout,
+            _preload_content=_preload_content,
+        )
+        if _preload_content:
+            return response
+        return WsResponse(200, b'', response=response)
 
     async def request(self, method, url, query_params=None, headers=None,
                       post_params=None, body=None, _preload_content=True,
@@ -90,11 +120,17 @@ class WsApiClient(ApiClient):
             url += '?' + urlencode(query_params)
 
         url = get_websocket_url(url)
+        pool_manager = self.rest_client.pool_manager
+        if pool_manager is None:
+            pool_manager = self.rest_client._create_pool_manager()
+            self.rest_client.pool_manager = pool_manager
 
         if _preload_content:
 
             resp_all = ''
-            async with self.rest_client.pool_manager.ws_connect(url, headers=headers, heartbeat=self.heartbeat) as ws:
+            async with pool_manager.ws_connect(
+                url, headers=headers, heartbeat=self.heartbeat
+            ) as ws:
                 async for msg in ws:
                     msg = msg.data.decode('utf-8')
                     if len(msg) > 1:
@@ -108,4 +144,6 @@ class WsApiClient(ApiClient):
 
         else:
 
-            return self.rest_client.pool_manager.ws_connect(url, headers=headers, heartbeat=self.heartbeat)
+            return pool_manager.ws_connect(
+                url, headers=headers, heartbeat=self.heartbeat
+            )

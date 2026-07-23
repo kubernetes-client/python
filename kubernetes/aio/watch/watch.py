@@ -13,10 +13,11 @@
 # limitations under the License.
 
 import asyncio
+import inspect
 import json
 import pydoc
 from functools import partial
-from types import SimpleNamespace
+from typing import Any
 
 from kubernetes.aio import client
 
@@ -32,7 +33,19 @@ TYPE_LIST_SUFFIX = "List"
 
 
 def _find_return_type(func):
-    for line in pydoc.getdoc(func).splitlines():
+    return_type = inspect.signature(func).return_annotation
+    if (
+        return_type is not inspect.Signature.empty
+        and return_type is not Any
+        and inspect.isclass(return_type)
+    ):
+        return return_type
+    if (
+        isinstance(return_type, str)
+        and hasattr(client.models, return_type)
+    ):
+        return return_type
+    for line in (pydoc.getdoc(func) or '').splitlines():
         if line.startswith(PYDOC_RETURN_LABEL):
             return line[len(PYDOC_RETURN_LABEL):].strip()
     return ""
@@ -60,9 +73,14 @@ class Watch(object):
         if self._raw_return_type:
             return self._raw_return_type
         return_type = _find_return_type(func)
-
-        if return_type.endswith(TYPE_LIST_SUFFIX):
-            return return_type[:-len(TYPE_LIST_SUFFIX)]
+        return_type_name = (
+            return_type if isinstance(return_type, str) else return_type.__name__
+        )
+        if return_type_name.endswith(TYPE_LIST_SUFFIX):
+            item_type_name = return_type_name[:-len(TYPE_LIST_SUFFIX)]
+            if isinstance(return_type, str):
+                return item_type_name
+            return getattr(client.models, item_type_name)
         return return_type
 
     def get_watch_argument_name(self, func):
@@ -107,8 +125,9 @@ class Watch(object):
             # type, eg `V1Namespace` or `V1Pod`,`ExtensionsV1beta1Deployment`, ...
             if response_type:
                 js['object'] = self._api_client.deserialize(
-                    response=SimpleNamespace(data=json.dumps(js['raw_object'])),
-                    response_type=response_type
+                    response_text=json.dumps(js['raw_object']),
+                    response_type=response_type,
+                    content_type='application/json',
                 )
 
             # decode and save resource_version to continue watching
@@ -236,7 +255,18 @@ class Watch(object):
         self._stop = False
         self.return_type = self.get_return_type(func)
         kwargs[self.get_watch_argument_name(func)] = True
-        kwargs['_preload_content'] = False
+        if inspect.ismethod(func):
+            raw_func = getattr(
+                func.__self__,
+                f'{func.__name__}_without_preload_content',
+                None,
+            )
+            if raw_func is not None:
+                func = raw_func
+            else:
+                kwargs['_preload_content'] = False
+        else:
+            kwargs['_preload_content'] = False
         if 'resource_version' in kwargs:
             self.resource_version = kwargs['resource_version']
 

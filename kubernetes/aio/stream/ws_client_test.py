@@ -65,7 +65,7 @@ class WSClientTest(IsolatedAsyncioTestCase):
             api_client.configuration.host = 'https://localhost'
             ws = client.CoreV1Api(api_client=api_client)
             resp = ws.connect_get_namespaced_pod_exec('pod', 'namespace',
-                                                      command="mock-command",
+                                                      command=["mock-command"],
                                                       stderr=True, stdin=False,
                                                       stdout=True, tty=False)
 
@@ -73,7 +73,7 @@ class WSClientTest(IsolatedAsyncioTestCase):
             self.assertEqual(ret, 'mock' * 5)
             mock.ws_connect.assert_called_once_with(
                 'wss://localhost/api/v1/namespaces/namespace/pods/pod/exec?'
-                'command=mock-command&stderr=True&stdin=False&stdout=True&tty=False',
+                'command=mock-command&stderr=true&stdin=false&stdout=true&tty=false',
                 headers={
                     'sec-websocket-protocol': 'v4.channel.k8s.io',
                     'Accept': '*/*',
@@ -92,7 +92,7 @@ class WSClientTest(IsolatedAsyncioTestCase):
             api_client.configuration.host = 'https://localhost'
             ws = client.CoreV1Api(api_client=api_client)
             resp = ws.connect_get_namespaced_pod_exec('pod', 'namespace',
-                                                      command='mock-command',
+                                                      command=['mock-command'],
                                                       stderr=True, stdin=False,
                                                       stdout=True, tty=False)
 
@@ -100,7 +100,7 @@ class WSClientTest(IsolatedAsyncioTestCase):
             self.assertEqual(ret, 'mock' * 5)
             mock.ws_connect.assert_called_once_with(
                 'wss://localhost/api/v1/namespaces/namespace/pods/pod/exec?'
-                'command=mock-command&stderr=True&stdin=False&stdout=True&tty=False',
+                'command=mock-command&stderr=true&stdin=false&stdout=true&tty=false',
                 headers={
                     'sec-websocket-protocol': 'v4.channel.k8s.io',
                     'Accept': '*/*',
