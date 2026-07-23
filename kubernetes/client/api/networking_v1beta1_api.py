@@ -1492,7 +1492,7 @@ class NetworkingV1beta1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_ip_address
 
         delete an IPAddress
@@ -1560,8 +1560,8 @@ class NetworkingV1beta1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1600,7 +1600,7 @@ class NetworkingV1beta1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1Status, int, Any]:
+    ) -> Tuple[object, int, Any]:
         """delete_ip_address
 
         delete an IPAddress
@@ -1668,8 +1668,8 @@ class NetworkingV1beta1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1808,7 +1808,7 @@ class NetworkingV1beta1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_service_cidr
 
         delete a ServiceCIDR
@@ -1876,8 +1876,8 @@ class NetworkingV1beta1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1916,7 +1916,7 @@ class NetworkingV1beta1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1Status, int, Any]:
+    ) -> Tuple[object, int, Any]:
         """delete_service_cidr
 
         delete a ServiceCIDR
@@ -1984,8 +1984,8 @@ class NetworkingV1beta1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
