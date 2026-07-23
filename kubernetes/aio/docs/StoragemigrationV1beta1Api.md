@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_storage_version_migration**
-> V1Status delete_storage_version_migration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_storage_version_migration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a StorageVersionMigration
 
@@ -224,7 +224,6 @@ delete a StorageVersionMigration
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -284,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 

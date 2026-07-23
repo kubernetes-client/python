@@ -980,7 +980,7 @@ class AutoscalingV2Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_namespaced_horizontal_pod_autoscaler
 
         delete a HorizontalPodAutoscaler
@@ -1042,8 +1042,8 @@ class AutoscalingV2Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1081,7 +1081,7 @@ class AutoscalingV2Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_namespaced_horizontal_pod_autoscaler
 
         delete a HorizontalPodAutoscaler
@@ -1143,8 +1143,8 @@ class AutoscalingV2Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1244,8 +1244,8 @@ class AutoscalingV2Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(

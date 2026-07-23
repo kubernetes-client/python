@@ -21,6 +21,7 @@ from aiohttp import web
 
 from kubernetes.aio.client import (
     ApiClient,
+    BatchV1Api,
     Configuration,
     CoreV1Api,
     V1ConfigMap,
@@ -120,6 +121,37 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             'Bearer refreshed-token',
             self.requests[-1][0].headers['Authorization'],
         )
+
+    async def test_delete_job_accepts_job_and_status_responses(self):
+        responses = (
+            {
+                'apiVersion': 'batch/v1',
+                'kind': 'Job',
+                'metadata': {'name': 'sample'},
+                'status': {'ready': 0},
+            },
+            {
+                'apiVersion': 'v1',
+                'kind': 'Status',
+                'status': 'Success',
+                'details': {'name': 'sample', 'kind': 'jobs'},
+            },
+        )
+
+        for response in responses:
+            with self.subTest(kind=response['kind']):
+                self.response = response
+                deleted = await BatchV1Api(
+                    self.api_client,
+                ).delete_namespaced_job(
+                    name='sample', namespace='default', body={},
+                )
+
+                self.assertEqual(response, deleted)
+                self.assertEqual(
+                    '/apis/batch/v1/namespaces/default/jobs/sample',
+                    self.requests[-1][0].path,
+                )
 
     async def test_object_patches_use_strategic_merge(self):
         self.response = {

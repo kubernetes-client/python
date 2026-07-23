@@ -1223,7 +1223,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_mutating_admission_policy**
-> V1Status delete_mutating_admission_policy(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_mutating_admission_policy(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a MutatingAdmissionPolicy
 
@@ -1234,7 +1234,6 @@ delete a MutatingAdmissionPolicy
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -1294,7 +1293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 
@@ -1316,7 +1315,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_mutating_admission_policy_binding**
-> V1Status delete_mutating_admission_policy_binding(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_mutating_admission_policy_binding(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a MutatingAdmissionPolicyBinding
 
@@ -1327,7 +1326,6 @@ delete a MutatingAdmissionPolicyBinding
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -1387,7 +1385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 
@@ -1409,7 +1407,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_mutating_webhook_configuration**
-> V1Status delete_mutating_webhook_configuration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_mutating_webhook_configuration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a MutatingWebhookConfiguration
 
@@ -1420,7 +1418,6 @@ delete a MutatingWebhookConfiguration
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -1480,7 +1477,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 
@@ -1502,7 +1499,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_validating_admission_policy**
-> V1Status delete_validating_admission_policy(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_validating_admission_policy(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ValidatingAdmissionPolicy
 
@@ -1513,7 +1510,6 @@ delete a ValidatingAdmissionPolicy
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -1573,7 +1569,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 
@@ -1595,7 +1591,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_validating_admission_policy_binding**
-> V1Status delete_validating_admission_policy_binding(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_validating_admission_policy_binding(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ValidatingAdmissionPolicyBinding
 
@@ -1606,7 +1602,6 @@ delete a ValidatingAdmissionPolicyBinding
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -1666,7 +1661,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 
@@ -1688,7 +1683,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_validating_webhook_configuration**
-> V1Status delete_validating_webhook_configuration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_validating_webhook_configuration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ValidatingWebhookConfiguration
 
@@ -1699,7 +1694,6 @@ delete a ValidatingWebhookConfiguration
 ```python
 import kubernetes.aio.client
 from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_status import V1Status
 from kubernetes.aio.client.rest import ApiException
 from pprint import pprint
 
@@ -1759,7 +1753,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 

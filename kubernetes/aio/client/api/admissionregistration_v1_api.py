@@ -5284,7 +5284,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_mutating_admission_policy
 
         delete a MutatingAdmissionPolicy
@@ -5343,8 +5343,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5381,7 +5381,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_mutating_admission_policy
 
         delete a MutatingAdmissionPolicy
@@ -5440,8 +5440,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5537,8 +5537,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5672,7 +5672,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_mutating_admission_policy_binding
 
         delete a MutatingAdmissionPolicyBinding
@@ -5731,8 +5731,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5769,7 +5769,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_mutating_admission_policy_binding
 
         delete a MutatingAdmissionPolicyBinding
@@ -5828,8 +5828,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5925,8 +5925,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6060,7 +6060,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_mutating_webhook_configuration
 
         delete a MutatingWebhookConfiguration
@@ -6119,8 +6119,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6157,7 +6157,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_mutating_webhook_configuration
 
         delete a MutatingWebhookConfiguration
@@ -6216,8 +6216,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6313,8 +6313,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6448,7 +6448,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_validating_admission_policy
 
         delete a ValidatingAdmissionPolicy
@@ -6507,8 +6507,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6545,7 +6545,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_validating_admission_policy
 
         delete a ValidatingAdmissionPolicy
@@ -6604,8 +6604,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6701,8 +6701,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6836,7 +6836,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_validating_admission_policy_binding
 
         delete a ValidatingAdmissionPolicyBinding
@@ -6895,8 +6895,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6933,7 +6933,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_validating_admission_policy_binding
 
         delete a ValidatingAdmissionPolicyBinding
@@ -6992,8 +6992,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -7089,8 +7089,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -7224,7 +7224,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_validating_webhook_configuration
 
         delete a ValidatingWebhookConfiguration
@@ -7283,8 +7283,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -7321,7 +7321,7 @@ class AdmissionregistrationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_validating_webhook_configuration
 
         delete a ValidatingWebhookConfiguration
@@ -7380,8 +7380,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -7477,8 +7477,8 @@ class AdmissionregistrationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(

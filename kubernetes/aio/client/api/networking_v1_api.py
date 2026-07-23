@@ -4477,7 +4477,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_ingress_class
 
         delete an IngressClass
@@ -4536,8 +4536,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4574,7 +4574,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_ingress_class
 
         delete an IngressClass
@@ -4633,8 +4633,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4730,8 +4730,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4865,7 +4865,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_ip_address
 
         delete an IPAddress
@@ -4924,8 +4924,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4962,7 +4962,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_ip_address
 
         delete an IPAddress
@@ -5021,8 +5021,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5118,8 +5118,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5254,7 +5254,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_namespaced_ingress
 
         delete an Ingress
@@ -5316,8 +5316,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5355,7 +5355,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_namespaced_ingress
 
         delete an Ingress
@@ -5417,8 +5417,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5518,8 +5518,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5657,7 +5657,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_namespaced_network_policy
 
         delete a NetworkPolicy
@@ -5719,8 +5719,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5758,7 +5758,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_namespaced_network_policy
 
         delete a NetworkPolicy
@@ -5820,8 +5820,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5921,8 +5921,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6059,7 +6059,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Status:
+    ) -> object:
         """delete_service_cidr
 
         delete a ServiceCIDR
@@ -6118,8 +6118,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6156,7 +6156,7 @@ class NetworkingV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1Status]:
+    ) -> ApiResponse[object]:
         """delete_service_cidr
 
         delete a ServiceCIDR
@@ -6215,8 +6215,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6312,8 +6312,8 @@ class NetworkingV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Status",
-            '202': "V1Status",
+            '200': "object",
+            '202': "object",
             '401': None,
         }
         response_data = await self.api_client.call_api(
