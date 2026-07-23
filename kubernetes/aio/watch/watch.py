@@ -33,7 +33,10 @@ TYPE_LIST_SUFFIX = "List"
 
 
 def _find_return_type(func):
-    return_type = inspect.signature(func).return_annotation
+    try:
+        return_type = inspect.signature(func).return_annotation
+    except (TypeError, ValueError):
+        return_type = inspect.Signature.empty
     if (
         return_type is not inspect.Signature.empty
         and return_type is not Any

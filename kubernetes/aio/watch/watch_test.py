@@ -23,6 +23,12 @@ from kubernetes.aio.watch import Watch
 
 class WatchTest(IsolatedAsyncioTestCase):
 
+    def test_uninspectable_callable_uses_documented_return_type(self):
+        operation = AsyncMock()
+        operation.__doc__ = ':rtype: V1NamespaceList'
+
+        self.assertEqual('V1Namespace', Watch().get_return_type(operation))
+
     async def test_watch_with_decode(self):
         fake_resp = AsyncMock()
         fake_resp.content.readline = AsyncMock()
