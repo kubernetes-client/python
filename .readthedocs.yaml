@@ -34,6 +34,7 @@ python:
   install:
     - requirements: doc/requirements-docs.txt
     - requirements: test-requirements.txt
+    - requirements: requirements.txt
 
 
 # git clone --depth 1 https://github.com/kubernetes-client/python .
