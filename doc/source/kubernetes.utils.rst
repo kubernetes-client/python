@@ -11,6 +11,8 @@ Submodules
    kubernetes.utils.duration
    kubernetes.utils.metrics
    kubernetes.utils.quantity
+   kubernetes.utils.retry
+   kubernetes.utils.retry_test
 
 Module contents
 ---------------

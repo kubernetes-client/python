@@ -9,6 +9,8 @@ Submodules
 
    kubernetes.aio.utils.create_from_yaml
    kubernetes.aio.utils.create_from_yaml_test
+   kubernetes.aio.utils.retry
+   kubernetes.aio.utils.retry_test
 
 Module contents
 ---------------
