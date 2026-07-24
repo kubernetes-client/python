@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1alpha3\_device\_taint module
+===========================================================
+
+.. automodule:: kubernetes.aio.client.models.v1alpha3_device_taint
+   :members:
+   :show-inheritance:
+   :undoc-members:

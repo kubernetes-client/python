@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.config.incluster_config module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.config.incluster_config_test module" href="kubernetes.aio.config.incluster_config_test.html" />
+    <link rel="prev" title="kubernetes.aio.config.google_auth_test module" href="kubernetes.aio.config.google_auth_test.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.config.incluster_config">
+<span id="kubernetes-aio-config-incluster-config-module"></span><h1>kubernetes.aio.config.incluster_config module<a class="headerlink" href="#module-kubernetes.aio.config.incluster_config" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config.InClusterConfigLoader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.incluster_config.</span></span><span class="sig-name descname"><span class="pre">InClusterConfigLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cert_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_refresh_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">environ({'SHELL':</span> <span class="pre">'/usr/bin/zsh',</span> <span class="pre">'LSCOLORS':</span> <span class="pre">'Gxfxcxdxbxegedabagacad',</span> <span class="pre">'PYENV_HOOK_PATH':</span> <span class="pre">'/usr/local/google/home/yliao/.pyenv/pyenv.d:/usr/etc/pyenv.d:/usr/local/etc/pyenv.d:/etc/pyenv.d:/usr/lib/pyenv/hooks',</span> <span class="pre">'PYENV_SHELL':</span> <span class="pre">'zsh',</span> <span class="pre">'LESS':</span> <span class="pre">'-R',</span> <span class="pre">'GVM_VERSION':</span> <span class="pre">'1.0.22',</span> <span class="pre">'MAKE_TERMOUT':</span> <span class="pre">'/dev/pts/8',</span> <span class="pre">'TERMCAP':</span> <span class="pre">'SC|screen.xterm-256color|VT</span> <span class="pre">100/ANSI</span> <span class="pre">X3.64</span> <span class="pre">virtual</span> <span class="pre">terminal:DO=\\E[%dB:LE=\\E[%dD:RI=\\E[%dC:UP=\\E[%dA:bs:bt=\\E[Z:cd=\\E[J:ce=\\E[K:cl=\\E[H\\E[J:cm=\\E[%i%d;%dH:ct=\\E[3g:do=^J:nd=\\E[C:pt:rc=\\E8:rs=\\Ec:sc=\\E7:st=\\EH:up=\\EM:le=^H:bl=^G:cr=^M:it#8:ho=\\E[H:nw=\\EE:ta=^I:is=\\E)0:li#83:co#308:am:xn:xv:LP:sr=\\EM:al=\\E[L:AL=\\E[%dL:cs=\\E[%i%d;%dr:dl=\\E[M:DL=\\E[%dM:dc=\\E[P:DC=\\E[%dP:im=\\E[4h:ei=\\E[4l:mi:IC=\\E[%d&#64;:ks=\\E[?1h\\E=:ke=\\E[?1l\\E&gt;:vi=\\E[?25l:ve=\\E[34h\\E[?25h:vs=\\E[34l:ti=\\E[?1049h:te=\\E[?1049l:us=\\E[4m:ue=\\E[24m:so=\\E[3m:se=\\E[23m:mb=\\E[5m:md=\\E[1m:mh=\\E[2m:mr=\\E[7m:me=\\E[m:ms:Co#8:pa#64:AF=\\E[3%dm:AB=\\E[4%dm:op=\\E[39;49m:AX:vb=\\Eg:G0:as=\\E(0:ae=\\E(B:ac=\\140\\140aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~..--++,,hhII00:po=\\E[5i:pf=\\E[4i:Km=\\E[&lt;:k0=\\E[10~:k1=\\EOP:k2=\\EOQ:k3=\\EOR:k4=\\EOS:k5=\\E[15~:k6=\\E[17~:k7=\\E[18~:k8=\\E[19~:k9=\\E[20~:k;=\\E[21~:F1=\\E[23~:F2=\\E[24~:kB=\\E[Z:kh=\\E[1~:&#64;1=\\E[1~:kH=\\E[4~:&#64;7=\\E[4~:kN=\\E[6~:kP=\\E[5~:kI=\\E[2~:kD=\\E[3~:ku=\\EOA:kd=\\EOB:kr=\\EOC:kl=\\EOD:km:',</span> <span class="pre">'P4CONFIG':</span> <span class="pre">'.p4config',</span> <span class="pre">'GVM_PATH_BACKUP':</span> <span class="pre">'/usr/local/google/home/yliao/.gvm/bin:/usr/lib/google-golang/bin:/usr/local/buildtools/java/jdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',</span> <span class="pre">'SSH_AUTH_SOCK':</span> <span class="pre">'/usr/local/google/home/yliao/.tmp/yliao.yliao.ssh_auth_sock',</span> <span class="pre">'KUBEBUILDER_ASSETS':</span> <span class="pre">'/usr/local/google/home/yliao/kubebuilder/bin',</span> <span class="pre">'KI_HOME':</span> <span class="pre">'/usr/local/google/home/yliao/.sdkman/candidates/ki/current',</span> <span class="pre">'WINDOW':</span> <span class="pre">'3',</span> <span class="pre">'SDKMAN_CANDIDATES_DIR':</span> <span class="pre">'/usr/local/google/home/yliao/.sdkman/candidates',</span> <span class="pre">'X20_HOME':</span> <span class="pre">'/google/data/rw/users/yl/yliao',</span> <span class="pre">'PYENV_VERSION':</span> <span class="pre">'3.11.11',</span> <span class="pre">'PWD':</span> <span class="pre">'/usr/local/google/home/yliao/prj/client-python/doc',</span> <span class="pre">'RSYNC_RSH':</span> <span class="pre">'ssh',</span> <span class="pre">'LOGNAME':</span> <span class="pre">'yliao',</span> <span class="pre">'XDG_SESSION_TYPE':</span> <span class="pre">'tty',</span> <span class="pre">'CIDER_SHELL_INTEGRATION':</span> <span class="pre">'1',</span> <span class="pre">'GOOGLE_API_CERTIFICATE_CONFIG':</span> <span class="pre">'/etc/gcloud/certificate_config.json',</span> <span class="pre">'P4MERGE':</span> <span class="pre">'/google/src/files/head/depot/eng/perforce/mergep4.tcl',</span> <span class="pre">'MOTD_SHOWN':</span> <span class="pre">'pam',</span> <span class="pre">'HOME':</span> <span class="pre">'/usr/local/google/home/yliao',</span> <span class="pre">'LANG':</span> <span class="pre">'en_US.UTF-8',</span> <span class="pre">'CLOUDSDK_CONTEXT_AWARE_USE_CLIENT_CERTIFICATE':</span> <span class="pre">'true',</span> <span class="pre">'LS_COLORS':</span> <span class="pre">'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.7z=01;31:*.ace=01;31:*.alz=01;31:*.apk=01;31:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;31:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;31:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;31:*.tar=01;31:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;31:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.jxl=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:',</span> <span class="pre">'SSH_AUTH_KEY':</span> <span class="pre">'ecdsa-sha2-nistp256-cert-v01&#64;openssh.com</span> <span class="pre">AAAAKGVjZHNhLXNoYTItbmlzdHAyNTYtY2VydC12MDFAb3BlbnNzaC5jb20AAAAg0Do86CgFABfiLoWeqIsmykH3XkWVN8wfk/2mEysM11MAAAAIbmlzdHAyNTYAAABBBDQ803ux4P+djnYQRkOMA4uKhfpyzaLXAeJO2LZnZ/aif3hW/jps3iyjap8yYY6UEOpgvGcKIA+GWUWcS749PwcZAAAAEc1qLwAAAAEAAAAVeWxpYW9AY29ycC5nb29nbGUuY29tAAAAGQAAAAV5bGlhbwAAAAxnb29nbGVceWxpYW8AAAAAakkvVgAAAABqSknCAAAAAAAAAMwAAAAYY2VydC1tZXRhZGF0YUBnb29nbGUuY29tAAAAKgAAACYIARIg5xnj6SHJaRC8pENV2u5PU+Ef5m2k2PeYewnonSfdbRcgBgAAABVwZXJtaXQtWDExLWZvcndhcmRpbmcAAAAAAAAAF3Blcm1pdC1hZ2VudC1mb3J3YXJkaW5nAAAAAAAAABZwZXJtaXQtcG9ydC1mb3J3YXJkaW5nAAAAAAAAAApwZXJtaXQtcHR5AAAAAAAAAA5wZXJtaXQtdXNlci1yYwAAAAAAAAAAAAABFwAAAAdzc2gtcnNhAAAAAwEAAQAAAQEAvN0ZS5b1OZYtoJ1PSKY4GIwjis1i4zZZ2MBdN/TEYqJIOVsfAtkDrhC9YGSVuyai/kOXwLLnFc5dVDRWHLDSBzoXEgl4QKCmNu9nneV/cMLEq4d03o1DPOSPQGJDq+wep4K9HuRwvzog6wTDA5Kp0loCnWY8MHTbt4S/O2Ro5mvF0x0ec9vccwW1KOtc/CydQiGmevBZOQOyXt8ZCZKEtSOTIPhAE55WK8agtMEsJlHRtcswSg2BJNJMSeUKgL1An/oCE9bKAME/zXVYVK5Fuv4epqccnd3sQW2T8qniOIcEDI4oybDejm6G8VPw/pxieSPbaFGftuLyR/rHS52OhwAAARQAAAAMcnNhLXNoYTItMjU2AAABAK/ghRLjPIsFngQjftgeP/qqI+6LPATEiCrv7YMUE6P5KJRJsZIwlYbWqLRj2D8S9VIuKBGw0f7Og+Ufw3HJEBBxLwOr1hRVdosk8HAUkOZv9T0gHQ8ZYiRpEdTtWWo09zk3HxWD5YAfg7f3AM+y65+5+EGOmFiGI+ec7lBOLl0faIaXQzoHWsB6Wp4etZOrT9KbUPJIH8/MrY9jcq/1zXQrM1W9tDNNVxHQzJBcCndEUOOrx86iq3WLQEQv/cDLZiQD2x7grEjgK8BNj9ZTpU8bmPBwO4QZRNjHsKmV8gXaXVyE9yJ2Ilt7TSxhAwqnPn3Fy7eQF++NTMqlcdP7ENg=\n',</span> <span class="pre">'SDKMAN_VERSION':</span> <span class="pre">'5.16.0',</span> <span class="pre">'GVM_ROOT':</span> <span class="pre">'/usr/local/google/home/yliao/.gvm',</span> <span class="pre">'STREAMZ_SERVERS':</span> <span class="pre">'[2001:4860:f802::78]:9530',</span> <span class="pre">'SSH_CONNECTION':</span> <span class="pre">'172.253.31.191</span> <span class="pre">59953</span> <span class="pre">172.19.58.46</span> <span class="pre">22',</span> <span class="pre">'PYENV_DIR':</span> <span class="pre">'/usr/local/google/home/yliao/prj/client-python/doc',</span> <span class="pre">'MFLAGS':</span> <span class="pre">'',</span> <span class="pre">'CLOUDSDK_CONTAINER_USE_APPLICATION_DEFAULT_CREDENTIALS':</span> <span class="pre">'true',</span> <span class="pre">'LESSCLOSE':</span> <span class="pre">'/usr/bin/lesspipe</span> <span class="pre">%s</span> <span class="pre">%s',</span> <span class="pre">'MAKEFLAGS':</span> <span class="pre">'',</span> <span class="pre">'XDG_SESSION_CLASS':</span> <span class="pre">'user',</span> <span class="pre">'PYTHONPATH':</span> <span class="pre">'/usr/local/buildtools/current/sitecustomize',</span> <span class="pre">'TERM':</span> <span class="pre">'screen.xterm-256color',</span> <span class="pre">'ZSH':</span> <span class="pre">'/usr/local/google/home/yliao/.oh-my-zsh',</span> <span class="pre">'LESSOPEN':</span> <span class="pre">'|</span> <span class="pre">/usr/bin/lesspipe</span> <span class="pre">%s',</span> <span class="pre">'SK_SIGNING_PLUGIN':</span> <span class="pre">'gnubbyagent',</span> <span class="pre">'USER':</span> <span class="pre">'yliao',</span> <span class="pre">'MAKE_TERMERR':</span> <span class="pre">'/dev/pts/8',</span> <span class="pre">'CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES':</span> <span class="pre">'1600x1200,3840x2160,3840x2560,5120x1440,2160x3840',</span> <span class="pre">'CLOUDSDK_CONTEXT_AWARE_USE_MTLS_FOR_GRPC':</span> <span class="pre">'true',</span> <span class="pre">'SDKMAN_DIR':</span> <span class="pre">'/usr/local/google/home/yliao/.sdkman',</span> <span class="pre">'SHLVL':</span> <span class="pre">'2',</span> <span class="pre">'PARINIT':</span> <span class="pre">'rTbgqR</span> <span class="pre">B=.?_A_a</span> <span class="pre">Q=_s&gt;|:',</span> <span class="pre">'CLOUDSDK_CONTEXT_AWARE_CERTIFICATE_CONFIG_FILE_PATH':</span> <span class="pre">'/etc/gcloud/certificate_config.json',</span> <span class="pre">'PAGER':</span> <span class="pre">'less',</span> <span class="pre">'MAKELEVEL':</span> <span class="pre">'1',</span> <span class="pre">'GOOGLE_AUTH_WEBAUTHN_PLUGIN':</span> <span class="pre">'gcloudwebauthn',</span> <span class="pre">'CVS_RSH':</span> <span class="pre">'ssh',</span> <span class="pre">'SDKMAN_CANDIDATES_API':</span> <span class="pre">'https://api.sdkman.io/2',</span> <span class="pre">'XDG_SESSION_ID':</span> <span class="pre">'c6',</span> <span class="pre">'XDG_RUNTIME_DIR':</span> <span class="pre">'/run/user/7393',</span> <span class="pre">'SSH_CLIENT':</span> <span class="pre">'172.253.31.191</span> <span class="pre">59953</span> <span class="pre">22',</span> <span class="pre">'PYENV_ROOT':</span> <span class="pre">'/usr/local/google/home/yliao/.pyenv',</span> <span class="pre">'XDG_DATA_DIRS':</span> <span class="pre">'/usr/share/gnome:/usr/local/share/:/usr/share/',</span> <span class="pre">'PATH':</span> <span class="pre">'/usr/local/google/home/yliao/.pyenv/versions/3.11.11/bin:/usr/local/google/home/yliao/.pyenv/libexec:/usr/local/google/home/yliao/.pyenv/plugins/python-build/bin:/usr/local/google/home/yliao/.pyenv/plugins/pyenv-update/bin:/usr/local/google/home/yliao/.pyenv/shims:/usr/local/google/home/yliao/.pyenv/bin:/usr/local/google/home/yliao/.pyenv/bin:/usr/local/google/home/yliao/.sdkman/candidates/ki/current/bin:/usr/local/google/home/yliao/.local/bin/:/usr/local/google/home/yliao/.gvm/bin:/usr/lib/google-golang/bin:/usr/local/buildtools/java/jdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/google/home/yliao/go/bin:/usr/local/google/home/yliao/bin',</span> <span class="pre">'STY':</span> <span class="pre">'32524.yliao',</span> <span class="pre">'GOOGLE_CLOUD_DISABLE_DIRECT_PATH':</span> <span class="pre">'true',</span> <span class="pre">'CLOUDSDK_INTERNAL_USER':</span> <span class="pre">'true',</span> <span class="pre">'DBUS_SESSION_BUS_ADDRESS':</span> <span class="pre">'unix:path=/run/user/7393/bus',</span> <span class="pre">'SDKMAN_PLATFORM':</span> <span class="pre">'linuxx64',</span> <span class="pre">'CLOUDSDK_CONTEXT_AWARE_USE_ECP_HTTP_PROXY':</span> <span class="pre">'true',</span> <span class="pre">'OLDPWD':</span> <span class="pre">'/usr/local/google/home/yliao/prj/client-python/doc/build',</span> <span class="pre">'TERM_PROGRAM':</span> <span class="pre">'cider',</span> <span class="pre">'BASH_FUNC_poetry%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">poetry</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_yarn%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">yarn</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_pip%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">pip</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_pdm%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">pdm</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_uvx%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">uvx</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_npm%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">npm</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_npx%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">npx</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_pip3%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">pip3</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_python3%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">python3</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_pipx%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">pipx</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_pnpx%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">pnpx</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_pnpm%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">pnpm</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_yarnpkg%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">yarnpkg</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_uv%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">uv</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_python%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">python</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'BASH_FUNC_hatch%%':</span> <span class="pre">'()</span> <span class="pre">{</span>&#160; <span class="pre">/usr/bin/gpkg</span> <span class="pre">hatch</span> <span class="pre">&quot;$&#64;&quot;\n}',</span> <span class="pre">'DOCUTILSCONFIG':</span> <span class="pre">'/usr/local/google/home/yliao/prj/client-python/doc/source/docutils.conf'})</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config.InClusterConfigLoader" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config.InClusterConfigLoader.load_and_set">
+<span class="sig-name descname"><span class="pre">load_and_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config.InClusterConfigLoader.load_and_set" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config.load_incluster_config">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.incluster_config.</span></span><span class="sig-name descname"><span class="pre">load_incluster_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_refresh_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config.load_incluster_config" title="Link to this definition">¶</a></dt>
+<dd><p>Use the service account kubernetes gives to pods to connect to kubernetes
+cluster. It’s intended for clients that expect to be running inside a pod
+running on kubernetes. It will raise an exception if called from a process
+not running in a kubernetes environment.</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.config.html">kubernetes.aio.config package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.config.google_auth_test.html" title="previous chapter">kubernetes.aio.config.google_auth_test module</a></li>
+      <li>Next: <a href="kubernetes.aio.config.incluster_config_test.html" title="next chapter">kubernetes.aio.config.incluster_config_test module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.config.incluster_config.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

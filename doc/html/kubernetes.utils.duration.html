@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.utils.duration module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.utils.metrics module" href="kubernetes.utils.metrics.html" />
+    <link rel="prev" title="kubernetes.utils.create_from_yaml module" href="kubernetes.utils.create_from_yaml.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.utils.duration">
+<span id="kubernetes-utils-duration-module"></span><h1>kubernetes.utils.duration module<a class="headerlink" href="#module-kubernetes.utils.duration" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.duration.format_duration">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.duration.</span></span><span class="sig-name descname"><span class="pre">format_duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kubernetes.utils.duration.format_duration" title="Link to this definition">¶</a></dt>
+<dd><p>Format a datetime.timedelta object to GEP-2257 Duration format.</p>
+<p>The GEP-2257 Duration format is a restricted form of the input to the Go
+time.ParseDuration function; specifically, it must match the regex
+“^([0-9]{1,5}(h|m|s|ms)){1,4}$”.</p>
+<p>See <a class="reference external" href="https://gateway-api.sigs.k8s.io/geps/gep-2257/">https://gateway-api.sigs.k8s.io/geps/gep-2257/</a> for more details.</p>
+<p>Input: duration: datetime.timedelta</p>
+<p>Returns: string</p>
+<p>Raises: ValueError if the timedelta given cannot be expressed as a
+GEP-2257 Duration.</p>
+<p>Examples:
+&gt;&gt;&gt; format_duration(datetime.timedelta(seconds=3600))
+‘1h’
+&gt;&gt;&gt; format_duration(datetime.timedelta(seconds=60))
+‘1m’
+&gt;&gt;&gt; format_duration(datetime.timedelta(seconds=1))
+‘1s’
+&gt;&gt;&gt; format_duration(datetime.timedelta(microseconds=1000))
+‘1ms’
+&gt;&gt;&gt; format_duration(datetime.timedelta(seconds=5410))
+‘1h30m10s’</p>
+<p>The zero duration is always “0s”.
+&gt;&gt;&gt; format_duration(datetime.timedelta(0))
+‘0s’</p>
+<p>Sub-millisecond precision is not allowed.
+&gt;&gt;&gt; format_duration(datetime.timedelta(microseconds=100))
+Traceback (most recent call last):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+<p>ValueError: Cannot express sub-millisecond precision in GEP-2257: 0:00:00.000100</p>
+<p>Negative durations are not allowed.
+&gt;&gt;&gt; format_duration(datetime.timedelta(seconds=-1))
+Traceback (most recent call last):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+<p>ValueError: Cannot express negative durations in GEP-2257: -1 day, 23:59:59</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.duration.parse_duration">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.duration.</span></span><span class="sig-name descname"><span class="pre">parse_duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">timedelta</span></span></span><a class="headerlink" href="#kubernetes.utils.duration.parse_duration" title="Link to this definition">¶</a></dt>
+<dd><p>Parse GEP-2257 Duration format to a datetime.timedelta object.</p>
+<p>The GEP-2257 Duration format is a restricted form of the input to the Go
+time.ParseDuration function; specifically, it must match the regex
+“^([0-9]{1,5}(h|m|s|ms)){1,4}$”.</p>
+<p>See <a class="reference external" href="https://gateway-api.sigs.k8s.io/geps/gep-2257/">https://gateway-api.sigs.k8s.io/geps/gep-2257/</a> for more details.</p>
+<p>Input: duration: string
+Returns: datetime.timedelta</p>
+<p>Raises: ValueError on invalid or unknown input</p>
+<p>Examples:
+&gt;&gt;&gt; parse_duration(“1h”)
+datetime.timedelta(seconds=3600)
+&gt;&gt;&gt; parse_duration(“1m”)
+datetime.timedelta(seconds=60)
+&gt;&gt;&gt; parse_duration(“1s”)
+datetime.timedelta(seconds=1)
+&gt;&gt;&gt; parse_duration(“1ms”)
+datetime.timedelta(microseconds=1000)
+&gt;&gt;&gt; parse_duration(“1h1m1s”)
+datetime.timedelta(seconds=3661)
+&gt;&gt;&gt; parse_duration(“10s30m1h”)
+datetime.timedelta(seconds=5410)</p>
+<p>Units are always required.
+&gt;&gt;&gt; parse_duration(“1”)
+Traceback (most recent call last):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+<p>ValueError: Invalid duration format: 1</p>
+<p>Floating-point and negative durations are not valid.
+&gt;&gt;&gt; parse_duration(“1.5m”)
+Traceback (most recent call last):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+<p>ValueError: Invalid duration format: 1.5m
+&gt;&gt;&gt; parse_duration(“-1m”)
+Traceback (most recent call last):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+<p>ValueError: Invalid duration format: -1m</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.utils.html">kubernetes.utils package</a><ul>
+      <li>Previous: <a href="kubernetes.utils.create_from_yaml.html" title="previous chapter">kubernetes.utils.create_from_yaml module</a></li>
+      <li>Next: <a href="kubernetes.utils.metrics.html" title="next chapter">kubernetes.utils.metrics module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.utils.duration.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

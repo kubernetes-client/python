@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1beta1\_resource\_claim\_status module
+====================================================================
+
+.. automodule:: kubernetes.aio.client.models.v1beta1_resource_claim_status
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.config.dateutil_test module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.config.exec_provider module" href="kubernetes.aio.config.exec_provider.html" />
+    <link rel="prev" title="kubernetes.aio.config.dateutil module" href="kubernetes.aio.config.dateutil.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.config.dateutil_test">
+<span id="kubernetes-aio-config-dateutil-test-module"></span><h1>kubernetes.aio.config.dateutil_test module<a class="headerlink" href="#module-kubernetes.aio.config.dateutil_test" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.dateutil_test.</span></span><span class="sig-name descname"><span class="pre">DateUtilTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest.test_format_rfc3339">
+<span class="sig-name descname"><span class="pre">test_format_rfc3339</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest.test_format_rfc3339" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339">
+<span class="sig-name descname"><span class="pre">test_parse_rfc3339</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_error_message_clarity">
+<span class="sig-name descname"><span class="pre">test_parse_rfc3339_error_message_clarity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_error_message_clarity" title="Link to this definition">¶</a></dt>
+<dd><p>Test that error messages are clear and helpful</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_handles_none_from_timezone_regex">
+<span class="sig-name descname"><span class="pre">test_parse_rfc3339_handles_none_from_timezone_regex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_handles_none_from_timezone_regex" title="Link to this definition">¶</a></dt>
+<dd><p>Test parse_rfc3339 handles timezone regex returning None.</p>
+<p>This test addresses the GitHub issue where parse_rfc3339 was
+calling .groups() on None when the timezone regex failed to match,
+causing: ‘NoneType’ object has no attribute ‘groups’</p>
+<p>The fix adds a check to ensure _re_timezone.search() result is
+not None before calling .groups(), and provides a clear error
+message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_invalid_formats">
+<span class="sig-name descname"><span class="pre">test_parse_rfc3339_invalid_formats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_invalid_formats" title="Link to this definition">¶</a></dt>
+<dd><p>Test that invalid RFC3339 formats raise ValueError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_with_whitespace">
+<span class="sig-name descname"><span class="pre">test_parse_rfc3339_with_whitespace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.dateutil_test.DateUtilTest.test_parse_rfc3339_with_whitespace" title="Link to this definition">¶</a></dt>
+<dd><p>Test that leading/trailing whitespace is handled</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.config.html">kubernetes.aio.config package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.config.dateutil.html" title="previous chapter">kubernetes.aio.config.dateutil module</a></li>
+      <li>Next: <a href="kubernetes.aio.config.exec_provider.html" title="next chapter">kubernetes.aio.config.exec_provider module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.config.dateutil_test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.watch package &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.watch.watch module" href="kubernetes.aio.watch.watch.html" />
+    <link rel="prev" title="kubernetes.aio.utils.retry_test module" href="kubernetes.aio.utils.retry_test.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="kubernetes-aio-watch-package">
+<h1>kubernetes.aio.watch package<a class="headerlink" href="#kubernetes-aio-watch-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.aio.watch.watch.html">kubernetes.aio.watch.watch module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch"><code class="docutils literal notranslate"><span class="pre">Watch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.close"><code class="docutils literal notranslate"><span class="pre">Watch.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.get_return_type"><code class="docutils literal notranslate"><span class="pre">Watch.get_return_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.get_watch_argument_name"><code class="docutils literal notranslate"><span class="pre">Watch.get_watch_argument_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.next"><code class="docutils literal notranslate"><span class="pre">Watch.next()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.stop"><code class="docutils literal notranslate"><span class="pre">Watch.stop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.stream"><code class="docutils literal notranslate"><span class="pre">Watch.stream()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch.html#kubernetes.aio.watch.watch.Watch.unmarshal_event"><code class="docutils literal notranslate"><span class="pre">Watch.unmarshal_event()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html">kubernetes.aio.watch.watch_test module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest"><code class="docutils literal notranslate"><span class="pre">WatchTest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshal_bookmark_succeeds_and_preserves_resource_version"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshal_bookmark_succeeds_and_preserves_resource_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshal_job_bookmark_succeeds_and_preserves_resource_version"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshal_job_bookmark_succeeds_and_preserves_resource_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshal_with_custom_object"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshal_with_custom_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshal_with_empty_return_type"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshal_with_empty_return_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshal_with_float_object"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshal_with_float_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshal_without_return_type"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshal_without_return_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshall_job_bookmark_malformed_object_fails"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshall_job_bookmark_malformed_object_fails()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshall_k8s_error_response"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshall_k8s_error_response()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_unmarshall_k8s_error_response_401_gke"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_unmarshall_k8s_error_response_401_gke()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_for_follow"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_for_follow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_k8s_empty_response"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_k8s_empty_response()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_retry_410"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_retry_410()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_retry_timeout"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_retry_timeout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_timeout_with_resource_version"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_timeout_with_resource_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_with_decode"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_with_decode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.watch.watch_test.html#kubernetes.aio.watch.watch_test.WatchTest.test_watch_with_exception"><code class="docutils literal notranslate"><span class="pre">WatchTest.test_watch_with_exception()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-kubernetes.aio.watch">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kubernetes.aio.watch" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.utils.retry_test.html" title="previous chapter">kubernetes.aio.utils.retry_test module</a></li>
+      <li>Next: <a href="kubernetes.aio.watch.watch.html" title="next chapter">kubernetes.aio.watch.watch module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.watch.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

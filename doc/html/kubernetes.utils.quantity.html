@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.utils.quantity module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.utils.retry module" href="kubernetes.utils.retry.html" />
+    <link rel="prev" title="kubernetes.utils.metrics module" href="kubernetes.utils.metrics.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.utils.quantity">
+<span id="kubernetes-utils-quantity-module"></span><h1>kubernetes.utils.quantity module<a class="headerlink" href="#module-kubernetes.utils.quantity" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.quantity.format_quantity">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.quantity.</span></span><span class="sig-name descname"><span class="pre">format_quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kubernetes.utils.quantity.format_quantity" title="Link to this definition">¶</a></dt>
+<dd><p>Takes a decimal and produces a string value in kubernetes’ canonical quantity form,
+like “200Mi”.Users can specify an additional decimal number to quantize the output.</p>
+<p>Example -  Relatively increase pod memory limits:</p>
+<p># retrieve my_pod
+current_memory: Decimal = parse_quantity(my_pod.spec.containers[0].resources.limits.memory)
+desired_memory = current_memory * 1.2
+desired_memory_str = format_quantity(desired_memory, suffix=”Gi”, quantize=Decimal(1))
+# patch pod with desired_memory_str</p>
+<p>‘quantize=Decimal(1)’ ensures that the result does not contain any fractional digits.</p>
+<p>Supported SI suffixes:
+base1024: Ki | Mi | Gi | Ti | Pi | Ei
+base1000: n | u | m | “” | k | M | G | T | P | E</p>
+<p>See <a class="reference external" href="https://github.com/kubernetes/apimachinery/blob/master/pkg/api/resource/quantity.go">https://github.com/kubernetes/apimachinery/blob/master/pkg/api/resource/quantity.go</a></p>
+<p>Input:
+quantity: Decimal.  Quantity as a number which is supposed to converted to a string</p>
+<blockquote>
+<div><p>with SI suffix.</p>
+</div></blockquote>
+<p>suffix: string.     The desired suffix/unit-of-measure of the output string
+quantize: Decimal.  Can be used to round/quantize the value before the string</p>
+<blockquote>
+<div><p>is returned. Defaults to None.</p>
+</div></blockquote>
+<p>Returns:
+string. Canonical Kubernetes quantity string containing the SI suffix.</p>
+<p>Raises:
+ValueError if the SI suffix is not supported.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.quantity.parse_quantity">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.quantity.</span></span><span class="sig-name descname"><span class="pre">parse_quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.utils.quantity.parse_quantity" title="Link to this definition">¶</a></dt>
+<dd><p>Parse kubernetes canonical form quantity like 200Mi to a decimal number.
+Supported SI suffixes:
+base1024: Ki | Mi | Gi | Ti | Pi | Ei
+base1000: n | u | m | “” | k | M | G | T | P | E</p>
+<p>See <a class="reference external" href="https://github.com/kubernetes/apimachinery/blob/master/pkg/api/resource/quantity.go">https://github.com/kubernetes/apimachinery/blob/master/pkg/api/resource/quantity.go</a></p>
+<p>Input:
+quantity: string. kubernetes canonical form quantity</p>
+<p>Returns:
+Decimal</p>
+<p>Raises:
+ValueError on invalid or unknown input</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.utils.html">kubernetes.utils package</a><ul>
+      <li>Previous: <a href="kubernetes.utils.metrics.html" title="previous chapter">kubernetes.utils.metrics module</a></li>
+      <li>Next: <a href="kubernetes.utils.retry.html" title="next chapter">kubernetes.utils.retry module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.utils.quantity.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
