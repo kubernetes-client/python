@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_managed\_fields\_entry module
-==============================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_managed_fields_entry
-   :members:
-   :show-inheritance:
-   :undoc-members:

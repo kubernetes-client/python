@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_mutating\_webhook\_configuration module
-========================================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_mutating_webhook_configuration
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_named\_rule\_with\_operations module
-=====================================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_named_rule_with_operations
-   :members:
-   :show-inheritance:
-   :undoc-members:

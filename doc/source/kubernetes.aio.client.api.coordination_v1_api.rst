@@ -1,7 +1,0 @@
-kubernetes.aio.client.api.coordination\_v1\_api module
-======================================================
-
-.. automodule:: kubernetes.aio.client.api.coordination_v1_api
-   :members:
-   :show-inheritance:
-   :undoc-members:

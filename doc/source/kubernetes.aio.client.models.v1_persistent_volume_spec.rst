@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_persistent\_volume\_spec module
-================================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_persistent_volume_spec
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1beta1\_device module
-===================================================
-
-.. automodule:: kubernetes.aio.client.models.v1beta1_device
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_api\_service\_status module
-============================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_api_service_status
-   :members:
-   :show-inheritance:
-   :undoc-members:

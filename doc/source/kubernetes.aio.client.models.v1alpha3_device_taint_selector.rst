@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1alpha3\_device\_taint\_selector module
-=====================================================================
-
-.. automodule:: kubernetes.aio.client.models.v1alpha3_device_taint_selector
-   :members:
-   :show-inheritance:
-   :undoc-members:

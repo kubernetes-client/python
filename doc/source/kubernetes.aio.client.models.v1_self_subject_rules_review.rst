@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_self\_subject\_rules\_review module
-====================================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_self_subject_rules_review
-   :members:
-   :show-inheritance:
-   :undoc-members:

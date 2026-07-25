@@ -1,7 +1,0 @@
-kubernetes.aio.client.api.admissionregistration\_v1alpha1\_api module
-=====================================================================
-
-.. automodule:: kubernetes.aio.client.api.admissionregistration_v1alpha1_api
-   :members:
-   :show-inheritance:
-   :undoc-members:

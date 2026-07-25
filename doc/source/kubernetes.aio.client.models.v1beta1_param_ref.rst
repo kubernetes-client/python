@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1beta1\_param\_ref module
-=======================================================
-
-.. automodule:: kubernetes.aio.client.models.v1beta1_param_ref
-   :members:
-   :show-inheritance:
-   :undoc-members:

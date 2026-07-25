@@ -1,7 +1,0 @@
-kubernetes.aio.client.models.v1\_token\_review\_status module
-=============================================================
-
-.. automodule:: kubernetes.aio.client.models.v1_token_review_status
-   :members:
-   :show-inheritance:
-   :undoc-members:
