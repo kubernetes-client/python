@@ -161,7 +161,7 @@ class WSClientMultiFrameReadTest(unittest.TestCase):
         payload = b'x' * total
 
         mock_ws = MagicMock()
-        mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+        mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
         mock_ws.connected = True
         client = self._make_client(mock_ws)
 
@@ -220,7 +220,7 @@ class WSClientMultiFrameReadTest(unittest.TestCase):
             frame2.data = bytes([STDOUT_CHANNEL]) + b'second'
 
             mock_ws = MagicMock()
-            mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
             mock_ws.connected = True
             mock_ws.recv_data_frame.side_effect = [
                 (websocket.ABNF.OPCODE_BINARY, frame1),
@@ -247,7 +247,7 @@ class WSClientMultiFrameReadTest(unittest.TestCase):
             close_frame.data = b'\x03\xe8'
 
             mock_ws = MagicMock()
-            mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
             mock_ws.connected = True
             mock_ws.recv_data_frame.side_effect = [
                 (websocket.ABNF.OPCODE_BINARY, frame1),
