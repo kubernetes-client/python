@@ -12,7 +12,780 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-if __import__("typing").TYPE_CHECKING:
+__all__ = [
+    "AdmissionregistrationV1ServiceReference",
+    "AdmissionregistrationV1WebhookClientConfig",
+    "ApiextensionsV1ServiceReference",
+    "ApiextensionsV1WebhookClientConfig",
+    "ApiregistrationV1ServiceReference",
+    "AuthenticationV1TokenRequest",
+    "CoreV1EndpointPort",
+    "CoreV1Event",
+    "CoreV1EventList",
+    "CoreV1EventSeries",
+    "CoreV1ResourceClaim",
+    "DiscoveryV1EndpointPort",
+    "EventsV1Event",
+    "EventsV1EventList",
+    "EventsV1EventSeries",
+    "FlowcontrolV1Subject",
+    "RbacV1Subject",
+    "ResourceV1ResourceClaim",
+    "StorageV1TokenRequest",
+    "V1APIGroup",
+    "V1APIGroupList",
+    "V1APIResource",
+    "V1APIResourceList",
+    "V1APIService",
+    "V1APIServiceCondition",
+    "V1APIServiceList",
+    "V1APIServiceSpec",
+    "V1APIServiceStatus",
+    "V1APIVersions",
+    "V1AWSElasticBlockStoreVolumeSource",
+    "V1Affinity",
+    "V1AggregationRule",
+    "V1AllocatedDeviceStatus",
+    "V1AllocationResult",
+    "V1AppArmorProfile",
+    "V1ApplyConfiguration",
+    "V1AttachedVolume",
+    "V1AuditAnnotation",
+    "V1AzureDiskVolumeSource",
+    "V1AzureFilePersistentVolumeSource",
+    "V1AzureFileVolumeSource",
+    "V1Binding",
+    "V1BoundObjectReference",
+    "V1CELDeviceSelector",
+    "V1CSIDriver",
+    "V1CSIDriverList",
+    "V1CSIDriverSpec",
+    "V1CSINode",
+    "V1CSINodeDriver",
+    "V1CSINodeList",
+    "V1CSINodeSpec",
+    "V1CSIPersistentVolumeSource",
+    "V1CSIStorageCapacity",
+    "V1CSIStorageCapacityList",
+    "V1CSIVolumeSource",
+    "V1Capabilities",
+    "V1CapacityRequestPolicy",
+    "V1CapacityRequestPolicyRange",
+    "V1CapacityRequirements",
+    "V1CephFSPersistentVolumeSource",
+    "V1CephFSVolumeSource",
+    "V1CertificateSigningRequest",
+    "V1CertificateSigningRequestCondition",
+    "V1CertificateSigningRequestList",
+    "V1CertificateSigningRequestSpec",
+    "V1CertificateSigningRequestStatus",
+    "V1CinderPersistentVolumeSource",
+    "V1CinderVolumeSource",
+    "V1ClientIPConfig",
+    "V1ClusterRole",
+    "V1ClusterRoleBinding",
+    "V1ClusterRoleBindingList",
+    "V1ClusterRoleList",
+    "V1ClusterTrustBundleProjection",
+    "V1ComponentCondition",
+    "V1ComponentStatus",
+    "V1ComponentStatusList",
+    "V1Condition",
+    "V1ConfigMap",
+    "V1ConfigMapEnvSource",
+    "V1ConfigMapKeySelector",
+    "V1ConfigMapList",
+    "V1ConfigMapNodeConfigSource",
+    "V1ConfigMapProjection",
+    "V1ConfigMapVolumeSource",
+    "V1Container",
+    "V1ContainerExtendedResourceRequest",
+    "V1ContainerImage",
+    "V1ContainerPort",
+    "V1ContainerResizePolicy",
+    "V1ContainerRestartRule",
+    "V1ContainerRestartRuleOnExitCodes",
+    "V1ContainerState",
+    "V1ContainerStateRunning",
+    "V1ContainerStateTerminated",
+    "V1ContainerStateWaiting",
+    "V1ContainerStatus",
+    "V1ContainerUser",
+    "V1ControllerRevision",
+    "V1ControllerRevisionList",
+    "V1Counter",
+    "V1CounterSet",
+    "V1CronJob",
+    "V1CronJobList",
+    "V1CronJobSpec",
+    "V1CronJobStatus",
+    "V1CrossVersionObjectReference",
+    "V1CustomResourceColumnDefinition",
+    "V1CustomResourceConversion",
+    "V1CustomResourceDefinition",
+    "V1CustomResourceDefinitionCondition",
+    "V1CustomResourceDefinitionList",
+    "V1CustomResourceDefinitionNames",
+    "V1CustomResourceDefinitionSpec",
+    "V1CustomResourceDefinitionStatus",
+    "V1CustomResourceDefinitionVersion",
+    "V1CustomResourceSubresourceScale",
+    "V1CustomResourceSubresources",
+    "V1CustomResourceValidation",
+    "V1DaemonEndpoint",
+    "V1DaemonSet",
+    "V1DaemonSetCondition",
+    "V1DaemonSetList",
+    "V1DaemonSetSpec",
+    "V1DaemonSetStatus",
+    "V1DaemonSetUpdateStrategy",
+    "V1DeleteOptions",
+    "V1Deployment",
+    "V1DeploymentCondition",
+    "V1DeploymentList",
+    "V1DeploymentSpec",
+    "V1DeploymentStatus",
+    "V1DeploymentStrategy",
+    "V1Device",
+    "V1DeviceAllocationConfiguration",
+    "V1DeviceAllocationResult",
+    "V1DeviceAttribute",
+    "V1DeviceCapacity",
+    "V1DeviceClaim",
+    "V1DeviceClaimConfiguration",
+    "V1DeviceClass",
+    "V1DeviceClassConfiguration",
+    "V1DeviceClassList",
+    "V1DeviceClassSpec",
+    "V1DeviceConstraint",
+    "V1DeviceCounterConsumption",
+    "V1DeviceRequest",
+    "V1DeviceRequestAllocationResult",
+    "V1DeviceSelector",
+    "V1DeviceSubRequest",
+    "V1DeviceTaint",
+    "V1DeviceToleration",
+    "V1DownwardAPIProjection",
+    "V1DownwardAPIVolumeFile",
+    "V1DownwardAPIVolumeSource",
+    "V1EmptyDirVolumeSource",
+    "V1Endpoint",
+    "V1EndpointAddress",
+    "V1EndpointConditions",
+    "V1EndpointHints",
+    "V1EndpointSlice",
+    "V1EndpointSliceList",
+    "V1EndpointSubset",
+    "V1Endpoints",
+    "V1EndpointsList",
+    "V1EnvFromSource",
+    "V1EnvVar",
+    "V1EnvVarSource",
+    "V1EphemeralContainer",
+    "V1EphemeralVolumeSource",
+    "V1EventSource",
+    "V1Eviction",
+    "V1ExactDeviceRequest",
+    "V1ExecAction",
+    "V1ExemptPriorityLevelConfiguration",
+    "V1ExpressionWarning",
+    "V1ExternalDocumentation",
+    "V1FCVolumeSource",
+    "V1FieldSelectorAttributes",
+    "V1FieldSelectorRequirement",
+    "V1FileKeySelector",
+    "V1FlexPersistentVolumeSource",
+    "V1FlexVolumeSource",
+    "V1FlockerVolumeSource",
+    "V1FlowDistinguisherMethod",
+    "V1FlowSchema",
+    "V1FlowSchemaCondition",
+    "V1FlowSchemaList",
+    "V1FlowSchemaSpec",
+    "V1FlowSchemaStatus",
+    "V1ForNode",
+    "V1ForZone",
+    "V1GCEPersistentDiskVolumeSource",
+    "V1GRPCAction",
+    "V1GitRepoVolumeSource",
+    "V1GlusterfsPersistentVolumeSource",
+    "V1GlusterfsVolumeSource",
+    "V1GroupResource",
+    "V1GroupSubject",
+    "V1GroupVersionForDiscovery",
+    "V1GroupVersionKind",
+    "V1HTTPGetAction",
+    "V1HTTPHeader",
+    "V1HTTPIngressPath",
+    "V1HTTPIngressRuleValue",
+    "V1HorizontalPodAutoscaler",
+    "V1HorizontalPodAutoscalerList",
+    "V1HorizontalPodAutoscalerSpec",
+    "V1HorizontalPodAutoscalerStatus",
+    "V1HostAlias",
+    "V1HostIP",
+    "V1HostPathVolumeSource",
+    "V1IPAddress",
+    "V1IPAddressList",
+    "V1IPAddressSpec",
+    "V1IPBlock",
+    "V1ISCSIPersistentVolumeSource",
+    "V1ISCSIVolumeSource",
+    "V1ImageVolumeSource",
+    "V1ImageVolumeStatus",
+    "V1Ingress",
+    "V1IngressBackend",
+    "V1IngressClass",
+    "V1IngressClassList",
+    "V1IngressClassParametersReference",
+    "V1IngressClassSpec",
+    "V1IngressList",
+    "V1IngressLoadBalancerIngress",
+    "V1IngressLoadBalancerStatus",
+    "V1IngressPortStatus",
+    "V1IngressRule",
+    "V1IngressServiceBackend",
+    "V1IngressSpec",
+    "V1IngressStatus",
+    "V1IngressTLS",
+    "V1JSONPatch",
+    "V1JSONSchemaProps",
+    "V1Job",
+    "V1JobCondition",
+    "V1JobList",
+    "V1JobSpec",
+    "V1JobStatus",
+    "V1JobTemplateSpec",
+    "V1KeyToPath",
+    "V1LabelSelector",
+    "V1LabelSelectorAttributes",
+    "V1LabelSelectorRequirement",
+    "V1Lease",
+    "V1LeaseList",
+    "V1LeaseSpec",
+    "V1Lifecycle",
+    "V1LifecycleHandler",
+    "V1LimitRange",
+    "V1LimitRangeItem",
+    "V1LimitRangeList",
+    "V1LimitRangeSpec",
+    "V1LimitResponse",
+    "V1LimitedPriorityLevelConfiguration",
+    "V1LinuxContainerUser",
+    "V1ListMeta",
+    "V1LoadBalancerIngress",
+    "V1LoadBalancerStatus",
+    "V1LocalObjectReference",
+    "V1LocalSubjectAccessReview",
+    "V1LocalVolumeSource",
+    "V1ManagedFieldsEntry",
+    "V1MatchCondition",
+    "V1MatchResources",
+    "V1ModifyVolumeStatus",
+    "V1MutatingAdmissionPolicy",
+    "V1MutatingAdmissionPolicyBinding",
+    "V1MutatingAdmissionPolicyBindingList",
+    "V1MutatingAdmissionPolicyBindingSpec",
+    "V1MutatingAdmissionPolicyList",
+    "V1MutatingAdmissionPolicySpec",
+    "V1MutatingWebhook",
+    "V1MutatingWebhookConfiguration",
+    "V1MutatingWebhookConfigurationList",
+    "V1Mutation",
+    "V1NFSVolumeSource",
+    "V1NamedRuleWithOperations",
+    "V1Namespace",
+    "V1NamespaceCondition",
+    "V1NamespaceList",
+    "V1NamespaceSpec",
+    "V1NamespaceStatus",
+    "V1NetworkDeviceData",
+    "V1NetworkPolicy",
+    "V1NetworkPolicyEgressRule",
+    "V1NetworkPolicyIngressRule",
+    "V1NetworkPolicyList",
+    "V1NetworkPolicyPeer",
+    "V1NetworkPolicyPort",
+    "V1NetworkPolicySpec",
+    "V1Node",
+    "V1NodeAddress",
+    "V1NodeAffinity",
+    "V1NodeAllocatableResourceClaimStatus",
+    "V1NodeAllocatableResourceMapping",
+    "V1NodeCondition",
+    "V1NodeConfigSource",
+    "V1NodeConfigStatus",
+    "V1NodeDaemonEndpoints",
+    "V1NodeFeatures",
+    "V1NodeList",
+    "V1NodeRuntimeHandler",
+    "V1NodeRuntimeHandlerFeatures",
+    "V1NodeSelector",
+    "V1NodeSelectorRequirement",
+    "V1NodeSelectorTerm",
+    "V1NodeSpec",
+    "V1NodeStatus",
+    "V1NodeSwapStatus",
+    "V1NodeSystemInfo",
+    "V1NonResourceAttributes",
+    "V1NonResourcePolicyRule",
+    "V1NonResourceRule",
+    "V1ObjectFieldSelector",
+    "V1ObjectMeta",
+    "V1ObjectReference",
+    "V1OpaqueDeviceConfiguration",
+    "V1Overhead",
+    "V1OwnerReference",
+    "V1ParamKind",
+    "V1ParamRef",
+    "V1ParentReference",
+    "V1PersistentVolume",
+    "V1PersistentVolumeClaim",
+    "V1PersistentVolumeClaimCondition",
+    "V1PersistentVolumeClaimList",
+    "V1PersistentVolumeClaimSpec",
+    "V1PersistentVolumeClaimStatus",
+    "V1PersistentVolumeClaimTemplate",
+    "V1PersistentVolumeClaimVolumeSource",
+    "V1PersistentVolumeList",
+    "V1PersistentVolumeSpec",
+    "V1PersistentVolumeStatus",
+    "V1PhotonPersistentDiskVolumeSource",
+    "V1Pod",
+    "V1PodAffinity",
+    "V1PodAffinityTerm",
+    "V1PodAntiAffinity",
+    "V1PodCertificateProjection",
+    "V1PodCondition",
+    "V1PodDNSConfig",
+    "V1PodDNSConfigOption",
+    "V1PodDisruptionBudget",
+    "V1PodDisruptionBudgetList",
+    "V1PodDisruptionBudgetSpec",
+    "V1PodDisruptionBudgetStatus",
+    "V1PodExtendedResourceClaimStatus",
+    "V1PodFailurePolicy",
+    "V1PodFailurePolicyOnExitCodesRequirement",
+    "V1PodFailurePolicyOnPodConditionsPattern",
+    "V1PodFailurePolicyRule",
+    "V1PodIP",
+    "V1PodList",
+    "V1PodOS",
+    "V1PodReadinessGate",
+    "V1PodResourceClaim",
+    "V1PodResourceClaimStatus",
+    "V1PodSchedulingGate",
+    "V1PodSchedulingGroup",
+    "V1PodSecurityContext",
+    "V1PodSpec",
+    "V1PodStatus",
+    "V1PodTemplate",
+    "V1PodTemplateList",
+    "V1PodTemplateSpec",
+    "V1PolicyRule",
+    "V1PolicyRulesWithSubjects",
+    "V1PortStatus",
+    "V1PortworxVolumeSource",
+    "V1Preconditions",
+    "V1PreferredSchedulingTerm",
+    "V1PriorityClass",
+    "V1PriorityClassList",
+    "V1PriorityLevelConfiguration",
+    "V1PriorityLevelConfigurationCondition",
+    "V1PriorityLevelConfigurationList",
+    "V1PriorityLevelConfigurationReference",
+    "V1PriorityLevelConfigurationSpec",
+    "V1PriorityLevelConfigurationStatus",
+    "V1Probe",
+    "V1ProjectedVolumeSource",
+    "V1QueuingConfiguration",
+    "V1QuobyteVolumeSource",
+    "V1RBDPersistentVolumeSource",
+    "V1RBDVolumeSource",
+    "V1ReplicaSet",
+    "V1ReplicaSetCondition",
+    "V1ReplicaSetList",
+    "V1ReplicaSetSpec",
+    "V1ReplicaSetStatus",
+    "V1ReplicationController",
+    "V1ReplicationControllerCondition",
+    "V1ReplicationControllerList",
+    "V1ReplicationControllerSpec",
+    "V1ReplicationControllerStatus",
+    "V1ResourceAttributes",
+    "V1ResourceClaimConsumerReference",
+    "V1ResourceClaimList",
+    "V1ResourceClaimSpec",
+    "V1ResourceClaimStatus",
+    "V1ResourceClaimTemplate",
+    "V1ResourceClaimTemplateList",
+    "V1ResourceClaimTemplateSpec",
+    "V1ResourceFieldSelector",
+    "V1ResourceHealth",
+    "V1ResourcePolicyRule",
+    "V1ResourcePool",
+    "V1ResourceQuota",
+    "V1ResourceQuotaList",
+    "V1ResourceQuotaSpec",
+    "V1ResourceQuotaStatus",
+    "V1ResourceRequirements",
+    "V1ResourceRule",
+    "V1ResourceSlice",
+    "V1ResourceSliceList",
+    "V1ResourceSliceSpec",
+    "V1ResourceStatus",
+    "V1Role",
+    "V1RoleBinding",
+    "V1RoleBindingList",
+    "V1RoleList",
+    "V1RoleRef",
+    "V1RollingUpdateDaemonSet",
+    "V1RollingUpdateDeployment",
+    "V1RollingUpdateStatefulSetStrategy",
+    "V1RuleWithOperations",
+    "V1RuntimeClass",
+    "V1RuntimeClassList",
+    "V1SELinuxOptions",
+    "V1Scale",
+    "V1ScaleIOPersistentVolumeSource",
+    "V1ScaleIOVolumeSource",
+    "V1ScaleSpec",
+    "V1ScaleStatus",
+    "V1Scheduling",
+    "V1ScopeSelector",
+    "V1ScopedResourceSelectorRequirement",
+    "V1SeccompProfile",
+    "V1Secret",
+    "V1SecretEnvSource",
+    "V1SecretKeySelector",
+    "V1SecretList",
+    "V1SecretProjection",
+    "V1SecretReference",
+    "V1SecretVolumeSource",
+    "V1SecurityContext",
+    "V1SelectableField",
+    "V1SelfSubjectAccessReview",
+    "V1SelfSubjectAccessReviewSpec",
+    "V1SelfSubjectReview",
+    "V1SelfSubjectReviewStatus",
+    "V1SelfSubjectRulesReview",
+    "V1SelfSubjectRulesReviewSpec",
+    "V1ServerAddressByClientCIDR",
+    "V1Service",
+    "V1ServiceAccount",
+    "V1ServiceAccountList",
+    "V1ServiceAccountSubject",
+    "V1ServiceAccountTokenProjection",
+    "V1ServiceBackendPort",
+    "V1ServiceCIDR",
+    "V1ServiceCIDRList",
+    "V1ServiceCIDRSpec",
+    "V1ServiceCIDRStatus",
+    "V1ServiceList",
+    "V1ServicePort",
+    "V1ServiceSpec",
+    "V1ServiceStatus",
+    "V1SessionAffinityConfig",
+    "V1ShardInfo",
+    "V1SleepAction",
+    "V1StatefulSet",
+    "V1StatefulSetCondition",
+    "V1StatefulSetList",
+    "V1StatefulSetOrdinals",
+    "V1StatefulSetPersistentVolumeClaimRetentionPolicy",
+    "V1StatefulSetSpec",
+    "V1StatefulSetStatus",
+    "V1StatefulSetUpdateStrategy",
+    "V1Status",
+    "V1StatusCause",
+    "V1StatusDetails",
+    "V1StorageClass",
+    "V1StorageClassList",
+    "V1StorageOSPersistentVolumeSource",
+    "V1StorageOSVolumeSource",
+    "V1SubjectAccessReview",
+    "V1SubjectAccessReviewSpec",
+    "V1SubjectAccessReviewStatus",
+    "V1SubjectRulesReviewStatus",
+    "V1SuccessPolicy",
+    "V1SuccessPolicyRule",
+    "V1Sysctl",
+    "V1TCPSocketAction",
+    "V1Taint",
+    "V1TokenRequestSpec",
+    "V1TokenRequestStatus",
+    "V1TokenReview",
+    "V1TokenReviewSpec",
+    "V1TokenReviewStatus",
+    "V1Toleration",
+    "V1TopologySelectorLabelRequirement",
+    "V1TopologySelectorTerm",
+    "V1TopologySpreadConstraint",
+    "V1TypeChecking",
+    "V1TypedLocalObjectReference",
+    "V1TypedObjectReference",
+    "V1UncountedTerminatedPods",
+    "V1UserInfo",
+    "V1UserSubject",
+    "V1ValidatingAdmissionPolicy",
+    "V1ValidatingAdmissionPolicyBinding",
+    "V1ValidatingAdmissionPolicyBindingList",
+    "V1ValidatingAdmissionPolicyBindingSpec",
+    "V1ValidatingAdmissionPolicyList",
+    "V1ValidatingAdmissionPolicySpec",
+    "V1ValidatingAdmissionPolicyStatus",
+    "V1ValidatingWebhook",
+    "V1ValidatingWebhookConfiguration",
+    "V1ValidatingWebhookConfigurationList",
+    "V1Validation",
+    "V1ValidationRule",
+    "V1Variable",
+    "V1Volume",
+    "V1VolumeAttachment",
+    "V1VolumeAttachmentList",
+    "V1VolumeAttachmentSource",
+    "V1VolumeAttachmentSpec",
+    "V1VolumeAttachmentStatus",
+    "V1VolumeAttributesClass",
+    "V1VolumeAttributesClassList",
+    "V1VolumeDevice",
+    "V1VolumeError",
+    "V1VolumeMount",
+    "V1VolumeMountStatus",
+    "V1VolumeNodeAffinity",
+    "V1VolumeNodeResources",
+    "V1VolumeProjection",
+    "V1VolumeResourceRequirements",
+    "V1VolumeStatus",
+    "V1VsphereVirtualDiskVolumeSource",
+    "V1WatchEvent",
+    "V1WebhookConversion",
+    "V1WeightedPodAffinityTerm",
+    "V1WindowsSecurityContextOptions",
+    "V1alpha1ApplyConfiguration",
+    "V1alpha1ClusterTrustBundle",
+    "V1alpha1ClusterTrustBundleList",
+    "V1alpha1ClusterTrustBundleSpec",
+    "V1alpha1JSONPatch",
+    "V1alpha1MatchCondition",
+    "V1alpha1MatchResources",
+    "V1alpha1MutatingAdmissionPolicy",
+    "V1alpha1MutatingAdmissionPolicyBinding",
+    "V1alpha1MutatingAdmissionPolicyBindingList",
+    "V1alpha1MutatingAdmissionPolicyBindingSpec",
+    "V1alpha1MutatingAdmissionPolicyList",
+    "V1alpha1MutatingAdmissionPolicySpec",
+    "V1alpha1Mutation",
+    "V1alpha1NamedRuleWithOperations",
+    "V1alpha1ParamKind",
+    "V1alpha1ParamRef",
+    "V1alpha1ServerStorageVersion",
+    "V1alpha1StorageVersion",
+    "V1alpha1StorageVersionCondition",
+    "V1alpha1StorageVersionList",
+    "V1alpha1StorageVersionStatus",
+    "V1alpha1Variable",
+    "V1alpha2GangSchedulingPolicy",
+    "V1alpha2LeaseCandidate",
+    "V1alpha2LeaseCandidateList",
+    "V1alpha2LeaseCandidateSpec",
+    "V1alpha2PodGroup",
+    "V1alpha2PodGroupList",
+    "V1alpha2PodGroupResourceClaim",
+    "V1alpha2PodGroupResourceClaimStatus",
+    "V1alpha2PodGroupSchedulingConstraints",
+    "V1alpha2PodGroupSchedulingPolicy",
+    "V1alpha2PodGroupSpec",
+    "V1alpha2PodGroupStatus",
+    "V1alpha2PodGroupTemplate",
+    "V1alpha2PodGroupTemplateReference",
+    "V1alpha2TopologyConstraint",
+    "V1alpha2TypedLocalObjectReference",
+    "V1alpha2Workload",
+    "V1alpha2WorkloadList",
+    "V1alpha2WorkloadPodGroupTemplateReference",
+    "V1alpha2WorkloadSpec",
+    "V1alpha3DeviceTaint",
+    "V1alpha3DeviceTaintRule",
+    "V1alpha3DeviceTaintRuleList",
+    "V1alpha3DeviceTaintRuleSpec",
+    "V1alpha3DeviceTaintRuleStatus",
+    "V1alpha3DeviceTaintSelector",
+    "V1alpha3PoolStatus",
+    "V1alpha3ResourcePoolStatusRequest",
+    "V1alpha3ResourcePoolStatusRequestList",
+    "V1alpha3ResourcePoolStatusRequestSpec",
+    "V1alpha3ResourcePoolStatusRequestStatus",
+    "V1beta1AllocatedDeviceStatus",
+    "V1beta1AllocationResult",
+    "V1beta1ApplyConfiguration",
+    "V1beta1BasicDevice",
+    "V1beta1CELDeviceSelector",
+    "V1beta1CapacityRequestPolicy",
+    "V1beta1CapacityRequestPolicyRange",
+    "V1beta1CapacityRequirements",
+    "V1beta1ClusterTrustBundle",
+    "V1beta1ClusterTrustBundleList",
+    "V1beta1ClusterTrustBundleSpec",
+    "V1beta1Counter",
+    "V1beta1CounterSet",
+    "V1beta1Device",
+    "V1beta1DeviceAllocationConfiguration",
+    "V1beta1DeviceAllocationResult",
+    "V1beta1DeviceAttribute",
+    "V1beta1DeviceCapacity",
+    "V1beta1DeviceClaim",
+    "V1beta1DeviceClaimConfiguration",
+    "V1beta1DeviceClass",
+    "V1beta1DeviceClassConfiguration",
+    "V1beta1DeviceClassList",
+    "V1beta1DeviceClassSpec",
+    "V1beta1DeviceConstraint",
+    "V1beta1DeviceCounterConsumption",
+    "V1beta1DeviceRequest",
+    "V1beta1DeviceRequestAllocationResult",
+    "V1beta1DeviceSelector",
+    "V1beta1DeviceSubRequest",
+    "V1beta1DeviceTaint",
+    "V1beta1DeviceToleration",
+    "V1beta1IPAddress",
+    "V1beta1IPAddressList",
+    "V1beta1IPAddressSpec",
+    "V1beta1JSONPatch",
+    "V1beta1LeaseCandidate",
+    "V1beta1LeaseCandidateList",
+    "V1beta1LeaseCandidateSpec",
+    "V1beta1MatchCondition",
+    "V1beta1MatchResources",
+    "V1beta1MutatingAdmissionPolicy",
+    "V1beta1MutatingAdmissionPolicyBinding",
+    "V1beta1MutatingAdmissionPolicyBindingList",
+    "V1beta1MutatingAdmissionPolicyBindingSpec",
+    "V1beta1MutatingAdmissionPolicyList",
+    "V1beta1MutatingAdmissionPolicySpec",
+    "V1beta1Mutation",
+    "V1beta1NamedRuleWithOperations",
+    "V1beta1NetworkDeviceData",
+    "V1beta1NodeAllocatableResourceMapping",
+    "V1beta1OpaqueDeviceConfiguration",
+    "V1beta1ParamKind",
+    "V1beta1ParamRef",
+    "V1beta1ParentReference",
+    "V1beta1PodCertificateRequest",
+    "V1beta1PodCertificateRequestList",
+    "V1beta1PodCertificateRequestSpec",
+    "V1beta1PodCertificateRequestStatus",
+    "V1beta1ResourceClaim",
+    "V1beta1ResourceClaimConsumerReference",
+    "V1beta1ResourceClaimList",
+    "V1beta1ResourceClaimSpec",
+    "V1beta1ResourceClaimStatus",
+    "V1beta1ResourceClaimTemplate",
+    "V1beta1ResourceClaimTemplateList",
+    "V1beta1ResourceClaimTemplateSpec",
+    "V1beta1ResourcePool",
+    "V1beta1ResourceSlice",
+    "V1beta1ResourceSliceList",
+    "V1beta1ResourceSliceSpec",
+    "V1beta1ServiceCIDR",
+    "V1beta1ServiceCIDRList",
+    "V1beta1ServiceCIDRSpec",
+    "V1beta1ServiceCIDRStatus",
+    "V1beta1StorageVersionMigration",
+    "V1beta1StorageVersionMigrationList",
+    "V1beta1StorageVersionMigrationSpec",
+    "V1beta1StorageVersionMigrationStatus",
+    "V1beta1Variable",
+    "V1beta1VolumeAttributesClass",
+    "V1beta1VolumeAttributesClassList",
+    "V1beta2AllocatedDeviceStatus",
+    "V1beta2AllocationResult",
+    "V1beta2CELDeviceSelector",
+    "V1beta2CapacityRequestPolicy",
+    "V1beta2CapacityRequestPolicyRange",
+    "V1beta2CapacityRequirements",
+    "V1beta2Counter",
+    "V1beta2CounterSet",
+    "V1beta2Device",
+    "V1beta2DeviceAllocationConfiguration",
+    "V1beta2DeviceAllocationResult",
+    "V1beta2DeviceAttribute",
+    "V1beta2DeviceCapacity",
+    "V1beta2DeviceClaim",
+    "V1beta2DeviceClaimConfiguration",
+    "V1beta2DeviceClass",
+    "V1beta2DeviceClassConfiguration",
+    "V1beta2DeviceClassList",
+    "V1beta2DeviceClassSpec",
+    "V1beta2DeviceConstraint",
+    "V1beta2DeviceCounterConsumption",
+    "V1beta2DeviceRequest",
+    "V1beta2DeviceRequestAllocationResult",
+    "V1beta2DeviceSelector",
+    "V1beta2DeviceSubRequest",
+    "V1beta2DeviceTaint",
+    "V1beta2DeviceTaintRule",
+    "V1beta2DeviceTaintRuleList",
+    "V1beta2DeviceTaintRuleSpec",
+    "V1beta2DeviceTaintRuleStatus",
+    "V1beta2DeviceTaintSelector",
+    "V1beta2DeviceToleration",
+    "V1beta2ExactDeviceRequest",
+    "V1beta2NetworkDeviceData",
+    "V1beta2NodeAllocatableResourceMapping",
+    "V1beta2OpaqueDeviceConfiguration",
+    "V1beta2ResourceClaim",
+    "V1beta2ResourceClaimConsumerReference",
+    "V1beta2ResourceClaimList",
+    "V1beta2ResourceClaimSpec",
+    "V1beta2ResourceClaimStatus",
+    "V1beta2ResourceClaimTemplate",
+    "V1beta2ResourceClaimTemplateList",
+    "V1beta2ResourceClaimTemplateSpec",
+    "V1beta2ResourcePool",
+    "V1beta2ResourceSlice",
+    "V1beta2ResourceSliceList",
+    "V1beta2ResourceSliceSpec",
+    "V2APIGroupDiscovery",
+    "V2APIGroupDiscoveryList",
+    "V2APIResourceDiscovery",
+    "V2APISubresourceDiscovery",
+    "V2APIVersionDiscovery",
+    "V2ContainerResourceMetricSource",
+    "V2ContainerResourceMetricStatus",
+    "V2CrossVersionObjectReference",
+    "V2ExternalMetricSource",
+    "V2ExternalMetricStatus",
+    "V2HPAScalingPolicy",
+    "V2HPAScalingRules",
+    "V2HorizontalPodAutoscaler",
+    "V2HorizontalPodAutoscalerBehavior",
+    "V2HorizontalPodAutoscalerCondition",
+    "V2HorizontalPodAutoscalerList",
+    "V2HorizontalPodAutoscalerSpec",
+    "V2HorizontalPodAutoscalerStatus",
+    "V2MetricIdentifier",
+    "V2MetricSpec",
+    "V2MetricStatus",
+    "V2MetricTarget",
+    "V2MetricValueStatus",
+    "V2ObjectMetricSource",
+    "V2ObjectMetricStatus",
+    "V2PodsMetricSource",
+    "V2PodsMetricStatus",
+    "V2ResourceMetricSource",
+    "V2ResourceMetricStatus",
+    "V2beta1APIGroupDiscovery",
+    "V2beta1APIGroupDiscoveryList",
+    "V2beta1APIResourceDiscovery",
+    "V2beta1APISubresourceDiscovery",
+    "V2beta1APIVersionDiscovery",
+    "VersionInfo",
+]
+
+import typing as _typing
+
+if _typing.TYPE_CHECKING:
     # import models into model package
     from kubernetes.aio.client.models.admissionregistration_v1_service_reference import AdmissionregistrationV1ServiceReference
     from kubernetes.aio.client.models.admissionregistration_v1_webhook_client_config import AdmissionregistrationV1WebhookClientConfig
@@ -784,788 +1557,785 @@ if __import__("typing").TYPE_CHECKING:
     from kubernetes.aio.client.models.version_info import VersionInfo
 
 else:
-    from lazy_imports import LazyModule, as_package, load
+    from importlib import import_module
 
-    load(
-        LazyModule(
-            *as_package(__file__),
-            """# import models into model package
-from kubernetes.aio.client.models.admissionregistration_v1_service_reference import AdmissionregistrationV1ServiceReference
-from kubernetes.aio.client.models.admissionregistration_v1_webhook_client_config import AdmissionregistrationV1WebhookClientConfig
-from kubernetes.aio.client.models.apiextensions_v1_service_reference import ApiextensionsV1ServiceReference
-from kubernetes.aio.client.models.apiextensions_v1_webhook_client_config import ApiextensionsV1WebhookClientConfig
-from kubernetes.aio.client.models.apiregistration_v1_service_reference import ApiregistrationV1ServiceReference
-from kubernetes.aio.client.models.authentication_v1_token_request import AuthenticationV1TokenRequest
-from kubernetes.aio.client.models.core_v1_endpoint_port import CoreV1EndpointPort
-from kubernetes.aio.client.models.core_v1_event import CoreV1Event
-from kubernetes.aio.client.models.core_v1_event_list import CoreV1EventList
-from kubernetes.aio.client.models.core_v1_event_series import CoreV1EventSeries
-from kubernetes.aio.client.models.core_v1_resource_claim import CoreV1ResourceClaim
-from kubernetes.aio.client.models.discovery_v1_endpoint_port import DiscoveryV1EndpointPort
-from kubernetes.aio.client.models.events_v1_event import EventsV1Event
-from kubernetes.aio.client.models.events_v1_event_list import EventsV1EventList
-from kubernetes.aio.client.models.events_v1_event_series import EventsV1EventSeries
-from kubernetes.aio.client.models.flowcontrol_v1_subject import FlowcontrolV1Subject
-from kubernetes.aio.client.models.rbac_v1_subject import RbacV1Subject
-from kubernetes.aio.client.models.resource_v1_resource_claim import ResourceV1ResourceClaim
-from kubernetes.aio.client.models.storage_v1_token_request import StorageV1TokenRequest
-from kubernetes.aio.client.models.v1_api_group import V1APIGroup
-from kubernetes.aio.client.models.v1_api_group_list import V1APIGroupList
-from kubernetes.aio.client.models.v1_api_resource import V1APIResource
-from kubernetes.aio.client.models.v1_api_resource_list import V1APIResourceList
-from kubernetes.aio.client.models.v1_api_service import V1APIService
-from kubernetes.aio.client.models.v1_api_service_condition import V1APIServiceCondition
-from kubernetes.aio.client.models.v1_api_service_list import V1APIServiceList
-from kubernetes.aio.client.models.v1_api_service_spec import V1APIServiceSpec
-from kubernetes.aio.client.models.v1_api_service_status import V1APIServiceStatus
-from kubernetes.aio.client.models.v1_api_versions import V1APIVersions
-from kubernetes.aio.client.models.v1_aws_elastic_block_store_volume_source import V1AWSElasticBlockStoreVolumeSource
-from kubernetes.aio.client.models.v1_affinity import V1Affinity
-from kubernetes.aio.client.models.v1_aggregation_rule import V1AggregationRule
-from kubernetes.aio.client.models.v1_allocated_device_status import V1AllocatedDeviceStatus
-from kubernetes.aio.client.models.v1_allocation_result import V1AllocationResult
-from kubernetes.aio.client.models.v1_app_armor_profile import V1AppArmorProfile
-from kubernetes.aio.client.models.v1_apply_configuration import V1ApplyConfiguration
-from kubernetes.aio.client.models.v1_attached_volume import V1AttachedVolume
-from kubernetes.aio.client.models.v1_audit_annotation import V1AuditAnnotation
-from kubernetes.aio.client.models.v1_azure_disk_volume_source import V1AzureDiskVolumeSource
-from kubernetes.aio.client.models.v1_azure_file_persistent_volume_source import V1AzureFilePersistentVolumeSource
-from kubernetes.aio.client.models.v1_azure_file_volume_source import V1AzureFileVolumeSource
-from kubernetes.aio.client.models.v1_binding import V1Binding
-from kubernetes.aio.client.models.v1_bound_object_reference import V1BoundObjectReference
-from kubernetes.aio.client.models.v1_cel_device_selector import V1CELDeviceSelector
-from kubernetes.aio.client.models.v1_csi_driver import V1CSIDriver
-from kubernetes.aio.client.models.v1_csi_driver_list import V1CSIDriverList
-from kubernetes.aio.client.models.v1_csi_driver_spec import V1CSIDriverSpec
-from kubernetes.aio.client.models.v1_csi_node import V1CSINode
-from kubernetes.aio.client.models.v1_csi_node_driver import V1CSINodeDriver
-from kubernetes.aio.client.models.v1_csi_node_list import V1CSINodeList
-from kubernetes.aio.client.models.v1_csi_node_spec import V1CSINodeSpec
-from kubernetes.aio.client.models.v1_csi_persistent_volume_source import V1CSIPersistentVolumeSource
-from kubernetes.aio.client.models.v1_csi_storage_capacity import V1CSIStorageCapacity
-from kubernetes.aio.client.models.v1_csi_storage_capacity_list import V1CSIStorageCapacityList
-from kubernetes.aio.client.models.v1_csi_volume_source import V1CSIVolumeSource
-from kubernetes.aio.client.models.v1_capabilities import V1Capabilities
-from kubernetes.aio.client.models.v1_capacity_request_policy import V1CapacityRequestPolicy
-from kubernetes.aio.client.models.v1_capacity_request_policy_range import V1CapacityRequestPolicyRange
-from kubernetes.aio.client.models.v1_capacity_requirements import V1CapacityRequirements
-from kubernetes.aio.client.models.v1_ceph_fs_persistent_volume_source import V1CephFSPersistentVolumeSource
-from kubernetes.aio.client.models.v1_ceph_fs_volume_source import V1CephFSVolumeSource
-from kubernetes.aio.client.models.v1_certificate_signing_request import V1CertificateSigningRequest
-from kubernetes.aio.client.models.v1_certificate_signing_request_condition import V1CertificateSigningRequestCondition
-from kubernetes.aio.client.models.v1_certificate_signing_request_list import V1CertificateSigningRequestList
-from kubernetes.aio.client.models.v1_certificate_signing_request_spec import V1CertificateSigningRequestSpec
-from kubernetes.aio.client.models.v1_certificate_signing_request_status import V1CertificateSigningRequestStatus
-from kubernetes.aio.client.models.v1_cinder_persistent_volume_source import V1CinderPersistentVolumeSource
-from kubernetes.aio.client.models.v1_cinder_volume_source import V1CinderVolumeSource
-from kubernetes.aio.client.models.v1_client_ip_config import V1ClientIPConfig
-from kubernetes.aio.client.models.v1_cluster_role import V1ClusterRole
-from kubernetes.aio.client.models.v1_cluster_role_binding import V1ClusterRoleBinding
-from kubernetes.aio.client.models.v1_cluster_role_binding_list import V1ClusterRoleBindingList
-from kubernetes.aio.client.models.v1_cluster_role_list import V1ClusterRoleList
-from kubernetes.aio.client.models.v1_cluster_trust_bundle_projection import V1ClusterTrustBundleProjection
-from kubernetes.aio.client.models.v1_component_condition import V1ComponentCondition
-from kubernetes.aio.client.models.v1_component_status import V1ComponentStatus
-from kubernetes.aio.client.models.v1_component_status_list import V1ComponentStatusList
-from kubernetes.aio.client.models.v1_condition import V1Condition
-from kubernetes.aio.client.models.v1_config_map import V1ConfigMap
-from kubernetes.aio.client.models.v1_config_map_env_source import V1ConfigMapEnvSource
-from kubernetes.aio.client.models.v1_config_map_key_selector import V1ConfigMapKeySelector
-from kubernetes.aio.client.models.v1_config_map_list import V1ConfigMapList
-from kubernetes.aio.client.models.v1_config_map_node_config_source import V1ConfigMapNodeConfigSource
-from kubernetes.aio.client.models.v1_config_map_projection import V1ConfigMapProjection
-from kubernetes.aio.client.models.v1_config_map_volume_source import V1ConfigMapVolumeSource
-from kubernetes.aio.client.models.v1_container import V1Container
-from kubernetes.aio.client.models.v1_container_extended_resource_request import V1ContainerExtendedResourceRequest
-from kubernetes.aio.client.models.v1_container_image import V1ContainerImage
-from kubernetes.aio.client.models.v1_container_port import V1ContainerPort
-from kubernetes.aio.client.models.v1_container_resize_policy import V1ContainerResizePolicy
-from kubernetes.aio.client.models.v1_container_restart_rule import V1ContainerRestartRule
-from kubernetes.aio.client.models.v1_container_restart_rule_on_exit_codes import V1ContainerRestartRuleOnExitCodes
-from kubernetes.aio.client.models.v1_container_state import V1ContainerState
-from kubernetes.aio.client.models.v1_container_state_running import V1ContainerStateRunning
-from kubernetes.aio.client.models.v1_container_state_terminated import V1ContainerStateTerminated
-from kubernetes.aio.client.models.v1_container_state_waiting import V1ContainerStateWaiting
-from kubernetes.aio.client.models.v1_container_status import V1ContainerStatus
-from kubernetes.aio.client.models.v1_container_user import V1ContainerUser
-from kubernetes.aio.client.models.v1_controller_revision import V1ControllerRevision
-from kubernetes.aio.client.models.v1_controller_revision_list import V1ControllerRevisionList
-from kubernetes.aio.client.models.v1_counter import V1Counter
-from kubernetes.aio.client.models.v1_counter_set import V1CounterSet
-from kubernetes.aio.client.models.v1_cron_job import V1CronJob
-from kubernetes.aio.client.models.v1_cron_job_list import V1CronJobList
-from kubernetes.aio.client.models.v1_cron_job_spec import V1CronJobSpec
-from kubernetes.aio.client.models.v1_cron_job_status import V1CronJobStatus
-from kubernetes.aio.client.models.v1_cross_version_object_reference import V1CrossVersionObjectReference
-from kubernetes.aio.client.models.v1_custom_resource_column_definition import V1CustomResourceColumnDefinition
-from kubernetes.aio.client.models.v1_custom_resource_conversion import V1CustomResourceConversion
-from kubernetes.aio.client.models.v1_custom_resource_definition import V1CustomResourceDefinition
-from kubernetes.aio.client.models.v1_custom_resource_definition_condition import V1CustomResourceDefinitionCondition
-from kubernetes.aio.client.models.v1_custom_resource_definition_list import V1CustomResourceDefinitionList
-from kubernetes.aio.client.models.v1_custom_resource_definition_names import V1CustomResourceDefinitionNames
-from kubernetes.aio.client.models.v1_custom_resource_definition_spec import V1CustomResourceDefinitionSpec
-from kubernetes.aio.client.models.v1_custom_resource_definition_status import V1CustomResourceDefinitionStatus
-from kubernetes.aio.client.models.v1_custom_resource_definition_version import V1CustomResourceDefinitionVersion
-from kubernetes.aio.client.models.v1_custom_resource_subresource_scale import V1CustomResourceSubresourceScale
-from kubernetes.aio.client.models.v1_custom_resource_subresources import V1CustomResourceSubresources
-from kubernetes.aio.client.models.v1_custom_resource_validation import V1CustomResourceValidation
-from kubernetes.aio.client.models.v1_daemon_endpoint import V1DaemonEndpoint
-from kubernetes.aio.client.models.v1_daemon_set import V1DaemonSet
-from kubernetes.aio.client.models.v1_daemon_set_condition import V1DaemonSetCondition
-from kubernetes.aio.client.models.v1_daemon_set_list import V1DaemonSetList
-from kubernetes.aio.client.models.v1_daemon_set_spec import V1DaemonSetSpec
-from kubernetes.aio.client.models.v1_daemon_set_status import V1DaemonSetStatus
-from kubernetes.aio.client.models.v1_daemon_set_update_strategy import V1DaemonSetUpdateStrategy
-from kubernetes.aio.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.aio.client.models.v1_deployment import V1Deployment
-from kubernetes.aio.client.models.v1_deployment_condition import V1DeploymentCondition
-from kubernetes.aio.client.models.v1_deployment_list import V1DeploymentList
-from kubernetes.aio.client.models.v1_deployment_spec import V1DeploymentSpec
-from kubernetes.aio.client.models.v1_deployment_status import V1DeploymentStatus
-from kubernetes.aio.client.models.v1_deployment_strategy import V1DeploymentStrategy
-from kubernetes.aio.client.models.v1_device import V1Device
-from kubernetes.aio.client.models.v1_device_allocation_configuration import V1DeviceAllocationConfiguration
-from kubernetes.aio.client.models.v1_device_allocation_result import V1DeviceAllocationResult
-from kubernetes.aio.client.models.v1_device_attribute import V1DeviceAttribute
-from kubernetes.aio.client.models.v1_device_capacity import V1DeviceCapacity
-from kubernetes.aio.client.models.v1_device_claim import V1DeviceClaim
-from kubernetes.aio.client.models.v1_device_claim_configuration import V1DeviceClaimConfiguration
-from kubernetes.aio.client.models.v1_device_class import V1DeviceClass
-from kubernetes.aio.client.models.v1_device_class_configuration import V1DeviceClassConfiguration
-from kubernetes.aio.client.models.v1_device_class_list import V1DeviceClassList
-from kubernetes.aio.client.models.v1_device_class_spec import V1DeviceClassSpec
-from kubernetes.aio.client.models.v1_device_constraint import V1DeviceConstraint
-from kubernetes.aio.client.models.v1_device_counter_consumption import V1DeviceCounterConsumption
-from kubernetes.aio.client.models.v1_device_request import V1DeviceRequest
-from kubernetes.aio.client.models.v1_device_request_allocation_result import V1DeviceRequestAllocationResult
-from kubernetes.aio.client.models.v1_device_selector import V1DeviceSelector
-from kubernetes.aio.client.models.v1_device_sub_request import V1DeviceSubRequest
-from kubernetes.aio.client.models.v1_device_taint import V1DeviceTaint
-from kubernetes.aio.client.models.v1_device_toleration import V1DeviceToleration
-from kubernetes.aio.client.models.v1_downward_api_projection import V1DownwardAPIProjection
-from kubernetes.aio.client.models.v1_downward_api_volume_file import V1DownwardAPIVolumeFile
-from kubernetes.aio.client.models.v1_downward_api_volume_source import V1DownwardAPIVolumeSource
-from kubernetes.aio.client.models.v1_empty_dir_volume_source import V1EmptyDirVolumeSource
-from kubernetes.aio.client.models.v1_endpoint import V1Endpoint
-from kubernetes.aio.client.models.v1_endpoint_address import V1EndpointAddress
-from kubernetes.aio.client.models.v1_endpoint_conditions import V1EndpointConditions
-from kubernetes.aio.client.models.v1_endpoint_hints import V1EndpointHints
-from kubernetes.aio.client.models.v1_endpoint_slice import V1EndpointSlice
-from kubernetes.aio.client.models.v1_endpoint_slice_list import V1EndpointSliceList
-from kubernetes.aio.client.models.v1_endpoint_subset import V1EndpointSubset
-from kubernetes.aio.client.models.v1_endpoints import V1Endpoints
-from kubernetes.aio.client.models.v1_endpoints_list import V1EndpointsList
-from kubernetes.aio.client.models.v1_env_from_source import V1EnvFromSource
-from kubernetes.aio.client.models.v1_env_var import V1EnvVar
-from kubernetes.aio.client.models.v1_env_var_source import V1EnvVarSource
-from kubernetes.aio.client.models.v1_ephemeral_container import V1EphemeralContainer
-from kubernetes.aio.client.models.v1_ephemeral_volume_source import V1EphemeralVolumeSource
-from kubernetes.aio.client.models.v1_event_source import V1EventSource
-from kubernetes.aio.client.models.v1_eviction import V1Eviction
-from kubernetes.aio.client.models.v1_exact_device_request import V1ExactDeviceRequest
-from kubernetes.aio.client.models.v1_exec_action import V1ExecAction
-from kubernetes.aio.client.models.v1_exempt_priority_level_configuration import V1ExemptPriorityLevelConfiguration
-from kubernetes.aio.client.models.v1_expression_warning import V1ExpressionWarning
-from kubernetes.aio.client.models.v1_external_documentation import V1ExternalDocumentation
-from kubernetes.aio.client.models.v1_fc_volume_source import V1FCVolumeSource
-from kubernetes.aio.client.models.v1_field_selector_attributes import V1FieldSelectorAttributes
-from kubernetes.aio.client.models.v1_field_selector_requirement import V1FieldSelectorRequirement
-from kubernetes.aio.client.models.v1_file_key_selector import V1FileKeySelector
-from kubernetes.aio.client.models.v1_flex_persistent_volume_source import V1FlexPersistentVolumeSource
-from kubernetes.aio.client.models.v1_flex_volume_source import V1FlexVolumeSource
-from kubernetes.aio.client.models.v1_flocker_volume_source import V1FlockerVolumeSource
-from kubernetes.aio.client.models.v1_flow_distinguisher_method import V1FlowDistinguisherMethod
-from kubernetes.aio.client.models.v1_flow_schema import V1FlowSchema
-from kubernetes.aio.client.models.v1_flow_schema_condition import V1FlowSchemaCondition
-from kubernetes.aio.client.models.v1_flow_schema_list import V1FlowSchemaList
-from kubernetes.aio.client.models.v1_flow_schema_spec import V1FlowSchemaSpec
-from kubernetes.aio.client.models.v1_flow_schema_status import V1FlowSchemaStatus
-from kubernetes.aio.client.models.v1_for_node import V1ForNode
-from kubernetes.aio.client.models.v1_for_zone import V1ForZone
-from kubernetes.aio.client.models.v1_gce_persistent_disk_volume_source import V1GCEPersistentDiskVolumeSource
-from kubernetes.aio.client.models.v1_grpc_action import V1GRPCAction
-from kubernetes.aio.client.models.v1_git_repo_volume_source import V1GitRepoVolumeSource
-from kubernetes.aio.client.models.v1_glusterfs_persistent_volume_source import V1GlusterfsPersistentVolumeSource
-from kubernetes.aio.client.models.v1_glusterfs_volume_source import V1GlusterfsVolumeSource
-from kubernetes.aio.client.models.v1_group_resource import V1GroupResource
-from kubernetes.aio.client.models.v1_group_subject import V1GroupSubject
-from kubernetes.aio.client.models.v1_group_version_for_discovery import V1GroupVersionForDiscovery
-from kubernetes.aio.client.models.v1_group_version_kind import V1GroupVersionKind
-from kubernetes.aio.client.models.v1_http_get_action import V1HTTPGetAction
-from kubernetes.aio.client.models.v1_http_header import V1HTTPHeader
-from kubernetes.aio.client.models.v1_http_ingress_path import V1HTTPIngressPath
-from kubernetes.aio.client.models.v1_http_ingress_rule_value import V1HTTPIngressRuleValue
-from kubernetes.aio.client.models.v1_horizontal_pod_autoscaler import V1HorizontalPodAutoscaler
-from kubernetes.aio.client.models.v1_horizontal_pod_autoscaler_list import V1HorizontalPodAutoscalerList
-from kubernetes.aio.client.models.v1_horizontal_pod_autoscaler_spec import V1HorizontalPodAutoscalerSpec
-from kubernetes.aio.client.models.v1_horizontal_pod_autoscaler_status import V1HorizontalPodAutoscalerStatus
-from kubernetes.aio.client.models.v1_host_alias import V1HostAlias
-from kubernetes.aio.client.models.v1_host_ip import V1HostIP
-from kubernetes.aio.client.models.v1_host_path_volume_source import V1HostPathVolumeSource
-from kubernetes.aio.client.models.v1_ip_address import V1IPAddress
-from kubernetes.aio.client.models.v1_ip_address_list import V1IPAddressList
-from kubernetes.aio.client.models.v1_ip_address_spec import V1IPAddressSpec
-from kubernetes.aio.client.models.v1_ip_block import V1IPBlock
-from kubernetes.aio.client.models.v1_iscsi_persistent_volume_source import V1ISCSIPersistentVolumeSource
-from kubernetes.aio.client.models.v1_iscsi_volume_source import V1ISCSIVolumeSource
-from kubernetes.aio.client.models.v1_image_volume_source import V1ImageVolumeSource
-from kubernetes.aio.client.models.v1_image_volume_status import V1ImageVolumeStatus
-from kubernetes.aio.client.models.v1_ingress import V1Ingress
-from kubernetes.aio.client.models.v1_ingress_backend import V1IngressBackend
-from kubernetes.aio.client.models.v1_ingress_class import V1IngressClass
-from kubernetes.aio.client.models.v1_ingress_class_list import V1IngressClassList
-from kubernetes.aio.client.models.v1_ingress_class_parameters_reference import V1IngressClassParametersReference
-from kubernetes.aio.client.models.v1_ingress_class_spec import V1IngressClassSpec
-from kubernetes.aio.client.models.v1_ingress_list import V1IngressList
-from kubernetes.aio.client.models.v1_ingress_load_balancer_ingress import V1IngressLoadBalancerIngress
-from kubernetes.aio.client.models.v1_ingress_load_balancer_status import V1IngressLoadBalancerStatus
-from kubernetes.aio.client.models.v1_ingress_port_status import V1IngressPortStatus
-from kubernetes.aio.client.models.v1_ingress_rule import V1IngressRule
-from kubernetes.aio.client.models.v1_ingress_service_backend import V1IngressServiceBackend
-from kubernetes.aio.client.models.v1_ingress_spec import V1IngressSpec
-from kubernetes.aio.client.models.v1_ingress_status import V1IngressStatus
-from kubernetes.aio.client.models.v1_ingress_tls import V1IngressTLS
-from kubernetes.aio.client.models.v1_json_patch import V1JSONPatch
-from kubernetes.aio.client.models.v1_json_schema_props import V1JSONSchemaProps
-from kubernetes.aio.client.models.v1_job import V1Job
-from kubernetes.aio.client.models.v1_job_condition import V1JobCondition
-from kubernetes.aio.client.models.v1_job_list import V1JobList
-from kubernetes.aio.client.models.v1_job_spec import V1JobSpec
-from kubernetes.aio.client.models.v1_job_status import V1JobStatus
-from kubernetes.aio.client.models.v1_job_template_spec import V1JobTemplateSpec
-from kubernetes.aio.client.models.v1_key_to_path import V1KeyToPath
-from kubernetes.aio.client.models.v1_label_selector import V1LabelSelector
-from kubernetes.aio.client.models.v1_label_selector_attributes import V1LabelSelectorAttributes
-from kubernetes.aio.client.models.v1_label_selector_requirement import V1LabelSelectorRequirement
-from kubernetes.aio.client.models.v1_lease import V1Lease
-from kubernetes.aio.client.models.v1_lease_list import V1LeaseList
-from kubernetes.aio.client.models.v1_lease_spec import V1LeaseSpec
-from kubernetes.aio.client.models.v1_lifecycle import V1Lifecycle
-from kubernetes.aio.client.models.v1_lifecycle_handler import V1LifecycleHandler
-from kubernetes.aio.client.models.v1_limit_range import V1LimitRange
-from kubernetes.aio.client.models.v1_limit_range_item import V1LimitRangeItem
-from kubernetes.aio.client.models.v1_limit_range_list import V1LimitRangeList
-from kubernetes.aio.client.models.v1_limit_range_spec import V1LimitRangeSpec
-from kubernetes.aio.client.models.v1_limit_response import V1LimitResponse
-from kubernetes.aio.client.models.v1_limited_priority_level_configuration import V1LimitedPriorityLevelConfiguration
-from kubernetes.aio.client.models.v1_linux_container_user import V1LinuxContainerUser
-from kubernetes.aio.client.models.v1_list_meta import V1ListMeta
-from kubernetes.aio.client.models.v1_load_balancer_ingress import V1LoadBalancerIngress
-from kubernetes.aio.client.models.v1_load_balancer_status import V1LoadBalancerStatus
-from kubernetes.aio.client.models.v1_local_object_reference import V1LocalObjectReference
-from kubernetes.aio.client.models.v1_local_subject_access_review import V1LocalSubjectAccessReview
-from kubernetes.aio.client.models.v1_local_volume_source import V1LocalVolumeSource
-from kubernetes.aio.client.models.v1_managed_fields_entry import V1ManagedFieldsEntry
-from kubernetes.aio.client.models.v1_match_condition import V1MatchCondition
-from kubernetes.aio.client.models.v1_match_resources import V1MatchResources
-from kubernetes.aio.client.models.v1_modify_volume_status import V1ModifyVolumeStatus
-from kubernetes.aio.client.models.v1_mutating_admission_policy import V1MutatingAdmissionPolicy
-from kubernetes.aio.client.models.v1_mutating_admission_policy_binding import V1MutatingAdmissionPolicyBinding
-from kubernetes.aio.client.models.v1_mutating_admission_policy_binding_list import V1MutatingAdmissionPolicyBindingList
-from kubernetes.aio.client.models.v1_mutating_admission_policy_binding_spec import V1MutatingAdmissionPolicyBindingSpec
-from kubernetes.aio.client.models.v1_mutating_admission_policy_list import V1MutatingAdmissionPolicyList
-from kubernetes.aio.client.models.v1_mutating_admission_policy_spec import V1MutatingAdmissionPolicySpec
-from kubernetes.aio.client.models.v1_mutating_webhook import V1MutatingWebhook
-from kubernetes.aio.client.models.v1_mutating_webhook_configuration import V1MutatingWebhookConfiguration
-from kubernetes.aio.client.models.v1_mutating_webhook_configuration_list import V1MutatingWebhookConfigurationList
-from kubernetes.aio.client.models.v1_mutation import V1Mutation
-from kubernetes.aio.client.models.v1_nfs_volume_source import V1NFSVolumeSource
-from kubernetes.aio.client.models.v1_named_rule_with_operations import V1NamedRuleWithOperations
-from kubernetes.aio.client.models.v1_namespace import V1Namespace
-from kubernetes.aio.client.models.v1_namespace_condition import V1NamespaceCondition
-from kubernetes.aio.client.models.v1_namespace_list import V1NamespaceList
-from kubernetes.aio.client.models.v1_namespace_spec import V1NamespaceSpec
-from kubernetes.aio.client.models.v1_namespace_status import V1NamespaceStatus
-from kubernetes.aio.client.models.v1_network_device_data import V1NetworkDeviceData
-from kubernetes.aio.client.models.v1_network_policy import V1NetworkPolicy
-from kubernetes.aio.client.models.v1_network_policy_egress_rule import V1NetworkPolicyEgressRule
-from kubernetes.aio.client.models.v1_network_policy_ingress_rule import V1NetworkPolicyIngressRule
-from kubernetes.aio.client.models.v1_network_policy_list import V1NetworkPolicyList
-from kubernetes.aio.client.models.v1_network_policy_peer import V1NetworkPolicyPeer
-from kubernetes.aio.client.models.v1_network_policy_port import V1NetworkPolicyPort
-from kubernetes.aio.client.models.v1_network_policy_spec import V1NetworkPolicySpec
-from kubernetes.aio.client.models.v1_node import V1Node
-from kubernetes.aio.client.models.v1_node_address import V1NodeAddress
-from kubernetes.aio.client.models.v1_node_affinity import V1NodeAffinity
-from kubernetes.aio.client.models.v1_node_allocatable_resource_claim_status import V1NodeAllocatableResourceClaimStatus
-from kubernetes.aio.client.models.v1_node_allocatable_resource_mapping import V1NodeAllocatableResourceMapping
-from kubernetes.aio.client.models.v1_node_condition import V1NodeCondition
-from kubernetes.aio.client.models.v1_node_config_source import V1NodeConfigSource
-from kubernetes.aio.client.models.v1_node_config_status import V1NodeConfigStatus
-from kubernetes.aio.client.models.v1_node_daemon_endpoints import V1NodeDaemonEndpoints
-from kubernetes.aio.client.models.v1_node_features import V1NodeFeatures
-from kubernetes.aio.client.models.v1_node_list import V1NodeList
-from kubernetes.aio.client.models.v1_node_runtime_handler import V1NodeRuntimeHandler
-from kubernetes.aio.client.models.v1_node_runtime_handler_features import V1NodeRuntimeHandlerFeatures
-from kubernetes.aio.client.models.v1_node_selector import V1NodeSelector
-from kubernetes.aio.client.models.v1_node_selector_requirement import V1NodeSelectorRequirement
-from kubernetes.aio.client.models.v1_node_selector_term import V1NodeSelectorTerm
-from kubernetes.aio.client.models.v1_node_spec import V1NodeSpec
-from kubernetes.aio.client.models.v1_node_status import V1NodeStatus
-from kubernetes.aio.client.models.v1_node_swap_status import V1NodeSwapStatus
-from kubernetes.aio.client.models.v1_node_system_info import V1NodeSystemInfo
-from kubernetes.aio.client.models.v1_non_resource_attributes import V1NonResourceAttributes
-from kubernetes.aio.client.models.v1_non_resource_policy_rule import V1NonResourcePolicyRule
-from kubernetes.aio.client.models.v1_non_resource_rule import V1NonResourceRule
-from kubernetes.aio.client.models.v1_object_field_selector import V1ObjectFieldSelector
-from kubernetes.aio.client.models.v1_object_meta import V1ObjectMeta
-from kubernetes.aio.client.models.v1_object_reference import V1ObjectReference
-from kubernetes.aio.client.models.v1_opaque_device_configuration import V1OpaqueDeviceConfiguration
-from kubernetes.aio.client.models.v1_overhead import V1Overhead
-from kubernetes.aio.client.models.v1_owner_reference import V1OwnerReference
-from kubernetes.aio.client.models.v1_param_kind import V1ParamKind
-from kubernetes.aio.client.models.v1_param_ref import V1ParamRef
-from kubernetes.aio.client.models.v1_parent_reference import V1ParentReference
-from kubernetes.aio.client.models.v1_persistent_volume import V1PersistentVolume
-from kubernetes.aio.client.models.v1_persistent_volume_claim import V1PersistentVolumeClaim
-from kubernetes.aio.client.models.v1_persistent_volume_claim_condition import V1PersistentVolumeClaimCondition
-from kubernetes.aio.client.models.v1_persistent_volume_claim_list import V1PersistentVolumeClaimList
-from kubernetes.aio.client.models.v1_persistent_volume_claim_spec import V1PersistentVolumeClaimSpec
-from kubernetes.aio.client.models.v1_persistent_volume_claim_status import V1PersistentVolumeClaimStatus
-from kubernetes.aio.client.models.v1_persistent_volume_claim_template import V1PersistentVolumeClaimTemplate
-from kubernetes.aio.client.models.v1_persistent_volume_claim_volume_source import V1PersistentVolumeClaimVolumeSource
-from kubernetes.aio.client.models.v1_persistent_volume_list import V1PersistentVolumeList
-from kubernetes.aio.client.models.v1_persistent_volume_spec import V1PersistentVolumeSpec
-from kubernetes.aio.client.models.v1_persistent_volume_status import V1PersistentVolumeStatus
-from kubernetes.aio.client.models.v1_photon_persistent_disk_volume_source import V1PhotonPersistentDiskVolumeSource
-from kubernetes.aio.client.models.v1_pod import V1Pod
-from kubernetes.aio.client.models.v1_pod_affinity import V1PodAffinity
-from kubernetes.aio.client.models.v1_pod_affinity_term import V1PodAffinityTerm
-from kubernetes.aio.client.models.v1_pod_anti_affinity import V1PodAntiAffinity
-from kubernetes.aio.client.models.v1_pod_certificate_projection import V1PodCertificateProjection
-from kubernetes.aio.client.models.v1_pod_condition import V1PodCondition
-from kubernetes.aio.client.models.v1_pod_dns_config import V1PodDNSConfig
-from kubernetes.aio.client.models.v1_pod_dns_config_option import V1PodDNSConfigOption
-from kubernetes.aio.client.models.v1_pod_disruption_budget import V1PodDisruptionBudget
-from kubernetes.aio.client.models.v1_pod_disruption_budget_list import V1PodDisruptionBudgetList
-from kubernetes.aio.client.models.v1_pod_disruption_budget_spec import V1PodDisruptionBudgetSpec
-from kubernetes.aio.client.models.v1_pod_disruption_budget_status import V1PodDisruptionBudgetStatus
-from kubernetes.aio.client.models.v1_pod_extended_resource_claim_status import V1PodExtendedResourceClaimStatus
-from kubernetes.aio.client.models.v1_pod_failure_policy import V1PodFailurePolicy
-from kubernetes.aio.client.models.v1_pod_failure_policy_on_exit_codes_requirement import V1PodFailurePolicyOnExitCodesRequirement
-from kubernetes.aio.client.models.v1_pod_failure_policy_on_pod_conditions_pattern import V1PodFailurePolicyOnPodConditionsPattern
-from kubernetes.aio.client.models.v1_pod_failure_policy_rule import V1PodFailurePolicyRule
-from kubernetes.aio.client.models.v1_pod_ip import V1PodIP
-from kubernetes.aio.client.models.v1_pod_list import V1PodList
-from kubernetes.aio.client.models.v1_pod_os import V1PodOS
-from kubernetes.aio.client.models.v1_pod_readiness_gate import V1PodReadinessGate
-from kubernetes.aio.client.models.v1_pod_resource_claim import V1PodResourceClaim
-from kubernetes.aio.client.models.v1_pod_resource_claim_status import V1PodResourceClaimStatus
-from kubernetes.aio.client.models.v1_pod_scheduling_gate import V1PodSchedulingGate
-from kubernetes.aio.client.models.v1_pod_scheduling_group import V1PodSchedulingGroup
-from kubernetes.aio.client.models.v1_pod_security_context import V1PodSecurityContext
-from kubernetes.aio.client.models.v1_pod_spec import V1PodSpec
-from kubernetes.aio.client.models.v1_pod_status import V1PodStatus
-from kubernetes.aio.client.models.v1_pod_template import V1PodTemplate
-from kubernetes.aio.client.models.v1_pod_template_list import V1PodTemplateList
-from kubernetes.aio.client.models.v1_pod_template_spec import V1PodTemplateSpec
-from kubernetes.aio.client.models.v1_policy_rule import V1PolicyRule
-from kubernetes.aio.client.models.v1_policy_rules_with_subjects import V1PolicyRulesWithSubjects
-from kubernetes.aio.client.models.v1_port_status import V1PortStatus
-from kubernetes.aio.client.models.v1_portworx_volume_source import V1PortworxVolumeSource
-from kubernetes.aio.client.models.v1_preconditions import V1Preconditions
-from kubernetes.aio.client.models.v1_preferred_scheduling_term import V1PreferredSchedulingTerm
-from kubernetes.aio.client.models.v1_priority_class import V1PriorityClass
-from kubernetes.aio.client.models.v1_priority_class_list import V1PriorityClassList
-from kubernetes.aio.client.models.v1_priority_level_configuration import V1PriorityLevelConfiguration
-from kubernetes.aio.client.models.v1_priority_level_configuration_condition import V1PriorityLevelConfigurationCondition
-from kubernetes.aio.client.models.v1_priority_level_configuration_list import V1PriorityLevelConfigurationList
-from kubernetes.aio.client.models.v1_priority_level_configuration_reference import V1PriorityLevelConfigurationReference
-from kubernetes.aio.client.models.v1_priority_level_configuration_spec import V1PriorityLevelConfigurationSpec
-from kubernetes.aio.client.models.v1_priority_level_configuration_status import V1PriorityLevelConfigurationStatus
-from kubernetes.aio.client.models.v1_probe import V1Probe
-from kubernetes.aio.client.models.v1_projected_volume_source import V1ProjectedVolumeSource
-from kubernetes.aio.client.models.v1_queuing_configuration import V1QueuingConfiguration
-from kubernetes.aio.client.models.v1_quobyte_volume_source import V1QuobyteVolumeSource
-from kubernetes.aio.client.models.v1_rbd_persistent_volume_source import V1RBDPersistentVolumeSource
-from kubernetes.aio.client.models.v1_rbd_volume_source import V1RBDVolumeSource
-from kubernetes.aio.client.models.v1_replica_set import V1ReplicaSet
-from kubernetes.aio.client.models.v1_replica_set_condition import V1ReplicaSetCondition
-from kubernetes.aio.client.models.v1_replica_set_list import V1ReplicaSetList
-from kubernetes.aio.client.models.v1_replica_set_spec import V1ReplicaSetSpec
-from kubernetes.aio.client.models.v1_replica_set_status import V1ReplicaSetStatus
-from kubernetes.aio.client.models.v1_replication_controller import V1ReplicationController
-from kubernetes.aio.client.models.v1_replication_controller_condition import V1ReplicationControllerCondition
-from kubernetes.aio.client.models.v1_replication_controller_list import V1ReplicationControllerList
-from kubernetes.aio.client.models.v1_replication_controller_spec import V1ReplicationControllerSpec
-from kubernetes.aio.client.models.v1_replication_controller_status import V1ReplicationControllerStatus
-from kubernetes.aio.client.models.v1_resource_attributes import V1ResourceAttributes
-from kubernetes.aio.client.models.v1_resource_claim_consumer_reference import V1ResourceClaimConsumerReference
-from kubernetes.aio.client.models.v1_resource_claim_list import V1ResourceClaimList
-from kubernetes.aio.client.models.v1_resource_claim_spec import V1ResourceClaimSpec
-from kubernetes.aio.client.models.v1_resource_claim_status import V1ResourceClaimStatus
-from kubernetes.aio.client.models.v1_resource_claim_template import V1ResourceClaimTemplate
-from kubernetes.aio.client.models.v1_resource_claim_template_list import V1ResourceClaimTemplateList
-from kubernetes.aio.client.models.v1_resource_claim_template_spec import V1ResourceClaimTemplateSpec
-from kubernetes.aio.client.models.v1_resource_field_selector import V1ResourceFieldSelector
-from kubernetes.aio.client.models.v1_resource_health import V1ResourceHealth
-from kubernetes.aio.client.models.v1_resource_policy_rule import V1ResourcePolicyRule
-from kubernetes.aio.client.models.v1_resource_pool import V1ResourcePool
-from kubernetes.aio.client.models.v1_resource_quota import V1ResourceQuota
-from kubernetes.aio.client.models.v1_resource_quota_list import V1ResourceQuotaList
-from kubernetes.aio.client.models.v1_resource_quota_spec import V1ResourceQuotaSpec
-from kubernetes.aio.client.models.v1_resource_quota_status import V1ResourceQuotaStatus
-from kubernetes.aio.client.models.v1_resource_requirements import V1ResourceRequirements
-from kubernetes.aio.client.models.v1_resource_rule import V1ResourceRule
-from kubernetes.aio.client.models.v1_resource_slice import V1ResourceSlice
-from kubernetes.aio.client.models.v1_resource_slice_list import V1ResourceSliceList
-from kubernetes.aio.client.models.v1_resource_slice_spec import V1ResourceSliceSpec
-from kubernetes.aio.client.models.v1_resource_status import V1ResourceStatus
-from kubernetes.aio.client.models.v1_role import V1Role
-from kubernetes.aio.client.models.v1_role_binding import V1RoleBinding
-from kubernetes.aio.client.models.v1_role_binding_list import V1RoleBindingList
-from kubernetes.aio.client.models.v1_role_list import V1RoleList
-from kubernetes.aio.client.models.v1_role_ref import V1RoleRef
-from kubernetes.aio.client.models.v1_rolling_update_daemon_set import V1RollingUpdateDaemonSet
-from kubernetes.aio.client.models.v1_rolling_update_deployment import V1RollingUpdateDeployment
-from kubernetes.aio.client.models.v1_rolling_update_stateful_set_strategy import V1RollingUpdateStatefulSetStrategy
-from kubernetes.aio.client.models.v1_rule_with_operations import V1RuleWithOperations
-from kubernetes.aio.client.models.v1_runtime_class import V1RuntimeClass
-from kubernetes.aio.client.models.v1_runtime_class_list import V1RuntimeClassList
-from kubernetes.aio.client.models.v1_se_linux_options import V1SELinuxOptions
-from kubernetes.aio.client.models.v1_scale import V1Scale
-from kubernetes.aio.client.models.v1_scale_io_persistent_volume_source import V1ScaleIOPersistentVolumeSource
-from kubernetes.aio.client.models.v1_scale_io_volume_source import V1ScaleIOVolumeSource
-from kubernetes.aio.client.models.v1_scale_spec import V1ScaleSpec
-from kubernetes.aio.client.models.v1_scale_status import V1ScaleStatus
-from kubernetes.aio.client.models.v1_scheduling import V1Scheduling
-from kubernetes.aio.client.models.v1_scope_selector import V1ScopeSelector
-from kubernetes.aio.client.models.v1_scoped_resource_selector_requirement import V1ScopedResourceSelectorRequirement
-from kubernetes.aio.client.models.v1_seccomp_profile import V1SeccompProfile
-from kubernetes.aio.client.models.v1_secret import V1Secret
-from kubernetes.aio.client.models.v1_secret_env_source import V1SecretEnvSource
-from kubernetes.aio.client.models.v1_secret_key_selector import V1SecretKeySelector
-from kubernetes.aio.client.models.v1_secret_list import V1SecretList
-from kubernetes.aio.client.models.v1_secret_projection import V1SecretProjection
-from kubernetes.aio.client.models.v1_secret_reference import V1SecretReference
-from kubernetes.aio.client.models.v1_secret_volume_source import V1SecretVolumeSource
-from kubernetes.aio.client.models.v1_security_context import V1SecurityContext
-from kubernetes.aio.client.models.v1_selectable_field import V1SelectableField
-from kubernetes.aio.client.models.v1_self_subject_access_review import V1SelfSubjectAccessReview
-from kubernetes.aio.client.models.v1_self_subject_access_review_spec import V1SelfSubjectAccessReviewSpec
-from kubernetes.aio.client.models.v1_self_subject_review import V1SelfSubjectReview
-from kubernetes.aio.client.models.v1_self_subject_review_status import V1SelfSubjectReviewStatus
-from kubernetes.aio.client.models.v1_self_subject_rules_review import V1SelfSubjectRulesReview
-from kubernetes.aio.client.models.v1_self_subject_rules_review_spec import V1SelfSubjectRulesReviewSpec
-from kubernetes.aio.client.models.v1_server_address_by_client_cidr import V1ServerAddressByClientCIDR
-from kubernetes.aio.client.models.v1_service import V1Service
-from kubernetes.aio.client.models.v1_service_account import V1ServiceAccount
-from kubernetes.aio.client.models.v1_service_account_list import V1ServiceAccountList
-from kubernetes.aio.client.models.v1_service_account_subject import V1ServiceAccountSubject
-from kubernetes.aio.client.models.v1_service_account_token_projection import V1ServiceAccountTokenProjection
-from kubernetes.aio.client.models.v1_service_backend_port import V1ServiceBackendPort
-from kubernetes.aio.client.models.v1_service_cidr import V1ServiceCIDR
-from kubernetes.aio.client.models.v1_service_cidr_list import V1ServiceCIDRList
-from kubernetes.aio.client.models.v1_service_cidr_spec import V1ServiceCIDRSpec
-from kubernetes.aio.client.models.v1_service_cidr_status import V1ServiceCIDRStatus
-from kubernetes.aio.client.models.v1_service_list import V1ServiceList
-from kubernetes.aio.client.models.v1_service_port import V1ServicePort
-from kubernetes.aio.client.models.v1_service_spec import V1ServiceSpec
-from kubernetes.aio.client.models.v1_service_status import V1ServiceStatus
-from kubernetes.aio.client.models.v1_session_affinity_config import V1SessionAffinityConfig
-from kubernetes.aio.client.models.v1_shard_info import V1ShardInfo
-from kubernetes.aio.client.models.v1_sleep_action import V1SleepAction
-from kubernetes.aio.client.models.v1_stateful_set import V1StatefulSet
-from kubernetes.aio.client.models.v1_stateful_set_condition import V1StatefulSetCondition
-from kubernetes.aio.client.models.v1_stateful_set_list import V1StatefulSetList
-from kubernetes.aio.client.models.v1_stateful_set_ordinals import V1StatefulSetOrdinals
-from kubernetes.aio.client.models.v1_stateful_set_persistent_volume_claim_retention_policy import V1StatefulSetPersistentVolumeClaimRetentionPolicy
-from kubernetes.aio.client.models.v1_stateful_set_spec import V1StatefulSetSpec
-from kubernetes.aio.client.models.v1_stateful_set_status import V1StatefulSetStatus
-from kubernetes.aio.client.models.v1_stateful_set_update_strategy import V1StatefulSetUpdateStrategy
-from kubernetes.aio.client.models.v1_status import V1Status
-from kubernetes.aio.client.models.v1_status_cause import V1StatusCause
-from kubernetes.aio.client.models.v1_status_details import V1StatusDetails
-from kubernetes.aio.client.models.v1_storage_class import V1StorageClass
-from kubernetes.aio.client.models.v1_storage_class_list import V1StorageClassList
-from kubernetes.aio.client.models.v1_storage_os_persistent_volume_source import V1StorageOSPersistentVolumeSource
-from kubernetes.aio.client.models.v1_storage_os_volume_source import V1StorageOSVolumeSource
-from kubernetes.aio.client.models.v1_subject_access_review import V1SubjectAccessReview
-from kubernetes.aio.client.models.v1_subject_access_review_spec import V1SubjectAccessReviewSpec
-from kubernetes.aio.client.models.v1_subject_access_review_status import V1SubjectAccessReviewStatus
-from kubernetes.aio.client.models.v1_subject_rules_review_status import V1SubjectRulesReviewStatus
-from kubernetes.aio.client.models.v1_success_policy import V1SuccessPolicy
-from kubernetes.aio.client.models.v1_success_policy_rule import V1SuccessPolicyRule
-from kubernetes.aio.client.models.v1_sysctl import V1Sysctl
-from kubernetes.aio.client.models.v1_tcp_socket_action import V1TCPSocketAction
-from kubernetes.aio.client.models.v1_taint import V1Taint
-from kubernetes.aio.client.models.v1_token_request_spec import V1TokenRequestSpec
-from kubernetes.aio.client.models.v1_token_request_status import V1TokenRequestStatus
-from kubernetes.aio.client.models.v1_token_review import V1TokenReview
-from kubernetes.aio.client.models.v1_token_review_spec import V1TokenReviewSpec
-from kubernetes.aio.client.models.v1_token_review_status import V1TokenReviewStatus
-from kubernetes.aio.client.models.v1_toleration import V1Toleration
-from kubernetes.aio.client.models.v1_topology_selector_label_requirement import V1TopologySelectorLabelRequirement
-from kubernetes.aio.client.models.v1_topology_selector_term import V1TopologySelectorTerm
-from kubernetes.aio.client.models.v1_topology_spread_constraint import V1TopologySpreadConstraint
-from kubernetes.aio.client.models.v1_type_checking import V1TypeChecking
-from kubernetes.aio.client.models.v1_typed_local_object_reference import V1TypedLocalObjectReference
-from kubernetes.aio.client.models.v1_typed_object_reference import V1TypedObjectReference
-from kubernetes.aio.client.models.v1_uncounted_terminated_pods import V1UncountedTerminatedPods
-from kubernetes.aio.client.models.v1_user_info import V1UserInfo
-from kubernetes.aio.client.models.v1_user_subject import V1UserSubject
-from kubernetes.aio.client.models.v1_validating_admission_policy import V1ValidatingAdmissionPolicy
-from kubernetes.aio.client.models.v1_validating_admission_policy_binding import V1ValidatingAdmissionPolicyBinding
-from kubernetes.aio.client.models.v1_validating_admission_policy_binding_list import V1ValidatingAdmissionPolicyBindingList
-from kubernetes.aio.client.models.v1_validating_admission_policy_binding_spec import V1ValidatingAdmissionPolicyBindingSpec
-from kubernetes.aio.client.models.v1_validating_admission_policy_list import V1ValidatingAdmissionPolicyList
-from kubernetes.aio.client.models.v1_validating_admission_policy_spec import V1ValidatingAdmissionPolicySpec
-from kubernetes.aio.client.models.v1_validating_admission_policy_status import V1ValidatingAdmissionPolicyStatus
-from kubernetes.aio.client.models.v1_validating_webhook import V1ValidatingWebhook
-from kubernetes.aio.client.models.v1_validating_webhook_configuration import V1ValidatingWebhookConfiguration
-from kubernetes.aio.client.models.v1_validating_webhook_configuration_list import V1ValidatingWebhookConfigurationList
-from kubernetes.aio.client.models.v1_validation import V1Validation
-from kubernetes.aio.client.models.v1_validation_rule import V1ValidationRule
-from kubernetes.aio.client.models.v1_variable import V1Variable
-from kubernetes.aio.client.models.v1_volume import V1Volume
-from kubernetes.aio.client.models.v1_volume_attachment import V1VolumeAttachment
-from kubernetes.aio.client.models.v1_volume_attachment_list import V1VolumeAttachmentList
-from kubernetes.aio.client.models.v1_volume_attachment_source import V1VolumeAttachmentSource
-from kubernetes.aio.client.models.v1_volume_attachment_spec import V1VolumeAttachmentSpec
-from kubernetes.aio.client.models.v1_volume_attachment_status import V1VolumeAttachmentStatus
-from kubernetes.aio.client.models.v1_volume_attributes_class import V1VolumeAttributesClass
-from kubernetes.aio.client.models.v1_volume_attributes_class_list import V1VolumeAttributesClassList
-from kubernetes.aio.client.models.v1_volume_device import V1VolumeDevice
-from kubernetes.aio.client.models.v1_volume_error import V1VolumeError
-from kubernetes.aio.client.models.v1_volume_mount import V1VolumeMount
-from kubernetes.aio.client.models.v1_volume_mount_status import V1VolumeMountStatus
-from kubernetes.aio.client.models.v1_volume_node_affinity import V1VolumeNodeAffinity
-from kubernetes.aio.client.models.v1_volume_node_resources import V1VolumeNodeResources
-from kubernetes.aio.client.models.v1_volume_projection import V1VolumeProjection
-from kubernetes.aio.client.models.v1_volume_resource_requirements import V1VolumeResourceRequirements
-from kubernetes.aio.client.models.v1_volume_status import V1VolumeStatus
-from kubernetes.aio.client.models.v1_vsphere_virtual_disk_volume_source import V1VsphereVirtualDiskVolumeSource
-from kubernetes.aio.client.models.v1_watch_event import V1WatchEvent
-from kubernetes.aio.client.models.v1_webhook_conversion import V1WebhookConversion
-from kubernetes.aio.client.models.v1_weighted_pod_affinity_term import V1WeightedPodAffinityTerm
-from kubernetes.aio.client.models.v1_windows_security_context_options import V1WindowsSecurityContextOptions
-from kubernetes.aio.client.models.v1alpha1_apply_configuration import V1alpha1ApplyConfiguration
-from kubernetes.aio.client.models.v1alpha1_cluster_trust_bundle import V1alpha1ClusterTrustBundle
-from kubernetes.aio.client.models.v1alpha1_cluster_trust_bundle_list import V1alpha1ClusterTrustBundleList
-from kubernetes.aio.client.models.v1alpha1_cluster_trust_bundle_spec import V1alpha1ClusterTrustBundleSpec
-from kubernetes.aio.client.models.v1alpha1_json_patch import V1alpha1JSONPatch
-from kubernetes.aio.client.models.v1alpha1_match_condition import V1alpha1MatchCondition
-from kubernetes.aio.client.models.v1alpha1_match_resources import V1alpha1MatchResources
-from kubernetes.aio.client.models.v1alpha1_mutating_admission_policy import V1alpha1MutatingAdmissionPolicy
-from kubernetes.aio.client.models.v1alpha1_mutating_admission_policy_binding import V1alpha1MutatingAdmissionPolicyBinding
-from kubernetes.aio.client.models.v1alpha1_mutating_admission_policy_binding_list import V1alpha1MutatingAdmissionPolicyBindingList
-from kubernetes.aio.client.models.v1alpha1_mutating_admission_policy_binding_spec import V1alpha1MutatingAdmissionPolicyBindingSpec
-from kubernetes.aio.client.models.v1alpha1_mutating_admission_policy_list import V1alpha1MutatingAdmissionPolicyList
-from kubernetes.aio.client.models.v1alpha1_mutating_admission_policy_spec import V1alpha1MutatingAdmissionPolicySpec
-from kubernetes.aio.client.models.v1alpha1_mutation import V1alpha1Mutation
-from kubernetes.aio.client.models.v1alpha1_named_rule_with_operations import V1alpha1NamedRuleWithOperations
-from kubernetes.aio.client.models.v1alpha1_param_kind import V1alpha1ParamKind
-from kubernetes.aio.client.models.v1alpha1_param_ref import V1alpha1ParamRef
-from kubernetes.aio.client.models.v1alpha1_server_storage_version import V1alpha1ServerStorageVersion
-from kubernetes.aio.client.models.v1alpha1_storage_version import V1alpha1StorageVersion
-from kubernetes.aio.client.models.v1alpha1_storage_version_condition import V1alpha1StorageVersionCondition
-from kubernetes.aio.client.models.v1alpha1_storage_version_list import V1alpha1StorageVersionList
-from kubernetes.aio.client.models.v1alpha1_storage_version_status import V1alpha1StorageVersionStatus
-from kubernetes.aio.client.models.v1alpha1_variable import V1alpha1Variable
-from kubernetes.aio.client.models.v1alpha2_gang_scheduling_policy import V1alpha2GangSchedulingPolicy
-from kubernetes.aio.client.models.v1alpha2_lease_candidate import V1alpha2LeaseCandidate
-from kubernetes.aio.client.models.v1alpha2_lease_candidate_list import V1alpha2LeaseCandidateList
-from kubernetes.aio.client.models.v1alpha2_lease_candidate_spec import V1alpha2LeaseCandidateSpec
-from kubernetes.aio.client.models.v1alpha2_pod_group import V1alpha2PodGroup
-from kubernetes.aio.client.models.v1alpha2_pod_group_list import V1alpha2PodGroupList
-from kubernetes.aio.client.models.v1alpha2_pod_group_resource_claim import V1alpha2PodGroupResourceClaim
-from kubernetes.aio.client.models.v1alpha2_pod_group_resource_claim_status import V1alpha2PodGroupResourceClaimStatus
-from kubernetes.aio.client.models.v1alpha2_pod_group_scheduling_constraints import V1alpha2PodGroupSchedulingConstraints
-from kubernetes.aio.client.models.v1alpha2_pod_group_scheduling_policy import V1alpha2PodGroupSchedulingPolicy
-from kubernetes.aio.client.models.v1alpha2_pod_group_spec import V1alpha2PodGroupSpec
-from kubernetes.aio.client.models.v1alpha2_pod_group_status import V1alpha2PodGroupStatus
-from kubernetes.aio.client.models.v1alpha2_pod_group_template import V1alpha2PodGroupTemplate
-from kubernetes.aio.client.models.v1alpha2_pod_group_template_reference import V1alpha2PodGroupTemplateReference
-from kubernetes.aio.client.models.v1alpha2_topology_constraint import V1alpha2TopologyConstraint
-from kubernetes.aio.client.models.v1alpha2_typed_local_object_reference import V1alpha2TypedLocalObjectReference
-from kubernetes.aio.client.models.v1alpha2_workload import V1alpha2Workload
-from kubernetes.aio.client.models.v1alpha2_workload_list import V1alpha2WorkloadList
-from kubernetes.aio.client.models.v1alpha2_workload_pod_group_template_reference import V1alpha2WorkloadPodGroupTemplateReference
-from kubernetes.aio.client.models.v1alpha2_workload_spec import V1alpha2WorkloadSpec
-from kubernetes.aio.client.models.v1alpha3_device_taint import V1alpha3DeviceTaint
-from kubernetes.aio.client.models.v1alpha3_device_taint_rule import V1alpha3DeviceTaintRule
-from kubernetes.aio.client.models.v1alpha3_device_taint_rule_list import V1alpha3DeviceTaintRuleList
-from kubernetes.aio.client.models.v1alpha3_device_taint_rule_spec import V1alpha3DeviceTaintRuleSpec
-from kubernetes.aio.client.models.v1alpha3_device_taint_rule_status import V1alpha3DeviceTaintRuleStatus
-from kubernetes.aio.client.models.v1alpha3_device_taint_selector import V1alpha3DeviceTaintSelector
-from kubernetes.aio.client.models.v1alpha3_pool_status import V1alpha3PoolStatus
-from kubernetes.aio.client.models.v1alpha3_resource_pool_status_request import V1alpha3ResourcePoolStatusRequest
-from kubernetes.aio.client.models.v1alpha3_resource_pool_status_request_list import V1alpha3ResourcePoolStatusRequestList
-from kubernetes.aio.client.models.v1alpha3_resource_pool_status_request_spec import V1alpha3ResourcePoolStatusRequestSpec
-from kubernetes.aio.client.models.v1alpha3_resource_pool_status_request_status import V1alpha3ResourcePoolStatusRequestStatus
-from kubernetes.aio.client.models.v1beta1_allocated_device_status import V1beta1AllocatedDeviceStatus
-from kubernetes.aio.client.models.v1beta1_allocation_result import V1beta1AllocationResult
-from kubernetes.aio.client.models.v1beta1_apply_configuration import V1beta1ApplyConfiguration
-from kubernetes.aio.client.models.v1beta1_basic_device import V1beta1BasicDevice
-from kubernetes.aio.client.models.v1beta1_cel_device_selector import V1beta1CELDeviceSelector
-from kubernetes.aio.client.models.v1beta1_capacity_request_policy import V1beta1CapacityRequestPolicy
-from kubernetes.aio.client.models.v1beta1_capacity_request_policy_range import V1beta1CapacityRequestPolicyRange
-from kubernetes.aio.client.models.v1beta1_capacity_requirements import V1beta1CapacityRequirements
-from kubernetes.aio.client.models.v1beta1_cluster_trust_bundle import V1beta1ClusterTrustBundle
-from kubernetes.aio.client.models.v1beta1_cluster_trust_bundle_list import V1beta1ClusterTrustBundleList
-from kubernetes.aio.client.models.v1beta1_cluster_trust_bundle_spec import V1beta1ClusterTrustBundleSpec
-from kubernetes.aio.client.models.v1beta1_counter import V1beta1Counter
-from kubernetes.aio.client.models.v1beta1_counter_set import V1beta1CounterSet
-from kubernetes.aio.client.models.v1beta1_device import V1beta1Device
-from kubernetes.aio.client.models.v1beta1_device_allocation_configuration import V1beta1DeviceAllocationConfiguration
-from kubernetes.aio.client.models.v1beta1_device_allocation_result import V1beta1DeviceAllocationResult
-from kubernetes.aio.client.models.v1beta1_device_attribute import V1beta1DeviceAttribute
-from kubernetes.aio.client.models.v1beta1_device_capacity import V1beta1DeviceCapacity
-from kubernetes.aio.client.models.v1beta1_device_claim import V1beta1DeviceClaim
-from kubernetes.aio.client.models.v1beta1_device_claim_configuration import V1beta1DeviceClaimConfiguration
-from kubernetes.aio.client.models.v1beta1_device_class import V1beta1DeviceClass
-from kubernetes.aio.client.models.v1beta1_device_class_configuration import V1beta1DeviceClassConfiguration
-from kubernetes.aio.client.models.v1beta1_device_class_list import V1beta1DeviceClassList
-from kubernetes.aio.client.models.v1beta1_device_class_spec import V1beta1DeviceClassSpec
-from kubernetes.aio.client.models.v1beta1_device_constraint import V1beta1DeviceConstraint
-from kubernetes.aio.client.models.v1beta1_device_counter_consumption import V1beta1DeviceCounterConsumption
-from kubernetes.aio.client.models.v1beta1_device_request import V1beta1DeviceRequest
-from kubernetes.aio.client.models.v1beta1_device_request_allocation_result import V1beta1DeviceRequestAllocationResult
-from kubernetes.aio.client.models.v1beta1_device_selector import V1beta1DeviceSelector
-from kubernetes.aio.client.models.v1beta1_device_sub_request import V1beta1DeviceSubRequest
-from kubernetes.aio.client.models.v1beta1_device_taint import V1beta1DeviceTaint
-from kubernetes.aio.client.models.v1beta1_device_toleration import V1beta1DeviceToleration
-from kubernetes.aio.client.models.v1beta1_ip_address import V1beta1IPAddress
-from kubernetes.aio.client.models.v1beta1_ip_address_list import V1beta1IPAddressList
-from kubernetes.aio.client.models.v1beta1_ip_address_spec import V1beta1IPAddressSpec
-from kubernetes.aio.client.models.v1beta1_json_patch import V1beta1JSONPatch
-from kubernetes.aio.client.models.v1beta1_lease_candidate import V1beta1LeaseCandidate
-from kubernetes.aio.client.models.v1beta1_lease_candidate_list import V1beta1LeaseCandidateList
-from kubernetes.aio.client.models.v1beta1_lease_candidate_spec import V1beta1LeaseCandidateSpec
-from kubernetes.aio.client.models.v1beta1_match_condition import V1beta1MatchCondition
-from kubernetes.aio.client.models.v1beta1_match_resources import V1beta1MatchResources
-from kubernetes.aio.client.models.v1beta1_mutating_admission_policy import V1beta1MutatingAdmissionPolicy
-from kubernetes.aio.client.models.v1beta1_mutating_admission_policy_binding import V1beta1MutatingAdmissionPolicyBinding
-from kubernetes.aio.client.models.v1beta1_mutating_admission_policy_binding_list import V1beta1MutatingAdmissionPolicyBindingList
-from kubernetes.aio.client.models.v1beta1_mutating_admission_policy_binding_spec import V1beta1MutatingAdmissionPolicyBindingSpec
-from kubernetes.aio.client.models.v1beta1_mutating_admission_policy_list import V1beta1MutatingAdmissionPolicyList
-from kubernetes.aio.client.models.v1beta1_mutating_admission_policy_spec import V1beta1MutatingAdmissionPolicySpec
-from kubernetes.aio.client.models.v1beta1_mutation import V1beta1Mutation
-from kubernetes.aio.client.models.v1beta1_named_rule_with_operations import V1beta1NamedRuleWithOperations
-from kubernetes.aio.client.models.v1beta1_network_device_data import V1beta1NetworkDeviceData
-from kubernetes.aio.client.models.v1beta1_node_allocatable_resource_mapping import V1beta1NodeAllocatableResourceMapping
-from kubernetes.aio.client.models.v1beta1_opaque_device_configuration import V1beta1OpaqueDeviceConfiguration
-from kubernetes.aio.client.models.v1beta1_param_kind import V1beta1ParamKind
-from kubernetes.aio.client.models.v1beta1_param_ref import V1beta1ParamRef
-from kubernetes.aio.client.models.v1beta1_parent_reference import V1beta1ParentReference
-from kubernetes.aio.client.models.v1beta1_pod_certificate_request import V1beta1PodCertificateRequest
-from kubernetes.aio.client.models.v1beta1_pod_certificate_request_list import V1beta1PodCertificateRequestList
-from kubernetes.aio.client.models.v1beta1_pod_certificate_request_spec import V1beta1PodCertificateRequestSpec
-from kubernetes.aio.client.models.v1beta1_pod_certificate_request_status import V1beta1PodCertificateRequestStatus
-from kubernetes.aio.client.models.v1beta1_resource_claim import V1beta1ResourceClaim
-from kubernetes.aio.client.models.v1beta1_resource_claim_consumer_reference import V1beta1ResourceClaimConsumerReference
-from kubernetes.aio.client.models.v1beta1_resource_claim_list import V1beta1ResourceClaimList
-from kubernetes.aio.client.models.v1beta1_resource_claim_spec import V1beta1ResourceClaimSpec
-from kubernetes.aio.client.models.v1beta1_resource_claim_status import V1beta1ResourceClaimStatus
-from kubernetes.aio.client.models.v1beta1_resource_claim_template import V1beta1ResourceClaimTemplate
-from kubernetes.aio.client.models.v1beta1_resource_claim_template_list import V1beta1ResourceClaimTemplateList
-from kubernetes.aio.client.models.v1beta1_resource_claim_template_spec import V1beta1ResourceClaimTemplateSpec
-from kubernetes.aio.client.models.v1beta1_resource_pool import V1beta1ResourcePool
-from kubernetes.aio.client.models.v1beta1_resource_slice import V1beta1ResourceSlice
-from kubernetes.aio.client.models.v1beta1_resource_slice_list import V1beta1ResourceSliceList
-from kubernetes.aio.client.models.v1beta1_resource_slice_spec import V1beta1ResourceSliceSpec
-from kubernetes.aio.client.models.v1beta1_service_cidr import V1beta1ServiceCIDR
-from kubernetes.aio.client.models.v1beta1_service_cidr_list import V1beta1ServiceCIDRList
-from kubernetes.aio.client.models.v1beta1_service_cidr_spec import V1beta1ServiceCIDRSpec
-from kubernetes.aio.client.models.v1beta1_service_cidr_status import V1beta1ServiceCIDRStatus
-from kubernetes.aio.client.models.v1beta1_storage_version_migration import V1beta1StorageVersionMigration
-from kubernetes.aio.client.models.v1beta1_storage_version_migration_list import V1beta1StorageVersionMigrationList
-from kubernetes.aio.client.models.v1beta1_storage_version_migration_spec import V1beta1StorageVersionMigrationSpec
-from kubernetes.aio.client.models.v1beta1_storage_version_migration_status import V1beta1StorageVersionMigrationStatus
-from kubernetes.aio.client.models.v1beta1_variable import V1beta1Variable
-from kubernetes.aio.client.models.v1beta1_volume_attributes_class import V1beta1VolumeAttributesClass
-from kubernetes.aio.client.models.v1beta1_volume_attributes_class_list import V1beta1VolumeAttributesClassList
-from kubernetes.aio.client.models.v1beta2_allocated_device_status import V1beta2AllocatedDeviceStatus
-from kubernetes.aio.client.models.v1beta2_allocation_result import V1beta2AllocationResult
-from kubernetes.aio.client.models.v1beta2_cel_device_selector import V1beta2CELDeviceSelector
-from kubernetes.aio.client.models.v1beta2_capacity_request_policy import V1beta2CapacityRequestPolicy
-from kubernetes.aio.client.models.v1beta2_capacity_request_policy_range import V1beta2CapacityRequestPolicyRange
-from kubernetes.aio.client.models.v1beta2_capacity_requirements import V1beta2CapacityRequirements
-from kubernetes.aio.client.models.v1beta2_counter import V1beta2Counter
-from kubernetes.aio.client.models.v1beta2_counter_set import V1beta2CounterSet
-from kubernetes.aio.client.models.v1beta2_device import V1beta2Device
-from kubernetes.aio.client.models.v1beta2_device_allocation_configuration import V1beta2DeviceAllocationConfiguration
-from kubernetes.aio.client.models.v1beta2_device_allocation_result import V1beta2DeviceAllocationResult
-from kubernetes.aio.client.models.v1beta2_device_attribute import V1beta2DeviceAttribute
-from kubernetes.aio.client.models.v1beta2_device_capacity import V1beta2DeviceCapacity
-from kubernetes.aio.client.models.v1beta2_device_claim import V1beta2DeviceClaim
-from kubernetes.aio.client.models.v1beta2_device_claim_configuration import V1beta2DeviceClaimConfiguration
-from kubernetes.aio.client.models.v1beta2_device_class import V1beta2DeviceClass
-from kubernetes.aio.client.models.v1beta2_device_class_configuration import V1beta2DeviceClassConfiguration
-from kubernetes.aio.client.models.v1beta2_device_class_list import V1beta2DeviceClassList
-from kubernetes.aio.client.models.v1beta2_device_class_spec import V1beta2DeviceClassSpec
-from kubernetes.aio.client.models.v1beta2_device_constraint import V1beta2DeviceConstraint
-from kubernetes.aio.client.models.v1beta2_device_counter_consumption import V1beta2DeviceCounterConsumption
-from kubernetes.aio.client.models.v1beta2_device_request import V1beta2DeviceRequest
-from kubernetes.aio.client.models.v1beta2_device_request_allocation_result import V1beta2DeviceRequestAllocationResult
-from kubernetes.aio.client.models.v1beta2_device_selector import V1beta2DeviceSelector
-from kubernetes.aio.client.models.v1beta2_device_sub_request import V1beta2DeviceSubRequest
-from kubernetes.aio.client.models.v1beta2_device_taint import V1beta2DeviceTaint
-from kubernetes.aio.client.models.v1beta2_device_taint_rule import V1beta2DeviceTaintRule
-from kubernetes.aio.client.models.v1beta2_device_taint_rule_list import V1beta2DeviceTaintRuleList
-from kubernetes.aio.client.models.v1beta2_device_taint_rule_spec import V1beta2DeviceTaintRuleSpec
-from kubernetes.aio.client.models.v1beta2_device_taint_rule_status import V1beta2DeviceTaintRuleStatus
-from kubernetes.aio.client.models.v1beta2_device_taint_selector import V1beta2DeviceTaintSelector
-from kubernetes.aio.client.models.v1beta2_device_toleration import V1beta2DeviceToleration
-from kubernetes.aio.client.models.v1beta2_exact_device_request import V1beta2ExactDeviceRequest
-from kubernetes.aio.client.models.v1beta2_network_device_data import V1beta2NetworkDeviceData
-from kubernetes.aio.client.models.v1beta2_node_allocatable_resource_mapping import V1beta2NodeAllocatableResourceMapping
-from kubernetes.aio.client.models.v1beta2_opaque_device_configuration import V1beta2OpaqueDeviceConfiguration
-from kubernetes.aio.client.models.v1beta2_resource_claim import V1beta2ResourceClaim
-from kubernetes.aio.client.models.v1beta2_resource_claim_consumer_reference import V1beta2ResourceClaimConsumerReference
-from kubernetes.aio.client.models.v1beta2_resource_claim_list import V1beta2ResourceClaimList
-from kubernetes.aio.client.models.v1beta2_resource_claim_spec import V1beta2ResourceClaimSpec
-from kubernetes.aio.client.models.v1beta2_resource_claim_status import V1beta2ResourceClaimStatus
-from kubernetes.aio.client.models.v1beta2_resource_claim_template import V1beta2ResourceClaimTemplate
-from kubernetes.aio.client.models.v1beta2_resource_claim_template_list import V1beta2ResourceClaimTemplateList
-from kubernetes.aio.client.models.v1beta2_resource_claim_template_spec import V1beta2ResourceClaimTemplateSpec
-from kubernetes.aio.client.models.v1beta2_resource_pool import V1beta2ResourcePool
-from kubernetes.aio.client.models.v1beta2_resource_slice import V1beta2ResourceSlice
-from kubernetes.aio.client.models.v1beta2_resource_slice_list import V1beta2ResourceSliceList
-from kubernetes.aio.client.models.v1beta2_resource_slice_spec import V1beta2ResourceSliceSpec
-from kubernetes.aio.client.models.v2_api_group_discovery import V2APIGroupDiscovery
-from kubernetes.aio.client.models.v2_api_group_discovery_list import V2APIGroupDiscoveryList
-from kubernetes.aio.client.models.v2_api_resource_discovery import V2APIResourceDiscovery
-from kubernetes.aio.client.models.v2_api_subresource_discovery import V2APISubresourceDiscovery
-from kubernetes.aio.client.models.v2_api_version_discovery import V2APIVersionDiscovery
-from kubernetes.aio.client.models.v2_container_resource_metric_source import V2ContainerResourceMetricSource
-from kubernetes.aio.client.models.v2_container_resource_metric_status import V2ContainerResourceMetricStatus
-from kubernetes.aio.client.models.v2_cross_version_object_reference import V2CrossVersionObjectReference
-from kubernetes.aio.client.models.v2_external_metric_source import V2ExternalMetricSource
-from kubernetes.aio.client.models.v2_external_metric_status import V2ExternalMetricStatus
-from kubernetes.aio.client.models.v2_hpa_scaling_policy import V2HPAScalingPolicy
-from kubernetes.aio.client.models.v2_hpa_scaling_rules import V2HPAScalingRules
-from kubernetes.aio.client.models.v2_horizontal_pod_autoscaler import V2HorizontalPodAutoscaler
-from kubernetes.aio.client.models.v2_horizontal_pod_autoscaler_behavior import V2HorizontalPodAutoscalerBehavior
-from kubernetes.aio.client.models.v2_horizontal_pod_autoscaler_condition import V2HorizontalPodAutoscalerCondition
-from kubernetes.aio.client.models.v2_horizontal_pod_autoscaler_list import V2HorizontalPodAutoscalerList
-from kubernetes.aio.client.models.v2_horizontal_pod_autoscaler_spec import V2HorizontalPodAutoscalerSpec
-from kubernetes.aio.client.models.v2_horizontal_pod_autoscaler_status import V2HorizontalPodAutoscalerStatus
-from kubernetes.aio.client.models.v2_metric_identifier import V2MetricIdentifier
-from kubernetes.aio.client.models.v2_metric_spec import V2MetricSpec
-from kubernetes.aio.client.models.v2_metric_status import V2MetricStatus
-from kubernetes.aio.client.models.v2_metric_target import V2MetricTarget
-from kubernetes.aio.client.models.v2_metric_value_status import V2MetricValueStatus
-from kubernetes.aio.client.models.v2_object_metric_source import V2ObjectMetricSource
-from kubernetes.aio.client.models.v2_object_metric_status import V2ObjectMetricStatus
-from kubernetes.aio.client.models.v2_pods_metric_source import V2PodsMetricSource
-from kubernetes.aio.client.models.v2_pods_metric_status import V2PodsMetricStatus
-from kubernetes.aio.client.models.v2_resource_metric_source import V2ResourceMetricSource
-from kubernetes.aio.client.models.v2_resource_metric_status import V2ResourceMetricStatus
-from kubernetes.aio.client.models.v2beta1_api_group_discovery import V2beta1APIGroupDiscovery
-from kubernetes.aio.client.models.v2beta1_api_group_discovery_list import V2beta1APIGroupDiscoveryList
-from kubernetes.aio.client.models.v2beta1_api_resource_discovery import V2beta1APIResourceDiscovery
-from kubernetes.aio.client.models.v2beta1_api_subresource_discovery import V2beta1APISubresourceDiscovery
-from kubernetes.aio.client.models.v2beta1_api_version_discovery import V2beta1APIVersionDiscovery
-from kubernetes.aio.client.models.version_info import VersionInfo
+    _exports = {
+        "AdmissionregistrationV1ServiceReference": ".admissionregistration_v1_service_reference",
+        "AdmissionregistrationV1WebhookClientConfig": ".admissionregistration_v1_webhook_client_config",
+        "ApiextensionsV1ServiceReference": ".apiextensions_v1_service_reference",
+        "ApiextensionsV1WebhookClientConfig": ".apiextensions_v1_webhook_client_config",
+        "ApiregistrationV1ServiceReference": ".apiregistration_v1_service_reference",
+        "AuthenticationV1TokenRequest": ".authentication_v1_token_request",
+        "CoreV1EndpointPort": ".core_v1_endpoint_port",
+        "CoreV1Event": ".core_v1_event",
+        "CoreV1EventList": ".core_v1_event_list",
+        "CoreV1EventSeries": ".core_v1_event_series",
+        "CoreV1ResourceClaim": ".core_v1_resource_claim",
+        "DiscoveryV1EndpointPort": ".discovery_v1_endpoint_port",
+        "EventsV1Event": ".events_v1_event",
+        "EventsV1EventList": ".events_v1_event_list",
+        "EventsV1EventSeries": ".events_v1_event_series",
+        "FlowcontrolV1Subject": ".flowcontrol_v1_subject",
+        "RbacV1Subject": ".rbac_v1_subject",
+        "ResourceV1ResourceClaim": ".resource_v1_resource_claim",
+        "StorageV1TokenRequest": ".storage_v1_token_request",
+        "V1APIGroup": ".v1_api_group",
+        "V1APIGroupList": ".v1_api_group_list",
+        "V1APIResource": ".v1_api_resource",
+        "V1APIResourceList": ".v1_api_resource_list",
+        "V1APIService": ".v1_api_service",
+        "V1APIServiceCondition": ".v1_api_service_condition",
+        "V1APIServiceList": ".v1_api_service_list",
+        "V1APIServiceSpec": ".v1_api_service_spec",
+        "V1APIServiceStatus": ".v1_api_service_status",
+        "V1APIVersions": ".v1_api_versions",
+        "V1AWSElasticBlockStoreVolumeSource": ".v1_aws_elastic_block_store_volume_source",
+        "V1Affinity": ".v1_affinity",
+        "V1AggregationRule": ".v1_aggregation_rule",
+        "V1AllocatedDeviceStatus": ".v1_allocated_device_status",
+        "V1AllocationResult": ".v1_allocation_result",
+        "V1AppArmorProfile": ".v1_app_armor_profile",
+        "V1ApplyConfiguration": ".v1_apply_configuration",
+        "V1AttachedVolume": ".v1_attached_volume",
+        "V1AuditAnnotation": ".v1_audit_annotation",
+        "V1AzureDiskVolumeSource": ".v1_azure_disk_volume_source",
+        "V1AzureFilePersistentVolumeSource": ".v1_azure_file_persistent_volume_source",
+        "V1AzureFileVolumeSource": ".v1_azure_file_volume_source",
+        "V1Binding": ".v1_binding",
+        "V1BoundObjectReference": ".v1_bound_object_reference",
+        "V1CELDeviceSelector": ".v1_cel_device_selector",
+        "V1CSIDriver": ".v1_csi_driver",
+        "V1CSIDriverList": ".v1_csi_driver_list",
+        "V1CSIDriverSpec": ".v1_csi_driver_spec",
+        "V1CSINode": ".v1_csi_node",
+        "V1CSINodeDriver": ".v1_csi_node_driver",
+        "V1CSINodeList": ".v1_csi_node_list",
+        "V1CSINodeSpec": ".v1_csi_node_spec",
+        "V1CSIPersistentVolumeSource": ".v1_csi_persistent_volume_source",
+        "V1CSIStorageCapacity": ".v1_csi_storage_capacity",
+        "V1CSIStorageCapacityList": ".v1_csi_storage_capacity_list",
+        "V1CSIVolumeSource": ".v1_csi_volume_source",
+        "V1Capabilities": ".v1_capabilities",
+        "V1CapacityRequestPolicy": ".v1_capacity_request_policy",
+        "V1CapacityRequestPolicyRange": ".v1_capacity_request_policy_range",
+        "V1CapacityRequirements": ".v1_capacity_requirements",
+        "V1CephFSPersistentVolumeSource": ".v1_ceph_fs_persistent_volume_source",
+        "V1CephFSVolumeSource": ".v1_ceph_fs_volume_source",
+        "V1CertificateSigningRequest": ".v1_certificate_signing_request",
+        "V1CertificateSigningRequestCondition": ".v1_certificate_signing_request_condition",
+        "V1CertificateSigningRequestList": ".v1_certificate_signing_request_list",
+        "V1CertificateSigningRequestSpec": ".v1_certificate_signing_request_spec",
+        "V1CertificateSigningRequestStatus": ".v1_certificate_signing_request_status",
+        "V1CinderPersistentVolumeSource": ".v1_cinder_persistent_volume_source",
+        "V1CinderVolumeSource": ".v1_cinder_volume_source",
+        "V1ClientIPConfig": ".v1_client_ip_config",
+        "V1ClusterRole": ".v1_cluster_role",
+        "V1ClusterRoleBinding": ".v1_cluster_role_binding",
+        "V1ClusterRoleBindingList": ".v1_cluster_role_binding_list",
+        "V1ClusterRoleList": ".v1_cluster_role_list",
+        "V1ClusterTrustBundleProjection": ".v1_cluster_trust_bundle_projection",
+        "V1ComponentCondition": ".v1_component_condition",
+        "V1ComponentStatus": ".v1_component_status",
+        "V1ComponentStatusList": ".v1_component_status_list",
+        "V1Condition": ".v1_condition",
+        "V1ConfigMap": ".v1_config_map",
+        "V1ConfigMapEnvSource": ".v1_config_map_env_source",
+        "V1ConfigMapKeySelector": ".v1_config_map_key_selector",
+        "V1ConfigMapList": ".v1_config_map_list",
+        "V1ConfigMapNodeConfigSource": ".v1_config_map_node_config_source",
+        "V1ConfigMapProjection": ".v1_config_map_projection",
+        "V1ConfigMapVolumeSource": ".v1_config_map_volume_source",
+        "V1Container": ".v1_container",
+        "V1ContainerExtendedResourceRequest": ".v1_container_extended_resource_request",
+        "V1ContainerImage": ".v1_container_image",
+        "V1ContainerPort": ".v1_container_port",
+        "V1ContainerResizePolicy": ".v1_container_resize_policy",
+        "V1ContainerRestartRule": ".v1_container_restart_rule",
+        "V1ContainerRestartRuleOnExitCodes": ".v1_container_restart_rule_on_exit_codes",
+        "V1ContainerState": ".v1_container_state",
+        "V1ContainerStateRunning": ".v1_container_state_running",
+        "V1ContainerStateTerminated": ".v1_container_state_terminated",
+        "V1ContainerStateWaiting": ".v1_container_state_waiting",
+        "V1ContainerStatus": ".v1_container_status",
+        "V1ContainerUser": ".v1_container_user",
+        "V1ControllerRevision": ".v1_controller_revision",
+        "V1ControllerRevisionList": ".v1_controller_revision_list",
+        "V1Counter": ".v1_counter",
+        "V1CounterSet": ".v1_counter_set",
+        "V1CronJob": ".v1_cron_job",
+        "V1CronJobList": ".v1_cron_job_list",
+        "V1CronJobSpec": ".v1_cron_job_spec",
+        "V1CronJobStatus": ".v1_cron_job_status",
+        "V1CrossVersionObjectReference": ".v1_cross_version_object_reference",
+        "V1CustomResourceColumnDefinition": ".v1_custom_resource_column_definition",
+        "V1CustomResourceConversion": ".v1_custom_resource_conversion",
+        "V1CustomResourceDefinition": ".v1_custom_resource_definition",
+        "V1CustomResourceDefinitionCondition": ".v1_custom_resource_definition_condition",
+        "V1CustomResourceDefinitionList": ".v1_custom_resource_definition_list",
+        "V1CustomResourceDefinitionNames": ".v1_custom_resource_definition_names",
+        "V1CustomResourceDefinitionSpec": ".v1_custom_resource_definition_spec",
+        "V1CustomResourceDefinitionStatus": ".v1_custom_resource_definition_status",
+        "V1CustomResourceDefinitionVersion": ".v1_custom_resource_definition_version",
+        "V1CustomResourceSubresourceScale": ".v1_custom_resource_subresource_scale",
+        "V1CustomResourceSubresources": ".v1_custom_resource_subresources",
+        "V1CustomResourceValidation": ".v1_custom_resource_validation",
+        "V1DaemonEndpoint": ".v1_daemon_endpoint",
+        "V1DaemonSet": ".v1_daemon_set",
+        "V1DaemonSetCondition": ".v1_daemon_set_condition",
+        "V1DaemonSetList": ".v1_daemon_set_list",
+        "V1DaemonSetSpec": ".v1_daemon_set_spec",
+        "V1DaemonSetStatus": ".v1_daemon_set_status",
+        "V1DaemonSetUpdateStrategy": ".v1_daemon_set_update_strategy",
+        "V1DeleteOptions": ".v1_delete_options",
+        "V1Deployment": ".v1_deployment",
+        "V1DeploymentCondition": ".v1_deployment_condition",
+        "V1DeploymentList": ".v1_deployment_list",
+        "V1DeploymentSpec": ".v1_deployment_spec",
+        "V1DeploymentStatus": ".v1_deployment_status",
+        "V1DeploymentStrategy": ".v1_deployment_strategy",
+        "V1Device": ".v1_device",
+        "V1DeviceAllocationConfiguration": ".v1_device_allocation_configuration",
+        "V1DeviceAllocationResult": ".v1_device_allocation_result",
+        "V1DeviceAttribute": ".v1_device_attribute",
+        "V1DeviceCapacity": ".v1_device_capacity",
+        "V1DeviceClaim": ".v1_device_claim",
+        "V1DeviceClaimConfiguration": ".v1_device_claim_configuration",
+        "V1DeviceClass": ".v1_device_class",
+        "V1DeviceClassConfiguration": ".v1_device_class_configuration",
+        "V1DeviceClassList": ".v1_device_class_list",
+        "V1DeviceClassSpec": ".v1_device_class_spec",
+        "V1DeviceConstraint": ".v1_device_constraint",
+        "V1DeviceCounterConsumption": ".v1_device_counter_consumption",
+        "V1DeviceRequest": ".v1_device_request",
+        "V1DeviceRequestAllocationResult": ".v1_device_request_allocation_result",
+        "V1DeviceSelector": ".v1_device_selector",
+        "V1DeviceSubRequest": ".v1_device_sub_request",
+        "V1DeviceTaint": ".v1_device_taint",
+        "V1DeviceToleration": ".v1_device_toleration",
+        "V1DownwardAPIProjection": ".v1_downward_api_projection",
+        "V1DownwardAPIVolumeFile": ".v1_downward_api_volume_file",
+        "V1DownwardAPIVolumeSource": ".v1_downward_api_volume_source",
+        "V1EmptyDirVolumeSource": ".v1_empty_dir_volume_source",
+        "V1Endpoint": ".v1_endpoint",
+        "V1EndpointAddress": ".v1_endpoint_address",
+        "V1EndpointConditions": ".v1_endpoint_conditions",
+        "V1EndpointHints": ".v1_endpoint_hints",
+        "V1EndpointSlice": ".v1_endpoint_slice",
+        "V1EndpointSliceList": ".v1_endpoint_slice_list",
+        "V1EndpointSubset": ".v1_endpoint_subset",
+        "V1Endpoints": ".v1_endpoints",
+        "V1EndpointsList": ".v1_endpoints_list",
+        "V1EnvFromSource": ".v1_env_from_source",
+        "V1EnvVar": ".v1_env_var",
+        "V1EnvVarSource": ".v1_env_var_source",
+        "V1EphemeralContainer": ".v1_ephemeral_container",
+        "V1EphemeralVolumeSource": ".v1_ephemeral_volume_source",
+        "V1EventSource": ".v1_event_source",
+        "V1Eviction": ".v1_eviction",
+        "V1ExactDeviceRequest": ".v1_exact_device_request",
+        "V1ExecAction": ".v1_exec_action",
+        "V1ExemptPriorityLevelConfiguration": ".v1_exempt_priority_level_configuration",
+        "V1ExpressionWarning": ".v1_expression_warning",
+        "V1ExternalDocumentation": ".v1_external_documentation",
+        "V1FCVolumeSource": ".v1_fc_volume_source",
+        "V1FieldSelectorAttributes": ".v1_field_selector_attributes",
+        "V1FieldSelectorRequirement": ".v1_field_selector_requirement",
+        "V1FileKeySelector": ".v1_file_key_selector",
+        "V1FlexPersistentVolumeSource": ".v1_flex_persistent_volume_source",
+        "V1FlexVolumeSource": ".v1_flex_volume_source",
+        "V1FlockerVolumeSource": ".v1_flocker_volume_source",
+        "V1FlowDistinguisherMethod": ".v1_flow_distinguisher_method",
+        "V1FlowSchema": ".v1_flow_schema",
+        "V1FlowSchemaCondition": ".v1_flow_schema_condition",
+        "V1FlowSchemaList": ".v1_flow_schema_list",
+        "V1FlowSchemaSpec": ".v1_flow_schema_spec",
+        "V1FlowSchemaStatus": ".v1_flow_schema_status",
+        "V1ForNode": ".v1_for_node",
+        "V1ForZone": ".v1_for_zone",
+        "V1GCEPersistentDiskVolumeSource": ".v1_gce_persistent_disk_volume_source",
+        "V1GRPCAction": ".v1_grpc_action",
+        "V1GitRepoVolumeSource": ".v1_git_repo_volume_source",
+        "V1GlusterfsPersistentVolumeSource": ".v1_glusterfs_persistent_volume_source",
+        "V1GlusterfsVolumeSource": ".v1_glusterfs_volume_source",
+        "V1GroupResource": ".v1_group_resource",
+        "V1GroupSubject": ".v1_group_subject",
+        "V1GroupVersionForDiscovery": ".v1_group_version_for_discovery",
+        "V1GroupVersionKind": ".v1_group_version_kind",
+        "V1HTTPGetAction": ".v1_http_get_action",
+        "V1HTTPHeader": ".v1_http_header",
+        "V1HTTPIngressPath": ".v1_http_ingress_path",
+        "V1HTTPIngressRuleValue": ".v1_http_ingress_rule_value",
+        "V1HorizontalPodAutoscaler": ".v1_horizontal_pod_autoscaler",
+        "V1HorizontalPodAutoscalerList": ".v1_horizontal_pod_autoscaler_list",
+        "V1HorizontalPodAutoscalerSpec": ".v1_horizontal_pod_autoscaler_spec",
+        "V1HorizontalPodAutoscalerStatus": ".v1_horizontal_pod_autoscaler_status",
+        "V1HostAlias": ".v1_host_alias",
+        "V1HostIP": ".v1_host_ip",
+        "V1HostPathVolumeSource": ".v1_host_path_volume_source",
+        "V1IPAddress": ".v1_ip_address",
+        "V1IPAddressList": ".v1_ip_address_list",
+        "V1IPAddressSpec": ".v1_ip_address_spec",
+        "V1IPBlock": ".v1_ip_block",
+        "V1ISCSIPersistentVolumeSource": ".v1_iscsi_persistent_volume_source",
+        "V1ISCSIVolumeSource": ".v1_iscsi_volume_source",
+        "V1ImageVolumeSource": ".v1_image_volume_source",
+        "V1ImageVolumeStatus": ".v1_image_volume_status",
+        "V1Ingress": ".v1_ingress",
+        "V1IngressBackend": ".v1_ingress_backend",
+        "V1IngressClass": ".v1_ingress_class",
+        "V1IngressClassList": ".v1_ingress_class_list",
+        "V1IngressClassParametersReference": ".v1_ingress_class_parameters_reference",
+        "V1IngressClassSpec": ".v1_ingress_class_spec",
+        "V1IngressList": ".v1_ingress_list",
+        "V1IngressLoadBalancerIngress": ".v1_ingress_load_balancer_ingress",
+        "V1IngressLoadBalancerStatus": ".v1_ingress_load_balancer_status",
+        "V1IngressPortStatus": ".v1_ingress_port_status",
+        "V1IngressRule": ".v1_ingress_rule",
+        "V1IngressServiceBackend": ".v1_ingress_service_backend",
+        "V1IngressSpec": ".v1_ingress_spec",
+        "V1IngressStatus": ".v1_ingress_status",
+        "V1IngressTLS": ".v1_ingress_tls",
+        "V1JSONPatch": ".v1_json_patch",
+        "V1JSONSchemaProps": ".v1_json_schema_props",
+        "V1Job": ".v1_job",
+        "V1JobCondition": ".v1_job_condition",
+        "V1JobList": ".v1_job_list",
+        "V1JobSpec": ".v1_job_spec",
+        "V1JobStatus": ".v1_job_status",
+        "V1JobTemplateSpec": ".v1_job_template_spec",
+        "V1KeyToPath": ".v1_key_to_path",
+        "V1LabelSelector": ".v1_label_selector",
+        "V1LabelSelectorAttributes": ".v1_label_selector_attributes",
+        "V1LabelSelectorRequirement": ".v1_label_selector_requirement",
+        "V1Lease": ".v1_lease",
+        "V1LeaseList": ".v1_lease_list",
+        "V1LeaseSpec": ".v1_lease_spec",
+        "V1Lifecycle": ".v1_lifecycle",
+        "V1LifecycleHandler": ".v1_lifecycle_handler",
+        "V1LimitRange": ".v1_limit_range",
+        "V1LimitRangeItem": ".v1_limit_range_item",
+        "V1LimitRangeList": ".v1_limit_range_list",
+        "V1LimitRangeSpec": ".v1_limit_range_spec",
+        "V1LimitResponse": ".v1_limit_response",
+        "V1LimitedPriorityLevelConfiguration": ".v1_limited_priority_level_configuration",
+        "V1LinuxContainerUser": ".v1_linux_container_user",
+        "V1ListMeta": ".v1_list_meta",
+        "V1LoadBalancerIngress": ".v1_load_balancer_ingress",
+        "V1LoadBalancerStatus": ".v1_load_balancer_status",
+        "V1LocalObjectReference": ".v1_local_object_reference",
+        "V1LocalSubjectAccessReview": ".v1_local_subject_access_review",
+        "V1LocalVolumeSource": ".v1_local_volume_source",
+        "V1ManagedFieldsEntry": ".v1_managed_fields_entry",
+        "V1MatchCondition": ".v1_match_condition",
+        "V1MatchResources": ".v1_match_resources",
+        "V1ModifyVolumeStatus": ".v1_modify_volume_status",
+        "V1MutatingAdmissionPolicy": ".v1_mutating_admission_policy",
+        "V1MutatingAdmissionPolicyBinding": ".v1_mutating_admission_policy_binding",
+        "V1MutatingAdmissionPolicyBindingList": ".v1_mutating_admission_policy_binding_list",
+        "V1MutatingAdmissionPolicyBindingSpec": ".v1_mutating_admission_policy_binding_spec",
+        "V1MutatingAdmissionPolicyList": ".v1_mutating_admission_policy_list",
+        "V1MutatingAdmissionPolicySpec": ".v1_mutating_admission_policy_spec",
+        "V1MutatingWebhook": ".v1_mutating_webhook",
+        "V1MutatingWebhookConfiguration": ".v1_mutating_webhook_configuration",
+        "V1MutatingWebhookConfigurationList": ".v1_mutating_webhook_configuration_list",
+        "V1Mutation": ".v1_mutation",
+        "V1NFSVolumeSource": ".v1_nfs_volume_source",
+        "V1NamedRuleWithOperations": ".v1_named_rule_with_operations",
+        "V1Namespace": ".v1_namespace",
+        "V1NamespaceCondition": ".v1_namespace_condition",
+        "V1NamespaceList": ".v1_namespace_list",
+        "V1NamespaceSpec": ".v1_namespace_spec",
+        "V1NamespaceStatus": ".v1_namespace_status",
+        "V1NetworkDeviceData": ".v1_network_device_data",
+        "V1NetworkPolicy": ".v1_network_policy",
+        "V1NetworkPolicyEgressRule": ".v1_network_policy_egress_rule",
+        "V1NetworkPolicyIngressRule": ".v1_network_policy_ingress_rule",
+        "V1NetworkPolicyList": ".v1_network_policy_list",
+        "V1NetworkPolicyPeer": ".v1_network_policy_peer",
+        "V1NetworkPolicyPort": ".v1_network_policy_port",
+        "V1NetworkPolicySpec": ".v1_network_policy_spec",
+        "V1Node": ".v1_node",
+        "V1NodeAddress": ".v1_node_address",
+        "V1NodeAffinity": ".v1_node_affinity",
+        "V1NodeAllocatableResourceClaimStatus": ".v1_node_allocatable_resource_claim_status",
+        "V1NodeAllocatableResourceMapping": ".v1_node_allocatable_resource_mapping",
+        "V1NodeCondition": ".v1_node_condition",
+        "V1NodeConfigSource": ".v1_node_config_source",
+        "V1NodeConfigStatus": ".v1_node_config_status",
+        "V1NodeDaemonEndpoints": ".v1_node_daemon_endpoints",
+        "V1NodeFeatures": ".v1_node_features",
+        "V1NodeList": ".v1_node_list",
+        "V1NodeRuntimeHandler": ".v1_node_runtime_handler",
+        "V1NodeRuntimeHandlerFeatures": ".v1_node_runtime_handler_features",
+        "V1NodeSelector": ".v1_node_selector",
+        "V1NodeSelectorRequirement": ".v1_node_selector_requirement",
+        "V1NodeSelectorTerm": ".v1_node_selector_term",
+        "V1NodeSpec": ".v1_node_spec",
+        "V1NodeStatus": ".v1_node_status",
+        "V1NodeSwapStatus": ".v1_node_swap_status",
+        "V1NodeSystemInfo": ".v1_node_system_info",
+        "V1NonResourceAttributes": ".v1_non_resource_attributes",
+        "V1NonResourcePolicyRule": ".v1_non_resource_policy_rule",
+        "V1NonResourceRule": ".v1_non_resource_rule",
+        "V1ObjectFieldSelector": ".v1_object_field_selector",
+        "V1ObjectMeta": ".v1_object_meta",
+        "V1ObjectReference": ".v1_object_reference",
+        "V1OpaqueDeviceConfiguration": ".v1_opaque_device_configuration",
+        "V1Overhead": ".v1_overhead",
+        "V1OwnerReference": ".v1_owner_reference",
+        "V1ParamKind": ".v1_param_kind",
+        "V1ParamRef": ".v1_param_ref",
+        "V1ParentReference": ".v1_parent_reference",
+        "V1PersistentVolume": ".v1_persistent_volume",
+        "V1PersistentVolumeClaim": ".v1_persistent_volume_claim",
+        "V1PersistentVolumeClaimCondition": ".v1_persistent_volume_claim_condition",
+        "V1PersistentVolumeClaimList": ".v1_persistent_volume_claim_list",
+        "V1PersistentVolumeClaimSpec": ".v1_persistent_volume_claim_spec",
+        "V1PersistentVolumeClaimStatus": ".v1_persistent_volume_claim_status",
+        "V1PersistentVolumeClaimTemplate": ".v1_persistent_volume_claim_template",
+        "V1PersistentVolumeClaimVolumeSource": ".v1_persistent_volume_claim_volume_source",
+        "V1PersistentVolumeList": ".v1_persistent_volume_list",
+        "V1PersistentVolumeSpec": ".v1_persistent_volume_spec",
+        "V1PersistentVolumeStatus": ".v1_persistent_volume_status",
+        "V1PhotonPersistentDiskVolumeSource": ".v1_photon_persistent_disk_volume_source",
+        "V1Pod": ".v1_pod",
+        "V1PodAffinity": ".v1_pod_affinity",
+        "V1PodAffinityTerm": ".v1_pod_affinity_term",
+        "V1PodAntiAffinity": ".v1_pod_anti_affinity",
+        "V1PodCertificateProjection": ".v1_pod_certificate_projection",
+        "V1PodCondition": ".v1_pod_condition",
+        "V1PodDNSConfig": ".v1_pod_dns_config",
+        "V1PodDNSConfigOption": ".v1_pod_dns_config_option",
+        "V1PodDisruptionBudget": ".v1_pod_disruption_budget",
+        "V1PodDisruptionBudgetList": ".v1_pod_disruption_budget_list",
+        "V1PodDisruptionBudgetSpec": ".v1_pod_disruption_budget_spec",
+        "V1PodDisruptionBudgetStatus": ".v1_pod_disruption_budget_status",
+        "V1PodExtendedResourceClaimStatus": ".v1_pod_extended_resource_claim_status",
+        "V1PodFailurePolicy": ".v1_pod_failure_policy",
+        "V1PodFailurePolicyOnExitCodesRequirement": ".v1_pod_failure_policy_on_exit_codes_requirement",
+        "V1PodFailurePolicyOnPodConditionsPattern": ".v1_pod_failure_policy_on_pod_conditions_pattern",
+        "V1PodFailurePolicyRule": ".v1_pod_failure_policy_rule",
+        "V1PodIP": ".v1_pod_ip",
+        "V1PodList": ".v1_pod_list",
+        "V1PodOS": ".v1_pod_os",
+        "V1PodReadinessGate": ".v1_pod_readiness_gate",
+        "V1PodResourceClaim": ".v1_pod_resource_claim",
+        "V1PodResourceClaimStatus": ".v1_pod_resource_claim_status",
+        "V1PodSchedulingGate": ".v1_pod_scheduling_gate",
+        "V1PodSchedulingGroup": ".v1_pod_scheduling_group",
+        "V1PodSecurityContext": ".v1_pod_security_context",
+        "V1PodSpec": ".v1_pod_spec",
+        "V1PodStatus": ".v1_pod_status",
+        "V1PodTemplate": ".v1_pod_template",
+        "V1PodTemplateList": ".v1_pod_template_list",
+        "V1PodTemplateSpec": ".v1_pod_template_spec",
+        "V1PolicyRule": ".v1_policy_rule",
+        "V1PolicyRulesWithSubjects": ".v1_policy_rules_with_subjects",
+        "V1PortStatus": ".v1_port_status",
+        "V1PortworxVolumeSource": ".v1_portworx_volume_source",
+        "V1Preconditions": ".v1_preconditions",
+        "V1PreferredSchedulingTerm": ".v1_preferred_scheduling_term",
+        "V1PriorityClass": ".v1_priority_class",
+        "V1PriorityClassList": ".v1_priority_class_list",
+        "V1PriorityLevelConfiguration": ".v1_priority_level_configuration",
+        "V1PriorityLevelConfigurationCondition": ".v1_priority_level_configuration_condition",
+        "V1PriorityLevelConfigurationList": ".v1_priority_level_configuration_list",
+        "V1PriorityLevelConfigurationReference": ".v1_priority_level_configuration_reference",
+        "V1PriorityLevelConfigurationSpec": ".v1_priority_level_configuration_spec",
+        "V1PriorityLevelConfigurationStatus": ".v1_priority_level_configuration_status",
+        "V1Probe": ".v1_probe",
+        "V1ProjectedVolumeSource": ".v1_projected_volume_source",
+        "V1QueuingConfiguration": ".v1_queuing_configuration",
+        "V1QuobyteVolumeSource": ".v1_quobyte_volume_source",
+        "V1RBDPersistentVolumeSource": ".v1_rbd_persistent_volume_source",
+        "V1RBDVolumeSource": ".v1_rbd_volume_source",
+        "V1ReplicaSet": ".v1_replica_set",
+        "V1ReplicaSetCondition": ".v1_replica_set_condition",
+        "V1ReplicaSetList": ".v1_replica_set_list",
+        "V1ReplicaSetSpec": ".v1_replica_set_spec",
+        "V1ReplicaSetStatus": ".v1_replica_set_status",
+        "V1ReplicationController": ".v1_replication_controller",
+        "V1ReplicationControllerCondition": ".v1_replication_controller_condition",
+        "V1ReplicationControllerList": ".v1_replication_controller_list",
+        "V1ReplicationControllerSpec": ".v1_replication_controller_spec",
+        "V1ReplicationControllerStatus": ".v1_replication_controller_status",
+        "V1ResourceAttributes": ".v1_resource_attributes",
+        "V1ResourceClaimConsumerReference": ".v1_resource_claim_consumer_reference",
+        "V1ResourceClaimList": ".v1_resource_claim_list",
+        "V1ResourceClaimSpec": ".v1_resource_claim_spec",
+        "V1ResourceClaimStatus": ".v1_resource_claim_status",
+        "V1ResourceClaimTemplate": ".v1_resource_claim_template",
+        "V1ResourceClaimTemplateList": ".v1_resource_claim_template_list",
+        "V1ResourceClaimTemplateSpec": ".v1_resource_claim_template_spec",
+        "V1ResourceFieldSelector": ".v1_resource_field_selector",
+        "V1ResourceHealth": ".v1_resource_health",
+        "V1ResourcePolicyRule": ".v1_resource_policy_rule",
+        "V1ResourcePool": ".v1_resource_pool",
+        "V1ResourceQuota": ".v1_resource_quota",
+        "V1ResourceQuotaList": ".v1_resource_quota_list",
+        "V1ResourceQuotaSpec": ".v1_resource_quota_spec",
+        "V1ResourceQuotaStatus": ".v1_resource_quota_status",
+        "V1ResourceRequirements": ".v1_resource_requirements",
+        "V1ResourceRule": ".v1_resource_rule",
+        "V1ResourceSlice": ".v1_resource_slice",
+        "V1ResourceSliceList": ".v1_resource_slice_list",
+        "V1ResourceSliceSpec": ".v1_resource_slice_spec",
+        "V1ResourceStatus": ".v1_resource_status",
+        "V1Role": ".v1_role",
+        "V1RoleBinding": ".v1_role_binding",
+        "V1RoleBindingList": ".v1_role_binding_list",
+        "V1RoleList": ".v1_role_list",
+        "V1RoleRef": ".v1_role_ref",
+        "V1RollingUpdateDaemonSet": ".v1_rolling_update_daemon_set",
+        "V1RollingUpdateDeployment": ".v1_rolling_update_deployment",
+        "V1RollingUpdateStatefulSetStrategy": ".v1_rolling_update_stateful_set_strategy",
+        "V1RuleWithOperations": ".v1_rule_with_operations",
+        "V1RuntimeClass": ".v1_runtime_class",
+        "V1RuntimeClassList": ".v1_runtime_class_list",
+        "V1SELinuxOptions": ".v1_se_linux_options",
+        "V1Scale": ".v1_scale",
+        "V1ScaleIOPersistentVolumeSource": ".v1_scale_io_persistent_volume_source",
+        "V1ScaleIOVolumeSource": ".v1_scale_io_volume_source",
+        "V1ScaleSpec": ".v1_scale_spec",
+        "V1ScaleStatus": ".v1_scale_status",
+        "V1Scheduling": ".v1_scheduling",
+        "V1ScopeSelector": ".v1_scope_selector",
+        "V1ScopedResourceSelectorRequirement": ".v1_scoped_resource_selector_requirement",
+        "V1SeccompProfile": ".v1_seccomp_profile",
+        "V1Secret": ".v1_secret",
+        "V1SecretEnvSource": ".v1_secret_env_source",
+        "V1SecretKeySelector": ".v1_secret_key_selector",
+        "V1SecretList": ".v1_secret_list",
+        "V1SecretProjection": ".v1_secret_projection",
+        "V1SecretReference": ".v1_secret_reference",
+        "V1SecretVolumeSource": ".v1_secret_volume_source",
+        "V1SecurityContext": ".v1_security_context",
+        "V1SelectableField": ".v1_selectable_field",
+        "V1SelfSubjectAccessReview": ".v1_self_subject_access_review",
+        "V1SelfSubjectAccessReviewSpec": ".v1_self_subject_access_review_spec",
+        "V1SelfSubjectReview": ".v1_self_subject_review",
+        "V1SelfSubjectReviewStatus": ".v1_self_subject_review_status",
+        "V1SelfSubjectRulesReview": ".v1_self_subject_rules_review",
+        "V1SelfSubjectRulesReviewSpec": ".v1_self_subject_rules_review_spec",
+        "V1ServerAddressByClientCIDR": ".v1_server_address_by_client_cidr",
+        "V1Service": ".v1_service",
+        "V1ServiceAccount": ".v1_service_account",
+        "V1ServiceAccountList": ".v1_service_account_list",
+        "V1ServiceAccountSubject": ".v1_service_account_subject",
+        "V1ServiceAccountTokenProjection": ".v1_service_account_token_projection",
+        "V1ServiceBackendPort": ".v1_service_backend_port",
+        "V1ServiceCIDR": ".v1_service_cidr",
+        "V1ServiceCIDRList": ".v1_service_cidr_list",
+        "V1ServiceCIDRSpec": ".v1_service_cidr_spec",
+        "V1ServiceCIDRStatus": ".v1_service_cidr_status",
+        "V1ServiceList": ".v1_service_list",
+        "V1ServicePort": ".v1_service_port",
+        "V1ServiceSpec": ".v1_service_spec",
+        "V1ServiceStatus": ".v1_service_status",
+        "V1SessionAffinityConfig": ".v1_session_affinity_config",
+        "V1ShardInfo": ".v1_shard_info",
+        "V1SleepAction": ".v1_sleep_action",
+        "V1StatefulSet": ".v1_stateful_set",
+        "V1StatefulSetCondition": ".v1_stateful_set_condition",
+        "V1StatefulSetList": ".v1_stateful_set_list",
+        "V1StatefulSetOrdinals": ".v1_stateful_set_ordinals",
+        "V1StatefulSetPersistentVolumeClaimRetentionPolicy": ".v1_stateful_set_persistent_volume_claim_retention_policy",
+        "V1StatefulSetSpec": ".v1_stateful_set_spec",
+        "V1StatefulSetStatus": ".v1_stateful_set_status",
+        "V1StatefulSetUpdateStrategy": ".v1_stateful_set_update_strategy",
+        "V1Status": ".v1_status",
+        "V1StatusCause": ".v1_status_cause",
+        "V1StatusDetails": ".v1_status_details",
+        "V1StorageClass": ".v1_storage_class",
+        "V1StorageClassList": ".v1_storage_class_list",
+        "V1StorageOSPersistentVolumeSource": ".v1_storage_os_persistent_volume_source",
+        "V1StorageOSVolumeSource": ".v1_storage_os_volume_source",
+        "V1SubjectAccessReview": ".v1_subject_access_review",
+        "V1SubjectAccessReviewSpec": ".v1_subject_access_review_spec",
+        "V1SubjectAccessReviewStatus": ".v1_subject_access_review_status",
+        "V1SubjectRulesReviewStatus": ".v1_subject_rules_review_status",
+        "V1SuccessPolicy": ".v1_success_policy",
+        "V1SuccessPolicyRule": ".v1_success_policy_rule",
+        "V1Sysctl": ".v1_sysctl",
+        "V1TCPSocketAction": ".v1_tcp_socket_action",
+        "V1Taint": ".v1_taint",
+        "V1TokenRequestSpec": ".v1_token_request_spec",
+        "V1TokenRequestStatus": ".v1_token_request_status",
+        "V1TokenReview": ".v1_token_review",
+        "V1TokenReviewSpec": ".v1_token_review_spec",
+        "V1TokenReviewStatus": ".v1_token_review_status",
+        "V1Toleration": ".v1_toleration",
+        "V1TopologySelectorLabelRequirement": ".v1_topology_selector_label_requirement",
+        "V1TopologySelectorTerm": ".v1_topology_selector_term",
+        "V1TopologySpreadConstraint": ".v1_topology_spread_constraint",
+        "V1TypeChecking": ".v1_type_checking",
+        "V1TypedLocalObjectReference": ".v1_typed_local_object_reference",
+        "V1TypedObjectReference": ".v1_typed_object_reference",
+        "V1UncountedTerminatedPods": ".v1_uncounted_terminated_pods",
+        "V1UserInfo": ".v1_user_info",
+        "V1UserSubject": ".v1_user_subject",
+        "V1ValidatingAdmissionPolicy": ".v1_validating_admission_policy",
+        "V1ValidatingAdmissionPolicyBinding": ".v1_validating_admission_policy_binding",
+        "V1ValidatingAdmissionPolicyBindingList": ".v1_validating_admission_policy_binding_list",
+        "V1ValidatingAdmissionPolicyBindingSpec": ".v1_validating_admission_policy_binding_spec",
+        "V1ValidatingAdmissionPolicyList": ".v1_validating_admission_policy_list",
+        "V1ValidatingAdmissionPolicySpec": ".v1_validating_admission_policy_spec",
+        "V1ValidatingAdmissionPolicyStatus": ".v1_validating_admission_policy_status",
+        "V1ValidatingWebhook": ".v1_validating_webhook",
+        "V1ValidatingWebhookConfiguration": ".v1_validating_webhook_configuration",
+        "V1ValidatingWebhookConfigurationList": ".v1_validating_webhook_configuration_list",
+        "V1Validation": ".v1_validation",
+        "V1ValidationRule": ".v1_validation_rule",
+        "V1Variable": ".v1_variable",
+        "V1Volume": ".v1_volume",
+        "V1VolumeAttachment": ".v1_volume_attachment",
+        "V1VolumeAttachmentList": ".v1_volume_attachment_list",
+        "V1VolumeAttachmentSource": ".v1_volume_attachment_source",
+        "V1VolumeAttachmentSpec": ".v1_volume_attachment_spec",
+        "V1VolumeAttachmentStatus": ".v1_volume_attachment_status",
+        "V1VolumeAttributesClass": ".v1_volume_attributes_class",
+        "V1VolumeAttributesClassList": ".v1_volume_attributes_class_list",
+        "V1VolumeDevice": ".v1_volume_device",
+        "V1VolumeError": ".v1_volume_error",
+        "V1VolumeMount": ".v1_volume_mount",
+        "V1VolumeMountStatus": ".v1_volume_mount_status",
+        "V1VolumeNodeAffinity": ".v1_volume_node_affinity",
+        "V1VolumeNodeResources": ".v1_volume_node_resources",
+        "V1VolumeProjection": ".v1_volume_projection",
+        "V1VolumeResourceRequirements": ".v1_volume_resource_requirements",
+        "V1VolumeStatus": ".v1_volume_status",
+        "V1VsphereVirtualDiskVolumeSource": ".v1_vsphere_virtual_disk_volume_source",
+        "V1WatchEvent": ".v1_watch_event",
+        "V1WebhookConversion": ".v1_webhook_conversion",
+        "V1WeightedPodAffinityTerm": ".v1_weighted_pod_affinity_term",
+        "V1WindowsSecurityContextOptions": ".v1_windows_security_context_options",
+        "V1alpha1ApplyConfiguration": ".v1alpha1_apply_configuration",
+        "V1alpha1ClusterTrustBundle": ".v1alpha1_cluster_trust_bundle",
+        "V1alpha1ClusterTrustBundleList": ".v1alpha1_cluster_trust_bundle_list",
+        "V1alpha1ClusterTrustBundleSpec": ".v1alpha1_cluster_trust_bundle_spec",
+        "V1alpha1JSONPatch": ".v1alpha1_json_patch",
+        "V1alpha1MatchCondition": ".v1alpha1_match_condition",
+        "V1alpha1MatchResources": ".v1alpha1_match_resources",
+        "V1alpha1MutatingAdmissionPolicy": ".v1alpha1_mutating_admission_policy",
+        "V1alpha1MutatingAdmissionPolicyBinding": ".v1alpha1_mutating_admission_policy_binding",
+        "V1alpha1MutatingAdmissionPolicyBindingList": ".v1alpha1_mutating_admission_policy_binding_list",
+        "V1alpha1MutatingAdmissionPolicyBindingSpec": ".v1alpha1_mutating_admission_policy_binding_spec",
+        "V1alpha1MutatingAdmissionPolicyList": ".v1alpha1_mutating_admission_policy_list",
+        "V1alpha1MutatingAdmissionPolicySpec": ".v1alpha1_mutating_admission_policy_spec",
+        "V1alpha1Mutation": ".v1alpha1_mutation",
+        "V1alpha1NamedRuleWithOperations": ".v1alpha1_named_rule_with_operations",
+        "V1alpha1ParamKind": ".v1alpha1_param_kind",
+        "V1alpha1ParamRef": ".v1alpha1_param_ref",
+        "V1alpha1ServerStorageVersion": ".v1alpha1_server_storage_version",
+        "V1alpha1StorageVersion": ".v1alpha1_storage_version",
+        "V1alpha1StorageVersionCondition": ".v1alpha1_storage_version_condition",
+        "V1alpha1StorageVersionList": ".v1alpha1_storage_version_list",
+        "V1alpha1StorageVersionStatus": ".v1alpha1_storage_version_status",
+        "V1alpha1Variable": ".v1alpha1_variable",
+        "V1alpha2GangSchedulingPolicy": ".v1alpha2_gang_scheduling_policy",
+        "V1alpha2LeaseCandidate": ".v1alpha2_lease_candidate",
+        "V1alpha2LeaseCandidateList": ".v1alpha2_lease_candidate_list",
+        "V1alpha2LeaseCandidateSpec": ".v1alpha2_lease_candidate_spec",
+        "V1alpha2PodGroup": ".v1alpha2_pod_group",
+        "V1alpha2PodGroupList": ".v1alpha2_pod_group_list",
+        "V1alpha2PodGroupResourceClaim": ".v1alpha2_pod_group_resource_claim",
+        "V1alpha2PodGroupResourceClaimStatus": ".v1alpha2_pod_group_resource_claim_status",
+        "V1alpha2PodGroupSchedulingConstraints": ".v1alpha2_pod_group_scheduling_constraints",
+        "V1alpha2PodGroupSchedulingPolicy": ".v1alpha2_pod_group_scheduling_policy",
+        "V1alpha2PodGroupSpec": ".v1alpha2_pod_group_spec",
+        "V1alpha2PodGroupStatus": ".v1alpha2_pod_group_status",
+        "V1alpha2PodGroupTemplate": ".v1alpha2_pod_group_template",
+        "V1alpha2PodGroupTemplateReference": ".v1alpha2_pod_group_template_reference",
+        "V1alpha2TopologyConstraint": ".v1alpha2_topology_constraint",
+        "V1alpha2TypedLocalObjectReference": ".v1alpha2_typed_local_object_reference",
+        "V1alpha2Workload": ".v1alpha2_workload",
+        "V1alpha2WorkloadList": ".v1alpha2_workload_list",
+        "V1alpha2WorkloadPodGroupTemplateReference": ".v1alpha2_workload_pod_group_template_reference",
+        "V1alpha2WorkloadSpec": ".v1alpha2_workload_spec",
+        "V1alpha3DeviceTaint": ".v1alpha3_device_taint",
+        "V1alpha3DeviceTaintRule": ".v1alpha3_device_taint_rule",
+        "V1alpha3DeviceTaintRuleList": ".v1alpha3_device_taint_rule_list",
+        "V1alpha3DeviceTaintRuleSpec": ".v1alpha3_device_taint_rule_spec",
+        "V1alpha3DeviceTaintRuleStatus": ".v1alpha3_device_taint_rule_status",
+        "V1alpha3DeviceTaintSelector": ".v1alpha3_device_taint_selector",
+        "V1alpha3PoolStatus": ".v1alpha3_pool_status",
+        "V1alpha3ResourcePoolStatusRequest": ".v1alpha3_resource_pool_status_request",
+        "V1alpha3ResourcePoolStatusRequestList": ".v1alpha3_resource_pool_status_request_list",
+        "V1alpha3ResourcePoolStatusRequestSpec": ".v1alpha3_resource_pool_status_request_spec",
+        "V1alpha3ResourcePoolStatusRequestStatus": ".v1alpha3_resource_pool_status_request_status",
+        "V1beta1AllocatedDeviceStatus": ".v1beta1_allocated_device_status",
+        "V1beta1AllocationResult": ".v1beta1_allocation_result",
+        "V1beta1ApplyConfiguration": ".v1beta1_apply_configuration",
+        "V1beta1BasicDevice": ".v1beta1_basic_device",
+        "V1beta1CELDeviceSelector": ".v1beta1_cel_device_selector",
+        "V1beta1CapacityRequestPolicy": ".v1beta1_capacity_request_policy",
+        "V1beta1CapacityRequestPolicyRange": ".v1beta1_capacity_request_policy_range",
+        "V1beta1CapacityRequirements": ".v1beta1_capacity_requirements",
+        "V1beta1ClusterTrustBundle": ".v1beta1_cluster_trust_bundle",
+        "V1beta1ClusterTrustBundleList": ".v1beta1_cluster_trust_bundle_list",
+        "V1beta1ClusterTrustBundleSpec": ".v1beta1_cluster_trust_bundle_spec",
+        "V1beta1Counter": ".v1beta1_counter",
+        "V1beta1CounterSet": ".v1beta1_counter_set",
+        "V1beta1Device": ".v1beta1_device",
+        "V1beta1DeviceAllocationConfiguration": ".v1beta1_device_allocation_configuration",
+        "V1beta1DeviceAllocationResult": ".v1beta1_device_allocation_result",
+        "V1beta1DeviceAttribute": ".v1beta1_device_attribute",
+        "V1beta1DeviceCapacity": ".v1beta1_device_capacity",
+        "V1beta1DeviceClaim": ".v1beta1_device_claim",
+        "V1beta1DeviceClaimConfiguration": ".v1beta1_device_claim_configuration",
+        "V1beta1DeviceClass": ".v1beta1_device_class",
+        "V1beta1DeviceClassConfiguration": ".v1beta1_device_class_configuration",
+        "V1beta1DeviceClassList": ".v1beta1_device_class_list",
+        "V1beta1DeviceClassSpec": ".v1beta1_device_class_spec",
+        "V1beta1DeviceConstraint": ".v1beta1_device_constraint",
+        "V1beta1DeviceCounterConsumption": ".v1beta1_device_counter_consumption",
+        "V1beta1DeviceRequest": ".v1beta1_device_request",
+        "V1beta1DeviceRequestAllocationResult": ".v1beta1_device_request_allocation_result",
+        "V1beta1DeviceSelector": ".v1beta1_device_selector",
+        "V1beta1DeviceSubRequest": ".v1beta1_device_sub_request",
+        "V1beta1DeviceTaint": ".v1beta1_device_taint",
+        "V1beta1DeviceToleration": ".v1beta1_device_toleration",
+        "V1beta1IPAddress": ".v1beta1_ip_address",
+        "V1beta1IPAddressList": ".v1beta1_ip_address_list",
+        "V1beta1IPAddressSpec": ".v1beta1_ip_address_spec",
+        "V1beta1JSONPatch": ".v1beta1_json_patch",
+        "V1beta1LeaseCandidate": ".v1beta1_lease_candidate",
+        "V1beta1LeaseCandidateList": ".v1beta1_lease_candidate_list",
+        "V1beta1LeaseCandidateSpec": ".v1beta1_lease_candidate_spec",
+        "V1beta1MatchCondition": ".v1beta1_match_condition",
+        "V1beta1MatchResources": ".v1beta1_match_resources",
+        "V1beta1MutatingAdmissionPolicy": ".v1beta1_mutating_admission_policy",
+        "V1beta1MutatingAdmissionPolicyBinding": ".v1beta1_mutating_admission_policy_binding",
+        "V1beta1MutatingAdmissionPolicyBindingList": ".v1beta1_mutating_admission_policy_binding_list",
+        "V1beta1MutatingAdmissionPolicyBindingSpec": ".v1beta1_mutating_admission_policy_binding_spec",
+        "V1beta1MutatingAdmissionPolicyList": ".v1beta1_mutating_admission_policy_list",
+        "V1beta1MutatingAdmissionPolicySpec": ".v1beta1_mutating_admission_policy_spec",
+        "V1beta1Mutation": ".v1beta1_mutation",
+        "V1beta1NamedRuleWithOperations": ".v1beta1_named_rule_with_operations",
+        "V1beta1NetworkDeviceData": ".v1beta1_network_device_data",
+        "V1beta1NodeAllocatableResourceMapping": ".v1beta1_node_allocatable_resource_mapping",
+        "V1beta1OpaqueDeviceConfiguration": ".v1beta1_opaque_device_configuration",
+        "V1beta1ParamKind": ".v1beta1_param_kind",
+        "V1beta1ParamRef": ".v1beta1_param_ref",
+        "V1beta1ParentReference": ".v1beta1_parent_reference",
+        "V1beta1PodCertificateRequest": ".v1beta1_pod_certificate_request",
+        "V1beta1PodCertificateRequestList": ".v1beta1_pod_certificate_request_list",
+        "V1beta1PodCertificateRequestSpec": ".v1beta1_pod_certificate_request_spec",
+        "V1beta1PodCertificateRequestStatus": ".v1beta1_pod_certificate_request_status",
+        "V1beta1ResourceClaim": ".v1beta1_resource_claim",
+        "V1beta1ResourceClaimConsumerReference": ".v1beta1_resource_claim_consumer_reference",
+        "V1beta1ResourceClaimList": ".v1beta1_resource_claim_list",
+        "V1beta1ResourceClaimSpec": ".v1beta1_resource_claim_spec",
+        "V1beta1ResourceClaimStatus": ".v1beta1_resource_claim_status",
+        "V1beta1ResourceClaimTemplate": ".v1beta1_resource_claim_template",
+        "V1beta1ResourceClaimTemplateList": ".v1beta1_resource_claim_template_list",
+        "V1beta1ResourceClaimTemplateSpec": ".v1beta1_resource_claim_template_spec",
+        "V1beta1ResourcePool": ".v1beta1_resource_pool",
+        "V1beta1ResourceSlice": ".v1beta1_resource_slice",
+        "V1beta1ResourceSliceList": ".v1beta1_resource_slice_list",
+        "V1beta1ResourceSliceSpec": ".v1beta1_resource_slice_spec",
+        "V1beta1ServiceCIDR": ".v1beta1_service_cidr",
+        "V1beta1ServiceCIDRList": ".v1beta1_service_cidr_list",
+        "V1beta1ServiceCIDRSpec": ".v1beta1_service_cidr_spec",
+        "V1beta1ServiceCIDRStatus": ".v1beta1_service_cidr_status",
+        "V1beta1StorageVersionMigration": ".v1beta1_storage_version_migration",
+        "V1beta1StorageVersionMigrationList": ".v1beta1_storage_version_migration_list",
+        "V1beta1StorageVersionMigrationSpec": ".v1beta1_storage_version_migration_spec",
+        "V1beta1StorageVersionMigrationStatus": ".v1beta1_storage_version_migration_status",
+        "V1beta1Variable": ".v1beta1_variable",
+        "V1beta1VolumeAttributesClass": ".v1beta1_volume_attributes_class",
+        "V1beta1VolumeAttributesClassList": ".v1beta1_volume_attributes_class_list",
+        "V1beta2AllocatedDeviceStatus": ".v1beta2_allocated_device_status",
+        "V1beta2AllocationResult": ".v1beta2_allocation_result",
+        "V1beta2CELDeviceSelector": ".v1beta2_cel_device_selector",
+        "V1beta2CapacityRequestPolicy": ".v1beta2_capacity_request_policy",
+        "V1beta2CapacityRequestPolicyRange": ".v1beta2_capacity_request_policy_range",
+        "V1beta2CapacityRequirements": ".v1beta2_capacity_requirements",
+        "V1beta2Counter": ".v1beta2_counter",
+        "V1beta2CounterSet": ".v1beta2_counter_set",
+        "V1beta2Device": ".v1beta2_device",
+        "V1beta2DeviceAllocationConfiguration": ".v1beta2_device_allocation_configuration",
+        "V1beta2DeviceAllocationResult": ".v1beta2_device_allocation_result",
+        "V1beta2DeviceAttribute": ".v1beta2_device_attribute",
+        "V1beta2DeviceCapacity": ".v1beta2_device_capacity",
+        "V1beta2DeviceClaim": ".v1beta2_device_claim",
+        "V1beta2DeviceClaimConfiguration": ".v1beta2_device_claim_configuration",
+        "V1beta2DeviceClass": ".v1beta2_device_class",
+        "V1beta2DeviceClassConfiguration": ".v1beta2_device_class_configuration",
+        "V1beta2DeviceClassList": ".v1beta2_device_class_list",
+        "V1beta2DeviceClassSpec": ".v1beta2_device_class_spec",
+        "V1beta2DeviceConstraint": ".v1beta2_device_constraint",
+        "V1beta2DeviceCounterConsumption": ".v1beta2_device_counter_consumption",
+        "V1beta2DeviceRequest": ".v1beta2_device_request",
+        "V1beta2DeviceRequestAllocationResult": ".v1beta2_device_request_allocation_result",
+        "V1beta2DeviceSelector": ".v1beta2_device_selector",
+        "V1beta2DeviceSubRequest": ".v1beta2_device_sub_request",
+        "V1beta2DeviceTaint": ".v1beta2_device_taint",
+        "V1beta2DeviceTaintRule": ".v1beta2_device_taint_rule",
+        "V1beta2DeviceTaintRuleList": ".v1beta2_device_taint_rule_list",
+        "V1beta2DeviceTaintRuleSpec": ".v1beta2_device_taint_rule_spec",
+        "V1beta2DeviceTaintRuleStatus": ".v1beta2_device_taint_rule_status",
+        "V1beta2DeviceTaintSelector": ".v1beta2_device_taint_selector",
+        "V1beta2DeviceToleration": ".v1beta2_device_toleration",
+        "V1beta2ExactDeviceRequest": ".v1beta2_exact_device_request",
+        "V1beta2NetworkDeviceData": ".v1beta2_network_device_data",
+        "V1beta2NodeAllocatableResourceMapping": ".v1beta2_node_allocatable_resource_mapping",
+        "V1beta2OpaqueDeviceConfiguration": ".v1beta2_opaque_device_configuration",
+        "V1beta2ResourceClaim": ".v1beta2_resource_claim",
+        "V1beta2ResourceClaimConsumerReference": ".v1beta2_resource_claim_consumer_reference",
+        "V1beta2ResourceClaimList": ".v1beta2_resource_claim_list",
+        "V1beta2ResourceClaimSpec": ".v1beta2_resource_claim_spec",
+        "V1beta2ResourceClaimStatus": ".v1beta2_resource_claim_status",
+        "V1beta2ResourceClaimTemplate": ".v1beta2_resource_claim_template",
+        "V1beta2ResourceClaimTemplateList": ".v1beta2_resource_claim_template_list",
+        "V1beta2ResourceClaimTemplateSpec": ".v1beta2_resource_claim_template_spec",
+        "V1beta2ResourcePool": ".v1beta2_resource_pool",
+        "V1beta2ResourceSlice": ".v1beta2_resource_slice",
+        "V1beta2ResourceSliceList": ".v1beta2_resource_slice_list",
+        "V1beta2ResourceSliceSpec": ".v1beta2_resource_slice_spec",
+        "V2APIGroupDiscovery": ".v2_api_group_discovery",
+        "V2APIGroupDiscoveryList": ".v2_api_group_discovery_list",
+        "V2APIResourceDiscovery": ".v2_api_resource_discovery",
+        "V2APISubresourceDiscovery": ".v2_api_subresource_discovery",
+        "V2APIVersionDiscovery": ".v2_api_version_discovery",
+        "V2ContainerResourceMetricSource": ".v2_container_resource_metric_source",
+        "V2ContainerResourceMetricStatus": ".v2_container_resource_metric_status",
+        "V2CrossVersionObjectReference": ".v2_cross_version_object_reference",
+        "V2ExternalMetricSource": ".v2_external_metric_source",
+        "V2ExternalMetricStatus": ".v2_external_metric_status",
+        "V2HPAScalingPolicy": ".v2_hpa_scaling_policy",
+        "V2HPAScalingRules": ".v2_hpa_scaling_rules",
+        "V2HorizontalPodAutoscaler": ".v2_horizontal_pod_autoscaler",
+        "V2HorizontalPodAutoscalerBehavior": ".v2_horizontal_pod_autoscaler_behavior",
+        "V2HorizontalPodAutoscalerCondition": ".v2_horizontal_pod_autoscaler_condition",
+        "V2HorizontalPodAutoscalerList": ".v2_horizontal_pod_autoscaler_list",
+        "V2HorizontalPodAutoscalerSpec": ".v2_horizontal_pod_autoscaler_spec",
+        "V2HorizontalPodAutoscalerStatus": ".v2_horizontal_pod_autoscaler_status",
+        "V2MetricIdentifier": ".v2_metric_identifier",
+        "V2MetricSpec": ".v2_metric_spec",
+        "V2MetricStatus": ".v2_metric_status",
+        "V2MetricTarget": ".v2_metric_target",
+        "V2MetricValueStatus": ".v2_metric_value_status",
+        "V2ObjectMetricSource": ".v2_object_metric_source",
+        "V2ObjectMetricStatus": ".v2_object_metric_status",
+        "V2PodsMetricSource": ".v2_pods_metric_source",
+        "V2PodsMetricStatus": ".v2_pods_metric_status",
+        "V2ResourceMetricSource": ".v2_resource_metric_source",
+        "V2ResourceMetricStatus": ".v2_resource_metric_status",
+        "V2beta1APIGroupDiscovery": ".v2beta1_api_group_discovery",
+        "V2beta1APIGroupDiscoveryList": ".v2beta1_api_group_discovery_list",
+        "V2beta1APIResourceDiscovery": ".v2beta1_api_resource_discovery",
+        "V2beta1APISubresourceDiscovery": ".v2beta1_api_subresource_discovery",
+        "V2beta1APIVersionDiscovery": ".v2beta1_api_version_discovery",
+        "VersionInfo": ".version_info",
+    }
 
-""",
-            name=__name__,
-            doc=__doc__,
-        )
-    )
+    def __getattr__(name: str) -> object:
+        if (module_name := _exports.get(name)) is None:
+            raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+        value = getattr(import_module(module_name, __name__), name)
+        globals()[name] = value
+        return value
 
-    _lazy_module = __import__("sys").modules[__name__]
-    _lazy_module.__package__ = __package__
-    _lazy_module.__loader__ = __loader__
-    _lazy_module.__spec__ = __spec__
+    def __dir__() -> list[str]:
+        return sorted(globals().keys() | _exports.keys())
