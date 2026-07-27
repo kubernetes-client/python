@@ -15,7 +15,8 @@ build:
     # golang: "1.20"
   jobs:
     # Empty build step to override and stop standard Sphinx/MkDocs execution
-    build: []
+    build:
+      - true
     # Copy your raw HTML directly to the hosted output folder
     post_build:
       - mkdir -p $READTHEDOCS_OUTPUT/html
