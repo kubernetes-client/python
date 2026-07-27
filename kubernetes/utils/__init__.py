@@ -25,3 +25,10 @@ from .retry import (Backoff, DEFAULT_BACKOFF, DEFAULT_RETRY,
                     on_retry_after_error, retry_after_backoff,
                     retry_after_max_retries, retry_on_conflict,
                     retry_after_seconds)
+from .resource_quota import (
+    ResourceChangeKind,
+    ResourceDiff,
+    get_resource_list_diff,
+    resource_quotas_equal,
+    compare_resource_quotas,
+)
