@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.utils.metrics module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.utils.quantity module" href="kubernetes.utils.quantity.html" />
+    <link rel="prev" title="kubernetes.utils.duration module" href="kubernetes.utils.duration.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.utils.metrics">
+<span id="kubernetes-utils-metrics-module"></span><h1>kubernetes.utils.metrics module<a class="headerlink" href="#module-kubernetes.utils.metrics" title="Link to this heading">¶</a></h1>
+<p>Metrics utilities for Kubernetes resource monitoring.</p>
+<p>Provides helpers for fetching and processing resource usage data from the
+metrics.k8s.io API endpoint, enabling monitoring and autoscaling workflows.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.metrics.get_nodes_metrics">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.metrics.</span></span><span class="sig-name descname"><span class="pre">get_nodes_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.utils.metrics.get_nodes_metrics" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch current resource usage for all cluster nodes.</p>
+<p>Retrieves CPU and memory consumption metrics from the metrics-server
+for every node in the cluster.</p>
+<dl>
+<dt>Parameters:</dt><dd><p>api_client: An initialized kubernetes.client.ApiClient instance</p>
+</dd>
+<dt>Returns:</dt><dd><p>A dictionary containing the metrics response with structure:
+{</p>
+<blockquote>
+<div><p>‘kind’: ‘NodeMetricsList’,
+‘apiVersion’: ‘metrics.k8s.io/v1beta1’,
+‘metadata’: {…},
+‘items’: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>‘metadata’: {‘name’: ‘node-1’, …},
+‘timestamp’: ‘2024-01-01T00:00:00Z’,
+‘window’: ’30s’,
+‘usage’: {‘cpu’: ‘100m’, ‘memory’: ‘1024Mi’}</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+<dt>Raises:</dt><dd><p>ApiException: If the metrics server is not available or request fails</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api_client</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">get_nodes_metrics</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">cpu</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;cpu&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">mem</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: CPU=</span><span class="si">{</span><span class="n">cpu</span><span class="si">}</span><span class="s2">, Memory=</span><span class="si">{</span><span class="n">mem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.metrics.get_pods_metrics">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.metrics.</span></span><span class="sig-name descname"><span class="pre">get_pods_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.utils.metrics.get_pods_metrics" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch current resource usage for pods in a namespace.</p>
+<p>Retrieves CPU and memory consumption metrics from the metrics-server
+for pods in the specified namespace, with optional label filtering.</p>
+<dl>
+<dt>Parameters:</dt><dd><p>api_client: An initialized kubernetes.client.ApiClient instance
+namespace: The namespace name to query (required)
+label_selector: Optional label query to filter pods (e.g., ‘app=web,env=prod’)</p>
+</dd>
+<dt>Returns:</dt><dd><p>A dictionary containing the metrics response with structure:
+{</p>
+<blockquote>
+<div><p>‘kind’: ‘PodMetricsList’,
+‘apiVersion’: ‘metrics.k8s.io/v1beta1’,
+‘metadata’: {…},
+‘items’: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>‘metadata’: {‘name’: ‘pod-1’, ‘namespace’: ‘default’, …},
+‘timestamp’: ‘2024-01-01T00:00:00Z’,
+‘window’: ’30s’,
+‘containers’: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>‘name’: ‘container-1’,
+‘usage’: {‘cpu’: ‘50m’, ‘memory’: ‘512Mi’}</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If namespace is None or empty
+ApiException: If the metrics server is not available or request fails</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api_client</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get all pods in namespace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">get_pods_metrics</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get pods with specific labels</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">get_pods_metrics</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;app=nginx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">pod</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">pod_name</span> <span class="o">=</span> <span class="n">pod</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pod: </span><span class="si">{</span><span class="n">pod_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">pod</span><span class="p">[</span><span class="s1">&#39;containers&#39;</span><span class="p">]:</span>
+<span class="gp">... </span>        <span class="n">cname</span> <span class="o">=</span> <span class="n">container</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="n">cpu</span> <span class="o">=</span> <span class="n">container</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;cpu&#39;</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="n">mem</span> <span class="o">=</span> <span class="n">container</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Container </span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">: CPU=</span><span class="si">{</span><span class="n">cpu</span><span class="si">}</span><span class="s2">, Memory=</span><span class="si">{</span><span class="n">mem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.utils.metrics.get_pods_metrics_in_all_namespaces">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.utils.metrics.</span></span><span class="sig-name descname"><span class="pre">get_pods_metrics_in_all_namespaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespaces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.utils.metrics.get_pods_metrics_in_all_namespaces" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch pod metrics across multiple namespaces.</p>
+<p>Queries pod metrics in each specified namespace and returns an aggregated
+result. If a namespace query fails, the error is captured in the result
+rather than raising an exception.</p>
+<dl>
+<dt>Parameters:</dt><dd><p>api_client: An initialized kubernetes.client.ApiClient instance
+namespaces: A list of namespace names to query
+label_selector: Optional label query applied to all namespaces</p>
+</dd>
+<dt>Returns:</dt><dd><p>A dictionary mapping namespace names to their metrics or error info:
+{</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘namespace-1’: {</dt><dd><p>‘items’: […],
+‘kind’: ‘PodMetricsList’,
+…</p>
+</dd>
+</dl>
+<p>},
+‘namespace-2’: {</p>
+<blockquote>
+<div><p>‘error’: ‘error message’,
+‘kind’: ‘Error’</p>
+</div></blockquote>
+</div></blockquote>
+<p>}</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api_client</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;kube-system&#39;</span><span class="p">,</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">all_metrics</span> <span class="o">=</span> <span class="n">get_pods_metrics_in_all_namespaces</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ns</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">all_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">: ERROR - </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">pod_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ns</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pod_count</span><span class="si">}</span><span class="s2"> pods&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.utils.html">kubernetes.utils package</a><ul>
+      <li>Previous: <a href="kubernetes.utils.duration.html" title="previous chapter">kubernetes.utils.duration module</a></li>
+      <li>Next: <a href="kubernetes.utils.quantity.html" title="next chapter">kubernetes.utils.quantity module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.utils.metrics.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

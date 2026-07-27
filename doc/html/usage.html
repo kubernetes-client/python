@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Usage &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes" href="modules.html" />
+    <link rel="prev" title="Kubernetes Python Client" href="README.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+<p>The directory <code class="docutils literal notranslate"><span class="pre">examples</span></code> contains a few examples on how to use the client.</p>
+<section id="deployments">
+<h2>Deployments<a class="headerlink" href="#deployments" title="Link to this heading">¶</a></h2>
+<p>Here is a simple usage of creating a deployment from a yaml file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright 2016 The Kubernetes Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Creates a deployment using AppsV1Api from file nginx-deployment.yaml.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Configs can be set in Configuration class directly or using helper</span>
+    <span class="c1"># utility. If no argument provided, the config will be loaded from</span>
+    <span class="c1"># default location.</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;yaml_dir/nginx-deployment.yaml&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dep</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">k8s_apps_v1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">AppsV1Api</span><span class="p">()</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">k8s_apps_v1</span><span class="o">.</span><span class="n">create_namespaced_deployment</span><span class="p">(</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">dep</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deployment created. Status=&#39;</span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following example demonstrates how to create, update and delete deployments
+without the need to read a file from the disk:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright 2016 The Kubernetes Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The example covers the following:</span>
+<span class="sd">    - Creation of a deployment using AppsV1Api</span>
+<span class="sd">    - update/patch to perform rolling restart on the deployment</span>
+<span class="sd">    - deletetion of the deployment</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+
+<span class="n">DEPLOYMENT_NAME</span> <span class="o">=</span> <span class="s2">&quot;nginx-deployment&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_deployment_object</span><span class="p">():</span>
+    <span class="c1"># Configureate Pod template container</span>
+    <span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">V1Container</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nginx&quot;</span><span class="p">,</span>
+        <span class="n">image</span><span class="o">=</span><span class="s2">&quot;nginx:1.15.4&quot;</span><span class="p">,</span>
+        <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="n">client</span><span class="o">.</span><span class="n">V1ContainerPort</span><span class="p">(</span><span class="n">container_port</span><span class="o">=</span><span class="mi">80</span><span class="p">)],</span>
+        <span class="n">resources</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">V1ResourceRequirements</span><span class="p">(</span>
+            <span class="n">requests</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cpu&quot;</span><span class="p">:</span> <span class="s2">&quot;100m&quot;</span><span class="p">,</span> <span class="s2">&quot;memory&quot;</span><span class="p">:</span> <span class="s2">&quot;200Mi&quot;</span><span class="p">},</span>
+            <span class="n">limits</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cpu&quot;</span><span class="p">:</span> <span class="s2">&quot;500m&quot;</span><span class="p">,</span> <span class="s2">&quot;memory&quot;</span><span class="p">:</span> <span class="s2">&quot;500Mi&quot;</span><span class="p">},</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create and configure a spec section</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">V1PodTemplateSpec</span><span class="p">(</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">V1ObjectMeta</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="s2">&quot;nginx&quot;</span><span class="p">}),</span>
+        <span class="n">spec</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">V1PodSpec</span><span class="p">(</span><span class="n">containers</span><span class="o">=</span><span class="p">[</span><span class="n">container</span><span class="p">]),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create the specification of deployment</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">V1DeploymentSpec</span><span class="p">(</span>
+        <span class="n">replicas</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;matchLabels&quot;</span><span class="p">:</span>
+            <span class="p">{</span><span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="s2">&quot;nginx&quot;</span><span class="p">}})</span>
+
+    <span class="c1"># Instantiate the deployment object</span>
+    <span class="n">deployment</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">V1Deployment</span><span class="p">(</span>
+        <span class="n">api_version</span><span class="o">=</span><span class="s2">&quot;apps/v1&quot;</span><span class="p">,</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;Deployment&quot;</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">V1ObjectMeta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">),</span>
+        <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">deployment</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_deployment</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">deployment</span><span class="p">):</span>
+    <span class="c1"># Create deployment</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">create_namespaced_deployment</span><span class="p">(</span>
+        <span class="n">body</span><span class="o">=</span><span class="n">deployment</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;default&quot;</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[INFO] deployment `nginx-deployment` created.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t\t\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;NAMESPACE&quot;</span><span class="p">,</span> <span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;REVISION&quot;</span><span class="p">,</span> <span class="s2">&quot;IMAGE&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t\t</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="p">(</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">containers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">image</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">update_deployment</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">deployment</span><span class="p">):</span>
+    <span class="c1"># Update container image</span>
+    <span class="n">deployment</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">containers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;nginx:1.16.0&quot;</span>
+
+    <span class="c1"># patch the deployment</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">patch_namespaced_deployment</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">deployment</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[INFO] deployment&#39;s container image updated.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t\t\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;NAMESPACE&quot;</span><span class="p">,</span> <span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;REVISION&quot;</span><span class="p">,</span> <span class="s2">&quot;IMAGE&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t\t</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="p">(</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">containers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">image</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">restart_deployment</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">deployment</span><span class="p">):</span>
+    <span class="c1"># update `spec.template.metadata` section</span>
+    <span class="c1"># to add `kubectl.kubernetes.io/restartedAt` annotation</span>
+    <span class="n">deployment</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;kubectl.kubernetes.io/restartedAt&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">tz</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">UTC</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># patch the deployment</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">patch_namespaced_deployment</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">deployment</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[INFO] deployment `nginx-deployment` restarted.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t\t\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;REVISION&quot;</span><span class="p">,</span> <span class="s2">&quot;RESTARTED-AT&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t\t</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="p">(</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">annotations</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_deployment</span><span class="p">(</span><span class="n">api</span><span class="p">):</span>
+    <span class="c1"># Delete deployment</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">delete_namespaced_deployment</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">,</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="n">body</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">V1DeleteOptions</span><span class="p">(</span>
+            <span class="n">propagation_policy</span><span class="o">=</span><span class="s2">&quot;Foreground&quot;</span><span class="p">,</span> <span class="n">grace_period_seconds</span><span class="o">=</span><span class="mi">5</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[INFO] deployment `nginx-deployment` deleted.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Configs can be set in Configuration class directly or using helper</span>
+    <span class="c1"># utility. If no argument provided, the config will be loaded from</span>
+    <span class="c1"># default location.</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+    <span class="n">apps_v1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">AppsV1Api</span><span class="p">()</span>
+
+    <span class="c1"># Uncomment the following lines to enable debug logging</span>
+    <span class="c1"># c = client.Configuration()</span>
+    <span class="c1"># c.debug = True</span>
+    <span class="c1"># apps_v1 = client.AppsV1Api(api_client=client.ApiClient(configuration=c))</span>
+
+    <span class="c1"># Create a deployment object with client-python API. The deployment we</span>
+    <span class="c1"># created is same as the `nginx-deployment.yaml` in the /examples folder.</span>
+    <span class="n">deployment</span> <span class="o">=</span> <span class="n">create_deployment_object</span><span class="p">()</span>
+
+    <span class="n">create_deployment</span><span class="p">(</span><span class="n">apps_v1</span><span class="p">,</span> <span class="n">deployment</span><span class="p">)</span>
+
+    <span class="n">update_deployment</span><span class="p">(</span><span class="n">apps_v1</span><span class="p">,</span> <span class="n">deployment</span><span class="p">)</span>
+
+    <span class="n">restart_deployment</span><span class="p">(</span><span class="n">apps_v1</span><span class="p">,</span> <span class="n">deployment</span><span class="p">)</span>
+
+    <span class="n">delete_deployment</span><span class="p">(</span><span class="n">apps_v1</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deployments">Deployments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="README.html" title="previous chapter">Kubernetes Python Client</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">kubernetes</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

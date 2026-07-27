@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.config.incluster_config_test module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.config.kube_config module" href="kubernetes.aio.config.kube_config.html" />
+    <link rel="prev" title="kubernetes.aio.config.incluster_config module" href="kubernetes.aio.config.incluster_config.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.config.incluster_config_test">
+<span id="kubernetes-aio-config-incluster-config-test-module"></span><h1>kubernetes.aio.config.incluster_config_test module<a class="headerlink" href="#module-kubernetes.aio.config.incluster_config_test" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.incluster_config_test.</span></span><span class="sig-name descname"><span class="pre">InClusterConfigTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IsolatedAsyncioTestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.get_test_loader">
+<span class="sig-name descname"><span class="pre">get_test_loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cert_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'KUBERNETES_SERVICE_HOST':</span> <span class="pre">'127.0.0.1',</span> <span class="pre">'KUBERNETES_SERVICE_PORT':</span> <span class="pre">'80'}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.get_test_loader" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.tearDown" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_auth_settings_with_authorization_key_and_prefix">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_auth_settings_with_authorization_key_and_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_auth_settings_with_authorization_key_and_prefix" title="Link to this definition">¶</a></dt>
+<dd><p>Legacy callers that split the token and prefix across
+api_key[‘authorization’] and api_key_prefix[‘authorization’] (rather
+than embedding “Bearer “ in the token itself) must still get the
+prefix applied. <a class="reference external" href="https://github.com/kubernetes-client/python/issues/2592">https://github.com/kubernetes-client/python/issues/2592</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_cert_file">
+<span class="sig-name descname"><span class="pre">test_empty_cert_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_cert_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_host">
+<span class="sig-name descname"><span class="pre">test_empty_host</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_host" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_port">
+<span class="sig-name descname"><span class="pre">test_empty_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_port" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_token_file">
+<span class="sig-name descname"><span class="pre">test_empty_token_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_empty_token_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_join_host_port">
+<span class="sig-name descname"><span class="pre">test_join_host_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_join_host_port" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_load_config">
+<span class="sig-name descname"><span class="pre">test_load_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_load_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_cert_file">
+<span class="sig-name descname"><span class="pre">test_no_cert_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_cert_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_host">
+<span class="sig-name descname"><span class="pre">test_no_host</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_host" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_port">
+<span class="sig-name descname"><span class="pre">test_no_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_port" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_token_file">
+<span class="sig-name descname"><span class="pre">test_no_token_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_no_token_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_refresh_token">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_refresh_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.incluster_config_test.InClusterConfigTest.test_refresh_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.config.html">kubernetes.aio.config package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.config.incluster_config.html" title="previous chapter">kubernetes.aio.config.incluster_config module</a></li>
+      <li>Next: <a href="kubernetes.aio.config.kube_config.html" title="next chapter">kubernetes.aio.config.kube_config module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.config.incluster_config_test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
