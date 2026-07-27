@@ -1,5 +1,4 @@
 certifi>=14.05.14 # MPL
-lazy-imports>=1,<2  # Apache-2.0
 python-dateutil>=2.8.2  # BSD
 pydantic>=2.11  # MIT
 setuptools>=21.0.0  # PSF/ZPL
@@ -8,5 +7,5 @@ websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
 typing-extensions>=4.7.1  # PSF
-urllib3>=2.6.3,<3.0.0 # MIT
+urllib3>=2.7.0,<3.0.0 # MIT
 durationpy>=0.7 # MIT
