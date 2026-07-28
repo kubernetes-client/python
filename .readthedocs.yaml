@@ -20,9 +20,8 @@ build:
         - mkdir -p $READTHEDOCS_OUTPUT/html
         - cp -r doc/html/* $READTHEDOCS_OUTPUT/html/
 
-
     # Copy your raw HTML directly to the hosted output folder
-    post_build:
+    # post_build:
 
 # Build documentation in the "docs/" directory with Sphinx
 # sphinx:
