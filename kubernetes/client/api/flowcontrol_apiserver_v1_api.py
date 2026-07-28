@@ -1492,7 +1492,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Status:
         """delete_flow_schema
 
         delete a FlowSchema
@@ -1560,8 +1560,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1600,7 +1600,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Status, int, Any]:
         """delete_flow_schema
 
         delete a FlowSchema
@@ -1668,8 +1668,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1808,7 +1808,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Status:
         """delete_priority_level_configuration
 
         delete a PriorityLevelConfiguration
@@ -1876,8 +1876,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1916,7 +1916,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Status, int, Any]:
         """delete_priority_level_configuration
 
         delete a PriorityLevelConfiguration
@@ -1984,8 +1984,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
