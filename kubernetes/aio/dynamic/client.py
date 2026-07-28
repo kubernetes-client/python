@@ -286,30 +286,34 @@ class DynamicClient(object):
         if params.get('content_type'):
             header_params['Content-Type'] = params['content_type']
         else:
-            header_params['Content-Type'] = self.client.select_header_content_type(['*/*'])
+            # Discovery routes require JSON and reject a literal */* with 415:
+            # https://github.com/kubernetes/kubernetes/blob/8ba6370120c1371ab70428be16341c3cf6ba8584/staging/src/k8s.io/apiserver/pkg/server/routes/version.go#L40-L49
+            header_params['Content-Type'] = 'application/json'
 
         # Authentication setting
         auth_settings = ['BearerToken']
 
-        api_response = await self.client.call_api(
-            path,
+        # The modern transport accepts a serialized request rather than the
+        # removed legacy call_api keyword arguments.
+        request = await self.client.param_serialize(
             method.upper(),
-            path_params,
-            query_params,
-            header_params,
+            path,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body,
             post_params=form_params,
-            async_req=params.get('async_req'),
             files=local_var_files,
             auth_settings=auth_settings,
-            _preload_content=False,
-            _return_http_data_only=params.get('_return_http_data_only', True),
-            _request_timeout=params.get('_request_timeout')
         )
-        if params.get('async_req'):
-            return api_response.get()
-        else:
-            return api_response
+        api_response = await self.client.call_api(
+            *request,
+            _request_timeout=params.get('_request_timeout'),
+        )
+        if not 200 <= api_response.status <= 299:
+            await api_response.read()
+            self.client.response_deserialize(api_response, {})
+        return api_response.response
 
     def validate(self, definition, version=None, strict=False):
         """validate checks a kubernetes resource definition
