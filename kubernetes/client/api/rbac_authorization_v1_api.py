@@ -1240,7 +1240,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Status:
         """delete_cluster_role
 
         delete a ClusterRole
@@ -1308,8 +1308,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1348,7 +1348,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Status, int, Any]:
         """delete_cluster_role
 
         delete a ClusterRole
@@ -1416,8 +1416,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1556,7 +1556,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Status:
         """delete_cluster_role_binding
 
         delete a ClusterRoleBinding
@@ -1624,8 +1624,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1664,7 +1664,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Status, int, Any]:
         """delete_cluster_role_binding
 
         delete a ClusterRoleBinding
@@ -1732,8 +1732,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -3575,7 +3575,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Status:
         """delete_namespaced_role
 
         delete a Role
@@ -3646,8 +3646,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -3687,7 +3687,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Status, int, Any]:
         """delete_namespaced_role
 
         delete a Role
@@ -3758,8 +3758,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -3902,7 +3902,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Status:
         """delete_namespaced_role_binding
 
         delete a RoleBinding
@@ -3973,8 +3973,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -4014,7 +4014,7 @@ class RbacAuthorizationV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Status, int, Any]:
         """delete_namespaced_role_binding
 
         delete a RoleBinding
@@ -4085,8 +4085,8 @@ class RbacAuthorizationV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Status",
+            '202': "V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
