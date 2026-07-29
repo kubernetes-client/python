@@ -22,7 +22,7 @@ def stream_logs():
         name="log-demo",
         namespace="default",
         follow=True,
-        _preload_content=False
+        _preload_content=False,
     )
 
     # 👇 make socket non-blocking with timeout

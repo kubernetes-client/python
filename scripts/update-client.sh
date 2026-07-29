@@ -23,6 +23,7 @@ set -o pipefail
 
 SCRIPT_ROOT=$(dirname "${BASH_SOURCE}")
 CLIENT_ROOT="${SCRIPT_ROOT}/../kubernetes"
+DOC_ROOT="${SCRIPT_ROOT}/../doc"
 CLIENT_VERSION=$(python "${SCRIPT_ROOT}/constants.py" CLIENT_VERSION)
 PACKAGE_NAME=$(python "${SCRIPT_ROOT}/constants.py" PACKAGE_NAME)
 DEVELOPMENT_STATUS=$(python "${SCRIPT_ROOT}/constants.py" DEVELOPMENT_STATUS)
@@ -58,6 +59,9 @@ echo ">>> Running python generator from the gen repo"
 "${GEN_ROOT}/openapi/python.sh" "${CLIENT_ROOT}" "${SETTING_FILE}"
 mv "${CLIENT_ROOT}/swagger.json" "${SCRIPT_ROOT}/swagger.json"
 
+echo ">>> restoring Kubernetes patch media-type selection..."
+git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
+
 echo ">>> updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^__version__ = .*/__version__ = \\\"${CLIENT_VERSION}\\\"/" "${CLIENT_ROOT}/__init__.py"
@@ -67,15 +71,10 @@ sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "$
 sed -i'' "s/^PACKAGE_NAME = .*/PACKAGE_NAME = \\\"${PACKAGE_NAME}\\\"/" "${SCRIPT_ROOT}/../setup-release.py"
 sed -i'' "s,^DEVELOPMENT_STATUS = .*,DEVELOPMENT_STATUS = \\\"${DEVELOPMENT_STATUS}\\\"," "${SCRIPT_ROOT}/../setup-release.py"
 
-# This is a terrible hack:
-# first, this must be in gen repo not here
-# second, this should be ported to swagger-codegen
-echo ">>> patching client..."
-git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
-git apply "${SCRIPT_ROOT}/api_client_patch.diff"
-# The following is commented out due to:
-# AttributeError: 'RESTResponse' object has no attribute 'headers'
-# OpenAPI client generator prior to 6.4.0 uses deprecated urllib3 APIs.
-# git apply "${SCRIPT_ROOT}/rest_urllib_headers.diff"
+echo ">>> generating docs..."
+pushd "${DOC_ROOT}" > /dev/null
+make rst
+git add -A .
+popd > /dev/null
 
 echo ">>> Done."

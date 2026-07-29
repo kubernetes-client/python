@@ -1,3 +1,82 @@
+# Breaking Change from upgrading OpenAPI Generator to v7.24.0
+
+Both clients now use the modern Python generator instead of
+`python-legacy`. The asynchronous client uses the generator's `asyncio`
+library and `aiohttp` transport. Existing endpoint names, model names,
+and wire aliases are preserved, but applications may need the following
+updates:
+
+- Synchronous runtime dependencies now require `urllib3>=2.6.3,<3`,
+  `pydantic>=2.11`, `lazy-imports>=1,<2`,
+  `typing-extensions>=4.7.1`, and `python-dateutil>=2.8.2`.
+- Asynchronous runtime dependencies now require
+  `aiohttp>=3.13.5,<4.0.0`, `aiohttp-retry>=2.8.3`, `pydantic>=2.11`,
+  `lazy-imports>=1,<2`, `typing-extensions>=4.7.1`, and
+  `python-dateutil>=2.8.2`. `certifi` and `six` are no longer direct
+  asynchronous dependencies. Python 3.10 remains the minimum supported
+  version for both clients.
+- Models and API-call arguments now use Pydantic validation. Invalid,
+  unknown, or previously coerced values can raise
+  `pydantic.ValidationError` before a request is sent; models are
+  keyword-only, reject unknown fields during construction, and validate
+  assignments. The model `local_vars_configuration` argument and
+  Configuration's `discard_unknown_keys` and
+  `disabled_client_side_validations` arguments are removed.
+  `client_side_validation=False` no longer disables generated
+  validation.
+- Low-level synchronous transport interfaces changed. Direct callers of
+  `ApiClient.request`, `ApiClient.call_api`, `ApiClient.deserialize`, or
+  the `RESTClientObject` HTTP-verb helpers must migrate to the modern
+  request/response interface. `ApiException.body` is now decoded text
+  instead of bytes.
+- Low-level asynchronous transport interfaces also changed. Direct
+  callers of `ApiClient.call_api`, `ApiClient.param_serialize`,
+  `ApiClient.response_deserialize`, or `RESTClientObject.request` must
+  migrate to the modern `aiohttp` request/response interface. HTTP
+  sessions are created lazily; close an owned client with
+  `await client.close()` or an async context manager. Interactive
+  websocket streams use the generated `_without_preload_content`
+  operations.
+- `CoreV1Api.delete_namespace` now returns a decoded dictionary rather
+  than `V1Status`, since a successful deletion can return either a
+  terminating Namespace or a Status.
+
+See [kubernetes-client/python#2631][python-pr] and
+[kubernetes-client/gen#305][gen-pr].
+
+[python-pr]: https://github.com/kubernetes-client/python/pull/2631
+[gen-pr]: https://github.com/kubernetes-client/gen/pull/305
+
+# v36.0.3
+
+Kubernetes API Version: v1.36.2
+
+### Bug or Regression
+- Fix Watch.stream selecting watch instead of follow when streaming pod logs.
+- Start the leader election worker thread as a daemon so it does not block process shutdown.
+- Fix readline_channel, readline_stdout and readline_stderr crashing with OverflowError when using the default timeout, and returning None when a timeout expires.
+- Fix format_quantity returning imprecise, non-canonical values for the milli, micro and nano suffixes, and ignoring quantize=Decimal(0).
+
+# v36.0.2
+
+Kubernetes API Version: v1.36.1
+
+### Uncategorized
+- Restored backward compatibility for `Configuration.auth_settings()`:
+  the legacy `api_key['authorization']` lookup is honored as a fallback
+  when `api_key['BearerToken']` is not set, fixing 401 Unauthorized
+  regressions seen after upgrading to v36.0.0 (#2595). (#2604, @GK-07)
+
+# v36.0.1
+
+Kubernetes API Version: v1.36.1
+
+### Bug or Regression
+- Fix `load_incluster_config()` and `load_kube_config()` (sync and async, with a static token) so requests carry an `Authorization` header on `kubernetes-client/python` v36+. Without this fix, in-cluster pods upgrading to v36 silently send unauthenticated requests and the apiserver rejects them as `system:anonymous`. (#2585, @Jmacek)
+
+### Deprecation
+- Support new exec v5 websocket subprotocol (#2486, @aojea)
+
 # v36.0.0
 
 Kubernetes API Version: v1.36.1
@@ -249,6 +328,9 @@ Kubernetes API Version: v1.36.0
 - ApiClient's `update_params_for_auth` method has one parameter name changed from `querys` to `queries`.
 
 - Configuration auth uses 'BearerToken' instead of 'authorization' in api_key.
+
+- V1ServiceSpec's external_i_ps has been renamed to external_ips, and
+  cluster_i_ps to cluster_ips.
 
 # v35.0.0
 

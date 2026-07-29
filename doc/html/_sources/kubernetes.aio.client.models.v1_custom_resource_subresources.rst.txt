@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1\_custom\_resource\_subresources module
+======================================================================
+
+.. automodule:: kubernetes.aio.client.models.v1_custom_resource_subresources
+   :members:
+   :show-inheritance:
+   :undoc-members:

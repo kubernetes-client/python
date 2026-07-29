@@ -116,8 +116,11 @@ class InClusterConfigTest(unittest.TestCase):
         loader.load_and_set(config)
 
         api_client = ApiClient(config)
-        headers = {}
-        api_client.update_params_for_auth(headers, [], ['BearerToken'])
+        _, _, headers, _, _ = api_client.param_serialize(
+            'GET',
+            '/',
+            auth_settings=['BearerToken'],
+        )
 
         self.assertIn('authorization', headers)
         self.assertTrue(

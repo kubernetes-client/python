@@ -19,3 +19,9 @@ from .quantity import parse_quantity
 from .duration import parse_duration
 from .metrics import (get_nodes_metrics, get_pods_metrics,
                       get_pods_metrics_in_all_namespaces)
+from .retry import (Backoff, DEFAULT_BACKOFF, DEFAULT_RETRY,
+                    DEFAULT_RETRY_AFTER_BACKOFF, is_conflict,
+                    is_retry_after_response, is_too_many_requests, on_error,
+                    on_retry_after_error, retry_after_backoff,
+                    retry_after_max_retries, retry_on_conflict,
+                    retry_after_seconds)

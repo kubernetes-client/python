@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1\_rbd\_persistent\_volume\_source module
+=======================================================================
+
+.. automodule:: kubernetes.aio.client.models.v1_rbd_persistent_volume_source
+   :members:
+   :show-inheritance:
+   :undoc-members:

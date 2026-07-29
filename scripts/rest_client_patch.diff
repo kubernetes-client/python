@@ -1,18 +1,17 @@
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
-index 5716565df..b788bf7d2 100644
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
-@@ -151,7 +151,12 @@ class RESTClientObject(object):
-             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
-                 if query_params:
-                     url += '?' + urlencode(query_params)
--                if re.search('json', headers['Content-Type'], re.IGNORECASE):
-+                if (re.search('json', headers['Content-Type'], re.IGNORECASE) or
-+                        headers['Content-Type'] == 'application/apply-patch+yaml'):
-+                    if headers['Content-Type'] == 'application/json-patch+json':
-+                        if not isinstance(body, list):
-+                            headers['Content-Type'] = \
-+                                'application/strategic-merge-patch+json'
-                     request_body = None
-                     if body is not None:
-                         request_body = json.dumps(body)
+@@ -223,4 +223,13 @@ class RESTClientObject:
+                 content_type = headers.get('Content-Type')
++                # JSON Patch is a list of operations; object patches for built-in
++                # APIs use strategic merge:
++                # https://kubernetes.io/docs/reference/using-api/api-concepts/#updates-to-existing-resources
++                if (
++                    content_type == 'application/json-patch+json'
++                    and not isinstance(body, list)
++                ):
++                    headers['Content-Type'] = content_type = \
++                        'application/strategic-merge-patch+json'
+                 is_json = (
+                     not content_type
+                     or re.search('json', content_type, re.IGNORECASE)

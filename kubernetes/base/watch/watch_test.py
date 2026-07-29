@@ -14,6 +14,8 @@
 
 import os
 import time
+from types import SimpleNamespace
+from typing import Any, Optional
 import unittest
 from unittest.mock import Mock, call
 
@@ -27,6 +29,31 @@ class WatchTests(unittest.TestCase):
     def setUp(self):
         # counter for a test that needs test global state
         self.callcount = 0
+
+    def test_generated_api_streams_raw_response(self):
+        fake_resp = Mock()
+        fake_resp.stream.return_value = [
+            '{"type": "ADDED", "object": {"metadata": {"name": "test"}}}\n'
+        ]
+        api = client.CoreV1Api()
+        api.api_client.call_api = Mock(
+            return_value=SimpleNamespace(response=fake_resp, status=200)
+        )
+
+        events = list(Watch().stream(api.list_namespace, timeout_seconds=1))
+
+        self.assertEqual('test', events[0]['object'].metadata.name)
+        api.api_client.call_api.assert_called_once()
+
+    def test_typing_annotation_falls_back_to_documented_model(self):
+        def list_pods() -> Optional[client.V1PodList]:
+            """:rtype: V1PodList"""
+
+        def list_any() -> Any:
+            """:rtype: V1PodList"""
+
+        self.assertEqual('V1Pod', Watch().get_return_type(list_pods))
+        self.assertEqual('V1Pod', Watch().get_return_type(list_any))
 
     def test_watch_with_decode(self):
         fake_resp = Mock()
@@ -204,7 +231,8 @@ class WatchTests(unittest.TestCase):
 
         fake_api = Mock()
         fake_api.read_namespaced_pod_log = Mock(return_value=fake_resp)
-        fake_api.read_namespaced_pod_log.__doc__ = ':param bool follow:\n:rtype: str'
+        fake_api.read_namespaced_pod_log.__doc__ = (
+            ':param follow:\n:type follow: bool\n:rtype: str')
 
         w = Watch()
         count = 1

@@ -13,10 +13,19 @@ build:
     # nodejs: "20"
     # rust: "1.70"
     # golang: "1.20"
+  jobs:
+    # Empty build step to override and stop standard Sphinx/MkDocs execution
+    build:
+      html:
+        - mkdir -p $READTHEDOCS_OUTPUT/html
+        - cp -r doc/html/* $READTHEDOCS_OUTPUT/html/
+
+    # Copy your raw HTML directly to the hosted output folder
+    # post_build:
 
 # Build documentation in the "docs/" directory with Sphinx
-sphinx:
-  configuration: doc/source/conf.py
+# sphinx:
+  # configuration: doc/source/conf.py
   # You can configure Sphinx to use a different builder, for instance use the dirhtml builder for simpler URLs
   # builder: "dirhtml"
   # Fail on all warnings to avoid broken references
@@ -30,12 +39,13 @@ sphinx:
 # Optional but recommended, declare the Python requirements required
 # to build your documentation
 # See https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
-python:
-  install:
-    - requirements: doc/requirements-docs.txt
-    - requirements: test-requirements.txt
-
-
+#python:
+#  install:
+#    - requirements: doc/requirements-docs.txt
+#    - requirements: test-requirements.txt
+#    - requirements: requirements.txt
+#
+#
 # git clone --depth 1 https://github.com/kubernetes-client/python .
 # git fetch origin --force --prune --prune-tags --depth 50 refs/heads/master:refs/remotes/origin/master
 # git checkout --force origin/master

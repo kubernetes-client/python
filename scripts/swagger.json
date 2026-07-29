@@ -23571,6 +23571,21 @@
       },
       "type": "object"
     },
+    "v1.GroupVersionKind": {
+      "type": "object",
+      "description": "GroupVersionKind unambiguously identifies a kind.",
+      "properties": {
+        "group": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        }
+      }
+    },
     "v2beta1.APIGroupDiscoveryList": {
       "type": "object",
       "description": "APIGroupDiscoveryList is a resource containing a list of APIGroupDiscovery. This is one of the types able to be returned from the /api and /apis endpoint and contains an aggregated list of API resources (built-ins, Custom Resource Definitions, resources from aggregated servers) that a cluster supports.",
@@ -23670,7 +23685,7 @@
           "description": "resource is the plural name of the resource."
         },
         "responseKind": {
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionKind"
+          "$ref": "#/definitions/v1.GroupVersionKind"
         },
         "scope": {
           "type": "string",
@@ -23724,7 +23739,7 @@
           "description": "subresource is the name of the subresource."
         },
         "responseKind": {
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionKind"
+          "$ref": "#/definitions/v1.GroupVersionKind"
         },
         "verbs": {
           "type": "array",
@@ -23736,7 +23751,7 @@
         "acceptedTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionKind"
+            "$ref": "#/definitions/v1.GroupVersionKind"
           }
         }
       },
@@ -23844,7 +23859,7 @@
           "description": "resource is the plural name of the resource."
         },
         "responseKind": {
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionKind"
+          "$ref": "#/definitions/v1.GroupVersionKind"
         },
         "scope": {
           "type": "string",
@@ -23905,12 +23920,12 @@
           "description": "subresource is the name of the subresource."
         },
         "responseKind": {
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionKind"
+          "$ref": "#/definitions/v1.GroupVersionKind"
         },
         "acceptedTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionKind"
+            "$ref": "#/definitions/v1.GroupVersionKind"
           },
           "x-kubernetes-list-type": "map",
           "x-kubernetes-list-map-keys": [
@@ -25427,13 +25442,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -26098,13 +26113,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -26769,13 +26784,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -27440,13 +27455,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -29851,8 +29866,12 @@
           "description": "Command is the remote command to execute. argv array. Not executed within a shell.",
           "in": "query",
           "name": "command",
-          "type": "string",
-          "uniqueItems": true
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
         },
         {
           "description": "Container in which to execute the command. Defaults to only container if there is only one container in the pod.",
@@ -30122,7 +30141,7 @@
           "description": "List of ports to forward Required when using WebSockets",
           "in": "query",
           "name": "ports",
-          "type": "integer",
+          "type": "string",
           "uniqueItems": true
         }
       ],
@@ -32223,13 +32242,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -34234,13 +34253,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -36740,13 +36759,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -37703,13 +37722,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -45076,13 +45095,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -45731,13 +45750,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -46386,13 +46405,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -47041,13 +47060,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -47911,13 +47930,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -48566,13 +48585,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -50360,13 +50379,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -51015,13 +51034,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -52073,13 +52092,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -52728,13 +52747,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -53819,13 +53838,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -54941,13 +54960,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -56452,13 +56471,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -57123,13 +57142,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -58017,13 +58036,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -59134,13 +59153,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -60251,13 +60270,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -63947,13 +63966,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -65291,13 +65310,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -66795,13 +66814,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -67689,13 +67708,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -69219,13 +69238,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -70523,13 +70542,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -71397,13 +71416,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -72060,13 +72079,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -73748,13 +73767,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -74869,13 +74888,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -75990,13 +76009,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -77144,13 +77163,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -78298,13 +78317,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -79317,13 +79336,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -80187,13 +80206,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -81493,13 +81512,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -82615,13 +82634,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -83397,13 +83416,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -84060,13 +84079,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -84954,13 +84973,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -85744,13 +85763,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -87777,13 +87796,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -88432,13 +88451,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -89738,13 +89757,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -90653,13 +90672,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -92022,13 +92041,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -92677,13 +92696,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -93340,13 +93359,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -94011,13 +94030,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -111494,13 +111513,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -112376,13 +112395,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -113270,13 +113289,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -116276,13 +116295,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -121269,13 +121288,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/v1.Status"
+              "type": "object"
             }
           },
           "401": {
@@ -122799,7 +122818,6 @@
         "operationId": "patchClusterCustomObject",
         "description": "patch the specified cluster scoped custom object",
         "consumes": [
-          "application/json-patch+json",
           "application/merge-patch+json"
         ],
         "produces": [
@@ -123054,7 +123072,6 @@
       "patch": {
         "description": "partially update status of the specified cluster scoped custom object",
         "consumes": [
-          "application/json-patch+json",
           "application/merge-patch+json"
         ],
         "produces": [
@@ -123252,7 +123269,6 @@
       "patch": {
         "description": "partially update scale of the specified cluster scoped custom object",
         "consumes": [
-          "application/json-patch+json",
           "application/merge-patch+json"
         ],
         "produces": [
@@ -123454,7 +123470,6 @@
         "operationId": "patchNamespacedCustomObject",
         "description": "patch the specified namespace scoped custom object",
         "consumes": [
-          "application/json-patch+json",
           "application/merge-patch+json"
         ],
         "produces": [
@@ -123716,7 +123731,6 @@
       "patch": {
         "description": "partially update status of the specified namespace scoped custom object",
         "consumes": [
-          "application/json-patch+json",
           "application/merge-patch+json",
           "application/apply-patch+yaml"
         ],
@@ -123922,7 +123936,6 @@
       "patch": {
         "description": "partially update scale of the specified namespace scoped custom object",
         "consumes": [
-          "application/json-patch+json",
           "application/merge-patch+json",
           "application/apply-patch+yaml"
         ],
@@ -124054,7 +124067,8 @@
       "description": "Bearer Token authentication",
       "in": "header",
       "name": "authorization",
-      "type": "apiKey"
+      "type": "apiKey",
+      "x-auth-id-alias": "authorization"
     }
   },
   "swagger": "2.0"

@@ -17,6 +17,7 @@ import os
 import tempfile
 import time
 import unittest
+from unittest import IsolatedAsyncioTestCase
 
 from kubernetes.aio.client import Configuration
 
@@ -43,7 +44,7 @@ _TEST_IPV6_ENVIRON = {
 }
 
 
-class InClusterConfigTest(unittest.TestCase):
+class InClusterConfigTest(IsolatedAsyncioTestCase):
     def setUp(self):
         self._temp_files = []
 
@@ -107,6 +108,18 @@ class InClusterConfigTest(unittest.TestCase):
                          await config.get_api_key_with_prefix('BearerToken'))
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN, loader.token)
         self.assertGreater(loader.token_expires_at, old_token_expires_at)
+
+    async def test_auth_settings_with_authorization_key_and_prefix(self):
+        """Legacy callers that split the token and prefix across
+        api_key['authorization'] and api_key_prefix['authorization'] (rather
+        than embedding "Bearer " in the token itself) must still get the
+        prefix applied. https://github.com/kubernetes-client/python/issues/2592
+        """
+        config = Configuration()
+        config.api_key['authorization'] = 'abc123'
+        config.api_key_prefix['authorization'] = 'Bearer'
+        settings = await config.auth_settings()
+        self.assertEqual(settings['BearerToken']['value'], 'Bearer abc123')
 
     def _should_fail_load(self, config_loader, reason):
         try:

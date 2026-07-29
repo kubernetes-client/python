@@ -16,7 +16,7 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "36.0.0a2"
+CLIENT_VERSION = "36.0.0+snapshot"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
@@ -75,10 +75,12 @@ setup(
               'kubernetes.informer',
               'kubernetes.aio',
               'kubernetes.aio.config',
+              'kubernetes.aio.utils',
               'kubernetes.aio.client',
               'kubernetes.aio.client.api',
               'kubernetes.aio.client.models'
               ],
+    package_data={'kubernetes.client': ['py.typed']},
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     python_requires='>=3.10',

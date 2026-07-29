@@ -104,47 +104,14 @@ command:
 scripts/update-client.sh
 ```
 
-**NOTE**: If you see a lot of new or modified files under the `kubernetes/test/`
-directory, delete everything except `kubernetes/test/test_api_client.py` and
-`kubernetes/test/test_configuration.py`.
-
 Commit changes (should be only version number changes) to the release branch.
 Name the commit something like "Update version constants for XXX release".
-
-***After you finished the steps above, refer to the section, "Hot issues", and
-apply the manual fixes.***
 
 ```bash
 git push upstream $RELEASE_BRANCH
 ```
 
-### 3. Hot issues
-
-Use the `scripts/apply-hotfixes.sh` script to apply the fixes below in one step.
-**As mentioned above, the script should be run after finishing the section "Update release tags". Also, ensure a clean working directory before applying the script.**
-
-Commit the manual changes like this [PR](https://github.com/kubernetes-client/python/pull/995/commits) does.
-
-There are some hot issues with the client generation that require manual fixes.
-**The steps below are deprecated and only exist for documentation purposess. They should be performed using the `scripts/apply-hotfixes.sh` script mentioned above.**
-
-1. Restore custom object patch behavior. You should apply [this commit](https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede)
-to ensure custom object patch behavior is backwards compatible. For more
-details, see [#866](https://github.com/kubernetes-client/python/issues/866) and
-[#959](https://github.com/kubernetes-client/python/pull/959).
-
-2. Add alias package kubernetes.client.apis with deprecation warning. You need
-to add [this file](https://github.com/kubernetes-client/python/blob/0976d59d6ff206f2f428cabc7a6b7b1144843b2a/kubernetes/client/apis/__init__.py)
-under `kubernetes/client/apis/` to ensure the package is backwards compatible.
-For more details, see [#974](https://github.com/kubernetes-client/python/issues/974)
-
-3. Add ability to the client to be used as Context Manager [kubernetes-client/python#1073](https://github.com/kubernetes-client/python/pull/1073)
-
-4. Remove the tests directory (ref: https://github.com/kubernetes-client/python/commit/ec9c944f076999543cd2122aff2d86f969d82548). See the [upstream issue](https://github.com/OpenAPITools/openapi-generator/issues/5377) for more information.
-
-5. Add tests for the default `Configuration` behavior (ref: https://github.com/kubernetes-client/python/pull/1303 and https://github.com/kubernetes-client/python/pull/1285). The commit [1ffa61d0650e4c93e0d7f0becd2c54797eafd407](https://github.com/kubernetes-client/python/pull/1285/commits/1ffa61d0650e4c93e0d7f0becd2c54797eafd407) should be cherry-picked.
-
-### 4. CHANGELOG
+### 3. CHANGELOG
 
 Make sure the change logs are up to date [here](https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md).
 If they are not, follow commits added after the last release and update/commit
@@ -152,14 +119,14 @@ the change logs to master.
 
 Then based on the release, follow one of next two steps.
 
-### 5. README
+### 4. README
 
 Update the compatibility matrix and maintenance status in the README file.
 
 ### Submit pull request
 
-Typically after the you've completed steps 2-6 above you can push your changes
-open a pull request against `kubernetes-client:release-x.y`
+After completing the steps above, push your changes and open a pull request
+against `kubernetes-client:release-x.y`.
 
 ## Patch a release branch
 

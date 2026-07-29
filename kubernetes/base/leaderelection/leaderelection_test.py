@@ -22,6 +22,7 @@ import threading
 import json
 import time
 import pytest
+from unittest.mock import patch
 
 thread_lock = threading.RLock()
 
@@ -193,6 +194,33 @@ class LeaderElectionTest(unittest.TestCase):
                              "try update record"])
 
         self.assert_history(leadership_history, ["get leadership", "start leading", "stop leading"])
+
+    def test_onstarted_leading_runs_in_daemon_thread(self):
+        captured = {}
+        real_thread = threading.Thread
+
+        def record_thread(*args, **kwargs):
+            thread = real_thread(*args, **kwargs)
+            captured["daemon"] = thread.daemon
+            return thread
+
+        started = threading.Event()
+
+        mock_lock = MockResourceLock("mock", "mock_namespace", "mock", thread_lock,
+                                     lambda: None, lambda: None, lambda: None, None)
+        mock_lock.renew_count_max = 1
+
+        config = electionconfig.Config(lock=mock_lock, lease_duration=2,
+                                       renew_deadline=1.5, retry_period=1,
+                                       onstarted_leading=started.set,
+                                       onstopped_leading=lambda: None)
+
+        with patch.object(leaderelection.threading, "Thread", new=record_thread):
+            leaderelection.LeaderElection(config).run()
+
+        self.assertTrue(started.wait(1), "onstarted_leading callback did not run")
+        self.assertIn("daemon", captured)
+        self.assertTrue(captured["daemon"])
 
     def assert_history(self, history, expected):
         self.assertIsNotNone(expected)

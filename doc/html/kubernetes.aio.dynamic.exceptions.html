@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.dynamic.exceptions module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.dynamic.resource module" href="kubernetes.aio.dynamic.resource.html" />
+    <link rel="prev" title="kubernetes.aio.dynamic.discovery_test module" href="kubernetes.aio.dynamic.discovery_test.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.dynamic.exceptions">
+<span id="kubernetes-aio-dynamic-exceptions-module"></span><h1>kubernetes.aio.dynamic.exceptions module<a class="headerlink" href="#module-kubernetes.aio.dynamic.exceptions" title="Link to this heading">¶</a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.BadRequestError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRequestError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.BadRequestError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>400: StatusBadRequest</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.ConflictError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">ConflictError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.ConflictError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>409: StatusConflict</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.DynamicApiError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">DynamicApiError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="kubernetes.aio.client.exceptions.html#kubernetes.aio.client.exceptions.ApiException" title="kubernetes.aio.client.exceptions.ApiException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiException</span></code></a></p>
+<p>Generic API Error for the dynamic client</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.DynamicApiError.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError.summary" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.ForbiddenError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">ForbiddenError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.ForbiddenError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>403: StatusForbidden</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.GoneError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">GoneError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.GoneError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>410: StatusGone</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.InternalServerError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">InternalServerError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.InternalServerError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>500: StatusInternalServer</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.KubernetesValidateMissing">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">KubernetesValidateMissing</span></span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.KubernetesValidateMissing" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>kubernetes-validate is not installed</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.MethodNotAllowedError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">MethodNotAllowedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.MethodNotAllowedError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>405: StatusMethodNotAllowed</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.NotFoundError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.NotFoundError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>404: StatusNotFound</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.ResourceNotFoundError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">ResourceNotFoundError</span></span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.ResourceNotFoundError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Resource was not found in available APIs</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.ResourceNotUniqueError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">ResourceNotUniqueError</span></span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.ResourceNotUniqueError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Parameters given matched multiple API resources</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.ServerTimeoutError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">ServerTimeoutError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.ServerTimeoutError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>504: StatusServerTimeout</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.ServiceUnavailableError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">ServiceUnavailableError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.ServiceUnavailableError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>503: StatusServiceUnavailable</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.TooManyRequestsError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">TooManyRequestsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.TooManyRequestsError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>429: StatusTooManyRequests</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.UnauthorizedError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnauthorizedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.UnauthorizedError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>401: StatusUnauthorized</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.UnprocessibleEntityError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnprocessibleEntityError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.UnprocessibleEntityError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.dynamic.exceptions.DynamicApiError" title="kubernetes.aio.dynamic.exceptions.DynamicApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicApiError</span></code></a></p>
+<p>422: StatusUnprocessibleEntity</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.dynamic.exceptions.api_exception">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.dynamic.exceptions.</span></span><span class="sig-name descname"><span class="pre">api_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.dynamic.exceptions.api_exception" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the proper Exception class for the given kubernetes.client.rest.ApiException object
+<a class="reference external" href="https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#success-codes">https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#success-codes</a></p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.dynamic.html">kubernetes.aio.dynamic package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.dynamic.discovery_test.html" title="previous chapter">kubernetes.aio.dynamic.discovery_test module</a></li>
+      <li>Next: <a href="kubernetes.aio.dynamic.resource.html" title="next chapter">kubernetes.aio.dynamic.resource module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.dynamic.exceptions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

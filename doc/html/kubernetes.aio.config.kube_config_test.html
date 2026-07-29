@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.config.kube_config_test module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.config.openid module" href="kubernetes.aio.config.openid.html" />
+    <link rel="prev" title="kubernetes.aio.config.kube_config module" href="kubernetes.aio.config.kube_config.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.config.kube_config_test">
+<span id="kubernetes-aio-config-kube-config-test-module"></span><h1>kubernetes.aio.config.kube_config_test module<a class="headerlink" href="#module-kubernetes.aio.config.kube_config_test" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.BaseTestCase">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.kube_config_test.</span></span><span class="sig-name descname"><span class="pre">BaseTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.BaseTestCase" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IsolatedAsyncioTestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.BaseTestCase.async_expect_exception">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">async_expect_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_part</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.BaseTestCase.async_expect_exception" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.BaseTestCase.expect_exception">
+<span class="sig-name descname"><span class="pre">expect_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_part</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.BaseTestCase.expect_exception" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.BaseTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.BaseTestCase.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.BaseTestCase.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.BaseTestCase.tearDown" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.FakeConfig">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.kube_config_test.</span></span><span class="sig-name descname"><span class="pre">FakeConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.FakeConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.FakeConfig.FILE_KEYS">
+<span class="sig-name descname"><span class="pre">FILE_KEYS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['ssl_ca_cert',</span> <span class="pre">'key_file',</span> <span class="pre">'cert_file']</span></span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.FakeConfig.FILE_KEYS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.kube_config_test.</span></span><span class="sig-name descname"><span class="pre">TestConfigNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.config.kube_config_test.BaseTestCase" title="kubernetes.aio.config.kube_config_test.BaseTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name">
+<span class="sig-name descname"><span class="pre">test_get_with_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_duplicate_name">
+<span class="sig-name descname"><span class="pre">test_get_with_name_on_duplicate_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_duplicate_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_invalid_object">
+<span class="sig-name descname"><span class="pre">test_get_with_name_on_invalid_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_invalid_object" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_name_does_not_exists">
+<span class="sig-name descname"><span class="pre">test_get_with_name_on_name_does_not_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_name_does_not_exists" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_non_list_object">
+<span class="sig-name descname"><span class="pre">test_get_with_name_on_non_list_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_get_with_name_on_non_list_object" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_key_does_not_exists">
+<span class="sig-name descname"><span class="pre">test_key_does_not_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_key_does_not_exists" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_normal_map_array_operations">
+<span class="sig-name descname"><span class="pre">test_normal_map_array_operations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_normal_map_array_operations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestConfigNode.test_obj">
+<span class="sig-name descname"><span class="pre">test_obj</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'key1':</span> <span class="pre">'test',</span> <span class="pre">'key2':</span> <span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c'],</span> <span class="pre">'key3':</span> <span class="pre">{'inner_key':</span> <span class="pre">'inner_value'},</span> <span class="pre">'with_names':</span> <span class="pre">[{'name':</span> <span class="pre">'test_name',</span> <span class="pre">'value':</span> <span class="pre">'test_value'},</span> <span class="pre">{'name':</span> <span class="pre">'test_name2',</span> <span class="pre">'value':</span> <span class="pre">{'key1',</span> <span class="pre">'test'}},</span> <span class="pre">{'name':</span> <span class="pre">'test_name3',</span> <span class="pre">'value':</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]}],</span> <span class="pre">'with_names_dup':</span> <span class="pre">[{'name':</span> <span class="pre">'test_name',</span> <span class="pre">'value':</span> <span class="pre">'test_value'},</span> <span class="pre">{'name':</span> <span class="pre">'test_name',</span> <span class="pre">'value':</span> <span class="pre">{'key1',</span> <span class="pre">'test'}},</span> <span class="pre">{'name':</span> <span class="pre">'test_name3',</span> <span class="pre">'value':</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]}]}</span></span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestConfigNode.test_obj" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.kube_config_test.</span></span><span class="sig-name descname"><span class="pre">TestFileOrData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.config.kube_config_test.BaseTestCase" title="kubernetes.aio.config.kube_config_test.BaseTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.get_file_content">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_file_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.get_file_content" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_data">
+<span class="sig-name descname"><span class="pre">test_data_given_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_file">
+<span class="sig-name descname"><span class="pre">test_data_given_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_file_and_data">
+<span class="sig-name descname"><span class="pre">test_data_given_file_and_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_file_and_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_file_no_base64">
+<span class="sig-name descname"><span class="pre">test_data_given_file_no_base64</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_data_given_file_no_base64" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data">
+<span class="sig-name descname"><span class="pre">test_file_given_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data_bytes">
+<span class="sig-name descname"><span class="pre">test_file_given_data_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data_bytes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data_bytes_no_base64">
+<span class="sig-name descname"><span class="pre">test_file_given_data_bytes_no_base64</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data_bytes_no_base64" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data_no_base64">
+<span class="sig-name descname"><span class="pre">test_file_given_data_no_base64</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_data_no_base64" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_file">
+<span class="sig-name descname"><span class="pre">test_file_given_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_file_and_data">
+<span class="sig-name descname"><span class="pre">test_file_given_file_and_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_file_and_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_non_existing_file">
+<span class="sig-name descname"><span class="pre">test_file_given_non_existing_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_given_non_existing_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_with_custom_dirname">
+<span class="sig-name descname"><span class="pre">test_file_with_custom_dirname</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestFileOrData.test_file_with_custom_dirname" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.kube_config_test.</span></span><span class="sig-name descname"><span class="pre">TestKubeConfigLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.config.kube_config_test.BaseTestCase" title="kubernetes.aio.config.kube_config_test.BaseTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTestCase</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.TEST_KUBE_CONFIG">
+<span class="sig-name descname"><span class="pre">TEST_KUBE_CONFIG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'clusters':</span> <span class="pre">[{'cluster':</span> <span class="pre">{'server':</span> <span class="pre">'test-host'},</span> <span class="pre">'name':</span> <span class="pre">'default'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'certificate-authority':</span> <span class="pre">'cert-auth',</span> <span class="pre">'server':</span> <span class="pre">'https://test-host'},</span> <span class="pre">'name':</span> <span class="pre">'ssl-no_file'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'certificate-authority':</span> <span class="pre">'cert_test',</span> <span class="pre">'server':</span> <span class="pre">'https://test-host'},</span> <span class="pre">'name':</span> <span class="pre">'ssl-local-file'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'certificate-authority-data':</span> <span class="pre">'Y2VydC1hdXRo',</span> <span class="pre">'insecure-skip-tls-verify':</span> <span class="pre">False,</span> <span class="pre">'server':</span> <span class="pre">'https://test-host'},</span> <span class="pre">'name':</span> <span class="pre">'ssl'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'insecure-skip-tls-verify':</span> <span class="pre">True,</span> <span class="pre">'server':</span> <span class="pre">'https://test-host'},</span> <span class="pre">'name':</span> <span class="pre">'no_ssl_verification'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'insecure-skip-tls-verify':</span> <span class="pre">False,</span> <span class="pre">'server':</span> <span class="pre">'https://test-host'},</span> <span class="pre">'name':</span> <span class="pre">'ssl_verification'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'certificate-authority-data':</span> <span class="pre">'Y2VydC1hdXRo',</span> <span class="pre">'insecure-skip-tls-verify':</span> <span class="pre">False,</span> <span class="pre">'server':</span> <span class="pre">'https://test-host',</span> <span class="pre">'tls-server-name':</span> <span class="pre">'kubernetes.io'},</span> <span class="pre">'name':</span> <span class="pre">'tls-server-name'},</span> <span class="pre">{'cluster':</span> <span class="pre">{'proxy-url':</span> <span class="pre">'http://proxy.example.com:3128',</span> <span class="pre">'server':</span> <span class="pre">'test-host'},</span> <span class="pre">'name':</span> <span class="pre">'proxy_cluster'}],</span> <span class="pre">'contexts':</span> <span class="pre">[{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default'},</span> <span class="pre">'name':</span> <span class="pre">'no_user'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'simple_token'},</span> <span class="pre">'name':</span> <span class="pre">'simple_token'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'gcp'},</span> <span class="pre">'name':</span> <span class="pre">'gcp'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'expired_gcp'},</span> <span class="pre">'name':</span> <span class="pre">'expired_gcp'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'oidc'},</span> <span class="pre">'name':</span> <span class="pre">'oidc'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'expired_oidc'},</span> <span class="pre">'name':</span> <span class="pre">'expired_oidc'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'expired_oidc_no_idp_cert_data'},</span> <span class="pre">'name':</span> <span class="pre">'expired_oidc_no_idp_cert_data'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'user_pass'},</span> <span class="pre">'name':</span> <span class="pre">'user_pass'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'ssl',</span> <span class="pre">'user':</span> <span class="pre">'ssl'},</span> <span class="pre">'name':</span> <span class="pre">'ssl'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'no_ssl_verification',</span> <span class="pre">'user':</span> <span class="pre">'ssl'},</span> <span class="pre">'name':</span> <span class="pre">'no_ssl_verification'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'ssl_verification',</span> <span class="pre">'user':</span> <span class="pre">'ssl'},</span> <span class="pre">'name':</span> <span class="pre">'ssl_verification'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'proxy_cluster',</span> <span class="pre">'user':</span> <span class="pre">'simple_token'},</span> <span class="pre">'name':</span> <span class="pre">'proxy_cluster_context'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'ssl-no_file',</span> <span class="pre">'user':</span> <span class="pre">'ssl-no_file'},</span> <span class="pre">'name':</span> <span class="pre">'ssl-no_file'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'ssl-local-file',</span> <span class="pre">'user':</span> <span class="pre">'ssl-local-file'},</span> <span class="pre">'name':</span> <span class="pre">'ssl-local-file'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'non_existing_user'},</span> <span class="pre">'name':</span> <span class="pre">'non_existing_user'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'exec_cred_user'},</span> <span class="pre">'name':</span> <span class="pre">'exec_cred_user'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'ssl',</span> <span class="pre">'user':</span> <span class="pre">'exec_cred_user_certificate'},</span> <span class="pre">'name':</span> <span class="pre">'exec_cred_user_certificate'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'tls-server-name',</span> <span class="pre">'user':</span> <span class="pre">'ssl'},</span> <span class="pre">'name':</span> <span class="pre">'tls-server-name'}],</span> <span class="pre">'current-context':</span> <span class="pre">'no_user',</span> <span class="pre">'users':</span> <span class="pre">[{'name':</span> <span class="pre">'simple_token',</span> <span class="pre">'user':</span> <span class="pre">{'password':</span> <span class="pre">'pass',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh',</span> <span class="pre">'username':</span> <span class="pre">'me'}},</span> <span class="pre">{'name':</span> <span class="pre">'gcp',</span> <span class="pre">'user':</span> <span class="pre">{'auth-provider':</span> <span class="pre">{'config':</span> <span class="pre">{'access-token':</span> <span class="pre">'dGVzdC1kYXRh'},</span> <span class="pre">'name':</span> <span class="pre">'gcp'},</span> <span class="pre">'password':</span> <span class="pre">'pass',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh',</span> <span class="pre">'username':</span> <span class="pre">'me'}},</span> <span class="pre">{'name':</span> <span class="pre">'expired_gcp',</span> <span class="pre">'user':</span> <span class="pre">{'auth-provider':</span> <span class="pre">{'config':</span> <span class="pre">{'access-token':</span> <span class="pre">'dGVzdC1kYXRh',</span> <span class="pre">'expiry':</span> <span class="pre">'2000-01-01T12:00:00Z'},</span> <span class="pre">'name':</span> <span class="pre">'gcp'},</span> <span class="pre">'password':</span> <span class="pre">'pass',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh',</span> <span class="pre">'username':</span> <span class="pre">'me'}},</span> <span class="pre">{'name':</span> <span class="pre">'oidc',</span> <span class="pre">'user':</span> <span class="pre">{'auth-provider':</span> <span class="pre">{'config':</span> <span class="pre">{'id-token':</span> <span class="pre">'dGVzdC1vaWRjLXRva2Vu.eyJuYW1lIjogInRlc3QifQ==.Y2xpZW50LWNlcnQ='},</span> <span class="pre">'name':</span> <span class="pre">'oidc'}}},</span> <span class="pre">{'name':</span> <span class="pre">'expired_oidc',</span> <span class="pre">'user':</span> <span class="pre">{'auth-provider':</span> <span class="pre">{'config':</span> <span class="pre">{'client-id':</span> <span class="pre">'tectonic-kubectl',</span> <span class="pre">'client-secret':</span> <span class="pre">'FAKE_SECRET',</span> <span class="pre">'id-token':</span> <span class="pre">'QmVhcmVyIGRHVnpkQzF2YVdSakxYUnZhMlZ1LmV5SnVZVzFsSWpvZ0luUmxjM1FpZlE9PS5ZMnhwWlc1MExXTmxjblE9.eyJuYW1lIjogInRlc3QiLCJleHAiOiA1MzY0NTc2MDB9.Y2xpZW50LWNlcnQ=',</span> <span class="pre">'idp-certificate-authority-data':</span> <span class="pre">'Y2VydC1hdXRo',</span> <span class="pre">'idp-issuer-url':</span> <span class="pre">'https://example.localhost/identity',</span> <span class="pre">'refresh-token':</span> <span class="pre">'lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk'},</span> <span class="pre">'name':</span> <span class="pre">'oidc'}}},</span> <span class="pre">{'name':</span> <span class="pre">'expired_oidc_no_idp_cert_data',</span> <span class="pre">'user':</span> <span class="pre">{'auth-provider':</span> <span class="pre">{'config':</span> <span class="pre">{'client-id':</span> <span class="pre">'tectonic-kubectl',</span> <span class="pre">'client-secret':</span> <span class="pre">'FAKE_SECRET',</span> <span class="pre">'id-token':</span> <span class="pre">'QmVhcmVyIGRHVnpkQzF2YVdSakxYUnZhMlZ1LmV5SnVZVzFsSWpvZ0luUmxjM1FpZlE9PS5ZMnhwWlc1MExXTmxjblE9.eyJuYW1lIjogInRlc3QiLCJleHAiOiA1MzY0NTc2MDB9.Y2xpZW50LWNlcnQ=',</span> <span class="pre">'idp-issuer-url':</span> <span class="pre">'https://example.localhost/identity',</span> <span class="pre">'refresh-token':</span> <span class="pre">'lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk'},</span> <span class="pre">'name':</span> <span class="pre">'oidc'}}},</span> <span class="pre">{'name':</span> <span class="pre">'user_pass',</span> <span class="pre">'user':</span> <span class="pre">{'password':</span> <span class="pre">'pass',</span> <span class="pre">'username':</span> <span class="pre">'me'}},</span> <span class="pre">{'name':</span> <span class="pre">'ssl-no_file',</span> <span class="pre">'user':</span> <span class="pre">{'client-certificate':</span> <span class="pre">'client-cert',</span> <span class="pre">'client-key':</span> <span class="pre">'client-key',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh'}},</span> <span class="pre">{'name':</span> <span class="pre">'ssl-local-file',</span> <span class="pre">'user':</span> <span class="pre">{'client-certificate':</span> <span class="pre">'client_cert',</span> <span class="pre">'client-key':</span> <span class="pre">'client_key',</span> <span class="pre">'tokenFile':</span> <span class="pre">'token_file'}},</span> <span class="pre">{'name':</span> <span class="pre">'ssl',</span> <span class="pre">'user':</span> <span class="pre">{'client-certificate-data':</span> <span class="pre">'Y2xpZW50LWNlcnQ=',</span> <span class="pre">'client-key-data':</span> <span class="pre">'Y2xpZW50LWtleQ==',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh'}},</span> <span class="pre">{'name':</span> <span class="pre">'exec_cred_user',</span> <span class="pre">'user':</span> <span class="pre">{'exec':</span> <span class="pre">{'apiVersion':</span> <span class="pre">'client.authentication.k8s.io/v1beta1',</span> <span class="pre">'args':</span> <span class="pre">['token',</span> <span class="pre">'-i',</span> <span class="pre">'dummy-cluster'],</span> <span class="pre">'command':</span> <span class="pre">'aws-iam-authenticator'}}},</span> <span class="pre">{'name':</span> <span class="pre">'exec_cred_user_certificate',</span> <span class="pre">'user':</span> <span class="pre">{'exec':</span> <span class="pre">{'apiVersion':</span> <span class="pre">'client.authentication.k8s.io/v1beta1',</span> <span class="pre">'args':</span> <span class="pre">[],</span> <span class="pre">'command':</span> <span class="pre">'custom-certificate-authenticator'}}}]}</span></span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.TEST_KUBE_CONFIG" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_async_load_gcp_token_with_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_async_load_gcp_token_with_refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_async_load_gcp_token_with_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_current_context">
+<span class="sig-name descname"><span class="pre">test_current_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_current_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_gcp_no_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_gcp_no_refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_gcp_no_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_invalid_oidc_configs">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_invalid_oidc_configs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_invalid_oidc_configs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_invalid_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_invalid_refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_invalid_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_list_contexts">
+<span class="sig-name descname"><span class="pre">test_list_contexts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_list_contexts" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_list_kube_config_contexts">
+<span class="sig-name descname"><span class="pre">test_list_kube_config_contexts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_list_kube_config_contexts" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_config_helper">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_load_config_helper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_config_helper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_gcp_token_no_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_load_gcp_token_no_refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_gcp_token_no_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_gcp_token_with_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_load_gcp_token_with_refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_gcp_token_with_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_kube_config">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_load_kube_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_kube_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_kube_config_from_dict">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_load_kube_config_from_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_kube_config_from_dict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_kube_config_from_dict_with_temp_file_path">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_load_kube_config_from_dict_with_temp_file_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_kube_config_from_dict_with_temp_file_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_user_pass_token">
+<span class="sig-name descname"><span class="pre">test_load_user_pass_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_user_pass_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_user_token">
+<span class="sig-name descname"><span class="pre">test_load_user_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_load_user_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_new_client_from_config">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_new_client_from_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_new_client_from_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_new_client_from_config_dict">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_new_client_from_config_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_new_client_from_config_dict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_new_client_from_config_proxy">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_new_client_from_config_proxy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_new_client_from_config_proxy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_no_user_context">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_no_user_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_no_user_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_no_users_section">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_no_users_section</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_no_users_section" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_non_existing_user">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_non_existing_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_non_existing_user" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_oidc_no_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_oidc_no_refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_oidc_no_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_oidc_with_refresh">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_oidc_with_refresh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mock_refresh_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_oidc_with_refresh" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_oidc_with_refresh_no_idp_cert_data">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_oidc_with_refresh_no_idp_cert_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mock_refresh_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_oidc_with_refresh_no_idp_cert_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_proxy_url_from_cluster">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_proxy_url_from_cluster</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_proxy_url_from_cluster" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_refresh_exec_token">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_refresh_exec_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_refresh_exec_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_refresh_gcp_token">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_refresh_gcp_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_refresh_gcp_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_set_active_context">
+<span class="sig-name descname"><span class="pre">test_set_active_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_set_active_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_simple_token">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_simple_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_simple_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_ssl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_no_cert_files">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_ssl_no_cert_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_no_cert_files" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_no_verification">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_ssl_no_verification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_no_verification" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_verification">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_ssl_verification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_verification" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_with_relative_ssl_files">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_ssl_with_relative_ssl_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_ssl_with_relative_ssl_files" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_tls_server_name">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_tls_server_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_tls_server_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_user_exec_auth">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_user_exec_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_user_exec_auth" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_user_exec_auth_certificates">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_user_exec_auth_certificates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_user_exec_auth_certificates" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_user_pass">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_user_pass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigLoader.test_user_pass" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.kube_config_test.</span></span><span class="sig-name descname"><span class="pre">TestKubeConfigMerger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kubernetes.aio.config.kube_config_test.BaseTestCase" title="kubernetes.aio.config.kube_config_test.BaseTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTestCase</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.TEST_KUBE_CONFIG_SET1">
+<span class="sig-name descname"><span class="pre">TEST_KUBE_CONFIG_SET1</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[{'clusters':</span> <span class="pre">[{'cluster':</span> <span class="pre">{'server':</span> <span class="pre">'test-host'},</span> <span class="pre">'name':</span> <span class="pre">'default'}],</span> <span class="pre">'contexts':</span> <span class="pre">[{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default'},</span> <span class="pre">'name':</span> <span class="pre">'no_user'}],</span> <span class="pre">'current-context':</span> <span class="pre">'no_user',</span> <span class="pre">'users':</span> <span class="pre">[]},</span> <span class="pre">{'clusters':</span> <span class="pre">[{'cluster':</span> <span class="pre">{'certificate-authority-data':</span> <span class="pre">'Y2VydC1hdXRo',</span> <span class="pre">'server':</span> <span class="pre">'https://test-host'},</span> <span class="pre">'name':</span> <span class="pre">'ssl'}],</span> <span class="pre">'contexts':</span> <span class="pre">[{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'ssl',</span> <span class="pre">'user':</span> <span class="pre">'ssl'},</span> <span class="pre">'name':</span> <span class="pre">'ssl'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'simple_token'},</span> <span class="pre">'name':</span> <span class="pre">'simple_token'}],</span> <span class="pre">'current-context':</span> <span class="pre">'',</span> <span class="pre">'users':</span> <span class="pre">[{'name':</span> <span class="pre">'ssl',</span> <span class="pre">'user':</span> <span class="pre">{'client-certificate-data':</span> <span class="pre">'Y2xpZW50LWNlcnQ=',</span> <span class="pre">'client-key-data':</span> <span class="pre">'Y2xpZW50LWtleQ==',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh'}}]},</span> <span class="pre">{'clusters':</span> <span class="pre">[],</span> <span class="pre">'contexts':</span> <span class="pre">[{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'expired_oidc'},</span> <span class="pre">'name':</span> <span class="pre">'expired_oidc'},</span> <span class="pre">{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'skipped-part2-defined-this-context',</span> <span class="pre">'user':</span> <span class="pre">'skipped'},</span> <span class="pre">'name':</span> <span class="pre">'ssl'}],</span> <span class="pre">'current-context':</span> <span class="pre">'expired_oidc',</span> <span class="pre">'users':</span> <span class="pre">[{'name':</span> <span class="pre">'expired_oidc',</span> <span class="pre">'user':</span> <span class="pre">{'auth-provider':</span> <span class="pre">{'config':</span> <span class="pre">{'client-id':</span> <span class="pre">'tectonic-kubectl',</span> <span class="pre">'client-secret':</span> <span class="pre">'FAKE_SECRET',</span> <span class="pre">'id-token':</span> <span class="pre">'QmVhcmVyIGRHVnpkQzF2YVdSakxYUnZhMlZ1LmV5SnVZVzFsSWpvZ0luUmxjM1FpZlE9PS5ZMnhwWlc1MExXTmxjblE9.eyJuYW1lIjogInRlc3QiLCJleHAiOiA1MzY0NTc2MDB9.Y2xpZW50LWNlcnQ=',</span> <span class="pre">'idp-certificate-authority-data':</span> <span class="pre">'Y2VydC1hdXRo',</span> <span class="pre">'idp-issuer-url':</span> <span class="pre">'https://example.org/identity',</span> <span class="pre">'refresh-token':</span> <span class="pre">'lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk'},</span> <span class="pre">'name':</span> <span class="pre">'oidc'}}},</span> <span class="pre">{'name':</span> <span class="pre">'simple_token',</span> <span class="pre">'user':</span> <span class="pre">{'password':</span> <span class="pre">'pass',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh',</span> <span class="pre">'username':</span> <span class="pre">'me'}}]}]</span></span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.TEST_KUBE_CONFIG_SET1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.TEST_KUBE_CONFIG_SET2">
+<span class="sig-name descname"><span class="pre">TEST_KUBE_CONFIG_SET2</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[{'clusters':</span> <span class="pre">[{'cluster':</span> <span class="pre">{'server':</span> <span class="pre">'test-host'},</span> <span class="pre">'name':</span> <span class="pre">'default'}]},</span> <span class="pre">{'contexts':</span> <span class="pre">[{'context':</span> <span class="pre">{'cluster':</span> <span class="pre">'default',</span> <span class="pre">'user':</span> <span class="pre">'simple_token'},</span> <span class="pre">'name':</span> <span class="pre">'simple_token'}],</span> <span class="pre">'current-context':</span> <span class="pre">'simple_token'},</span> <span class="pre">{'users':</span> <span class="pre">[{'name':</span> <span class="pre">'simple_token',</span> <span class="pre">'user':</span> <span class="pre">{'password':</span> <span class="pre">'pass',</span> <span class="pre">'token':</span> <span class="pre">'dGVzdC1kYXRh',</span> <span class="pre">'username':</span> <span class="pre">'me'}}]}]</span></span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.TEST_KUBE_CONFIG_SET2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_list_kube_config_contexts">
+<span class="sig-name descname"><span class="pre">test_list_kube_config_contexts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_list_kube_config_contexts" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_merge_with_context_in_different_file">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_merge_with_context_in_different_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_merge_with_context_in_different_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_new_client_from_config">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">test_new_client_from_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_new_client_from_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_save_changes">
+<span class="sig-name descname"><span class="pre">test_save_changes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.kube_config_test.TestKubeConfigMerger.test_save_changes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.config.html">kubernetes.aio.config package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.config.kube_config.html" title="previous chapter">kubernetes.aio.config.kube_config module</a></li>
+      <li>Next: <a href="kubernetes.aio.config.openid.html" title="next chapter">kubernetes.aio.config.openid module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.config.kube_config_test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

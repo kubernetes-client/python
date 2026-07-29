@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kubernetes Python Client &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Welcome to kubernetes-python-client’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="kubernetes-python-client">
+<h1>Kubernetes Python Client<a class="headerlink" href="#kubernetes-python-client" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/kubernetes-client/python/actions/workflows/test.yaml"><img alt="CI" src="https://github.com/kubernetes-client/python/workflows/Kubernetes%20Python%20Client%20-%20Validation/badge.svg" /></a>
+<a class="reference external" href="https://badge.fury.io/py/kubernetes"><img alt="PyPI version" src="https://badge.fury.io/py/kubernetes.svg" /></a>
+<a class="reference external" href="https://codecov.io/gh/kubernetes-client/python"><img alt="codecov" src="https://codecov.io/gh/kubernetes-client/python/branch/master/graph/badge.svg" /></a>
+<a class="reference external" href="https://pypi.python.org/pypi/kubernetes"><img alt="pypi supported versions" src="https://img.shields.io/pypi/pyversions/kubernetes.svg" /></a>
+<a class="reference external" href="https://github.com/kubernetes/design-proposals-archive/blob/main/api-machinery/csi-new-client-library-procedure.md"><img alt="Client Capabilities" src="https://img.shields.io/badge/Kubernetes%20client-Silver-blue.svg?style=flat&amp;colorB=C0C0C0&amp;colorA=306CE8" /></a>
+<a class="reference external" href="https://github.com/kubernetes/design-proposals-archive/blob/main/api-machinery/csi-new-client-library-procedure.md"><img alt="Client Support Level" src="https://img.shields.io/badge/kubernetes%20client-beta-green.svg?style=flat&amp;colorA=306CE8" /></a></p>
+<p>Python client for the <a class="reference external" href="http://kubernetes.io/">kubernetes</a> API.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>From source:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">client</span><span class="o">/</span><span class="n">python</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">python</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>From <a class="reference external" href="https://pypi.python.org/pypi/kubernetes/">PyPI</a> directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">kubernetes</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<p>list all pods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+
+<span class="c1"># Configs can be set in Configuration class directly or using helper utility</span>
+<span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+
+<span class="n">v1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">CoreV1Api</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Listing pods with their IPs:&quot;</span><span class="p">)</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">list_pod_for_all_namespaces</span><span class="p">(</span><span class="n">watch</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ret</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">pod_ip</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>list all pods using asyncio:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes.aio</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes.aio.client.api_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiClient</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Configs can be set in Configuration class directly or using helper</span>
+    <span class="c1"># utility. If no argument provided, the config will be loaded from</span>
+    <span class="c1"># default location.</span>
+    <span class="k">await</span> <span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+
+    <span class="c1"># use the context manager to close http sessions automatically</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">ApiClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">api</span><span class="p">:</span>
+
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">CoreV1Api</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Listing pods with their IPs:&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="k">await</span> <span class="n">v1</span><span class="o">.</span><span class="n">list_pod_for_all_namespaces</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ret</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">pod_ip</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>watch on namespace object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kubernetes</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">watch</span>
+
+<span class="c1"># Configs can be set in Configuration class directly or using helper utility</span>
+<span class="n">config</span><span class="o">.</span><span class="n">load_kube_config</span><span class="p">()</span>
+
+<span class="n">v1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">CoreV1Api</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">watch</span><span class="o">.</span><span class="n">Watch</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">w</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">list_namespace</span><span class="p">,</span> <span class="n">_request_timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Event: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">count</span><span class="p">:</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ended.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More examples can be found in <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/examples/">examples</a> folder. To run examples, run this command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>examples.example1
+</pre></div>
+</div>
+<p>(replace example1 with one of the filenames in the examples folder)</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h2>
+<p>All APIs and Models’ documentation can be found at the <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/kubernetes/README.md">Generated client’s README file</a></p>
+</section>
+<section id="compatibility">
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">client-python</span></code> follows <a class="reference external" href="http://semver.org/">semver</a>, so until the major version of
+client-python gets increased, your code will continue to work with explicitly
+supported versions of Kubernetes clusters.</p>
+<section id="compatibility-matrix-of-supported-client-versions">
+<h3>Compatibility matrix of supported client versions<a class="headerlink" href="#compatibility-matrix-of-supported-client-versions" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/9.0.1/">client 9.y.z</a>: Kubernetes 1.12 or below (+-), Kubernetes 1.13 (✓), Kubernetes 1.14 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/10.1.0/">client 10.y.z</a>: Kubernetes 1.13 or below (+-), Kubernetes 1.14 (✓), Kubernetes 1.14 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/11.0.0/">client 11.y.z</a>: Kubernetes 1.14 or below (+-), Kubernetes 1.15 (✓), Kubernetes 1.16 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/12.0.1/">client 12.y.z</a>: Kubernetes 1.15 or below (+-), Kubernetes 1.16 (✓), Kubernetes 1.17 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/17.17.0/">client 17.y.z</a>: Kubernetes 1.16 or below (+-), Kubernetes 1.17 (✓), Kubernetes 1.18 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/18.20.0/">client 18.y.z</a>: Kubernetes 1.17 or below (+-), Kubernetes 1.18 (✓), Kubernetes 1.19 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/19.15.0/">client 19.y.z</a>: Kubernetes 1.18 or below (+-), Kubernetes 1.19 (✓), Kubernetes 1.20 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/20.13.0/">client 20.y.z</a>: Kubernetes 1.19 or below (+-), Kubernetes 1.20 (✓), Kubernetes 1.21 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/21.7.0/">client 21.y.z</a>: Kubernetes 1.20 or below (+-), Kubernetes 1.21 (✓), Kubernetes 1.22 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/22.6.0/">client 22.y.z</a>: Kubernetes 1.21 or below (+-), Kubernetes 1.22 (✓), Kubernetes 1.23 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/23.6.0/">client 23.y.z</a>: Kubernetes 1.22 or below (+-), Kubernetes 1.23 (✓), Kubernetes 1.24 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/24.2.0/">client 24.y.z</a>: Kubernetes 1.23 or below (+-), Kubernetes 1.24 (✓), Kubernetes 1.25 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/25.3.0/">client 25.y.z</a>: Kubernetes 1.24 or below (+-), Kubernetes 1.25 (✓), Kubernetes 1.26 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/26.1.0/">client 26.y.z</a>: Kubernetes 1.25 or below (+-), Kubernetes 1.26 (✓), Kubernetes 1.27 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/27.2.0/">client 27.y.z</a>: Kubernetes 1.26 or below (+-), Kubernetes 1.27 (✓), Kubernetes 1.28 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/28.1.0/">client 28.y.z</a>: Kubernetes 1.27 or below (+-), Kubernetes 1.28 (✓), Kubernetes 1.29 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/29.0.0/">client 29.y.z</a>: Kubernetes 1.28 or below (+-), Kubernetes 1.29 (✓), Kubernetes 1.30 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/30.1.0/">client 30.y.z</a>: Kubernetes 1.29 or below (+-), Kubernetes 1.30 (✓), Kubernetes 1.31 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/31.0.0/">client 31.y.z</a>: Kubernetes 1.30 or below (+-), Kubernetes 1.31 (✓), Kubernetes 1.32 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/32.0.1/">client 32.y.z</a>: Kubernetes 1.31 or below (+-), Kubernetes 1.32 (✓), Kubernetes 1.33 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/33.1.0/">client 33.y.z</a>: Kubernetes 1.32 or below (+-), Kubernetes 1.33 (✓), Kubernetes 1.34 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/34.1.0/">client 34.y.z</a>: Kubernetes 1.33 or below (+-), Kubernetes 1.34 (✓), Kubernetes 1.35 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/35.0.0/">client 35.y.z</a>: Kubernetes 1.34 or below (+-), Kubernetes 1.35 (✓), Kubernetes 1.36 or above (+-)</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/kubernetes/36.0.3/">client 36.y.z</a>: Kubernetes 1.35 or below (+-), Kubernetes 1.36 (✓), Kubernetes 1.37 or above (+-)</p></li>
+</ul>
+<blockquote>
+<div><p>See <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/#homogenizing-the-kubernetes-python-client-versions">here</a> for an explanation of why there is no v13-v16 release.</p>
+</div></blockquote>
+<p>Key:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">✓</span></code> Exactly the same features / API objects in both client-python and the Kubernetes
+version.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code> client-python has features or API objects that may not be present in the Kubernetes
+cluster, either due to that client-python has additional new API, or that the server has
+removed old API. However, everything they have in common (i.e., most APIs) will work.
+Please note that alpha APIs may vanish or change significantly in a single release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-</span></code> The Kubernetes cluster has features the client-python library can’t use, either due
+to the server has additional new API, or that client-python has removed old API. However,
+everything they share in common (i.e., most APIs) will work.</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/./CHANGELOG.md">CHANGELOG</a> for a detailed description of changes
+between client-python versions.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Client version</th>
+<th>Canonical source for OpenAPI spec</th>
+<th>Maintenance status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.9 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>5.0</td>
+<td>Kubernetes main repo, 1.9 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>6.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.10 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>6.0</td>
+<td>Kubernetes main repo, 1.10 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>7.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.11 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>7.0</td>
+<td>Kubernetes main repo, 1.11 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>8.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.12 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>8.0</td>
+<td>Kubernetes main repo, 1.12 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>9.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.13 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>9.0</td>
+<td>Kubernetes main repo, 1.13 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>10.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.14 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>10.0</td>
+<td>Kubernetes main repo, 1.14 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>11.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.15 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>11.0</td>
+<td>Kubernetes main repo, 1.15 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>12.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.16 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>12.0</td>
+<td>Kubernetes main repo, 1.16 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>17.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.17 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>17.0</td>
+<td>Kubernetes main repo, 1.17 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>18.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.18 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>18.0</td>
+<td>Kubernetes main repo, 1.18 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>19.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.19 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>19.0</td>
+<td>Kubernetes main repo, 1.19 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>20.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.20 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>20.0</td>
+<td>Kubernetes main repo, 1.20 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>21.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.21 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>21.0</td>
+<td>Kubernetes main repo, 1.21 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>22.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.22 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>22.0</td>
+<td>Kubernetes main repo, 1.22 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>23.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.23 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>23.0</td>
+<td>Kubernetes main repo, 1.23 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>24.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.24 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>24.0</td>
+<td>Kubernetes main repo, 1.24 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>25.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.25 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>25.0</td>
+<td>Kubernetes main repo, 1.25 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>26.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.26 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>26.0</td>
+<td>Kubernetes main repo, 1.26 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>27.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.27 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>27.0</td>
+<td>Kubernetes main repo, 1.27 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>28.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.28 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>28.0</td>
+<td>Kubernetes main repo, 1.28 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>29.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.29 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>29.0</td>
+<td>Kubernetes main repo, 1.29 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>30.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.30 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>30.0</td>
+<td>Kubernetes main repo, 1.30 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>31.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.31 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>31.0</td>
+<td>Kubernetes main repo, 1.31 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>32.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.32 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>32.1</td>
+<td>Kubernetes main repo, 1.32 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>33.1 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.33 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>33.1</td>
+<td>Kubernetes main repo, 1.33 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>34.1 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.34 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>34.1</td>
+<td>Kubernetes main repo, 1.34 branch</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>35.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.35 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>35.0</td>
+<td>Kubernetes main repo, 1.35 branch</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>36.0 Alpha/Beta</td>
+<td>Kubernetes main repo, 1.36 branch</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>36.0</td>
+<td>Kubernetes main repo, 1.36 branch</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table><blockquote>
+<div><p>See <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/#homogenizing-the-kubernetes-python-client-versions">here</a> for an explanation of why there is no v13-v16 release.</p>
+</div></blockquote>
+<p>Key:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">✓</span></code> Changes in main Kubernetes repo are manually (<a class="reference external" href="https://github.com/kubernetes-client/python/issues/177">should be automated</a>) published to client-python when they are available.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">✗</span></code> No longer maintained; please upgrade.</p></li>
+</ul>
+<p>Kubernetes supports <a class="reference external" href="https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#supported-releases-and-component-skew">three minor releases</a> at a time. “Support” means we expect users to be running that version in production, though we may not port fixes back before the latest minor version. For example, when v1.3 comes out, v1.0 will no longer be supported. In consistent with Kubernetes support policy, we expect to support <strong>three GA major releases</strong> (corresponding to three Kubernetes minor releases) at a time.</p>
+<p>Note: There would be no maintenance for alpha/beta releases except the latest one.</p>
+<p><strong>Exception to the above support rule:</strong> Since we are running behind on releases, we will support Alpha/Beta releases for a greater number of clients until we catch up with the upstream version.</p>
+</section>
+</section>
+<section id="homogenizing-the-kubernetes-python-client-versions">
+<h2>Homogenizing the Kubernetes Python Client versions<a class="headerlink" href="#homogenizing-the-kubernetes-python-client-versions" title="Link to this heading">¶</a></h2>
+<p>The client releases v12 and before following a versioning schema where the major version was 4 integer positions behind the Kubernetes minor on which the client is based on. For example, v12.0.0 is based on Kubernetes v1.16, v11.0.0 is based on Kubernetes v1.15 and so on.</p>
+<p>This created a lot of confusion tracking two different version numbers for each client release. It was decided to homogenize the version scheme starting from the Kubernetes Python client based on Kubernetes v1.17. The versioning scheme of the client from this release would be vY.Z.P where Y and Z are the Kubernetes minor and patch release numbers from Kubernetes v1.Y.Z and P is the client specific patch release numbers to accommodate changes and fixes done specifically to the client. For more details, refer <a class="reference external" href="https://github.com/kubernetes-client/python/issues/1244">this issue</a>.</p>
+</section>
+<section id="community-support-discussion">
+<h2>Community, Support, Discussion<a class="headerlink" href="#community-support-discussion" title="Link to this heading">¶</a></h2>
+<p>If you have any problem on using the package or any suggestions, please start with reaching the <a class="reference external" href="https://kubernetes.slack.com/messages/C76GB48RK/">Kubernetes clients slack channel</a>, or filing an <a class="reference external" href="https://github.com/kubernetes-client/python/issues">issue</a> to let us know. You can also reach the maintainers of this project at <a class="reference external" href="https://github.com/kubernetes/community/tree/master/sig-api-machinery">SIG API Machinery</a>, where this project falls under.</p>
+<section id="code-of-conduct">
+<h3>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading">¶</a></h3>
+<p>Participation in the Kubernetes community is governed by the <a class="reference external" href="https://github.com/cncf/foundation/blob/master/code-of-conduct.md">CNCF Code of Conduct</a>.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="sslerror-on-macos">
+<h3>SSLError on macOS<a class="headerlink" href="#sslerror-on-macos" title="Link to this heading">¶</a></h3>
+<p>If you get an SSLError, you likely need to update your version of python. The
+version that ships with macOS may not be supported.</p>
+<p>Install the latest version of python with <a class="reference external" href="https://brew.sh/">brew</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>Once installed, you can query the version of OpenSSL like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import ssl; print (ssl.OPENSSL_VERSION)&quot;</span>
+</pre></div>
+</div>
+<p>You’ll need a version with OpenSSL version 1.0.0 or later.</p>
+</section>
+<section id="hostname-doesn-t-match">
+<h3>Hostname doesn’t match<a class="headerlink" href="#hostname-doesn-t-match" title="Link to this heading">¶</a></h3>
+<p>If you get an <code class="docutils literal notranslate"><span class="pre">ssl.CertificateError</span></code> complaining about hostname match, your installed packages does not meet version <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/requirements.txt">requirements</a>.
+Specifically check <code class="docutils literal notranslate"><span class="pre">ipaddress</span></code> and <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> package versions to make sure they met requirements in <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/requirements.txt">requirements.txt</a> file.</p>
+</section>
+<section id="why-exec-attach-calls-doesn-t-work">
+<h3>Why Exec/Attach calls doesn’t work<a class="headerlink" href="#why-exec-attach-calls-doesn-t-work" title="Link to this heading">¶</a></h3>
+<p>Starting from 4.0 release, we do not support directly calling exec or attach calls. you should use stream module to call them. so instead
+of <code class="docutils literal notranslate"><span class="pre">resp</span> <span class="pre">=</span> <span class="pre">api.connect_get_namespaced_pod_exec(name,</span> <span class="pre">...</span></code> you should call <code class="docutils literal notranslate"><span class="pre">resp</span> <span class="pre">=</span> <span class="pre">stream(api.connect_get_namespaced_pod_exec,</span> <span class="pre">name,</span> <span class="pre">...</span></code>.</p>
+<p>Using Stream will overwrite the requests protocol in <em>core_v1_api.CoreV1Api()</em>
+This will cause a failure in  non-exec/attach calls. If you reuse your api client object, you will need to
+recreate it between api calls that use <em>stream</em> and other api calls.</p>
+<p>See more at <a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/examples/pod_exec.py">exec example</a>.</p>
+</section>
+</section>
+<section id="enabling-debug-logging">
+<h2>Enabling Debug Logging<a class="headerlink" href="#enabling-debug-logging" title="Link to this heading">¶</a></h2>
+<p>To enable debug logging in the Kubernetes Python client, follow these steps:</p>
+<section id="import-the-logging-module">
+<h3>1. Import the <code class="docutils literal notranslate"><span class="pre">logging</span></code> module<a class="headerlink" href="#import-the-logging-module" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Set the logging level to DEBUG</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># To see the HTTP requests and responses sent to the Kubernetes API (for debugging network-related issues), configure the urllib3 logger:</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;urllib3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong><a class="reference external" href="https://github.com/kubernetes-client/python/blob/master/#Installation">⬆ back to top</a></strong></p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compatibility">Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#homogenizing-the-kubernetes-python-client-versions">Homogenizing the Kubernetes Python Client versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#community-support-discussion">Community, Support, Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-debug-logging">Enabling Debug Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to kubernetes-python-client’s documentation!</a></li>
+      <li>Next: <a href="usage.html" title="next chapter">Usage</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/README.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

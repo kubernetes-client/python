@@ -128,7 +128,7 @@ class TestClient(unittest.TestCase):
         self.assertIsInstance(resp, bytes)
         self.assertEqual("This is a test string", gzip.decompress(resp).decode('utf-8'))
 
-        exec_command = 'uptime'
+        exec_command = ['uptime']
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
                       command=exec_command,
                       stderr=False, stdin=False,
@@ -137,7 +137,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(1, len(resp.splitlines()))
 
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
-                      command='/bin/sh',
+                      command=['/bin/sh'],
                       stderr=True, stdin=True,
                       stdout=True, tty=False,
                       _preload_content=False)
@@ -162,7 +162,7 @@ class TestClient(unittest.TestCase):
         self.assertFalse(resp.is_open())
 
         resp = stream(api.connect_post_namespaced_pod_exec, name, 'default',
-                      command='/bin/sh',
+                      command=['/bin/sh'],
                       stderr=True, stdin=True,
                       stdout=True, tty=False,
                       binary=True,
@@ -291,9 +291,9 @@ class TestClient(unittest.TestCase):
             time.sleep(1)
 
         commands_expected_values = (
-            (["false", 1]),
+            (["false"], 1),
             (["/bin/sh", "-c", "sleep 1; exit 3"], 3),
-            (["true", 0]),
+            (["true"], 0),
             (["/bin/sh", "-c", "ls /"], 0)
         )
         for command, value in commands_expected_values:
@@ -527,8 +527,7 @@ class TestClient(unittest.TestCase):
         service_manifest = {'apiVersion': 'v1',
                             'kind': 'Service',
                             'metadata': {'labels': {'name': name},
-                                         'name': name,
-                                         'resourceversion': 'v1'},
+                                         'name': name},
                             'spec': {'ports': [{'name': 'port',
                                                 'port': 80,
                                                 'protocol': 'TCP',
@@ -639,7 +638,7 @@ class TestClient(unittest.TestCase):
             name=name, body={}, namespace='default')
 
         resp = api.list_namespaced_config_map(
-            'default', pretty=True, label_selector="e2e-tests=true")
+            'default', label_selector="e2e-tests=true")
         self.assertEqual([], resp.items)
 
     def test_node_apis(self):

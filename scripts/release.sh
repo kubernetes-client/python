@@ -132,7 +132,7 @@ newbranch="$(echo "automated-release-of-${CLIENT_VERSION}-${remote_branch}" | se
 newbranchuniq="${newbranch}-$(date +%s)"
 declare -r newbranchuniq
 echo "+++ Creating local branch ${newbranchuniq}"
-git checkout -b "${newbranchuniq}" "${remote_branch}"
+git checkout -b "${newbranchuniq}" "upstream/master"
 
 # Get Kubernetes API versions
 old_client_version=$(python3 "scripts/constants.py" CLIENT_VERSION)
@@ -143,7 +143,7 @@ echo "New Kubernetes API Version: $new_k8s_api_version"
 
 # If it's an actual release, pull master branch
 if [[ $CLIENT_VERSION != *"snapshot"* ]]; then
-  git pull -X theirs upstream master --no-edit
+  git pull -X theirs upstream release-"${CLIENT_VERSION%%.*}".0 --no-edit
 
   # Collect release notes from master branch
   if [[ $(git log ${remote_branch}..upstream/master | grep ^commit) ]]; then
@@ -207,14 +207,9 @@ git diff-index --quiet --cached HEAD || git commit -am "update changelog"
 
 # Re-generate the client
 scripts/update-client.sh
-# Apply hotfixes
-rm -r kubernetes/test/
-git add .
-git commit -m "temporary generated commit"
-scripts/apply-hotfixes.sh
-git reset HEAD~2
-# Apply proxy config after hotfixes
-scripts/insert_proxy_config.sh
+
+# Re-generate the asyncio client
+scripts/update-client-asyncio.sh
 
 # Custom object API is hosted in gen repo. Commit custom object API change
 # separately for easier review
@@ -222,9 +217,6 @@ if [[ -n "$(git diff kubernetes/client/api/custom_objects_api.py)" ]]; then
   git add kubernetes/client/api/custom_objects_api.py
   git commit -m "generated client change for custom_objects"
 fi
-
-# Re-generate the asyncio client
-scripts/update-client-asyncio.sh
 
 # Check if there is any API change, then commit
 git add kubernetes/docs kubernetes/client/api/ kubernetes/client/models/ kubernetes/swagger.json.unprocessed scripts/swagger.json

@@ -1,5 +1,8 @@
 .gitignore
+.github/
+.gitlab-ci.yml
 git_push.sh
+pyproject.toml
 requirements.txt
 test-requirements.txt
 setup.py

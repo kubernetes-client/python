@@ -52,7 +52,7 @@ def create_namespace(namespace_api, name):
     namespace_manifest = {
         "apiVersion": "v1",
         "kind": "Namespace",
-        "metadata": {"name": name, "resourceversion": "v1"},
+        "metadata": {"name": name},
     }
     namespace_api.create(body=namespace_manifest)
 

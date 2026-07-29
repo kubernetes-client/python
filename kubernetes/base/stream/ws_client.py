@@ -22,7 +22,7 @@ import socket
 import ssl
 import threading
 import time
-from urllib.parse import urlencode, urlparse, urlunparse
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 from io import StringIO, BytesIO
 from websocket import WebSocket, ABNF, enableTrace, WebSocketConnectionClosedException
 from base64 import urlsafe_b64decode
@@ -128,6 +128,7 @@ class WSClient:
                 return b"" if self.binary else ""
 
             self.update(timeout=(timeout - time.time() + start))
+        return b"" if self.binary else ""
 
     def write_channel(self, channel, data):
         """Write data to a channel."""
@@ -216,11 +217,15 @@ class WSClient:
         if hasattr(select, "poll"):
             poll = select.poll()
             poll.register(self.sock.sock, select.POLLIN)
-            if timeout is not None:
+            if timeout is not None and timeout != float("inf"):
                 timeout *= 1_000  # poll method uses milliseconds as the time unit
+            else:
+                timeout = None
             r = poll.poll(timeout)
             poll.unregister(self.sock.sock)
         else:
+            if timeout == float("inf"):
+                timeout = None
             r, _, _ = select.select(
                 (self.sock.sock, ), (), (), timeout)
 
@@ -598,6 +603,8 @@ def portforward_call(configuration, _method, url, **kwargs):
     parameters of apiClient.request method."""
 
     query_params = kwargs.get("query_params")
+    if query_params is None:
+        query_params = parse_qsl(urlparse(url).query, keep_blank_values=True)
 
     ports = []
     for param, value in query_params:

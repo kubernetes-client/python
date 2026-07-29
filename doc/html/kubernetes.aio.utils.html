@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.utils package &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.utils.create_from_yaml module" href="kubernetes.aio.utils.create_from_yaml.html" />
+    <link rel="prev" title="kubernetes.aio.test.test_well_known_api module" href="kubernetes.aio.test.test_well_known_api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="kubernetes-aio-utils-package">
+<h1>kubernetes.aio.utils package<a class="headerlink" href="#kubernetes-aio-utils-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml.html">kubernetes.aio.utils.create_from_yaml module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml.html#kubernetes.aio.utils.create_from_yaml.FailToCreateError"><code class="docutils literal notranslate"><span class="pre">FailToCreateError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml.html#kubernetes.aio.utils.create_from_yaml.create_from_dict"><code class="docutils literal notranslate"><span class="pre">create_from_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml.html#kubernetes.aio.utils.create_from_yaml.create_from_yaml"><code class="docutils literal notranslate"><span class="pre">create_from_yaml()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml.html#kubernetes.aio.utils.create_from_yaml.create_from_yaml_single_item"><code class="docutils literal notranslate"><span class="pre">create_from_yaml_single_item()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml_test.html">kubernetes.aio.utils.create_from_yaml_test module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml_test.html#kubernetes.aio.utils.create_from_yaml_test.CreateFromYamlTest"><code class="docutils literal notranslate"><span class="pre">CreateFromYamlTest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml_test.html#kubernetes.aio.utils.create_from_yaml_test.CreateFromYamlTest.test_create_from_dict"><code class="docutils literal notranslate"><span class="pre">CreateFromYamlTest.test_create_from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.create_from_yaml_test.html#kubernetes.aio.utils.create_from_yaml_test.CreateFromYamlTest.test_create_from_yaml"><code class="docutils literal notranslate"><span class="pre">CreateFromYamlTest.test_create_from_yaml()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.aio.utils.retry.html">kubernetes.aio.utils.retry module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry.html#kubernetes.aio.utils.retry.on_error"><code class="docutils literal notranslate"><span class="pre">on_error()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry.html#kubernetes.aio.utils.retry.on_retry_after_error"><code class="docutils literal notranslate"><span class="pre">on_retry_after_error()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry.html#kubernetes.aio.utils.retry.retry_on_conflict"><code class="docutils literal notranslate"><span class="pre">retry_on_conflict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html">kubernetes.aio.utils.retry_test module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest"><code class="docutils literal notranslate"><span class="pre">AioRetryTest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_default_retry_matches_client_go"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_default_retry_matches_client_go()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_on_error_retries_retriable_errors"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_on_error_retries_retriable_errors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_on_retry_after_error_honors_retry_after_for_429"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_on_retry_after_error_honors_retry_after_for_429()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_retry_after_seconds_parses_delay_seconds"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_retry_after_seconds_parses_delay_seconds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_retry_on_conflict_retries"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_retry_on_conflict_retries()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.FakeError"><code class="docutils literal notranslate"><span class="pre">FakeError</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-kubernetes.aio.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kubernetes.aio.utils" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.test.test_well_known_api.html" title="previous chapter">kubernetes.aio.test.test_well_known_api module</a></li>
+      <li>Next: <a href="kubernetes.aio.utils.create_from_yaml.html" title="next chapter">kubernetes.aio.utils.create_from_yaml module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

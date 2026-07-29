@@ -402,11 +402,12 @@ class KubeConfigLoader:
 
         client = ApiClient(configuration=config)
 
-        response = client.request(
+        response = client.call_api(
             method="GET",
             url="%s/.well-known/openid-configuration"
             % provider['config']['idp-issuer-url']
         )
+        response.read()
 
         if response.status != 200:
             return

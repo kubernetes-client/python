@@ -13,37 +13,61 @@
 # limitations under the License.
 
 import functools
+from types import SimpleNamespace
 
 from . import ws_client
 
 
 def _websocket_request(websocket_request, force_kwargs, api_method, *args, **kwargs):
-    """Override the ApiClient.request method with an alternative websocket based
-    method and call the supplied Kubernetes API method with that in place."""
+    """Call a generated API method using the WebSocket transport."""
     if force_kwargs:
         for kwarg, value in force_kwargs.items():
             kwargs[kwarg] = value
     api_client = api_method.__self__.api_client
-    # old generated code's api client has config. new ones has configuration
-    try:
-        configuration = api_client.configuration
-    except AttributeError:
-        configuration = api_client.config
-    prev_request = api_client.request
+    configuration = api_client.configuration
+    preload_content = kwargs.pop('_preload_content', True)
+    kwargs['_preload_content'] = False
     binary = kwargs.pop('binary', False)
+    previous_call_api = api_client.call_api
+
+    # Legacy-compatible generated methods preserve _preload_content=False
+    # instead of emitting *_without_preload_content siblings. Keep generated
+    # request serialization, then satisfy the raw-response shape it expects.
+    def call_api(
+        method,
+        url,
+        header_params=None,
+        body=None,
+        post_params=None,
+        _request_timeout=None,
+    ):
+        response = websocket_request(
+            configuration,
+            method,
+            url,
+            headers=header_params,
+            body=body,
+            post_params=post_params,
+            _request_timeout=_request_timeout,
+            _preload_content=preload_content,
+            binary=binary,
+        )
+        return SimpleNamespace(
+            response=response,
+            status=response.status
+            if isinstance(response, ws_client.WSResponse)
+            else 200,
+        )
+
     try:
-        api_client.request = functools.partial(websocket_request, configuration, binary=binary)
-        out = api_method(*args, **kwargs)
-        # The api_client insists on converting this to a string using its representation, so we have
-        # to do this dance to strip it of the b' prefix and ' suffix, encode it byte-per-byte (latin1),
-        # escape all of the unicode \x*'s, then encode it back byte-by-byte
-        # However, if _preload_content=False is passed, then the entire WSClient is returned instead
-        # of a response, and we want to leave it alone
-        if binary and kwargs.get('_preload_content', True):
-            out = out[2:-1].encode('latin1').decode('unicode_escape').encode('latin1')
-        return out
+        api_client.call_api = call_api
+        response = api_method(*args, **kwargs)
     finally:
-        api_client.request = prev_request
+        api_client.call_api = previous_call_api
+
+    if isinstance(response, ws_client.WSResponse):
+        return response.data
+    return response
 
 
 stream = functools.partial(_websocket_request, ws_client.websocket_call, None)

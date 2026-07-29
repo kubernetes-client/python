@@ -44,7 +44,7 @@ def create_from_directory(
     apply: bool. If True, use server-side apply for creating resources.
 
     Available parameters for creating <kind>:
-    :param async_req bool
+    :param bool async_req: Whether to execute the request asynchronously.
     :param bool include_uninitialized: If true, partially initialized
         resources are included in the response.
     :param str pretty: If 'true', then the output is pretty printed.
@@ -123,7 +123,7 @@ def create_from_yaml(
     apply: bool. If True, use server-side apply for creating resources.
 
     Available parameters for creating <kind>:
-    :param async_req bool
+    :param bool async_req: Whether to execute the request asynchronously.
     :param bool include_uninitialized: If true, partially initialized
         resources are included in the response.
     :param str pretty: If 'true', then the output is pretty printed.
@@ -253,7 +253,6 @@ def create_from_dict(
 def create_from_yaml_single_item(
     k8s_client, yml_object, verbose=False, apply=False, **kwargs
 ):
-
     kind = yml_object["kind"]
     if apply is True:
         apply_client = DynamicClient(k8s_client).resources.get(

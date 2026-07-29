@@ -3,6 +3,7 @@ include OWNERS
 include *.md
 include *.txt
 include *.ini
+include kubernetes/client/py.typed
 exclude .gitignore
 exclude .gitreview
 

@@ -18,8 +18,9 @@ def create_namespaced_cron_job(namespace='default', body=None):
         print(f'{name} exists, please do not repeat!')
     else:
         v1 = client.BatchV1Api()
-        ret = v1.create_namespaced_cron_job(namespace=namespace, body=cronjob_json, pretty=True,
-                                            _preload_content=False, async_req=False)
+        ret = v1.create_namespaced_cron_job(
+            namespace=namespace, body=cronjob_json, pretty='true',
+            _preload_content=False)
         ret_dict = json.loads(ret.data)
         print(f'create succeed\n{json.dumps(ret_dict)}')
 
@@ -32,7 +33,8 @@ def delete_namespaced_cron_job(namespace='default', name=None):
         print(f"{name} doesn't exists, please enter a new one!")
     else:
         v1 = client.BatchV1Api()
-        ret = v1.delete_namespaced_cron_job(name=name, namespace=namespace, _preload_content=False, async_req=False)
+        ret = v1.delete_namespaced_cron_job(
+            name=name, namespace=namespace, _preload_content=False)
         ret_dict = json.loads(ret.data)
         print(f'delete succeed\n{json.dumps(ret_dict)}')
 
@@ -45,8 +47,9 @@ def patch_namespaced_cron_job(namespace='default', body=None):
     name = body['metadata']['name']
     if judge_crontab_exists(namespace, name):
         v1 = client.BatchV1Api()
-        ret = v1.patch_namespaced_cron_job(name=name, namespace=namespace, body=cronjob_json,
-                                           _preload_content=False, async_req=False)
+        ret = v1.patch_namespaced_cron_job(
+            name=name, namespace=namespace, body=cronjob_json,
+            _preload_content=False)
         ret_dict = json.loads(ret.data)
         print(f'patch succeed\n{json.dumps(ret_dict)}')
     else:
@@ -55,7 +58,8 @@ def patch_namespaced_cron_job(namespace='default', body=None):
 
 def get_cronjob_list(namespace='default'):
     v1 = client.BatchV1Api()
-    ret = v1.list_namespaced_cron_job(namespace=namespace, pretty=True, _preload_content=False)
+    ret = v1.list_namespaced_cron_job(
+        namespace=namespace, pretty='true', _preload_content=False)
     cron_job_list = json.loads(ret.data)
     print(f'cronjob number={len(cron_job_list["items"])}')
     return cron_job_list["items"]

@@ -969,7 +969,7 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(TEST_OIDC_TOKEN, loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.request')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
     def test_oidc_with_refresh(self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()
         type(mock_response).status = mock.PropertyMock(
@@ -994,7 +994,7 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual("Bearer abc123", loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.request')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
     def test_oidc_with_idp_ca_file_refresh(self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()
         type(mock_response).status = mock.PropertyMock(
@@ -1020,7 +1020,7 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual("Bearer abc123", loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.request')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
     def test_oidc_with_refresh_nocert(
             self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()

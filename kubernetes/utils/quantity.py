@@ -136,7 +136,7 @@ def format_quantity(quantity_value, suffix, quantize=None) -> str:
     if suffix[0] not in _EXPONENTS:
         raise ValueError(f"{quantity_value} has unknown suffix")
 
-    different_scale = quantity_value / Decimal(base ** _EXPONENTS[suffix[0]])
-    if quantize:
+    different_scale = quantity_value / (Decimal(base) ** _EXPONENTS[suffix[0]])
+    if quantize is not None:
         different_scale = different_scale.quantize(quantize)
-    return str(different_scale) + suffix
+    return format(different_scale, "f") + suffix

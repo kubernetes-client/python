@@ -13,13 +13,15 @@
 # limitations under the License.
 
 import http
+import inspect
 import json
 import pydoc
+from typing import Any
 
 from kubernetes import client
 
 PYDOC_RETURN_LABEL = ":rtype:"
-PYDOC_FOLLOW_PARAM = ":param bool follow:"
+PYDOC_FOLLOW_PARAM = ":param follow:"
 
 # Removing this suffix from return type name should give us event's object
 # type. e.g., if list_namespaces() returns "NamespaceList" type,
@@ -31,14 +33,20 @@ TYPE_LIST_SUFFIX = "List"
 HTTP_STATUS_GONE = http.HTTPStatus.GONE
 
 
-class SimpleNamespace:
-
-    def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
-
-
 def _find_return_type(func):
-    for line in pydoc.getdoc(func).splitlines():
+    return_type = inspect.signature(func).return_annotation
+    if (
+        return_type is not inspect.Signature.empty
+        and return_type is not Any
+        and inspect.isclass(return_type)
+    ):
+        return return_type
+    if (
+        isinstance(return_type, str)
+        and hasattr(client.models, return_type)
+    ):
+        return return_type
+    for line in (pydoc.getdoc(func) or '').splitlines():
         if line.startswith(PYDOC_RETURN_LABEL):
             return line[len(PYDOC_RETURN_LABEL):].strip()
     return ""
@@ -106,12 +114,21 @@ class Watch:
         if self._raw_return_type:
             return self._raw_return_type
         return_type = _find_return_type(func)
-        if return_type.endswith(TYPE_LIST_SUFFIX):
-            return return_type[:-len(TYPE_LIST_SUFFIX)]
+        return_type_name = (
+            return_type if isinstance(return_type, str) else return_type.__name__
+        )
+        if return_type_name.endswith(TYPE_LIST_SUFFIX):
+            item_type_name = return_type_name[:-len(TYPE_LIST_SUFFIX)]
+            if isinstance(return_type, str):
+                return item_type_name
+            return getattr(client.models, item_type_name)
         return return_type
 
     def get_watch_argument_name(self, func):
-        if PYDOC_FOLLOW_PARAM in pydoc.getdoc(func):
+        if (
+            'follow' in inspect.signature(func).parameters
+            or PYDOC_FOLLOW_PARAM in (pydoc.getdoc(func) or '')
+        ):
             return 'follow'
         else:
             return 'watch'
@@ -134,8 +151,11 @@ class Watch:
                     if isinstance(metadata, dict) and 'resourceVersion' in metadata:
                         self.resource_version = metadata['resourceVersion']
             elif js['type'] != 'ERROR':
-                obj = SimpleNamespace(data=json.dumps(js['raw_object']))
-                js['object'] = self._api_client.deserialize(obj, return_type)
+                js['object'] = self._api_client.deserialize(
+                    json.dumps(js['raw_object']),
+                    return_type,
+                    'application/json',
+                )
                 if hasattr(js['object'], 'metadata'):
                     self.resource_version = js['object'].metadata.resource_version
                 # For custom objects that we don't have model defined, json
@@ -199,6 +219,9 @@ class Watch:
             resp = func(*args, **kwargs)
             self._resp = resp
             try:
+                status = getattr(resp, 'status', None)
+                if isinstance(status, int) and not 200 <= status <= 299:
+                    self._api_client.response_deserialize(resp, {})
                 for line in iter_resp_lines(resp):
                     # unmarshal when we are receiving events from watch,
                     # return raw string when we are streaming log

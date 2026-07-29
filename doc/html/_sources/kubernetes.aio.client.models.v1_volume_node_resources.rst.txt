@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1\_volume\_node\_resources module
+===============================================================
+
+.. automodule:: kubernetes.aio.client.models.v1_volume_node_resources
+   :members:
+   :show-inheritance:
+   :undoc-members:

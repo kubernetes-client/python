@@ -36,7 +36,7 @@ def main():
     service_manifest = {
         "apiVersion": "v1",
         "kind": "Service",
-        "metadata": {"labels": {"name": name}, "name": name, "resourceversion": "v1"},
+        "metadata": {"labels": {"name": name}, "name": name},
         "spec": {
             "ports": [
                 {"name": "port", "port": 80, "protocol": "TCP", "targetPort": 80}

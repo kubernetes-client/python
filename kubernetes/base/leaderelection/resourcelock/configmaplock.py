@@ -83,7 +83,7 @@ class ConfigMapLock:
                       "annotations": {self.leader_electionrecord_annotationkey: json.dumps(self.get_lock_dict(election_record))}})
 
         try:
-            api_response = self.api_instance.create_namespaced_config_map(namespace, body, pretty=True)
+            self.api_instance.create_namespaced_config_map(namespace, body)
             return True
         except ApiException as e:
             logger.info("Failed to create lock as {}".format(e))

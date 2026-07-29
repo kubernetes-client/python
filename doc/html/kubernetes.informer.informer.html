@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.informer.informer module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.utils package" href="kubernetes.utils.html" />
+    <link rel="prev" title="kubernetes.informer.cache module" href="kubernetes.informer.cache.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.informer.informer">
+<span id="kubernetes-informer-informer-module"></span><h1>kubernetes.informer.informer module<a class="headerlink" href="#module-kubernetes.informer.informer" title="Link to this heading">¶</a></h1>
+<p>Informer implementation for the Kubernetes Python client.</p>
+<p>Provides SharedInformer: a background watcher that keeps a local
+ObjectCache in sync with the Kubernetes API server and notifies
+registered event-handler callbacks.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.informer.informer.SharedInformer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.informer.informer.</span></span><span class="sig-name descname"><span class="pre">SharedInformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resync_period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.informer.informer.SharedInformer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Watch a Kubernetes resource and maintain a local cache.</p>
+<p>The informer starts a daemon thread that continuously watches the
+given resource via <code class="docutils literal notranslate"><span class="pre">list_func</span></code>.  On each event the local
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectCache</span></code> is updated and registered
+event-handler callbacks are invoked.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>list_func:</dt><dd><p>Bound API method used for the initial list <strong>and</strong> as the watch
+source.  It must accept a watch keyword argument (e.g.
+CoreV1Api().list_namespaced_pod).</p>
+</dd>
+<dt>namespace:</dt><dd><p>Kubernetes namespace to watch.  Pass None for cluster-scoped
+or all-namespace list functions.</p>
+</dd>
+<dt>resync_period:</dt><dd><p>How often (seconds) to perform a full re-list from the API server.
+Defaults to 0 which disables periodic resyncs.</p>
+</dd>
+<dt>label_selector:</dt><dd><p>Optional label selector string forwarded to the API server.</p>
+</dd>
+<dt>field_selector:</dt><dd><p>Optional field selector string forwarded to the API server.</p>
+</dd>
+<dt>key_func:</dt><dd><p>Optional callable (obj) -&gt; str used to key objects in the
+cache.  Defaults to namespace/name.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.informer.informer.SharedInformer.add_event_handler">
+<span class="sig-name descname"><span class="pre">add_event_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.informer.informer.SharedInformer.add_event_handler" title="Link to this definition">¶</a></dt>
+<dd><p>Register a callback for a specific event type.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>event_type:</dt><dd><p>One of <code class="xref py py-data docutils literal notranslate"><span class="pre">ADDED</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">MODIFIED</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">DELETED</span></code>,
+<code class="xref py py-data docutils literal notranslate"><span class="pre">BOOKMARK</span></code> or <code class="xref py py-data docutils literal notranslate"><span class="pre">ERROR</span></code>.</p>
+</dd>
+<dt>handler:</dt><dd><p>Callable invoked with the event object (or the raw exception for
+ERROR events).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kubernetes.informer.informer.SharedInformer.cache">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cache</span></span><a class="headerlink" href="#kubernetes.informer.informer.SharedInformer.cache" title="Link to this definition">¶</a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectCache</span></code> maintained by this informer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.informer.informer.SharedInformer.remove_event_handler">
+<span class="sig-name descname"><span class="pre">remove_event_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.informer.informer.SharedInformer.remove_event_handler" title="Link to this definition">¶</a></dt>
+<dd><p>Deregister a previously registered <em>handler</em>.</p>
+<p>No-op if <em>handler</em> is not registered.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.informer.informer.SharedInformer.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.informer.informer.SharedInformer.start" title="Link to this definition">¶</a></dt>
+<dd><p>Start the background watch loop in a daemon thread.</p>
+<p>Calling <a class="reference internal" href="#kubernetes.informer.informer.SharedInformer.start" title="kubernetes.informer.informer.SharedInformer.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start()</span></code></a> more than once without an intervening
+<a class="reference internal" href="#kubernetes.informer.informer.SharedInformer.stop" title="kubernetes.informer.informer.SharedInformer.stop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stop()</span></code></a> is a no-op.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.informer.informer.SharedInformer.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.informer.informer.SharedInformer.stop" title="Link to this definition">¶</a></dt>
+<dd><p>Ask the background watch loop to stop and join the thread.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.informer.html">kubernetes.informer package</a><ul>
+      <li>Previous: <a href="kubernetes.informer.cache.html" title="previous chapter">kubernetes.informer.cache module</a></li>
+      <li>Next: <a href="kubernetes.utils.html" title="next chapter">kubernetes.utils package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.informer.informer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

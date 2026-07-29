@@ -1,10 +1,11 @@
 certifi>=14.05.14 # MPL
-six>=1.9.0  # MIT
-python-dateutil>=2.5.3  # BSD
+python-dateutil>=2.8.2  # BSD
+pydantic>=2.11  # MIT
 setuptools>=21.0.0  # PSF/ZPL
 pyyaml>=6.0.3  # MIT
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
-urllib3!=2.6.0,>=2.7.0 # MIT
+typing-extensions>=4.7.1  # PSF
+urllib3>=2.7.0,<3.0.0 # MIT
 durationpy>=0.7 # MIT
