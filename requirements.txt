@@ -1,7 +1,7 @@
 certifi>=14.05.14 # MPL
 python-dateutil>=2.8.2  # BSD
 pydantic>=2.11  # MIT
-setuptools>=21.0.0  # PSF/ZPL
+setuptools>=83.0.0  # PSF/ZPL
 pyyaml>=6.0.3  # MIT
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
