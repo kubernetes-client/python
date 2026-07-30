@@ -2,6 +2,6 @@ python-dateutil>=2.8.2  # BSD
 pyyaml>=6.0.3  # MIT
 urllib3>=2.7.0 # MIT
 aiohttp>=3.14.3,<4.0.0  # Apache-2.0
-aiohttp-retry>=2.8.3  # MIT
+aiohttp-retry>=2.9.1  # MIT
 pydantic>=2.11  # MIT
 typing-extensions>=4.7.1  # PSF
