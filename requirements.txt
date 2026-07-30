@@ -1,4 +1,4 @@
-certifi>=14.05.14 # MPL
+certifi>=2026.7.22 # MPL
 python-dateutil>=2.8.2  # BSD
 pydantic>=2.11  # MIT
 setuptools>=83.0.0  # PSF/ZPL
