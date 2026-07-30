@@ -24,6 +24,7 @@ from pydantic import ValidationError
 
 from kubernetes.client import (
     ApiClient,
+    BatchV1Api,
     Configuration,
     CoreV1Api,
     CustomObjectsApi,
@@ -73,6 +74,8 @@ class _RecordingHandler(BaseHTTPRequestHandler):
         self._respond()
 
     def do_DELETE(self):
+        length = int(self.headers.get('Content-Length', 0))
+        self.server.request_body = self.rfile.read(length)
         self.server.request_path = self.path
         self._respond()
 
@@ -440,6 +443,81 @@ class GeneratedApiTest(unittest.TestCase):
                 self.assertEqual(response, deleted)
                 self.assertEqual(
                     '/api/v1/namespaces/sample', self.server.request_path)
+
+    def test_delete_job_preserves_resource_and_status_responses(self):
+        responses = (
+            (
+                {
+                    'apiVersion': 'batch/v1',
+                    'kind': 'Job',
+                    'metadata': {'name': 'sample'},
+                    'spec': {'parallelism': 3},
+                    'status': {'ready': 0},
+                },
+                {'ready': 0},
+            ),
+            (
+                {
+                    'apiVersion': 'v1',
+                    'kind': 'Status',
+                    'status': 'Success',
+                    'details': {'name': 'sample', 'kind': 'jobs'},
+                },
+                'Success',
+            ),
+        )
+
+        for response_status in (200, 202):
+            for response, expected_status in responses:
+                with self.subTest(
+                    status=response_status, kind=response['kind']
+                ):
+                    self.server.response_status = response_status
+                    self.server.response_body = json.dumps(response).encode()
+
+                    deleted = BatchV1Api(
+                        self.api_client,
+                    ).delete_namespaced_job(
+                        name='sample', namespace='default', body={},
+                    )
+
+                    self.assertIsInstance(deleted, dict)
+                    self.assertIsNot(response, deleted)
+                    self.assertEqual(response, deleted)
+                    self.assertEqual(response['kind'], deleted['kind'])
+                    self.assertEqual(expected_status, deleted['status'])
+                    if response['kind'] == 'Job':
+                        self.assertIsInstance(deleted['status'], dict)
+                        self.assertIsNot(response['status'], deleted['status'])
+                        self.assertEqual(3, deleted['spec']['parallelism'])
+                    else:
+                        self.assertIsInstance(deleted['status'], str)
+                    self.assertEqual({}, json.loads(self.server.request_body))
+                    self.assertEqual(
+                        '/apis/batch/v1/namespaces/default/jobs/sample',
+                        self.server.request_path,
+                    )
+
+    def test_delete_job_with_http_info_preserves_resource_response(self):
+        response = {
+            'apiVersion': 'batch/v1',
+            'kind': 'Job',
+            'metadata': {'name': 'sample'},
+            'status': {'ready': 0},
+        }
+        self.server.response_status = 202
+        self.server.response_body = json.dumps(response).encode()
+
+        deleted, status, headers = BatchV1Api(
+            self.api_client,
+        ).delete_namespaced_job_with_http_info(
+            name='sample', namespace='default', body={},
+        )
+
+        self.assertEqual(response, deleted)
+        self.assertEqual(202, status)
+        self.assertEqual('application/json', headers['Content-Type'])
+        self.assertEqual({}, json.loads(self.server.request_body))
 
     def test_builtin_object_patch_defaults_to_strategic_merge_patch(self):
         body = {'data': {'key': 'value'}}

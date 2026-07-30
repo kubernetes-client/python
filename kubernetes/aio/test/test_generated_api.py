@@ -45,6 +45,7 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             'metadata': {'resourceVersion': '1'},
             'items': [],
         }
+        self.response_status = 200
         app = web.Application()
         app.router.add_route('*', '/{path:.*}', self._handle_request)
         self.runner = web.AppRunner(app)
@@ -90,7 +91,7 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             }).encode() + b'\n')
             await response.write_eof()
             return response
-        return web.json_response(self.response)
+        return web.json_response(self.response, status=self.response_status)
 
     async def test_bearer_alias_supports_synchronous_token_refresh(self):
         self.configuration.api_key['authorization'] = 'expired-token'
@@ -124,34 +125,57 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
 
     async def test_delete_job_accepts_job_and_status_responses(self):
         responses = (
-            {
-                'apiVersion': 'batch/v1',
-                'kind': 'Job',
-                'metadata': {'name': 'sample'},
-                'status': {'ready': 0},
-            },
-            {
-                'apiVersion': 'v1',
-                'kind': 'Status',
-                'status': 'Success',
-                'details': {'name': 'sample', 'kind': 'jobs'},
-            },
+            (
+                {
+                    'apiVersion': 'batch/v1',
+                    'kind': 'Job',
+                    'metadata': {'name': 'sample'},
+                    'status': {'ready': 0},
+                },
+                'Job',
+                {'ready': 0},
+            ),
+            (
+                {
+                    'apiVersion': 'v1',
+                    'kind': 'Status',
+                    'status': 'Success',
+                    'details': {'name': 'sample', 'kind': 'jobs'},
+                },
+                'Status',
+                'Success',
+            ),
         )
 
-        for response in responses:
-            with self.subTest(kind=response['kind']):
-                self.response = response
-                deleted = await BatchV1Api(
-                    self.api_client,
-                ).delete_namespaced_job(
-                    name='sample', namespace='default', body={},
-                )
+        for response_status in (200, 202):
+            for response, expected_kind, expected_status in responses:
+                with self.subTest(
+                    status=response_status, kind=expected_kind
+                ):
+                    self.response_status = response_status
+                    self.response = response
+                    deleted = await BatchV1Api(
+                        self.api_client,
+                    ).delete_namespaced_job(
+                        name='sample', namespace='default', body={},
+                    )
 
-                self.assertEqual(response, deleted)
-                self.assertEqual(
-                    '/apis/batch/v1/namespaces/default/jobs/sample',
-                    self.requests[-1][0].path,
-                )
+                    self.assertIsInstance(deleted, dict)
+                    self.assertIsNot(response, deleted)
+                    self.assertEqual(response, deleted)
+                    self.assertEqual(expected_kind, deleted['kind'])
+                    self.assertEqual(expected_status, deleted['status'])
+                    if expected_kind == 'Job':
+                        self.assertIsInstance(deleted['status'], dict)
+                        self.assertIsNot(response['status'], deleted['status'])
+                    else:
+                        self.assertIsInstance(deleted['status'], str)
+                    request, body = self.requests[-1]
+                    self.assertEqual({}, json.loads(body))
+                    self.assertEqual(
+                        '/apis/batch/v1/namespaces/default/jobs/sample',
+                        request.path,
+                    )
 
     async def test_object_patches_use_strategic_merge(self):
         self.response = {

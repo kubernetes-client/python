@@ -58,5 +58,14 @@ class TestClientBatch(unittest.TestCase):
         self.assertEqual('sleep 5', resp.spec.template.spec.containers[0].command[2])
         self.assertEqual('Never', resp.spec.template.spec.restart_policy)
 
-        api.delete_namespaced_job(
-            name=name, namespace='default', propagation_policy='Background')
+        deleted = api.delete_namespaced_job(
+            name=name, namespace='default',
+            body={'propagationPolicy': 'Background'})
+        self.assertIsInstance(deleted, dict)
+        self.assertIn(deleted['kind'], ('Job', 'Status'))
+        if deleted['kind'] == 'Job':
+            self.assertEqual(name, deleted['metadata']['name'])
+        else:
+            self.assertEqual('Success', deleted['status'])
+            if 'details' in deleted:
+                self.assertEqual(name, deleted['details']['name'])
