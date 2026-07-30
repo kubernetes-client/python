@@ -80,7 +80,10 @@ setup(
               'kubernetes.aio.client.api',
               'kubernetes.aio.client.models'
               ],
-    package_data={'kubernetes.client': ['py.typed']},
+    package_data={
+        'kubernetes': ['py.typed'],
+        'kubernetes.client': ['py.typed'],
+    },
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     python_requires='>=3.10',
