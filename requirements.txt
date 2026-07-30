@@ -6,6 +6,6 @@ pyyaml>=6.0.3  # MIT
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
-typing-extensions>=4.7.1  # PSF
+typing-extensions>=4.16.0  # PSF
 urllib3>=2.7.0,<3.0.0 # MIT
 durationpy>=0.7 # MIT
