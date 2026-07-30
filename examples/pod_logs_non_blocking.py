@@ -26,6 +26,9 @@ def stream_logs():
     )
 
     # 👇 make socket non-blocking with timeout
+    # Note: when streaming logs with _preload_content=False, the transport may
+    # deliver arbitrary chunk boundaries, so callers should split or buffer data
+    # themselves if they need line-oriented processing.
     resp._fp.fp.raw._sock.settimeout(1)
 
     try:
