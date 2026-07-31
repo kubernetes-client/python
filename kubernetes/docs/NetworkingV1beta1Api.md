@@ -415,7 +415,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_ip_address**
-> V1Status delete_ip_address(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_ip_address(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete an IPAddress
 
@@ -426,7 +426,6 @@ delete an IPAddress
 ```python
 import kubernetes.client
 from kubernetes.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.client.models.v1_status import V1Status
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
@@ -486,7 +485,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 
@@ -508,7 +507,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_service_cidr**
-> V1Status delete_service_cidr(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> object delete_service_cidr(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ServiceCIDR
 
@@ -519,7 +518,6 @@ delete a ServiceCIDR
 ```python
 import kubernetes.client
 from kubernetes.client.models.v1_delete_options import V1DeleteOptions
-from kubernetes.client.models.v1_status import V1Status
 from kubernetes.client.rest import ApiException
 from pprint import pprint
 
@@ -579,7 +577,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1Status**](V1Status.md)
+**object**
 
 ### Authorization
 

@@ -37,9 +37,12 @@ updates:
   `await client.close()` or an async context manager. Interactive
   websocket streams use the generated `_without_preload_content`
   operations.
-- `CoreV1Api.delete_namespace` now returns a decoded dictionary rather
-  than `V1Status`, since a successful deletion can return either a
-  terminating Namespace or a Status.
+- Individual resource-deletion methods that previously returned
+  `V1Status`, including `CoreV1Api.delete_namespace` and
+  `BatchV1Api.delete_namespaced_job`, now return decoded dictionaries in
+  both clients. A successful deletion can return either the deleted
+  resource or a Status; access response fields with dictionary keys
+  instead of model attributes.
 
 See [kubernetes-client/python#2631][python-pr] and
 [kubernetes-client/gen#305][gen-pr].

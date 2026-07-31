@@ -88,7 +88,7 @@ def delete_job(api_instance):
         body=client.V1DeleteOptions(
             propagation_policy='Foreground',
             grace_period_seconds=5))
-    print(f"Job deleted. status='{str(api_response.status)}'")
+    print(f"Job deleted. status='{str(api_response.get('status'))}'")
 
 
 def main():

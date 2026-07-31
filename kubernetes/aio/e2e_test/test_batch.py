@@ -55,4 +55,13 @@ class TestClientBatch(IsolatedAsyncioTestCase):
         self.assertEqual(name, resp.metadata.name)
 
         resp = await api.delete_namespaced_job(
-            name=name, body={}, namespace='default')
+            name=name, body={'propagationPolicy': 'Background'},
+            namespace='default')
+        self.assertIsInstance(resp, dict)
+        self.assertIn(resp['kind'], ('Job', 'Status'))
+        if resp['kind'] == 'Job':
+            self.assertEqual(name, resp['metadata']['name'])
+        else:
+            self.assertEqual('Success', resp['status'])
+            if 'details' in resp:
+                self.assertEqual(name, resp['details']['name'])
