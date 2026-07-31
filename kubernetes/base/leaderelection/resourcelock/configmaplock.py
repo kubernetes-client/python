@@ -73,7 +73,7 @@ class ConfigMapLock:
 
     def create(self, name, namespace, election_record):
         """
-        :param electionRecord: Annotation string
+        :param election_record: Annotation string
         :param name: Name of the configmap object to be created
         :param namespace: Namespace in which the configmap object is to be created
         :return: 'True' if object is created else 'False' if failed
