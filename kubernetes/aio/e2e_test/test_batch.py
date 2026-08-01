@@ -65,3 +65,19 @@ class TestClientBatch(IsolatedAsyncioTestCase):
             self.assertEqual('Success', resp['status'])
             if 'details' in resp:
                 self.assertEqual(name, resp['details']['name'])
+
+        resp = await api.create_namespaced_job(
+            body=job_manifest, namespace='default')
+        self.assertEqual(name, resp.metadata.name)
+
+        resp = await api.delete_namespaced_job(
+            name=name, body={'propagationPolicy': 'Foreground'},
+            namespace='default')
+        self.assertIsInstance(resp, dict)
+        self.assertIn(resp['kind'], ('Job', 'Status'))
+        if resp['kind'] == 'Job':
+            self.assertEqual(name, resp['metadata']['name'])
+        else:
+            self.assertEqual('Success', resp['status'])
+            if 'details' in resp:
+                self.assertEqual(name, resp['details']['name'])

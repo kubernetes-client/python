@@ -69,3 +69,19 @@ class TestClientBatch(unittest.TestCase):
             self.assertEqual('Success', deleted['status'])
             if 'details' in deleted:
                 self.assertEqual(name, deleted['details']['name'])
+
+        create_job_resp = api.create_namespaced_job(
+            body=job_manifest, namespace='default')
+        self.assertEqual(name, create_job_resp.metadata.name)
+
+        deleted = api.delete_namespaced_job(
+            name=name, namespace='default',
+            body={'propagationPolicy': 'Foreground'})
+        self.assertIsInstance(deleted, dict)
+        self.assertIn(deleted['kind'], ('Job', 'Status'))
+        if deleted['kind'] == 'Job':
+            self.assertEqual(name, deleted['metadata']['name'])
+        else:
+            self.assertEqual('Success', deleted['status'])
+            if 'details' in deleted:
+                self.assertEqual(name, deleted['details']['name'])
