@@ -1,0 +1,53 @@
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+index 7c461b32e..e88290ef7 100644
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -81,27 +81,40 @@ class RESTClientObject(object):
+             else:
+                 maxsize = 4
+ 
++        if configuration.disable_strict_ssl_verification:
++            ssl_context = ssl.create_default_context(cafile=configuration.ssl_ca_cert)
++            if configuration.cert_file:
++                ssl_context.load_cert_chain(
++                    configuration.cert_file, keyfile=configuration.key_file
++                )
++            if not configuration.verify_ssl:
++                ssl_context.check_hostname = False
++                ssl_context.verify_mode = ssl.CERT_NONE
++            if hasattr(ssl, 'VERIFY_X509_STRICT') and hasattr(ssl_context, 'verify_flags'):
++                ssl_context.verify_flags &= ~ssl.VERIFY_X509_STRICT
++            ssl_pool_kwargs = {'ssl_context': ssl_context}
++        else:
++            ssl_pool_kwargs = {
++                'cert_reqs': cert_reqs,
++                'ca_certs': configuration.ssl_ca_cert,
++                'cert_file': configuration.cert_file,
++                'key_file': configuration.key_file,
++            }
++
+         # https pool manager
+         if configuration.proxy and not should_bypass_proxies(configuration.host, no_proxy=configuration.no_proxy or ''):
+             self.pool_manager = urllib3.ProxyManager(
+                 num_pools=pools_size,
+                 maxsize=maxsize,
+-                cert_reqs=cert_reqs,
+-                ca_certs=configuration.ssl_ca_cert,
+-                cert_file=configuration.cert_file,
+-                key_file=configuration.key_file,
+                 proxy_url=configuration.proxy,
+                 proxy_headers=configuration.proxy_headers,
++                **ssl_pool_kwargs,
+                 **addition_pool_args
+             )
+         else:
+             self.pool_manager = urllib3.PoolManager(
+                 num_pools=pools_size,
+                 maxsize=maxsize,
+-                cert_reqs=cert_reqs,
+-                ca_certs=configuration.ssl_ca_cert,
+-                cert_file=configuration.cert_file,
+-                key_file=configuration.key_file,
++                **ssl_pool_kwargs,
+                 **addition_pool_args
+             )

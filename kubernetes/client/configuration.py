@@ -307,6 +307,14 @@ conf = client.Configuration(
            Set this to false to skip verifying SSL certificate when calling API
            from https server.
         """
+        self.disable_strict_ssl_verification = False
+        """Set to true, to accept certificates violate X509 strict certificate
+           verification requirements, like missing the following extensions:
+           - X509v3 Subject Key Identifier
+           - X509v3 Authority Key Identifier
+           - X509v3 Subject Alternative Name
+           (It is implemented by removing ssl.VERIFY_X509_STRICT from SSLContext.verify_flags)
+        """
         self.ssl_ca_cert = ssl_ca_cert
         """Set this to customize the certificate file to verify the peer.
         """

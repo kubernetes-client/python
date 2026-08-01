@@ -79,7 +79,8 @@ class RESTClientObject:
             self.ssl_context.verify_mode = ssl.CERT_NONE
 
         if configuration.disable_strict_ssl_verification:
-            self.ssl_context.verify_flags &= ~ssl.VERIFY_X509_STRICT
+            if hasattr(ssl, 'VERIFY_X509_STRICT') and hasattr(self.ssl_context, 'verify_flags'):
+                self.ssl_context.verify_flags &= ~ssl.VERIFY_X509_STRICT
 
         self.proxy = configuration.proxy
         self.proxy_headers = configuration.proxy_headers

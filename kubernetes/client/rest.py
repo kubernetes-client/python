@@ -141,9 +141,25 @@ class RESTClientObject:
         if configuration.connection_pool_maxsize is not None:
             pool_args['maxsize'] = configuration.connection_pool_maxsize
 
-        # https pool manager
-        self.pool_manager: urllib3.PoolManager
+        if configuration.disable_strict_ssl_verification:
+            ssl_context = ssl.create_default_context(cafile=configuration.ssl_ca_cert)
+            if configuration.cert_file:
+                ssl_context.load_cert_chain(
+                    configuration.cert_file, keyfile=configuration.key_file
+                )
+            if not configuration.verify_ssl:
+                ssl_context.check_hostname = False
+                ssl_context.verify_mode = ssl.CERT_NONE
+            if hasattr(ssl, 'VERIFY_X509_STRICT') and hasattr(ssl_context, 'verify_flags'):
+                ssl_context.verify_flags &= ~ssl.VERIFY_X509_STRICT
+            # Replace individual SSL params with ssl_context to avoid
+            # DeprecationWarning in urllib3 >= 2.x when mixing ssl_context
+            # with individual cert parameters.
+            for key in ('cert_reqs', 'ca_certs', 'cert_file', 'key_file', 'ca_cert_data'):
+                pool_args.pop(key, None)
+            pool_args['ssl_context'] = ssl_context
 
+        # https pool manager
         if configuration.proxy and not should_bypass_proxies(
             configuration.host, configuration.no_proxy or ''
         ):
