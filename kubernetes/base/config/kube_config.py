@@ -383,16 +383,14 @@ class KubeConfigLoader:
         config = Configuration()
 
         if 'idp-certificate-authority-data' in provider['config']:
-            ca_cert = tempfile.NamedTemporaryFile(delete=True)
-
             cert = base64.b64decode(
                 provider['config']['idp-certificate-authority-data']
             ).decode('utf-8')
 
-            with open(ca_cert.name, 'w') as fh:
-                fh.write(cert)
-
-            config.ssl_ca_cert = ca_cert.name
+            # Use the shared temp-file helper instead of reopening a
+            # NamedTemporaryFile by name, which fails with PermissionError
+            # on Windows while the original handle is still open.
+            config.ssl_ca_cert = _create_temp_file_with_content(cert)
 
         elif 'idp-certificate-authority' in provider['config']:
             config.ssl_ca_cert = provider['config']['idp-certificate-authority']
