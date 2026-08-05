@@ -922,3 +922,26 @@ class ApiClient:
         """
 
         return klass.from_dict(data)
+    
+    def __getstate__(self):
+        """Prepares the object state for pickling by removing unpicklable attributes."""
+        state = self.__dict__.copy()
+        # Supprime les attributs contenant des locks et connexions réseau
+        if 'rest_client' in state:
+            del state['rest_client']
+        if '_pool_lock' in state:
+            del state['_pool_lock']
+        if 'pool_manager' in state:
+            del state['pool_manager']
+        return state
+
+    def __setstate__(self, state):
+        """Restores the object state after unpickling."""
+        self.__dict__.update(state)
+        # Re-instancie le client REST et le lock après désérialisation
+        import threading
+        from kubernetes.client.rest import RESTClientObject
+        
+        self._pool_lock = threading.Lock()
+        if not hasattr(self, 'rest_client') or self.rest_client is None:
+            self.rest_client = RESTClientObject(self.configuration)

@@ -41,6 +41,17 @@ class TestApiClient(unittest.TestCase):
                     client._ApiClient__deserialize(expected, response_type),
                     expected,
                 )
+                
+    def test_api_client_pickle(self):
+        import pickle
+        from kubernetes.client.api_client import ApiClient
+
+        client = ApiClient()
+        data = pickle.dumps(client)
+        restored = pickle.loads(data)
+
+        self.assertIsNotNone(restored)
+        self.assertIsInstance(restored, ApiClient)
 
     def test_rest_proxycare(self):
 
