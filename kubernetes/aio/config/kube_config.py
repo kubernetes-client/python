@@ -52,6 +52,26 @@ def _cleanup_temp_files():
     _temp_files = {}
 
 
+def _create_temp_file_with_content(content, temp_file_path=None, force_recreate=False):
+    if len(_temp_files) == 0:
+        atexit.register(_cleanup_temp_files)
+
+    # Because we may change context several times, try to remember files we
+    # created and reuse them at a small memory cost.
+    content_key = str(content)
+
+    if not force_recreate and content_key in _temp_files:
+        return _temp_files[content_key]
+    if temp_file_path and not os.path.isdir(temp_file_path):
+        os.makedirs(name=temp_file_path)
+    fd, name = tempfile.mkstemp(dir=temp_file_path)
+    os.close(fd)
+    _temp_files[content_key] = name
+    with open(name, 'wb') as fd:
+        fd.write(content.encode() if isinstance(content, str) else content)
+    return name
+
+
 def _is_expired(expiry):
     return ((parse_rfc3339(expiry) - EXPIRY_SKEW_PREVENTION_DELAY)
             <= datetime.datetime.utcnow().replace(tzinfo=UTC))
@@ -85,18 +105,7 @@ class FileOrData(object):
                 os.path.join(file_base_path, obj[file_key_name]))
 
     def _create_temp_file_with_content(self, content):
-        if len(_temp_files) == 0:
-            atexit.register(_cleanup_temp_files)
-        # Because we may change context several times, try to remember files we
-        # created and reuse them at a small memory cost.
-        content_key = str(content)
-        if content_key in _temp_files:
-            return _temp_files[content_key]
-        _, name = tempfile.mkstemp(dir=self._temp_file_path)
-        _temp_files[content_key] = name
-        with open(name, 'wb') as fd:
-            fd.write(content.encode() if isinstance(content, str) else content)
-        return name
+        return _create_temp_file_with_content(content, self._temp_file_path)
 
     def as_file(self):
         """If obj[%data_key_name] exists, return name of a file with base64
@@ -282,28 +291,29 @@ class KubeConfigLoader(object):
         if 'refresh-token' not in provider['config']:
             raise ConfigException('oidc: No valid id-token, and cannot refresh without refresh-token')
 
-        with tempfile.NamedTemporaryFile(delete=True) as certfile:
-            ssl_ca_cert = None
-            cert_auth_data = self._retrieve_oidc_cacert(provider)
-            if cert_auth_data is not None:
-                certfile.write(cert_auth_data)
-                certfile.flush()
-                ssl_ca_cert = certfile.name
+        ssl_ca_cert = None
+        cert_auth_data = self._retrieve_oidc_cacert(provider)
 
-            requestor = OpenIDRequestor(
-                provider['config']['client-id'],
-                provider['config']['client-secret'],
-                provider['config']['idp-issuer-url'],
-                ssl_ca_cert,
-            )
+        if cert_auth_data is not None:
+            # Write through the shared helper instead of handing out the name
+            # of an open NamedTemporaryFile, which cannot be reopened by path
+            # on Windows while the original handle is still open.
+            ssl_ca_cert = _create_temp_file_with_content(cert_auth_data)
 
-            resp = await requestor.refresh_token(provider['config']['refresh-token'])
+        requestor = OpenIDRequestor(
+            provider['config']['client-id'],
+            provider['config']['client-secret'],
+            provider['config']['idp-issuer-url'],
+            ssl_ca_cert,
+        )
 
-            provider['config'].value['id-token'] = resp['id_token']
-            provider['config'].value['refresh-token'] = resp['refresh_token']
+        resp = await requestor.refresh_token(provider['config']['refresh-token'])
 
-            if self._config_persister:
-                self._config_persister(self._config.value)
+        provider['config'].value['id-token'] = resp['id_token']
+        provider['config'].value['refresh-token'] = resp['refresh_token']
+
+        if self._config_persister:
+            self._config_persister(self._config.value)
 
     def _retrieve_oidc_cacert(self, provider):
         if 'idp-certificate-authority-data' in provider['config']:
