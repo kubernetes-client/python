@@ -22,7 +22,7 @@ class TestMetrics(unittest.TestCase):
     def setUp(self):
         self.mock_api_client = MagicMock(spec=client.ApiClient)
 
-    @patch('kubernetes.utils.metrics.CustomObjectsApi')
+    @patch('kubernetes.client.api.custom_objects_api.CustomObjectsApi')
     def test_get_nodes_metrics_success(self, mock_custom_api_class):
         """Test successful retrieval of node metrics"""
         mock_api_instance = MagicMock()
@@ -54,7 +54,7 @@ class TestMetrics(unittest.TestCase):
         self.assertEqual(len(result['items']), 1)
         self.assertEqual(result['items'][0]['metadata']['name'], 'node1')
 
-    @patch('kubernetes.utils.metrics.CustomObjectsApi')
+    @patch('kubernetes.client.api.custom_objects_api.CustomObjectsApi')
     def test_get_pods_metrics_success(self, mock_custom_api_class):
         """Test successful retrieval of pod metrics"""
         mock_api_instance = MagicMock()
@@ -91,7 +91,7 @@ class TestMetrics(unittest.TestCase):
         self.assertEqual(result, expected_response)
         self.assertEqual(len(result['items']), 1)
 
-    @patch('kubernetes.utils.metrics.CustomObjectsApi')
+    @patch('kubernetes.client.api.custom_objects_api.CustomObjectsApi')
     def test_get_pods_metrics_with_label_selector(self, mock_custom_api_class):
         """Test pod metrics retrieval with label selector"""
         mock_api_instance = MagicMock()

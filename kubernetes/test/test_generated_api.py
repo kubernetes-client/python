@@ -80,10 +80,25 @@ class _RecordingHandler(BaseHTTPRequestHandler):
         self._respond()
 
     def _respond(self):
+        request_index = self.server.request_count
+        self.server.request_count += 1
         response = self.server.response_body
-        self.send_response(self.server.response_status)
+        response_bodies = getattr(self.server, 'response_bodies', None)
+        if response_bodies is not None:
+            response = response_bodies[min(request_index, len(response_bodies) - 1)]
+        status = self.server.response_status
+        response_statuses = getattr(self.server, 'response_statuses', None)
+        if response_statuses is not None:
+            status = response_statuses[min(request_index, len(response_statuses) - 1)]
+        response_headers = self.server.response_headers
+        response_header_sets = getattr(self.server, 'response_header_sets', None)
+        if response_header_sets is not None:
+            response_headers = response_header_sets[min(request_index, len(response_header_sets) - 1)]
+        self.send_response(status)
         self.send_header('Content-Type', 'application/json')
         self.send_header('Content-Length', str(len(response)))
+        for key, value in response_headers.items():
+            self.send_header(key, value)
         self.end_headers()
         self.wfile.write(response)
 
@@ -386,6 +401,8 @@ class GeneratedApiTest(unittest.TestCase):
             ('127.0.0.1', 0), _RecordingHandler)
         self.server.response_body = b'{}'
         self.server.response_status = 200
+        self.server.response_headers = {}
+        self.server.request_count = 0
         self.thread = threading.Thread(target=self.server.serve_forever)
         self.thread.start()
         self.api_client = ApiClient(Configuration(
@@ -410,6 +427,24 @@ class GeneratedApiTest(unittest.TestCase):
             '/api/v1/namespaces?continue=next-page',
             self.server.request_path,
         )
+
+    def test_client_go_retry_retries_get_retry_after_response(self):
+        self.api_client.configuration.client_go_retries = True
+        self.api_client.configuration.retries = 1
+        self.server.response_statuses = [429, 200]
+        self.server.response_bodies = [
+            b'{"message": "retry later"}',
+            b'{"items": []}',
+        ]
+        self.server.response_header_sets = [
+            {'Retry-After': '0'},
+            {},
+        ]
+
+        namespaces = CoreV1Api(self.api_client).list_namespace()
+
+        self.assertEqual([], namespaces.items)
+        self.assertEqual(2, self.server.request_count)
 
     def test_deferred_api_validation_rejects_invalid_first_call(self):
         with self.assertRaises(ValidationError) as raised:

@@ -17,8 +17,6 @@ import os
 import re
 
 import yaml
-from kubernetes import client
-from kubernetes.dynamic.client import DynamicClient
 
 UPPER_FOLLOWED_BY_LOWER_RE = re.compile("(.)([A-Z][a-z]+)")
 LOWER_OR_NUM_FOLLOWED_BY_UPPER_RE = re.compile("([a-z0-9])([A-Z])")
@@ -207,6 +205,8 @@ def create_from_dict(
         FailToCreateError which holds list of `client.rest.ApiException`
         instances for each object that failed to create.
     """
+    from kubernetes import client
+
     # If it is a list type, will need to iterate its items
     api_exceptions = []
     k8s_objects = []
@@ -255,6 +255,8 @@ def create_from_yaml_single_item(
 ):
     kind = yml_object["kind"]
     if apply is True:
+        from kubernetes.dynamic.client import DynamicClient
+
         apply_client = DynamicClient(k8s_client).resources.get(
             api_version=yml_object["apiVersion"], kind=kind
         )
@@ -267,6 +269,8 @@ def create_from_yaml_single_item(
                 msg += " status='{0}'".format(str(resp.status))
             print(msg)
         return resp
+    from kubernetes import client
+
     group, _, version = yml_object["apiVersion"].partition("/")
     if version == "":
         version = group
