@@ -22,6 +22,11 @@ import aiohttp
 import aiohttp_retry
 
 from kubernetes.aio.client.exceptions import ApiException, ApiValueError
+from kubernetes.aio.utils.retry import (
+    is_retry_after_response,
+    on_retry_after_error,
+    retry_after_backoff,
+)
 
 RESTResponseType = aiohttp.ClientResponse
 
@@ -292,6 +297,41 @@ class RESTClientObject:
                 )
             pool_manager = self.retry_client
 
-        r = await pool_manager.request(**args)
+        async def read_request(check_retry_status=False):
+            response = await self.pool_manager.request(**args)
+            if check_retry_status:
+                self._raise_retry_after_response(response)
+            return response
+
+        if (
+            method in ['GET', 'HEAD']
+            and getattr(self.configuration, 'client_go_retries', False)
+        ):
+            backoff = retry_after_backoff(
+                getattr(self.configuration, 'retries', None),
+                getattr(self.configuration, 'client_go_retry_backoff', None),
+            )
+            r = await on_retry_after_error(
+                backoff, self._is_read_retryable, lambda: read_request(True))
+        else:
+            r = await pool_manager.request(**args)
 
         return RESTResponse(r)
+
+    @classmethod
+    def _is_read_retryable(cls, error):
+        return is_retry_after_response(error)
+
+    @staticmethod
+    def _retry_after_error(response):
+        error = ApiException(status=response.status, reason=response.reason)
+        error.headers = response.headers
+        return error
+
+    @classmethod
+    def _raise_retry_after_response(cls, response):
+        error = cls._retry_after_error(response)
+        if not is_retry_after_response(error):
+            return
+        response.release()
+        raise error

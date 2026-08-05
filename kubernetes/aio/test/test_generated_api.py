@@ -46,6 +46,8 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             'items': [],
         }
         self.response_status = 200
+        self.response_headers = {}
+        self.responses = None
         app = web.Application()
         app.router.add_route('*', '/{path:.*}', self._handle_request)
         self.runner = web.AppRunner(app)
@@ -91,7 +93,17 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             }).encode() + b'\n')
             await response.write_eof()
             return response
-        return web.json_response(self.response, status=self.response_status)
+        if self.responses is not None:
+            index = len(self.requests) - 1
+            response, status, headers = self.responses[
+                min(index, len(self.responses) - 1)
+            ]
+            return web.json_response(response, status=status, headers=headers)
+        return web.json_response(
+            self.response,
+            status=self.response_status,
+            headers=self.response_headers,
+        )
 
     async def test_bearer_alias_supports_synchronous_token_refresh(self):
         self.configuration.api_key['authorization'] = 'expired-token'
@@ -122,6 +134,19 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             'Bearer refreshed-token',
             self.requests[-1][0].headers['Authorization'],
         )
+
+    async def test_client_go_retry_retries_get_retry_after_response(self):
+        self.configuration.client_go_retries = True
+        self.configuration.retries = 1
+        self.responses = [
+            ({'message': 'retry later'}, 429, {'Retry-After': '0'}),
+            (self.response, 200, {}),
+        ]
+
+        namespaces = await CoreV1Api(self.api_client).list_namespace()
+
+        self.assertEqual([], namespaces.items)
+        self.assertEqual(2, len(self.requests))
 
     async def test_delete_job_accepts_job_and_status_responses(self):
         responses = (

@@ -1,0 +1,86 @@
+diff --git a/kubernetes/aio/client/configuration.py b/kubernetes/aio/client/configuration.py
+index 8a6da82ec..c26bac633 100644
+--- a/kubernetes/aio/client/configuration.py
++++ b/kubernetes/aio/client/configuration.py
+@@ -355,6 +355,22 @@ conf = client.Configuration(
+         self.retries = retries
+         """Retry configuration
+         """
++        self.client_go_retries = False
++        """Enable Kubernetes client-go-compatible retry semantics.
++
++           When enabled, GET and HEAD requests retry Retry-After responses.
++           The retry ceiling is read from ``retries`` when set; otherwise it
++           follows the client-go default of at most 10 retries.
++        """
++        self.client_go_retry_backoff = None
++        """Backoff for Kubernetes client-go-compatible retries.
++
++           If unset, client-go-compatible GET and HEAD retries use the
++           client-go default retry ceiling with no additional client-side
++           delay beyond Retry-After. When set, ``retries`` still overrides
++           the retry ceiling if it is not None.
++        """
++
+         self.trace_configs = trace_configs
+         """aiohttp.TraceConfig list forwarded to ClientSession for tracing.
+         """
+diff --git a/kubernetes/aio/client/rest.py b/kubernetes/aio/client/rest.py
+index 087f52a43..754ea4a2a 100644
+--- a/kubernetes/aio/client/rest.py
++++ b/kubernetes/aio/client/rest.py
+@@ -22,6 +22,11 @@ import aiohttp
+ import aiohttp_retry
+ 
+ from kubernetes.aio.client.exceptions import ApiException, ApiValueError
++from kubernetes.aio.utils.retry import (
++    is_retry_after_response,
++    on_retry_after_error,
++    retry_after_backoff,
++)
+ 
+ RESTResponseType = aiohttp.ClientResponse
+ 
+@@ -292,6 +297,41 @@ class RESTClientObject:
+                 )
+             pool_manager = self.retry_client
+ 
+-        r = await pool_manager.request(**args)
++        async def read_request(check_retry_status=False):
++            response = await self.pool_manager.request(**args)
++            if check_retry_status:
++                self._raise_retry_after_response(response)
++            return response
++
++        if (
++            method in ['GET', 'HEAD']
++            and getattr(self.configuration, 'client_go_retries', False)
++        ):
++            backoff = retry_after_backoff(
++                getattr(self.configuration, 'retries', None),
++                getattr(self.configuration, 'client_go_retry_backoff', None),
++            )
++            r = await on_retry_after_error(
++                backoff, self._is_read_retryable, lambda: read_request(True))
++        else:
++            r = await pool_manager.request(**args)
+ 
+         return RESTResponse(r)
++
++    @classmethod
++    def _is_read_retryable(cls, error):
++        return is_retry_after_response(error)
++
++    @staticmethod
++    def _retry_after_error(response):
++        error = ApiException(status=response.status, reason=response.reason)
++        error.headers = response.headers
++        return error
++
++    @classmethod
++    def _raise_retry_after_response(cls, response):
++        error = cls._retry_after_error(response)
++        if not is_retry_after_response(error):
++            return
++        response.release()
++        raise error
