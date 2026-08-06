@@ -205,6 +205,16 @@ class WSClient:
             self._connected = False
             return
 
+        # SSL sockets decrypt an entire TLS record at a time, so a previous
+        # recv_data_frame() call may have pulled the bytes of the next frames
+        # off the socket already: those frames sit decrypted in the
+        # SSLSocket's internal buffer, invisible to select()/poll() on the
+        # underlying socket. Without this check the buffered frames would
+        # only be delivered once new data arrives on the socket, and would be
+        # lost if it never does.
+        if (isinstance(self.sock.sock, ssl.SSLSocket)
+                and self.sock.sock.pending()):
+            r = True
         # The options here are:
         # select.select() - this will work on most OS, however, it has a
         #                   limitation of only able to read fd numbers up to 1024.
@@ -214,7 +224,7 @@ class WSClient:
         #                   efficient as epoll. Will work for fd numbers above 1024.
         # select.epoll()  - newest and most efficient way of polling.
         #                   However, only works on linux.
-        if hasattr(select, "poll"):
+        elif hasattr(select, "poll"):
             poll = select.poll()
             poll.register(self.sock.sock, select.POLLIN)
             if timeout is not None and timeout != float("inf"):

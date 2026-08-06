@@ -16,11 +16,12 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 from . import ws_client as ws_client_module
-from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL
+from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL, STDOUT_CHANNEL
 from .ws_client import websocket_proxycare
 from kubernetes.client.configuration import Configuration
 import os
 import socket
+import ssl
 import threading
 import pytest
 from kubernetes import stream, client, config
@@ -384,6 +385,108 @@ class WSClientProtocolTest(unittest.TestCase):
                 line = client.readline_channel(1, timeout=0.01)
             self.assertEqual(line, b"")
 
+
+class WSClientUpdateTest(unittest.TestCase):
+    """Tests for WSClient.update() frame consumption (issue #2375)"""
+
+    def setUp(self):
+        # Mock configuration to avoid real connections in WSClient.__init__
+        self.config_mock = MagicMock()
+        self.config_mock.assert_hostname = False
+        self.config_mock.api_key = {}
+        self.config_mock.proxy = None
+        self.config_mock.ssl_ca_cert = None
+        self.config_mock.cert_file = None
+        self.config_mock.key_file = None
+        self.config_mock.verify_ssl = True
+
+    def _make_client(self, mock_ws):
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_create.return_value = mock_ws
+            return WSClient(self.config_mock, "wss://test", headers=None,
+                            capture_all=True, binary=True)
+
+    def test_update_reads_frames_pending_in_ssl_buffer(self):
+        """Verify update reads a frame buffered inside the SSL socket even
+        when the underlying socket does not report as readable.
+
+        SSL sockets decrypt a whole TLS record at a time, so frames that
+        share a TLS record with a previously read frame sit decrypted in
+        the SSLSocket's buffer where select()/poll() cannot see them."""
+        with patch('select.poll') as mock_poll, \
+             patch('select.select') as mock_select:
+            # Nothing is readable on the underlying socket.
+            mock_poll.return_value.poll.return_value = []
+            mock_select.return_value = ([], [], [])
+
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            # A decrypted frame is waiting inside the SSL socket.
+            mock_ws.sock = MagicMock(spec=ssl.SSLSocket)
+            mock_ws.sock.pending.return_value = 6
+            frame = MagicMock()
+            frame.data = bytes([STDOUT_CHANNEL]) + b'hello'
+            mock_ws.recv_data_frame.return_value = (websocket.ABNF.OPCODE_BINARY, frame)
+
+            client = self._make_client(mock_ws)
+            client.update(timeout=0)
+
+            self.assertEqual(client._channels.get(STDOUT_CHANNEL), b'hello')
+
+    def test_update_polls_when_no_ssl_data_pending(self):
+        """Verify update falls back to poll/select when the SSL socket has no
+        buffered data"""
+        with patch('select.poll') as mock_poll, \
+             patch('select.select') as mock_select:
+            mock_poll.return_value.poll.return_value = []
+            mock_select.return_value = ([], [], [])
+
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.sock = MagicMock(spec=ssl.SSLSocket)
+            mock_ws.sock.pending.return_value = 0
+
+            client = self._make_client(mock_ws)
+            client.update(timeout=0)
+
+            mock_ws.recv_data_frame.assert_not_called()
+
+    def test_update_receives_fragmented_message(self):
+        """Verify a message fragmented into continuation frames is delivered
+        in full.
+
+        websocket-client reassembles continuation (OPCODE_CONT) frames inside
+        recv_data_frame() and returns the opcode of the initial frame, so
+        update() must buffer the complete message."""
+        mock_ws = MagicMock()
+        mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
+        mock_ws.connected = True
+        client = self._make_client(mock_ws)
+
+        server_sock, client_sock = socket.socketpair()
+        try:
+            ws = websocket.WebSocket()
+            ws.sock = client_sock
+            ws.connected = True
+            client.sock = ws
+
+            # A stdout message fragmented into an initial data frame (fin=0)
+            # and a continuation frame (fin=1); server frames are unmasked.
+            initial = websocket.ABNF(0, 0, 0, 0, websocket.ABNF.OPCODE_BINARY,
+                                     0, bytes([STDOUT_CHANNEL]) + b'A' * 10)
+            cont = websocket.ABNF(1, 0, 0, 0, websocket.ABNF.OPCODE_CONT,
+                                  0, b'B' * 10)
+            server_sock.sendall(initial.format() + cont.format())
+
+            client.update(timeout=5)
+
+            self.assertEqual(client._channels.get(STDOUT_CHANNEL),
+                             b'A' * 10 + b'B' * 10)
+        finally:
+            server_sock.close()
+            client_sock.close()
 
 
 @pytest.fixture(scope="module")
