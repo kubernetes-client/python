@@ -15,6 +15,7 @@ import aiohttp
 import aiohttp_retry
 import base64
 import copy
+import ssl
 import http.client as httplib
 import logging
 from logging import FileHandler
@@ -181,6 +182,7 @@ class Configuration:
     :param connection_pool_maxsize: Connection pool max size. None in the constructor is coerced to 100 for async and cpu_count * 5 for sync.
     :param proxy: Proxy URL.
     :param proxy_headers: Proxy headers.
+    :param proxy_ssl_context: SSL context used only for the TLS handshake with the proxy itself, independent of the destination TLS settings.
     :param safe_chars_for_path_param: Safe characters for path parameter encoding.
     :param client_side_validation: Enable client-side validation. Default True.
     :param socket_options: Options to pass down to the underlying urllib3 socket.
@@ -238,6 +240,7 @@ conf = client.Configuration(
         connection_pool_maxsize: Optional[int]=None,
         proxy: Optional[str]=None,
         proxy_headers: Optional[Any]=None,
+        proxy_ssl_context: Optional[ssl.SSLContext]=None,
         safe_chars_for_path_param: str='',
         client_side_validation: bool=True,
         socket_options: Optional[Any]=None,
@@ -349,6 +352,11 @@ conf = client.Configuration(
         self.proxy_headers = proxy_headers
         """Proxy headers
         """
+        self.proxy_ssl_context = proxy_ssl_context
+        """SSL context used only for the TLS handshake with
+           the proxy itself (e.g. an HTTPS CONNECT tunnel),
+           independent of the destination TLS settings above.
+        """
         self.safe_chars_for_path_param = safe_chars_for_path_param
         """Safe chars for path_param
         """
@@ -396,6 +404,10 @@ conf = client.Configuration(
                 if callable(copy_method):
                     setattr(result, k, copy_method())
                     continue
+            if k == 'proxy_ssl_context':
+                # ssl.SSLContext holds unpicklable C state and can't be deepcopied.
+                setattr(result, k, v)
+                continue
             if k in ('client_session_kwargs', 'trace_configs'):
                 setattr(result, k, copy.copy(v))
                 continue

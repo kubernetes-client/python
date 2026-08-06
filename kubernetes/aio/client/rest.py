@@ -54,6 +54,53 @@ class RESTResponse(io.IOBase):
         return self.response.headers.get(name, default)
 
 
+class _ProxySSLContextTCPConnector(aiohttp.TCPConnector):
+    """TCPConnector that verifies an HTTPS proxy's own certificate against a
+    different CA than the destination server's.
+
+    aiohttp has no public option for this: the proxy's CONNECT-tunnel TLS
+    handshake reuses the destination request's ``ssl`` setting verbatim
+    (``TCPConnector._update_proxy_auth_header_and_build_proxy_req`` builds the
+    proxy request with ``ssl=req.ssl``), so an HTTPS proxy and an HTTPS
+    destination are always validated against the same trust store. This
+    overrides that private method - reproducing its logic exactly except for
+    which ``ssl`` value the proxy request gets - to give the proxy leg its
+    own context, mirroring ``proxy_ssl_context`` in the urllib3-based sync
+    client. Being a private-API override, it can silently stop taking effect
+    (falling back to aiohttp's shared-context behavior) if aiohttp changes
+    this method's internals in a future release.
+    """
+
+    def __init__(self, *args, proxy_ssl_context=None, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._proxy_ssl_context = proxy_ssl_context
+
+    def _update_proxy_auth_header_and_build_proxy_req(self, req):
+        if self._proxy_ssl_context is None:
+            return super()._update_proxy_auth_header_and_build_proxy_req(req)
+
+        url = req.proxy
+        headers: Dict[str, Any] = {}
+        if req.proxy_headers is not None:
+            headers = req.proxy_headers
+        headers[aiohttp.hdrs.HOST] = req.headers[aiohttp.hdrs.HOST]
+        proxy_req = aiohttp.ClientRequest(
+            aiohttp.hdrs.METH_GET,
+            url,
+            headers=headers,
+            auth=req.proxy_auth,
+            loop=self._loop,
+            ssl=self._proxy_ssl_context,
+        )
+        auth = proxy_req.headers.pop(aiohttp.hdrs.AUTHORIZATION, None)
+        if auth is not None:
+            if not req.is_ssl():
+                req.headers[aiohttp.hdrs.PROXY_AUTHORIZATION] = auth
+            else:
+                proxy_req.headers[aiohttp.hdrs.PROXY_AUTHORIZATION] = auth
+        return proxy_req
+
+
 class RESTClientObject:
 
     def __init__(self, configuration) -> None:
@@ -83,6 +130,7 @@ class RESTClientObject:
 
         self.proxy = configuration.proxy
         self.proxy_headers = configuration.proxy_headers
+        self.proxy_ssl_context = configuration.proxy_ssl_context
 
         retries = configuration.retries
         if retries is None:
@@ -120,6 +168,9 @@ class RESTClientObject:
         limit_per_host = getattr(self.configuration, "tcp_connector_limit_per_host", None)
         if limit_per_host is not None:
             kwargs["limit_per_host"] = limit_per_host
+        if self.proxy_ssl_context is not None:
+            kwargs["proxy_ssl_context"] = self.proxy_ssl_context
+            return _ProxySSLContextTCPConnector(**kwargs)
         return aiohttp.TCPConnector(**kwargs)
 
     def _create_pool_manager(self) -> aiohttp.ClientSession:
