@@ -1,0 +1,132 @@
+diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
+index 5e150b408..3ef976444 100644
+--- a/kubernetes/client/configuration.py
++++ b/kubernetes/client/configuration.py
+@@ -359,0 +360,16 @@ conf = client.Configuration(
++        self.client_go_retries = False
++        """Enable Kubernetes client-go-compatible retry semantics.
++
++           When enabled, GET and HEAD requests retry Retry-After responses.
++           The retry ceiling is read from ``retries`` when set; otherwise it
++           follows the client-go default of at most 10 retries.
++        """
++        self.client_go_retry_backoff = None
++        """Backoff for Kubernetes client-go-compatible retries.
++
++           If unset, client-go-compatible GET and HEAD retries use the
++           client-go default retry ceiling with no additional client-side
++           delay beyond Retry-After. When set, ``retries`` still overrides
++           the retry ceiling if it is not None.
++        """
++
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+index 9fca6dca3..a5fb08c7a 100644
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -22,0 +23 @@ import urllib3
++from urllib3.util.retry import Retry
+@@ -23,0 +25,5 @@ import urllib3
++from kubernetes.client._retry import (
++    is_retry_after_response,
++    on_retry_after_error,
++    retry_after_backoff,
++)
+@@ -107,0 +114,2 @@ class RESTClientObject:
++        self.configuration = configuration
++
+@@ -219,0 +228,26 @@ class RESTClientObject:
++        client_go_read_retries = (
++            method in ['GET', 'HEAD']
++            and getattr(self.configuration, 'client_go_retries', False)
++        )
++        read_retries = None
++        if client_go_read_retries:
++            read_retries = self._urllib3_retries_without_status(
++                getattr(self.configuration, 'retries', None))
++
++        def read_request(check_retry_status=False):
++            kwargs = {}
++            if read_retries is not None:
++                kwargs['retries'] = read_retries
++            response = self.pool_manager.request(
++                method,
++                url,
++                fields={},
++                timeout=timeout,
++                headers=headers,
++                preload_content=False,
++                **kwargs
++            )
++            if check_retry_status:
++                self._raise_retry_after_response(response)
++            return response
++
+@@ -313,8 +347,10 @@ class RESTClientObject:
+-                r = self.pool_manager.request(
+-                    method,
+-                    url,
+-                    fields={},
+-                    timeout=timeout,
+-                    headers=headers,
+-                    preload_content=False
+-                )
++                if client_go_read_retries:
++                    backoff = retry_after_backoff(
++                        getattr(self.configuration, 'retries', None),
++                        getattr(self.configuration, 'client_go_retry_backoff', None),
++                    )
++                    r = on_retry_after_error(
++                        backoff, self._is_read_retryable,
++                        lambda: read_request(True))
++                else:
++                    r = read_request()
+@@ -325,0 +362,49 @@ class RESTClientObject:
++
++    @classmethod
++    def _is_read_retryable(cls, error):
++        return is_retry_after_response(error)
++
++    @staticmethod
++    def _retry_after_error(response):
++        error = ApiException(status=response.status, reason=response.reason)
++        error.headers = response.getheaders()
++        return error
++
++    @classmethod
++    def _raise_retry_after_response(cls, response):
++        error = cls._retry_after_error(response)
++        if not is_retry_after_response(error):
++            return
++        cls._read_and_close_retry_response(response)
++        raise error
++
++    @staticmethod
++    def _read_and_close_retry_response(response):
++        try:
++            try:
++                content_length = int(response.getheaders().get(
++                    'Content-Length', '-1'))
++            except (TypeError, ValueError):
++                content_length = -1
++            if content_length <= 2 << 10:
++                response.read(2 << 10)
++        finally:
++            response.close()
++
++    @staticmethod
++    def _urllib3_retries_without_status(retries):
++        if retries is False:
++            return False
++        if retries is None:
++            retries = Retry.DEFAULT
++        elif retries is True:
++            retries = Retry.DEFAULT
++        elif isinstance(retries, int):
++            retries = Retry.from_int(retries)
++        if isinstance(retries, Retry):
++            return retries.new(
++                status=0,
++                status_forcelist=(),
++                respect_retry_after_header=False,
++            )
++        return retries

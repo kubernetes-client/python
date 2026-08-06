@@ -357,6 +357,22 @@ conf = client.Configuration(
         self.retries = retries
         """Retry configuration
         """
+        self.client_go_retries = False
+        """Enable Kubernetes client-go-compatible retry semantics.
+
+           When enabled, GET and HEAD requests retry Retry-After responses.
+           The retry ceiling is read from ``retries`` when set; otherwise it
+           follows the client-go default of at most 10 retries.
+        """
+        self.client_go_retry_backoff = None
+        """Backoff for Kubernetes client-go-compatible retries.
+
+           If unset, client-go-compatible GET and HEAD retries use the
+           client-go default retry ceiling with no additional client-side
+           delay beyond Retry-After. When set, ``retries`` still overrides
+           the retry ceiling if it is not None.
+        """
+
         # Enable client side validation
         self.client_side_validation = client_side_validation
 

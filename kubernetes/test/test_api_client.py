@@ -8,6 +8,7 @@ import weakref
 import kubernetes
 from kubernetes.aio.client.configuration import Configuration as AsyncConfiguration
 from kubernetes.client.configuration import Configuration
+from kubernetes.client.rest import RESTClientObject
 import urllib3
 
 
@@ -66,6 +67,24 @@ class TestApiClient(unittest.TestCase):
             # test
             client = kubernetes.client.ApiClient(configuration=config)
             self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )
+
+    def test_client_go_read_retries_do_not_override_write_retries(self):
+        config = Configuration(proxy='', no_proxy='', retries=urllib3.Retry(total=2))
+        config.client_go_retries = True
+        rest_client = RESTClientObject(config)
+        rest_client.pool_manager = mock.Mock()
+        rest_client.pool_manager.request.return_value = urllib3.HTTPResponse(
+            body=b'{}', status=200, reason='OK',
+        )
+
+        rest_client.request(
+            'PATCH',
+            'http://example.test/api/v1/namespaces/default/configmaps/sample',
+            headers={'Content-Type': 'application/json'},
+            body={},
+        )
+
+        self.assertNotIn('retries', rest_client.pool_manager.request.call_args.kwargs)
 
 
 class TestConfigurationAuthSettings(unittest.TestCase):

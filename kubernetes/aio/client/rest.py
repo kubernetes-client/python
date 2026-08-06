@@ -21,6 +21,11 @@ from typing import Any, Dict, Optional, Union
 import aiohttp
 import aiohttp_retry
 
+from kubernetes.aio.client._retry import (
+    is_retry_after_response,
+    on_retry_after_error,
+    retry_after_backoff,
+)
 from kubernetes.aio.client.exceptions import ApiException, ApiValueError
 
 RESTResponseType = aiohttp.ClientResponse
@@ -284,7 +289,16 @@ class RESTClientObject:
             self.pool_manager = self._create_pool_manager()
         pool_manager = self.pool_manager
 
-        if self._effective_retry_options is not None and method in ALLOW_RETRY_METHODS:
+        client_go_read_retries = (
+            method in ['GET', 'HEAD']
+            and getattr(self.configuration, 'client_go_retries', False)
+        )
+
+        if (
+            self._effective_retry_options is not None
+            and method in ALLOW_RETRY_METHODS
+            and not client_go_read_retries
+        ):
             if self.retry_client is None:
                 self.retry_client = aiohttp_retry.RetryClient(
                     client_session=self.pool_manager,
@@ -292,6 +306,38 @@ class RESTClientObject:
                 )
             pool_manager = self.retry_client
 
-        r = await pool_manager.request(**args)
+        async def read_request(check_retry_status=False):
+            response = await self.pool_manager.request(**args)
+            if check_retry_status:
+                self._raise_retry_after_response(response)
+            return response
+
+        if client_go_read_retries:
+            backoff = retry_after_backoff(
+                getattr(self.configuration, 'retries', None),
+                getattr(self.configuration, 'client_go_retry_backoff', None),
+            )
+            r = await on_retry_after_error(
+                backoff, self._is_read_retryable, lambda: read_request(True))
+        else:
+            r = await pool_manager.request(**args)
 
         return RESTResponse(r)
+
+    @classmethod
+    def _is_read_retryable(cls, error):
+        return is_retry_after_response(error)
+
+    @staticmethod
+    def _retry_after_error(response):
+        error = ApiException(status=response.status, reason=response.reason)
+        error.headers = response.headers
+        return error
+
+    @classmethod
+    def _raise_retry_after_response(cls, response):
+        error = cls._retry_after_error(response)
+        if not is_retry_after_response(error):
+            return
+        response.release()
+        raise error

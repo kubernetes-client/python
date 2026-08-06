@@ -20,6 +20,7 @@ from kubernetes.aio.utils.retry import (
     is_too_many_requests,
     on_error,
     on_retry_after_error,
+    retry_after_max_retries,
     retry_after_seconds,
     retry_on_conflict,
 )
@@ -33,6 +34,12 @@ class FakeError(Exception):
         self.headers = headers or {}
 
 
+class RetryOptions:
+
+    def __init__(self, attempts):
+        self.attempts = attempts
+
+
 class AioRetryTest(unittest.IsolatedAsyncioTestCase):
 
     def test_default_retry_matches_client_go(self):
@@ -40,6 +47,10 @@ class AioRetryTest(unittest.IsolatedAsyncioTestCase):
             DEFAULT_RETRY,
             Backoff(steps=5, duration=0.01, factor=1.0, jitter=0.1),
         )
+
+    def test_retry_after_backoff_uses_aio_retry_attempts(self):
+        self.assertEqual(retry_after_max_retries(RetryOptions(attempts=3)), 2)
+        self.assertEqual(retry_after_max_retries(RetryOptions(attempts=1)), 0)
 
     def test_retry_after_seconds_parses_delay_seconds(self):
         error = FakeError(429, {"Retry-After": "7"})
