@@ -22,12 +22,12 @@ from urllib.parse import urlparse
 import urllib3
 from urllib3.util.retry import Retry
 
-from kubernetes.client.exceptions import ApiException, ApiValueError
-from kubernetes.utils.retry import (
+from kubernetes.client._retry import (
     is_retry_after_response,
     on_retry_after_error,
     retry_after_backoff,
 )
+from kubernetes.client.exceptions import ApiException, ApiValueError
 
 SUPPORTED_SOCKS_PROXIES = {"socks5", "socks5h", "socks4", "socks4a"}
 RESTResponseType = urllib3.HTTPResponse
@@ -225,25 +225,27 @@ class RESTClientObject:
                     read=_request_timeout[1]
                 )
 
-        client_go_retries = getattr(self.configuration, 'client_go_retries', False)
-        request_retries = None
-        if client_go_retries:
-            request_retries = self._urllib3_retries_without_status(
+        client_go_read_retries = (
+            method in ['GET', 'HEAD']
+            and getattr(self.configuration, 'client_go_retries', False)
+        )
+        read_retries = None
+        if client_go_read_retries:
+            read_retries = self._urllib3_retries_without_status(
                 getattr(self.configuration, 'retries', None))
 
-        def pool_request(*args, **kwargs):
-            if request_retries is not None:
-                kwargs['retries'] = request_retries
-            return self.pool_manager.request(*args, **kwargs)
-
         def read_request(check_retry_status=False):
-            response = pool_request(
+            kwargs = {}
+            if read_retries is not None:
+                kwargs['retries'] = read_retries
+            response = self.pool_manager.request(
                 method,
                 url,
                 fields={},
                 timeout=timeout,
                 headers=headers,
-                preload_content=False
+                preload_content=False,
+                **kwargs
             )
             if check_retry_status:
                 self._raise_retry_after_response(response)
@@ -279,7 +281,7 @@ class RESTClientObject:
                     request_body = None
                     if body is not None:
                         request_body = json.dumps(body)
-                    r = pool_request(
+                    r = self.pool_manager.request(
                         method,
                         url,
                         body=request_body,
@@ -288,7 +290,7 @@ class RESTClientObject:
                         preload_content=False
                     )
                 elif content_type == 'application/x-www-form-urlencoded':
-                    r = pool_request(
+                    r = self.pool_manager.request(
                         method,
                         url,
                         fields=post_params,
@@ -304,7 +306,7 @@ class RESTClientObject:
                     del headers['Content-Type']
                     # Ensures that dict objects are serialized
                     post_params = [(a, json.dumps(b)) if isinstance(b, dict) else (a,b) for a, b in post_params]
-                    r = pool_request(
+                    r = self.pool_manager.request(
                         method,
                         url,
                         fields=post_params,
@@ -317,7 +319,7 @@ class RESTClientObject:
                 # other content types than JSON when `body` argument is
                 # provided in serialized form.
                 elif isinstance(body, str) or isinstance(body, bytes):
-                    r = pool_request(
+                    r = self.pool_manager.request(
                         method,
                         url,
                         body=body,
@@ -327,7 +329,7 @@ class RESTClientObject:
                     )
                 elif headers['Content-Type'].startswith('text/') and isinstance(body, bool):
                     request_body = "true" if body else "false"
-                    r = pool_request(
+                    r = self.pool_manager.request(
                         method,
                         url,
                         body=request_body,
@@ -342,7 +344,7 @@ class RESTClientObject:
                     raise ApiException(status=0, reason=msg)
             # For `GET`, `HEAD`
             else:
-                if client_go_retries:
+                if client_go_read_retries:
                     backoff = retry_after_backoff(
                         getattr(self.configuration, 'retries', None),
                         getattr(self.configuration, 'client_go_retry_backoff', None),
@@ -373,11 +375,21 @@ class RESTClientObject:
         error = cls._retry_after_error(response)
         if not is_retry_after_response(error):
             return
-        try:
-            response.drain_conn()
-        except Exception:
-            response.release_conn()
+        cls._read_and_close_retry_response(response)
         raise error
+
+    @staticmethod
+    def _read_and_close_retry_response(response):
+        try:
+            try:
+                content_length = int(response.getheaders().get(
+                    'Content-Length', '-1'))
+            except (TypeError, ValueError):
+                content_length = -1
+            if content_length <= 2 << 10:
+                response.read(2 << 10)
+        finally:
+            response.close()
 
     @staticmethod
     def _urllib3_retries_without_status(retries):

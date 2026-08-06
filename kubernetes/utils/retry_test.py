@@ -39,6 +39,12 @@ def api_exception(status, headers=None):
     return error
 
 
+class RetryOptions:
+
+    def __init__(self, attempts):
+        self.attempts = attempts
+
+
 class RetryTest(unittest.TestCase):
 
     def test_default_backoffs_match_client_go(self):
@@ -61,6 +67,8 @@ class RetryTest(unittest.TestCase):
         self.assertEqual(retry_after_max_retries(0), 0)
         self.assertEqual(retry_after_max_retries(3), 3)
         self.assertEqual(retry_after_max_retries(Retry(total=2)), 2)
+        self.assertEqual(retry_after_max_retries(RetryOptions(attempts=3)), 2)
+        self.assertEqual(retry_after_max_retries(RetryOptions(attempts=1)), 0)
         self.assertEqual(retry_after_backoff(3).steps, 4)
 
     def test_retry_after_backoff_can_be_configured(self):

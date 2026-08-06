@@ -21,12 +21,12 @@ from typing import Any, Dict, Optional, Union
 import aiohttp
 import aiohttp_retry
 
-from kubernetes.aio.client.exceptions import ApiException, ApiValueError
-from kubernetes.aio.utils.retry import (
+from kubernetes.aio.client._retry import (
     is_retry_after_response,
     on_retry_after_error,
     retry_after_backoff,
 )
+from kubernetes.aio.client.exceptions import ApiException, ApiValueError
 
 RESTResponseType = aiohttp.ClientResponse
 
@@ -289,7 +289,16 @@ class RESTClientObject:
             self.pool_manager = self._create_pool_manager()
         pool_manager = self.pool_manager
 
-        if self._effective_retry_options is not None and method in ALLOW_RETRY_METHODS:
+        client_go_read_retries = (
+            method in ['GET', 'HEAD']
+            and getattr(self.configuration, 'client_go_retries', False)
+        )
+
+        if (
+            self._effective_retry_options is not None
+            and method in ALLOW_RETRY_METHODS
+            and not client_go_read_retries
+        ):
             if self.retry_client is None:
                 self.retry_client = aiohttp_retry.RetryClient(
                     client_session=self.pool_manager,
@@ -303,10 +312,7 @@ class RESTClientObject:
                 self._raise_retry_after_response(response)
             return response
 
-        if (
-            method in ['GET', 'HEAD']
-            and getattr(self.configuration, 'client_go_retries', False)
-        ):
+        if client_go_read_retries:
             backoff = retry_after_backoff(
                 getattr(self.configuration, 'retries', None),
                 getattr(self.configuration, 'client_go_retry_backoff', None),

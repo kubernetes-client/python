@@ -63,7 +63,7 @@ echo ">>> restoring Kubernetes patch media-type selection..."
 git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 
 echo ">>> restoring Kubernetes client-go retry integration..."
-git apply "${SCRIPT_ROOT}/client_go_retry_patch.diff"
+git apply --unidiff-zero "${SCRIPT_ROOT}/client_go_retry_patch.diff"
 
 echo ">>> updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"

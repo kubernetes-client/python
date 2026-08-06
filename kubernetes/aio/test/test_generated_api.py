@@ -147,6 +147,7 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
 
         self.assertEqual([], namespaces.items)
         self.assertEqual(2, len(self.requests))
+        self.assertIsNone(self.api_client.rest_client.retry_client)
 
     async def test_delete_job_accepts_job_and_status_responses(self):
         responses = (
