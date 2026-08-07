@@ -20,6 +20,7 @@ from . import electionconfig
 import unittest
 import threading
 import json
+import sys
 import time
 import pytest
 from unittest.mock import patch
@@ -221,6 +222,32 @@ class LeaderElectionTest(unittest.TestCase):
         self.assertTrue(started.wait(1), "onstarted_leading callback did not run")
         self.assertIn("daemon", captured)
         self.assertTrue(captured["daemon"])
+
+    """Expected behavior: if onstarted_leading raises, the lease it protects is no
+    longer backed by any running work, so the candidate must stop renewing it and
+    run onstopped_leading. The lock below never refuses a renewal, so the renew
+    loop can only end because the callback failed."""
+    def test_stops_leading_when_onstarted_leading_raises(self):
+        stopped = threading.Event()
+
+        mock_lock = MockResourceLock("mock", "mock_namespace", "mock", thread_lock,
+                                     lambda: None, lambda: None, lambda: None, None)
+        mock_lock.renew_count_max = sys.maxsize
+
+        def on_started_leading():
+            raise RuntimeError("onstarted_leading failed")
+
+        config = electionconfig.Config(lock=mock_lock, lease_duration=2,
+                                       renew_deadline=1.5, retry_period=1.1,
+                                       onstarted_leading=on_started_leading,
+                                       onstopped_leading=stopped.set)
+
+        # Run in a daemon thread so a regression times out instead of hanging.
+        threading.Thread(target=leaderelection.LeaderElection(config).run,
+                         daemon=True).start()
+
+        self.assertTrue(stopped.wait(10),
+                        "onstopped_leading was not called after onstarted_leading raised")
 
     def assert_history(self, history, expected):
         self.assertIsNotNone(expected)

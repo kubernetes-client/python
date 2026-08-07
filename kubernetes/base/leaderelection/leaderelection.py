@@ -55,12 +55,23 @@ class LeaderElection:
             logger.info("{} successfully acquired lease".format(self.election_config.lock.identity))
 
             # Start leading and call OnStartedLeading()
-            threading.Thread(target=self.election_config.onstarted_leading, daemon=True).start()
+            leading_failed = threading.Event()
+            threading.Thread(target=self.run_onstarted_leading, args=(leading_failed,), daemon=True).start()
 
-            self.renew_loop()
+            self.renew_loop(leading_failed)
 
             # Failed to update lease, run OnStoppedLeading callback
             self.election_config.onstopped_leading()
+
+    def run_onstarted_leading(self, leading_failed):
+        # Run the callback in this thread, recording whether it raised. Without
+        # this the exception is swallowed by the worker thread and the lease keeps
+        # being renewed even though the work it protects is no longer running.
+        try:
+            self.election_config.onstarted_leading()
+        except Exception:
+            logger.exception("onstarted_leading raised an exception, stopping leading")
+            leading_failed.set()
 
     def acquire(self):
         # Follower
@@ -75,7 +86,7 @@ class LeaderElection:
 
             time.sleep(retry_period)
 
-    def renew_loop(self):
+    def renew_loop(self, leading_failed=None):
         # Leader
         logger.info("Leader has entered renew loop and will try to update lease continuously")
 
@@ -83,6 +94,11 @@ class LeaderElection:
         renew_deadline = self.election_config.renew_deadline * 1000
 
         while True:
+            # onstarted_leading raised, so stop renewing a lease that no longer
+            # protects anything and let run() call onstopped_leading.
+            if leading_failed is not None and leading_failed.is_set():
+                return
+
             timeout = int(time.time() * 1000) + renew_deadline
             succeeded = False
 
