@@ -18,6 +18,7 @@ from unittest.mock import MagicMock, patch
 from . import ws_client as ws_client_module
 from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL
 from .ws_client import websocket_proxycare
+from .ws_client import STDOUT_CHANNEL
 from kubernetes.client.configuration import Configuration
 import os
 import socket
@@ -192,6 +193,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws = MagicMock()
             mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
             mock_ws.connected = True
+            mock_ws.is_ssl.return_value = False
             mock_ws.sock.fileno.return_value = 10
 
             # Setup frame with close signal for channel 0
@@ -216,6 +218,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws = MagicMock()
             mock_ws.subprotocol = V4_CHANNEL_PROTOCOL
             mock_ws.connected = True
+            mock_ws.is_ssl.return_value = False
             mock_ws.sock.fileno.return_value = 10
 
             # Setup frame that looks like close signal but should be treated as data
@@ -315,6 +318,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws = MagicMock()
             mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
             mock_ws.connected = True
+            mock_ws.is_ssl.return_value = False
             mock_ws.sock.fileno.return_value = 10
             mock_create.return_value = mock_ws
 
@@ -350,6 +354,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws = MagicMock()
             mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
             mock_ws.connected = True
+            mock_ws.is_ssl.return_value = False
             mock_ws.sock.fileno.return_value = 10
             mock_create.return_value = mock_ws
 
@@ -357,6 +362,46 @@ class WSClientProtocolTest(unittest.TestCase):
             client.update(timeout=float("inf"))
 
             mock_poll.return_value.poll.assert_called_once_with(None)
+
+    def test_update_reads_pending_ssl_data_without_polling(self):
+        with (
+            patch.object(
+                ws_client_module,
+                'create_websocket',
+            ) as mock_create,
+            patch('select.poll') as mock_poll,
+            patch('select.select') as mock_select,
+        ):
+            mock_ws = MagicMock()
+            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+            mock_ws.connected = True
+            mock_ws.is_ssl.return_value = True
+            mock_ws.sock.pending.return_value = 1
+
+            frame = MagicMock()
+            frame.data = bytes([STDOUT_CHANNEL]) + b"pending"
+            mock_ws.recv_data_frame.return_value = (
+                websocket.ABNF.OPCODE_BINARY,
+                frame,
+            )
+            mock_create.return_value = mock_ws
+
+            client = WSClient(
+                self.config_mock,
+                "wss://test",
+                headers=None,
+                capture_all=True,
+                binary=True,
+            )
+            client.update(timeout=None)
+
+            mock_poll.assert_not_called()
+            mock_select.assert_not_called()
+            mock_ws.recv_data_frame.assert_called_once_with(True)
+            self.assertEqual(
+                client.read_channel(STDOUT_CHANNEL),
+                b"pending",
+            )
 
     def test_readline_channel_returns_empty_string_on_expired_timeout(self):
         """Verify readline_channel returns '' (not None) when a finite timeout expires"""
