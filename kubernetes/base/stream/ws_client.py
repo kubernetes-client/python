@@ -197,8 +197,23 @@ class WSClient:
         """The same as write_channel with channel=0."""
         self.write_channel(STDIN_CHANNEL, data)
 
+    def _frames_immediately_available(self):
+        """Return True if at least one more frame is already waiting on
+        the socket and can be read without blocking."""
+        # Prefer poll over select for the same reasons as in update().
+        if hasattr(select, "poll"):
+            poll = select.poll()
+            poll.register(self.sock.sock, select.POLLIN)
+            r = poll.poll(0)
+            poll.unregister(self.sock.sock)
+        else:
+            r, _, _ = select.select((self.sock.sock, ), (), (), 0)
+        return bool(r)
+
     def update(self, timeout=0):
-        """Update channel buffers with at most one complete frame of input."""
+        """Update channel buffers with all complete frames of input that
+        are available, waiting at most `timeout` seconds for the first
+        one."""
         if not self.is_open():
             return
         if not self.sock.connected:
@@ -231,7 +246,7 @@ class WSClient:
             r, _, _ = select.select(
                 (self.sock.sock, ), (), (), timeout)
 
-        if r:
+        while r:
             op_code, frame = self.sock.recv_data_frame(True)
             if op_code == ABNF.OPCODE_CLOSE:
                 self._connected = False
@@ -265,6 +280,13 @@ class WSClient:
                             self._channels[channel] = data
                         else:
                             self._channels[channel] += data
+
+            # Output larger than the websocket frame size (e.g. long exec
+            # stdout) arrives as a sequence of frames. Consume every frame
+            # that is already available before returning, otherwise callers
+            # reading a channel after a single update() would see the
+            # output truncated at a frame boundary.
+            r = self._frames_immediately_available()
 
     def run_forever(self, timeout=None):
         """Wait till connection is closed or timeout reached. Buffer any input
