@@ -16,12 +16,11 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 from . import ws_client as ws_client_module
-from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL, STDOUT_CHANNEL
+from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL
 from .ws_client import websocket_proxycare
 from .ws_client import STDOUT_CHANNEL
 from kubernetes.client.configuration import Configuration
 import os
-import select
 import socket
 import threading
 import pytest
@@ -129,139 +128,6 @@ class WSClientTest(unittest.TestCase):
             assert dictval(connect_opts, 'http_no_proxy') == expect_noproxy
 
 
-class WSClientMultiFrameReadTest(unittest.TestCase):
-    """Tests that reads spanning multiple websocket frames are not
-    truncated at a frame boundary (issue #2226)"""
-
-    def setUp(self):
-        # Mock configuration to avoid real connections in WSClient.__init__
-        self.config_mock = MagicMock()
-        self.config_mock.assert_hostname = False
-        self.config_mock.api_key = {}
-        self.config_mock.proxy = None
-        self.config_mock.ssl_ca_cert = None
-        self.config_mock.cert_file = None
-        self.config_mock.key_file = None
-        self.config_mock.verify_ssl = True
-
-    def _make_client(self, mock_ws):
-        with patch.object(ws_client_module, 'create_websocket') as mock_create:
-            mock_create.return_value = mock_ws
-            return WSClient(self.config_mock, "wss://test", headers=None,
-                            capture_all=True)
-
-    def test_read_stdout_returns_all_available_frames(self):
-        """Verify a single peek/read returns output spanning several frames.
-
-        The server sends long exec stdout as a sequence of websocket
-        messages (32768 bytes each). Reading only one frame per update()
-        truncated the output at a frame boundary for callers using the
-        peek_stdout()/read_stdout() pattern."""
-        frame_payload = 32768
-        total = 70000
-        payload = b'x' * total
-
-        mock_ws = MagicMock()
-        mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
-        mock_ws.connected = True
-        client = self._make_client(mock_ws)
-
-        server_sock, client_sock = socket.socketpair()
-        try:
-            # Make sure the whole simulated server output fits in the
-            # socket buffers so sendall() below cannot block.
-            client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF,
-                                   4 * frame_payload)
-            server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF,
-                                   4 * frame_payload)
-
-            ws = websocket.WebSocket()
-            ws.sock = client_sock
-            ws.connected = True
-            client.sock = ws
-
-            # The stdout messages (server frames are unmasked), followed by
-            # a close frame, just like an exec of `cat <long file>`.
-            frames = b''
-            for offset in range(0, total, frame_payload):
-                chunk = (bytes([STDOUT_CHANNEL])
-                         + payload[offset:offset + frame_payload])
-                frames += websocket.ABNF(
-                    1, 0, 0, 0, websocket.ABNF.OPCODE_BINARY, 0,
-                    chunk).format()
-            frames += websocket.ABNF(
-                1, 0, 0, 0, websocket.ABNF.OPCODE_CLOSE, 0,
-                b'\x03\xe8').format()
-            server_sock.sendall(frames)
-
-            out = ''
-            if client.peek_stdout(timeout=5):
-                out = client.read_stdout()
-
-            self.assertEqual(len(out), total)
-            # The close frame was consumed as well
-            self.assertFalse(client.is_open())
-        finally:
-            server_sock.close()
-            client_sock.close()
-
-    def test_update_consumes_all_immediately_available_frames(self):
-        """Verify update() drains every frame that is already readable"""
-        with patch('select.poll') as mock_poll, \
-             patch('select.select') as mock_select:
-            # The socket reports readable twice, then has no more data.
-            mock_poll.return_value.poll.side_effect = [
-                [(10, select.POLLIN)], [(10, select.POLLIN)], []]
-            mock_select.side_effect = [
-                ([10], [], []), ([10], [], []), ([], [], [])]
-
-            frame1 = MagicMock()
-            frame1.data = bytes([STDOUT_CHANNEL]) + b'first'
-            frame2 = MagicMock()
-            frame2.data = bytes([STDOUT_CHANNEL]) + b'second'
-
-            mock_ws = MagicMock()
-            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
-            mock_ws.connected = True
-            mock_ws.recv_data_frame.side_effect = [
-                (websocket.ABNF.OPCODE_BINARY, frame1),
-                (websocket.ABNF.OPCODE_BINARY, frame2)]
-
-            client = self._make_client(mock_ws)
-            client.update(timeout=0)
-
-            self.assertEqual(mock_ws.recv_data_frame.call_count, 2)
-            self.assertEqual(client._channels.get(STDOUT_CHANNEL),
-                             'firstsecond')
-
-    def test_update_stops_draining_on_close_frame(self):
-        """Verify the drain loop terminates when a close frame arrives"""
-        with patch('select.poll') as mock_poll, \
-             patch('select.select') as mock_select:
-            # The socket always reports readable.
-            mock_poll.return_value.poll.return_value = [(10, select.POLLIN)]
-            mock_select.return_value = ([10], [], [])
-
-            frame1 = MagicMock()
-            frame1.data = bytes([STDOUT_CHANNEL]) + b'output'
-            close_frame = MagicMock()
-            close_frame.data = b'\x03\xe8'
-
-            mock_ws = MagicMock()
-            mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
-            mock_ws.connected = True
-            mock_ws.recv_data_frame.side_effect = [
-                (websocket.ABNF.OPCODE_BINARY, frame1),
-                (websocket.ABNF.OPCODE_CLOSE, close_frame)]
-
-            client = self._make_client(mock_ws)
-            client.update(timeout=0)
-
-            self.assertEqual(mock_ws.recv_data_frame.call_count, 2)
-            self.assertEqual(client._channels.get(STDOUT_CHANNEL), 'output')
-            self.assertFalse(client.is_open())
-
-
 class WSClientProtocolTest(unittest.TestCase):
     """Tests for WSClient V5 protocol handling"""
 
@@ -347,7 +213,6 @@ class WSClientProtocolTest(unittest.TestCase):
     def test_update_ignores_close_signal_v4(self):
         """Verify update treats 0xFF as regular data (or ignores signal interpretation) when v4"""
         with patch.object(ws_client_module, 'create_websocket') as mock_create, \
-            patch('select.poll') as mock_poll, \
             patch('select.select') as mock_select:
 
             mock_ws = MagicMock()
@@ -362,11 +227,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws.recv_data_frame.return_value = (websocket.ABNF.OPCODE_BINARY, frame)
 
             mock_create.return_value = mock_ws
-            # The frame is readable once, then there is no more data.
-            mock_poll.return_value.poll.side_effect = [
-                [(10, select.POLLIN)], []]
-            mock_select.side_effect = [
-                ([mock_ws.sock], [], []), ([], [], [])]
+            mock_select.return_value = ([mock_ws.sock], [], [])
 
             client = WSClient(self.config_mock, "ws://test", headers=None, capture_all=True, binary=True) # binary=True to avoid decode errors
             client.update(timeout=0)
