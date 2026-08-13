@@ -19,11 +19,14 @@ Provides helpers for fetching and processing resource usage data from the
 metrics.k8s.io API endpoint, enabling monitoring and autoscaling workflows.
 """
 
-from kubernetes.client.api.custom_objects_api import CustomObjectsApi
-
-
 METRICS_API_GROUP = "metrics.k8s.io"
 METRICS_API_VERSION = "v1beta1"
+
+
+def _custom_objects_api(api_client):
+    from kubernetes.client.api.custom_objects_api import CustomObjectsApi
+
+    return CustomObjectsApi(api_client)
 
 
 def get_nodes_metrics(api_client):
@@ -67,7 +70,7 @@ def get_nodes_metrics(api_client):
         ...     mem = node['usage']['memory']
         ...     print(f"Node {name}: CPU={cpu}, Memory={mem}")
     """
-    api = CustomObjectsApi(api_client)
+    api = _custom_objects_api(api_client)
     return api.list_cluster_custom_object(
         group=METRICS_API_GROUP,
         version=METRICS_API_VERSION,
@@ -137,7 +140,7 @@ def get_pods_metrics(api_client, namespace, label_selector=None):
     if not namespace:
         raise ValueError("namespace parameter is required and cannot be empty")
     
-    api = CustomObjectsApi(api_client)
+    api = _custom_objects_api(api_client)
     
     kwargs = {
         "group": METRICS_API_GROUP,

@@ -18,8 +18,6 @@ from os import path
 
 import yaml
 
-from kubernetes.aio import client
-
 
 async def create_from_yaml(
         k8s_client,
@@ -115,6 +113,8 @@ async def create_from_dict(
         processing of the request.
         Valid values are: - All: all dry run stages will be processed
     """
+    from kubernetes.aio import client
+
     api_exceptions = []
     k8s_objects = []
 
@@ -156,6 +156,8 @@ async def create_from_yaml_single_item(
         verbose=False,
         namespace="default",
         **kwargs):
+    from kubernetes.aio import client
+
     group, _, version = yml_object["apiVersion"].partition("/")
     if version == "":
         version = group

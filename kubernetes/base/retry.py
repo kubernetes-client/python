@@ -77,7 +77,8 @@ def retry_after_backoff(
     ``None``, it is interpreted as the retry ceiling and overrides
     ``backoff.steps``. ``False`` and ``0`` disable retries by returning a
     single-attempt backoff. Integer values and urllib3-style Retry objects with
-    a ``total`` value are treated as the retry ceiling.
+    a ``total`` value are treated as retry ceilings. aiohttp-retry-style
+    options with an ``attempts`` value are treated as request attempt ceilings.
     """
 
     if backoff is None:
@@ -106,13 +107,22 @@ def retry_after_max_retries(retries: Any = None) -> int:
     if isinstance(retries, int):
         return max(0, retries)
 
-    total = getattr(retries, "total", None)
-    if total is False:
+    if hasattr(retries, "total"):
+        total = getattr(retries, "total", None)
+        if total is False:
+            return 0
+        if total is True or total is None:
+            return 10
+        if isinstance(total, int):
+            return max(0, total)
+
+    attempts = getattr(retries, "attempts", None)
+    if attempts is False:
         return 0
-    if total is True or total is None:
+    if attempts is True:
         return 10
-    if isinstance(total, int):
-        return max(0, total)
+    if isinstance(attempts, int):
+        return max(0, attempts - 1)
     return 10
 
 

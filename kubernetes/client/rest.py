@@ -20,7 +20,13 @@ import ssl
 from urllib.parse import urlparse
 
 import urllib3
+from urllib3.util.retry import Retry
 
+from kubernetes.utils.retry import (
+    is_retry_after_response,
+    on_retry_after_error,
+    retry_after_backoff,
+)
 from kubernetes.client.exceptions import ApiException, ApiValueError
 
 SUPPORTED_SOCKS_PROXIES = {"socks5", "socks5h", "socks4", "socks4a"}
@@ -105,6 +111,8 @@ class RESTResponse(io.IOBase):
 class RESTClientObject:
 
     def __init__(self, configuration) -> None:
+        self.configuration = configuration
+
         # urllib3.PoolManager will pass all kw parameters to connectionpool
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  # noqa: E501
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
@@ -221,6 +229,32 @@ class RESTClientObject:
                     read=_request_timeout[1]
                 )
 
+        client_go_read_retries = (
+            method in ['GET', 'HEAD']
+            and getattr(self.configuration, 'client_go_retries', False)
+        )
+        read_retries = None
+        if client_go_read_retries:
+            read_retries = self._urllib3_retries_without_status(
+                getattr(self.configuration, 'retries', None))
+
+        def read_request(check_retry_status=False):
+            kwargs = {}
+            if read_retries is not None:
+                kwargs['retries'] = read_retries
+            response = self.pool_manager.request(
+                method,
+                url,
+                fields={},
+                timeout=timeout,
+                headers=headers,
+                preload_content=False,
+                **kwargs
+            )
+            if check_retry_status:
+                self._raise_retry_after_response(response)
+            return response
+
         try:
             # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
@@ -314,16 +348,67 @@ class RESTClientObject:
                     raise ApiException(status=0, reason=msg)
             # For `GET`, `HEAD`
             else:
-                r = self.pool_manager.request(
-                    method,
-                    url,
-                    fields={},
-                    timeout=timeout,
-                    headers=headers,
-                    preload_content=False
-                )
+                if client_go_read_retries:
+                    backoff = retry_after_backoff(
+                        getattr(self.configuration, 'retries', None),
+                        getattr(self.configuration, 'client_go_retry_backoff', None),
+                    )
+                    r = on_retry_after_error(
+                        backoff, self._is_read_retryable,
+                        lambda: read_request(True))
+                else:
+                    r = read_request()
         except urllib3.exceptions.SSLError as e:
             msg = "\n".join([type(e).__name__, str(e)])
             raise ApiException(status=0, reason=msg)
 
         return RESTResponse(r)
+
+    @classmethod
+    def _is_read_retryable(cls, error):
+        return is_retry_after_response(error)
+
+    @staticmethod
+    def _retry_after_error(response):
+        error = ApiException(status=response.status, reason=response.reason)
+        error.headers = response.getheaders()
+        return error
+
+    @classmethod
+    def _raise_retry_after_response(cls, response):
+        error = cls._retry_after_error(response)
+        if not is_retry_after_response(error):
+            return
+        cls._read_and_close_retry_response(response)
+        raise error
+
+    @staticmethod
+    def _read_and_close_retry_response(response):
+        try:
+            try:
+                content_length = int(response.getheaders().get(
+                    'Content-Length', '-1'))
+            except (TypeError, ValueError):
+                content_length = -1
+            if content_length <= 2 << 10:
+                response.read(2 << 10)
+        finally:
+            response.close()
+
+    @staticmethod
+    def _urllib3_retries_without_status(retries):
+        if retries is False:
+            return False
+        if retries is None:
+            retries = Retry.DEFAULT
+        elif retries is True:
+            retries = Retry.DEFAULT
+        elif isinstance(retries, int):
+            retries = Retry.from_int(retries)
+        if isinstance(retries, Retry):
+            return retries.new(
+                status=0,
+                status_forcelist=(),
+                respect_retry_after_header=False,
+            )
+        return retries
