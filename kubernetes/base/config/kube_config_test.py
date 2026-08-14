@@ -102,6 +102,7 @@ TEST_CLIENT_KEY_BASE64 = _base64(TEST_CLIENT_KEY)
 TEST_CLIENT_CERT = "client-cert"
 TEST_CLIENT_CERT_BASE64 = _base64(TEST_CLIENT_CERT)
 TEST_TLS_SERVER_NAME = "kubernetes.io"
+TEST_PROXY_URL = "http://proxy.example.com:3128"
 
 TEST_OIDC_TOKEN = "test-oidc-token"
 TEST_OIDC_INFO = "{\"name\": \"test\"}"
@@ -580,6 +581,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     "user": "ssl"
                 }
             },
+            {
+                "name": "proxy_cluster_context",
+                "context": {
+                    "cluster": "proxy_cluster",
+                    "user": "simple_token"
+                }
+            },
         ],
         "clusters": [
             {
@@ -630,6 +638,13 @@ class TestKubeConfigLoader(BaseTestCase):
                         TEST_CERTIFICATE_AUTH_BASE64,
                     "insecure-skip-tls-verify": False,
                     "tls-server-name": TEST_TLS_SERVER_NAME,
+                }
+            },
+            {
+                "name": "proxy_cluster",
+                "cluster": {
+                    "server": TEST_HOST,
+                    "proxy-url": TEST_PROXY_URL,
                 }
             },
         ],
@@ -1136,6 +1151,18 @@ class TestKubeConfigLoader(BaseTestCase):
             active_context="tls-server-name").load_and_set(actual)
         self.assertEqual(expected, actual)
 
+    def test_proxy_url_from_cluster(self):
+        expected = FakeConfig(
+            host=TEST_HOST,
+            token=BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
+            proxy=TEST_PROXY_URL,
+        )
+        actual = FakeConfig()
+        KubeConfigLoader(
+            config_dict=self.TEST_KUBE_CONFIG,
+            active_context="proxy_cluster_context").load_and_set(actual)
+        self.assertEqual(expected, actual)
+
     def test_list_contexts(self):
         loader = KubeConfigLoader(
             config_dict=self.TEST_KUBE_CONFIG,
@@ -1284,6 +1311,14 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(TEST_HOST, client.configuration.host)
         self.assertEqual(BEARER_TOKEN_FORMAT % TEST_DATA_BASE64,
                          client.configuration.api_key['BearerToken'])
+
+    def test_new_client_from_config_proxy(self):
+        config_file = self._create_temp_file(
+            yaml.safe_dump(self.TEST_KUBE_CONFIG))
+        client = new_client_from_config(
+            config_file=config_file, context="proxy_cluster_context")
+        self.assertEqual(TEST_HOST, client.configuration.host)
+        self.assertEqual(TEST_PROXY_URL, client.configuration.proxy)
 
     def test_new_client_from_config_dict(self):
         client = new_client_from_config_dict(
