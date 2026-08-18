@@ -158,7 +158,7 @@ class DynamicClient:
 
         return self.request('patch', path, body=body, force_conflicts=force_conflicts, **kwargs)
 
-    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None, allow_watch_bookmarks=None):
+    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None, allow_watch_bookmarks=None, _request_timeout=None):
         """
         Stream events for a resource from the Kubernetes API
 
@@ -172,6 +172,7 @@ class DynamicClient:
         :param timeout: The amount of time in seconds to wait before terminating the stream
         :param watcher: The Watcher object that will be used to stream the resource
         :param allow_watch_bookmarks: Ask the API server to send BOOKMARK events
+        :param _request_timeout: The amount of time in seconds to wait for a request to complete
 
         :return: Event object with these keys:
                    'type': The type of event such as "ADDED", "DELETED", etc.
@@ -188,6 +189,10 @@ class DynamicClient:
                 print(e['object'].metadata)
                 # If you want to gracefully stop the stream watcher
                 watcher.stop()
+
+            # Using a client-side request timeout
+            for e in v1_pods.watch(timeout=60, _request_timeout=(5, 65)):
+                print(e['type'])
         """
         if not watcher: watcher = watch.Watch()
 
@@ -204,6 +209,7 @@ class DynamicClient:
             serialize=False,
             timeout_seconds=timeout,
             allow_watch_bookmarks=allow_watch_bookmarks,
+            _request_timeout=_request_timeout,
         ):
             event['object'] = ResourceInstance(resource, event['object'])
             yield event
