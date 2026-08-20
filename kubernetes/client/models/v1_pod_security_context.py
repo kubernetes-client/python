@@ -294,8 +294,7 @@ class V1PodSecurityContext(BaseModel):
         _items = []
         if self.sysctls:
             for _item_sysctls in self.sysctls:
-                if _item_sysctls:
-                    _items.append(_to_openapi_value(_item_sysctls))
+                _items.append(_to_openapi_value(_item_sysctls) if _item_sysctls is not None else None)
             _dict['sysctls'] = _items
         # override the default output from pydantic by calling `to_dict()` of windows_options
         if self.windows_options:

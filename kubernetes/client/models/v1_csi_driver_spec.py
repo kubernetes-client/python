@@ -270,8 +270,7 @@ class V1CSIDriverSpec(BaseModel):
         _items = []
         if self.token_requests:
             for _item_token_requests in self.token_requests:
-                if _item_token_requests:
-                    _items.append(_to_openapi_value(_item_token_requests))
+                _items.append(_to_openapi_value(_item_token_requests) if _item_token_requests is not None else None)
             _dict['tokenRequests'] = _items
         return _dict
 

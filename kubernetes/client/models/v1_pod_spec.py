@@ -475,8 +475,7 @@ class V1PodSpec(BaseModel):
         _items = []
         if self.containers:
             for _item_containers in self.containers:
-                if _item_containers:
-                    _items.append(_to_openapi_value(_item_containers))
+                _items.append(_to_openapi_value(_item_containers) if _item_containers is not None else None)
             _dict['containers'] = _items
         # override the default output from pydantic by calling `to_dict()` of dns_config
         if self.dns_config:
@@ -485,29 +484,25 @@ class V1PodSpec(BaseModel):
         _items = []
         if self.ephemeral_containers:
             for _item_ephemeral_containers in self.ephemeral_containers:
-                if _item_ephemeral_containers:
-                    _items.append(_to_openapi_value(_item_ephemeral_containers))
+                _items.append(_to_openapi_value(_item_ephemeral_containers) if _item_ephemeral_containers is not None else None)
             _dict['ephemeralContainers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in host_aliases (list)
         _items = []
         if self.host_aliases:
             for _item_host_aliases in self.host_aliases:
-                if _item_host_aliases:
-                    _items.append(_to_openapi_value(_item_host_aliases))
+                _items.append(_to_openapi_value(_item_host_aliases) if _item_host_aliases is not None else None)
             _dict['hostAliases'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in image_pull_secrets (list)
         _items = []
         if self.image_pull_secrets:
             for _item_image_pull_secrets in self.image_pull_secrets:
-                if _item_image_pull_secrets:
-                    _items.append(_to_openapi_value(_item_image_pull_secrets))
+                _items.append(_to_openapi_value(_item_image_pull_secrets) if _item_image_pull_secrets is not None else None)
             _dict['imagePullSecrets'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in init_containers (list)
         _items = []
         if self.init_containers:
             for _item_init_containers in self.init_containers:
-                if _item_init_containers:
-                    _items.append(_to_openapi_value(_item_init_containers))
+                _items.append(_to_openapi_value(_item_init_containers) if _item_init_containers is not None else None)
             _dict['initContainers'] = _items
         # override the default output from pydantic by calling `to_dict()` of os
         if self.os:
@@ -516,15 +511,13 @@ class V1PodSpec(BaseModel):
         _items = []
         if self.readiness_gates:
             for _item_readiness_gates in self.readiness_gates:
-                if _item_readiness_gates:
-                    _items.append(_to_openapi_value(_item_readiness_gates))
+                _items.append(_to_openapi_value(_item_readiness_gates) if _item_readiness_gates is not None else None)
             _dict['readinessGates'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in resource_claims (list)
         _items = []
         if self.resource_claims:
             for _item_resource_claims in self.resource_claims:
-                if _item_resource_claims:
-                    _items.append(_to_openapi_value(_item_resource_claims))
+                _items.append(_to_openapi_value(_item_resource_claims) if _item_resource_claims is not None else None)
             _dict['resourceClaims'] = _items
         # override the default output from pydantic by calling `to_dict()` of resources
         if self.resources:
@@ -533,8 +526,7 @@ class V1PodSpec(BaseModel):
         _items = []
         if self.scheduling_gates:
             for _item_scheduling_gates in self.scheduling_gates:
-                if _item_scheduling_gates:
-                    _items.append(_to_openapi_value(_item_scheduling_gates))
+                _items.append(_to_openapi_value(_item_scheduling_gates) if _item_scheduling_gates is not None else None)
             _dict['schedulingGates'] = _items
         # override the default output from pydantic by calling `to_dict()` of scheduling_group
         if self.scheduling_group:
@@ -546,22 +538,19 @@ class V1PodSpec(BaseModel):
         _items = []
         if self.tolerations:
             for _item_tolerations in self.tolerations:
-                if _item_tolerations:
-                    _items.append(_to_openapi_value(_item_tolerations))
+                _items.append(_to_openapi_value(_item_tolerations) if _item_tolerations is not None else None)
             _dict['tolerations'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in topology_spread_constraints (list)
         _items = []
         if self.topology_spread_constraints:
             for _item_topology_spread_constraints in self.topology_spread_constraints:
-                if _item_topology_spread_constraints:
-                    _items.append(_to_openapi_value(_item_topology_spread_constraints))
+                _items.append(_to_openapi_value(_item_topology_spread_constraints) if _item_topology_spread_constraints is not None else None)
             _dict['topologySpreadConstraints'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in volumes (list)
         _items = []
         if self.volumes:
             for _item_volumes in self.volumes:
-                if _item_volumes:
-                    _items.append(_to_openapi_value(_item_volumes))
+                _items.append(_to_openapi_value(_item_volumes) if _item_volumes is not None else None)
             _dict['volumes'] = _items
         return _dict
 

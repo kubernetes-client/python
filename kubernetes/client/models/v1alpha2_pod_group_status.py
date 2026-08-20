@@ -205,15 +205,13 @@ class V1alpha2PodGroupStatus(BaseModel):
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_to_openapi_value(_item_conditions))
+                _items.append(_to_openapi_value(_item_conditions) if _item_conditions is not None else None)
             _dict['conditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in resource_claim_statuses (list)
         _items = []
         if self.resource_claim_statuses:
             for _item_resource_claim_statuses in self.resource_claim_statuses:
-                if _item_resource_claim_statuses:
-                    _items.append(_to_openapi_value(_item_resource_claim_statuses))
+                _items.append(_to_openapi_value(_item_resource_claim_statuses) if _item_resource_claim_statuses is not None else None)
             _dict['resourceClaimStatuses'] = _items
         return _dict
 

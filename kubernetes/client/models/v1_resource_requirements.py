@@ -193,8 +193,7 @@ class V1ResourceRequirements(BaseModel):
         _items = []
         if self.claims:
             for _item_claims in self.claims:
-                if _item_claims:
-                    _items.append(_to_openapi_value(_item_claims))
+                _items.append(_to_openapi_value(_item_claims) if _item_claims is not None else None)
             _dict['claims'] = _items
         return _dict
 

@@ -215,8 +215,7 @@ class V2HPAScalingRules(BaseModel):
         _items = []
         if self.policies:
             for _item_policies in self.policies:
-                if _item_policies:
-                    _items.append(_to_openapi_value(_item_policies))
+                _items.append(_to_openapi_value(_item_policies) if _item_policies is not None else None)
             _dict['policies'] = _items
         return _dict
 

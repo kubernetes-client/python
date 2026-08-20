@@ -355,15 +355,13 @@ class V1EphemeralContainer(BaseModel):
         _items = []
         if self.env:
             for _item_env in self.env:
-                if _item_env:
-                    _items.append(_to_openapi_value(_item_env))
+                _items.append(_to_openapi_value(_item_env) if _item_env is not None else None)
             _dict['env'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in env_from (list)
         _items = []
         if self.env_from:
             for _item_env_from in self.env_from:
-                if _item_env_from:
-                    _items.append(_to_openapi_value(_item_env_from))
+                _items.append(_to_openapi_value(_item_env_from) if _item_env_from is not None else None)
             _dict['envFrom'] = _items
         # override the default output from pydantic by calling `to_dict()` of lifecycle
         if self.lifecycle:
@@ -375,8 +373,7 @@ class V1EphemeralContainer(BaseModel):
         _items = []
         if self.ports:
             for _item_ports in self.ports:
-                if _item_ports:
-                    _items.append(_to_openapi_value(_item_ports))
+                _items.append(_to_openapi_value(_item_ports) if _item_ports is not None else None)
             _dict['ports'] = _items
         # override the default output from pydantic by calling `to_dict()` of readiness_probe
         if self.readiness_probe:
@@ -385,8 +382,7 @@ class V1EphemeralContainer(BaseModel):
         _items = []
         if self.resize_policy:
             for _item_resize_policy in self.resize_policy:
-                if _item_resize_policy:
-                    _items.append(_to_openapi_value(_item_resize_policy))
+                _items.append(_to_openapi_value(_item_resize_policy) if _item_resize_policy is not None else None)
             _dict['resizePolicy'] = _items
         # override the default output from pydantic by calling `to_dict()` of resources
         if self.resources:
@@ -395,8 +391,7 @@ class V1EphemeralContainer(BaseModel):
         _items = []
         if self.restart_policy_rules:
             for _item_restart_policy_rules in self.restart_policy_rules:
-                if _item_restart_policy_rules:
-                    _items.append(_to_openapi_value(_item_restart_policy_rules))
+                _items.append(_to_openapi_value(_item_restart_policy_rules) if _item_restart_policy_rules is not None else None)
             _dict['restartPolicyRules'] = _items
         # override the default output from pydantic by calling `to_dict()` of security_context
         if self.security_context:
@@ -408,15 +403,13 @@ class V1EphemeralContainer(BaseModel):
         _items = []
         if self.volume_devices:
             for _item_volume_devices in self.volume_devices:
-                if _item_volume_devices:
-                    _items.append(_to_openapi_value(_item_volume_devices))
+                _items.append(_to_openapi_value(_item_volume_devices) if _item_volume_devices is not None else None)
             _dict['volumeDevices'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_to_openapi_value(_item_volume_mounts))
+                _items.append(_to_openapi_value(_item_volume_mounts) if _item_volume_mounts is not None else None)
             _dict['volumeMounts'] = _items
         return _dict
 

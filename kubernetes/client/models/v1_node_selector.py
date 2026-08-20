@@ -200,8 +200,7 @@ class V1NodeSelector(BaseModel):
         _items = []
         if self.node_selector_terms:
             for _item_node_selector_terms in self.node_selector_terms:
-                if _item_node_selector_terms:
-                    _items.append(_to_openapi_value(_item_node_selector_terms))
+                _items.append(_to_openapi_value(_item_node_selector_terms) if _item_node_selector_terms is not None else None)
             _dict['nodeSelectorTerms'] = _items
         return _dict
 

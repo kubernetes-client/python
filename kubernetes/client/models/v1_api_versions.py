@@ -215,8 +215,7 @@ class V1APIVersions(BaseModel):
         _items = []
         if self.server_address_by_client_cidrs:
             for _item_server_address_by_client_cidrs in self.server_address_by_client_cidrs:
-                if _item_server_address_by_client_cidrs:
-                    _items.append(_to_openapi_value(_item_server_address_by_client_cidrs))
+                _items.append(_to_openapi_value(_item_server_address_by_client_cidrs) if _item_server_address_by_client_cidrs is not None else None)
             _dict['serverAddressByClientCIDRs'] = _items
         return _dict
 

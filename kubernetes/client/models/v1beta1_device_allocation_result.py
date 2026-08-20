@@ -190,15 +190,13 @@ class V1beta1DeviceAllocationResult(BaseModel):
         _items = []
         if self.config:
             for _item_config in self.config:
-                if _item_config:
-                    _items.append(_to_openapi_value(_item_config))
+                _items.append(_to_openapi_value(_item_config) if _item_config is not None else None)
             _dict['config'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
             for _item_results in self.results:
-                if _item_results:
-                    _items.append(_to_openapi_value(_item_results))
+                _items.append(_to_openapi_value(_item_results) if _item_results is not None else None)
             _dict['results'] = _items
         return _dict
 

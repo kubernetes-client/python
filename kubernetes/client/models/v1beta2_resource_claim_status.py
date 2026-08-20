@@ -213,15 +213,13 @@ class V1beta2ResourceClaimStatus(BaseModel):
         _items = []
         if self.devices:
             for _item_devices in self.devices:
-                if _item_devices:
-                    _items.append(_to_openapi_value(_item_devices))
+                _items.append(_to_openapi_value(_item_devices) if _item_devices is not None else None)
             _dict['devices'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in reserved_for (list)
         _items = []
         if self.reserved_for:
             for _item_reserved_for in self.reserved_for:
-                if _item_reserved_for:
-                    _items.append(_to_openapi_value(_item_reserved_for))
+                _items.append(_to_openapi_value(_item_reserved_for) if _item_reserved_for is not None else None)
             _dict['reservedFor'] = _items
         return _dict
 

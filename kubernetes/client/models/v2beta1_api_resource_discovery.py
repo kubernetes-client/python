@@ -238,8 +238,7 @@ class V2beta1APIResourceDiscovery(BaseModel):
         _items = []
         if self.subresources:
             for _item_subresources in self.subresources:
-                if _item_subresources:
-                    _items.append(_to_openapi_value(_item_subresources))
+                _items.append(_to_openapi_value(_item_subresources) if _item_subresources is not None else None)
             _dict['subresources'] = _items
         return _dict
 

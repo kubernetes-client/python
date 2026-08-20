@@ -207,8 +207,7 @@ class V1PodExtendedResourceClaimStatus(BaseModel):
         _items = []
         if self.request_mappings:
             for _item_request_mappings in self.request_mappings:
-                if _item_request_mappings:
-                    _items.append(_to_openapi_value(_item_request_mappings))
+                _items.append(_to_openapi_value(_item_request_mappings) if _item_request_mappings is not None else None)
             _dict['requestMappings'] = _items
         return _dict
 

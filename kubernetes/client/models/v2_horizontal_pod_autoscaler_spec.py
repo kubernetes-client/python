@@ -227,8 +227,7 @@ class V2HorizontalPodAutoscalerSpec(BaseModel):
         _items = []
         if self.metrics:
             for _item_metrics in self.metrics:
-                if _item_metrics:
-                    _items.append(_to_openapi_value(_item_metrics))
+                _items.append(_to_openapi_value(_item_metrics) if _item_metrics is not None else None)
             _dict['metrics'] = _items
         # override the default output from pydantic by calling `to_dict()` of scale_target_ref
         if self.scale_target_ref:

@@ -211,8 +211,7 @@ class V1alpha2WorkloadSpec(BaseModel):
         _items = []
         if self.pod_group_templates:
             for _item_pod_group_templates in self.pod_group_templates:
-                if _item_pod_group_templates:
-                    _items.append(_to_openapi_value(_item_pod_group_templates))
+                _items.append(_to_openapi_value(_item_pod_group_templates) if _item_pod_group_templates is not None else None)
             _dict['podGroupTemplates'] = _items
         return _dict
 

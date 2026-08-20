@@ -240,8 +240,7 @@ class V1NodeSpec(BaseModel):
         _items = []
         if self.taints:
             for _item_taints in self.taints:
-                if _item_taints:
-                    _items.append(_to_openapi_value(_item_taints))
+                _items.append(_to_openapi_value(_item_taints) if _item_taints is not None else None)
             _dict['taints'] = _items
         return _dict
 

@@ -1,8 +1,10 @@
 diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
-index 5e150b408..3ef976444 100644
 --- a/kubernetes/client/configuration.py
 +++ b/kubernetes/client/configuration.py
-@@ -359,0 +360,16 @@ conf = client.Configuration(
+@@ -365,6 +365,22 @@
+         self.retries = retries
+         """Retry configuration
+         """
 +        self.client_go_retries = False
 +        """Enable Kubernetes client-go-compatible retry semantics.
 +
@@ -19,22 +21,39 @@ index 5e150b408..3ef976444 100644
 +           the retry ceiling if it is not None.
 +        """
 +
+         # Enable client side validation
+         self.client_side_validation = client_side_validation
+ 
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
-index 9fca6dca3..a5fb08c7a 100644
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
-@@ -22,0 +23 @@ import urllib3
+@@ -20,7 +20,13 @@
+ from urllib.parse import urlparse
+ 
+ import urllib3
 +from urllib3.util.retry import Retry
-@@ -23,0 +25,5 @@ import urllib3
+ 
 +from kubernetes.utils.retry import (
 +    is_retry_after_response,
 +    on_retry_after_error,
 +    retry_after_backoff,
 +)
-@@ -107,0 +114,2 @@ class RESTClientObject:
+ from kubernetes.client.exceptions import ApiException, ApiValueError
+ 
+ SUPPORTED_SOCKS_PROXIES = {"socks5", "socks5h", "socks4", "socks4a"}
+@@ -120,6 +126,8 @@
+ class RESTClientObject:
+ 
+     def __init__(self, configuration) -> None:
 +        self.configuration = configuration
 +
-@@ -219,0 +228,26 @@ class RESTClientObject:
+         # urllib3.PoolManager will pass all kw parameters to connectionpool
+         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  # noqa: E501
+         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
+@@ -234,6 +242,32 @@
+                     read=_request_timeout[1]
+                 )
+ 
 +        client_go_read_retries = (
 +            method in ['GET', 'HEAD']
 +            and getattr(self.configuration, 'client_go_retries', False)
@@ -61,7 +80,13 @@ index 9fca6dca3..a5fb08c7a 100644
 +                self._raise_retry_after_response(response)
 +            return response
 +
-@@ -313,8 +347,10 @@ class RESTClientObject:
+         try:
+             # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
+             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
+@@ -331,16 +365,67 @@
+                     raise ApiException(status=0, reason=msg)
+             # For `GET`, `HEAD`
+             else:
 -                r = self.pool_manager.request(
 -                    method,
 -                    url,
@@ -80,7 +105,11 @@ index 9fca6dca3..a5fb08c7a 100644
 +                        lambda: read_request(True))
 +                else:
 +                    r = read_request()
-@@ -325,0 +362,49 @@ class RESTClientObject:
+         except urllib3.exceptions.SSLError as e:
+             msg = "\n".join([type(e).__name__, str(e)])
+             raise ApiException(status=0, reason=msg)
+ 
+         return RESTResponse(r)
 +
 +    @classmethod
 +    def _is_read_retryable(cls, error):

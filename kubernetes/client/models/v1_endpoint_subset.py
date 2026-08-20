@@ -209,22 +209,19 @@ class V1EndpointSubset(BaseModel):
         _items = []
         if self.addresses:
             for _item_addresses in self.addresses:
-                if _item_addresses:
-                    _items.append(_to_openapi_value(_item_addresses))
+                _items.append(_to_openapi_value(_item_addresses) if _item_addresses is not None else None)
             _dict['addresses'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in not_ready_addresses (list)
         _items = []
         if self.not_ready_addresses:
             for _item_not_ready_addresses in self.not_ready_addresses:
-                if _item_not_ready_addresses:
-                    _items.append(_to_openapi_value(_item_not_ready_addresses))
+                _items.append(_to_openapi_value(_item_not_ready_addresses) if _item_not_ready_addresses is not None else None)
             _dict['notReadyAddresses'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ports (list)
         _items = []
         if self.ports:
             for _item_ports in self.ports:
-                if _item_ports:
-                    _items.append(_to_openapi_value(_item_ports))
+                _items.append(_to_openapi_value(_item_ports) if _item_ports is not None else None)
             _dict['ports'] = _items
         return _dict
 

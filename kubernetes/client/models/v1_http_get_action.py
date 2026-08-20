@@ -216,8 +216,7 @@ class V1HTTPGetAction(BaseModel):
         _items = []
         if self.http_headers:
             for _item_http_headers in self.http_headers:
-                if _item_http_headers:
-                    _items.append(_to_openapi_value(_item_http_headers))
+                _items.append(_to_openapi_value(_item_http_headers) if _item_http_headers is not None else None)
             _dict['httpHeaders'] = _items
         return _dict
 

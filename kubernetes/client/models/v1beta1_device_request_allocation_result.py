@@ -248,8 +248,7 @@ class V1beta1DeviceRequestAllocationResult(BaseModel):
         _items = []
         if self.tolerations:
             for _item_tolerations in self.tolerations:
-                if _item_tolerations:
-                    _items.append(_to_openapi_value(_item_tolerations))
+                _items.append(_to_openapi_value(_item_tolerations) if _item_tolerations is not None else None)
             _dict['tolerations'] = _items
         return _dict
 

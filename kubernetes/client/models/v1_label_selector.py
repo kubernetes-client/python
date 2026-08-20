@@ -207,8 +207,7 @@ class V1LabelSelector(BaseModel):
         _items = []
         if self.match_expressions:
             for _item_match_expressions in self.match_expressions:
-                if _item_match_expressions:
-                    _items.append(_to_openapi_value(_item_match_expressions))
+                _items.append(_to_openapi_value(_item_match_expressions) if _item_match_expressions is not None else None)
             _dict['matchExpressions'] = _items
         return _dict
 

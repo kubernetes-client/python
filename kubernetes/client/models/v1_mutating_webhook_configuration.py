@@ -216,8 +216,7 @@ class V1MutatingWebhookConfiguration(BaseModel):
         _items = []
         if self.webhooks:
             for _item_webhooks in self.webhooks:
-                if _item_webhooks:
-                    _items.append(_to_openapi_value(_item_webhooks))
+                _items.append(_to_openapi_value(_item_webhooks) if _item_webhooks is not None else None)
             _dict['webhooks'] = _items
         return _dict
 
