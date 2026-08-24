@@ -10,16 +10,21 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import datetime
 import unittest
 from decimal import Decimal
 from os import path
+from typing import Optional
 
 import yaml
+from pydantic import AliasChoices, BaseModel, Field, StrictStr
 
 from kubernetes import client, utils
+from kubernetes.client.models.v1_object_meta import V1ObjectMeta
 from kubernetes.client.rest import ApiException
 from kubernetes.e2e_test import base
 from kubernetes.utils import quantity
+from kubernetes.utils.duration import V1Duration, format_duration, parse_duration
 
 
 class TestUtils(unittest.TestCase):
@@ -811,3 +816,148 @@ class TestUtilsUnitTests(unittest.TestCase):
             quantity.format_quantity(Decimal("0.5006"), "m", quantize=Decimal(0)),
             "501m",
         )
+
+
+class TestDuration(unittest.TestCase):
+
+    def test_parse_duration(self):
+        # Valid durations
+        self.assertEqual(parse_duration("0h"), datetime.timedelta(hours=0))
+        self.assertEqual(parse_duration("0s"), datetime.timedelta(hours=0))
+        self.assertEqual(parse_duration("0h0m0s"), datetime.timedelta(hours=0))
+        self.assertEqual(parse_duration("1h"), datetime.timedelta(hours=1))
+        self.assertEqual(parse_duration("30m"), datetime.timedelta(minutes=30))
+        self.assertEqual(parse_duration("10s"), datetime.timedelta(seconds=10))
+        self.assertEqual(parse_duration("500ms"), datetime.timedelta(milliseconds=500))
+        self.assertEqual(parse_duration("2h30m"), datetime.timedelta(hours=2, minutes=30))
+        self.assertEqual(parse_duration("150m"), datetime.timedelta(hours=2, minutes=30))
+        self.assertEqual(parse_duration("7230s"), datetime.timedelta(hours=2, seconds=30))
+        self.assertEqual(parse_duration("1h30m10s"), datetime.timedelta(hours=1, minutes=30, seconds=10))
+        self.assertEqual(parse_duration("10s30m1h"), datetime.timedelta(hours=1, minutes=30, seconds=10))
+        self.assertEqual(parse_duration("100ms200ms300ms"), datetime.timedelta(milliseconds=600))
+
+        # Invalid durations
+        with self.assertRaises(ValueError):
+            parse_duration("1d")  # Invalid unit 'd'
+        with self.assertRaises(ValueError):
+            parse_duration("1")  # Missing unit
+        with self.assertRaises(ValueError):
+            parse_duration("1m1")  # Missing unit
+        with self.assertRaises(ValueError):
+            parse_duration("1h30m10s20ms50h")  # Too many units
+        with self.assertRaises(ValueError):
+            parse_duration("999999h")  # Too many digits
+        with self.assertRaises(ValueError):
+            parse_duration("1.5h")  # Floating point is not supported
+        with self.assertRaises(ValueError):
+            parse_duration("-15m")  # Negative durations are not supported
+
+    def test_format_duration(self):
+        # Valid durations
+        self.assertEqual(format_duration(datetime.timedelta(0)), "0s")
+        self.assertEqual(format_duration(datetime.timedelta(hours=1)), "1h")
+        self.assertEqual(format_duration(datetime.timedelta(minutes=30)), "30m")
+        self.assertEqual(format_duration(datetime.timedelta(seconds=10)), "10s")
+        self.assertEqual(format_duration(datetime.timedelta(milliseconds=500)), "500ms")
+        self.assertEqual(format_duration(datetime.timedelta(hours=2, minutes=30)), "2h30m")
+        self.assertEqual(format_duration(datetime.timedelta(hours=1, minutes=30, seconds=10)), "1h30m10s")
+        self.assertEqual(format_duration(datetime.timedelta(milliseconds=600)), "600ms")
+        self.assertEqual(format_duration(datetime.timedelta(hours=2, milliseconds=600)), "2h600ms")
+        self.assertEqual(format_duration(datetime.timedelta(hours=2, minutes=30, milliseconds=600)), "2h30m600ms")
+        self.assertEqual(format_duration(datetime.timedelta(hours=2, minutes=30, seconds=10, milliseconds=600)), "2h30m10s600ms")
+        self.assertEqual(format_duration(datetime.timedelta(minutes=0.5)), "30s")
+        self.assertEqual(format_duration(datetime.timedelta(seconds=0.5)), "500ms")
+        self.assertEqual(format_duration(datetime.timedelta(days=10)), "240h")  # 10 days = 240 hours
+
+        # Invalid durations
+        with self.assertRaises(ValueError):
+            format_duration(datetime.timedelta(microseconds=100))  # Sub-millisecond precision
+        with self.assertRaises(ValueError):
+            format_duration(datetime.timedelta(milliseconds=0.5))  # Sub-millisecond precision
+        with self.assertRaises(ValueError):
+            format_duration(datetime.timedelta(days=10000))  # Out of range (more than 99999 hours)
+        with self.assertRaises(ValueError):
+            format_duration(datetime.timedelta(minutes=-15))  # Negative durations are not supported
+
+
+class DurationSpec(BaseModel):
+    time_to_live: V1Duration = Field(validation_alias=AliasChoices("timeToLive", "time_to_live"), serialization_alias="timeToLive")
+
+
+class ObjectWithDuration(BaseModel):
+    api_version: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("apiVersion", "api_version"), serialization_alias="apiVersion")
+    kind: Optional[StrictStr] = None
+    metadata: Optional[V1ObjectMeta] = None
+    spec: Optional[DurationSpec] = None
+
+
+class TestDurationType(unittest.TestCase):
+    def test_model_dump(self):
+        test_object = ObjectWithDuration(
+            metadata=V1ObjectMeta(
+                name="duration-test",
+                namespace="test",
+            ),
+            spec=DurationSpec(
+                time_to_live=datetime.timedelta(hours=3, minutes=5, seconds=2)
+            )
+        )
+        self.assertEqual(
+            test_object.model_dump(exclude_none=True, exclude_defaults=True, by_alias=True),
+            {
+                "metadata": {
+                    "name": "duration-test",
+                    "namespace": "test",
+                },
+                "spec": {
+                    "timeToLive": "3h5m2s",
+                },
+            },
+        )
+
+    def test_model_dump_json(self):
+        test_object = ObjectWithDuration(
+            metadata=V1ObjectMeta(
+                name="duration-test",
+                namespace="test",
+            ),
+            spec=DurationSpec(
+                time_to_live=datetime.timedelta(hours=3, minutes=5, seconds=2)
+            )
+        )
+        self.assertEqual(r'{"metadata":{"name":"duration-test","namespace":"test"},"spec":{"timeToLive":"3h5m2s"}}',
+            test_object.model_dump_json(exclude_none=True, exclude_defaults=True, by_alias=True)
+        )
+
+    def test_model_validate(self):
+        duration_object = ObjectWithDuration.model_validate({
+                "metadata": {
+                    "name": "duration-test",
+                    "namespace": "test",
+                },
+                "spec": {
+                    "timeToLive": "3h5m2s",
+                },
+            },
+        )
+        self.assertEqual(duration_object.metadata.name, "duration-test")
+        self.assertEqual(duration_object.metadata.namespace, "test")
+        self.assertEqual(duration_object.spec.time_to_live, datetime.timedelta(hours=3, minutes=5, seconds=2))
+
+    def test_model_validate_json(self):
+        duration_object = ObjectWithDuration.model_validate_json(
+            r'{"metadata":{"name":"duration-test","namespace":"test"},"spec":{"timeToLive":"3h5m2s"}}'
+        )
+        self.assertEqual(duration_object.metadata.name, "duration-test")
+        self.assertEqual(duration_object.metadata.namespace, "test")
+        self.assertEqual(duration_object.spec.time_to_live, datetime.timedelta(hours=3, minutes=5, seconds=2))
+
+    def test_timedelta_input_is_accepted(self):
+        spec = DurationSpec(time_to_live=datetime.timedelta(minutes=5))
+        self.assertEqual(spec.time_to_live, datetime.timedelta(minutes=5))
+
+    def test_invalid_object_raises_value_error(self):
+        with self.assertRaises(expected_exception=ValueError):
+            ObjectWithDuration.model_validate_json(
+                r'{"metadata":{"name":"duration-test","namespace":"test"},"spec":{"timeToLive":"3h5m2s-Tuesday"}}'
+            )

@@ -16,7 +16,7 @@
 from .create_from_yaml import (FailToCreateError, create_from_dict,
                                create_from_yaml, create_from_directory)
 from .quantity import parse_quantity
-from .duration import parse_duration
+from .duration import parse_duration, format_duration
 from .metrics import (get_nodes_metrics, get_pods_metrics,
                       get_pods_metrics_in_all_namespaces)
 from .retry import (Backoff, DEFAULT_BACKOFF, DEFAULT_RETRY,
