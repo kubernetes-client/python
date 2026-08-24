@@ -204,8 +204,7 @@ class V1beta1DeviceCounterConsumption(BaseModel):
         _field_dict = {}
         if self.counters:
             for _key_counters in self.counters:
-                if self.counters[_key_counters]:
-                    _field_dict[_key_counters] = _to_openapi_value(self.counters[_key_counters])
+                _field_dict[_key_counters] = _to_openapi_value(self.counters[_key_counters]) if self.counters[_key_counters] is not None else None
             _dict['counters'] = _field_dict
         return _dict
 

@@ -217,15 +217,13 @@ class V1NetworkPolicySpec(BaseModel):
         _items = []
         if self.egress:
             for _item_egress in self.egress:
-                if _item_egress:
-                    _items.append(_to_openapi_value(_item_egress))
+                _items.append(_to_openapi_value(_item_egress) if _item_egress is not None else None)
             _dict['egress'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ingress (list)
         _items = []
         if self.ingress:
             for _item_ingress in self.ingress:
-                if _item_ingress:
-                    _items.append(_to_openapi_value(_item_ingress))
+                _items.append(_to_openapi_value(_item_ingress) if _item_ingress is not None else None)
             _dict['ingress'] = _items
         # override the default output from pydantic by calling `to_dict()` of pod_selector
         if self.pod_selector:

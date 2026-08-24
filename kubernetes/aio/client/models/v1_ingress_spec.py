@@ -220,15 +220,13 @@ class V1IngressSpec(BaseModel):
         _items = []
         if self.rules:
             for _item_rules in self.rules:
-                if _item_rules:
-                    _items.append(_to_openapi_value(_item_rules))
+                _items.append(_to_openapi_value(_item_rules) if _item_rules is not None else None)
             _dict['rules'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in tls (list)
         _items = []
         if self.tls:
             for _item_tls in self.tls:
-                if _item_tls:
-                    _items.append(_to_openapi_value(_item_tls))
+                _items.append(_to_openapi_value(_item_tls) if _item_tls is not None else None)
             _dict['tls'] = _items
         return _dict
 

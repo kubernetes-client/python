@@ -240,8 +240,7 @@ class V1beta1MutatingAdmissionPolicySpec(BaseModel):
         _items = []
         if self.match_conditions:
             for _item_match_conditions in self.match_conditions:
-                if _item_match_conditions:
-                    _items.append(_to_openapi_value(_item_match_conditions))
+                _items.append(_to_openapi_value(_item_match_conditions) if _item_match_conditions is not None else None)
             _dict['matchConditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of match_constraints
         if self.match_constraints:
@@ -250,8 +249,7 @@ class V1beta1MutatingAdmissionPolicySpec(BaseModel):
         _items = []
         if self.mutations:
             for _item_mutations in self.mutations:
-                if _item_mutations:
-                    _items.append(_to_openapi_value(_item_mutations))
+                _items.append(_to_openapi_value(_item_mutations) if _item_mutations is not None else None)
             _dict['mutations'] = _items
         # override the default output from pydantic by calling `to_dict()` of param_kind
         if self.param_kind:
@@ -260,8 +258,7 @@ class V1beta1MutatingAdmissionPolicySpec(BaseModel):
         _items = []
         if self.variables:
             for _item_variables in self.variables:
-                if _item_variables:
-                    _items.append(_to_openapi_value(_item_variables))
+                _items.append(_to_openapi_value(_item_variables) if _item_variables is not None else None)
             _dict['variables'] = _items
         return _dict
 

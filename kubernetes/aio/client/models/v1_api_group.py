@@ -230,15 +230,13 @@ class V1APIGroup(BaseModel):
         _items = []
         if self.server_address_by_client_cidrs:
             for _item_server_address_by_client_cidrs in self.server_address_by_client_cidrs:
-                if _item_server_address_by_client_cidrs:
-                    _items.append(_to_openapi_value(_item_server_address_by_client_cidrs))
+                _items.append(_to_openapi_value(_item_server_address_by_client_cidrs) if _item_server_address_by_client_cidrs is not None else None)
             _dict['serverAddressByClientCIDRs'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in versions (list)
         _items = []
         if self.versions:
             for _item_versions in self.versions:
-                if _item_versions:
-                    _items.append(_to_openapi_value(_item_versions))
+                _items.append(_to_openapi_value(_item_versions) if _item_versions is not None else None)
             _dict['versions'] = _items
         return _dict
 

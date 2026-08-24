@@ -209,15 +209,13 @@ class V1alpha3ResourcePoolStatusRequestStatus(BaseModel):
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_to_openapi_value(_item_conditions))
+                _items.append(_to_openapi_value(_item_conditions) if _item_conditions is not None else None)
             _dict['conditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in pools (list)
         _items = []
         if self.pools:
             for _item_pools in self.pools:
-                if _item_pools:
-                    _items.append(_to_openapi_value(_item_pools))
+                _items.append(_to_openapi_value(_item_pools) if _item_pools is not None else None)
             _dict['pools'] = _items
         return _dict
 

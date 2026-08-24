@@ -204,8 +204,7 @@ class V1FieldSelectorAttributes(BaseModel):
         _items = []
         if self.requirements:
             for _item_requirements in self.requirements:
-                if _item_requirements:
-                    _items.append(_to_openapi_value(_item_requirements))
+                _items.append(_to_openapi_value(_item_requirements) if _item_requirements is not None else None)
             _dict['requirements'] = _items
         return _dict
 

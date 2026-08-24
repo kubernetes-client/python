@@ -213,8 +213,7 @@ class V1ClusterRoleBindingList(BaseModel):
         _items = []
         if self.items:
             for _item_items in self.items:
-                if _item_items:
-                    _items.append(_to_openapi_value(_item_items))
+                _items.append(_to_openapi_value(_item_items) if _item_items is not None else None)
             _dict['items'] = _items
         # override the default output from pydantic by calling `to_dict()` of metadata
         if self.metadata:

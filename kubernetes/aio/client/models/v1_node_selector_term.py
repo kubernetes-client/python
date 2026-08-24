@@ -207,15 +207,13 @@ class V1NodeSelectorTerm(BaseModel):
         _items = []
         if self.match_expressions:
             for _item_match_expressions in self.match_expressions:
-                if _item_match_expressions:
-                    _items.append(_to_openapi_value(_item_match_expressions))
+                _items.append(_to_openapi_value(_item_match_expressions) if _item_match_expressions is not None else None)
             _dict['matchExpressions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in match_fields (list)
         _items = []
         if self.match_fields:
             for _item_match_fields in self.match_fields:
-                if _item_match_fields:
-                    _items.append(_to_openapi_value(_item_match_fields))
+                _items.append(_to_openapi_value(_item_match_fields) if _item_match_fields is not None else None)
             _dict['matchFields'] = _items
         return _dict
 

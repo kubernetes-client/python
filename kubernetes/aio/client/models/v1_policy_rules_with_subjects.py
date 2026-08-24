@@ -213,22 +213,19 @@ class V1PolicyRulesWithSubjects(BaseModel):
         _items = []
         if self.non_resource_rules:
             for _item_non_resource_rules in self.non_resource_rules:
-                if _item_non_resource_rules:
-                    _items.append(_to_openapi_value(_item_non_resource_rules))
+                _items.append(_to_openapi_value(_item_non_resource_rules) if _item_non_resource_rules is not None else None)
             _dict['nonResourceRules'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in resource_rules (list)
         _items = []
         if self.resource_rules:
             for _item_resource_rules in self.resource_rules:
-                if _item_resource_rules:
-                    _items.append(_to_openapi_value(_item_resource_rules))
+                _items.append(_to_openapi_value(_item_resource_rules) if _item_resource_rules is not None else None)
             _dict['resourceRules'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in subjects (list)
         _items = []
         if self.subjects:
             for _item_subjects in self.subjects:
-                if _item_subjects:
-                    _items.append(_to_openapi_value(_item_subjects))
+                _items.append(_to_openapi_value(_item_subjects) if _item_subjects is not None else None)
             _dict['subjects'] = _items
         return _dict
 

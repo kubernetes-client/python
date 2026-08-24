@@ -212,8 +212,7 @@ class V1CronJobStatus(BaseModel):
         _items = []
         if self.active:
             for _item_active in self.active:
-                if _item_active:
-                    _items.append(_to_openapi_value(_item_active))
+                _items.append(_to_openapi_value(_item_active) if _item_active is not None else None)
             _dict['active'] = _items
         return _dict
 

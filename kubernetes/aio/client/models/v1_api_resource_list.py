@@ -215,8 +215,7 @@ class V1APIResourceList(BaseModel):
         _items = []
         if self.resources:
             for _item_resources in self.resources:
-                if _item_resources:
-                    _items.append(_to_openapi_value(_item_resources))
+                _items.append(_to_openapi_value(_item_resources) if _item_resources is not None else None)
             _dict['resources'] = _items
         return _dict
 

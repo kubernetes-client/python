@@ -193,8 +193,7 @@ class V1PodDNSConfig(BaseModel):
         _items = []
         if self.options:
             for _item_options in self.options:
-                if _item_options:
-                    _items.append(_to_openapi_value(_item_options))
+                _items.append(_to_openapi_value(_item_options) if _item_options is not None else None)
             _dict['options'] = _items
         return _dict
 

@@ -212,8 +212,7 @@ class V1LoadBalancerIngress(BaseModel):
         _items = []
         if self.ports:
             for _item_ports in self.ports:
-                if _item_ports:
-                    _items.append(_to_openapi_value(_item_ports))
+                _items.append(_to_openapi_value(_item_ports) if _item_ports is not None else None)
             _dict['ports'] = _items
         return _dict
 

@@ -190,15 +190,13 @@ class V1NetworkPolicyEgressRule(BaseModel):
         _items = []
         if self.ports:
             for _item_ports in self.ports:
-                if _item_ports:
-                    _items.append(_to_openapi_value(_item_ports))
+                _items.append(_to_openapi_value(_item_ports) if _item_ports is not None else None)
             _dict['ports'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in to (list)
         _items = []
         if self.to:
             for _item_to in self.to:
-                if _item_to:
-                    _items.append(_to_openapi_value(_item_to))
+                _items.append(_to_openapi_value(_item_to) if _item_to is not None else None)
             _dict['to'] = _items
         return _dict
 

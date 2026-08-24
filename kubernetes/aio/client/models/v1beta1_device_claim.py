@@ -195,22 +195,19 @@ class V1beta1DeviceClaim(BaseModel):
         _items = []
         if self.config:
             for _item_config in self.config:
-                if _item_config:
-                    _items.append(_to_openapi_value(_item_config))
+                _items.append(_to_openapi_value(_item_config) if _item_config is not None else None)
             _dict['config'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in constraints (list)
         _items = []
         if self.constraints:
             for _item_constraints in self.constraints:
-                if _item_constraints:
-                    _items.append(_to_openapi_value(_item_constraints))
+                _items.append(_to_openapi_value(_item_constraints) if _item_constraints is not None else None)
             _dict['constraints'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in requests (list)
         _items = []
         if self.requests:
             for _item_requests in self.requests:
-                if _item_requests:
-                    _items.append(_to_openapi_value(_item_requests))
+                _items.append(_to_openapi_value(_item_requests) if _item_requests is not None else None)
             _dict['requests'] = _items
         return _dict
 

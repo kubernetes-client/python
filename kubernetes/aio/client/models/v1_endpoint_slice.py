@@ -225,8 +225,7 @@ class V1EndpointSlice(BaseModel):
         _items = []
         if self.endpoints:
             for _item_endpoints in self.endpoints:
-                if _item_endpoints:
-                    _items.append(_to_openapi_value(_item_endpoints))
+                _items.append(_to_openapi_value(_item_endpoints) if _item_endpoints is not None else None)
             _dict['endpoints'] = _items
         # override the default output from pydantic by calling `to_dict()` of metadata
         if self.metadata:
@@ -235,8 +234,7 @@ class V1EndpointSlice(BaseModel):
         _items = []
         if self.ports:
             for _item_ports in self.ports:
-                if _item_ports:
-                    _items.append(_to_openapi_value(_item_ports))
+                _items.append(_to_openapi_value(_item_ports) if _item_ports is not None else None)
             _dict['ports'] = _items
         return _dict
 

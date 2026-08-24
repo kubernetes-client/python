@@ -185,8 +185,7 @@ class V1LimitRangeSpec(BaseModel):
         _items = []
         if self.limits:
             for _item_limits in self.limits:
-                if _item_limits:
-                    _items.append(_to_openapi_value(_item_limits))
+                _items.append(_to_openapi_value(_item_limits) if _item_limits is not None else None)
             _dict['limits'] = _items
         return _dict
 

@@ -209,15 +209,13 @@ class V1beta1DeviceClassSpec(BaseModel):
         _items = []
         if self.config:
             for _item_config in self.config:
-                if _item_config:
-                    _items.append(_to_openapi_value(_item_config))
+                _items.append(_to_openapi_value(_item_config) if _item_config is not None else None)
             _dict['config'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in selectors (list)
         _items = []
         if self.selectors:
             for _item_selectors in self.selectors:
-                if _item_selectors:
-                    _items.append(_to_openapi_value(_item_selectors))
+                _items.append(_to_openapi_value(_item_selectors) if _item_selectors is not None else None)
             _dict['selectors'] = _items
         return _dict
 

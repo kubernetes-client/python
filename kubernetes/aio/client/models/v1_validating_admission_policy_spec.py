@@ -241,15 +241,13 @@ class V1ValidatingAdmissionPolicySpec(BaseModel):
         _items = []
         if self.audit_annotations:
             for _item_audit_annotations in self.audit_annotations:
-                if _item_audit_annotations:
-                    _items.append(_to_openapi_value(_item_audit_annotations))
+                _items.append(_to_openapi_value(_item_audit_annotations) if _item_audit_annotations is not None else None)
             _dict['auditAnnotations'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in match_conditions (list)
         _items = []
         if self.match_conditions:
             for _item_match_conditions in self.match_conditions:
-                if _item_match_conditions:
-                    _items.append(_to_openapi_value(_item_match_conditions))
+                _items.append(_to_openapi_value(_item_match_conditions) if _item_match_conditions is not None else None)
             _dict['matchConditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of match_constraints
         if self.match_constraints:
@@ -261,15 +259,13 @@ class V1ValidatingAdmissionPolicySpec(BaseModel):
         _items = []
         if self.validations:
             for _item_validations in self.validations:
-                if _item_validations:
-                    _items.append(_to_openapi_value(_item_validations))
+                _items.append(_to_openapi_value(_item_validations) if _item_validations is not None else None)
             _dict['validations'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in variables (list)
         _items = []
         if self.variables:
             for _item_variables in self.variables:
-                if _item_variables:
-                    _items.append(_to_openapi_value(_item_variables))
+                _items.append(_to_openapi_value(_item_variables) if _item_variables is not None else None)
             _dict['variables'] = _items
         return _dict
 

@@ -259,8 +259,7 @@ class V1CustomResourceDefinitionVersion(BaseModel):
         _items = []
         if self.additional_printer_columns:
             for _item_additional_printer_columns in self.additional_printer_columns:
-                if _item_additional_printer_columns:
-                    _items.append(_to_openapi_value(_item_additional_printer_columns))
+                _items.append(_to_openapi_value(_item_additional_printer_columns) if _item_additional_printer_columns is not None else None)
             _dict['additionalPrinterColumns'] = _items
         # override the default output from pydantic by calling `to_dict()` of var_schema
         if self.var_schema:
@@ -269,8 +268,7 @@ class V1CustomResourceDefinitionVersion(BaseModel):
         _items = []
         if self.selectable_fields:
             for _item_selectable_fields in self.selectable_fields:
-                if _item_selectable_fields:
-                    _items.append(_to_openapi_value(_item_selectable_fields))
+                _items.append(_to_openapi_value(_item_selectable_fields) if _item_selectable_fields is not None else None)
             _dict['selectableFields'] = _items
         # override the default output from pydantic by calling `to_dict()` of subresources
         if self.subresources:

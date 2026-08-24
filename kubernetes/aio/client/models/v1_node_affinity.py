@@ -208,8 +208,7 @@ class V1NodeAffinity(BaseModel):
         _items = []
         if self.preferred_during_scheduling_ignored_during_execution:
             for _item_preferred_during_scheduling_ignored_during_execution in self.preferred_during_scheduling_ignored_during_execution:
-                if _item_preferred_during_scheduling_ignored_during_execution:
-                    _items.append(_to_openapi_value(_item_preferred_during_scheduling_ignored_during_execution))
+                _items.append(_to_openapi_value(_item_preferred_during_scheduling_ignored_during_execution) if _item_preferred_during_scheduling_ignored_during_execution is not None else None)
             _dict['preferredDuringSchedulingIgnoredDuringExecution'] = _items
         # override the default output from pydantic by calling `to_dict()` of required_during_scheduling_ignored_during_execution
         if self.required_during_scheduling_ignored_during_execution:

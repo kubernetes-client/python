@@ -220,8 +220,7 @@ class V1StatusDetails(BaseModel):
         _items = []
         if self.causes:
             for _item_causes in self.causes:
-                if _item_causes:
-                    _items.append(_to_openapi_value(_item_causes))
+                _items.append(_to_openapi_value(_item_causes) if _item_causes is not None else None)
             _dict['causes'] = _items
         return _dict
 

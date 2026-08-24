@@ -208,15 +208,13 @@ class V1EndpointHints(BaseModel):
         _items = []
         if self.for_nodes:
             for _item_for_nodes in self.for_nodes:
-                if _item_for_nodes:
-                    _items.append(_to_openapi_value(_item_for_nodes))
+                _items.append(_to_openapi_value(_item_for_nodes) if _item_for_nodes is not None else None)
             _dict['forNodes'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in for_zones (list)
         _items = []
         if self.for_zones:
             for _item_for_zones in self.for_zones:
-                if _item_for_zones:
-                    _items.append(_to_openapi_value(_item_for_zones))
+                _items.append(_to_openapi_value(_item_for_zones) if _item_for_zones is not None else None)
             _dict['forZones'] = _items
         return _dict
 

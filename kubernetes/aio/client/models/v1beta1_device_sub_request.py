@@ -232,15 +232,13 @@ class V1beta1DeviceSubRequest(BaseModel):
         _items = []
         if self.selectors:
             for _item_selectors in self.selectors:
-                if _item_selectors:
-                    _items.append(_to_openapi_value(_item_selectors))
+                _items.append(_to_openapi_value(_item_selectors) if _item_selectors is not None else None)
             _dict['selectors'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in tolerations (list)
         _items = []
         if self.tolerations:
             for _item_tolerations in self.tolerations:
-                if _item_tolerations:
-                    _items.append(_to_openapi_value(_item_tolerations))
+                _items.append(_to_openapi_value(_item_tolerations) if _item_tolerations is not None else None)
             _dict['tolerations'] = _items
         return _dict
 

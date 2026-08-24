@@ -494,22 +494,19 @@ class V1JSONSchemaProps(BaseModel):
         _items = []
         if self.all_of:
             for _item_all_of in self.all_of:
-                if _item_all_of:
-                    _items.append(_to_openapi_value(_item_all_of))
+                _items.append(_to_openapi_value(_item_all_of) if _item_all_of is not None else None)
             _dict['allOf'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in any_of (list)
         _items = []
         if self.any_of:
             for _item_any_of in self.any_of:
-                if _item_any_of:
-                    _items.append(_to_openapi_value(_item_any_of))
+                _items.append(_to_openapi_value(_item_any_of) if _item_any_of is not None else None)
             _dict['anyOf'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in definitions (dict)
         _field_dict = {}
         if self.definitions:
             for _key_definitions in self.definitions:
-                if self.definitions[_key_definitions]:
-                    _field_dict[_key_definitions] = _to_openapi_value(self.definitions[_key_definitions])
+                _field_dict[_key_definitions] = _to_openapi_value(self.definitions[_key_definitions]) if self.definitions[_key_definitions] is not None else None
             _dict['definitions'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of external_docs
         if self.external_docs:
@@ -521,29 +518,25 @@ class V1JSONSchemaProps(BaseModel):
         _items = []
         if self.one_of:
             for _item_one_of in self.one_of:
-                if _item_one_of:
-                    _items.append(_to_openapi_value(_item_one_of))
+                _items.append(_to_openapi_value(_item_one_of) if _item_one_of is not None else None)
             _dict['oneOf'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in pattern_properties (dict)
         _field_dict = {}
         if self.pattern_properties:
             for _key_pattern_properties in self.pattern_properties:
-                if self.pattern_properties[_key_pattern_properties]:
-                    _field_dict[_key_pattern_properties] = _to_openapi_value(self.pattern_properties[_key_pattern_properties])
+                _field_dict[_key_pattern_properties] = _to_openapi_value(self.pattern_properties[_key_pattern_properties]) if self.pattern_properties[_key_pattern_properties] is not None else None
             _dict['patternProperties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
             for _key_properties in self.properties:
-                if self.properties[_key_properties]:
-                    _field_dict[_key_properties] = _to_openapi_value(self.properties[_key_properties])
+                _field_dict[_key_properties] = _to_openapi_value(self.properties[_key_properties]) if self.properties[_key_properties] is not None else None
             _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in x_kubernetes_validations (list)
         _items = []
         if self.x_kubernetes_validations:
             for _item_x_kubernetes_validations in self.x_kubernetes_validations:
-                if _item_x_kubernetes_validations:
-                    _items.append(_to_openapi_value(_item_x_kubernetes_validations))
+                _items.append(_to_openapi_value(_item_x_kubernetes_validations) if _item_x_kubernetes_validations is not None else None)
             _dict['x-kubernetes-validations'] = _items
         return _dict
 

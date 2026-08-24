@@ -204,8 +204,7 @@ class V1ProjectedVolumeSource(BaseModel):
         _items = []
         if self.sources:
             for _item_sources in self.sources:
-                if _item_sources:
-                    _items.append(_to_openapi_value(_item_sources))
+                _items.append(_to_openapi_value(_item_sources) if _item_sources is not None else None)
             _dict['sources'] = _items
         return _dict
 
