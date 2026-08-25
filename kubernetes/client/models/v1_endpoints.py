@@ -216,8 +216,7 @@ class V1Endpoints(BaseModel):
         _items = []
         if self.subsets:
             for _item_subsets in self.subsets:
-                if _item_subsets:
-                    _items.append(_to_openapi_value(_item_subsets))
+                _items.append(_to_openapi_value(_item_subsets) if _item_subsets is not None else None)
             _dict['subsets'] = _items
         return _dict
 

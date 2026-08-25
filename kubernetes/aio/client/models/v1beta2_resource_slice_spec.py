@@ -243,8 +243,7 @@ class V1beta2ResourceSliceSpec(BaseModel):
         _items = []
         if self.devices:
             for _item_devices in self.devices:
-                if _item_devices:
-                    _items.append(_to_openapi_value(_item_devices))
+                _items.append(_to_openapi_value(_item_devices) if _item_devices is not None else None)
             _dict['devices'] = _items
         # override the default output from pydantic by calling `to_dict()` of node_selector
         if self.node_selector:
@@ -256,8 +255,7 @@ class V1beta2ResourceSliceSpec(BaseModel):
         _items = []
         if self.shared_counters:
             for _item_shared_counters in self.shared_counters:
-                if _item_shared_counters:
-                    _items.append(_to_openapi_value(_item_shared_counters))
+                _items.append(_to_openapi_value(_item_shared_counters) if _item_shared_counters is not None else None)
             _dict['sharedCounters'] = _items
         return _dict
 

@@ -212,8 +212,7 @@ class V1ValidatingAdmissionPolicyStatus(BaseModel):
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_to_openapi_value(_item_conditions))
+                _items.append(_to_openapi_value(_item_conditions) if _item_conditions is not None else None)
             _dict['conditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of type_checking
         if self.type_checking:

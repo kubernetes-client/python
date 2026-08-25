@@ -277,8 +277,7 @@ class V1MutatingWebhook(BaseModel):
         _items = []
         if self.match_conditions:
             for _item_match_conditions in self.match_conditions:
-                if _item_match_conditions:
-                    _items.append(_to_openapi_value(_item_match_conditions))
+                _items.append(_to_openapi_value(_item_match_conditions) if _item_match_conditions is not None else None)
             _dict['matchConditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of namespace_selector
         if self.namespace_selector:
@@ -290,8 +289,7 @@ class V1MutatingWebhook(BaseModel):
         _items = []
         if self.rules:
             for _item_rules in self.rules:
-                if _item_rules:
-                    _items.append(_to_openapi_value(_item_rules))
+                _items.append(_to_openapi_value(_item_rules) if _item_rules is not None else None)
             _dict['rules'] = _items
         return _dict
 

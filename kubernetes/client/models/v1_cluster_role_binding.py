@@ -227,8 +227,7 @@ class V1ClusterRoleBinding(BaseModel):
         _items = []
         if self.subjects:
             for _item_subjects in self.subjects:
-                if _item_subjects:
-                    _items.append(_to_openapi_value(_item_subjects))
+                _items.append(_to_openapi_value(_item_subjects) if _item_subjects is not None else None)
             _dict['subjects'] = _items
         return _dict
 

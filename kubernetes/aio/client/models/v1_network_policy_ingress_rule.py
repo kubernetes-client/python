@@ -235,15 +235,13 @@ class V1NetworkPolicyIngressRule(BaseModel):
         _items = []
         if self.var_from:
             for _item_var_from in self.var_from:
-                if _item_var_from:
-                    _items.append(_to_openapi_value(_item_var_from))
+                _items.append(_to_openapi_value(_item_var_from) if _item_var_from is not None else None)
             _dict['from'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ports (list)
         _items = []
         if self.ports:
             for _item_ports in self.ports:
-                if _item_ports:
-                    _items.append(_to_openapi_value(_item_ports))
+                _items.append(_to_openapi_value(_item_ports) if _item_ports is not None else None)
             _dict['ports'] = _items
         return _dict
 

@@ -277,29 +277,25 @@ class V1Device(BaseModel):
         _field_dict = {}
         if self.attributes:
             for _key_attributes in self.attributes:
-                if self.attributes[_key_attributes]:
-                    _field_dict[_key_attributes] = _to_openapi_value(self.attributes[_key_attributes])
+                _field_dict[_key_attributes] = _to_openapi_value(self.attributes[_key_attributes]) if self.attributes[_key_attributes] is not None else None
             _dict['attributes'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in capacity (dict)
         _field_dict = {}
         if self.capacity:
             for _key_capacity in self.capacity:
-                if self.capacity[_key_capacity]:
-                    _field_dict[_key_capacity] = _to_openapi_value(self.capacity[_key_capacity])
+                _field_dict[_key_capacity] = _to_openapi_value(self.capacity[_key_capacity]) if self.capacity[_key_capacity] is not None else None
             _dict['capacity'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in consumes_counters (list)
         _items = []
         if self.consumes_counters:
             for _item_consumes_counters in self.consumes_counters:
-                if _item_consumes_counters:
-                    _items.append(_to_openapi_value(_item_consumes_counters))
+                _items.append(_to_openapi_value(_item_consumes_counters) if _item_consumes_counters is not None else None)
             _dict['consumesCounters'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in node_allocatable_resource_mappings (dict)
         _field_dict = {}
         if self.node_allocatable_resource_mappings:
             for _key_node_allocatable_resource_mappings in self.node_allocatable_resource_mappings:
-                if self.node_allocatable_resource_mappings[_key_node_allocatable_resource_mappings]:
-                    _field_dict[_key_node_allocatable_resource_mappings] = _to_openapi_value(self.node_allocatable_resource_mappings[_key_node_allocatable_resource_mappings])
+                _field_dict[_key_node_allocatable_resource_mappings] = _to_openapi_value(self.node_allocatable_resource_mappings[_key_node_allocatable_resource_mappings]) if self.node_allocatable_resource_mappings[_key_node_allocatable_resource_mappings] is not None else None
             _dict['nodeAllocatableResourceMappings'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of node_selector
         if self.node_selector:
@@ -308,8 +304,7 @@ class V1Device(BaseModel):
         _items = []
         if self.taints:
             for _item_taints in self.taints:
-                if _item_taints:
-                    _items.append(_to_openapi_value(_item_taints))
+                _items.append(_to_openapi_value(_item_taints) if _item_taints is not None else None)
             _dict['taints'] = _items
         return _dict
 

@@ -281,8 +281,7 @@ class V1ContainerStatus(BaseModel):
         _items = []
         if self.allocated_resources_status:
             for _item_allocated_resources_status in self.allocated_resources_status:
-                if _item_allocated_resources_status:
-                    _items.append(_to_openapi_value(_item_allocated_resources_status))
+                _items.append(_to_openapi_value(_item_allocated_resources_status) if _item_allocated_resources_status is not None else None)
             _dict['allocatedResourcesStatus'] = _items
         # override the default output from pydantic by calling `to_dict()` of last_state
         if self.last_state:
@@ -300,8 +299,7 @@ class V1ContainerStatus(BaseModel):
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_to_openapi_value(_item_volume_mounts))
+                _items.append(_to_openapi_value(_item_volume_mounts) if _item_volume_mounts is not None else None)
             _dict['volumeMounts'] = _items
         return _dict
 

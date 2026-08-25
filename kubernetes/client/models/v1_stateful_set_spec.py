@@ -278,8 +278,7 @@ class V1StatefulSetSpec(BaseModel):
         _items = []
         if self.volume_claim_templates:
             for _item_volume_claim_templates in self.volume_claim_templates:
-                if _item_volume_claim_templates:
-                    _items.append(_to_openapi_value(_item_volume_claim_templates))
+                _items.append(_to_openapi_value(_item_volume_claim_templates) if _item_volume_claim_templates is not None else None)
             _dict['volumeClaimTemplates'] = _items
         return _dict
 

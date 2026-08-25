@@ -245,8 +245,7 @@ class V1alpha2PodGroupSpec(BaseModel):
         _items = []
         if self.resource_claims:
             for _item_resource_claims in self.resource_claims:
-                if _item_resource_claims:
-                    _items.append(_to_openapi_value(_item_resource_claims))
+                _items.append(_to_openapi_value(_item_resource_claims) if _item_resource_claims is not None else None)
             _dict['resourceClaims'] = _items
         # override the default output from pydantic by calling `to_dict()` of scheduling_constraints
         if self.scheduling_constraints:

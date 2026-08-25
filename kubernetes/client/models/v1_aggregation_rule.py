@@ -200,8 +200,7 @@ class V1AggregationRule(BaseModel):
         _items = []
         if self.cluster_role_selectors:
             for _item_cluster_role_selectors in self.cluster_role_selectors:
-                if _item_cluster_role_selectors:
-                    _items.append(_to_openapi_value(_item_cluster_role_selectors))
+                _items.append(_to_openapi_value(_item_cluster_role_selectors) if _item_cluster_role_selectors is not None else None)
             _dict['clusterRoleSelectors'] = _items
         return _dict
 

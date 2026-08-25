@@ -1,7 +1,9 @@
 diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
 --- a/kubernetes/client/rest.py
 +++ b/kubernetes/client/rest.py
-@@ -223,4 +223,13 @@ class RESTClientObject:
+@@ -239,6 +239,15 @@
+             if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
+ 
                  content_type = headers.get('Content-Type')
 +                # JSON Patch is a list of operations; object patches for built-in
 +                # APIs use strategic merge:
@@ -14,4 +16,4 @@ diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
 +                        'application/strategic-merge-patch+json'
                  is_json = (
                      not content_type
-                     or re.search('json', content_type, re.IGNORECASE)
+                     or contenttype_matches(content_type, 'application', 'json')

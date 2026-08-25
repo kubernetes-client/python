@@ -1,8 +1,10 @@
 diff --git a/kubernetes/aio/client/configuration.py b/kubernetes/aio/client/configuration.py
-index 8a6da82ec..c26bac633 100644
 --- a/kubernetes/aio/client/configuration.py
 +++ b/kubernetes/aio/client/configuration.py
-@@ -357,0 +358,16 @@ conf = client.Configuration(
+@@ -355,6 +355,22 @@
+         self.retries = retries
+         """Retry configuration
+         """
 +        self.client_go_retries = False
 +        """Enable Kubernetes client-go-compatible retry semantics.
 +
@@ -19,17 +21,28 @@ index 8a6da82ec..c26bac633 100644
 +           the retry ceiling if it is not None.
 +        """
 +
+         self.trace_configs = trace_configs
+         """aiohttp.TraceConfig list forwarded to ClientSession for tracing.
+         """
 diff --git a/kubernetes/aio/client/rest.py b/kubernetes/aio/client/rest.py
-index 087f52a43..d8bf6ab90 100644
 --- a/kubernetes/aio/client/rest.py
 +++ b/kubernetes/aio/client/rest.py
-@@ -23,0 +24,5 @@ import aiohttp_retry
+@@ -21,6 +21,11 @@
+ import aiohttp
+ import aiohttp_retry
+ 
 +from kubernetes.aio.utils.retry import (
 +    is_retry_after_response,
 +    on_retry_after_error,
 +    retry_after_backoff,
 +)
-@@ -287 +292,10 @@ class RESTClientObject:
+ from kubernetes.aio.client.exceptions import ApiException, ApiValueError
+ 
+ RESTResponseType = aiohttp.ClientResponse
+@@ -284,7 +289,16 @@
+             self.pool_manager = self._create_pool_manager()
+         pool_manager = self.pool_manager
+ 
 -        if self._effective_retry_options is not None and method in ALLOW_RETRY_METHODS:
 +        client_go_read_retries = (
 +            method in ['GET', 'HEAD']
@@ -41,7 +54,13 @@ index 087f52a43..d8bf6ab90 100644
 +            and method in ALLOW_RETRY_METHODS
 +            and not client_go_read_retries
 +        ):
-@@ -295 +309,15 @@ class RESTClientObject:
+             if self.retry_client is None:
+                 self.retry_client = aiohttp_retry.RetryClient(
+                     client_session=self.pool_manager,
+@@ -292,6 +306,38 @@
+                 )
+             pool_manager = self.retry_client
+ 
 -        r = await pool_manager.request(**args)
 +        async def read_request(check_retry_status=False):
 +            response = await self.pool_manager.request(**args)
@@ -58,7 +77,8 @@ index 087f52a43..d8bf6ab90 100644
 +                backoff, self._is_read_retryable, lambda: read_request(True))
 +        else:
 +            r = await pool_manager.request(**args)
-@@ -297,0 +326,18 @@ class RESTClientObject:
+ 
+         return RESTResponse(r)
 +
 +    @classmethod
 +    def _is_read_retryable(cls, error):

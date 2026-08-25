@@ -185,8 +185,7 @@ class V1alpha2PodGroupSchedulingConstraints(BaseModel):
         _items = []
         if self.topology:
             for _item_topology in self.topology:
-                if _item_topology:
-                    _items.append(_to_openapi_value(_item_topology))
+                _items.append(_to_openapi_value(_item_topology) if _item_topology is not None else None)
             _dict['topology'] = _items
         return _dict
 

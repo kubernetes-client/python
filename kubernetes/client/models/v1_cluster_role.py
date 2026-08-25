@@ -227,8 +227,7 @@ class V1ClusterRole(BaseModel):
         _items = []
         if self.rules:
             for _item_rules in self.rules:
-                if _item_rules:
-                    _items.append(_to_openapi_value(_item_rules))
+                _items.append(_to_openapi_value(_item_rules) if _item_rules is not None else None)
             _dict['rules'] = _items
         return _dict
 

@@ -212,8 +212,7 @@ class V1beta2DeviceRequest(BaseModel):
         _items = []
         if self.first_available:
             for _item_first_available in self.first_available:
-                if _item_first_available:
-                    _items.append(_to_openapi_value(_item_first_available))
+                _items.append(_to_openapi_value(_item_first_available) if _item_first_available is not None else None)
             _dict['firstAvailable'] = _items
         return _dict
 

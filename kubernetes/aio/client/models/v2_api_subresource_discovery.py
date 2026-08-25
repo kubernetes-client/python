@@ -218,8 +218,7 @@ class V2APISubresourceDiscovery(BaseModel):
         _items = []
         if self.accepted_types:
             for _item_accepted_types in self.accepted_types:
-                if _item_accepted_types:
-                    _items.append(_to_openapi_value(_item_accepted_types))
+                _items.append(_to_openapi_value(_item_accepted_types) if _item_accepted_types is not None else None)
             _dict['acceptedTypes'] = _items
         return _dict
 

@@ -215,8 +215,7 @@ class V1PodFailurePolicyRule(BaseModel):
         _items = []
         if self.on_pod_conditions:
             for _item_on_pod_conditions in self.on_pod_conditions:
-                if _item_on_pod_conditions:
-                    _items.append(_to_openapi_value(_item_on_pod_conditions))
+                _items.append(_to_openapi_value(_item_on_pod_conditions) if _item_on_pod_conditions is not None else None)
             _dict['onPodConditions'] = _items
         return _dict
 

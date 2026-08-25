@@ -228,8 +228,7 @@ class V1CustomResourceDefinitionSpec(BaseModel):
         _items = []
         if self.versions:
             for _item_versions in self.versions:
-                if _item_versions:
-                    _items.append(_to_openapi_value(_item_versions))
+                _items.append(_to_openapi_value(_item_versions) if _item_versions is not None else None)
             _dict['versions'] = _items
         return _dict
 

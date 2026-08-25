@@ -200,8 +200,7 @@ class V1TopologySelectorTerm(BaseModel):
         _items = []
         if self.match_label_expressions:
             for _item_match_label_expressions in self.match_label_expressions:
-                if _item_match_label_expressions:
-                    _items.append(_to_openapi_value(_item_match_label_expressions))
+                _items.append(_to_openapi_value(_item_match_label_expressions) if _item_match_label_expressions is not None else None)
             _dict['matchLabelExpressions'] = _items
         return _dict
 

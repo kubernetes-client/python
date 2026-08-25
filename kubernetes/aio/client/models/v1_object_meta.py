@@ -279,15 +279,13 @@ class V1ObjectMeta(BaseModel):
         _items = []
         if self.managed_fields:
             for _item_managed_fields in self.managed_fields:
-                if _item_managed_fields:
-                    _items.append(_to_openapi_value(_item_managed_fields))
+                _items.append(_to_openapi_value(_item_managed_fields) if _item_managed_fields is not None else None)
             _dict['managedFields'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in owner_references (list)
         _items = []
         if self.owner_references:
             for _item_owner_references in self.owner_references:
-                if _item_owner_references:
-                    _items.append(_to_openapi_value(_item_owner_references))
+                _items.append(_to_openapi_value(_item_owner_references) if _item_owner_references is not None else None)
             _dict['ownerReferences'] = _items
         return _dict
 

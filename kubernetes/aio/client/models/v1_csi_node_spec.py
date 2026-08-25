@@ -185,8 +185,7 @@ class V1CSINodeSpec(BaseModel):
         _items = []
         if self.drivers:
             for _item_drivers in self.drivers:
-                if _item_drivers:
-                    _items.append(_to_openapi_value(_item_drivers))
+                _items.append(_to_openapi_value(_item_drivers) if _item_drivers is not None else None)
             _dict['drivers'] = _items
         return _dict
 

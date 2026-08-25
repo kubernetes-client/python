@@ -200,8 +200,7 @@ class V1TypeChecking(BaseModel):
         _items = []
         if self.expression_warnings:
             for _item_expression_warnings in self.expression_warnings:
-                if _item_expression_warnings:
-                    _items.append(_to_openapi_value(_item_expression_warnings))
+                _items.append(_to_openapi_value(_item_expression_warnings) if _item_expression_warnings is not None else None)
             _dict['expressionWarnings'] = _items
         return _dict
 

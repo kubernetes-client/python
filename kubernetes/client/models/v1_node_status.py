@@ -275,15 +275,13 @@ class V1NodeStatus(BaseModel):
         _items = []
         if self.addresses:
             for _item_addresses in self.addresses:
-                if _item_addresses:
-                    _items.append(_to_openapi_value(_item_addresses))
+                _items.append(_to_openapi_value(_item_addresses) if _item_addresses is not None else None)
             _dict['addresses'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in conditions (list)
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_to_openapi_value(_item_conditions))
+                _items.append(_to_openapi_value(_item_conditions) if _item_conditions is not None else None)
             _dict['conditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of config
         if self.config:
@@ -298,8 +296,7 @@ class V1NodeStatus(BaseModel):
         _items = []
         if self.images:
             for _item_images in self.images:
-                if _item_images:
-                    _items.append(_to_openapi_value(_item_images))
+                _items.append(_to_openapi_value(_item_images) if _item_images is not None else None)
             _dict['images'] = _items
         # override the default output from pydantic by calling `to_dict()` of node_info
         if self.node_info:
@@ -308,15 +305,13 @@ class V1NodeStatus(BaseModel):
         _items = []
         if self.runtime_handlers:
             for _item_runtime_handlers in self.runtime_handlers:
-                if _item_runtime_handlers:
-                    _items.append(_to_openapi_value(_item_runtime_handlers))
+                _items.append(_to_openapi_value(_item_runtime_handlers) if _item_runtime_handlers is not None else None)
             _dict['runtimeHandlers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in volumes_attached (list)
         _items = []
         if self.volumes_attached:
             for _item_volumes_attached in self.volumes_attached:
-                if _item_volumes_attached:
-                    _items.append(_to_openapi_value(_item_volumes_attached))
+                _items.append(_to_openapi_value(_item_volumes_attached) if _item_volumes_attached is not None else None)
             _dict['volumesAttached'] = _items
         return _dict
 

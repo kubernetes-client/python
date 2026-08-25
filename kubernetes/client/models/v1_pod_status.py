@@ -330,22 +330,19 @@ class V1PodStatus(BaseModel):
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_to_openapi_value(_item_conditions))
+                _items.append(_to_openapi_value(_item_conditions) if _item_conditions is not None else None)
             _dict['conditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in container_statuses (list)
         _items = []
         if self.container_statuses:
             for _item_container_statuses in self.container_statuses:
-                if _item_container_statuses:
-                    _items.append(_to_openapi_value(_item_container_statuses))
+                _items.append(_to_openapi_value(_item_container_statuses) if _item_container_statuses is not None else None)
             _dict['containerStatuses'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ephemeral_container_statuses (list)
         _items = []
         if self.ephemeral_container_statuses:
             for _item_ephemeral_container_statuses in self.ephemeral_container_statuses:
-                if _item_ephemeral_container_statuses:
-                    _items.append(_to_openapi_value(_item_ephemeral_container_statuses))
+                _items.append(_to_openapi_value(_item_ephemeral_container_statuses) if _item_ephemeral_container_statuses is not None else None)
             _dict['ephemeralContainerStatuses'] = _items
         # override the default output from pydantic by calling `to_dict()` of extended_resource_claim_status
         if self.extended_resource_claim_status:
@@ -354,36 +351,31 @@ class V1PodStatus(BaseModel):
         _items = []
         if self.host_ips:
             for _item_host_ips in self.host_ips:
-                if _item_host_ips:
-                    _items.append(_to_openapi_value(_item_host_ips))
+                _items.append(_to_openapi_value(_item_host_ips) if _item_host_ips is not None else None)
             _dict['hostIPs'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in init_container_statuses (list)
         _items = []
         if self.init_container_statuses:
             for _item_init_container_statuses in self.init_container_statuses:
-                if _item_init_container_statuses:
-                    _items.append(_to_openapi_value(_item_init_container_statuses))
+                _items.append(_to_openapi_value(_item_init_container_statuses) if _item_init_container_statuses is not None else None)
             _dict['initContainerStatuses'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in node_allocatable_resource_claim_statuses (list)
         _items = []
         if self.node_allocatable_resource_claim_statuses:
             for _item_node_allocatable_resource_claim_statuses in self.node_allocatable_resource_claim_statuses:
-                if _item_node_allocatable_resource_claim_statuses:
-                    _items.append(_to_openapi_value(_item_node_allocatable_resource_claim_statuses))
+                _items.append(_to_openapi_value(_item_node_allocatable_resource_claim_statuses) if _item_node_allocatable_resource_claim_statuses is not None else None)
             _dict['nodeAllocatableResourceClaimStatuses'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in pod_ips (list)
         _items = []
         if self.pod_ips:
             for _item_pod_ips in self.pod_ips:
-                if _item_pod_ips:
-                    _items.append(_to_openapi_value(_item_pod_ips))
+                _items.append(_to_openapi_value(_item_pod_ips) if _item_pod_ips is not None else None)
             _dict['podIPs'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in resource_claim_statuses (list)
         _items = []
         if self.resource_claim_statuses:
             for _item_resource_claim_statuses in self.resource_claim_statuses:
-                if _item_resource_claim_statuses:
-                    _items.append(_to_openapi_value(_item_resource_claim_statuses))
+                _items.append(_to_openapi_value(_item_resource_claim_statuses) if _item_resource_claim_statuses is not None else None)
             _dict['resourceClaimStatuses'] = _items
         # override the default output from pydantic by calling `to_dict()` of resources
         if self.resources:

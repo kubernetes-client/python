@@ -228,8 +228,7 @@ class V1ServiceAccount(BaseModel):
         _items = []
         if self.image_pull_secrets:
             for _item_image_pull_secrets in self.image_pull_secrets:
-                if _item_image_pull_secrets:
-                    _items.append(_to_openapi_value(_item_image_pull_secrets))
+                _items.append(_to_openapi_value(_item_image_pull_secrets) if _item_image_pull_secrets is not None else None)
             _dict['imagePullSecrets'] = _items
         # override the default output from pydantic by calling `to_dict()` of metadata
         if self.metadata:
@@ -238,8 +237,7 @@ class V1ServiceAccount(BaseModel):
         _items = []
         if self.secrets:
             for _item_secrets in self.secrets:
-                if _item_secrets:
-                    _items.append(_to_openapi_value(_item_secrets))
+                _items.append(_to_openapi_value(_item_secrets) if _item_secrets is not None else None)
             _dict['secrets'] = _items
         return _dict
 
