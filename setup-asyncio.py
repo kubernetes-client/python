@@ -39,7 +39,7 @@ setup(
     description="Kubernetes asynchronous python client",
     author_email="",
     author="Kubernetes",
-    license="Apache-2.0",
+    license_expression="Apache-2.0",
     url="https://github.com/kubernetes-client/kubernetes/aio",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,

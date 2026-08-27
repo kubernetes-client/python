@@ -60,7 +60,7 @@ setup(
     description="Kubernetes python client",
     author_email="",
     author="Kubernetes",
-    license="Apache-2.0",
+    license_expression="Apache-2.0",
     url="https://github.com/kubernetes-client/python",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES+REQUIRES_ASYNCIO,
