@@ -139,6 +139,24 @@ class RESTClientObject:
         else:
             cert_reqs = ssl.CERT_NONE
 
+        ssl_context = None
+        if configuration.disable_strict_ssl_verification:
+            ssl_context = ssl.create_default_context(
+                cafile=configuration.ssl_ca_cert,
+                cadata=configuration.ca_cert_data,
+            )
+
+            ssl_context.verify_flags &= ~ssl.VERIFY_X509_STRICT
+
+            if configuration.cert_file:
+                ssl_context.load_cert_chain(
+                    configuration.cert_file, keyfile=configuration.key_file
+                )
+
+            if not configuration.verify_ssl:
+                ssl_context.check_hostname = False
+                ssl_context.verify_mode = ssl.CERT_NONE
+
         pool_args = {
             "cert_reqs": cert_reqs,
             "ca_certs": configuration.ssl_ca_cert,
@@ -146,6 +164,8 @@ class RESTClientObject:
             "key_file": configuration.key_file,
             "ca_cert_data": configuration.ca_cert_data,
         }
+        if ssl_context is not None:
+            pool_args["ssl_context"] = ssl_context
         if configuration.assert_hostname is not None:
             pool_args['assert_hostname'] = (
                 configuration.assert_hostname

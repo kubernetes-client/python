@@ -4,6 +4,7 @@
 import unittest
 from unittest import mock
 import weakref
+import ssl
 
 import kubernetes
 from kubernetes.aio.client.configuration import Configuration as AsyncConfiguration
@@ -85,6 +86,20 @@ class TestApiClient(unittest.TestCase):
         )
 
         self.assertNotIn('retries', rest_client.pool_manager.request.call_args.kwargs)
+
+    def test_disable_strict_ssl_verification(self):
+        config = Configuration()
+        config.disable_strict_ssl_verification = True
+
+        rest_client = RESTClientObject(config)
+
+        self.assertIsNotNone(
+            rest_client.pool_manager.connection_pool_kw["ssl_context"]
+        )
+        self.assertFalse(
+            rest_client.pool_manager.connection_pool_kw["ssl_context"].verify_flags
+            & ssl.VERIFY_X509_STRICT
+        )
 
 
 class TestConfigurationAuthSettings(unittest.TestCase):
