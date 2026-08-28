@@ -16,6 +16,7 @@ import uuid
 from kubernetes import client, config
 from kubernetes.leaderelection import leaderelection
 from kubernetes.leaderelection.resourcelock.configmaplock import ConfigMapLock
+from kubernetes.leaderelection.resourcelock.leaselock import LeaseLock
 from kubernetes.leaderelection import electionconfig
 
 
@@ -42,8 +43,13 @@ def example_func():
 # A user can choose not to provide any callbacks for what to do when a candidate fails to lead - onStoppedLeading()
 # In that case, a default callback function will be used
 
+lock = LeaseLock(lock_name, lock_namespace, candidate_id)
+# Choose the lock to use. LeaseLock uses the coordination.k8s.io Lease
+# resource and is the recommended one; ConfigMapLock is kept for existing users.
+# lock = ConfigMapLock(lock_name, lock_namespace, candidate_id)
+
 # Create config
-config = electionconfig.Config(ConfigMapLock(lock_name, lock_namespace, candidate_id), lease_duration=17,
+config = electionconfig.Config(lock, lease_duration=17,
                                renew_deadline=15, retry_period=5, onstarted_leading=example_func,
                                onstopped_leading=None)
 
