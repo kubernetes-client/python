@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.apiextensions\_v1\_webhook\_client\_config module
+==============================================================================
+
+.. automodule:: kubernetes.aio.client.models.apiextensions_v1_webhook_client_config
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1\_capacity\_request\_policy\_range module
+========================================================================
+
+.. automodule:: kubernetes.aio.client.models.v1_capacity_request_policy_range
+   :members:
+   :show-inheritance:
+   :undoc-members:
