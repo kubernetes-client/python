@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **ready** | **int** | The number of active pods which have a Ready condition and are not terminating (without a deletionTimestamp). | [optional]
 **start_time** | **datetime** | Represents time when the job controller started processing a job. When a Job is created in the suspended state, this field is not set until the first time it is resumed. This field is reset every time a Job is resumed from suspension. It is represented in RFC3339 form and is in UTC.  Once set, the field can only be removed when the job is suspended. The field cannot be modified while the job is unsuspended or finished. | [optional]
 **succeeded** | **int** | The number of pods which reached phase Succeeded. The value increases monotonically for a given spec. However, it may decrease in reaction to scale down of elastic indexed jobs. | [optional]
-**terminating** | **int** | The number of pods which are terminating (in phase Pending or Running and have a deletionTimestamp).  This field is beta-level. The job controller populates the field when the feature gate JobPodReplacementPolicy is enabled (enabled by default). | [optional]
+**terminating** | **int** | The number of pods which are terminating (in phase Pending or Running and have a deletionTimestamp). | [optional]
 **uncounted_terminated_pods** | [**V1UncountedTerminatedPods**](V1UncountedTerminatedPods.md) |  | [optional]
 
 ## Example

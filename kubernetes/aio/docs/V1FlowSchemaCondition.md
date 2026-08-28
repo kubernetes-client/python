@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **last_transition_time** | **datetime** | &#x60;lastTransitionTime&#x60; is the last time the condition transitioned from one status to another. | [optional]
 **message** | **str** | &#x60;message&#x60; is a human-readable message indicating details about last transition. | [optional]
 **reason** | **str** | &#x60;reason&#x60; is a unique, one-word, CamelCase reason for the condition&#39;s last transition. | [optional]
-**status** | **str** | &#x60;status&#x60; is the status of the condition. Can be True, False, Unknown. Required. | [optional]
-**type** | **str** | &#x60;type&#x60; is the type of the condition. Required. | [optional]
+**status** | **str** | &#x60;status&#x60; is the status of the condition. Should be specified and set to one of True, False, Unknown. | [optional]
+**type** | **str** | &#x60;type&#x60; is the type of the condition. Required. |
 
 ## Example
 

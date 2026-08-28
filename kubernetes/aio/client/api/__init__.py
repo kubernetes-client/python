@@ -24,7 +24,6 @@ __all__ = [
     "BatchV1Api",
     "CertificatesApi",
     "CertificatesV1Api",
-    "CertificatesV1alpha1Api",
     "CertificatesV1beta1Api",
     "CoordinationApi",
     "CoordinationV1Api",
@@ -41,10 +40,11 @@ __all__ = [
     "FlowcontrolApiserverV1Api",
     "InternalApiserverApi",
     "InternalApiserverV1alpha1Api",
+    "LifecycleApi",
+    "LifecycleV1alpha1Api",
     "LogsApi",
     "NetworkingApi",
     "NetworkingV1Api",
-    "NetworkingV1beta1Api",
     "NodeApi",
     "NodeV1Api",
     "OpenidApi",
@@ -59,11 +59,12 @@ __all__ = [
     "ResourceV1beta2Api",
     "SchedulingApi",
     "SchedulingV1Api",
-    "SchedulingV1alpha2Api",
+    "SchedulingV1alpha3Api",
+    "SchedulingV1beta1Api",
     "StorageApi",
     "StorageV1Api",
-    "StorageV1beta1Api",
     "StoragemigrationApi",
+    "StoragemigrationV1Api",
     "StoragemigrationV1beta1Api",
     "VersionApi",
 ]
@@ -95,7 +96,6 @@ if _typing.TYPE_CHECKING:
     from kubernetes.aio.client.api.batch_v1_api import BatchV1Api
     from kubernetes.aio.client.api.certificates_api import CertificatesApi
     from kubernetes.aio.client.api.certificates_v1_api import CertificatesV1Api
-    from kubernetes.aio.client.api.certificates_v1alpha1_api import CertificatesV1alpha1Api
     from kubernetes.aio.client.api.certificates_v1beta1_api import CertificatesV1beta1Api
     from kubernetes.aio.client.api.coordination_api import CoordinationApi
     from kubernetes.aio.client.api.coordination_v1_api import CoordinationV1Api
@@ -112,10 +112,11 @@ if _typing.TYPE_CHECKING:
     from kubernetes.aio.client.api.flowcontrol_apiserver_v1_api import FlowcontrolApiserverV1Api
     from kubernetes.aio.client.api.internal_apiserver_api import InternalApiserverApi
     from kubernetes.aio.client.api.internal_apiserver_v1alpha1_api import InternalApiserverV1alpha1Api
+    from kubernetes.aio.client.api.lifecycle_api import LifecycleApi
+    from kubernetes.aio.client.api.lifecycle_v1alpha1_api import LifecycleV1alpha1Api
     from kubernetes.aio.client.api.logs_api import LogsApi
     from kubernetes.aio.client.api.networking_api import NetworkingApi
     from kubernetes.aio.client.api.networking_v1_api import NetworkingV1Api
-    from kubernetes.aio.client.api.networking_v1beta1_api import NetworkingV1beta1Api
     from kubernetes.aio.client.api.node_api import NodeApi
     from kubernetes.aio.client.api.node_v1_api import NodeV1Api
     from kubernetes.aio.client.api.openid_api import OpenidApi
@@ -130,11 +131,12 @@ if _typing.TYPE_CHECKING:
     from kubernetes.aio.client.api.resource_v1beta2_api import ResourceV1beta2Api
     from kubernetes.aio.client.api.scheduling_api import SchedulingApi
     from kubernetes.aio.client.api.scheduling_v1_api import SchedulingV1Api
-    from kubernetes.aio.client.api.scheduling_v1alpha2_api import SchedulingV1alpha2Api
+    from kubernetes.aio.client.api.scheduling_v1alpha3_api import SchedulingV1alpha3Api
+    from kubernetes.aio.client.api.scheduling_v1beta1_api import SchedulingV1beta1Api
     from kubernetes.aio.client.api.storage_api import StorageApi
     from kubernetes.aio.client.api.storage_v1_api import StorageV1Api
-    from kubernetes.aio.client.api.storage_v1beta1_api import StorageV1beta1Api
     from kubernetes.aio.client.api.storagemigration_api import StoragemigrationApi
+    from kubernetes.aio.client.api.storagemigration_v1_api import StoragemigrationV1Api
     from kubernetes.aio.client.api.storagemigration_v1beta1_api import StoragemigrationV1beta1Api
     from kubernetes.aio.client.api.version_api import VersionApi
 
@@ -165,7 +167,6 @@ else:
         "BatchV1Api": ".batch_v1_api",
         "CertificatesApi": ".certificates_api",
         "CertificatesV1Api": ".certificates_v1_api",
-        "CertificatesV1alpha1Api": ".certificates_v1alpha1_api",
         "CertificatesV1beta1Api": ".certificates_v1beta1_api",
         "CoordinationApi": ".coordination_api",
         "CoordinationV1Api": ".coordination_v1_api",
@@ -182,10 +183,11 @@ else:
         "FlowcontrolApiserverV1Api": ".flowcontrol_apiserver_v1_api",
         "InternalApiserverApi": ".internal_apiserver_api",
         "InternalApiserverV1alpha1Api": ".internal_apiserver_v1alpha1_api",
+        "LifecycleApi": ".lifecycle_api",
+        "LifecycleV1alpha1Api": ".lifecycle_v1alpha1_api",
         "LogsApi": ".logs_api",
         "NetworkingApi": ".networking_api",
         "NetworkingV1Api": ".networking_v1_api",
-        "NetworkingV1beta1Api": ".networking_v1beta1_api",
         "NodeApi": ".node_api",
         "NodeV1Api": ".node_v1_api",
         "OpenidApi": ".openid_api",
@@ -200,11 +202,12 @@ else:
         "ResourceV1beta2Api": ".resource_v1beta2_api",
         "SchedulingApi": ".scheduling_api",
         "SchedulingV1Api": ".scheduling_v1_api",
-        "SchedulingV1alpha2Api": ".scheduling_v1alpha2_api",
+        "SchedulingV1alpha3Api": ".scheduling_v1alpha3_api",
+        "SchedulingV1beta1Api": ".scheduling_v1beta1_api",
         "StorageApi": ".storage_api",
         "StorageV1Api": ".storage_v1_api",
-        "StorageV1beta1Api": ".storage_v1beta1_api",
         "StoragemigrationApi": ".storagemigration_api",
+        "StoragemigrationV1Api": ".storagemigration_v1_api",
         "StoragemigrationV1beta1Api": ".storagemigration_v1beta1_api",
         "VersionApi": ".version_api",
     }

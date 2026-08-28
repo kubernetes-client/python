@@ -7,7 +7,7 @@ BoundObjectReference is a reference to an object that a token is bound to.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **api_version** | **str** | apiVersion is API version of the referent. | [optional]
-**kind** | **str** | kind of the referent. Valid kinds are &#39;Pod&#39; and &#39;Secret&#39;. | [optional]
+**kind** | **str** | kind of the referent. Valid kinds are &#39;Pod&#39;, &#39;Secret&#39;, &#39;Node&#39;, &#39;ValidatingWebhookConfiguration&#39;, and &#39;MutatingWebhookConfiguration&#39;. | [optional]
 **name** | **str** | name of the referent. | [optional]
 **uid** | **str** | uid of the referent. | [optional]
 

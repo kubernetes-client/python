@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **last_update_time** | **datetime** | The last time this condition was updated. | [optional]
 **message** | **str** | A human readable message indicating details about the transition. | [optional]
 **reason** | **str** | The reason for the condition&#39;s last transition. | [optional]
-**status** | **str** | Status of the condition, one of True, False, Unknown. |
-**type** | **str** | Type of deployment condition. |
+**status** | **str** | Status of the condition, one of True, False, Unknown. | [optional]
+**type** | **str** | Type of deployment condition. | [optional]
 
 ## Example
 

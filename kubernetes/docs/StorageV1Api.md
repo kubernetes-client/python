@@ -32,6 +32,7 @@ Method | HTTP request | Description
 [**list_volume_attributes_class**](StorageV1Api.md#list_volume_attributes_class) | **GET** /apis/storage.k8s.io/v1/volumeattributesclasses |
 [**patch_csi_driver**](StorageV1Api.md#patch_csi_driver) | **PATCH** /apis/storage.k8s.io/v1/csidrivers/{name} |
 [**patch_csi_node**](StorageV1Api.md#patch_csi_node) | **PATCH** /apis/storage.k8s.io/v1/csinodes/{name} |
+[**patch_csi_node_status**](StorageV1Api.md#patch_csi_node_status) | **PATCH** /apis/storage.k8s.io/v1/csinodes/{name}/status |
 [**patch_namespaced_csi_storage_capacity**](StorageV1Api.md#patch_namespaced_csi_storage_capacity) | **PATCH** /apis/storage.k8s.io/v1/namespaces/{namespace}/csistoragecapacities/{name} |
 [**patch_storage_class**](StorageV1Api.md#patch_storage_class) | **PATCH** /apis/storage.k8s.io/v1/storageclasses/{name} |
 [**patch_volume_attachment**](StorageV1Api.md#patch_volume_attachment) | **PATCH** /apis/storage.k8s.io/v1/volumeattachments/{name} |
@@ -39,6 +40,7 @@ Method | HTTP request | Description
 [**patch_volume_attributes_class**](StorageV1Api.md#patch_volume_attributes_class) | **PATCH** /apis/storage.k8s.io/v1/volumeattributesclasses/{name} |
 [**read_csi_driver**](StorageV1Api.md#read_csi_driver) | **GET** /apis/storage.k8s.io/v1/csidrivers/{name} |
 [**read_csi_node**](StorageV1Api.md#read_csi_node) | **GET** /apis/storage.k8s.io/v1/csinodes/{name} |
+[**read_csi_node_status**](StorageV1Api.md#read_csi_node_status) | **GET** /apis/storage.k8s.io/v1/csinodes/{name}/status |
 [**read_namespaced_csi_storage_capacity**](StorageV1Api.md#read_namespaced_csi_storage_capacity) | **GET** /apis/storage.k8s.io/v1/namespaces/{namespace}/csistoragecapacities/{name} |
 [**read_storage_class**](StorageV1Api.md#read_storage_class) | **GET** /apis/storage.k8s.io/v1/storageclasses/{name} |
 [**read_volume_attachment**](StorageV1Api.md#read_volume_attachment) | **GET** /apis/storage.k8s.io/v1/volumeattachments/{name} |
@@ -46,6 +48,7 @@ Method | HTTP request | Description
 [**read_volume_attributes_class**](StorageV1Api.md#read_volume_attributes_class) | **GET** /apis/storage.k8s.io/v1/volumeattributesclasses/{name} |
 [**replace_csi_driver**](StorageV1Api.md#replace_csi_driver) | **PUT** /apis/storage.k8s.io/v1/csidrivers/{name} |
 [**replace_csi_node**](StorageV1Api.md#replace_csi_node) | **PUT** /apis/storage.k8s.io/v1/csinodes/{name} |
+[**replace_csi_node_status**](StorageV1Api.md#replace_csi_node_status) | **PUT** /apis/storage.k8s.io/v1/csinodes/{name}/status |
 [**replace_namespaced_csi_storage_capacity**](StorageV1Api.md#replace_namespaced_csi_storage_capacity) | **PUT** /apis/storage.k8s.io/v1/namespaces/{namespace}/csistoragecapacities/{name} |
 [**replace_storage_class**](StorageV1Api.md#replace_storage_class) | **PUT** /apis/storage.k8s.io/v1/storageclasses/{name} |
 [**replace_volume_attachment**](StorageV1Api.md#replace_volume_attachment) | **PUT** /apis/storage.k8s.io/v1/volumeattachments/{name} |
@@ -2734,6 +2737,96 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_csi_node_status**
+> V1CSINode patch_csi_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
+
+partially update status of the specified CSINode
+
+### Example
+
+* Api Key Authentication (BearerToken):
+
+```python
+import kubernetes.client
+from kubernetes.client.models.v1_csi_node import V1CSINode
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.StorageV1Api(api_client)
+    name = 'name_example' # str | name of the CSINode
+    body = None # object |
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). (optional)
+    dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
+    field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). (optional)
+    field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional)
+    force = True # bool | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. (optional)
+
+    try:
+        api_response = api_instance.patch_csi_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
+        print("The response of StorageV1Api->patch_csi_node_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StorageV1Api->patch_csi_node_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the CSINode |
+ **body** | **object**|  |
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional]
+ **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional]
+ **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional]
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. | [optional]
+ **force** | **bool**| Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional]
+
+### Return type
+
+[**V1CSINode**](V1CSINode.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **patch_namespaced_csi_storage_capacity**
 > V1CSIStorageCapacity patch_namespaced_csi_storage_capacity(name, namespace, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation, force=force)
 
@@ -3344,6 +3437,85 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **read_csi_node_status**
+> V1CSINode read_csi_node_status(name, pretty=pretty)
+
+read status of the specified CSINode
+
+### Example
+
+* Api Key Authentication (BearerToken):
+
+```python
+import kubernetes.client
+from kubernetes.client.models.v1_csi_node import V1CSINode
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.StorageV1Api(api_client)
+    name = 'name_example' # str | name of the CSINode
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). (optional)
+
+    try:
+        api_response = api_instance.read_csi_node_status(name, pretty=pretty)
+        print("The response of StorageV1Api->read_csi_node_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StorageV1Api->read_csi_node_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the CSINode |
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional]
+
+### Return type
+
+[**V1CSINode**](V1CSINode.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **read_namespaced_csi_storage_capacity**
 > V1CSIStorageCapacity read_namespaced_csi_storage_capacity(name, namespace, pretty=pretty)
 
@@ -3878,6 +4050,94 @@ with kubernetes.client.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling StorageV1Api->replace_csi_node: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| name of the CSINode |
+ **body** | [**V1CSINode**](V1CSINode.md)|  |
+ **pretty** | **str**| If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional]
+ **dry_run** | **str**| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional]
+ **field_manager** | **str**| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional]
+ **field_validation** | **str**| fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. | [optional]
+
+### Return type
+
+[**V1CSINode**](V1CSINode.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_csi_node_status**
+> V1CSINode replace_csi_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
+
+replace status of the specified CSINode
+
+### Example
+
+* Api Key Authentication (BearerToken):
+
+```python
+import kubernetes.client
+from kubernetes.client.models.v1_csi_node import V1CSINode
+from kubernetes.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kubernetes.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: BearerToken
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['BearerToken'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kubernetes.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = kubernetes.client.StorageV1Api(api_client)
+    name = 'name_example' # str | name of the CSINode
+    body = kubernetes.client.V1CSINode() # V1CSINode |
+    pretty = 'pretty_example' # str | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). (optional)
+    dry_run = 'dry_run_example' # str | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed (optional)
+    field_manager = 'field_manager_example' # str | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. (optional)
+    field_validation = 'field_validation_example' # str | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. (optional)
+
+    try:
+        api_response = api_instance.replace_csi_node_status(name, body, pretty=pretty, dry_run=dry_run, field_manager=field_manager, field_validation=field_validation)
+        print("The response of StorageV1Api->replace_csi_node_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StorageV1Api->replace_csi_node_status: %s\n" % e)
 ```
 
 

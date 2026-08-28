@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **capacity** | **Dict[str, str]** | capacity represents the actual resources of the underlying volume. | [optional]
 **conditions** | [**List[V1PersistentVolumeClaimCondition]**](V1PersistentVolumeClaimCondition.md) | conditions is the current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to &#39;Resizing&#39;. | [optional]
 **current_volume_attributes_class_name** | **str** | currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim | [optional]
+**health_status** | [**V1VolumeHealthStatus**](V1VolumeHealthStatus.md) |  | [optional]
 **modify_volume_status** | [**V1ModifyVolumeStatus**](V1ModifyVolumeStatus.md) |  | [optional]
 **phase** | **str** | phase represents the current phase of PersistentVolumeClaim. | [optional]
 

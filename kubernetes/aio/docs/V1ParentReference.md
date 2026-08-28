@@ -6,10 +6,10 @@ ParentReference describes a reference to a parent object.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group** | **str** | Group is the group of the object being referenced. | [optional]
-**name** | **str** | Name is the name of the object being referenced. |
-**namespace** | **str** | Namespace is the namespace of the object being referenced. | [optional]
-**resource** | **str** | Resource is the resource of the object being referenced. |
+**group** | **str** | group is the group of the object being referenced. | [optional]
+**name** | **str** | name is the name of the object being referenced. |
+**namespace** | **str** | namespace is the namespace of the object being referenced. | [optional]
+**resource** | **str** | resource is the resource of the object being referenced. |
 
 ## Example
 
