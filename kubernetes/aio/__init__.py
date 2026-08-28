@@ -14,7 +14,7 @@
 
 __project__ = "kubernetes_aio"
 # The version is auto-updated. Please do not edit.
-__version__ = "36.0.0+snapshot"
+__version__ = "37.0.0+snapshot"
 
 import kubernetes.aio.client as client
 import kubernetes.aio.config as config
