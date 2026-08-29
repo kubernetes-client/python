@@ -27,6 +27,7 @@ from kubernetes.utils.retry import (
     on_retry_after_error,
     retry_after_backoff,
 )
+from kubernetes.utils.keepalive import tcp_keepalive_socket_options
 from kubernetes.client.exceptions import ApiException, ApiValueError
 
 SUPPORTED_SOCKS_PROXIES = {"socks5", "socks5h", "socks4", "socks4a"}
@@ -160,6 +161,8 @@ class RESTClientObject:
 
         if configuration.socket_options is not None:
             pool_args['socket_options'] = configuration.socket_options
+        elif getattr(configuration, 'keep_alive', False):
+            pool_args['socket_options'] = tcp_keepalive_socket_options()
 
         if configuration.connection_pool_maxsize is not None:
             pool_args['maxsize'] = configuration.connection_pool_maxsize
