@@ -65,6 +65,9 @@ git apply "${SCRIPT_ROOT}/rest_client_patch.diff"
 echo ">>> restoring Kubernetes client-go retry integration..."
 git apply "${SCRIPT_ROOT}/client_go_retry_patch.diff"
 
+echo ">>> restoring Kubernetes TCP keepalive option..."
+git apply "${SCRIPT_ROOT}/keepalive_patch.diff"
+
 echo ">>> updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^__version__ = .*/__version__ = \\\"${CLIENT_VERSION}\\\"/" "${CLIENT_ROOT}/__init__.py"
