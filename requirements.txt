@@ -8,4 +8,4 @@ requests # Apache-2.0
 requests-oauthlib # ISC
 typing-extensions>=4.16.0  # PSF
 urllib3>=2.7.0,<3.0.0 # MIT
-durationpy>=0.7 # MIT
+durationpy>=0.11 # MIT
