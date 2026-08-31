@@ -9,6 +9,7 @@ comments throughout the code.
 
 - pod_logs.py — basic (blocking) pod log streaming example
 - pod_logs_non_blocking.py — non-blocking streaming of pod logs with graceful shutdown
+- tcp_keepalive.py — enable TCP keepalive via Configuration.socket_options so dead connections on long-lived watches/log streams are detected
 
 ## Setup
 
