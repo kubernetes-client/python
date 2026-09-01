@@ -208,6 +208,31 @@ class DynamicClientTest(unittest.TestCase):
             target.server_close()
             proxy.server_close()
 
+    def test_watch_forwards_request_timeout(self):
+        class FakeWatcher:
+            def __init__(self):
+                self.kwargs = None
+
+            def stream(self, func, **kwargs):
+                self.kwargs = kwargs
+                return iter(())
+
+        class FakeResource:
+            def get(self, **kwargs):
+                pass
+
+        dynamic = DynamicClient.__new__(DynamicClient)
+        watcher = FakeWatcher()
+
+        list(dynamic.watch(
+            FakeResource(),
+            namespace='default',
+            watcher=watcher,
+            _request_timeout=30,
+        ))
+
+        self.assertEqual(30, watcher.kwargs['_request_timeout'])
+
 
 if __name__ == '__main__':
     unittest.main()
