@@ -11,6 +11,7 @@ Subpackages
    kubernetes.aio.config
    kubernetes.aio.dynamic
    kubernetes.aio.e2e_test
+   kubernetes.aio.leaderelection
    kubernetes.aio.stream
    kubernetes.aio.test
    kubernetes.aio.utils

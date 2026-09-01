@@ -1,5 +1,5 @@
-kubernetes.aio.test package
-===========================
+kubernetes.watch package
+========================
 
 Submodules
 ----------
@@ -7,12 +7,13 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   kubernetes.aio.test.test_generated_api
+   kubernetes.watch.watch
+   kubernetes.watch.watch_test
 
 Module contents
 ---------------
 
-.. automodule:: kubernetes.aio.test
+.. automodule:: kubernetes.watch
    :members:
    :show-inheritance:
    :undoc-members:

@@ -69,7 +69,10 @@ Submodules
    kubernetes.aio.client.models.v1_cluster_role_binding
    kubernetes.aio.client.models.v1_cluster_role_binding_list
    kubernetes.aio.client.models.v1_cluster_role_list
+   kubernetes.aio.client.models.v1_cluster_trust_bundle
+   kubernetes.aio.client.models.v1_cluster_trust_bundle_list
    kubernetes.aio.client.models.v1_cluster_trust_bundle_projection
+   kubernetes.aio.client.models.v1_cluster_trust_bundle_spec
    kubernetes.aio.client.models.v1_component_condition
    kubernetes.aio.client.models.v1_component_status
    kubernetes.aio.client.models.v1_component_status_list
@@ -110,6 +113,7 @@ Submodules
    kubernetes.aio.client.models.v1_csi_node_driver
    kubernetes.aio.client.models.v1_csi_node_list
    kubernetes.aio.client.models.v1_csi_node_spec
+   kubernetes.aio.client.models.v1_csi_node_status
    kubernetes.aio.client.models.v1_csi_persistent_volume_source
    kubernetes.aio.client.models.v1_csi_storage_capacity
    kubernetes.aio.client.models.v1_csi_storage_capacity_list
@@ -153,11 +157,17 @@ Submodules
    kubernetes.aio.client.models.v1_device_class_spec
    kubernetes.aio.client.models.v1_device_constraint
    kubernetes.aio.client.models.v1_device_counter_consumption
+   kubernetes.aio.client.models.v1_device_derived_attribute
    kubernetes.aio.client.models.v1_device_request
    kubernetes.aio.client.models.v1_device_request_allocation_result
    kubernetes.aio.client.models.v1_device_selector
    kubernetes.aio.client.models.v1_device_sub_request
    kubernetes.aio.client.models.v1_device_taint
+   kubernetes.aio.client.models.v1_device_taint_rule
+   kubernetes.aio.client.models.v1_device_taint_rule_list
+   kubernetes.aio.client.models.v1_device_taint_rule_spec
+   kubernetes.aio.client.models.v1_device_taint_rule_status
+   kubernetes.aio.client.models.v1_device_taint_selector
    kubernetes.aio.client.models.v1_device_toleration
    kubernetes.aio.client.models.v1_downward_api_projection
    kubernetes.aio.client.models.v1_downward_api_volume_file
@@ -179,6 +189,7 @@ Submodules
    kubernetes.aio.client.models.v1_ephemeral_volume_source
    kubernetes.aio.client.models.v1_event_source
    kubernetes.aio.client.models.v1_eviction
+   kubernetes.aio.client.models.v1_eviction_responder
    kubernetes.aio.client.models.v1_exact_device_request
    kubernetes.aio.client.models.v1_exec_action
    kubernetes.aio.client.models.v1_exempt_priority_level_configuration
@@ -245,6 +256,7 @@ Submodules
    kubernetes.aio.client.models.v1_job
    kubernetes.aio.client.models.v1_job_condition
    kubernetes.aio.client.models.v1_job_list
+   kubernetes.aio.client.models.v1_job_scheduling_configuration
    kubernetes.aio.client.models.v1_job_spec
    kubernetes.aio.client.models.v1_job_status
    kubernetes.aio.client.models.v1_job_template_spec
@@ -304,14 +316,19 @@ Submodules
    kubernetes.aio.client.models.v1_node
    kubernetes.aio.client.models.v1_node_address
    kubernetes.aio.client.models.v1_node_affinity
+   kubernetes.aio.client.models.v1_node_allocatable_mapped_resources
+   kubernetes.aio.client.models.v1_node_allocatable_mapping
+   kubernetes.aio.client.models.v1_node_allocatable_overhead
+   kubernetes.aio.client.models.v1_node_allocatable_overhead_resources
+   kubernetes.aio.client.models.v1_node_allocatable_resource
    kubernetes.aio.client.models.v1_node_allocatable_resource_claim_status
-   kubernetes.aio.client.models.v1_node_allocatable_resource_mapping
    kubernetes.aio.client.models.v1_node_condition
    kubernetes.aio.client.models.v1_node_config_source
    kubernetes.aio.client.models.v1_node_config_status
    kubernetes.aio.client.models.v1_node_daemon_endpoints
    kubernetes.aio.client.models.v1_node_features
    kubernetes.aio.client.models.v1_node_list
+   kubernetes.aio.client.models.v1_node_pod_preemption_policy
    kubernetes.aio.client.models.v1_node_runtime_handler
    kubernetes.aio.client.models.v1_node_runtime_handler_features
    kubernetes.aio.client.models.v1_node_selector
@@ -350,6 +367,10 @@ Submodules
    kubernetes.aio.client.models.v1_pod_affinity_term
    kubernetes.aio.client.models.v1_pod_anti_affinity
    kubernetes.aio.client.models.v1_pod_certificate_projection
+   kubernetes.aio.client.models.v1_pod_certificate_request
+   kubernetes.aio.client.models.v1_pod_certificate_request_list
+   kubernetes.aio.client.models.v1_pod_certificate_request_spec
+   kubernetes.aio.client.models.v1_pod_certificate_request_status
    kubernetes.aio.client.models.v1_pod_condition
    kubernetes.aio.client.models.v1_pod_disruption_budget
    kubernetes.aio.client.models.v1_pod_disruption_budget_list
@@ -376,6 +397,7 @@ Submodules
    kubernetes.aio.client.models.v1_pod_template
    kubernetes.aio.client.models.v1_pod_template_list
    kubernetes.aio.client.models.v1_pod_template_spec
+   kubernetes.aio.client.models.v1_pod_volume_health
    kubernetes.aio.client.models.v1_policy_rule
    kubernetes.aio.client.models.v1_policy_rules_with_subjects
    kubernetes.aio.client.models.v1_port_status
@@ -495,8 +517,14 @@ Submodules
    kubernetes.aio.client.models.v1_status_details
    kubernetes.aio.client.models.v1_storage_class
    kubernetes.aio.client.models.v1_storage_class_list
+   kubernetes.aio.client.models.v1_storage_health
+   kubernetes.aio.client.models.v1_storage_health_condition
    kubernetes.aio.client.models.v1_storage_os_persistent_volume_source
    kubernetes.aio.client.models.v1_storage_os_volume_source
+   kubernetes.aio.client.models.v1_storage_version_migration
+   kubernetes.aio.client.models.v1_storage_version_migration_list
+   kubernetes.aio.client.models.v1_storage_version_migration_spec
+   kubernetes.aio.client.models.v1_storage_version_migration_status
    kubernetes.aio.client.models.v1_subject_access_review
    kubernetes.aio.client.models.v1_subject_access_review_spec
    kubernetes.aio.client.models.v1_subject_access_review_status
@@ -544,6 +572,8 @@ Submodules
    kubernetes.aio.client.models.v1_volume_attributes_class_list
    kubernetes.aio.client.models.v1_volume_device
    kubernetes.aio.client.models.v1_volume_error
+   kubernetes.aio.client.models.v1_volume_health_condition
+   kubernetes.aio.client.models.v1_volume_health_status
    kubernetes.aio.client.models.v1_volume_mount
    kubernetes.aio.client.models.v1_volume_mount_status
    kubernetes.aio.client.models.v1_volume_node_affinity
@@ -557,9 +587,18 @@ Submodules
    kubernetes.aio.client.models.v1_weighted_pod_affinity_term
    kubernetes.aio.client.models.v1_windows_security_context_options
    kubernetes.aio.client.models.v1alpha1_apply_configuration
-   kubernetes.aio.client.models.v1alpha1_cluster_trust_bundle
-   kubernetes.aio.client.models.v1alpha1_cluster_trust_bundle_list
-   kubernetes.aio.client.models.v1alpha1_cluster_trust_bundle_spec
+   kubernetes.aio.client.models.v1alpha1_eviction
+   kubernetes.aio.client.models.v1alpha1_eviction_list
+   kubernetes.aio.client.models.v1alpha1_eviction_pod_reference
+   kubernetes.aio.client.models.v1alpha1_eviction_request
+   kubernetes.aio.client.models.v1alpha1_eviction_request_list
+   kubernetes.aio.client.models.v1alpha1_eviction_request_pod_reference
+   kubernetes.aio.client.models.v1alpha1_eviction_request_spec
+   kubernetes.aio.client.models.v1alpha1_eviction_request_status
+   kubernetes.aio.client.models.v1alpha1_eviction_request_target
+   kubernetes.aio.client.models.v1alpha1_eviction_spec
+   kubernetes.aio.client.models.v1alpha1_eviction_status
+   kubernetes.aio.client.models.v1alpha1_eviction_target
    kubernetes.aio.client.models.v1alpha1_json_patch
    kubernetes.aio.client.models.v1alpha1_match_condition
    kubernetes.aio.client.models.v1alpha1_match_resources
@@ -573,43 +612,63 @@ Submodules
    kubernetes.aio.client.models.v1alpha1_named_rule_with_operations
    kubernetes.aio.client.models.v1alpha1_param_kind
    kubernetes.aio.client.models.v1alpha1_param_ref
+   kubernetes.aio.client.models.v1alpha1_requester
+   kubernetes.aio.client.models.v1alpha1_responder_status
    kubernetes.aio.client.models.v1alpha1_server_storage_version
    kubernetes.aio.client.models.v1alpha1_storage_version
    kubernetes.aio.client.models.v1alpha1_storage_version_condition
    kubernetes.aio.client.models.v1alpha1_storage_version_list
    kubernetes.aio.client.models.v1alpha1_storage_version_status
+   kubernetes.aio.client.models.v1alpha1_target_responder
    kubernetes.aio.client.models.v1alpha1_variable
-   kubernetes.aio.client.models.v1alpha2_gang_scheduling_policy
    kubernetes.aio.client.models.v1alpha2_lease_candidate
    kubernetes.aio.client.models.v1alpha2_lease_candidate_list
    kubernetes.aio.client.models.v1alpha2_lease_candidate_spec
-   kubernetes.aio.client.models.v1alpha2_pod_group
-   kubernetes.aio.client.models.v1alpha2_pod_group_list
-   kubernetes.aio.client.models.v1alpha2_pod_group_resource_claim
-   kubernetes.aio.client.models.v1alpha2_pod_group_resource_claim_status
-   kubernetes.aio.client.models.v1alpha2_pod_group_scheduling_constraints
-   kubernetes.aio.client.models.v1alpha2_pod_group_scheduling_policy
-   kubernetes.aio.client.models.v1alpha2_pod_group_spec
-   kubernetes.aio.client.models.v1alpha2_pod_group_status
-   kubernetes.aio.client.models.v1alpha2_pod_group_template
-   kubernetes.aio.client.models.v1alpha2_pod_group_template_reference
-   kubernetes.aio.client.models.v1alpha2_topology_constraint
-   kubernetes.aio.client.models.v1alpha2_typed_local_object_reference
-   kubernetes.aio.client.models.v1alpha2_workload
-   kubernetes.aio.client.models.v1alpha2_workload_list
-   kubernetes.aio.client.models.v1alpha2_workload_pod_group_template_reference
-   kubernetes.aio.client.models.v1alpha2_workload_spec
+   kubernetes.aio.client.models.v1alpha3_composite_disruption_mode
+   kubernetes.aio.client.models.v1alpha3_composite_gang_scheduling_policy
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group_list
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group_scheduling_constraints
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group_scheduling_policy
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group_spec
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group_status
+   kubernetes.aio.client.models.v1alpha3_composite_pod_group_template
    kubernetes.aio.client.models.v1alpha3_device_taint
    kubernetes.aio.client.models.v1alpha3_device_taint_rule
    kubernetes.aio.client.models.v1alpha3_device_taint_rule_list
    kubernetes.aio.client.models.v1alpha3_device_taint_rule_spec
    kubernetes.aio.client.models.v1alpha3_device_taint_rule_status
    kubernetes.aio.client.models.v1alpha3_device_taint_selector
+   kubernetes.aio.client.models.v1alpha3_disruption_mode
+   kubernetes.aio.client.models.v1alpha3_gang_scheduling_policy
+   kubernetes.aio.client.models.v1alpha3_partition_type_status
+   kubernetes.aio.client.models.v1alpha3_pod_group
+   kubernetes.aio.client.models.v1alpha3_pod_group_list
+   kubernetes.aio.client.models.v1alpha3_pod_group_resource_claim
+   kubernetes.aio.client.models.v1alpha3_pod_group_resource_claim_status
+   kubernetes.aio.client.models.v1alpha3_pod_group_scheduling_constraints
+   kubernetes.aio.client.models.v1alpha3_pod_group_scheduling_policy
+   kubernetes.aio.client.models.v1alpha3_pod_group_spec
+   kubernetes.aio.client.models.v1alpha3_pod_group_status
+   kubernetes.aio.client.models.v1alpha3_pod_group_template
    kubernetes.aio.client.models.v1alpha3_pool_status
    kubernetes.aio.client.models.v1alpha3_resource_pool_status_request
    kubernetes.aio.client.models.v1alpha3_resource_pool_status_request_list
    kubernetes.aio.client.models.v1alpha3_resource_pool_status_request_spec
    kubernetes.aio.client.models.v1alpha3_resource_pool_status_request_status
+   kubernetes.aio.client.models.v1alpha3_shareable_capacity_status
+   kubernetes.aio.client.models.v1alpha3_shareable_summary_status
+   kubernetes.aio.client.models.v1alpha3_topology_constraint
+   kubernetes.aio.client.models.v1alpha3_typed_local_object_reference
+   kubernetes.aio.client.models.v1alpha3_workload
+   kubernetes.aio.client.models.v1alpha3_workload_list
+   kubernetes.aio.client.models.v1alpha3_workload_pod_group_disruption_mode
+   kubernetes.aio.client.models.v1alpha3_workload_pod_group_gang_scheduling_policy
+   kubernetes.aio.client.models.v1alpha3_workload_pod_group_resource_claim
+   kubernetes.aio.client.models.v1alpha3_workload_pod_group_scheduling_constraints
+   kubernetes.aio.client.models.v1alpha3_workload_pod_group_scheduling_policy
+   kubernetes.aio.client.models.v1alpha3_workload_reference
+   kubernetes.aio.client.models.v1alpha3_workload_spec
    kubernetes.aio.client.models.v1beta1_allocated_device_status
    kubernetes.aio.client.models.v1beta1_allocation_result
    kubernetes.aio.client.models.v1beta1_apply_configuration
@@ -621,6 +680,11 @@ Submodules
    kubernetes.aio.client.models.v1beta1_cluster_trust_bundle
    kubernetes.aio.client.models.v1beta1_cluster_trust_bundle_list
    kubernetes.aio.client.models.v1beta1_cluster_trust_bundle_spec
+   kubernetes.aio.client.models.v1beta1_composite_disruption_mode
+   kubernetes.aio.client.models.v1beta1_composite_gang_scheduling_policy
+   kubernetes.aio.client.models.v1beta1_composite_pod_group_scheduling_constraints
+   kubernetes.aio.client.models.v1beta1_composite_pod_group_scheduling_policy
+   kubernetes.aio.client.models.v1beta1_composite_pod_group_template
    kubernetes.aio.client.models.v1beta1_counter
    kubernetes.aio.client.models.v1beta1_counter_set
    kubernetes.aio.client.models.v1beta1_device
@@ -636,15 +700,15 @@ Submodules
    kubernetes.aio.client.models.v1beta1_device_class_spec
    kubernetes.aio.client.models.v1beta1_device_constraint
    kubernetes.aio.client.models.v1beta1_device_counter_consumption
+   kubernetes.aio.client.models.v1beta1_device_derived_attribute
    kubernetes.aio.client.models.v1beta1_device_request
    kubernetes.aio.client.models.v1beta1_device_request_allocation_result
    kubernetes.aio.client.models.v1beta1_device_selector
    kubernetes.aio.client.models.v1beta1_device_sub_request
    kubernetes.aio.client.models.v1beta1_device_taint
    kubernetes.aio.client.models.v1beta1_device_toleration
-   kubernetes.aio.client.models.v1beta1_ip_address
-   kubernetes.aio.client.models.v1beta1_ip_address_list
-   kubernetes.aio.client.models.v1beta1_ip_address_spec
+   kubernetes.aio.client.models.v1beta1_disruption_mode
+   kubernetes.aio.client.models.v1beta1_gang_scheduling_policy
    kubernetes.aio.client.models.v1beta1_json_patch
    kubernetes.aio.client.models.v1beta1_lease_candidate
    kubernetes.aio.client.models.v1beta1_lease_candidate_list
@@ -660,15 +724,25 @@ Submodules
    kubernetes.aio.client.models.v1beta1_mutation
    kubernetes.aio.client.models.v1beta1_named_rule_with_operations
    kubernetes.aio.client.models.v1beta1_network_device_data
-   kubernetes.aio.client.models.v1beta1_node_allocatable_resource_mapping
+   kubernetes.aio.client.models.v1beta1_node_allocatable_mapping
+   kubernetes.aio.client.models.v1beta1_node_allocatable_overhead
+   kubernetes.aio.client.models.v1beta1_node_allocatable_resource
    kubernetes.aio.client.models.v1beta1_opaque_device_configuration
    kubernetes.aio.client.models.v1beta1_param_kind
    kubernetes.aio.client.models.v1beta1_param_ref
-   kubernetes.aio.client.models.v1beta1_parent_reference
    kubernetes.aio.client.models.v1beta1_pod_certificate_request
    kubernetes.aio.client.models.v1beta1_pod_certificate_request_list
    kubernetes.aio.client.models.v1beta1_pod_certificate_request_spec
    kubernetes.aio.client.models.v1beta1_pod_certificate_request_status
+   kubernetes.aio.client.models.v1beta1_pod_group
+   kubernetes.aio.client.models.v1beta1_pod_group_list
+   kubernetes.aio.client.models.v1beta1_pod_group_resource_claim
+   kubernetes.aio.client.models.v1beta1_pod_group_resource_claim_status
+   kubernetes.aio.client.models.v1beta1_pod_group_scheduling_constraints
+   kubernetes.aio.client.models.v1beta1_pod_group_scheduling_policy
+   kubernetes.aio.client.models.v1beta1_pod_group_spec
+   kubernetes.aio.client.models.v1beta1_pod_group_status
+   kubernetes.aio.client.models.v1beta1_pod_group_template
    kubernetes.aio.client.models.v1beta1_resource_claim
    kubernetes.aio.client.models.v1beta1_resource_claim_consumer_reference
    kubernetes.aio.client.models.v1beta1_resource_claim_list
@@ -681,17 +755,17 @@ Submodules
    kubernetes.aio.client.models.v1beta1_resource_slice
    kubernetes.aio.client.models.v1beta1_resource_slice_list
    kubernetes.aio.client.models.v1beta1_resource_slice_spec
-   kubernetes.aio.client.models.v1beta1_service_cidr
-   kubernetes.aio.client.models.v1beta1_service_cidr_list
-   kubernetes.aio.client.models.v1beta1_service_cidr_spec
-   kubernetes.aio.client.models.v1beta1_service_cidr_status
    kubernetes.aio.client.models.v1beta1_storage_version_migration
    kubernetes.aio.client.models.v1beta1_storage_version_migration_list
    kubernetes.aio.client.models.v1beta1_storage_version_migration_spec
    kubernetes.aio.client.models.v1beta1_storage_version_migration_status
+   kubernetes.aio.client.models.v1beta1_topology_constraint
+   kubernetes.aio.client.models.v1beta1_typed_local_object_reference
    kubernetes.aio.client.models.v1beta1_variable
-   kubernetes.aio.client.models.v1beta1_volume_attributes_class
-   kubernetes.aio.client.models.v1beta1_volume_attributes_class_list
+   kubernetes.aio.client.models.v1beta1_workload
+   kubernetes.aio.client.models.v1beta1_workload_list
+   kubernetes.aio.client.models.v1beta1_workload_reference
+   kubernetes.aio.client.models.v1beta1_workload_spec
    kubernetes.aio.client.models.v1beta2_allocated_device_status
    kubernetes.aio.client.models.v1beta2_allocation_result
    kubernetes.aio.client.models.v1beta2_capacity_request_policy
@@ -713,6 +787,7 @@ Submodules
    kubernetes.aio.client.models.v1beta2_device_class_spec
    kubernetes.aio.client.models.v1beta2_device_constraint
    kubernetes.aio.client.models.v1beta2_device_counter_consumption
+   kubernetes.aio.client.models.v1beta2_device_derived_attribute
    kubernetes.aio.client.models.v1beta2_device_request
    kubernetes.aio.client.models.v1beta2_device_request_allocation_result
    kubernetes.aio.client.models.v1beta2_device_selector
@@ -726,7 +801,9 @@ Submodules
    kubernetes.aio.client.models.v1beta2_device_toleration
    kubernetes.aio.client.models.v1beta2_exact_device_request
    kubernetes.aio.client.models.v1beta2_network_device_data
-   kubernetes.aio.client.models.v1beta2_node_allocatable_resource_mapping
+   kubernetes.aio.client.models.v1beta2_node_allocatable_mapping
+   kubernetes.aio.client.models.v1beta2_node_allocatable_overhead
+   kubernetes.aio.client.models.v1beta2_node_allocatable_resource
    kubernetes.aio.client.models.v1beta2_opaque_device_configuration
    kubernetes.aio.client.models.v1beta2_resource_claim
    kubernetes.aio.client.models.v1beta2_resource_claim_consumer_reference
