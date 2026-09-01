@@ -165,20 +165,20 @@ this step and go back to the master branch if there are any API changes.
 ## Make distribution packages
 
 First make sure you are using a clean version of python. Use virtualenv and
-pyenv packages. Make sure you are using python 3.9.1. I would normally do this
+pyenv packages. Make sure you are using python 3.11.11. I would normally do this
 on a clean machine:
 
 (install [pyenv](https://github.com/yyuu/pyenv#installation))
 (install [pip](https://pip.pypa.io/en/stable/installing/))
-(install [virtualenv](https://virtualenv.pypa.io/en/stable/installation/))
+(install [virtualenv](https://virtualenv.pypa.io/))
 
 ```bash
 git clean -xdf
-pyenv install -s 3.9.1
-pyenv global 3.9.1
+pyenv install -s 3.11.11
+pyenv global 3.11.11
 virtualenv .release
 source .release/bin/activate
-python --version     # Make sure you get Python 3.9.1
+python --version     # Make sure you get Python 3.11.11
 pip install twine
 ```
 
@@ -198,8 +198,8 @@ TODO: we should be able to pass these parameters to twine directly. My first att
 Now that the environment is ready, lets create distribution packages:
 
 ```bash
-python setup.py sdist
-python setup.py bdist_wheel --universal
+python setup-release.py sdist
+python setup-release.py bdist_wheel --universal
 ls dist/
 ```
 
