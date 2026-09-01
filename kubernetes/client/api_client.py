@@ -129,7 +129,7 @@ class ApiClient:
         self.pool_threads = pool_threads
         self._pool_lock = Lock()
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/37.0.0+snapshot/python'
+        self.user_agent = 'OpenAPI-Generator/37.0.0a1/python'
         self.client_side_validation = configuration.client_side_validation
 
     def close(self):
