@@ -7,8 +7,9 @@ NodeAllocatableResourceClaimStatus describes the status of node allocatable reso
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **containers** | **List[str]** | Containers lists the names of all containers in this pod that reference the claim. | [optional]
+**mapping** | [**List[V1NodeAllocatableMappedResources]**](V1NodeAllocatableMappedResources.md) | Mapping contains allocations through devices mapped in the device spec&#39;s &#x60;nodeAllocatableResources[...].mapping&#x60; field. This is used by kubelet for pod level and container-level cgroup enforcement. | [optional]
+**overhead** | [**List[V1NodeAllocatableOverheadResources]**](V1NodeAllocatableOverheadResources.md) | Overhead contains allocations through devices mapped in the device spec&#39;s &#x60;nodeAllocatableResources[...].overhead&#x60; field. This is used by kubelet for pod level and container-level cgroup enforcement. | [optional]
 **resource_claim_name** | **str** | ResourceClaimName is the resource claim referenced by the pod that resulted in this node allocatable resource allocation. |
-**resources** | **Dict[str, str]** | Resources is a map of the node-allocatable resource name to the aggregate quantity allocated to the claim. |
 
 ## Example
 

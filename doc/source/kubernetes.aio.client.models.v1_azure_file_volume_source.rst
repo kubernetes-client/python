@@ -1,0 +1,7 @@
+kubernetes.aio.client.models.v1\_azure\_file\_volume\_source module
+===================================================================
+
+.. automodule:: kubernetes.aio.client.models.v1_azure_file_volume_source
+   :members:
+   :show-inheritance:
+   :undoc-members:

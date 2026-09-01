@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **resource_claim_statuses** | [**List[V1PodResourceClaimStatus]**](V1PodResourceClaimStatus.md) | Status of resource claims. | [optional]
 **resources** | [**V1ResourceRequirements**](V1ResourceRequirements.md) |  | [optional]
 **start_time** | **datetime** | RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod. | [optional]
+**volume_health** | [**List[V1PodVolumeHealth]**](V1PodVolumeHealth.md) | volumeHealth contains node-reported health for each volume the pod is using. Populated by the kubelet on the pod&#39;s node. | [optional]
 
 ## Example
 

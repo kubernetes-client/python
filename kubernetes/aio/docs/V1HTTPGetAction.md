@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **http_headers** | [**List[V1HTTPHeader]**](V1HTTPHeader.md) | Custom headers to set in the request. HTTP allows repeated headers. | [optional]
 **path** | **str** | Path to access on the HTTP server. | [optional]
 **port** | **Union[int, str]** | Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. |
+**protocol** | **str** | Protocol selects the wire protocol for the probe connection. Nil defaults to HTTP/1.1. | [optional]
 **scheme** | **str** | Scheme to use for connecting to the host. Defaults to HTTP. | [optional]
 
 ## Example
