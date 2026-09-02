@@ -25,3 +25,4 @@ from .retry import (Backoff, DEFAULT_BACKOFF, DEFAULT_RETRY,
                     on_retry_after_error, retry_after_backoff,
                     retry_after_max_retries, retry_on_conflict,
                     retry_after_seconds)
+from .keepalive import tcp_keepalive_socket_options

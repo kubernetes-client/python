@@ -1,0 +1,39 @@
+diff --git a/kubernetes/client/configuration.py b/kubernetes/client/configuration.py
+--- a/kubernetes/client/configuration.py
++++ b/kubernetes/client/configuration.py
+@@ -387,6 +387,15 @@
+         self.socket_options = socket_options
+         """Options to pass down to the underlying urllib3 socket
+         """
++        self.keep_alive = False
++        """Enable TCP keepalive on the underlying urllib3 sockets.
++
++           Long lived requests such as watches are otherwise dropped
++           silently by an idle proxy or load balancer. When enabled, the
++           client asks the kernel for the same keepalive timings client-go
++           uses. Ignored if ``socket_options`` is set, which takes
++           precedence.
++        """
+ 
+         self.datetime_format = datetime_format
+         """datetime format
+diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
+--- a/kubernetes/client/rest.py
++++ b/kubernetes/client/rest.py
+@@ -27,6 +27,7 @@
+     on_retry_after_error,
+     retry_after_backoff,
+ )
++from kubernetes.utils.keepalive import tcp_keepalive_socket_options
+ from kubernetes.client.exceptions import ApiException, ApiValueError
+ 
+ SUPPORTED_SOCKS_PROXIES = {"socks5", "socks5h", "socks4", "socks4a"}
+@@ -160,6 +161,8 @@
+ 
+         if configuration.socket_options is not None:
+             pool_args['socket_options'] = configuration.socket_options
++        elif getattr(configuration, 'keep_alive', False):
++            pool_args['socket_options'] = tcp_keepalive_socket_options()
+ 
+         if configuration.connection_pool_maxsize is not None:
+             pool_args['maxsize'] = configuration.connection_pool_maxsize
