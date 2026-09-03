@@ -80,9 +80,26 @@ class ConfigMapLock(BaseLock):
                 self.configmap_reference = api_response
                 return True, None
 
-            lock_record = self.get_lock_object(
-                json.loads(annotations[self.leader_electionrecord_annotationkey])
-            )
+            # A corrupted annotation must not take the elector down: treat it
+            # like a missing one so the next update rewrites a clean record.
+            try:
+                annotation_record = json.loads(
+                    annotations[self.leader_electionrecord_annotationkey]
+                )
+            except ValueError:
+                logger.warning(
+                    "Leader election annotation on ConfigMap %s/%s is not valid "
+                    "JSON; treating the lock as unheld",
+                    name,
+                    namespace,
+                )
+                api_response.metadata.annotations = {
+                    self.leader_electionrecord_annotationkey: ""
+                }
+                self.configmap_reference = api_response
+                return True, None
+
+            lock_record = self.get_lock_object(annotation_record)
 
             self.configmap_reference = api_response
             return True, lock_record
