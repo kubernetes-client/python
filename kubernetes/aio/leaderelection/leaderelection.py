@@ -145,11 +145,22 @@ class LeaderElection:
 
         # A lock is not created with that name, try to create one
         if not lock_status:
-            assert (
+            # The error body comes straight from the API server, but anything
+            # sitting in front of it (ingress, load balancer, proxy) can answer
+            # with an HTML page, an empty payload or some other non-JSON body.
+            # Only a clean 404 means the lock is absent and may be created;
+            # everything else is retried on the next period instead of taking
+            # the whole leader election down.
+            error_code = None
+            if (
                 isinstance(old_election_record, ApiException)
                 and old_election_record.body is not None
-            )
-            if json.loads(old_election_record.body)["code"] != HTTPStatus.NOT_FOUND:
+            ):
+                try:
+                    error_code = json.loads(old_election_record.body)["code"]
+                except (ValueError, TypeError, KeyError, AttributeError):
+                    error_code = None
+            if error_code != HTTPStatus.NOT_FOUND:
                 logger.error(
                     "Error retrieving resource lock %s as %s",
                     self.election_config.lock.name,
