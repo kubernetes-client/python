@@ -3,7 +3,7 @@ python-dateutil>=2.8.2  # BSD
 pydantic>=2.13.5  # MIT
 setuptools>=84.0.0  # PSF/ZPL
 PyYAML>=6.0.3  # MIT
-websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
+websocket-client!=0.40.0,!=0.41.0.dev,!=0.42.0.dev,>=1.9.2 # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
 typing-extensions>=4.16.0  # PSF
