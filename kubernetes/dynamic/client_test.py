@@ -208,6 +208,77 @@ class DynamicClientTest(unittest.TestCase):
             target.server_close()
             proxy.server_close()
 
+    def test_watch_forwards_send_initial_events(self):
+        class FakeWatcher:
+            def __init__(self):
+                self.kwargs = None
+
+            def stream(self, func, **kwargs):
+                self.kwargs = kwargs
+                return iter(())
+
+        class FakeResource:
+            def get(self, **kwargs):
+                pass
+
+        dynamic = DynamicClient.__new__(DynamicClient)
+        watcher = FakeWatcher()
+
+        list(dynamic.watch(
+            FakeResource(),
+            namespace='default',
+            watcher=watcher,
+            send_initial_events=True,
+            resource_version_match='NotOlderThan',
+        ))
+
+        self.assertEqual(True, watcher.kwargs['send_initial_events'])
+        self.assertEqual('NotOlderThan', watcher.kwargs['resource_version_match'])
+
+    def test_request_builds_send_initial_events_query_params(self):
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.server.request_path = self.path
+                body = json.dumps({'kind': 'APIResourceList'}).encode()
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Length', str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def log_message(self, format, *args):
+                pass
+
+        server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+        thread = threading.Thread(target=server.serve_forever)
+        thread.start()
+        try:
+            dynamic = DynamicClient.__new__(DynamicClient)
+            dynamic.client = ApiClient(Configuration(
+                host=f'http://127.0.0.1:{server.server_port}',
+                proxy='',
+                no_proxy='',
+            ))
+
+            dynamic.request(
+                'get',
+                '/apis',
+                resource_version='0',
+                resource_version_match='NotOlderThan',
+                send_initial_events=True,
+                serializer=lambda _, data: data,
+            )
+
+            self.assertEqual(
+                '/apis?resourceVersion=0&resourceVersionMatch=NotOlderThan'
+                '&sendInitialEvents=true',
+                server.request_path,
+            )
+        finally:
+            server.shutdown()
+            thread.join()
+            server.server_close()
+
 
 if __name__ == '__main__':
     unittest.main()
