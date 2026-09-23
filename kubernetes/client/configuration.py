@@ -387,6 +387,15 @@ conf = client.Configuration(
         self.socket_options = socket_options
         """Options to pass down to the underlying urllib3 socket
         """
+        self.keep_alive = False
+        """Enable TCP keepalive on the underlying urllib3 sockets.
+
+           Long lived requests such as watches are otherwise dropped
+           silently by an idle proxy or load balancer. When enabled, the
+           client asks the kernel for the same keepalive timings client-go
+           uses. Ignored if ``socket_options`` is set, which takes
+           precedence.
+        """
 
         self.datetime_format = datetime_format
         """datetime format
@@ -604,7 +613,7 @@ conf = client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: release-1.37\n"\
-               "SDK Package Version: 37.0.0a1".\
+               "SDK Package Version: 37.0.0b1".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:

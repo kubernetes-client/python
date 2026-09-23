@@ -158,7 +158,7 @@ class DynamicClient:
 
         return self.request('patch', path, body=body, force_conflicts=force_conflicts, **kwargs)
 
-    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None, allow_watch_bookmarks=None):
+    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None, allow_watch_bookmarks=None, send_initial_events=None, resource_version_match=None):
         """
         Stream events for a resource from the Kubernetes API
 
@@ -172,6 +172,10 @@ class DynamicClient:
         :param timeout: The amount of time in seconds to wait before terminating the stream
         :param watcher: The Watcher object that will be used to stream the resource
         :param allow_watch_bookmarks: Ask the API server to send BOOKMARK events
+        :param send_initial_events: Ask the API server to begin the stream with synthetic events
+                                    for the current state, followed by a BOOKMARK event
+        :param resource_version_match: How resource_version is matched, e.g. "NotOlderThan".
+                                       Required by the API server when send_initial_events is set
 
         :return: Event object with these keys:
                    'type': The type of event such as "ADDED", "DELETED", etc.
@@ -204,6 +208,8 @@ class DynamicClient:
             serialize=False,
             timeout_seconds=timeout,
             allow_watch_bookmarks=allow_watch_bookmarks,
+            send_initial_events=send_initial_events,
+            resource_version_match=resource_version_match,
         ):
             event['object'] = ResourceInstance(resource, event['object'])
             yield event
@@ -229,6 +235,8 @@ class DynamicClient:
             query_params.append(('limit', params['limit']))
         if params.get('resource_version') is not None:
             query_params.append(('resourceVersion', params['resource_version']))
+        if params.get('resource_version_match') is not None:
+            query_params.append(('resourceVersionMatch', params['resource_version_match']))
         if params.get('timeout_seconds') is not None:
             query_params.append(('timeoutSeconds', params['timeout_seconds']))
         if params.get('watch') is not None:
@@ -247,6 +255,8 @@ class DynamicClient:
             query_params.append(('force', params['force_conflicts']))
         if params.get('allow_watch_bookmarks') is not None:
             query_params.append(('allowWatchBookmarks', params['allow_watch_bookmarks']))
+        if params.get('send_initial_events') is not None:
+            query_params.append(('sendInitialEvents', params['send_initial_events']))
 
         header_params = params.get('header_params', {})
         form_params = []

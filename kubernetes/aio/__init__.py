@@ -14,13 +14,14 @@
 
 __project__ = "kubernetes_aio"
 # The version is auto-updated. Please do not edit.
-__version__ = "37.0.0a1"
+__version__ = "37.0.0b1"
 
 import kubernetes.aio.client as client
 import kubernetes.aio.config as config
 import kubernetes.aio.dynamic as dynamic
+import kubernetes.aio.leaderelection as leaderelection
 import kubernetes.aio.stream as stream
 import kubernetes.aio.utils as utils
 import kubernetes.aio.watch as watch
 
-__all__ = ["client", "config", "dynamic", "stream", "utils", "watch"]
+__all__ = ["client", "config", "dynamic", "leaderelection", "stream", "utils", "watch"]

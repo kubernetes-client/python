@@ -365,5 +365,38 @@ class MockResourceLock(BaseLock):
             self.lock.release()
 
 
+    def test_acquire_survives_non_json_error_body(self):
+        """A proxy answering with an HTML error page must not kill the elector."""
+
+        class GatewayErrorLock:
+            def __init__(self):
+                self.name = "lock"
+                self.namespace = "ns"
+                self.identity = "candidate"
+
+            async def get(self, name, namespace):
+                return False, ApiException(
+                    status=502,
+                    reason="Bad Gateway",
+                    body="<html><body>502 Bad Gateway</body></html>",
+                )
+
+            async def create(self, name, namespace, election_record):
+                return False
+
+        config = electionconfig.Config(
+            lock=GatewayErrorLock(),
+            lease_duration=4,
+            renew_deadline=3,
+            retry_period=1,
+            onstarted_leading=lambda: None,
+            onstopped_leading=lambda: None,
+        )
+
+        elector = leaderelection.LeaderElection(config)
+        result = asyncio.run(elector.try_acquire_or_renew())
+        self.assertFalse(result)
+
+
 if __name__ == "__main__":
     unittest.main()

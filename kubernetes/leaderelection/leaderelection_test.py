@@ -321,5 +321,76 @@ class MockResourceLock:
             self.lock.release()
 
 
+    def test_acquire_survives_non_json_error_body(self):
+        """A proxy answering with an HTML error page must not kill the elector."""
+        class GatewayErrorLock:
+            def __init__(self):
+                self.name = "lock"
+                self.namespace = "ns"
+                self.identity = "candidate"
+
+            def get(self, name, namespace):
+                return False, ApiException(
+                    status=502, reason="Bad Gateway",
+                    body="<html><body>502 Bad Gateway</body></html>")
+
+        config = electionconfig.Config(
+            lock=GatewayErrorLock(), lease_duration=4, renew_deadline=3,
+            retry_period=1, onstarted_leading=lambda: None,
+            onstopped_leading=lambda: None)
+
+        result = leaderelection.LeaderElection(config).try_acquire_or_renew()
+        self.assertFalse(result)
+
+    def test_acquire_survives_empty_error_body(self):
+        class EmptyErrorLock:
+            def __init__(self):
+                self.name = "lock"
+                self.namespace = "ns"
+                self.identity = "candidate"
+
+            def get(self, name, namespace):
+                return False, ApiException(status=500, reason="Server Error",
+                                           body=None)
+
+        config = electionconfig.Config(
+            lock=EmptyErrorLock(), lease_duration=4, renew_deadline=3,
+            retry_period=1, onstarted_leading=lambda: None,
+            onstopped_leading=lambda: None)
+
+        result = leaderelection.LeaderElection(config).try_acquire_or_renew()
+        self.assertFalse(result)
+
+    def test_acquire_still_creates_on_clean_404(self):
+        class NotFoundLock:
+            def __init__(self):
+                self.name = "lock"
+                self.namespace = "ns"
+                self.identity = "candidate"
+                self.created = False
+
+            def get(self, name, namespace):
+                if self.created:
+                    return True, LeaderElectionRecord(
+                        "candidate", "4", "now", "now")
+                return False, ApiException(
+                    status=404, reason="Not Found",
+                    body=json.dumps({'code': 404}))
+
+            def create(self, name, namespace, election_record):
+                self.created = True
+                return True
+
+            def update(self, name, namespace, updated_record):
+                return True
+
+        config = electionconfig.Config(
+            lock=NotFoundLock(), lease_duration=4, renew_deadline=3,
+            retry_period=1, onstarted_leading=lambda: None,
+            onstopped_leading=lambda: None)
+
+        self.assertTrue(leaderelection.LeaderElection(config).try_acquire_or_renew())
+
+
 if __name__ == '__main__':
     unittest.main()
